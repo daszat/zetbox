@@ -117,6 +117,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.One_to_N_relations_One OneSide
         {
             get

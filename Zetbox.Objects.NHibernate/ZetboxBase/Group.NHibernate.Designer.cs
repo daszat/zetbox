@@ -176,6 +176,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Module Module
         {
             get

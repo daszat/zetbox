@@ -63,6 +63,7 @@ namespace Zetbox.App.SchemaMigration
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity ChangedBy
         {
             get
@@ -383,6 +384,7 @@ namespace Zetbox.App.SchemaMigration
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity CreatedBy
         {
             get
@@ -718,6 +720,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.SchemaMigration.SourceEnum> EnumEntries
         {
@@ -956,6 +959,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.SchemaMigration.SourceColumn References
         {
             get
@@ -1084,6 +1088,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.SchemaMigration.SourceColumn> Referers
         {
@@ -1186,6 +1191,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.SchemaMigration.SourceTable SourceTable
         {
             get

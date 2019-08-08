@@ -132,6 +132,7 @@ namespace Zetbox.App.Test
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Test.Muhblah> MubBlah_List_Nav
         {
@@ -176,6 +177,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.Muhblah MubBlah_Nav
         {
             get
@@ -343,6 +345,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.Muhblah MuhBlah_One_Nav
         {
             get

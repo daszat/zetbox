@@ -59,6 +59,7 @@ namespace Zetbox.App.Base
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.Icon FalseIcon
         {
             get
@@ -225,6 +226,7 @@ namespace Zetbox.App.Base
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.Icon NullIcon
         {
             get
@@ -391,6 +393,7 @@ namespace Zetbox.App.Base
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.Icon TrueIcon
         {
             get

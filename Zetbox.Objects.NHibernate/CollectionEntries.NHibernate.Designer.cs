@@ -85,6 +85,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.N_to_M_relations_A A
         {
             get
@@ -191,6 +192,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.N_to_M_relations_B B
         {
             get
@@ -544,6 +546,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.CalculatedObjectReferenceProperty A
         {
             get
@@ -652,6 +655,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Property B
         {
             get
@@ -1017,6 +1021,7 @@ namespace Zetbox.App.Calendar
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Calendar.CalendarBook A
         {
             get
@@ -1125,6 +1130,7 @@ namespace Zetbox.App.Calendar
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Group B
         {
             get
@@ -1455,6 +1461,7 @@ namespace Zetbox.App.Calendar
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Calendar.CalendarBook A
         {
             get
@@ -1561,6 +1568,7 @@ namespace Zetbox.App.Calendar
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity B
         {
             get
@@ -1888,6 +1896,7 @@ namespace Zetbox.App.Calendar
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Calendar.CalendarBook A
         {
             get
@@ -1996,6 +2005,7 @@ namespace Zetbox.App.Calendar
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Group B
         {
             get
@@ -2326,6 +2336,7 @@ namespace Zetbox.App.Calendar
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Calendar.CalendarBook A
         {
             get
@@ -2432,6 +2443,7 @@ namespace Zetbox.App.Calendar
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity B
         {
             get
@@ -2759,6 +2771,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.DataType A
         {
             get
@@ -2867,6 +2880,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Interface B
         {
             get
@@ -3232,6 +3246,7 @@ namespace at.dasz.DocumentManagement
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public at.dasz.DocumentManagement.File A
         {
             get
@@ -3370,6 +3385,7 @@ namespace at.dasz.DocumentManagement
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Blob B
         {
             get
@@ -3770,6 +3786,7 @@ namespace Zetbox.App.Base
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity A
         {
             get
@@ -3876,6 +3893,7 @@ namespace Zetbox.App.Base
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Group B
         {
             get
@@ -4194,6 +4212,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.Muhblah A
         {
             get
@@ -4300,6 +4319,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.TestCustomObject B
         {
             get
@@ -4653,6 +4673,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.NavigationEntry A
         {
             get
@@ -4761,6 +4782,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Group B
         {
             get
@@ -5126,6 +5148,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.ObjectReferenceProperty A
         {
             get
@@ -5234,6 +5257,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Method B
         {
             get
@@ -5625,6 +5649,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ViewModelDescriptor A
         {
             get
@@ -5733,6 +5758,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ControlKind B
         {
             get
@@ -6098,6 +6124,7 @@ namespace Zetbox.App.Projekte
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Projekte.Projekt A
         {
             get
@@ -6236,6 +6263,7 @@ namespace Zetbox.App.Projekte
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Projekte.Mitarbeiter B
         {
             get
@@ -6697,6 +6725,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.RoleMembership A
         {
             get
@@ -6835,6 +6864,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Relation B
         {
             get
@@ -7270,6 +7300,7 @@ namespace Zetbox.App.SchemaMigration
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.SchemaMigration.SourceColumn A
         {
             get
@@ -7408,6 +7439,7 @@ namespace Zetbox.App.SchemaMigration
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Property B
         {
             get
@@ -7808,6 +7840,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.TestStudent A
         {
             get
@@ -7914,6 +7947,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.Fragebogen B
         {
             get
@@ -8267,6 +8301,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.IndexConstraint A
         {
             get
@@ -8375,6 +8410,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Property B
         {
             get
@@ -8675,6 +8711,7 @@ namespace Zetbox.App.Projekte
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Projekte.Kunde Parent
         {
             get
@@ -9003,6 +9040,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.Muhblah Parent
         {
             get
@@ -9322,6 +9360,7 @@ namespace Zetbox.App.LicenseManagement
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.LicenseManagement.PrivateKey Parent
         {
             get
@@ -9661,6 +9700,7 @@ namespace Zetbox.App.Projekte
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Projekte.Projekt Parent
         {
             get
@@ -10018,6 +10058,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.TestCustomObject Parent
         {
             get

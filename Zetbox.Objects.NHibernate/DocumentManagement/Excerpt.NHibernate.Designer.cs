@@ -59,6 +59,7 @@ namespace at.dasz.DocumentManagement
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public at.dasz.DocumentManagement.File File
         {
             get
