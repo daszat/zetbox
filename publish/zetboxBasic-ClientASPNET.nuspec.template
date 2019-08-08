@@ -6,7 +6,7 @@
     <title>zetbox Basic - client ASP.NET MVC components</title>
     <authors>dasz.at OG</authors>
     <owners>dasz.at OG</owners>
-    <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+	<license type="expression">LGPL-2.0-or-later</license>
     <projectUrl>http://zetbox.at/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Client ASP.NET MVC components for the zetbox.</description>
