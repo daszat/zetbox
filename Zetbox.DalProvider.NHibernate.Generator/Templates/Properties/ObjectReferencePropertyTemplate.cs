@@ -78,6 +78,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             string eventName = "On" + name;
 
             string fkBackingName = "_fk_" + name;
+            string publicFKBackingName = "FK_" + name;
             string fkGuidBackingName = "_fk_guid_" + name;
 
             string referencedImplementation = referencedInterface
@@ -107,6 +108,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
                 implName,
                 eventName,
                 fkBackingName,
+                publicFKBackingName,
                 fkGuidBackingName,
                 referencedInterface,
                 referencedImplementation,

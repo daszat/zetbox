@@ -33,6 +33,7 @@
 <%@ Parameter Name="implName" Type="string" %>
 <%@ Parameter Name="eventName" Type="string" %>
 <%@ Parameter Name="fkBackingName" Type="string" %>
+<%@ Parameter Name="publicFKBackingName" Type="string" %>
 <%@ Parameter Name="fkGuidBackingName" Type="string" %>
 <%@ Parameter Name="referencedInterface" Type="string" %>
 <%@ Parameter Name="referencedImplementation" Type="string" %>
@@ -70,6 +71,14 @@
         }
 
         private int? <%= fkBackingName %>;
+
+        /// <summary>ForeignKey Property for <%= UglyXmlEncode(name) %>'s id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? <%= publicFKBackingName %>
+		{
+			get { return <%= name %> != null ? <%= name %>.ID : (int?)null; }
+			set { <%= fkBackingName %> = value; }
+		}
 
 <% if (relDataTypeExportable) { %>
         private Guid? <%= fkGuidBackingName %> = null;

@@ -41,6 +41,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             string name = "Parent";
             string eventName = "unused";
             string fkBackingName = "_fk_Parent";
+            string publicFKBackingName = "FK_" + name;
             string fkGuidBackingName = "unused";
             string referencedInterface = prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name;
             string referencedImplementation = referencedInterface + ImplementationSuffix;
@@ -57,6 +58,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 string.Empty /*implNameUnused*/,
                 eventName,
                 fkBackingName,
+                publicFKBackingName,
                 fkGuidBackingName,
                 referencedInterface,
                 referencedImplementation,
