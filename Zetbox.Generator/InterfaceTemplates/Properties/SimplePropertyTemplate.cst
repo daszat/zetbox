@@ -46,3 +46,11 @@
     }
 %>
         }
+
+<% if(IsObjectReference) { %>
+		int? FK_<%= name %> 
+		{ 
+			get; 
+			set;
+		}
+<% } %>
