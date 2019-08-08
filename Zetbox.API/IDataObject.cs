@@ -258,31 +258,37 @@ namespace Zetbox.API
         /// <summary>
         /// Gets a value indicating the current state of this object.
         /// </summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         DataObjectState ObjectState { get; }
 
         /// <summary>
         /// Gets the <see cref="IZetboxContext"/> containing this object.
         /// </summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         IZetboxContext Context { get; }
 
         /// <summary>
         /// Gets the <see cref="IReadOnlyZetboxContext"/> containing this object.
         /// </summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         IReadOnlyZetboxContext ReadOnlyContext { get; }
 
         /// <summary>
         /// Gets a value indicating whether or not this object is attached to a context.
         /// </summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         bool IsAttached { get; }
 
         /// <summary>
         /// Gets a value indicating whether values of this object can be set. This depends mostly on the state of the containing context.
         /// </summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         bool IsReadonly { get; }
 
         /// <summary>
         /// Reflects the current access rights by the current Identity. 
         /// </summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         AccessRights CurrentAccessRights { get; }
 
         #region //// INTERNALS /////
@@ -386,12 +392,14 @@ namespace Zetbox.API
         /// <param name="parentObj"></param>
         void UpdateParent(string propertyName, IDataObject parentObj);
 
+        [System.Runtime.Serialization.IgnoreDataMember]
         Guid ObjectClassID { get; }
         #endregion
 
         /// <summary>
         /// The transient state of this instance. Used by businesslogic to store temporary data.
         /// </summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         Dictionary<object, object> TransientState { get; }
     }
 
@@ -404,10 +412,12 @@ namespace Zetbox.API
         /// <summary>
         /// Gets a value indicating whether values of this object can be set. This mostly depends on the state of the containing object.
         /// </summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         bool IsReadonly { get; }
         /// <summary>
         /// Reflects the current access rights by the current Identity. 
         /// </summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         AccessRights CurrentAccessRights { get; }
 
         /// <summary>
@@ -429,6 +439,7 @@ namespace Zetbox.API
         /// </summary>
         void ApplyChangesFrom(ICompoundObject other);
 
+        [System.Runtime.Serialization.IgnoreDataMember]
         Guid CompoundObjectID { get; }
 
         /// <summary>
@@ -447,6 +458,7 @@ namespace Zetbox.API
         /// <summary>
         /// The transient state of this instance. Used by businesslogic to store temporary data.
         /// </summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         Dictionary<object, object> TransientState { get; }
     }
 
