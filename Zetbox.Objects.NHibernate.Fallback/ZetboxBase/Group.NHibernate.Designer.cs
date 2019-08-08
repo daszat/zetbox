@@ -176,6 +176,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Module Module
         {
             get
@@ -656,6 +657,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

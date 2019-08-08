@@ -211,6 +211,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Module Module
         {

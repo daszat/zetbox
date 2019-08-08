@@ -49,6 +49,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity ChangedBy
@@ -245,6 +246,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity CreatedBy
@@ -499,6 +501,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Module DestinationModule
@@ -689,6 +692,7 @@ namespace Zetbox.App.SchemaMigration
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.SchemaMigration.StagingDatabase> StagingDatabases
         {

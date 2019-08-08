@@ -234,6 +234,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.RelationEnd RelationEnd
         {
             get

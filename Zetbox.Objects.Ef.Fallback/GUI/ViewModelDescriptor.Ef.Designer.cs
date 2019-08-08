@@ -59,6 +59,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind DefaultDisplayKind
         {
@@ -175,6 +176,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind DefaultEditorKind
         {
@@ -291,6 +293,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind DefaultGridCellDisplayKind
         {
@@ -407,6 +410,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind DefaultGridCellEditorKind
         {
@@ -523,6 +527,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind DefaultGridCellPreEditorKind
         {
@@ -872,6 +877,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Module Module
         {

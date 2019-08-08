@@ -196,6 +196,7 @@ namespace Zetbox.App.GUI
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity Owner
         {
             get
@@ -302,6 +303,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.ObjectClass Type
         {
             get
@@ -669,6 +671,7 @@ namespace Zetbox.App.GUI
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

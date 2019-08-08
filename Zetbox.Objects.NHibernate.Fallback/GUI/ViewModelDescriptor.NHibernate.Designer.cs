@@ -61,6 +61,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ControlKind DefaultDisplayKind
         {
             get
@@ -169,6 +170,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ControlKind DefaultEditorKind
         {
             get
@@ -277,6 +279,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ControlKind DefaultGridCellDisplayKind
         {
             get
@@ -385,6 +388,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ControlKind DefaultGridCellEditorKind
         {
             get
@@ -493,6 +497,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ControlKind DefaultGridCellPreEditorKind
         {
             get
@@ -815,6 +820,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Module Module
         {
             get
@@ -1562,6 +1568,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

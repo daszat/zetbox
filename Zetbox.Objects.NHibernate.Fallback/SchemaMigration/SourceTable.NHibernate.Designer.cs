@@ -62,6 +62,7 @@ namespace Zetbox.App.SchemaMigration
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity ChangedBy
         {
             get
@@ -304,6 +305,7 @@ namespace Zetbox.App.SchemaMigration
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity CreatedBy
         {
             get
@@ -546,6 +548,7 @@ namespace Zetbox.App.SchemaMigration
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.ObjectClass DestinationObjectClass
         {
             get
@@ -787,6 +790,7 @@ namespace Zetbox.App.SchemaMigration
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.SchemaMigration.SourceColumn> SourceColumn
         {
@@ -831,6 +835,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.SchemaMigration.StagingDatabase StagingDatabase
         {
             get
@@ -1581,6 +1586,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

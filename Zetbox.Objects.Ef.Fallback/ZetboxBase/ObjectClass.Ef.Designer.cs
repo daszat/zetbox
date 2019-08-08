@@ -54,6 +54,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Base.AccessControl> AccessControlList
         {
@@ -133,6 +134,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.ObjectClass BaseObjectClass
         {
@@ -317,6 +319,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
         {
@@ -428,6 +431,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration> FilterConfigurations
         {
@@ -830,6 +834,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Base.ObjectClass> SubClasses
         {

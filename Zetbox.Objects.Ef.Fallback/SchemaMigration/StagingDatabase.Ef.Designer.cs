@@ -59,6 +59,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity ChangedBy
         {
@@ -327,6 +328,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity CreatedBy
         {
@@ -677,6 +679,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.SchemaMigration.MigrationProject MigrationProject
         {
@@ -938,6 +941,7 @@ namespace Zetbox.App.SchemaMigration
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.SchemaMigration.SourceTable> SourceTables
         {

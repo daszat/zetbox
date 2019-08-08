@@ -199,6 +199,7 @@ namespace Zetbox.App.Base
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity ChangedBy
         {
             get
@@ -433,6 +434,7 @@ namespace Zetbox.App.Base
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Base.Constraint> Constraints
         {
@@ -479,6 +481,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity CreatedBy
         {
             get
@@ -721,6 +724,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.DefaultPropertyValue DefaultValue
         {
             get
@@ -1039,6 +1043,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.PropertyFilterConfiguration FilterConfiguration
         {
             get
@@ -1279,6 +1284,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Module Module
         {
             get
@@ -1445,6 +1451,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.DataType ObjectClass
         {
             get
@@ -1606,6 +1613,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ControlKind RequestedKind
         {
             get
@@ -1772,6 +1780,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ViewModelDescriptor ValueModelDescriptor
         {
             get
@@ -2952,6 +2961,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

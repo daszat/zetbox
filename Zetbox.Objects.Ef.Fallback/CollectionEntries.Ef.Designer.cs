@@ -155,6 +155,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.CalculatedObjectReferenceProperty A
         {
@@ -244,6 +245,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Property B
         {
@@ -604,6 +606,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.DataType A
         {
@@ -693,6 +696,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Interface B
         {
@@ -1005,6 +1009,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity A
         {
@@ -1093,6 +1098,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Group B
         {
@@ -1419,6 +1425,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.NavigationEntry A
         {
@@ -1508,6 +1515,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Group B
         {
@@ -1868,6 +1876,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.ObjectReferenceProperty A
         {
@@ -1957,6 +1966,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Method B
         {
@@ -2318,6 +2328,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ViewModelDescriptor A
         {
@@ -2407,6 +2418,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind B
         {
@@ -2764,6 +2776,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.RoleMembership A
         {
@@ -2895,6 +2908,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Relation B
         {
@@ -3318,6 +3332,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.SchemaMigration.SourceColumn A
         {
@@ -3449,6 +3464,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Property B
         {
@@ -3875,6 +3891,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.IndexConstraint A
         {
@@ -3964,6 +3981,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Property B
         {

@@ -97,6 +97,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.ObjectClass ReferencedClass
         {
             get

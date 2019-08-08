@@ -59,6 +59,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity ChangedBy
         {
@@ -258,6 +259,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity CreatedBy
         {
@@ -457,6 +459,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.EnumerationEntry DestinationValue
         {
@@ -655,6 +658,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.SchemaMigration.SourceColumn SourceColumn
         {

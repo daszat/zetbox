@@ -120,6 +120,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.CalculatedObjectReferenceProperty A
         {
             get
@@ -228,6 +229,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Property B
         {
             get
@@ -483,6 +485,7 @@ namespace Zetbox.App.Base
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -593,6 +596,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.DataType A
         {
             get
@@ -701,6 +705,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Interface B
         {
             get
@@ -956,6 +961,7 @@ namespace Zetbox.App.Base
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -1031,6 +1037,7 @@ namespace Zetbox.App.Base
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity A
         {
             get
@@ -1137,6 +1144,7 @@ namespace Zetbox.App.Base
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Group B
         {
             get
@@ -1380,6 +1388,7 @@ namespace Zetbox.App.Base
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -1490,6 +1499,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.NavigationEntry A
         {
             get
@@ -1598,6 +1608,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Group B
         {
             get
@@ -1853,6 +1864,7 @@ namespace Zetbox.App.GUI
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -1963,6 +1975,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.ObjectReferenceProperty A
         {
             get
@@ -2071,6 +2084,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Method B
         {
             get
@@ -2352,6 +2366,7 @@ namespace Zetbox.App.GUI
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -2462,6 +2477,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ViewModelDescriptor A
         {
             get
@@ -2570,6 +2586,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ControlKind B
         {
             get
@@ -2825,6 +2842,7 @@ namespace Zetbox.App.GUI
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -2935,6 +2953,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.RoleMembership A
         {
             get
@@ -3073,6 +3092,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Relation B
         {
             get
@@ -3398,6 +3418,7 @@ namespace Zetbox.App.Base
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -3508,6 +3529,7 @@ namespace Zetbox.App.SchemaMigration
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.SchemaMigration.SourceColumn A
         {
             get
@@ -3646,6 +3668,7 @@ namespace Zetbox.App.SchemaMigration
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Property B
         {
             get
@@ -3971,6 +3994,7 @@ namespace Zetbox.App.SchemaMigration
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -4081,6 +4105,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.IndexConstraint A
         {
             get
@@ -4189,6 +4214,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Property B
         {
             get
@@ -4444,6 +4470,7 @@ namespace Zetbox.App.Base
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }

@@ -59,6 +59,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity ChangedBy
         {
@@ -409,6 +410,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity CreatedBy
         {
@@ -824,6 +826,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.SchemaMigration.SourceEnum> EnumEntries
         {
@@ -1123,6 +1126,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.SchemaMigration.SourceColumn References
         {
@@ -1246,6 +1250,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.SchemaMigration.SourceColumn> Referers
         {
@@ -1394,6 +1399,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.SchemaMigration.SourceTable SourceTable
         {

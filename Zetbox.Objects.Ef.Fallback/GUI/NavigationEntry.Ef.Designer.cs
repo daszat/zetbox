@@ -59,6 +59,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity ChangedBy
         {
@@ -253,6 +254,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public IList<Zetbox.App.GUI.NavigationEntry> Children
         {
@@ -401,6 +403,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity CreatedBy
         {
@@ -753,6 +756,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Module Module
         {
@@ -869,6 +873,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.NavigationEntry Parent
         {
@@ -1039,6 +1044,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind RequestedKind
         {
@@ -1224,6 +1230,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ViewModelDescriptor ViewModelDescriptor
         {

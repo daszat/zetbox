@@ -59,6 +59,7 @@ namespace Zetbox.App.Base
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ViewModelDescriptor DefaultPropertyViewModelDescriptor
         {
             get
@@ -167,6 +168,7 @@ namespace Zetbox.App.Base
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
         {
             get
