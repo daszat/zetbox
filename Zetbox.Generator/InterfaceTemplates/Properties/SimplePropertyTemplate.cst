@@ -48,6 +48,7 @@
         }
 
 <% if(IsObjectReference) { %>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
 		int? FK_<%= name %> 
 		{ 
 			get; 

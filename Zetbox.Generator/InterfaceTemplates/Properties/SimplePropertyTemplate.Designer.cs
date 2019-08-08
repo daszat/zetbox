@@ -64,12 +64,13 @@ this.WriteObjects("\r\n");
 #line 50 "D:\Projects\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 if(IsObjectReference) { 
 #line 51 "D:\Projects\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+this.WriteObjects("		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]\r\n");
 this.WriteObjects("		int? FK_",  name , " \r\n");
 this.WriteObjects("		{ \r\n");
 this.WriteObjects("			get; \r\n");
 this.WriteObjects("			set;\r\n");
 this.WriteObjects("		}\r\n");
-#line 56 "D:\Projects\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 57 "D:\Projects\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 } 
 
         }
