@@ -39,8 +39,6 @@ namespace Zetbox.Generator.InterfaceTemplates
         {
             // do not add self-reference
             // base.ApplyAdditionalReferences();
-
-            this.WriteObjects("    <Reference Include=\"System.Runtime.Serialization\" />\r\n");
         }
 
         protected override void ApplyAdditionalProperties()
