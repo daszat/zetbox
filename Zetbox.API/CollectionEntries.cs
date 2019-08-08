@@ -113,6 +113,7 @@ namespace Zetbox.API
         where TParent : IDataObject
     {
         /// <summary>Gets or sets the object containing the collection.</summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         TParent Parent { get; set; }
 
         /// <summary>Gets or sets the contained value.</summary>
