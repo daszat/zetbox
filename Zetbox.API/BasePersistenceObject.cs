@@ -66,6 +66,7 @@ namespace Zetbox.API
         /// Always false, when the object is not attached or a playback is happening.
         /// </remarks>
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public bool IsReadonly
         {
             get
@@ -105,17 +106,20 @@ namespace Zetbox.API
         /// Gets the <see cref="IZetboxContext"/> containing this object.
         /// </summary>
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public IZetboxContext Context { get; private set; }
         /// <summary>
         /// Gets the <see cref="IReadOnlyZetboxContext"/> containing this object.
         /// </summary>
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public IReadOnlyZetboxContext ReadOnlyContext { get { return Context; } }
 
         /// <summary>
         /// Gets a value indicating whether or not this object is attached to a context.
         /// </summary>
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public abstract bool IsAttached { get; }
 
         /// <summary>
@@ -349,6 +353,7 @@ namespace Zetbox.API
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         string IDataErrorInfo.Error
         {
             get
@@ -381,6 +386,7 @@ namespace Zetbox.API
         /// <value>String.Empty</value> if there is nothing to report.</returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         string IDataErrorInfo.this[string columnName]
         {
             get
@@ -519,6 +525,7 @@ namespace Zetbox.API
         private Dictionary<object, object> _transientState;
         /// <inheritdoc />
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public Dictionary<object, object> TransientState
         {
             get
