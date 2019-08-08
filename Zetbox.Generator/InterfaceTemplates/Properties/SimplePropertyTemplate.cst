@@ -32,6 +32,9 @@
     string type = prop.GetPropertyTypeString();
 %>
         [Zetbox.API.DefinitionGuid("<%= prop.ExportGuid %>")]
+<% if(IsObjectReference) { %>
+		[System.Runtime.Serialization.IgnoreDataMember]
+<% } %>
         <%= type %> <%= name %> {
             get;
 <%

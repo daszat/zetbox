@@ -36,6 +36,7 @@ namespace Zetbox.Generator.InterfaceTemplates.Properties
 this.WriteObjects("\r\n");
 #line 30 "D:\Projects\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
 this.WriteObjects("        [Zetbox.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\r\n");
+this.WriteObjects("        [System.Runtime.Serialization.IgnoreDataMember]\r\n");
 this.WriteObjects("        ",  GetPropertyTypeString() , " ",  GetPropertyName() , " { get; }\r\n");
 
         }
