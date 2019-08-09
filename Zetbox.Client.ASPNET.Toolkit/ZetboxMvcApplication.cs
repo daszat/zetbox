@@ -31,6 +31,7 @@ namespace Zetbox.Client.ASPNET
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.API.Utils;
     using Zetbox.Client.Presentables;
+    using System.Web.Http;
 
     public abstract class ZetboxMvcApplication : System.Web.HttpApplication
     {
@@ -95,7 +96,7 @@ namespace Zetbox.Client.ASPNET
             // ZetboxController.UpdateModelState() will 
             // write those errors to the ModelStateDictionary
             var toRemove = ModelValidatorProviders.Providers.OfType<DataErrorInfoModelValidatorProvider>().ToList();
-            foreach(var r in toRemove)
+            foreach (var r in toRemove)
             {
                 ModelValidatorProviders.Providers.Remove(r);
             }
@@ -103,8 +104,8 @@ namespace Zetbox.Client.ASPNET
 
         protected virtual void SetupModelBinder(IContainer container)
         {
-            ModelBinderProviders.BinderProviders.Add(container.Resolve<IZetboxViewModelBinderProvider>());
             ModelBinderProviders.BinderProviders.Add(container.Resolve<ILookupDictionaryModelBinderProvider>());
+            ModelBinderProviders.BinderProviders.Add(container.Resolve<IZetboxViewModelBinderProvider>());
         }
         protected virtual void SetupResolver(IContainer container)
         {

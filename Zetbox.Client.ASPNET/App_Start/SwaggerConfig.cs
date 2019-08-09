@@ -3,6 +3,9 @@ using WebActivatorEx;
 using Swashbuckle.Application;
 using System.Net.Http;
 using System.Linq;
+using Swashbuckle.Swagger;
+using System.Web.Http.Description;
+using System.Collections.Generic;
 
 [assembly: PreApplicationStartMethod(typeof(Zetbox.Client.ASPNET.SwaggerConfig), "Register")]
 
