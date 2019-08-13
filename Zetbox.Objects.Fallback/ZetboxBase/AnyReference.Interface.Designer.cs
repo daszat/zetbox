@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Guid of referenced object
         /// </summary>
@@ -32,6 +33,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// ID of the referenced object
         /// </summary>
@@ -40,6 +42,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// 

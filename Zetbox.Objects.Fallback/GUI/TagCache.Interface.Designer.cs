@@ -23,6 +23,7 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// Rebuilds the tag cache
         /// </summary>

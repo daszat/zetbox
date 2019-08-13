@@ -23,37 +23,56 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("4a929ef5-f211-47b4-92c3-4961da6d5173")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.Muhblah> MubBlah_List_Nav { get; }
 
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("3251497d-5214-4e42-976e-f36c3d9541de")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Test.Muhblah MubBlah_Nav {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_MubBlah_Nav 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("9c4217f2-47d8-47b5-a324-7601ecabc7b0")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.Muhblah> MuhBlah_ManyList_Nav { get; }
 
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("e7b207d3-5d25-4716-85b3-564f10eac210")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Test.Muhblah MuhBlah_One_Nav {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_MuhBlah_One_Nav 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Person&amp;apos;s Name
@@ -64,6 +83,7 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -72,6 +92,7 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -82,11 +103,13 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("0c0c1101-118a-4ce2-806c-d30a03b19dde")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.TestPhoneCompoundObject> PhoneNumbersOther { get; }
     }
 }

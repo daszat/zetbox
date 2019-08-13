@@ -61,6 +61,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ControlKind ControlKind
         {
             get
@@ -134,6 +135,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for ControlKind's id, used on dehydration only</summary>
         private int? _fk_ControlKind = null;
+
+        /// <summary>ForeignKey Property for ControlKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ControlKind
+		{
+			get { return ControlKind != null ? ControlKind.ID : (int?)null; }
+			set { _fk_ControlKind = value; }
+		}
 
         /// <summary>Backing store for ControlKind's guid, used on import only</summary>
         private Guid? _fk_guid_ControlKind = null;
@@ -375,6 +384,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Module Module
         {
             get
@@ -448,6 +458,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for Module's id, used on dehydration only</summary>
         private int? _fk_Module = null;
+
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return Module != null ? Module.ID : (int?)null; }
+			set { _fk_Module = value; }
+		}
 
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
@@ -823,6 +841,7 @@ namespace Zetbox.App.GUI
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

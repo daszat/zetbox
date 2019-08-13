@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Version number of this schema
         /// </summary>
@@ -31,5 +32,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

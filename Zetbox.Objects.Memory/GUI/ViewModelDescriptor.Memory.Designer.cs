@@ -49,6 +49,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ControlKind DefaultDisplayKind
@@ -72,6 +73,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchDefaultDisplayKindTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for DefaultDisplayKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultDisplayKind
+		{
+			get { return _fk_DefaultDisplayKind; }
+			set { _fk_DefaultDisplayKind = value; }
+		}
 
         private Guid? _fk_guid_DefaultDisplayKind = null;
 
@@ -165,6 +174,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ControlKind DefaultEditorKind
@@ -188,6 +198,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchDefaultEditorKindTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for DefaultEditorKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultEditorKind
+		{
+			get { return _fk_DefaultEditorKind; }
+			set { _fk_DefaultEditorKind = value; }
+		}
 
         private Guid? _fk_guid_DefaultEditorKind = null;
 
@@ -281,6 +299,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ControlKind DefaultGridCellDisplayKind
@@ -304,6 +323,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchDefaultGridCellDisplayKindTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for DefaultGridCellDisplayKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultGridCellDisplayKind
+		{
+			get { return _fk_DefaultGridCellDisplayKind; }
+			set { _fk_DefaultGridCellDisplayKind = value; }
+		}
 
         private Guid? _fk_guid_DefaultGridCellDisplayKind = null;
 
@@ -397,6 +424,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ControlKind DefaultGridCellEditorKind
@@ -420,6 +448,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchDefaultGridCellEditorKindTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for DefaultGridCellEditorKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultGridCellEditorKind
+		{
+			get { return _fk_DefaultGridCellEditorKind; }
+			set { _fk_DefaultGridCellEditorKind = value; }
+		}
 
         private Guid? _fk_guid_DefaultGridCellEditorKind = null;
 
@@ -513,6 +549,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ControlKind DefaultGridCellPreEditorKind
@@ -536,6 +573,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchDefaultGridCellPreEditorKindTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for DefaultGridCellPreEditorKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultGridCellPreEditorKind
+		{
+			get { return _fk_DefaultGridCellPreEditorKind; }
+			set { _fk_DefaultGridCellPreEditorKind = value; }
+		}
 
         private Guid? _fk_guid_DefaultGridCellPreEditorKind = null;
 
@@ -829,6 +874,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Module Module
@@ -852,6 +898,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchModuleTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return _fk_Module; }
+			set { _fk_Module = value; }
+		}
 
         private Guid? _fk_guid_Module = null;
 

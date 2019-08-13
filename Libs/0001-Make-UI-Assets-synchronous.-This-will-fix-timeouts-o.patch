@@ -1,0 +1,88 @@
+From ce76cd20f52432d651231e3937c8e54958390910 Mon Sep 17 00:00:00 2001
+From: Arthur Zaczek <arthur@dasz.at>
+Date: Fri, 29 Mar 2019 10:24:33 +0100
+Subject: [PATCH] Make UI Assets synchronous. This will fix timeouts on mono
+
+---
+ .../Application/SwaggerUiHandler.cs           | 45 ++++++++++++++++++-
+ 1 file changed, 43 insertions(+), 2 deletions(-)
+
+diff --git a/Swashbuckle.Core/Application/SwaggerUiHandler.cs b/Swashbuckle.Core/Application/SwaggerUiHandler.cs
+index 4e1e133..dbf80d0 100644
+--- a/Swashbuckle.Core/Application/SwaggerUiHandler.cs
++++ b/Swashbuckle.Core/Application/SwaggerUiHandler.cs
+@@ -5,6 +5,8 @@ using System.Threading.Tasks;
+ using System.Net;
+ using System.Net.Http.Headers;
+ using Swashbuckle.SwaggerUi;
++using System.Net.Http.Formatting;
++using System.IO;
+ 
+ namespace Swashbuckle.Application
+ {
+@@ -27,7 +29,9 @@ namespace Swashbuckle.Application
+             {
+                 var webAsset = swaggerUiProvider.GetAsset(rootUrl, assetPath);
+                 var content = ContentFor(webAsset);
+-                return TaskFor(new HttpResponseMessage { Content = content, RequestMessage = request });
++                var task = TaskFor(new HttpResponseMessage { Content = content, RequestMessage = request });
++                task.Wait();
++                return task;
+             }
+             catch (AssetNotFound ex)
+             {
+@@ -41,7 +45,7 @@ namespace Swashbuckle.Application
+                 ? int.MaxValue
+                 : (int)webAsset.Stream.Length;
+ 
+-            var content = new StreamContent(webAsset.Stream, bufferSize);
++            var content = new MyStreamContent(webAsset.Stream);
+             content.Headers.ContentType = new MediaTypeHeaderValue(webAsset.MediaType);
+             return content;
+         }
+@@ -52,5 +56,42 @@ namespace Swashbuckle.Application
+             tsc.SetResult(response);
+             return tsc.Task;
+         }
++
++        class MyStreamContent : HttpContent
++        {
++            private readonly Stream src;
++            private readonly long srcLength;
++
++            public MyStreamContent(Stream src)
++            {
++                this.src = src;
++                this.srcLength = src.Length;
++            }
++
++            protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
++            {
++                src.CopyTo(stream, 16 * 1024);
++                stream.Flush();
++                var t = new Task(() => { });
++                t.RunSynchronously();
++                return t;
++            }
++
++            protected override bool TryComputeLength(out long length)
++            {
++                length = -1L;
++                return false;
++            }
++
++            protected override void Dispose(bool disposing)
++            {
++                if (disposing)
++                {
++                    src.Dispose();
++                }
++
++                base.Dispose(disposing);
++            }
++        }
+     }
+ }
+-- 
+2.21.0.windows.1
+

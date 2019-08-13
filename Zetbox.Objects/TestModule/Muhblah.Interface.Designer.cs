@@ -19,6 +19,7 @@ namespace Zetbox.App.Test
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("b89fc0d2-8603-40d7-8649-61431a9fb09b")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<string> StringCollection { get; }
 
         /// <summary>
@@ -30,11 +31,13 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("1f944324-673f-4f14-94c8-dc570ea3022d")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.TestCustomObject> TestCustomObjects_List_Nav { get; }
 
         /// <summary>
@@ -42,25 +45,42 @@ namespace Zetbox.App.Test
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("a3ad7340-4dc1-488c-bc9a-29ac931b1f0d")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.TestCustomObject> TestCustomObjects_ManyList_Nav { get; }
 
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("aabd7cb7-c45e-43c9-97fd-76e50c310ab3")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Test.TestCustomObject TestCustomObjects_Nav {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_TestCustomObjects_Nav 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("42c6bc2f-0428-488a-b928-539c4c6e3e65")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Test.TestCustomObject TestCustomObjects_One_Nav {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_TestCustomObjects_One_Nav 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -71,6 +91,7 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -80,6 +101,7 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -88,5 +110,6 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
     }
 }

@@ -97,6 +97,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.ObjectClass ReferencedClass
@@ -120,6 +121,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
                 _triggerFetchReferencedClassTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for ReferencedClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ReferencedClass
+		{
+			get { return _fk_ReferencedClass; }
+			set { _fk_ReferencedClass = value; }
+		}
 
         private Guid? _fk_guid_ReferencedClass = null;
 

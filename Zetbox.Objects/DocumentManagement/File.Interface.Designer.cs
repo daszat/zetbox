@@ -23,23 +23,40 @@ namespace at.dasz.DocumentManagement
             set;
         }
 
+
         /// <summary>
         /// Current File Content
         /// </summary>
         [Zetbox.API.DefinitionGuid("ef5addda-340f-4a87-83c9-3ee419519343")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Blob Blob {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Blob 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// A searchable excerpt
         /// </summary>
         [Zetbox.API.DefinitionGuid("76e29530-9252-4c2a-bae4-503f3b6dcd29")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         at.dasz.DocumentManagement.Excerpt Excerpt {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Excerpt 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// This file cannot be changed when the flas is set
@@ -50,6 +67,7 @@ namespace at.dasz.DocumentManagement
             set;
         }
 
+
         /// <summary>
         /// Keeps revisions of this file
         /// </summary>
@@ -58,6 +76,7 @@ namespace at.dasz.DocumentManagement
             get;
             set;
         }
+
 
         /// <summary>
         /// Filename
@@ -68,11 +87,13 @@ namespace at.dasz.DocumentManagement
             set;
         }
 
+
         /// <summary>
         /// Revisions of this file
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Base.Blob> Revisions { get; }
 
         /// <summary>
@@ -83,6 +104,7 @@ namespace at.dasz.DocumentManagement
             get;
             set;
         }
+
 
         /// <summary>
         /// Creates an excerpt from the current file

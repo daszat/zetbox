@@ -59,6 +59,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.CompoundObject CompoundObjectDefinition
         {
@@ -67,6 +68,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_CompoundObjectDefinition;
+
+        /// <summary>ForeignKey Property for CompoundObjectDefinition's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CompoundObjectDefinition
+		{
+			get { return CompoundObjectDefinition != null ? CompoundObjectDefinition.ID : (int?)null; }
+			set { _fk_CompoundObjectDefinition = value; }
+		}
 
         private Guid? _fk_guid_CompoundObjectDefinition = null;
 

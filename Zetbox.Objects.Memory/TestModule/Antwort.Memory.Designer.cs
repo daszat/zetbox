@@ -107,6 +107,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Test.Fragebogen Fragebogen
@@ -130,6 +131,14 @@ namespace Zetbox.App.Test
                 _triggerFetchFragebogenTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Fragebogen's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Fragebogen
+		{
+			get { return _fk_Fragebogen; }
+			set { _fk_Fragebogen = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> _triggerFetchFragebogenTask;

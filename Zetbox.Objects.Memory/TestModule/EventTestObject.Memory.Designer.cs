@@ -49,6 +49,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Calendar.Event Event
@@ -72,6 +73,14 @@ namespace Zetbox.App.Test
                 _triggerFetchEventTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Event's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Event
+		{
+			get { return _fk_Event; }
+			set { _fk_Event = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Event> _triggerFetchEventTask;

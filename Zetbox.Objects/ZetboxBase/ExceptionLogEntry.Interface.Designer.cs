@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -31,6 +32,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -41,6 +43,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -49,6 +52,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -59,6 +63,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -67,5 +72,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

@@ -128,6 +128,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Test.One_to_N_relations_One OneSide
         {
@@ -136,6 +137,14 @@ namespace Zetbox.App.Test
         }
 
         private int? _fk_OneSide;
+
+        /// <summary>ForeignKey Property for OneSide's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_OneSide
+		{
+			get { return OneSide != null ? OneSide.ID : (int?)null; }
+			set { _fk_OneSide = value; }
+		}
 
 
         // internal implementation, EF sees only this property

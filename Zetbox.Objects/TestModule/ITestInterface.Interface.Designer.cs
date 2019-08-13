@@ -18,10 +18,18 @@ namespace Zetbox.App.Test
         /// Objektpointer für das Testinterface
         /// </summary>
         [Zetbox.API.DefinitionGuid("bd5c671d-c81f-4f13-9ee8-158ea4892d24")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Projekte.Kunde ObjectProp {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ObjectProp 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// String Property für das Testinterface
@@ -32,6 +40,7 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// Test Enum Property
         /// </summary>
@@ -40,6 +49,7 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
 
         /// <summary>
         /// 

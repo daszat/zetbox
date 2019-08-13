@@ -28,4 +28,5 @@
 <%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="prop" Type="Property" %>
         [Zetbox.API.DefinitionGuid("<%= prop.ExportGuid %>")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         <%= GetPropertyTypeString() %> <%= GetPropertyName() %> { get; }

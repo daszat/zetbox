@@ -23,22 +23,39 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("776c6c41-d42d-43d0-bff4-e99638a045bf")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Identity Owner {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Owner 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("93775971-e361-4495-8107-3398205589ec")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.ObjectClass Type {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Type 
+		{ 
+			get; 
+			set;
+		}
     }
 }

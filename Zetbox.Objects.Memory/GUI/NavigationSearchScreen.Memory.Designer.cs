@@ -687,6 +687,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ControlKind RequestedEditorKind
@@ -710,6 +711,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchRequestedEditorKindTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for RequestedEditorKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RequestedEditorKind
+		{
+			get { return _fk_RequestedEditorKind; }
+			set { _fk_RequestedEditorKind = value; }
+		}
 
         private Guid? _fk_guid_RequestedEditorKind = null;
 
@@ -803,6 +812,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ControlKind RequestedWorkspaceKind
@@ -826,6 +836,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchRequestedWorkspaceKindTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for RequestedWorkspaceKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RequestedWorkspaceKind
+		{
+			get { return _fk_RequestedWorkspaceKind; }
+			set { _fk_RequestedWorkspaceKind = value; }
+		}
 
         private Guid? _fk_guid_RequestedWorkspaceKind = null;
 
@@ -1151,6 +1169,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.ObjectClass Type
@@ -1174,6 +1193,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchTypeTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Type's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Type
+		{
+			get { return _fk_Type; }
+			set { _fk_Type = value; }
+		}
 
         private Guid? _fk_guid_Type = null;
 

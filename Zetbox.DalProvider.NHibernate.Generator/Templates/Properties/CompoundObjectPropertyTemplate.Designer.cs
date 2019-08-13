@@ -61,6 +61,7 @@ this.WriteObjects("            set { ",  backingPropertyName , " = (",  coImplem
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>backing property for ",  UglyXmlEncode(propName) , ", takes care of attaching/detaching the values</summary>\r\n");
+this.WriteObjects("		[System.Runtime.Serialization.IgnoreDataMember]\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  coImplementationType , " ",  backingPropertyName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
@@ -92,10 +93,10 @@ this.WriteObjects("                    if(IsAttached) UpdateChangedInfo = true;\
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 81 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 82 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 83 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 84 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , "");
 
         }

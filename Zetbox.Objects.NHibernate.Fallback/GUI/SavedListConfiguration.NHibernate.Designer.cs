@@ -196,6 +196,7 @@ namespace Zetbox.App.GUI
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity Owner
         {
             get
@@ -270,6 +271,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for Owner's id, used on dehydration only</summary>
         private int? _fk_Owner = null;
 
+        /// <summary>ForeignKey Property for Owner's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Owner
+		{
+			get { return Owner != null ? Owner.ID : (int?)null; }
+			set { _fk_Owner = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchOwnerAsync()
     {
@@ -294,6 +303,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.ObjectClass Type
         {
             get
@@ -367,6 +377,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for Type's id, used on dehydration only</summary>
         private int? _fk_Type = null;
+
+        /// <summary>ForeignKey Property for Type's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Type
+		{
+			get { return Type != null ? Type.ID : (int?)null; }
+			set { _fk_Type = value; }
+		}
 
         /// <summary>Backing store for Type's guid, used on import only</summary>
         private Guid? _fk_guid_Type = null;
@@ -653,6 +671,7 @@ namespace Zetbox.App.GUI
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

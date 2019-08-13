@@ -18,10 +18,18 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("9119f41f-0767-47c0-ae71-5cd3f897b477")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Identity Identity {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Identity 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -32,14 +40,23 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("9bdf1c7f-16d1-4e92-9024-7447d3b2c9ec")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Test.SecurityTestParent Parent {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Parent 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -48,5 +65,6 @@ namespace Zetbox.App.Test
         string ParentName {
             get;
         }
+
     }
 }

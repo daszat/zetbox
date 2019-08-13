@@ -70,6 +70,7 @@ namespace Zetbox.App.Test
         }
 
         /// <summary>backing property for Rule, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.RecurrenceRuleNHibernateImpl RuleImpl
         {
             get
@@ -409,6 +410,7 @@ namespace Zetbox.App.Test
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

@@ -23,13 +23,22 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("598a1fc0-442e-436f-8dab-c04112c1709e")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Test.One_to_N_relations_One OneSide {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_OneSide 
+		{ 
+			get; 
+			set;
+		}
     }
 }

@@ -102,6 +102,7 @@ namespace Zetbox.App.Test
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Test.One_to_N_relations_N> NSide
         {
@@ -168,6 +169,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public IList<Zetbox.App.Test.One_to_N_relations_OrderedN> OrderedNSide
         {

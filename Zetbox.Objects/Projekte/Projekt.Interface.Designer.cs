@@ -19,6 +19,7 @@ namespace Zetbox.App.Projekte
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("30a1d8b6-4db5-45a0-a9a8-531472a9107e")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Projekte.Auftrag> Auftraege { get; }
 
         /// <summary>
@@ -29,6 +30,7 @@ namespace Zetbox.App.Projekte
             get;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -37,6 +39,7 @@ namespace Zetbox.App.Projekte
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -47,6 +50,7 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -55,6 +59,7 @@ namespace Zetbox.App.Projekte
             get;
             set;
         }
+
 
         /// <summary>
         /// Bitte geben Sie den Kundennamen ein
@@ -65,11 +70,13 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("3e60fe29-ac50-4232-bbeb-af023ede02f6")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Projekte.Mitarbeiter> Mitarbeiter { get; }
 
         /// <summary>
@@ -81,11 +88,13 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("f6ff71b0-ccaf-4c7d-8e2b-1210a9df4b0f")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Projekte.Task> Tasks { get; }
 
         /// <summary>
@@ -96,6 +105,7 @@ namespace Zetbox.App.Projekte
             get;
             set;
         }
+
 
         /// <summary>
         /// 

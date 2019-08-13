@@ -49,6 +49,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Test.OrderedOneEnd OneEnd
@@ -72,6 +73,14 @@ namespace Zetbox.App.Test
                 _triggerFetchOneEndTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for OneEnd's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_OneEnd
+		{
+			get { return _fk_OneEnd; }
+			set { _fk_OneEnd = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> _triggerFetchOneEndTask;

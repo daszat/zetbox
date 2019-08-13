@@ -23,6 +23,7 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// Overrides the default behaviour. If true the filter will be immediately applied
         /// </summary>
@@ -32,14 +33,23 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// Overrides the default kind of the configured ViewModelDescriptor
         /// </summary>
         [Zetbox.API.DefinitionGuid("afd2747f-9165-425e-946f-aed748ca5703")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ControlKind RequestedKind {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_RequestedKind 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -50,14 +60,23 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("5776e14c-4bf4-4388-8a5b-2e81b232bf8f")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ViewModelDescriptor ViewModelDescriptor {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ViewModelDescriptor 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 

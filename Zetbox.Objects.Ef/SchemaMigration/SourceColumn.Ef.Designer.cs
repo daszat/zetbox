@@ -59,6 +59,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity ChangedBy
         {
@@ -67,6 +68,14 @@ namespace Zetbox.App.SchemaMigration
         }
 
         private int? _fk_ChangedBy;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -401,6 +410,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity CreatedBy
         {
@@ -409,6 +419,14 @@ namespace Zetbox.App.SchemaMigration
         }
 
         private int? _fk_CreatedBy;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -808,6 +826,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.SchemaMigration.SourceEnum> EnumEntries
         {
@@ -1107,6 +1126,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.SchemaMigration.SourceColumn References
         {
@@ -1115,6 +1135,14 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         }
 
         private int? _fk_References;
+
+        /// <summary>ForeignKey Property for References's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_References
+		{
+			get { return References != null ? References.ID : (int?)null; }
+			set { _fk_References = value; }
+		}
 
         private Guid? _fk_guid_References = null;
 
@@ -1222,6 +1250,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.SchemaMigration.SourceColumn> Referers
         {
@@ -1370,6 +1399,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.SchemaMigration.SourceTable SourceTable
         {
@@ -1378,6 +1408,14 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         }
 
         private int? _fk_SourceTable;
+
+        /// <summary>ForeignKey Property for SourceTable's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_SourceTable
+		{
+			get { return SourceTable != null ? SourceTable.ID : (int?)null; }
+			set { _fk_SourceTable = value; }
+		}
 
         private Guid? _fk_guid_SourceTable = null;
 

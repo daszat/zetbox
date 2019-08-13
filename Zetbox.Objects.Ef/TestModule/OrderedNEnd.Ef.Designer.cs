@@ -59,6 +59,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Test.OrderedOneEnd OneEnd
         {
@@ -67,6 +68,14 @@ namespace Zetbox.App.Test
         }
 
         private int? _fk_OneEnd;
+
+        /// <summary>ForeignKey Property for OneEnd's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_OneEnd
+		{
+			get { return OneEnd != null ? OneEnd.ID : (int?)null; }
+			set { _fk_OneEnd = value; }
+		}
 
 
         // internal implementation, EF sees only this property

@@ -121,6 +121,7 @@ namespace at.dasz.DocumentManagement
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Blob Blob
         {
@@ -129,6 +130,14 @@ namespace at.dasz.DocumentManagement
         }
 
         private int? _fk_Blob;
+
+        /// <summary>ForeignKey Property for Blob's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Blob
+		{
+			get { return Blob != null ? Blob.ID : (int?)null; }
+			set { _fk_Blob = value; }
+		}
 
         private Guid? _fk_guid_Blob = null;
 
@@ -229,6 +238,7 @@ namespace at.dasz.DocumentManagement
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity ChangedBy
         {
@@ -237,6 +247,14 @@ namespace at.dasz.DocumentManagement
         }
 
         private int? _fk_ChangedBy;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -420,6 +438,7 @@ namespace at.dasz.DocumentManagement
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity CreatedBy
         {
@@ -428,6 +447,14 @@ namespace at.dasz.DocumentManagement
         }
 
         private int? _fk_CreatedBy;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -611,6 +638,7 @@ namespace at.dasz.DocumentManagement
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public at.dasz.DocumentManagement.Excerpt Excerpt
         {
@@ -619,6 +647,14 @@ namespace at.dasz.DocumentManagement
         }
 
         private int? _fk_Excerpt;
+
+        /// <summary>ForeignKey Property for Excerpt's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Excerpt
+		{
+			get { return Excerpt != null ? Excerpt.ID : (int?)null; }
+			set { _fk_Excerpt = value; }
+		}
 
 
         // internal implementation, EF sees only this property

@@ -107,6 +107,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Sequence Sequence
@@ -130,6 +131,14 @@ namespace Zetbox.App.Base
                 _triggerFetchSequenceTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Sequence's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Sequence
+		{
+			get { return _fk_Sequence; }
+			set { _fk_Sequence = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence> _triggerFetchSequenceTask;

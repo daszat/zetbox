@@ -18,19 +18,35 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("6f8a1d45-5064-4c7e-bd01-bcf892a536cd")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         at.dasz.DocumentManagement.File AnotherFile {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_AnotherFile 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("427d1022-4953-4fc1-90aa-867fe3898688")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         at.dasz.DocumentManagement.File AnyFile {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_AnyFile 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -40,5 +56,6 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
     }
 }

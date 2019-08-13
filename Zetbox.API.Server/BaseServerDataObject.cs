@@ -68,6 +68,7 @@ namespace Zetbox.API.Server
         }
 #endif
 
+        [System.Runtime.Serialization.IgnoreDataMember]
         public DataObjectState ClientObjectState { get; set; }
 
         private DataObjectState _ObjectState = DataObjectState.Detached;
@@ -279,6 +280,7 @@ namespace Zetbox.API.Server
         /// </summary>
         public virtual void NotifyPostSave() { }
 
+        [System.Runtime.Serialization.IgnoreDataMember]
         public abstract Guid ObjectClassID { get; }
 
         public abstract void UpdateParent(string propertyName, IDataObject parentObj);

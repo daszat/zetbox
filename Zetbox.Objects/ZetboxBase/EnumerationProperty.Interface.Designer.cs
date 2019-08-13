@@ -18,9 +18,17 @@ namespace Zetbox.App.Base
         /// Enumeration der Eigenschaft
         /// </summary>
         [Zetbox.API.DefinitionGuid("1144c061-3610-495f-b8b4-951058bb0c23")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Enumeration Enumeration {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Enumeration 
+		{ 
+			get; 
+			set;
+		}
     }
 }

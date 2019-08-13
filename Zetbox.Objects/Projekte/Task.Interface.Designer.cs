@@ -23,6 +23,7 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// Enddatum
         /// </summary>
@@ -31,6 +32,7 @@ namespace Zetbox.App.Projekte
             get;
             set;
         }
+
 
         /// <summary>
         /// Start Datum
@@ -41,6 +43,7 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// Taskname
         /// </summary>
@@ -50,13 +53,22 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// Verknüpfung zum Projekt
         /// </summary>
         [Zetbox.API.DefinitionGuid("5545ba8a-3e89-4b22-bd66-c12f3622ace0")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Projekte.Projekt Projekt {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Projekt 
+		{ 
+			get; 
+			set;
+		}
     }
 }

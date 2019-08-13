@@ -59,6 +59,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Property Property
         {
@@ -67,6 +68,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_Property;
+
+        /// <summary>ForeignKey Property for Property's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Property
+		{
+			get { return Property != null ? Property.ID : (int?)null; }
+			set { _fk_Property = value; }
+		}
 
         private Guid? _fk_guid_Property = null;
 

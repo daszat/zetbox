@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Original file name of this blob
         /// </summary>
@@ -32,6 +33,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Relative Path + Filename to the client/server document storage location. Readonly on client side.
         /// </summary>
@@ -40,6 +42,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Returnes the document stream

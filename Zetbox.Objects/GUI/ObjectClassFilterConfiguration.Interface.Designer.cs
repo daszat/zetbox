@@ -18,9 +18,17 @@ namespace Zetbox.App.GUI
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("c7da5741-f172-4e04-b7fa-94bb1eaf2471")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.ObjectClass ObjectClass {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ObjectClass 
+		{ 
+			get; 
+			set;
+		}
     }
 }

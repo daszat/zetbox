@@ -120,6 +120,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.CalculatedObjectReferenceProperty A
         {
             get
@@ -199,6 +200,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -220,6 +229,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Property B
         {
             get
@@ -275,6 +285,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -467,6 +485,7 @@ namespace Zetbox.App.Base
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -577,6 +596,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.DataType A
         {
             get
@@ -656,6 +676,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -677,6 +705,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Interface B
         {
             get
@@ -732,6 +761,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -924,6 +961,7 @@ namespace Zetbox.App.Base
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -999,6 +1037,7 @@ namespace Zetbox.App.Base
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity A
         {
             get
@@ -1078,6 +1117,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
     {
@@ -1097,6 +1144,7 @@ namespace Zetbox.App.Base
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Group B
         {
             get
@@ -1175,6 +1223,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
@@ -1332,6 +1388,7 @@ namespace Zetbox.App.Base
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -1442,6 +1499,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.NavigationEntry A
         {
             get
@@ -1521,6 +1579,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -1542,6 +1608,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Group B
         {
             get
@@ -1597,6 +1664,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -1789,6 +1864,7 @@ namespace Zetbox.App.GUI
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -1899,6 +1975,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.ObjectReferenceProperty A
         {
             get
@@ -1978,6 +2055,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -1999,6 +2084,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Method B
         {
             get
@@ -2077,6 +2163,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -2272,6 +2366,7 @@ namespace Zetbox.App.GUI
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -2382,6 +2477,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ViewModelDescriptor A
         {
             get
@@ -2461,6 +2557,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -2482,6 +2586,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ControlKind B
         {
             get
@@ -2537,6 +2642,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -2729,6 +2842,7 @@ namespace Zetbox.App.GUI
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -2839,6 +2953,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.RoleMembership A
         {
             get
@@ -2918,6 +3033,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -2969,6 +3092,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Relation B
         {
             get
@@ -3024,6 +3148,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -3286,6 +3418,7 @@ namespace Zetbox.App.Base
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -3396,6 +3529,7 @@ namespace Zetbox.App.SchemaMigration
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.SchemaMigration.SourceColumn A
         {
             get
@@ -3475,6 +3609,14 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -3526,6 +3668,7 @@ namespace Zetbox.App.SchemaMigration
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Property B
         {
             get
@@ -3581,6 +3724,14 @@ namespace Zetbox.App.SchemaMigration
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -3843,6 +3994,7 @@ namespace Zetbox.App.SchemaMigration
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
@@ -3953,6 +4105,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.IndexConstraint A
         {
             get
@@ -4032,6 +4185,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -4053,6 +4214,7 @@ namespace Zetbox.App.Base
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Property B
         {
             get
@@ -4108,6 +4270,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -4300,6 +4470,7 @@ namespace Zetbox.App.Base
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }

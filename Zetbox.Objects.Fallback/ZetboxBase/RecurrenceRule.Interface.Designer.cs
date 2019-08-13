@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Specifies a comma separated list of hours. (0,1,22,23)
         /// </summary>
@@ -31,6 +32,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Specifies a comma separated list of minutes. (0,1,58,59)
@@ -41,6 +43,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Specifies a comma separated list of months of the year (1,2,3,4,11,12)
         /// </summary>
@@ -49,6 +52,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Specifies a comma separated list of days of the month. (1,2,30,31,-1,-2,-31)
@@ -59,6 +63,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Specifies a comma separated list of seconds. (0,1,58,59)
         /// </summary>
@@ -67,6 +72,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Specifies a comma separated list of nth occurrences
@@ -77,6 +83,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Specifies a comma separated list of weeks of the year. Valid values are 1 to 53 or -53 to -1. (1,5,-2)
         /// </summary>
@@ -85,6 +92,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Specifies a comma separated list of days of the year. (1,2,365,366,-1,-2,-366)
@@ -95,6 +103,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Specifies how often the recurrence will be repeated. The start date counts as the first one
         /// </summary>
@@ -103,6 +112,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -113,6 +123,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Specifies how often the recurrence rule repeats, null is equivalent to 1
         /// </summary>
@@ -121,6 +132,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Recurrents ends at this date, including this date
@@ -131,6 +143,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -139,6 +152,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// 

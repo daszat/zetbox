@@ -19,16 +19,25 @@ namespace Zetbox.App.Base
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("4514093c-0a1f-4644-b4a6-3389f1ca7aa8")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.AccessControl> AccessControlList { get; }
 
         /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
         [Zetbox.API.DefinitionGuid("ad060d41-bc7a-41b8-a3e3-ec9302c8c714")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.ObjectClass BaseObjectClass {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_BaseObjectClass 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Provides a code template for default methods
@@ -38,20 +47,30 @@ namespace Zetbox.App.Base
             get;
         }
 
+
         /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
         [Zetbox.API.DefinitionGuid("11adedb9-d32a-4da9-b986-0534e65df760")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_DefaultViewModelDescriptor 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("bd526c1f-a6ac-40b6-8f81-66aaf553129f")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration> FilterConfigurations { get; }
 
         /// <summary>
@@ -63,6 +82,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Indicated that the type will be created programmatically
         /// </summary>
@@ -71,6 +91,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// if true then all Instances appear in FozenContext.
@@ -81,6 +102,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Setting this to true marks the instances of this class as &amp;quot;simple.&amp;quot; At first this will only mean that they&apos;ll be displayed inline.
         /// </summary>
@@ -90,11 +112,13 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Liste der vererbten Klassen
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("0914de6e-966c-46fc-9359-e4da6c3608b1")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.ObjectClass> SubClasses { get; }
 
         /// <summary>
@@ -106,6 +130,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Tabellenname in der Datenbank
         /// </summary>
@@ -114,6 +139,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Creates a new Method for this class

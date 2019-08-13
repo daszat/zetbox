@@ -18,10 +18,18 @@ namespace at.dasz.DocumentManagement
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("f36d87fe-bd2f-472c-a716-46667ab1e0bd")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         at.dasz.DocumentManagement.File File {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_File 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Text of the Excerpt
@@ -31,5 +39,6 @@ namespace at.dasz.DocumentManagement
             get;
             set;
         }
+
     }
 }

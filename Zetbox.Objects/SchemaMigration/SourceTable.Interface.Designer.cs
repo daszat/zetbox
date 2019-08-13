@@ -23,6 +23,7 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -32,14 +33,23 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("ec638748-894e-4e61-b618-7d8fbacec2fe")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.ObjectClass DestinationObjectClass {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_DestinationObjectClass 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -50,21 +60,31 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("0e435261-9490-4fbb-8268-f7f1f6607d2c")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.SchemaMigration.SourceColumn> SourceColumn { get; }
 
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("d57c1138-b611-44b6-bd30-9b6d6a91cbed")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.SchemaMigration.StagingDatabase StagingDatabase {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_StagingDatabase 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -74,6 +94,7 @@ namespace Zetbox.App.SchemaMigration
             get;
             set;
         }
+
 
         /// <summary>
         /// Creates a mapping report

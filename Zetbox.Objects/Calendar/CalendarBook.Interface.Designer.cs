@@ -19,6 +19,7 @@ namespace Zetbox.App.Calendar
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("5ae7dd37-9789-47a6-b679-3ccaecbbb75d")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Group> GroupReaders { get; }
 
         /// <summary>
@@ -26,6 +27,7 @@ namespace Zetbox.App.Calendar
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("d960ba8e-1605-4a70-b950-4e12c4c1ae75")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Group> GroupWriters { get; }
 
         /// <summary>
@@ -37,20 +39,30 @@ namespace Zetbox.App.Calendar
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("7e39185f-5826-481f-b0fd-bc0ffd1400ad")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Identity Owner {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Owner 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("ebd1fd99-f1c9-4260-832d-5ef5c48e7660")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Identity> Readers { get; }
 
         /// <summary>
@@ -58,6 +70,7 @@ namespace Zetbox.App.Calendar
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("e52271a9-ca1a-486d-95c0-795a502af48e")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Identity> Writers { get; }
 
         /// <summary>

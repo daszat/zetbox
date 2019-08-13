@@ -49,6 +49,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.DataType Constrained
@@ -72,6 +73,14 @@ namespace Zetbox.App.Base
                 _triggerFetchConstrainedTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Constrained's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Constrained
+		{
+			get { return _fk_Constrained; }
+			set { _fk_Constrained = value; }
+		}
 
         private Guid? _fk_guid_Constrained = null;
 

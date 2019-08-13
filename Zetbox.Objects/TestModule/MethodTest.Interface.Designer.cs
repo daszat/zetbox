@@ -19,16 +19,25 @@ namespace Zetbox.App.Test
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("bf48b883-8821-4c4e-8509-590a72604f9e")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.MethodTest> Children { get; }
 
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("02a7d534-9325-48e5-bbc2-b61420afd940")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Test.MethodTest Parent {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Parent 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -38,6 +47,7 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
 
         /// <summary>
         /// 

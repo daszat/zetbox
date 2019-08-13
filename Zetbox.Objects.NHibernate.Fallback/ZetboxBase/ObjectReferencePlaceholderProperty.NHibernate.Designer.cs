@@ -291,6 +291,7 @@ namespace Zetbox.App.Base
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.ObjectClass ReferencedObjectClass
         {
             get
@@ -364,6 +365,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for ReferencedObjectClass's id, used on dehydration only</summary>
         private int? _fk_ReferencedObjectClass = null;
+
+        /// <summary>ForeignKey Property for ReferencedObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ReferencedObjectClass
+		{
+			get { return ReferencedObjectClass != null ? ReferencedObjectClass.ID : (int?)null; }
+			set { _fk_ReferencedObjectClass = value; }
+		}
 
         /// <summary>Backing store for ReferencedObjectClass's guid, used on import only</summary>
         private Guid? _fk_guid_ReferencedObjectClass = null;

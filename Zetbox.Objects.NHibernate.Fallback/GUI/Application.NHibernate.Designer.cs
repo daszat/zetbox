@@ -62,6 +62,7 @@ namespace Zetbox.App.GUI
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity ChangedBy
         {
             get
@@ -135,6 +136,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
@@ -238,6 +247,7 @@ namespace Zetbox.App.GUI
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity CreatedBy
         {
             get
@@ -311,6 +321,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
@@ -550,6 +568,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.Icon Icon
         {
             get
@@ -624,6 +643,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for Icon's id, used on dehydration only</summary>
         private int? _fk_Icon = null;
 
+        /// <summary>ForeignKey Property for Icon's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Icon
+		{
+			get { return Icon != null ? Icon.ID : (int?)null; }
+			set { _fk_Icon = value; }
+		}
+
         /// <summary>Backing store for Icon's guid, used on import only</summary>
         private Guid? _fk_guid_Icon = null;
 
@@ -650,6 +677,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Module Module
         {
             get
@@ -723,6 +751,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for Module's id, used on dehydration only</summary>
         private int? _fk_Module = null;
+
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return Module != null ? Module.ID : (int?)null; }
+			set { _fk_Module = value; }
+		}
 
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
@@ -808,6 +844,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.NavigationScreen RootScreen
         {
             get
@@ -882,6 +919,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for RootScreen's id, used on dehydration only</summary>
         private int? _fk_RootScreen = null;
 
+        /// <summary>ForeignKey Property for RootScreen's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RootScreen
+		{
+			get { return RootScreen != null ? RootScreen.ID : (int?)null; }
+			set { _fk_RootScreen = value; }
+		}
+
         /// <summary>Backing store for RootScreen's guid, used on import only</summary>
         private Guid? _fk_guid_RootScreen = null;
 
@@ -908,6 +953,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ViewModelDescriptor WorkspaceViewModel
         {
             get
@@ -981,6 +1027,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for WorkspaceViewModel's id, used on dehydration only</summary>
         private int? _fk_WorkspaceViewModel = null;
+
+        /// <summary>ForeignKey Property for WorkspaceViewModel's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_WorkspaceViewModel
+		{
+			get { return WorkspaceViewModel != null ? WorkspaceViewModel.ID : (int?)null; }
+			set { _fk_WorkspaceViewModel = value; }
+		}
 
         /// <summary>Backing store for WorkspaceViewModel's guid, used on import only</summary>
         private Guid? _fk_guid_WorkspaceViewModel = null;
@@ -1462,6 +1516,7 @@ namespace Zetbox.App.GUI
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

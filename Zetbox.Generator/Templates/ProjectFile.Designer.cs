@@ -113,6 +113,7 @@ this.WriteObjects("    <Reference Include=\"System.Core\">\r\n");
 this.WriteObjects("      <RequiredTargetFramework>3.5</RequiredTargetFramework>\r\n");
 this.WriteObjects("    </Reference>\r\n");
 this.WriteObjects("    <Reference Include=\"System.Xml\" />\r\n");
+this.WriteObjects("    <Reference Include=\"System.Runtime.Serialization\" />\r\n");
 this.WriteObjects("    <Reference Include=\"log4net\">\r\n");
 this.WriteObjects("      <SpecificVersion>False</SpecificVersion>\r\n");
 this.WriteObjects("      <HintPath>$(ZetboxAPIPath)\\Common\\log4net.dll</HintPath>\r\n");
@@ -131,25 +132,25 @@ this.WriteObjects("    </Reference>\r\n");
 this.WriteObjects("    <Reference Include=\"WindowsBase\">\r\n");
 this.WriteObjects("      <RequiredTargetFramework>3.5</RequiredTargetFramework>\r\n");
 this.WriteObjects("    </Reference>\r\n");
-#line 123 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
-ApplyAdditionalReferences(); 
 #line 124 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+ApplyAdditionalReferences(); 
+#line 125 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
-#line 126 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
-foreach (var name in fileNames) { 
 #line 127 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
-this.WriteObjects("    <Compile Include=\"",  name.Replace('/', '\\') , "\" />\r\n");
+foreach (var name in fileNames) { 
 #line 128 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
-} 
+this.WriteObjects("    <Compile Include=\"",  name.Replace('/', '\\') , "\" />\r\n");
 #line 129 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+} 
+#line 130 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <None Include=\"Zetbox.Objects.snk\" />\r\n");
 this.WriteObjects("  </ItemGroup>\r\n");
-#line 133 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
-ApplyAdditionalItemGroups(); 
 #line 134 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+ApplyAdditionalItemGroups(); 
+#line 135 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />\r\n");
 this.WriteObjects("  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. \r\n");
 this.WriteObjects("       Other similar extension points exist, see Microsoft.Common.targets.\r\n");
@@ -158,9 +159,9 @@ this.WriteObjects("  </Target>\r\n");
 this.WriteObjects("  -->\r\n");
 this.WriteObjects("  <Target Name=\"AfterBuild\">\r\n");
 this.WriteObjects("  </Target>\r\n");
-#line 142 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
-ApplyAdditionalPropertyGroups(); 
 #line 143 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+ApplyAdditionalPropertyGroups(); 
+#line 144 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("</Project>");
 
         }

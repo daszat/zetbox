@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// If true, a property getter will be invoked to get the properties value. No Backingstore is generated, thus there is no setter.
         /// </summary>
@@ -32,6 +33,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -40,5 +42,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

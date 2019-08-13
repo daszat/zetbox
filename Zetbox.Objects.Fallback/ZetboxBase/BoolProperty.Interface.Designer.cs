@@ -18,10 +18,18 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("784846d0-2eea-4966-b63d-72a0f13b418b")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.Icon FalseIcon {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_FalseIcon 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// A string to describe the &quot;false&quot; value to the user.
@@ -32,14 +40,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("62454172-467d-4c8e-8f1a-a959946d3fdb")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.Icon NullIcon {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_NullIcon 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// A string to describe the &quot;null&quot; value to the user.
@@ -50,14 +67,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("bb8fd69f-437a-45d5-a169-64c9586bfc1d")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.Icon TrueIcon {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_TrueIcon 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// A string to describe the &quot;true&quot; value to the user.
@@ -67,5 +93,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

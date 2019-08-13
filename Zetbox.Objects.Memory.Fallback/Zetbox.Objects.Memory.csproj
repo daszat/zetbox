@@ -75,6 +75,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="log4net">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\log4net.dll</HintPath>
@@ -234,9 +235,7 @@
     <None Include="Zetbox.Objects.snk" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FrozenObjects.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="FrozenObjects.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -23,14 +23,23 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("0943ff5e-cc21-4f3b-b3ed-a2a13beb0c97")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.Icon Icon {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Icon 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -41,22 +50,39 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("2232a206-1192-4937-8314-701073215cdb")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.NavigationScreen RootScreen {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_RootScreen 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("25e50509-3b29-46b1-9bdb-17a0bd2963c2")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ViewModelDescriptor WorkspaceViewModel {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_WorkspaceViewModel 
+		{ 
+			get; 
+			set;
+		}
     }
 }

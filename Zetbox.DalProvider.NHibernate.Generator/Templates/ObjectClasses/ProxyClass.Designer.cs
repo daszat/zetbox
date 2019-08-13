@@ -71,6 +71,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        // make proxy available for the provider\r\n");
+this.WriteObjects("        [System.Runtime.Serialization.IgnoreDataMember]\r\n");
 this.WriteObjects("        public override IProxyObject NHibernateProxy { get { return Proxy; } }");
 
         }

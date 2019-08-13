@@ -19,15 +19,24 @@ namespace Zetbox.App.Base
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("bfda6511-087d-4381-9780-1f76f3abcffe")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Property> Inputs { get; }
 
         /// <summary>
         /// the referenced class of objects
         /// </summary>
         [Zetbox.API.DefinitionGuid("cd62d769-0752-4a72-832f-5935ece1198b")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.ObjectClass ReferencedClass {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ReferencedClass 
+		{ 
+			get; 
+			set;
+		}
     }
 }

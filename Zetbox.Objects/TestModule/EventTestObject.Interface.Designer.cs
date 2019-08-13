@@ -18,10 +18,18 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("adf59fe9-12fe-413e-8dc7-d9190aa6bf13")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Calendar.Event Event {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Event 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -31,5 +39,6 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
     }
 }

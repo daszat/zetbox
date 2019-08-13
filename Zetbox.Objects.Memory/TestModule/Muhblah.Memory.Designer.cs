@@ -130,6 +130,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Test.TestCustomObject> TestCustomObjects_List_Nav
         {
@@ -247,6 +248,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Test.TestCustomObject TestCustomObjects_Nav
@@ -270,6 +272,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 _triggerFetchTestCustomObjects_NavTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for TestCustomObjects_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_TestCustomObjects_Nav
+		{
+			get { return _fk_TestCustomObjects_Nav; }
+			set { _fk_TestCustomObjects_Nav = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchTestCustomObjects_NavTask;
@@ -378,6 +388,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Test.TestCustomObject TestCustomObjects_One_Nav
@@ -401,6 +412,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 _triggerFetchTestCustomObjects_One_NavTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for TestCustomObjects_One_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_TestCustomObjects_One_Nav
+		{
+			get { return _fk_TestCustomObjects_One_Nav; }
+			set { _fk_TestCustomObjects_One_Nav = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchTestCustomObjects_One_NavTask;

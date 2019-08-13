@@ -59,6 +59,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public at.dasz.DocumentManagement.File AnotherFile
         {
@@ -67,6 +68,14 @@ namespace Zetbox.App.Test
         }
 
         private int? _fk_AnotherFile;
+
+        /// <summary>ForeignKey Property for AnotherFile's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_AnotherFile
+		{
+			get { return AnotherFile != null ? AnotherFile.ID : (int?)null; }
+			set { _fk_AnotherFile = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -166,6 +175,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public at.dasz.DocumentManagement.File AnyFile
         {
@@ -174,6 +184,14 @@ namespace Zetbox.App.Test
         }
 
         private int? _fk_AnyFile;
+
+        /// <summary>ForeignKey Property for AnyFile's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_AnyFile
+		{
+			get { return AnyFile != null ? AnyFile.ID : (int?)null; }
+			set { _fk_AnyFile = value; }
+		}
 
 
         // internal implementation, EF sees only this property

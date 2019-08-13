@@ -49,6 +49,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Enumeration Enumeration
@@ -72,6 +73,14 @@ namespace Zetbox.App.Base
                 _triggerFetchEnumerationTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Enumeration's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Enumeration
+		{
+			get { return _fk_Enumeration; }
+			set { _fk_Enumeration = value; }
+		}
 
         private Guid? _fk_guid_Enumeration = null;
 

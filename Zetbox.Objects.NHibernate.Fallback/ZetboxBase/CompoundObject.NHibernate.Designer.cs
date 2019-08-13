@@ -59,6 +59,7 @@ namespace Zetbox.App.Base
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ViewModelDescriptor DefaultPropertyViewModelDescriptor
         {
             get
@@ -133,6 +134,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for DefaultPropertyViewModelDescriptor's id, used on dehydration only</summary>
         private int? _fk_DefaultPropertyViewModelDescriptor = null;
 
+        /// <summary>ForeignKey Property for DefaultPropertyViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultPropertyViewModelDescriptor
+		{
+			get { return DefaultPropertyViewModelDescriptor != null ? DefaultPropertyViewModelDescriptor.ID : (int?)null; }
+			set { _fk_DefaultPropertyViewModelDescriptor = value; }
+		}
+
         /// <summary>Backing store for DefaultPropertyViewModelDescriptor's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultPropertyViewModelDescriptor = null;
 
@@ -159,6 +168,7 @@ namespace Zetbox.App.Base
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
         {
             get
@@ -232,6 +242,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for DefaultViewModelDescriptor's id, used on dehydration only</summary>
         private int? _fk_DefaultViewModelDescriptor = null;
+
+        /// <summary>ForeignKey Property for DefaultViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultViewModelDescriptor
+		{
+			get { return DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null; }
+			set { _fk_DefaultViewModelDescriptor = value; }
+		}
 
         /// <summary>Backing store for DefaultViewModelDescriptor's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;

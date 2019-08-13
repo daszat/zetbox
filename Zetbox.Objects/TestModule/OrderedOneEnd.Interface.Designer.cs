@@ -19,6 +19,7 @@ namespace Zetbox.App.Test
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("7b7a227b-462a-4923-bda6-15264f0af841")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Test.OrderedNEnd> NEnds { get; }
 
         /// <summary>
@@ -29,5 +30,6 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
     }
 }

@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// A space separated list of category names containing this Property
         /// </summary>
@@ -32,6 +33,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Provides a code template for a calculated property
         /// </summary>
@@ -40,11 +42,13 @@ namespace Zetbox.App.Base
             get;
         }
 
+
         /// <summary>
         /// The list of constraints applying to this Property
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("fd8f14da-e647-48cb-8593-3a30984f5c96")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Constraint> Constraints { get; }
 
         /// <summary>
@@ -56,14 +60,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Property can have a default value
         /// </summary>
         [Zetbox.API.DefinitionGuid("590d6a36-2e4b-41bd-a51e-298aba90ce72")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.DefaultPropertyValue DefaultValue {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_DefaultValue 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Description of this Property
@@ -74,6 +87,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Disables the export. If not set, export is enabled
         /// </summary>
@@ -83,14 +97,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("dbf93142-1769-4f53-bcbc-71325e1d5ce7")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.PropertyFilterConfiguration FilterConfiguration {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_FilterConfiguration 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// A HTML string with a help text
@@ -101,6 +124,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Label is displayed to User in UI
         /// </summary>
@@ -109,6 +133,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -119,23 +144,40 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("bdaacacd-c8cb-45cf-a329-28f942337273")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.DataType ObjectClass {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ObjectClass 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// Optional requested ControlKind
         /// </summary>
         [Zetbox.API.DefinitionGuid("3be58daf-9008-4cc3-a65d-8989909dcd80")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ControlKind RequestedKind {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_RequestedKind 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -146,14 +188,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// The ViewModel to use for values of this Property
         /// </summary>
         [Zetbox.API.DefinitionGuid("84e0996a-081f-4a17-a34d-54cf23991301")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ViewModelDescriptor ValueModelDescriptor {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ValueModelDescriptor 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Returns the translated description

@@ -46,6 +46,7 @@
         }
 
         /// <summary>backing property for <%= UglyXmlEncode(propName) %>, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         <%= GetModifiers() %> <%= coImplementationType %> <%= backingPropertyName %>
         {
             get

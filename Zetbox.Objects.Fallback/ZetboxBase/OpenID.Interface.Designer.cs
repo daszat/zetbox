@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// The User ID part of the OpenID
         /// </summary>
@@ -31,5 +32,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

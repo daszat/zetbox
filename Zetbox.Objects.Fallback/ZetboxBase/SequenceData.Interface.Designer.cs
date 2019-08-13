@@ -23,13 +23,22 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("98a20549-d4ff-4caf-bae2-10951b04c6f1")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Sequence Sequence {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Sequence 
+		{ 
+			get; 
+			set;
+		}
     }
 }

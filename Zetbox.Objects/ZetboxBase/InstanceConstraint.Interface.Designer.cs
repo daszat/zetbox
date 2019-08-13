@@ -18,10 +18,18 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("d89723fc-1050-45a1-9b74-5575a677bc2b")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.DataType Constrained {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Constrained 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// The reason of this constraint
@@ -31,6 +39,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// 

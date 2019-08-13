@@ -43,6 +43,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
                 "Parent" + ImplementationPropertySuffix,
                 "OnParent",
                 "_fk_Parent",
+                "FK_Parent",
                 null,
                 interfaceType,
                 implementationType,

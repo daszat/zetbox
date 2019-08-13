@@ -361,6 +361,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         }
 
         /// <summary>backing property for OpenID, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.OpenIDNHibernateImpl OpenIDImpl
         {
             get
@@ -1135,6 +1136,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

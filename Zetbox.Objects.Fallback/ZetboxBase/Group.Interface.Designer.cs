@@ -19,6 +19,7 @@ namespace Zetbox.App.Base
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("f60308a5-a502-4641-aa19-f895e701778c")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Identity> Member { get; }
 
         /// <summary>
@@ -29,5 +30,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

@@ -196,6 +196,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Projekte.Kunde ObjectProp
         {
@@ -204,6 +205,14 @@ namespace Zetbox.App.Test
         }
 
         private int? _fk_ObjectProp;
+
+        /// <summary>ForeignKey Property for ObjectProp's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ObjectProp
+		{
+			get { return ObjectProp != null ? ObjectProp.ID : (int?)null; }
+			set { _fk_ObjectProp = value; }
+		}
 
 
         // internal implementation, EF sees only this property

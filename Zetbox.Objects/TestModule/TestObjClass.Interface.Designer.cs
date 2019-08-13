@@ -22,6 +22,7 @@ namespace Zetbox.App.Test
             get;
         }
 
+
         /// <summary>
         /// test
         /// </summary>
@@ -31,6 +32,7 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// Tests whether enums with defaults work
         /// </summary>
@@ -39,5 +41,6 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
     }
 }
