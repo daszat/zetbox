@@ -159,6 +159,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IdentityBasicAuthenticationModule.cs" />
     <Compile Include="HtPasswdBasicAuthenticationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="packages.config" />
