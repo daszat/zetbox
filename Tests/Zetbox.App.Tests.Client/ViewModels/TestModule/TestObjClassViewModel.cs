@@ -120,7 +120,7 @@ namespace Zetbox.Client.Presentables
                             PropertyModelsByName["StringProp"],
                             PropertyModelsByName["MyIntProperty"],
                             PropertyModelsByName["ObjectProp"],
-                            UICreator.Presenter(PropertyModelsByName["ObjectProp"], NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_DataObjectKind.Find(FrozenContext)),
+                            UICreator.ObjectReferencePresenter(PropertyModelsByName["ObjectProp"], NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_DataObjectKind.Find(FrozenContext)),
                         }),
                         UICreator.GroupBox("Grp 2", new []
                         {

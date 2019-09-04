@@ -68,7 +68,7 @@ namespace Zetbox.Client.Presentables.GUI
         {
             base.Dispose(disposing);
 
-            foreach(var c in _children)
+            foreach (var c in _children)
             {
                 c.Dispose();
             }
@@ -254,39 +254,44 @@ namespace Zetbox.Client.Presentables.GUI
     [ViewModelDescriptor]
     public class PresenterViewModel : ViewModel
     {
-        private ObjectReferenceViewModel _objRefVM;
 
         public new delegate PresenterViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ViewModel viewModel, App.GUI.ControlKind controlKind);
-        public PresenterViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, ViewModel viewModel, App.GUI.ControlKind controlKind) 
+        public PresenterViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, ViewModel viewModel, App.GUI.ControlKind controlKind)
             : base(dependencies, dataCtx, parent)
         {
             ControlKind = controlKind;
-
-            if(ViewModel is ObjectReferenceViewModel)
-            {
-                _objRefVM = (ObjectReferenceViewModel)viewModel;
-                _objRefVM.PropertyChanged += ObjectReferenceViewModel_PropertyChanged;
-
-                ViewModel = _objRefVM.Value;
-            }
-            else
-            {
-                ViewModel = viewModel;
-            }
-        }
-
-        private void ObjectReferenceViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if(e.PropertyName == "Value")
-            {
-                ViewModel = _objRefVM.Value;
-                OnPropertyChanged("ViewModel");
-            }
+            ViewModel = viewModel;
         }
 
         public override string Name => ViewModel.Name;
 
-        public ViewModel ViewModel { get; private set; }
+        public ViewModel ViewModel { get; protected set; }
         public App.GUI.ControlKind ControlKind { get; }
+    }
+
+    [ViewModelDescriptor]
+    public class ObjectReferencePresenterViewModel : PresenterViewModel
+    {
+        private ObjectReferenceViewModel _objRefVM;
+
+        public new delegate ObjectReferencePresenterViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ViewModel viewModel, App.GUI.ControlKind controlKind);
+        public ObjectReferencePresenterViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, ObjectReferenceViewModel viewModel, App.GUI.ControlKind controlKind)
+            : base(dependencies, dataCtx, parent, viewModel, controlKind)
+        {
+            _objRefVM = viewModel;
+            _objRefVM.PropertyChanged += ObjectReferenceViewModel_PropertyChanged;
+
+            ViewModel = _objRefVM.Value;
+        }
+
+        private void ObjectReferenceViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Value")
+            {
+                ViewModel = _objRefVM.Value;
+                OnPropertyChanged("Name");
+                OnPropertyChanged("ViewModel");
+            }
+        }
     }
 }
