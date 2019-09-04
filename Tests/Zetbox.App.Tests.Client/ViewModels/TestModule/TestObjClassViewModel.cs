@@ -115,11 +115,12 @@ namespace Zetbox.Client.Presentables
                 {
                     UICreator.StackPanel(new []
                     {
-                        UICreator.GroupBox("Grp 1", new []
+                        UICreator.GroupBox("Grp 1", new ViewModel[]
                         {
                             PropertyModelsByName["StringProp"],
                             PropertyModelsByName["MyIntProperty"],
                             PropertyModelsByName["ObjectProp"],
+                            UICreator.Presenter(PropertyModelsByName["ObjectProp"], NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_DataObjectKind.Find(FrozenContext)),
                         }),
                         UICreator.GroupBox("Grp 2", new []
                         {
@@ -141,6 +142,7 @@ namespace Zetbox.Client.Presentables
                             PropertyModelsByName["StringProp"],
                             PropertyModelsByName["MyIntProperty"],
                             PropertyModelsByName["ObjectProp"],
+                            
                         })),
                         new GridPanelViewModel.Cell(0, 1, UICreator.GroupBox("Grp 2", new []
                         {

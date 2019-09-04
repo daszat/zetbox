@@ -21,6 +21,7 @@ namespace Zetbox.Client.Presentables.GUI
     using System.Text;
     using Zetbox.API;
     using System.Collections.ObjectModel;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     public abstract class PanelViewModel : ViewModel
     {
@@ -248,5 +249,44 @@ namespace Zetbox.Client.Presentables.GUI
             : base(dependencies, dataCtx, parent, name, children)
         {
         }
+    }
+
+    [ViewModelDescriptor]
+    public class PresenterViewModel : ViewModel
+    {
+        private ObjectReferenceViewModel _objRefVM;
+
+        public new delegate PresenterViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ViewModel viewModel, App.GUI.ControlKind controlKind);
+        public PresenterViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, ViewModel viewModel, App.GUI.ControlKind controlKind) 
+            : base(dependencies, dataCtx, parent)
+        {
+            ControlKind = controlKind;
+
+            if(ViewModel is ObjectReferenceViewModel)
+            {
+                _objRefVM = (ObjectReferenceViewModel)viewModel;
+                _objRefVM.PropertyChanged += ObjectReferenceViewModel_PropertyChanged;
+
+                ViewModel = _objRefVM.Value;
+            }
+            else
+            {
+                ViewModel = viewModel;
+            }
+        }
+
+        private void ObjectReferenceViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "Value")
+            {
+                ViewModel = _objRefVM.Value;
+                OnPropertyChanged("ViewModel");
+            }
+        }
+
+        public override string Name => ViewModel.Name;
+
+        public ViewModel ViewModel { get; private set; }
+        public App.GUI.ControlKind ControlKind { get; }
     }
 }

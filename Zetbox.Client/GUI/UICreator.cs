@@ -83,5 +83,12 @@ namespace Zetbox.Client.GUI
             return uiCreator.ViewModelFactory.CreateViewModel<DockPanelViewModel.Factory>()
                        .Invoke(uiCreator.DataContext, uiCreator.Parent, "__dock", children);
         }
+        public static PresenterViewModel Presenter(this UICreator uiCreator, ViewModel view, App.GUI.ControlKind requestedKind)
+        {
+            if (uiCreator == null) throw new ArgumentNullException("uiCreator");
+
+            return uiCreator.ViewModelFactory.CreateViewModel<PresenterViewModel.Factory>()
+                       .Invoke(uiCreator.DataContext, uiCreator.Parent, view, requestedKind);
+        }
     }
 }

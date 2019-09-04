@@ -4940,6 +4940,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("7b8275b2-2760-44cd-a79d-33cef9f92e61"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_Presenter
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("96058c65-37fa-432f-9f53-d02800436782"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_PropertiesPreview
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("dc5982a3-8b8f-44e1-b860-1400a41c4275"); }
@@ -8144,6 +8148,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_NavigatorViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("94be5252-6aeb-4a0d-b6eb-6f7ae07728e8"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_PresenterViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("29549071-447f-4460-b44e-a7f621b03966"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_SavedListConfigViewModel
                 {
