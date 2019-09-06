@@ -338,6 +338,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.RequiredParent> O
             {
                 Children = new Collection<Zetbox.App.Test.RequiredParentChildNHibernateImpl.RequiredParentChildProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
+
 
             public virtual int ID { get; set; }
 

@@ -664,7 +664,9 @@ namespace Zetbox.API
     /// <typeparam name="T">the type of the key. usually int or similar</typeparam>
     public interface ISortKey<T>
     {
-        T ID { get; }
+        [System.Xml.Serialization.XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
+        T InternalSortKey { get; }
     }
 
     public static class IDataObjectTransientStateExtensions

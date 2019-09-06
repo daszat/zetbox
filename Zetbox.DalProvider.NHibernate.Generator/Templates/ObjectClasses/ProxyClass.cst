@@ -51,6 +51,9 @@
             public virtual <%= p.Key %> <%= p.Value %> { get; set; }
 
 <% } %>
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey => ID;
         }
 
         // make proxy available for the provider

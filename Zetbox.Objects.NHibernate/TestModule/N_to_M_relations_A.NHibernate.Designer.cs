@@ -329,6 +329,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_
             {
                 BSide = new Collection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl.ASide_connectsTo_BSide_RelationEntryProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
+
 
             public virtual int ID { get; set; }
 

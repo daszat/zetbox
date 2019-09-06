@@ -1111,6 +1111,8 @@ namespace Zetbox.App.Base
             public AssemblyProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

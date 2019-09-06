@@ -267,6 +267,8 @@ namespace Zetbox.App.Test
             public CompanyProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

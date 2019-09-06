@@ -329,6 +329,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestStudent> OnTe
             {
                 Testbogen = new Collection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl.Student_füllt_aus_Testbogen_RelationEntryProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

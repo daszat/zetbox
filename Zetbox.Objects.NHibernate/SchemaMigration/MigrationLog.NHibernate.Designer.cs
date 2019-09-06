@@ -547,6 +547,9 @@ namespace Zetbox.App.SchemaMigration
             public MigrationLogProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
+
 
             public virtual int ID { get; set; }
 

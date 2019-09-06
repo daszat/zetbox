@@ -68,6 +68,9 @@ this.WriteObjects("\r\n");
 #line 53 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 } 
 #line 54 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("			[System.Runtime.Serialization.IgnoreDataMember]\r\n");
+this.WriteObjects("			int ISortKey<int>.InternalSortKey => ID;\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        // make proxy available for the provider\r\n");

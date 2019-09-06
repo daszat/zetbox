@@ -2188,6 +2188,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 Methods = new Collection<Zetbox.App.Base.MethodNHibernateImpl.MethodProxy>();
                 Properties = new Collection<Zetbox.App.Base.PropertyNHibernateImpl.PropertyProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

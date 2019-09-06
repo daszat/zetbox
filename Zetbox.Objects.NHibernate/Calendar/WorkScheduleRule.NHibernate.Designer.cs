@@ -1511,6 +1511,8 @@ namespace Zetbox.App.Calendar
             public WorkScheduleRuleProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

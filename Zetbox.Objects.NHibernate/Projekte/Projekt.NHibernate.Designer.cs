@@ -1630,6 +1630,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                 Mitarbeiter = new Collection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekte_haben_Mitarbeiter_RelationEntryProxy>();
                 Tasks = new Collection<Zetbox.App.Projekte.TaskNHibernateImpl.TaskProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
+
 
             public virtual int ID { get; set; }
 

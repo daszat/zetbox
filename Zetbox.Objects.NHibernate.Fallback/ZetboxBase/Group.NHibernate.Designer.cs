@@ -640,6 +640,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
             {
                 Member = new Collection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl.Identities_memberOf_Groups_RelationEntryProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

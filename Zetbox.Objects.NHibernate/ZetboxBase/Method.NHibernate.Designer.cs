@@ -2106,6 +2106,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
                 Parameter = new Collection<Zetbox.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy>();
                 ShowByProperties = new Collection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl.ObjRefProp_shows_Methods_RelationEntryProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

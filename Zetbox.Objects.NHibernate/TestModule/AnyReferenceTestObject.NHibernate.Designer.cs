@@ -432,6 +432,9 @@ namespace Zetbox.App.Test
             public AnyReferenceTestObjectProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
+
 
             public virtual int ID { get; set; }
 

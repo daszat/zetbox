@@ -957,6 +957,8 @@ namespace Zetbox.App.Calendar
             public SyncProviderProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

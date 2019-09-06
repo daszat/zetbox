@@ -1138,6 +1138,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             {
                 Children = new Collection<Zetbox.App.Test.MethodTestNHibernateImpl.MethodTestProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

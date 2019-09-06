@@ -1731,6 +1731,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 Children = new Collection<Zetbox.App.GUI.NavigationEntryNHibernateImpl.NavigationEntryProxy>();
                 Groups = new Collection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl.NavigationScreen_accessed_by_Groups_RelationEntryProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

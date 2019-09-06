@@ -440,6 +440,8 @@ namespace Zetbox.App.Test
             public One_to_N_relations_NProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

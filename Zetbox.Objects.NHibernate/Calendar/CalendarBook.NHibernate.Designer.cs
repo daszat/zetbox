@@ -1378,6 +1378,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 
             public virtual ICollection<CalendarBook_RightsNHibernateImpl> SecurityRightsCollectionImpl { get; set; }
 
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
         }
 
         // make proxy available for the provider

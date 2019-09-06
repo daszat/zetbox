@@ -987,6 +987,8 @@ namespace Zetbox.App.Base
             public DefaultPropertyValueProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

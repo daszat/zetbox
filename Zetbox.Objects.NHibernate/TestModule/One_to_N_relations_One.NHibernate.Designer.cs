@@ -399,6 +399,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
                 NSide = new Collection<Zetbox.App.Test.One_to_N_relations_NNHibernateImpl.One_to_N_relations_NProxy>();
                 OrderedNSide = new Collection<Zetbox.App.Test.One_to_N_relations_OrderedNNHibernateImpl.One_to_N_relations_OrderedNProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
+
 
             public virtual int ID { get; set; }
 

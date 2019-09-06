@@ -338,6 +338,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParen
             {
                 Children = new Collection<Zetbox.App.Test.SecurityTestChildNHibernateImpl.SecurityTestChildProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

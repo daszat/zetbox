@@ -1979,6 +1979,9 @@ namespace Zetbox.App.Base
             public RelationProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
+
 
             public virtual int ID { get; set; }
 

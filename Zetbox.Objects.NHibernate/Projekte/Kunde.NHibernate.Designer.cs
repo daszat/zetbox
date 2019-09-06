@@ -1171,6 +1171,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
             {
                 EMails = new Collection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
+
 
             public virtual int ID { get; set; }
 

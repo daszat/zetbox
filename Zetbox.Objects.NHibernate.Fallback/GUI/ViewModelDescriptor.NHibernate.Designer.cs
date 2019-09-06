@@ -1537,6 +1537,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             {
                 SecondaryControlKinds = new Collection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl.Presentable_displayedBy_SecondaryControlKinds_RelationEntryProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

@@ -1485,6 +1485,8 @@ namespace Zetbox.App.GUI
             public ApplicationProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

@@ -470,6 +470,8 @@ namespace Zetbox.App.Base
             public CalculatedReference_dependsOn_InputProperties_RelationEntryProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -946,6 +948,8 @@ namespace Zetbox.App.Base
             public DataType_implements_ImplementedInterfaces_RelationEntryProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -1375,6 +1379,8 @@ namespace Zetbox.App.Base
             public Identities_memberOf_Groups_RelationEntryProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -1849,6 +1855,8 @@ namespace Zetbox.App.GUI
             public NavigationScreen_accessed_by_Groups_RelationEntryProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -2351,6 +2359,8 @@ namespace Zetbox.App.GUI
             public ObjRefProp_shows_Methods_RelationEntryProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -2827,6 +2837,8 @@ namespace Zetbox.App.GUI
             public Presentable_displayedBy_SecondaryControlKinds_RelationEntryProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -3399,6 +3411,8 @@ namespace Zetbox.App.Base
             public RoleMembership_resolves_Relations_RelationEntryProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -3975,6 +3989,8 @@ namespace Zetbox.App.SchemaMigration
             public SourceColumn_created_Property_RelationEntryProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -4455,6 +4471,8 @@ namespace Zetbox.App.Base
             public UniqueContraints_ensures_unique_on_Properties_RelationEntryProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

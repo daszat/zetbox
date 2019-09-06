@@ -664,6 +664,8 @@ namespace Zetbox.App.Base
             public InstanceConstraintProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

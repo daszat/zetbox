@@ -824,6 +824,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             {
                 ChildControlKinds = new Collection<Zetbox.App.GUI.ControlKindNHibernateImpl.ControlKindProxy>();
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
+
 
             public virtual int ID { get; set; }
 

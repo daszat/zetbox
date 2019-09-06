@@ -1425,6 +1425,8 @@ namespace Zetbox.App.Projekte
             public AuftragProxy()
             {
             }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 

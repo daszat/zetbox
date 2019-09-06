@@ -1555,6 +1555,8 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
 
             public virtual int ID { get; set; }
+            [System.Runtime.Serialization.IgnoreDataMember]
+            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual Type ZetboxWrapper { get { return typeof(SourceTableNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(SourceTableProxy); } }

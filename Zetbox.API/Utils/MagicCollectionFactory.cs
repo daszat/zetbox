@@ -195,7 +195,7 @@ namespace Zetbox.API.Utils
                 try
                 {
                     var potentialCollection = WrapAsCollection<T>(potentialList);
-                    var sortedList = new SortListFromCollection<int, T>(item => ((ISortKey<int>)item).ID, potentialCollection);
+                    var sortedList = new SortListFromCollection<int, T>(item => ((ISortKey<int>)item).InternalSortKey, potentialCollection);
                     return sortedList;
                 }
                 catch (ArgumentException)
