@@ -254,7 +254,6 @@ namespace Zetbox.Client.Presentables.GUI
     [ViewModelDescriptor]
     public class PresenterViewModel : ViewModel
     {
-
         public new delegate PresenterViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ViewModel viewModel, App.GUI.ControlKind controlKind);
         public PresenterViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, ViewModel viewModel, App.GUI.ControlKind controlKind)
             : base(dependencies, dataCtx, parent)

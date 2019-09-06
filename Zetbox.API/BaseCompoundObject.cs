@@ -233,6 +233,7 @@ namespace Zetbox.API
         private static readonly object _ISortKey_ID_current_lock = new object();
         private static int _ISortKey_ID_current = 0;
         private int _ISortKey_ID = 0;
+        [System.Runtime.Serialization.IgnoreDataMember]
         int ISortKey<int>.ID
         {
             get
