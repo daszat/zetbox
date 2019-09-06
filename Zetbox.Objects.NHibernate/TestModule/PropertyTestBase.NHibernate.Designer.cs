@@ -163,15 +163,15 @@ namespace Zetbox.App.Test
             public PropertyTestBaseProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
             public virtual Type ZetboxWrapper { get { return typeof(PropertyTestBaseNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(PropertyTestBaseProxy); } }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

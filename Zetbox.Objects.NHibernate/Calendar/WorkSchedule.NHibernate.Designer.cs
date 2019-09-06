@@ -1530,9 +1530,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 ChildWorkSchedule = new Collection<Zetbox.App.Calendar.WorkScheduleNHibernateImpl.WorkScheduleProxy>();
                 WorkScheduleRules = new Collection<Zetbox.App.Calendar.WorkScheduleRuleNHibernateImpl.WorkScheduleRuleProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -1559,6 +1556,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
 
             public virtual ICollection<Zetbox.App.Calendar.WorkScheduleRuleNHibernateImpl.WorkScheduleRuleProxy> WorkScheduleRules { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

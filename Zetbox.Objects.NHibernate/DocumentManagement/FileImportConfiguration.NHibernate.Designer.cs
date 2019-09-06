@@ -1042,9 +1042,6 @@ namespace at.dasz.DocumentManagement
             public FileImportConfigurationProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -1067,6 +1064,9 @@ namespace at.dasz.DocumentManagement
 
             public virtual string PickupDirectory { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

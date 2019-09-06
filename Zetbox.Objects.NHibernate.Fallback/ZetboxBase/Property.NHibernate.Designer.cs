@@ -2904,8 +2904,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             {
                 Constraints = new Collection<Zetbox.App.Base.ConstraintNHibernateImpl.ConstraintProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -2960,6 +2958,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
             public virtual Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl.ViewModelDescriptorProxy ValueModelDescriptor { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

@@ -1155,9 +1155,6 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
             {
                 AuditJournal = new Collection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl.PrivateKey_AuditJournal_CollectionEntryProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -1184,6 +1181,9 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
 
             public virtual string Password { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

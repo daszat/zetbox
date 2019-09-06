@@ -988,9 +988,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 TestCustomObjects_List_Nav = new Collection<Zetbox.App.Test.TestCustomObjectNHibernateImpl.TestCustomObjectProxy>();
                 TestCustomObjects_ManyList_Nav = new Collection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -1017,6 +1014,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 
             public virtual string TestString { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

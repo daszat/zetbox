@@ -1597,8 +1597,6 @@ namespace Zetbox.App.LicenseManagement
             public LicenseProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -1631,6 +1629,9 @@ namespace Zetbox.App.LicenseManagement
 
             public virtual DateTime ValidThru { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

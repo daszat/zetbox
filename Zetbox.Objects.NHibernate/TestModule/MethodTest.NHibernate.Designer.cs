@@ -1138,8 +1138,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             {
                 Children = new Collection<Zetbox.App.Test.MethodTestNHibernateImpl.MethodTestProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -1152,6 +1150,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
 
             public virtual string StringProp { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

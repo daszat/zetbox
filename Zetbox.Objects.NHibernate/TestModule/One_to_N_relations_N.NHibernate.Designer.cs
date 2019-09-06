@@ -440,8 +440,6 @@ namespace Zetbox.App.Test
             public One_to_N_relations_NProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -452,6 +450,9 @@ namespace Zetbox.App.Test
 
             public virtual Zetbox.App.Test.One_to_N_relations_OneNHibernateImpl.One_to_N_relations_OneProxy OneSide { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

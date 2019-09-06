@@ -1171,9 +1171,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
             {
                 EMails = new Collection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -1204,6 +1201,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
 
             public virtual string PLZ { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

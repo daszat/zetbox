@@ -1979,9 +1979,6 @@ namespace Zetbox.App.Base
             public RelationProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -2014,6 +2011,9 @@ namespace Zetbox.App.Base
 
             public virtual string Verb { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

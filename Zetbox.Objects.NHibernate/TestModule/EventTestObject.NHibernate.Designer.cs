@@ -417,8 +417,6 @@ namespace Zetbox.App.Test
             public EventTestObjectProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -429,6 +427,9 @@ namespace Zetbox.App.Test
 
             public virtual string Name { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

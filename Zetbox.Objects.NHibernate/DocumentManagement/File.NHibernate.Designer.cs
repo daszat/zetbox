@@ -1769,9 +1769,6 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
             {
                 Revisions = new Collection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl.Document_has_Revisions_RelationEntryProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -1806,6 +1803,9 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
 
             public virtual string Tags { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

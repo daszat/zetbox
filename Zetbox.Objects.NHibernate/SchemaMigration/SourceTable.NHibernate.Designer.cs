@@ -1553,9 +1553,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             {
                 SourceColumn = new Collection<Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl.SourceColumnProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -1586,6 +1583,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
 
             public virtual Zetbox.App.SchemaMigration.MappingStatus? Status { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

@@ -53,7 +53,7 @@
 <% } %>
 
 			[System.Runtime.Serialization.IgnoreDataMember]
-			int ISortKey<int>.InternalSortKey => ID;
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

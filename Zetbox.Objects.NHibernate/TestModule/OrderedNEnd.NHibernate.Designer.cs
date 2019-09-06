@@ -481,9 +481,6 @@ namespace Zetbox.App.Test
             public OrderedNEndProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -496,6 +493,9 @@ namespace Zetbox.App.Test
 
             public virtual int? OtherInt { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

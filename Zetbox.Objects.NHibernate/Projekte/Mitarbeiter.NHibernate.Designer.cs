@@ -1379,9 +1379,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
             {
                 Projekte = new Collection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekte_haben_Mitarbeiter_RelationEntryProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -1414,6 +1411,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
 
             public virtual string TelefonNummer { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

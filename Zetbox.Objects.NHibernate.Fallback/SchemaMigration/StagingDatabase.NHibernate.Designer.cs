@@ -1281,8 +1281,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Stagin
             {
                 SourceTables = new Collection<Zetbox.App.SchemaMigration.SourceTableNHibernateImpl.SourceTableProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -1311,6 +1309,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Stagin
 
             public virtual ICollection<Zetbox.App.SchemaMigration.SourceTableNHibernateImpl.SourceTableProxy> SourceTables { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

@@ -423,9 +423,6 @@ namespace Zetbox.App.Test
             public ASide_connectsTo_BSide_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -436,6 +433,9 @@ namespace Zetbox.App.Test
 
             public virtual Zetbox.App.Test.N_to_M_relations_BNHibernateImpl.N_to_M_relations_BProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -900,8 +900,6 @@ namespace Zetbox.App.Base
             public CalculatedReference_dependsOn_InputProperties_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -914,6 +912,9 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -1378,9 +1379,6 @@ namespace Zetbox.App.Calendar
             public Calendar_shared_r_GroupReaders_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -1393,6 +1391,9 @@ namespace Zetbox.App.Calendar
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -1784,9 +1785,6 @@ namespace Zetbox.App.Calendar
             public Calendar_shared_r_Readers_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -1797,6 +1795,9 @@ namespace Zetbox.App.Calendar
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -2261,9 +2262,6 @@ namespace Zetbox.App.Calendar
             public Calendar_shared_w_GroupWriters_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -2276,6 +2274,9 @@ namespace Zetbox.App.Calendar
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -2667,9 +2668,6 @@ namespace Zetbox.App.Calendar
             public Calendar_shared_w_Writers_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -2680,6 +2678,9 @@ namespace Zetbox.App.Calendar
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -3144,9 +3145,6 @@ namespace Zetbox.App.Base
             public DataType_implements_ImplementedInterfaces_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -3159,6 +3157,9 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -3719,9 +3720,6 @@ namespace at.dasz.DocumentManagement
             public Document_has_Revisions_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -3738,6 +3736,9 @@ namespace at.dasz.DocumentManagement
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -4155,8 +4156,6 @@ namespace Zetbox.App.Base
             public Identities_memberOf_Groups_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -4167,6 +4166,9 @@ namespace Zetbox.App.Base
 
             public virtual Zetbox.App.Base.GroupNHibernateImpl.GroupProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -4584,8 +4586,6 @@ namespace Zetbox.App.Test
             public MB_Many_Role_has_TCO_ManyList_Role_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -4596,6 +4596,9 @@ namespace Zetbox.App.Test
 
             public virtual Zetbox.App.Test.TestCustomObjectNHibernateImpl.TestCustomObjectProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -5060,8 +5063,6 @@ namespace Zetbox.App.GUI
             public NavigationScreen_accessed_by_Groups_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -5074,6 +5075,9 @@ namespace Zetbox.App.GUI
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -5564,8 +5568,6 @@ namespace Zetbox.App.GUI
             public ObjRefProp_shows_Methods_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -5578,6 +5580,9 @@ namespace Zetbox.App.GUI
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -6042,8 +6047,6 @@ namespace Zetbox.App.GUI
             public Presentable_displayedBy_SecondaryControlKinds_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -6056,6 +6059,9 @@ namespace Zetbox.App.GUI
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -6642,8 +6648,6 @@ namespace Zetbox.App.Projekte
             public Projekte_haben_Mitarbeiter_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -6660,6 +6664,9 @@ namespace Zetbox.App.Projekte
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -7220,8 +7227,6 @@ namespace Zetbox.App.Base
             public RoleMembership_resolves_Relations_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -7238,6 +7243,9 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -7798,8 +7806,6 @@ namespace Zetbox.App.SchemaMigration
             public SourceColumn_created_Property_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -7816,6 +7822,9 @@ namespace Zetbox.App.SchemaMigration
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -8233,9 +8242,6 @@ namespace Zetbox.App.Test
             public Student_füllt_aus_Testbogen_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -8246,6 +8252,9 @@ namespace Zetbox.App.Test
 
             public virtual Zetbox.App.Test.FragebogenNHibernateImpl.FragebogenProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -8710,9 +8719,6 @@ namespace Zetbox.App.Base
             public UniqueContraints_ensures_unique_on_Properties_RelationEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -8725,6 +8731,9 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -9043,9 +9052,6 @@ namespace Zetbox.App.Projekte
             public Kunde_EMails_CollectionEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -9058,6 +9064,9 @@ namespace Zetbox.App.Projekte
 
             public virtual string Value { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -9358,9 +9367,6 @@ namespace Zetbox.App.Test
             public Muhblah_StringCollection_CollectionEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -9373,6 +9379,9 @@ namespace Zetbox.App.Test
 
             public virtual string Value { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -9703,9 +9712,6 @@ namespace Zetbox.App.LicenseManagement
             public PrivateKey_AuditJournal_CollectionEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -9718,6 +9724,9 @@ namespace Zetbox.App.LicenseManagement
 
             public virtual Zetbox.App.Base.AuditEntryNHibernateImpl Value { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -10066,9 +10075,6 @@ namespace Zetbox.App.Projekte
             public Projekt_AuditJournal_CollectionEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -10081,6 +10087,9 @@ namespace Zetbox.App.Projekte
 
             public virtual Zetbox.App.Base.AuditEntryNHibernateImpl Value { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -10411,8 +10420,6 @@ namespace Zetbox.App.Test
             public TestCustomObject_PhoneNumbersOther_CollectionEntryProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -10425,6 +10432,9 @@ namespace Zetbox.App.Test
 
             public virtual Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl Value { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

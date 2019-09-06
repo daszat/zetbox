@@ -1146,8 +1146,6 @@ namespace Zetbox.App.SchemaMigration
             public SourceEnumProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -1170,6 +1168,9 @@ namespace Zetbox.App.SchemaMigration
 
             public virtual string SourceValue { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

@@ -1555,8 +1555,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
 
             public virtual int ID { get; set; }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual Type ZetboxWrapper { get { return typeof(SourceTableNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(SourceTableProxy); } }
@@ -1585,6 +1583,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
 
             public virtual Zetbox.App.SchemaMigration.MappingStatus? Status { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

@@ -1111,8 +1111,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             {
                 Groups = new Collection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl.Identities_memberOf_Groups_RelationEntryProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -1135,6 +1133,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
 
             public virtual string UserName { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

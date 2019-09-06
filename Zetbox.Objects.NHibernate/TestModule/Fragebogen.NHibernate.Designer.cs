@@ -392,9 +392,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStu
                 Antworten = new Collection<Zetbox.App.Test.AntwortNHibernateImpl.AntwortProxy>();
                 Student = new Collection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl.Student_füllt_aus_Testbogen_RelationEntryProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -407,6 +404,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStu
 
             public virtual ICollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl.Student_füllt_aus_Testbogen_RelationEntryProxy> Student { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

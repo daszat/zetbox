@@ -654,8 +654,6 @@ namespace Zetbox.App.GUI
             public SavedListConfigurationProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -670,6 +668,9 @@ namespace Zetbox.App.GUI
 
             public virtual Zetbox.App.Base.ObjectClassNHibernateImpl.ObjectClassProxy Type { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

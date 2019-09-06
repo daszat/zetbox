@@ -1174,8 +1174,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Migrat
             {
                 StagingDatabases = new Collection<Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl.StagingDatabaseProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -1198,6 +1196,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Migrat
 
             public virtual ICollection<Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl.StagingDatabaseProxy> StagingDatabases { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

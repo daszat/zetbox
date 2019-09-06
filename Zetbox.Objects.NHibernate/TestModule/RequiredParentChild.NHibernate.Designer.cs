@@ -440,9 +440,6 @@ namespace Zetbox.App.Test
             public RequiredParentChildProxy()
             {
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
-
 
             public virtual int ID { get; set; }
 
@@ -453,6 +450,9 @@ namespace Zetbox.App.Test
 
             public virtual Zetbox.App.Test.RequiredParentNHibernateImpl.RequiredParentProxy Parent { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

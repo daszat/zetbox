@@ -988,8 +988,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 MuhBlah_ManyList_Nav = new Collection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryProxy>();
                 PhoneNumbersOther = new Collection<Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -1016,6 +1014,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 
             public virtual int? PhoneNumbersOther_pos { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

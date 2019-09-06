@@ -1537,8 +1537,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             {
                 SecondaryControlKinds = new Collection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl.Presentable_displayedBy_SecondaryControlKinds_RelationEntryProxy>();
             }
-            [System.Runtime.Serialization.IgnoreDataMember]
-            int ISortKey<int>.InternalSortKey => ID;
 
             public virtual int ID { get; set; }
 
@@ -1567,6 +1565,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
 
             public virtual string ViewModelTypeRef { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
