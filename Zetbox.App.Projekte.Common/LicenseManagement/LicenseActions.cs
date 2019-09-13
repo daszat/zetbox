@@ -61,7 +61,7 @@ namespace Zetbox.App.LicenseManagement
                 sw.Write(obj.ValidFrom);
                 sw.Write(obj.ValidThru);
                 sw.Write(obj.LicenseSubject);
-                sw.Write(obj.LicenseData ?? "");
+                sw.Write((obj.LicenseData ?? "").Replace("\r", "").Replace("\n", "").Replace("\t", " "));
                 sw.Flush();
 
                 return sha.ComputeHash(ms.GetBuffer());
@@ -97,6 +97,12 @@ namespace Zetbox.App.LicenseManagement
             var cng_private = (System.Security.Cryptography.RSACng)key.GetRSAPrivateKey();
             var hash = ComputeHash(obj);
             obj.Signature = Convert.ToBase64String(cng_private.SignHash(hash, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1));
+        }
+
+        [Invocation]
+        public static void Export(License obj, string file)
+        {
+            App.Packaging.Exporter.Export(obj.Context, file, new[] { obj });
         }
     }
 }

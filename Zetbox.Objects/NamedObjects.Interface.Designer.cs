@@ -2902,6 +2902,14 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("b6dd86e3-d5a8-438b-9abd-e1af540d14dc"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> Export
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("976274b8-0264-4ede-bbf6-453fd9883cd8"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> ExportUI
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("cf389911-d60a-40d1-aef7-1deb44aaf216"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Method> IsSignatureValid
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("c83f0514-3732-466e-a7d7-2d953627ab80"); }
