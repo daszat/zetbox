@@ -33,6 +33,18 @@ namespace Zetbox.App.LicenseManagement
         }
 
         [Invocation]
+        public static void preSet_ValidFrom(License obj, PropertyPreSetterEventArgs<DateTime> e)
+        {
+            e.Result = e.NewValue.Date;
+        }
+
+        [Invocation]
+        public static void preSet_ValidThru(License obj, PropertyPreSetterEventArgs<DateTime> e)
+        {
+            e.Result = e.NewValue.Date;
+        }
+
+        [Invocation]
         public static void NotifyCreated(License obj)
         {
             obj.ValidThru = DateTime.Today.AddYears(1);
