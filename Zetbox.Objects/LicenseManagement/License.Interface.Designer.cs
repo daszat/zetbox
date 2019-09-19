@@ -120,8 +120,13 @@ namespace Zetbox.App.LicenseManagement
         bool IsValid();
 
         /// <summary>
-        /// Signs this certificate
+        /// Sings this license
         /// </summary>
-        void Sign(Zetbox.App.LicenseManagement.PrivateKey certificate);
+        void Sign(Zetbox.App.LicenseManagement.PrivateKey certificate, string password);
+
+        /// <summary>
+        /// Sings this license
+        /// </summary>
+        void SignUI();
     }
 }

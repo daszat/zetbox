@@ -23,25 +23,57 @@ namespace Zetbox.App.LicenseManagement
     using System.Text;
     using Zetbox.API;
     using Zetbox.Client.Presentables;
+    using Zetbox.Client.GUI;
 
     [Implementor]
     public class LicenseActions
     {
-        private static IViewModelFactory _vmdl;
+        private static IViewModelFactory _vmf;
+        private static IFrozenContext _frozenContext;
 
-        public LicenseActions(IViewModelFactory vmdl)
+        public LicenseActions(IViewModelFactory vmf, IFrozenContext frozenContext)
         {
-            _vmdl = vmdl;
+            _vmf = vmf;
+            _frozenContext = frozenContext;
         }
 
         [Invocation]
         public static void ExportUI(License obj)
         {
-            var file = _vmdl.GetDestinationFileNameFromUser(Helper.GetLegalFileName($"{obj.Licensee?.Replace(".", "_")}-{obj.ValidFrom.ToString("yyyyMMdd")}-{obj.ValidThru.ToString("yyyyMMdd")}.license"));
-            if(!string.IsNullOrWhiteSpace(file))
+            var file = _vmf.GetDestinationFileNameFromUser(Helper.GetLegalFileName($"{obj.Licensee?.Replace(".", "_")}-{obj.ValidFrom.ToString("yyyyMMdd")}-{obj.ValidThru.ToString("yyyyMMdd")}.license"));
+            if (!string.IsNullOrWhiteSpace(file))
             {
                 obj.Export(file);
             }
+        }
+
+        [Invocation]
+        public static void SignUI(License obj)
+        {
+            _vmf.CreateDialog(obj.Context, "Sign")
+                .AddObjectReference("key", "Private key", NamedObjects.Base.Classes.Zetbox.App.LicenseManagement.PrivateKey.Find(_frozenContext))
+                .AddPassword("pwd", "Password", "Optional a password. If empty, the password from the private key will be used.", "You should realy avoid storing passwords in the private key.")
+                .OnAccept(values =>
+                {
+                    var key = (PrivateKey)values["key"];
+                    var pwd = (string)values["pwd"];
+
+                    if(key == null)
+                    {
+                        _vmf.ShowMessage("No private key selected", "Error");
+                        return;
+                    }
+
+                    try
+                    {
+                        obj.Sign(key, pwd);
+                    }
+                    catch (System.Security.Cryptography.CryptographicException ex)
+                    {
+                        _vmf.ShowMessage(ex.Message, "Error");
+                    }
+                })
+                .Show();
         }
     }
 }

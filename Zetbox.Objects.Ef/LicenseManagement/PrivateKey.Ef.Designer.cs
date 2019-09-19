@@ -41,65 +41,6 @@ namespace Zetbox.App.LicenseManagement
         }
 
         /// <summary>
-        /// Eine Liste der Änderungen an diesem Datensatz.
-        /// </summary>
-        // CompoundObject list property
-        // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Zetbox.App.Base.AuditEntry> AuditJournal
-        {
-            get
-            {
-                if (_AuditJournal == null)
-                {
-                    _AuditJournal = new EfValueCollectionWrapper<PrivateKey, Zetbox.App.Base.AuditEntry, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryEfImpl, EntityCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryEfImpl>>(
-                        this.Context,
-                        this,
-                        null, // see GetAuditJournalImplCollection()
-                        AuditJournalImpl);
-                }
-                return _AuditJournal;
-            }
-        }
-
-        [EdmRelationshipNavigationProperty("Model", "FK_PrivateKey_value_AuditJournal", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryEfImpl> AuditJournalImpl
-        {
-            get
-            {
-                return GetAuditJournalImplCollection();
-            }
-        }
-
-        internal EntityCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryEfImpl> GetAuditJournalImplCollection()
-        {
-            if (_AuditJournalImplEntityCollection == null)
-            {
-                _AuditJournalImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryEfImpl>(
-                        "Model.FK_PrivateKey_value_AuditJournal",
-                        "CollectionEntry");
-                // the EntityCollection has to be loaded before attaching the AssociationChanged event
-                // because the event is triggered while relation entries are loaded from the database
-                // although that does not require notification of the business logic.
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !_AuditJournalImplEntityCollection.IsLoaded)
-                {
-                    _AuditJournalImplEntityCollection.Load();
-                }
-                _AuditJournalImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("AuditJournal", null, null); if (OnAuditJournal_PostSetter != null && IsAttached) OnAuditJournal_PostSetter(this); };
-            }
-            return _AuditJournalImplEntityCollection;
-        }
-        private EntityCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryEfImpl> _AuditJournalImplEntityCollection;
-        private EfValueCollectionWrapper<PrivateKey, Zetbox.App.Base.AuditEntry, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryEfImpl, EntityCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryEfImpl>> _AuditJournal;
-public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.PrivateKey> OnAuditJournal_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.PrivateKey> OnAuditJournal_IsValid;
-
-        /// <summary>
         /// The certificate
         /// </summary>
         // value type property
@@ -789,6 +730,75 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
         public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.PrivateKey> OnPassword_IsValid;
 
         /// <summary>
+        /// Tags of this private key
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public string Tags
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Tags;
+                if (OnTags_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnTags_Getter(this, __e);
+                    __result = _Tags = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Tags != value)
+                {
+                    var __oldValue = _Tags;
+                    var __newValue = value;
+                    if (OnTags_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTags_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Tags", __oldValue, __newValue);
+                    _Tags = __newValue;
+                    NotifyPropertyChanged("Tags", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnTags_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTags_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("Tags");
+                }
+            }
+        }
+        private string _Tags_store;
+        private string _Tags {
+            get { return _Tags_store; }
+            set {
+                ReportEfPropertyChanging("Tags");
+                _Tags_store = value;
+                ReportEfPropertyChanged("Tags");
+            }
+        }
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.LicenseManagement.PrivateKey, string> OnTags_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.LicenseManagement.PrivateKey, string> OnTags_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.LicenseManagement.PrivateKey, string> OnTags_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.PrivateKey> OnTags_IsValid;
+
+        /// <summary>
         /// Asks the user to open a file and loads the certificate
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -932,6 +942,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
             me.Description = other.Description;
             me.IsDeactivated = other.IsDeactivated;
             me.Password = other.Password;
+            me.Tags = other.Tags;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
         }
@@ -956,6 +967,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 case "Description":
                 case "IsDeactivated":
                 case "Password":
+                case "Tags":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -1008,15 +1020,6 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
-                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<PrivateKey, ICollection<Zetbox.App.Base.AuditEntry>>(
-                        lazyCtx,
-                        new Guid("3ea184f1-d6f7-4ceb-be7f-525da44ed3b4"),
-                        "AuditJournal",
-                        null,
-                        obj => obj.AuditJournal,
-                        null, // lists are read-only properties
-                        obj => OnAuditJournal_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<PrivateKey, string>(
                         lazyCtx,
@@ -1089,6 +1092,15 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                         obj => obj.Password,
                         (obj, val) => obj.Password = val,
 						obj => OnPassword_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<PrivateKey, string>(
+                        lazyCtx,
+                        new Guid("58e7c968-8f8d-4d27-811a-f6dbf48177a0"),
+                        "Tags",
+                        null,
+                        obj => obj.Tags,
+                        (obj, val) => obj.Tags = val,
+						obj => OnTags_IsValid), 
                     // position columns
                 };
             }
@@ -1156,6 +1168,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Password");
+            SetNotInitializedProperty("Tags");
             base.NotifyCreated();
             if (OnNotifyCreated_PrivateKey != null) OnNotifyCreated_PrivateKey(this);
         }
@@ -1166,7 +1179,6 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_PrivateKey != null) OnNotifyDeleting_PrivateKey(this);
-            AuditJournal.Clear();
             ChangedBy = null;
             CreatedBy = null;
         }
@@ -1214,7 +1226,6 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.WriteCollectionEntries(this.AuditJournalImpl);
             binStream.Write(this._Certificate);
             {
                 var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_PrivateKey_was_ChangedBy", "ChangedBy");
@@ -1240,6 +1251,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 binStream.Write(this._IsDeactivated);
             }
             binStream.Write(this._Password);
+            binStream.Write(this._Tags);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1265,6 +1277,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 this._IsDeactivated = binStream.ReadBoolean();
             }
             this._Password = binStream.ReadString();
+            this._Tags = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

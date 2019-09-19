@@ -38,34 +38,6 @@ namespace Zetbox.App.LicenseManagement
         }
 
         /// <summary>
-        /// Eine Liste der Änderungen an diesem Datensatz.
-        /// </summary>
-        // CompoundObject list property
-		// Zetbox.Generator.Templates.Properties.ValueCollectionProperty
-		public ICollection<Zetbox.App.Base.AuditEntry> AuditJournal
-		{
-			get
-			{
-				if (_AuditJournal == null)
-				{
-				    _AuditJournal 
-				        = new ClientValueCollectionWrapper<PrivateKey, Zetbox.App.Base.AuditEntry, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntry, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryMemoryImpl>>(
-							this.Context,
-				            this, 
-				            () => { this.NotifyPropertyChanged("AuditJournal", null, null); if(OnAuditJournal_PostSetter != null && IsAttached) OnAuditJournal_PostSetter(this); },
-				            _AuditJournalCollection);
-				}
-				return _AuditJournal;
-			}
-		}
-
-		private ClientValueCollectionWrapper<PrivateKey, Zetbox.App.Base.AuditEntry, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntry, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryMemoryImpl>> _AuditJournal;
-		private ObservableCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryMemoryImpl> _AuditJournalCollection = new ObservableCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryMemoryImpl>();
-public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.PrivateKey> OnAuditJournal_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.PrivateKey> OnAuditJournal_IsValid;
-
-        /// <summary>
         /// The certificate
         /// </summary>
         // value type property
@@ -705,6 +677,64 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
         public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.PrivateKey> OnPassword_IsValid;
 
         /// <summary>
+        /// Tags of this private key
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public string Tags
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Tags;
+                if (OnTags_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnTags_Getter(this, __e);
+                    __result = _Tags = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Tags != value)
+                {
+                    var __oldValue = _Tags;
+                    var __newValue = value;
+                    if (OnTags_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTags_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Tags", __oldValue, __newValue);
+                    _Tags = __newValue;
+                    NotifyPropertyChanged("Tags", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnTags_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTags_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("Tags");
+                }
+            }
+        }
+        private string _Tags;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.LicenseManagement.PrivateKey, string> OnTags_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.LicenseManagement.PrivateKey, string> OnTags_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.LicenseManagement.PrivateKey, string> OnTags_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.PrivateKey> OnTags_IsValid;
+
+        /// <summary>
         /// Asks the user to open a file and loads the certificate
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -848,7 +878,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
             me.Description = other.Description;
             me.IsDeactivated = other.IsDeactivated;
             me.Password = other.Password;
-            SynchronizeCollections(this._AuditJournalCollection, otherImpl._AuditJournalCollection);
+            me.Tags = other.Tags;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
         }
@@ -901,6 +931,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 case "Description":
                 case "IsDeactivated":
                 case "Password":
+                case "Tags":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -953,15 +984,6 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
-                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<PrivateKey, ICollection<Zetbox.App.Base.AuditEntry>>(
-                        lazyCtx,
-                        new Guid("3ea184f1-d6f7-4ceb-be7f-525da44ed3b4"),
-                        "AuditJournal",
-                        null,
-                        obj => obj.AuditJournal,
-                        null, // lists are read-only properties
-                        obj => OnAuditJournal_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<PrivateKey, string>(
                         lazyCtx,
@@ -1034,6 +1056,15 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                         obj => obj.Password,
                         (obj, val) => obj.Password = val,
 						obj => OnPassword_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<PrivateKey, string>(
+                        lazyCtx,
+                        new Guid("58e7c968-8f8d-4d27-811a-f6dbf48177a0"),
+                        "Tags",
+                        null,
+                        obj => obj.Tags,
+                        (obj, val) => obj.Tags = val,
+						obj => OnTags_IsValid), 
                     // position columns
                 };
             }
@@ -1101,6 +1132,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Password");
+            SetNotInitializedProperty("Tags");
             base.NotifyCreated();
             if (OnNotifyCreated_PrivateKey != null) OnNotifyCreated_PrivateKey(this);
         }
@@ -1111,7 +1143,6 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_PrivateKey != null) OnNotifyDeleting_PrivateKey(this);
-            AuditJournal.Clear();
             ChangedBy = null;
             CreatedBy = null;
         }
@@ -1127,7 +1158,6 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.WriteCollectionEntries(this._AuditJournalCollection);
             binStream.Write(this._Certificate);
             binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
             binStream.Write(this._isChangedOnSet);
@@ -1145,6 +1175,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 binStream.Write(this._IsDeactivated);
             }
             binStream.Write(this._Password);
+            binStream.Write(this._Tags);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1153,7 +1184,6 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            binStream.ReadCollectionEntries(this, this._AuditJournalCollection);
             this._Certificate = binStream.ReadString();
             this._fk_ChangedBy = binStream.ReadNullableInt32();
             this._isChangedOnSet = binStream.ReadBoolean();
@@ -1171,6 +1201,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 this._IsDeactivated = binStream.ReadBoolean();
             }
             this._Password = binStream.ReadString();
+            this._Tags = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

@@ -1532,11 +1532,6 @@
         </id>
 
         <!-- define the properties -->
-        <!-- CompoundObjectProperty IsList -->
-        <set name="AuditJournal" inverse="true" batch-size="100">
-            <key column="`fk_PrivateKey`" />
-            <one-to-many class="Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl+PrivateKey_AuditJournal_CollectionEntryProxy,Zetbox.Objects.NHibernateImpl" />
-        </set>
         <!-- ValueTypeProperty isValue -->
         <property name="Certificate" 
                   column="`Certificate`" 
@@ -1566,6 +1561,10 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Password" 
                   column="`Password`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Tags" 
+                  column="`Tags`" 
                   optimistic-lock="false"/>
 
         <!-- define the subclasses -->
