@@ -100,6 +100,16 @@ namespace Zetbox.App.LicenseManagement
         bool Check(System.Object certificate);
 
         /// <summary>
+        /// 
+        /// </summary>
+        void Export(string file);
+
+        /// <summary>
+        /// Exports this License
+        /// </summary>
+        void ExportUI();
+
+        /// <summary>
         /// Checks, if the signature is valid
         /// </summary>
         bool IsSignatureValid(System.Object certificate);

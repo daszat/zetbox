@@ -1201,6 +1201,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
 
             public virtual string PLZ { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

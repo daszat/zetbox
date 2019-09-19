@@ -1583,6 +1583,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
 
             public virtual Zetbox.App.SchemaMigration.MappingStatus? Status { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

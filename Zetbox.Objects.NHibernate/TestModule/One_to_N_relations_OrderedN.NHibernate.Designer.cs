@@ -493,6 +493,9 @@ namespace Zetbox.App.Test
 
             public virtual int? OrderedNSide_pos { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

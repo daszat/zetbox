@@ -808,6 +808,9 @@ namespace Zetbox.App.Test
 
             public virtual Zetbox.App.Test.TestEnum TestEnumWithDefault { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

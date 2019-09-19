@@ -482,6 +482,9 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -958,6 +961,9 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -1385,6 +1391,9 @@ namespace Zetbox.App.Base
 
             public virtual Zetbox.App.Base.GroupNHibernateImpl.GroupProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -1861,6 +1870,9 @@ namespace Zetbox.App.GUI
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -2363,6 +2375,9 @@ namespace Zetbox.App.GUI
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -2839,6 +2854,9 @@ namespace Zetbox.App.GUI
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -3415,6 +3433,9 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -3991,6 +4012,9 @@ namespace Zetbox.App.SchemaMigration
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -4467,6 +4491,9 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

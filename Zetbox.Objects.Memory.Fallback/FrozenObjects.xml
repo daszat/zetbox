@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-08-08T18:54:14.6687478Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-09-06T12:25:47.5528867Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -15192,6 +15192,22 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.GUI.NavigatorViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="7b0528ce-dbe8-4011-a9ca-4ecdaee58c05">
+    <GUI:DefaultDisplayKind>96058c65-37fa-432f-9f53-d02800436782</GUI:DefaultDisplayKind>
+    <GUI:DefaultEditorKind>96058c65-37fa-432f-9f53-d02800436782</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A Object Reference Presenter ViewModel</GUI:Description>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.GUI.ObjectReferencePresenterViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="29549071-447f-4460-b44e-a7f621b03966">
+    <GUI:DefaultDisplayKind>96058c65-37fa-432f-9f53-d02800436782</GUI:DefaultDisplayKind>
+    <GUI:DefaultEditorKind>96058c65-37fa-432f-9f53-d02800436782</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A Presenter ViewModel</GUI:Description>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.GUI.PresenterViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="0dbfab52-64c2-404d-a612-6df0696131b7">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel for editing a saved instance list configuration</GUI:Description>
@@ -15355,6 +15371,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ViewDescriptor ExportGuid="93c2965e-598a-4bbd-8c37-3f520699ff68">
     <GUI:ControlKind>8cf4c4e6-8c6f-48ac-a879-f09679141298</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.GridCells.MultilineStringValue, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="2c2fb772-4296-49c7-bf6c-6b05c02853b3">
+    <GUI:ControlKind>96058c65-37fa-432f-9f53-d02800436782</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.GUI.ContentPresenterView, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
@@ -15846,6 +15869,11 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ControlKind ExportGuid="933e0b1f-ea8c-4de1-8a86-a925aad86343">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.Panels</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="96058c65-37fa-432f-9f53-d02800436782">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.Presenter</GUI:Name>
+    <GUI:Parent>933e0b1f-ea8c-4de1-8a86-a925aad86343</GUI:Parent>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="9731f312-8ce4-4c2d-8d95-1923256dc9b8">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>

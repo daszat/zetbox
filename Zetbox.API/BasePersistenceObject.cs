@@ -540,6 +540,12 @@ namespace Zetbox.API
                 return _transientState;
             }
         }
+
+        #endregion
+
+        #region ISortKey<int>
+        [System.Runtime.Serialization.IgnoreDataMember]
+        int ISortKey<int>.InternalSortKey => ID;
         #endregion
     }
 }

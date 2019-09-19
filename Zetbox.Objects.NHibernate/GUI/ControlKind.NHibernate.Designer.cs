@@ -840,6 +840,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
 
             public virtual Zetbox.App.GUI.ControlKindNHibernateImpl.ControlKindProxy Parent { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

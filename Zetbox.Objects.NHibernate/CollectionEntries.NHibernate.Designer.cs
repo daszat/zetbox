@@ -433,6 +433,9 @@ namespace Zetbox.App.Test
 
             public virtual Zetbox.App.Test.N_to_M_relations_BNHibernateImpl.N_to_M_relations_BProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -909,6 +912,9 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -1385,6 +1391,9 @@ namespace Zetbox.App.Calendar
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -1786,6 +1795,9 @@ namespace Zetbox.App.Calendar
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -2262,6 +2274,9 @@ namespace Zetbox.App.Calendar
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -2663,6 +2678,9 @@ namespace Zetbox.App.Calendar
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -3139,6 +3157,9 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -3715,6 +3736,9 @@ namespace at.dasz.DocumentManagement
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -4142,6 +4166,9 @@ namespace Zetbox.App.Base
 
             public virtual Zetbox.App.Base.GroupNHibernateImpl.GroupProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -4569,6 +4596,9 @@ namespace Zetbox.App.Test
 
             public virtual Zetbox.App.Test.TestCustomObjectNHibernateImpl.TestCustomObjectProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -5045,6 +5075,9 @@ namespace Zetbox.App.GUI
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -5547,6 +5580,9 @@ namespace Zetbox.App.GUI
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -6023,6 +6059,9 @@ namespace Zetbox.App.GUI
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -6625,6 +6664,9 @@ namespace Zetbox.App.Projekte
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -7201,6 +7243,9 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -7777,6 +7822,9 @@ namespace Zetbox.App.SchemaMigration
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -8204,6 +8252,9 @@ namespace Zetbox.App.Test
 
             public virtual Zetbox.App.Test.FragebogenNHibernateImpl.FragebogenProxy B { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -8680,6 +8731,9 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -9010,6 +9064,9 @@ namespace Zetbox.App.Projekte
 
             public virtual string Value { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -9322,6 +9379,9 @@ namespace Zetbox.App.Test
 
             public virtual string Value { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -9664,6 +9724,9 @@ namespace Zetbox.App.LicenseManagement
 
             public virtual Zetbox.App.Base.AuditEntryNHibernateImpl Value { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -10024,6 +10087,9 @@ namespace Zetbox.App.Projekte
 
             public virtual Zetbox.App.Base.AuditEntryNHibernateImpl Value { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
@@ -10366,6 +10432,9 @@ namespace Zetbox.App.Test
 
             public virtual Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl Value { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

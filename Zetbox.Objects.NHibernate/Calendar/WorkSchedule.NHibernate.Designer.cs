@@ -1556,6 +1556,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
 
             public virtual ICollection<Zetbox.App.Calendar.WorkScheduleRuleNHibernateImpl.WorkScheduleRuleProxy> WorkScheduleRules { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

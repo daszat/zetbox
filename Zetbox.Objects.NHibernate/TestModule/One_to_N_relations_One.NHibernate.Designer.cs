@@ -411,6 +411,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
 
             public virtual ICollection<Zetbox.App.Test.One_to_N_relations_OrderedNNHibernateImpl.One_to_N_relations_OrderedNProxy> OrderedNSide { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

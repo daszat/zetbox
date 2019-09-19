@@ -2230,6 +2230,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
 
             public virtual bool ShowNameInLists { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

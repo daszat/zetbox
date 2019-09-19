@@ -637,6 +637,9 @@ namespace Zetbox.App.Test
 
             public virtual int? gute_Antworten_pos { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

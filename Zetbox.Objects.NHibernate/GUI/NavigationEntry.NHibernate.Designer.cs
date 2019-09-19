@@ -1765,6 +1765,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
             public virtual Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl.ViewModelDescriptorProxy ViewModelDescriptor { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

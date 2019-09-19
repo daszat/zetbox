@@ -1698,6 +1698,9 @@ namespace Zetbox.App.Calendar
 
             public virtual ICollection<Event_RightsNHibernateImpl> SecurityRightsCollectionImpl { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

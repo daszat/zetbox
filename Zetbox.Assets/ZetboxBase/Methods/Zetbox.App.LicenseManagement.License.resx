@@ -135,6 +135,24 @@
   <data name="Check(certificate)_description" xml:space="preserve">
     <value>Certificate either as byte array or as X509Certificate class</value>
   </data>
+  <data name="Export_label" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Export_description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Export(file)_label" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Export(file)_description" xml:space="preserve">
+    <value>Target filename</value>
+  </data>
+  <data name="ExportUI_label" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="ExportUI_description" xml:space="preserve">
+    <value>Exports this License</value>
+  </data>
   <data name="IsSignatureValid_label" xml:space="preserve">
     <value>Is signature valid</value>
   </data>

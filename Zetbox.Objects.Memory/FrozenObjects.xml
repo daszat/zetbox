@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-08-09T12:36:39.8339626Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-09-13T20:49:51.9566888Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -15192,6 +15192,22 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.GUI.NavigatorViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="7b0528ce-dbe8-4011-a9ca-4ecdaee58c05">
+    <GUI:DefaultDisplayKind>96058c65-37fa-432f-9f53-d02800436782</GUI:DefaultDisplayKind>
+    <GUI:DefaultEditorKind>96058c65-37fa-432f-9f53-d02800436782</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A Object Reference Presenter ViewModel</GUI:Description>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.GUI.ObjectReferencePresenterViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="29549071-447f-4460-b44e-a7f621b03966">
+    <GUI:DefaultDisplayKind>96058c65-37fa-432f-9f53-d02800436782</GUI:DefaultDisplayKind>
+    <GUI:DefaultEditorKind>96058c65-37fa-432f-9f53-d02800436782</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A Presenter ViewModel</GUI:Description>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.GUI.PresenterViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="0dbfab52-64c2-404d-a612-6df0696131b7">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel for editing a saved instance list configuration</GUI:Description>
@@ -15355,6 +15371,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ViewDescriptor ExportGuid="93c2965e-598a-4bbd-8c37-3f520699ff68">
     <GUI:ControlKind>8cf4c4e6-8c6f-48ac-a879-f09679141298</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.GridCells.MultilineStringValue, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="2c2fb772-4296-49c7-bf6c-6b05c02853b3">
+    <GUI:ControlKind>96058c65-37fa-432f-9f53-d02800436782</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.GUI.ContentPresenterView, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
@@ -15846,6 +15869,11 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ControlKind ExportGuid="933e0b1f-ea8c-4de1-8a86-a925aad86343">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.Panels</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="96058c65-37fa-432f-9f53-d02800436782">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.Presenter</GUI:Name>
+    <GUI:Parent>933e0b1f-ea8c-4de1-8a86-a925aad86343</GUI:Parent>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="9731f312-8ce4-4c2d-8d95-1923256dc9b8">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
@@ -16341,8 +16369,8 @@ public static void isValid_CreatedOn(License obj, PropertyIsValidEventArgs e)
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:StringProperty ExportGuid="bb043766-bd52-4e8f-b98a-6c35867db9e1">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
-    <ZetboxBase:CategoryTags>Summay, Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2018-12-21T07:54:33Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2019-09-13T20:31:10Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Description(License obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -16657,8 +16685,8 @@ public static void isValid_ValidFrom(License obj, PropertyIsValidEventArgs e)
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="75a9ef4f-b914-47e2-ad0a-f2f63fd8c60f">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
-    <ZetboxBase:CategoryTags>Summay, Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2018-12-21T07:54:33Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2019-09-13T20:31:10Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ValidThru(License obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -17389,6 +17417,57 @@ public static void CheckCanExecReason(License obj, MethodReturnEventArgs&lt;stri
     <ZetboxBase:Name>Check</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="976274b8-0264-4ede-bbf6-453fd9883cd8">
+    <ZetboxBase:ChangedOn>2019-09-13T20:32:03Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void Export(License obj, string file)
+{
+}
+
+[Invocation]
+public static void ExportCanExec(License obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ExportCanExecReason(License obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2019-09-13T20:32:03Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>Export</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="cf389911-d60a-40d1-aef7-1deb44aaf216">
+    <ZetboxBase:ChangedOn>2019-09-13T20:49:00Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ExportUI(License obj)
+{
+}
+
+[Invocation]
+public static void ExportUICanExec(License obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ExportUICanExecReason(License obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2019-09-13T20:32:46Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Exports this License</ZetboxBase:Description>
+    <GUI:Icon>d78f970f-76be-47eb-8e04-72ed7d3c3fb7</GUI:Icon>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Label>Export</ZetboxBase:Label>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>ExportUI</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="c83f0514-3732-466e-a7d7-2d953627ab80">
     <ZetboxBase:ChangedOn>2018-12-21T11:15:48Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -17542,6 +17621,18 @@ public static void LoadFromFileCanExecReason(PrivateKey obj, MethodReturnEventAr
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>retVal</ZetboxBase:Name>
   </ZetboxBase:BoolParameter>
+  <ZetboxBase:StringParameter ExportGuid="3c8c9e8a-466d-486c-8ae3-99989f0d27a0">
+    <ZetboxBase:ChangedOn>2019-09-13T20:32:03Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2019-09-13T20:32:03Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Target filename</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Label>File</ZetboxBase:Label>
+    <ZetboxBase:Method>976274b8-0264-4ede-bbf6-453fd9883cd8</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>file</ZetboxBase:Name>
+  </ZetboxBase:StringParameter>
   <ZetboxBase:CLRObjectParameter ExportGuid="97959d58-e268-4de8-8995-c6b1e8c0ff66">
     <ZetboxBase:ChangedOn>2018-12-21T08:16:16Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2018-12-21T08:16:16Z</ZetboxBase:CreatedOn>

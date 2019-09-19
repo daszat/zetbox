@@ -53,18 +53,16 @@ namespace Zetbox.App.LicenseManagement
         private static byte[] ComputeHash(License obj)
         {
             using (var sha = SHA512.Create())
-            using (var ms = new MemoryStream())
-            using (var sw = new StreamWriter(ms))
             {
-                sw.Write(obj.Licensee);
-                sw.Write(obj.Licensor);
-                sw.Write(obj.ValidFrom);
-                sw.Write(obj.ValidThru);
-                sw.Write(obj.LicenseSubject);
-                sw.Write(obj.LicenseData ?? "");
-                sw.Flush();
+                var sb = new StringBuilder();
+                sb.Append(obj.Licensee ?? "-");
+                sb.Append(obj.Licensor ?? "-");
+                sb.Append(obj.ValidFrom.ToString("yyyy-MM-dd"));
+                sb.Append(obj.ValidThru.ToString("yyyy-MM-dd"));
+                sb.Append((obj.LicenseSubject ?? -1).ToString());
+                sb.Append((obj.LicenseData ?? "-").Replace("\r", "").Replace("\n", "").Replace("\t", " "));
 
-                return sha.ComputeHash(ms.GetBuffer());
+                return sha.ComputeHash(UTF8Encoding.UTF8.GetBytes(sb.ToString()));
             }
         }
 
@@ -97,6 +95,12 @@ namespace Zetbox.App.LicenseManagement
             var cng_private = (System.Security.Cryptography.RSACng)key.GetRSAPrivateKey();
             var hash = ComputeHash(obj);
             obj.Signature = Convert.ToBase64String(cng_private.SignHash(hash, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1));
+        }
+
+        [Invocation]
+        public static void Export(License obj, string file)
+        {
+            App.Packaging.Exporter.Export(obj.Context, file, new[] { obj });
         }
     }
 }

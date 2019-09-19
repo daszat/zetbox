@@ -1124,6 +1124,9 @@ namespace Zetbox.App.Base
 
             public virtual string StoragePath { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

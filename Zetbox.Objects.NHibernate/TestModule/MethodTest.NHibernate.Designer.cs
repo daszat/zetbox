@@ -1150,6 +1150,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
 
             public virtual string StringProp { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

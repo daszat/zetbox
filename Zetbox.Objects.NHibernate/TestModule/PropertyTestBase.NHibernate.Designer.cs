@@ -169,6 +169,9 @@ namespace Zetbox.App.Test
             public virtual Type ZetboxWrapper { get { return typeof(PropertyTestBaseNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(PropertyTestBaseProxy); } }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

@@ -1064,6 +1064,9 @@ namespace at.dasz.DocumentManagement
 
             public virtual string PickupDirectory { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

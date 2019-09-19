@@ -1364,6 +1364,9 @@ namespace Zetbox.App.Projekte
 
             public virtual ICollection<Task_RightsNHibernateImpl> SecurityRightsCollectionImpl { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

@@ -563,6 +563,9 @@ namespace Zetbox.App.SchemaMigration
 
             public virtual DateTime Timestamp { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

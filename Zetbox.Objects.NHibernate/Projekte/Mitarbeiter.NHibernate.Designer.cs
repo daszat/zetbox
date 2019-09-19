@@ -1411,6 +1411,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
 
             public virtual string TelefonNummer { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

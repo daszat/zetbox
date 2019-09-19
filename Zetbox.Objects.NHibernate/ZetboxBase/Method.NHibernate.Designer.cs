@@ -2148,6 +2148,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
 
             public virtual ICollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl.ObjRefProp_shows_Methods_RelationEntryProxy> ShowByProperties { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

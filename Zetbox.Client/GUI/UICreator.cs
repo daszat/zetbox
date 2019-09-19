@@ -22,6 +22,7 @@ namespace Zetbox.Client.GUI
     using Zetbox.API;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.GUI;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     public class UICreator
     {
@@ -82,6 +83,21 @@ namespace Zetbox.Client.GUI
 
             return uiCreator.ViewModelFactory.CreateViewModel<DockPanelViewModel.Factory>()
                        .Invoke(uiCreator.DataContext, uiCreator.Parent, "__dock", children);
+        }
+        public static PresenterViewModel Presenter(this UICreator uiCreator, ViewModel view, App.GUI.ControlKind requestedKind)
+        {
+            if (uiCreator == null) throw new ArgumentNullException("uiCreator");
+
+            return uiCreator.ViewModelFactory.CreateViewModel<PresenterViewModel.Factory>()
+                       .Invoke(uiCreator.DataContext, uiCreator.Parent, view, requestedKind);
+        }
+        public static ObjectReferencePresenterViewModel ObjectReferencePresenter(this UICreator uiCreator, ViewModel view, App.GUI.ControlKind requestedKind)
+        {
+            if (uiCreator == null) throw new ArgumentNullException("uiCreator");
+            if (!(view is ObjectReferenceViewModel)) throw new ArgumentException("view must be a ObjectReferenceViewModel");
+
+            return uiCreator.ViewModelFactory.CreateViewModel<ObjectReferencePresenterViewModel     .Factory>()
+                       .Invoke(uiCreator.DataContext, uiCreator.Parent, (ObjectReferenceViewModel)view, requestedKind);
         }
     }
 }

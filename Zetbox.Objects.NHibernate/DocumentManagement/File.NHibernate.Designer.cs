@@ -1803,6 +1803,9 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
 
             public virtual string Tags { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider

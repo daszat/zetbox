@@ -338,6 +338,9 @@ namespace Zetbox.App.GUI
 
             public virtual string Name { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
