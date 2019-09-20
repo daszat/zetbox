@@ -2922,6 +2922,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("cd865690-c5d1-4391-911c-524be49b2a7c"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> SignUI
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("25846556-54ea-4060-a2d0-cbe2f71df7ab"); }
+                                }
                             }
                             public static class License_Properties
                             {
@@ -2991,10 +2995,6 @@ namespace Zetbox {
                             }
                             public static class PrivateKey_Properties
                             {
-                                public static TypedGuid<global::Zetbox.App.Base.CompoundObjectProperty> AuditJournal
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.CompoundObjectProperty>("3ea184f1-d6f7-4ceb-be7f-525da44ed3b4"); }
-                                }
                                 public static TypedGuid<global::Zetbox.App.Base.StringProperty> Certificate
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("f5c7f0dc-9d99-4e24-bb70-84de196659f7"); }
@@ -3026,6 +3026,10 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.StringProperty> Password
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("86e8eff6-4e23-4837-a812-7586f303e761"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.StringProperty> Tags
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("58e7c968-8f8d-4d27-811a-f6dbf48177a0"); }
                                 }
                             }
                         }

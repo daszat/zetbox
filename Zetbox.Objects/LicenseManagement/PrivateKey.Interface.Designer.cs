@@ -11,7 +11,7 @@ namespace Zetbox.App.LicenseManagement
     /// A private key for signing
     /// </summary>
     [Zetbox.API.DefinitionGuid("40673c91-596b-4c4a-aabc-c94a14434194")]
-    public interface PrivateKey : IDataObject, Zetbox.App.Base.IAuditable, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IDeactivatable 
+    public interface PrivateKey : IDataObject, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IDeactivatable 
     {
 
         /// <summary>
@@ -39,6 +39,16 @@ namespace Zetbox.App.LicenseManagement
         /// </summary>
         [Zetbox.API.DefinitionGuid("86e8eff6-4e23-4837-a812-7586f303e761")]
         string Password {
+            get;
+            set;
+        }
+
+
+        /// <summary>
+        /// Tags of this private key
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("58e7c968-8f8d-4d27-811a-f6dbf48177a0")]
+        string Tags {
             get;
             set;
         }

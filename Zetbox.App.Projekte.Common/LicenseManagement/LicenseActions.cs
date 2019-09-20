@@ -29,7 +29,19 @@ namespace Zetbox.App.LicenseManagement
         [Invocation]
         public static void ToString(License obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = $"{obj.Licensee}: {obj.ValidFrom} - {obj.ValidThru}, {obj.Description}";
+            e.Result = $"{obj.Licensee}: {obj.ValidFrom.ToShortDateString()} - {obj.ValidThru.ToShortDateString()}, {obj.Description}";
+        }
+
+        [Invocation]
+        public static void preSet_ValidFrom(License obj, PropertyPreSetterEventArgs<DateTime> e)
+        {
+            e.Result = e.NewValue.Date;
+        }
+
+        [Invocation]
+        public static void preSet_ValidThru(License obj, PropertyPreSetterEventArgs<DateTime> e)
+        {
+            e.Result = e.NewValue.Date;
         }
 
         [Invocation]
@@ -89,9 +101,9 @@ namespace Zetbox.App.LicenseManagement
         }
 
         [Invocation]
-        public static void Sign(License obj, Zetbox.App.LicenseManagement.PrivateKey certificate)
+        public static void Sign(License obj, Zetbox.App.LicenseManagement.PrivateKey certificate, string password)
         {
-            var key = new X509Certificate2(Convert.FromBase64String(certificate.Certificate), certificate.Password);
+            var key = new X509Certificate2(Convert.FromBase64String(certificate.Certificate), !string.IsNullOrWhiteSpace(password) ? password : certificate.Password);
             var cng_private = (System.Security.Cryptography.RSACng)key.GetRSAPrivateKey();
             var hash = ComputeHash(obj);
             obj.Signature = Convert.ToBase64String(cng_private.SignHash(hash, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1));
