@@ -29,7 +29,7 @@ namespace Zetbox.App.LicenseManagement
         [Invocation]
         public static void ToString(License obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = $"{obj.Licensee}: {obj.ValidFrom} - {obj.ValidThru}, {obj.Description}";
+            e.Result = $"{obj.Licensee}: {obj.ValidFrom.ToShortDateString()} - {obj.ValidThru.ToShortDateString()}, {obj.Description}";
         }
 
         [Invocation]
