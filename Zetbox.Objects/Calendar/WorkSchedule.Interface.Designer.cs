@@ -63,6 +63,11 @@ namespace Zetbox.App.Calendar
         Zetbox.App.Calendar.WorkSchedule Duplicate();
 
         /// <summary>
+        /// Gets the number of holidays between two dates. A Holiday is defined as every yearly rule, that is not a working day. All other rules are ignored.
+        /// </summary>
+        int GetHolidays(DateTime from, DateTime until);
+
+        /// <summary>
         /// Gets the number of free days between two dates
         /// </summary>
         int GetOffDays(DateTime from, DateTime until);
