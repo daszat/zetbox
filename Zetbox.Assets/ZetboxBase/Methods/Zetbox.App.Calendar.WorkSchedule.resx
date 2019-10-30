@@ -129,6 +129,30 @@
   <data name="Duplicate(retVal)_description" xml:space="preserve">
     <value />
   </data>
+  <data name="GetHolidays_label" xml:space="preserve">
+    <value>GetHolidays</value>
+  </data>
+  <data name="GetHolidays_description" xml:space="preserve">
+    <value>Gets the number of holidays between two dates. A Holiday is defined as every yearly rule, that is not a working day. All other rules are ignored.</value>
+  </data>
+  <data name="GetHolidays(retVal)_label" xml:space="preserve">
+    <value>retVal</value>
+  </data>
+  <data name="GetHolidays(retVal)_description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GetHolidays(from)_label" xml:space="preserve">
+    <value>from</value>
+  </data>
+  <data name="GetHolidays(from)_description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GetHolidays(until)_label" xml:space="preserve">
+    <value>until</value>
+  </data>
+  <data name="GetHolidays(until)_description" xml:space="preserve">
+    <value />
+  </data>
   <data name="GetOffDays_label" xml:space="preserve">
     <value>GetOffDays</value>
   </data>

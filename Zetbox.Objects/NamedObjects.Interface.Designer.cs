@@ -2203,6 +2203,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("6dd4ffcb-f911-4dce-b58d-c6b2eb6ba335"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> GetHolidays
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("f80fc26c-54fa-487e-98b5-90a1f5904a7e"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Method> GetOffDays
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("79e9a145-8d0d-400c-a3b8-875c9bda44e8"); }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-09-19T19:29:35.1264091Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-10-30T19:19:11.3526879Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -4446,6 +4446,32 @@ public static void DuplicateCanExecReason(WorkSchedule obj, MethodReturnEventArg
     <ZetboxBase:Name>Duplicate</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="f80fc26c-54fa-487e-98b5-90a1f5904a7e">
+    <ZetboxBase:CategoryTags>Check</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2019-10-30T19:15:46Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetHolidays(WorkSchedule obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
+{
+}
+
+[Invocation]
+public static void GetHolidaysCanExec(WorkSchedule obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetHolidaysCanExecReason(WorkSchedule obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2019-10-30T19:15:46Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Gets the number of holidays between two dates. A Holiday is defined as every yearly rule, that is not a working day. All other rules are ignored.</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:Name>GetHolidays</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="79e9a145-8d0d-400c-a3b8-875c9bda44e8">
     <ZetboxBase:CategoryTags>Check</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2018-09-25T15:48:47Z</ZetboxBase:ChangedOn>
@@ -4573,6 +4599,36 @@ public static void AppliesToCanExecReason(WorkScheduleRule obj, MethodReturnEven
     <ZetboxBase:Name>retVal</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
   </ZetboxBase:ObjectReferenceParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="8e924df0-139d-408b-8664-ecdfaa2880a3">
+    <ZetboxBase:ChangedOn>2019-10-30T19:16:45Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2019-10-30T19:16:45Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>f80fc26c-54fa-487e-98b5-90a1f5904a7e</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>from</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:IntParameter ExportGuid="df499638-4001-4e1a-8348-a54566e0045c">
+    <ZetboxBase:ChangedOn>2019-10-30T19:15:57Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2019-10-30T19:15:57Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>f80fc26c-54fa-487e-98b5-90a1f5904a7e</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+  </ZetboxBase:IntParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="d7f4113c-d149-4662-9195-5354df2b25c6">
+    <ZetboxBase:ChangedOn>2019-10-30T19:16:45Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2019-10-30T19:16:45Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>f80fc26c-54fa-487e-98b5-90a1f5904a7e</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>2</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>until</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
   <ZetboxBase:DateTimeParameter ExportGuid="ec4b729a-cf80-4ef1-a0b6-d7c35ea08986">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:00Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T10:43:48Z</ZetboxBase:CreatedOn>

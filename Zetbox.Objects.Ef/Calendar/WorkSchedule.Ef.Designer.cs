@@ -1052,6 +1052,70 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
+        /// Gets the number of holidays between two dates. A Holiday is defined as every yearly rule, that is not a working day. All other rules are ignored.
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetHolidays_WorkSchedule")]
+        public virtual int GetHolidays(DateTime from, DateTime until)
+        {
+            var e = new MethodReturnEventArgs<int>();
+            if (OnGetHolidays_WorkSchedule != null)
+            {
+                OnGetHolidays_WorkSchedule(this, e, from, until);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on WorkSchedule.GetHolidays");
+            }
+            return e.Result;
+        }
+        public delegate void GetHolidays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
+        public static event GetHolidays_Handler<WorkSchedule> OnGetHolidays_WorkSchedule;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<WorkSchedule> OnGetHolidays_WorkSchedule_CanExec;
+
+        [EventBasedMethod("OnGetHolidays_WorkSchedule_CanExec")]
+        public virtual bool GetHolidaysCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetHolidays_WorkSchedule_CanExec != null)
+				{
+					OnGetHolidays_WorkSchedule_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<WorkSchedule> OnGetHolidays_WorkSchedule_CanExecReason;
+
+        [EventBasedMethod("OnGetHolidays_WorkSchedule_CanExecReason")]
+        public virtual string GetHolidaysCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetHolidays_WorkSchedule_CanExecReason != null)
+				{
+					OnGetHolidays_WorkSchedule_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// Gets the number of free days between two dates
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
