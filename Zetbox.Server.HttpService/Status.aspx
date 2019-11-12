@@ -3,9 +3,15 @@
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="System.Diagnostics" %>
 <%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Autofac" %>
+<%@ Import Namespace="Autofac.Integration.Web" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <script runat="server">
     protected Process p = Process.GetCurrentProcess();
+    protected string DatabaseError = "";
+    protected string SchemaProvider = "Unknown";
+    protected string DbStatementResult = "-";
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -34,6 +40,51 @@
 
         repHeaders.DataSource = Request.Headers.AllKeys.ToDictionary(k => k, k => Request.Headers.Get(k));
         repHeaders.DataBind();
+
+        GetDbInfos();
+    }
+
+    protected void GetDbInfos()
+    {
+        IContainerProviderAccessor cpa = null;
+        try
+        {
+            cpa = (IContainerProviderAccessor)HttpContext.Current.ApplicationInstance;
+            var scope = cpa.ContainerProvider.RequestLifetime;
+
+            var ctx = scope.Resolve<IZetboxServerContext>();
+            SchemaProvider = ctx.SchemaProvider;
+            using (var cmd = ctx.CreateDbCommand())
+            {
+                switch (ctx.SchemaProvider)
+                {
+                    case "POSTGRESQL":
+                        cmd.CommandText = "select count(*) from base.\"DataTypes\"";
+                        break;
+                    case "MSSQL":
+                        cmd.CommandText = "select count(*) from base.[DataTypes]";
+                        break;
+                    default:
+                        DatabaseError = "Unknown SchemaProvider " + ctx.SchemaProvider;
+                        return;
+                }
+                if ((long)cmd.ExecuteScalar() > 0)
+                {
+                    DbStatementResult = "OK";
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            DatabaseError = ex.ToString();
+        }
+        finally
+        {
+            if (cpa != null && cpa.ContainerProvider != null)
+            {
+                cpa.ContainerProvider.EndRequestLifetime();
+            }
+        }
     }
 
     protected void OnClearCache(object sender, EventArgs e)
@@ -71,192 +122,197 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <h1>
-        Web Site Status</h1>
-    <div>
-        <h2>
-            ASP.NET Status</h2>
-        <table>
-            <tr>
-                <td>
-                    System Version:
-                </td>
-                <td>
-                    <%= System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion() %>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Runtime Directory:
-                </td>
-                <td>
-                    <%= System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory() %>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    User.Identity:
-                </td>
-                <td>
-                    <%= User.Identity.Name %>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Thread.CurrentPrincipal:
-                </td>
-                <td>
-                    <%= System.Threading.Thread.CurrentPrincipal.Identity.Name %>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    WindowsIdentity:
-                </td>
-                <td>
-                    <%= System.Security.Principal.WindowsIdentity.GetCurrent().Name%>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Total Memory:
-                </td>
-                <td>
-                    <%= MB(GC.GetTotalMemory(false)) %>
+        <h1>Web Site Status</h1>
+        <div>
+            <h2>ASP.NET Status</h2>
+            <table>
+                <tr>
+                    <td>System Version:
+                    </td>
+                    <td>
+                        <%= System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion() %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Runtime Directory:
+                    </td>
+                    <td>
+                        <%= System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory() %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>User.Identity:
+                    </td>
+                    <td>
+                        <%= User.Identity.Name %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Thread.CurrentPrincipal:
+                    </td>
+                    <td>
+                        <%= System.Threading.Thread.CurrentPrincipal.Identity.Name %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>WindowsIdentity:
+                    </td>
+                    <td>
+                        <%= System.Security.Principal.WindowsIdentity.GetCurrent().Name%>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total Memory:
+                    </td>
+                    <td>
+                        <%= MB(GC.GetTotalMemory(false)) %>
                     MB
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Mem Usage:
-                </td>
-                <td>
-                    <%= MB(p.WorkingSet64)%>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mem Usage:
+                    </td>
+                    <td>
+                        <%= MB(p.WorkingSet64)%>
                     MB
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    VirtualMemorySize:
-                </td>
-                <td>
-                    <%= MB(p.PagedMemorySize64)%>
+                    </td>
+                </tr>
+                <tr>
+                    <td>VirtualMemorySize:
+                    </td>
+                    <td>
+                        <%= MB(p.PagedMemorySize64)%>
                     MB
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Cache.EffectivePrivateBytesLimit:
-                </td>
-                <td>
-                    <%= MB(this.Cache.EffectivePrivateBytesLimit)%>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cache.EffectivePrivateBytesLimit:
+                    </td>
+                    <td>
+                        <%= MB(this.Cache.EffectivePrivateBytesLimit)%>
                     MB
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Cache.EffectivePercentagePhysicalMemoryLimit:
-                </td>
-                <td>
-                    <%= MB(this.Cache.EffectivePercentagePhysicalMemoryLimit)%>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cache.EffectivePercentagePhysicalMemoryLimit:
+                    </td>
+                    <td>
+                        <%= MB(this.Cache.EffectivePercentagePhysicalMemoryLimit)%>
                     %
-                </td>
-            </tr>
-        </table>
-        <asp:Button ID="btnGCCollect" runat="server" OnClick="OnGCCollect" Text="GC.Collect" />
-    </div>
-    <div>
-        <h2>
-            Cache</h2>
-        <asp:Button ID="btnRefresh" runat="server" Text="Refresh" />
-        <asp:Button ID="btnClearCache" runat="server" Text="Clear Cache" OnClick="OnClearCache" />
-        <asp:Repeater ID="repCache" runat="server">
-            <HeaderTemplate>
-                <table border="1" style="border-collapse: collapse;">
-                    <tr>
-                        <th>
-                            Type in Cache
-                        </th>
-                        <th>
-                            Count
-                        </th>
-                    </tr>
-            </HeaderTemplate>
-            <ItemTemplate>
-                <tr>
-                    <td style="width: 400px;">
-                        <%# Eval("Key") %>
-                    </td>
-                    <td>
-                        <%# Eval("Value") %>
                     </td>
                 </tr>
-            </ItemTemplate>
-            <FooterTemplate>
-                </table>
-            </FooterTemplate>
-        </asp:Repeater>
-    </div>
-    <div>
-        <h2>
-            Headers</h2>
-        <asp:Repeater ID="repHeaders" runat="server">
-            <HeaderTemplate>
-                <table border="1" style="border-collapse: collapse;">
+            </table>
+            <asp:Button ID="btnGCCollect" runat="server" OnClick="OnGCCollect" Text="GC.Collect" />
+        </div>
+        <div>
+            <h2>Cache</h2>
+            <asp:Button ID="btnRefresh" runat="server" Text="Refresh" />
+            <asp:Button ID="btnClearCache" runat="server" Text="Clear Cache" OnClick="OnClearCache" />
+            <asp:Repeater ID="repCache" runat="server">
+                <HeaderTemplate>
+                    <table border="1" style="border-collapse: collapse;">
+                        <tr>
+                            <th>Type in Cache
+                            </th>
+                            <th>Count
+                            </th>
+                        </tr>
+                </HeaderTemplate>
+                <ItemTemplate>
                     <tr>
-                        <th>
-                            Key
-                        </th>
-                        <th>
-                            Value
-                        </th>
+                        <td style="width: 400px;">
+                            <%# Eval("Key") %>
+                        </td>
+                        <td>
+                            <%# Eval("Value") %>
+                        </td>
                     </tr>
-            </HeaderTemplate>
-            <ItemTemplate>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </table>
+                </FooterTemplate>
+            </asp:Repeater>
+        </div>
+        <div>
+            <h2>Headers</h2>
+            <asp:Repeater ID="repHeaders" runat="server">
+                <HeaderTemplate>
+                    <table border="1" style="border-collapse: collapse;">
+                        <tr>
+                            <th>Key
+                            </th>
+                            <th>Value
+                            </th>
+                        </tr>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td style="width: 400px;">
+                            <%# Eval("Key") %>
+                        </td>
+                        <td>
+                            <%# Eval("Value") %>
+                        </td>
+                    </tr>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </table>
+                </FooterTemplate>
+            </asp:Repeater>
+        </div>
+        <div>
+            <h2>Environment</h2>
+            <asp:Repeater ID="repEnvironment" runat="server">
+                <HeaderTemplate>
+                    <table border="1" style="border-collapse: collapse;">
+                        <tr>
+                            <th>Key
+                            </th>
+                            <th>Value
+                            </th>
+                        </tr>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td style="width: 400px;">
+                            <%# Eval("Key") %>
+                        </td>
+                        <td>
+                            <%# Eval("Value") %>
+                        </td>
+                    </tr>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </table>
+                </FooterTemplate>
+            </asp:Repeater>
+        </div>
+        <div>
+            <h2>Database</h2>
+            <table>
                 <tr>
-                    <td style="width: 400px;">
-                        <%# Eval("Key") %>
+                    <td>Schema provider:
                     </td>
                     <td>
-                        <%# Eval("Value") %>
+                        <%= SchemaProvider %>
                     </td>
                 </tr>
-            </ItemTemplate>
-            <FooterTemplate>
-                </table>
-            </FooterTemplate>
-        </asp:Repeater>
-    </div>
-    <div>
-        <h2>
-            Environment</h2>
-        <asp:Repeater ID="repEnvironment" runat="server">
-            <HeaderTemplate>
-                <table border="1" style="border-collapse: collapse;">
-                    <tr>
-                        <th>
-                            Key
-                        </th>
-                        <th>
-                            Value
-                        </th>
-                    </tr>
-            </HeaderTemplate>
-            <ItemTemplate>
                 <tr>
-                    <td style="width: 400px;">
-                        <%# Eval("Key") %>
+                    <td>Raw statement result:
                     </td>
                     <td>
-                        <%# Eval("Value") %>
+                        <%= DbStatementResult %>
                     </td>
                 </tr>
-            </ItemTemplate>
-            <FooterTemplate>
-                </table>
-            </FooterTemplate>
-        </asp:Repeater>
-    </div>
+                <tr>
+                    <td>Errors:
+                    </td>
+                    <td>
+                        <%= DatabaseError %>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </form>
 </body>
 </html>

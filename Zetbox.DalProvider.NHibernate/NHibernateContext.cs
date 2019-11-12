@@ -707,6 +707,11 @@ namespace Zetbox.DalProvider.NHibernate
             }
         }
 
+        public override IDbCommand CreateDbCommand()
+        {
+            return _nhSession.Connection.CreateCommand();
+        }
+
         /// <summary>
         /// Given an NH-proxy, load a full Impl-object. This may force going to the database to find the concrete type.
         /// </summary>
