@@ -989,6 +989,19 @@ namespace Zetbox.API.Server
         public abstract void RollbackTransaction();
         #endregion
 
+        #region IZetboxServer Context db command
+        /// <summary>
+        /// Creates a native DbCommand object. This can be used to communicated with the database directly.
+        /// </summary>
+        /// <returns></returns>
+        public abstract IDbCommand CreateDbCommand();
+
+        /// <summary>
+        /// Returns the Database Config Name. Currently POSTGRESQL or MSSQL.
+        /// </summary>
+        public string SchemaProvider => config.Server.GetConnectionString("Zetbox").SchemaProvider;
+        #endregion
+
         public ZetboxPrincipal Pricipal
         {
             get { return this.principalStore; }

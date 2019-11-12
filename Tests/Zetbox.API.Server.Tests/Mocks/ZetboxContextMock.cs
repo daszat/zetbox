@@ -14,6 +14,7 @@
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using Zetbox.API.Async;
@@ -179,6 +180,11 @@ namespace Zetbox.API.Server.Mocks
         protected override bool IsTransactionRunning
         {
             get { throw new NotImplementedException(); }
+        }
+
+        public override IDbCommand CreateDbCommand()
+        {
+            throw new NotImplementedException();
         }
 
         public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)

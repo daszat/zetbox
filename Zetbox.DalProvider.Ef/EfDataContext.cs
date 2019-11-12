@@ -860,6 +860,11 @@ namespace Zetbox.DalProvider.Ef
             }
         }
 
+        public override IDbCommand CreateDbCommand()
+        {
+            return _ctx.Connection.CreateCommand();
+        }
+
         public override ContextIsolationLevel IsolationLevel
         {
             get { return ContextIsolationLevel.PreferContextCache; }
