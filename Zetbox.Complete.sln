@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ACC74A05-6833-4897-B739-8D5E82E846C2}"
 	ProjectSection(SolutionItems) = preProject
@@ -33,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Server", "Zetbox.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client", "Zetbox.Client\Zetbox.Client.csproj", "{A736E13F-D349-4CE5-A397-8438F58D0B9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.API", "Zetbox.API\Zetbox.API.csproj", "{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zetbox.API", "Zetbox.API\Zetbox.API.csproj", "{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.API.Client", "Zetbox.API.Client\Zetbox.API.Client.csproj", "{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}"
 EndProject
@@ -940,13 +940,14 @@ Global
 		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|.NET.ActiveCfg = Linux.Debug|Any CPU
-		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|.NET.Build.0 = Linux.Debug|Any CPU
-		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|Any CPU.ActiveCfg = Linux.Debug|Any CPU
-		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|Any CPU.Build.0 = Linux.Debug|Any CPU
-		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|Mixed Platforms.ActiveCfg = Linux.Debug|Any CPU
-		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|Mixed Platforms.Build.0 = Linux.Debug|Any CPU
-		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|x86.ActiveCfg = Linux.Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|.NET.Build.0 = Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Linux.Debug|x86.Build.0 = Debug|Any CPU
 		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Minimal|.NET.ActiveCfg = Debug|Any CPU
 		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Minimal|.NET.Build.0 = Debug|Any CPU
 		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Minimal|Any CPU.ActiveCfg = Debug|Any CPU

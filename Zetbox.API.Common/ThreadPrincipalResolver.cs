@@ -38,7 +38,8 @@ namespace Zetbox.API.Common
             if (!string.IsNullOrEmpty(Thread.CurrentPrincipal.Identity.Name))
                 return Resolve(Thread.CurrentPrincipal.Identity);
             else
-                return Resolve(WindowsIdentity.GetCurrent());
+                throw new InvalidOperationException("Thread.CurrentPrincipal.Identity is not set");
+                //return Resolve(WindowsIdentity.GetCurrent());
         }
     }
 }
