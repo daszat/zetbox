@@ -59,6 +59,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.OrderedOneEnd OneEnd
         {
             get
@@ -155,6 +156,14 @@ namespace Zetbox.App.Test
 
         /// <summary>Backing store for OneEnd's id, used on dehydration only</summary>
         private int? _fk_OneEnd = null;
+
+        /// <summary>ForeignKey Property for OneEnd's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_OneEnd
+		{
+			get { return OneEnd != null ? OneEnd.ID : (int?)null; }
+			set { _fk_OneEnd = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchOneEndAsync()
@@ -484,9 +493,13 @@ namespace Zetbox.App.Test
 
             public virtual int? OtherInt { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

@@ -10,7 +10,7 @@ using Zetbox.Generator.Templates.Serialization;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Serialization
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst")]
     public partial class ObjectReferencePropertySerialization : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -46,34 +46,34 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 38 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 38 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 switch(direction)
     {
         case SerializerDirection.ToStream:
 
-#line 42 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 42 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 this.WriteObjects("            ",  streamName , ".Write(",  sourceMember , " != null ? OurContext.GetIdFromProxy(",  sourceMember , ") : (int?)null);\r\n");
-#line 44 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 44 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
-#line 47 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 47 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 this.WriteObjects("            ",  streamName , ".Read(out this.",  targetMember , ");\r\n");
-#line 49 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 49 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.Export:
 
-#line 52 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 52 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(",  sourceMember , " != null ? ",  sourceMember , ".ExportGuid : (Guid?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 54 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 54 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
-#line 57 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 57 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
 this.WriteObjects("                this.",  targetGuidMember , " = XmlStreamer.ReadNullableGuid(",  streamName , ");\r\n");
 this.WriteObjects("                break;\r\n");
-#line 61 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 61 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

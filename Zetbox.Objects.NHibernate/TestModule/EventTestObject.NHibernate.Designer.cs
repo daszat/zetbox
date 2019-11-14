@@ -59,6 +59,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Calendar.Event Event
         {
             get
@@ -132,6 +133,14 @@ namespace Zetbox.App.Test
 
         /// <summary>Backing store for Event's id, used on dehydration only</summary>
         private int? _fk_Event = null;
+
+        /// <summary>ForeignKey Property for Event's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Event
+		{
+			get { return Event != null ? Event.ID : (int?)null; }
+			set { _fk_Event = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchEventAsync()
@@ -418,9 +427,13 @@ namespace Zetbox.App.Test
 
             public virtual string Name { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

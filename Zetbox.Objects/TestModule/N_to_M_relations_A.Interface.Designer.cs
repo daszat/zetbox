@@ -19,6 +19,7 @@ namespace Zetbox.App.Test
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("3afe0378-20f3-46f9-8391-da25414716ff")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.N_to_M_relations_B> BSide { get; }
 
         /// <summary>
@@ -29,5 +30,6 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
     }
 }

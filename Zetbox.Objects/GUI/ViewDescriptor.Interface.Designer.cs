@@ -18,10 +18,18 @@ namespace Zetbox.App.GUI
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("7720b38c-64af-4607-bc73-d015af6612e3")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ControlKind ControlKind {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ControlKind 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// The control implementing this View.
@@ -32,6 +40,7 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// Indicates that the referenced control type is deleted. Descriptors with this flag set require action to finally delete them and handle their users.
         /// </summary>
@@ -41,6 +50,7 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// Which toolkit provides this View
         /// </summary>
@@ -49,5 +59,6 @@ namespace Zetbox.App.GUI
             get;
             set;
         }
+
     }
 }

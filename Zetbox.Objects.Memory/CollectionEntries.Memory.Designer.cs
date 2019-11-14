@@ -106,6 +106,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Test.N_to_M_relations_A A
@@ -129,6 +130,14 @@ namespace Zetbox.App.Test
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_A> _triggerFetchATask;
@@ -209,6 +218,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Test.N_to_M_relations_B B
@@ -232,6 +242,14 @@ namespace Zetbox.App.Test
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_B> _triggerFetchBTask;
@@ -529,6 +547,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.CalculatedObjectReferenceProperty A
@@ -552,6 +571,14 @@ namespace Zetbox.App.Base
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -633,6 +660,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Property B
@@ -656,6 +684,14 @@ namespace Zetbox.App.Base
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -972,6 +1008,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Calendar.CalendarBook A
@@ -995,6 +1032,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -1076,6 +1121,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Group B
@@ -1099,6 +1145,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -1381,6 +1435,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Calendar.CalendarBook A
@@ -1404,6 +1459,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> _triggerFetchATask;
@@ -1484,6 +1547,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity B
@@ -1507,6 +1571,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchBTask;
@@ -1788,6 +1860,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Calendar.CalendarBook A
@@ -1811,6 +1884,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -1892,6 +1973,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Group B
@@ -1915,6 +1997,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -2197,6 +2287,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Calendar.CalendarBook A
@@ -2220,6 +2311,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> _triggerFetchATask;
@@ -2300,6 +2399,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity B
@@ -2323,6 +2423,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchBTask;
@@ -2604,6 +2712,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.DataType A
@@ -2627,6 +2736,14 @@ namespace Zetbox.App.Base
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -2708,6 +2825,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Interface B
@@ -2731,6 +2849,14 @@ namespace Zetbox.App.Base
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -3047,6 +3173,7 @@ namespace at.dasz.DocumentManagement
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public at.dasz.DocumentManagement.File A
@@ -3070,6 +3197,14 @@ namespace at.dasz.DocumentManagement
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -3182,6 +3317,7 @@ namespace at.dasz.DocumentManagement
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Blob B
@@ -3205,6 +3341,14 @@ namespace at.dasz.DocumentManagement
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -3542,6 +3686,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity A
@@ -3565,6 +3710,14 @@ namespace Zetbox.App.Base
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchATask;
@@ -3645,6 +3798,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Group B
@@ -3668,6 +3822,14 @@ namespace Zetbox.App.Base
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group> _triggerFetchBTask;
@@ -3931,6 +4093,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Test.Muhblah A
@@ -3954,6 +4117,14 @@ namespace Zetbox.App.Test
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> _triggerFetchATask;
@@ -4034,6 +4205,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Test.TestCustomObject B
@@ -4057,6 +4229,14 @@ namespace Zetbox.App.Test
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchBTask;
@@ -4354,6 +4534,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.NavigationEntry A
@@ -4377,6 +4558,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -4458,6 +4647,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Group B
@@ -4481,6 +4671,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -4797,6 +4995,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.ObjectReferenceProperty A
@@ -4820,6 +5019,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -4901,6 +5108,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Method B
@@ -4924,6 +5132,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -5256,6 +5472,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ViewModelDescriptor A
@@ -5279,6 +5496,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -5360,6 +5585,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ControlKind B
@@ -5383,6 +5609,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -5699,6 +5933,7 @@ namespace Zetbox.App.Projekte
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Projekte.Projekt A
@@ -5722,6 +5957,14 @@ namespace Zetbox.App.Projekte
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -5834,6 +6077,7 @@ namespace Zetbox.App.Projekte
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Projekte.Mitarbeiter B
@@ -5857,6 +6101,14 @@ namespace Zetbox.App.Projekte
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -6244,6 +6496,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.RoleMembership A
@@ -6267,6 +6520,14 @@ namespace Zetbox.App.Base
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -6379,6 +6640,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Relation B
@@ -6402,6 +6664,14 @@ namespace Zetbox.App.Base
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -6773,6 +7043,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.SchemaMigration.SourceColumn A
@@ -6796,6 +7067,14 @@ namespace Zetbox.App.SchemaMigration
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -6908,6 +7187,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Property B
@@ -6931,6 +7211,14 @@ namespace Zetbox.App.SchemaMigration
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -7268,6 +7556,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Test.TestStudent A
@@ -7291,6 +7580,14 @@ namespace Zetbox.App.Test
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestStudent> _triggerFetchATask;
@@ -7371,6 +7668,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Test.Fragebogen B
@@ -7394,6 +7692,14 @@ namespace Zetbox.App.Test
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> _triggerFetchBTask;
@@ -7691,6 +7997,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.IndexConstraint A
@@ -7714,6 +8021,14 @@ namespace Zetbox.App.Base
                 _triggerFetchATask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -7795,6 +8110,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Property B
@@ -7818,6 +8134,14 @@ namespace Zetbox.App.Base
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -8473,268 +8797,6 @@ namespace Zetbox.App.Test
 
             if (_fk_Parent.HasValue)
                 Parent = (Zetbox.App.Test.MuhblahMemoryImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_Parent.Value);
-            else
-                Parent = null;
-
-        }
-
-
-        public override void UpdateParent(string propertyName, IDataObject parentObj)
-        {
-            switch(propertyName)
-            {
-                case "Parent":
-                    {
-                        var __oldValue = _fk_Parent;
-                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
-                        NotifyPropertyChanging("Parent", __oldValue, __newValue);
-                        _fk_Parent = __newValue;
-                        NotifyPropertyChanged("Parent", __oldValue, __newValue);
-                    }
-                    break;
-                default:
-                    base.UpdateParent(propertyName, parentObj);
-                    break;
-            }
-        }
-    }
-    // END Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
-}
-
-namespace Zetbox.App.LicenseManagement
-{
-    // BEGIN Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
-    [System.Diagnostics.DebuggerDisplay("PrivateKey_AuditJournal_CollectionEntryMemoryImpl")]
-    public class PrivateKey_AuditJournal_CollectionEntryMemoryImpl : Zetbox.DalProvider.Memory.CompoundCollectionEntryMemoryImpl<Zetbox.App.LicenseManagement.PrivateKey, Zetbox.App.LicenseManagement.PrivateKeyMemoryImpl, Zetbox.App.Base.AuditEntry, Zetbox.App.Base.AuditEntryMemoryImpl>, PrivateKey_AuditJournal_CollectionEntry
-    {
-        [Obsolete]
-        public PrivateKey_AuditJournal_CollectionEntryMemoryImpl()
-            : base(null)
-        {
-            ValueImpl = new Zetbox.App.Base.AuditEntryMemoryImpl(null, this, "Value");
-        }
-
-        public PrivateKey_AuditJournal_CollectionEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
-            : base(lazyCtx)
-        {
-            ValueImpl = new Zetbox.App.Base.AuditEntryMemoryImpl(lazyCtx, this, "Value");
-        }
-        // BEGIN Zetbox.Generator.Templates.Properties.IdProperty
-        public override int ID
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ID;
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ID != value)
-                {
-                    var __oldValue = _ID;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ID", __oldValue, __newValue);
-                    _ID = __newValue;
-                    NotifyPropertyChanged("ID", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                }
-                else
-                {
-                    SetInitializedProperty("ID");
-                }
-            }
-        }
-        private int _ID;
-        // END Zetbox.Generator.Templates.Properties.IdProperty
-        private static readonly Guid _propertyID = new Guid("3ea184f1-d6f7-4ceb-be7f-525da44ed3b4");
-        public override Guid PropertyID { get { return _propertyID; } }
-
-
-        /// <summary>
-        /// the A-side value of this CollectionEntry
-        /// </summary>
-        public Zetbox.App.LicenseManagement.PrivateKey Parent
-        {
-            get
-            {
-                if (_ParentCache != null && _ParentCache.ID == _fk_Parent)
-                    return _ParentCache;
-
-                if (_fk_Parent.HasValue)
-                    _ParentCache = this.Context.Find<Zetbox.App.LicenseManagement.PrivateKey>(_fk_Parent.Value);
-                else
-                    _ParentCache = null;
-
-                return _ParentCache;
-            }
-            set
-            {
-                if (value == null && !_fk_Parent.HasValue)
-                    return;
-                if (value != null && _fk_Parent.HasValue && value.ID == _fk_Parent.Value)
-                    return;
-
-                _ParentCache = value;
-                if (value != null)
-                    fk_Parent = value.ID;
-                else
-                    fk_Parent = null;
-            }
-        }
-        private Zetbox.App.LicenseManagement.PrivateKey _ParentCache;
-
-        public int? fk_Parent
-        {
-            get
-            {
-                return _fk_Parent;
-            }
-            set
-            {
-                if (_fk_Parent != value)
-                {
-                    var __oldValue = _fk_Parent;
-                    NotifyPropertyChanging("Parent", __oldValue, value);
-                    _fk_Parent = value;
-                    NotifyPropertyChanged("Parent", __oldValue, value);
-                }
-            }
-        }
-
-        // backing store for serialization
-        private int? _fk_Parent;
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.API.IDataObject ParentObject
-        {
-            get { return Parent; }
-            set { Parent = (Zetbox.App.LicenseManagement.PrivateKeyMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        /// <summary>
-        /// the B-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
-        // implement the user-visible interface
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Base.AuditEntry Value
-        {
-            get { return ValueImpl; }
-            set { ValueImpl = (Zetbox.App.Base.AuditEntryMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        /// <summary>backing store for Value</summary>
-        private Zetbox.App.Base.AuditEntryMemoryImpl _Value;
-
-        /// <summary>backing property for Value, takes care of attaching/detaching the values</summary>
-        public Zetbox.App.Base.AuditEntryMemoryImpl ValueImpl
-        {
-            get
-            {
-                return _Value;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value == null)
-                    throw new ArgumentNullException("value");
-                if (!object.Equals(_Value, value))
-                {
-                    var __oldValue = _Value;
-                    var __newValue = value;
-
-                    NotifyPropertyChanging("Value", __oldValue, __newValue);
-
-                    if (_Value != null)
-                    {
-                        _Value.DetachFromObject(this, "Value");
-                    }
-                    __newValue = (Zetbox.App.Base.AuditEntryMemoryImpl)__newValue.Clone();
-                    _Value = __newValue;
-                    _Value.AttachToObject(this, "Value");
-
-                    NotifyPropertyChanged("Value", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-                }
-            }
-        }
-        // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public object ValueObject
-        {
-            get { return Value; }
-            set { Value = (Zetbox.App.Base.AuditEntryMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        #region Serializer
-
-
-        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-            base.ToStream(binStream, auxObjects, eagerLoadLists);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this._fk_Parent);
-            binStream.Write(this.Value);
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
-        {
-            var baseResult = base.FromStream(binStream);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._fk_Parent = binStream.ReadNullableInt32();
-            {
-                // use backing store to avoid notifications
-                this.ValueImpl = binStream.ReadCompoundObject<Zetbox.App.Base.AuditEntryMemoryImpl>();
-                this.ValueImpl.AttachToObject(this, "Value");
-            }
-            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
-            return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        #endregion
-
-        public override Type GetImplementedInterface()
-        {
-            return typeof(PrivateKey_AuditJournal_CollectionEntry);
-        }
-
-        public override void ApplyChangesFrom(IPersistenceObject obj)
-        {
-            base.ApplyChangesFrom(obj);
-            var other = (PrivateKey_AuditJournal_CollectionEntryMemoryImpl)obj;
-            var me = (PrivateKey_AuditJournal_CollectionEntryMemoryImpl)this;
-
-            me._fk_Parent = other._fk_Parent;
-            if (me.Value == null && other.Value != null) {
-                me.Value = (Zetbox.App.Base.AuditEntry)other.Value.Clone();
-            } else if (me.Value != null && other.Value == null) {
-                me.Value = null;
-            } else if (me.Value != null && other.Value != null) {
-                me.Value.ApplyChangesFrom(other.Value);
-            }
-        }
-
-
-        public override void ReloadReferences()
-        {
-            // Do not reload references if the current object has been deleted.
-            // TODO: enable when MemoryContext uses MemoryDataObjects
-            //if (this.ObjectState == DataObjectState.Deleted) return;
-
-            if (_fk_Parent.HasValue)
-                Parent = (Zetbox.App.LicenseManagement.PrivateKeyMemoryImpl)Context.Find<Zetbox.App.LicenseManagement.PrivateKey>(_fk_Parent.Value);
             else
                 Parent = null;
 

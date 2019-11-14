@@ -23,6 +23,7 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// In some cases, when joining across source tables, nulls should be compared as equals, instead of not. This is especially true, when &quot;null&quot; is used as a domain value.
         /// </summary>
@@ -31,6 +32,7 @@ namespace Zetbox.App.SchemaMigration
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -41,6 +43,7 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -50,11 +53,13 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("38dce431-bb65-44c5-b67a-1f28202e51d9")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Base.Property> DestinationProperty { get; }
 
         /// <summary>
@@ -62,6 +67,7 @@ namespace Zetbox.App.SchemaMigration
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("a040ea6b-c105-4815-815b-e36f0778e4cb")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.SchemaMigration.SourceEnum> EnumEntries { get; }
 
         /// <summary>
@@ -73,6 +79,7 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -82,20 +89,30 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("4d6faa25-d610-4e23-b12f-7ee4c78da70b")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.SchemaMigration.SourceColumn References {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_References 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("71bed80f-57ec-4038-a9a4-9aabc0c2f60d")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.SchemaMigration.SourceColumn> Referers { get; }
 
         /// <summary>
@@ -107,14 +124,23 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("d1dca069-f6b5-4da1-beee-a51853c109ba")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.SchemaMigration.SourceTable SourceTable {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_SourceTable 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -124,6 +150,7 @@ namespace Zetbox.App.SchemaMigration
             get;
             set;
         }
+
 
         /// <summary>
         /// 

@@ -49,6 +49,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.Icon FalseIcon
@@ -72,6 +73,14 @@ namespace Zetbox.App.Base
                 _triggerFetchFalseIconTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for FalseIcon's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_FalseIcon
+		{
+			get { return _fk_FalseIcon; }
+			set { _fk_FalseIcon = value; }
+		}
 
         private Guid? _fk_guid_FalseIcon = null;
 
@@ -223,6 +232,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.Icon NullIcon
@@ -246,6 +256,14 @@ namespace Zetbox.App.Base
                 _triggerFetchNullIconTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for NullIcon's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_NullIcon
+		{
+			get { return _fk_NullIcon; }
+			set { _fk_NullIcon = value; }
+		}
 
         private Guid? _fk_guid_NullIcon = null;
 
@@ -397,6 +415,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.Icon TrueIcon
@@ -420,6 +439,14 @@ namespace Zetbox.App.Base
                 _triggerFetchTrueIconTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for TrueIcon's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_TrueIcon
+		{
+			get { return _fk_TrueIcon; }
+			set { _fk_TrueIcon = value; }
+		}
 
         private Guid? _fk_guid_TrueIcon = null;
 

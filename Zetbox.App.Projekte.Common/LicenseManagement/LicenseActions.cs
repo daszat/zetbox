@@ -29,7 +29,19 @@ namespace Zetbox.App.LicenseManagement
         [Invocation]
         public static void ToString(License obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = $"{obj.Licensee}: {obj.ValidFrom} - {obj.ValidThru}, {obj.Description}";
+            e.Result = $"{obj.Licensee}: {obj.ValidFrom.ToShortDateString()} - {obj.ValidThru.ToShortDateString()}, {obj.Description}";
+        }
+
+        [Invocation]
+        public static void preSet_ValidFrom(License obj, PropertyPreSetterEventArgs<DateTime> e)
+        {
+            e.Result = e.NewValue.Date;
+        }
+
+        [Invocation]
+        public static void preSet_ValidThru(License obj, PropertyPreSetterEventArgs<DateTime> e)
+        {
+            e.Result = e.NewValue.Date;
         }
 
         [Invocation]
@@ -53,18 +65,16 @@ namespace Zetbox.App.LicenseManagement
         private static byte[] ComputeHash(License obj)
         {
             using (var sha = SHA512.Create())
-            using (var ms = new MemoryStream())
-            using (var sw = new StreamWriter(ms))
             {
-                sw.Write(obj.Licensee);
-                sw.Write(obj.Licensor);
-                sw.Write(obj.ValidFrom);
-                sw.Write(obj.ValidThru);
-                sw.Write(obj.LicenseSubject);
-                sw.Write(obj.LicenseData ?? "");
-                sw.Flush();
+                var sb = new StringBuilder();
+                sb.Append(obj.Licensee ?? "-");
+                sb.Append(obj.Licensor ?? "-");
+                sb.Append(obj.ValidFrom.ToString("yyyy-MM-dd"));
+                sb.Append(obj.ValidThru.ToString("yyyy-MM-dd"));
+                sb.Append((obj.LicenseSubject ?? -1).ToString());
+                sb.Append((obj.LicenseData ?? "-").Replace("\r", "").Replace("\n", "").Replace("\t", " "));
 
-                return sha.ComputeHash(ms.GetBuffer());
+                return sha.ComputeHash(UTF8Encoding.UTF8.GetBytes(sb.ToString()));
             }
         }
 
@@ -91,12 +101,18 @@ namespace Zetbox.App.LicenseManagement
         }
 
         [Invocation]
-        public static void Sign(License obj, Zetbox.App.LicenseManagement.PrivateKey certificate)
+        public static void Sign(License obj, Zetbox.App.LicenseManagement.PrivateKey certificate, string password)
         {
-            var key = new X509Certificate2(Convert.FromBase64String(certificate.Certificate), certificate.Password);
+            var key = new X509Certificate2(Convert.FromBase64String(certificate.Certificate), !string.IsNullOrWhiteSpace(password) ? password : certificate.Password);
             var cng_private = (System.Security.Cryptography.RSACng)key.GetRSAPrivateKey();
             var hash = ComputeHash(obj);
             obj.Signature = Convert.ToBase64String(cng_private.SignHash(hash, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1));
+        }
+
+        [Invocation]
+        public static void Export(License obj, string file)
+        {
+            App.Packaging.Exporter.Export(obj.Context, file, new[] { obj });
         }
     }
 }

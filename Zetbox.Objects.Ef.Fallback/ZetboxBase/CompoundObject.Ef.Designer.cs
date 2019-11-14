@@ -59,6 +59,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ViewModelDescriptor DefaultPropertyViewModelDescriptor
         {
@@ -67,6 +68,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_DefaultPropertyViewModelDescriptor;
+
+        /// <summary>ForeignKey Property for DefaultPropertyViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultPropertyViewModelDescriptor
+		{
+			get { return DefaultPropertyViewModelDescriptor != null ? DefaultPropertyViewModelDescriptor.ID : (int?)null; }
+			set { _fk_DefaultPropertyViewModelDescriptor = value; }
+		}
 
         private Guid? _fk_guid_DefaultPropertyViewModelDescriptor = null;
 
@@ -167,6 +176,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
         {
@@ -175,6 +185,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_DefaultViewModelDescriptor;
+
+        /// <summary>ForeignKey Property for DefaultViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultViewModelDescriptor
+		{
+			get { return DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null; }
+			set { _fk_DefaultViewModelDescriptor = value; }
+		}
 
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 

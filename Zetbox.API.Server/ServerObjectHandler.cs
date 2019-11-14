@@ -354,6 +354,17 @@ namespace Zetbox.API.Server
             {
                 var ifType = ctx.GetInterfaceType(obj);
                 var ctxObj = ctx.FindPersistenceObject(ifType, obj.ID);
+                if(ctxObj == null)
+                {
+                    string objStr = GetObjectString(obj, ifType);
+                    concurrencyFailed.Add(new ConcurrencyExceptionDetail(
+                            Guid.Empty, // TODO: There is no frozen context here. Refactor *HanderFatories to autofac modules!
+                            obj.ID,
+                            objStr,
+                            DateTime.Now,
+                            string.Empty));
+                    continue;
+                }
                 ((BasePersistenceObject)ctxObj).RecordNotifications();
                 // optimistic concurrency
                 if (obj is Zetbox.App.Base.IChangedBy)
@@ -362,18 +373,7 @@ namespace Zetbox.API.Server
                     var send = (Zetbox.App.Base.IChangedBy)obj;
                     if (Math.Abs((orig.ChangedOn - send.ChangedOn).Ticks) > 15) // postgres is only accurate down to µs (1/1000th ms), but DateTime is accurate down to 1/10th µs. Rounding errors cause invalid concurrency failures.
                     {
-                        string objStr;
-                        try
-                        {
-                            objStr = send.ToString();
-                        }
-                        catch
-                        {
-                            // Some ToString implementations might not deal with 
-                            // detached objects correctly, use an alternative
-                            // string representation
-                            objStr = string.Format("{0} #{1}", ifType.Type.Name, obj.ID);
-                        }
+                        string objStr = GetObjectString(obj, ifType);
                         concurrencyFailed.Add(new ConcurrencyExceptionDetail(
                             Guid.Empty, // TODO: There is no frozen context here. Refactor *HanderFatories to autofac modules!
                             obj.ID,
@@ -403,8 +403,25 @@ namespace Zetbox.API.Server
             // then delete objects
             foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.Deleted))
             {
-                var ctxObj = ctx.FindPersistenceObject(ctx.GetInterfaceType(obj), obj.ID);
+                var ifType = ctx.GetInterfaceType(obj);
+                var ctxObj = ctx.FindPersistenceObject(ifType, obj.ID);
+                if (ctxObj == null)
+                {
+                    string objStr = GetObjectString(obj, ifType);
+                    concurrencyFailed.Add(new ConcurrencyExceptionDetail(
+                            Guid.Empty, // TODO: There is no frozen context here. Refactor *HanderFatories to autofac modules!
+                            obj.ID,
+                            objStr,
+                            DateTime.Now,
+                            string.Empty));
+                    continue;
+                }
                 ctx.Delete(ctxObj);
+            }
+
+            if (concurrencyFailed.Count > 0)
+            {
+                throw new ConcurrencyException(concurrencyFailed);
             }
 
             // Playback notifications
@@ -412,6 +429,24 @@ namespace Zetbox.API.Server
             {
                 obj.PlaybackNotifications();
             }
+        }
+
+        private static string GetObjectString(BaseServerPersistenceObject obj, InterfaceType ifType)
+        {
+            string objStr;
+            try
+            {
+                objStr = obj.ToString();
+            }
+            catch
+            {
+                // Some ToString implementations might not deal with 
+                // detached objects correctly, use an alternative
+                // string representation
+                objStr = string.Format("{0} #{1}", ifType.Type.Name, obj.ID);
+            }
+
+            return objStr;
         }
     }
 

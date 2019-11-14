@@ -23,6 +23,7 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -31,6 +32,7 @@ namespace Zetbox.App.GUI
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -41,6 +43,7 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -49,6 +52,7 @@ namespace Zetbox.App.GUI
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -59,6 +63,7 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -67,6 +72,7 @@ namespace Zetbox.App.GUI
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -77,6 +83,7 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -85,6 +92,7 @@ namespace Zetbox.App.GUI
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -95,6 +103,7 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -103,6 +112,7 @@ namespace Zetbox.App.GUI
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -113,23 +123,40 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("80987e44-841a-4d56-88d2-92c28efb70a1")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ControlKind RequestedEditorKind {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_RequestedEditorKind 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("e0a94b30-5225-45e6-9dfc-c88dbf0648f5")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ControlKind RequestedWorkspaceKind {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_RequestedWorkspaceKind 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -140,6 +167,7 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -148,6 +176,7 @@ namespace Zetbox.App.GUI
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -158,6 +187,7 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -167,14 +197,23 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("0bbea63f-f609-4fc2-848e-7464bef87fb4")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.ObjectClass Type {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Type 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -184,5 +223,6 @@ namespace Zetbox.App.GUI
             get;
             set;
         }
+
     }
 }

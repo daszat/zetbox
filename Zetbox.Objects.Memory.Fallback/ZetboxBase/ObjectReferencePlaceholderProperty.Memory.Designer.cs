@@ -281,6 +281,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.ObjectClass ReferencedObjectClass
@@ -304,6 +305,14 @@ namespace Zetbox.App.Base
                 _triggerFetchReferencedObjectClassTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for ReferencedObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ReferencedObjectClass
+		{
+			get { return _fk_ReferencedObjectClass; }
+			set { _fk_ReferencedObjectClass = value; }
+		}
 
         private Guid? _fk_guid_ReferencedObjectClass = null;
 

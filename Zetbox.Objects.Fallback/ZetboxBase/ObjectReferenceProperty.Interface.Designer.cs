@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Simple objects are inline editable in lists. Use this property to override this default. If true, the referenced instances are editable in lists, otherwise not.
         /// </summary>
@@ -32,21 +33,31 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// This property will show these methods
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("6d8fd10e-90d8-46e4-80ab-198b94537e2f")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Method> Methods { get; }
 
         /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
         [Zetbox.API.DefinitionGuid("63ba109d-92c6-4ced-980b-0a52aabfaec0")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.RelationEnd RelationEnd {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_RelationEnd 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 

@@ -49,6 +49,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity ChangedBy
@@ -72,6 +73,14 @@ namespace Zetbox.App.SchemaMigration
                 _triggerFetchChangedByTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return _fk_ChangedBy; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
@@ -295,6 +304,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity CreatedBy
@@ -318,6 +328,14 @@ namespace Zetbox.App.SchemaMigration
                 _triggerFetchCreatedByTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return _fk_CreatedBy; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
@@ -541,6 +559,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.ObjectClass DestinationObjectClass
@@ -564,6 +583,14 @@ namespace Zetbox.App.SchemaMigration
                 _triggerFetchDestinationObjectClassTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for DestinationObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DestinationObjectClass
+		{
+			get { return _fk_DestinationObjectClass; }
+			set { _fk_DestinationObjectClass = value; }
+		}
 
         private Guid? _fk_guid_DestinationObjectClass = null;
 
@@ -781,6 +808,7 @@ namespace Zetbox.App.SchemaMigration
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.SchemaMigration.SourceColumn> SourceColumn
         {
@@ -852,6 +880,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.SchemaMigration.StagingDatabase StagingDatabase
@@ -875,6 +904,14 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 _triggerFetchStagingDatabaseTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for StagingDatabase's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_StagingDatabase
+		{
+			get { return _fk_StagingDatabase; }
+			set { _fk_StagingDatabase = value; }
+		}
 
         private Guid? _fk_guid_StagingDatabase = null;
 

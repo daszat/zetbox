@@ -37,6 +37,8 @@ namespace Zetbox.API.Server.Mocks
             set;
         }
 
+        public int? FK_BaseObjectClass { get; set; }
+
         public ICollection<Zetbox.App.Base.InstanceConstraint> Constraints
         {
             get { throw new NotImplementedException(); }
@@ -47,6 +49,8 @@ namespace Zetbox.API.Server.Mocks
             get;
             set;
         }
+
+        public int? FK_DefaultViewModelDescriptor { get; set; }
 
         public ICollection<Zetbox.App.Base.Interface> ImplementsInterfaces
         {
@@ -130,6 +134,9 @@ namespace Zetbox.API.Server.Mocks
             set;
         }
 
+        public int? FK_DefaultIcon { get; set; }
+
+
         public string Description
         {
             get;
@@ -152,6 +159,9 @@ namespace Zetbox.API.Server.Mocks
             get;
             set;
         }
+
+        public int? FK_Module { get; set; }
+
 
         public IList<Zetbox.App.Base.Property> Properties
         {
@@ -381,6 +391,9 @@ namespace Zetbox.API.Server.Mocks
             set;
         }
 
+        public int? FK_ChangedBy { get; set; }
+
+
         public DateTime ChangedOn
         {
             get;
@@ -392,6 +405,7 @@ namespace Zetbox.API.Server.Mocks
             get;
             set;
         }
+        public int? FK_CreatedBy { get; set; }
 
         public DateTime CreatedOn
         {
@@ -446,6 +460,9 @@ namespace Zetbox.API.Server.Mocks
                 throw new NotImplementedException();
             }
         }
+
+        public int? FK_RequestedKind { get; set; }
+
 
         public ICollection<ObjectClassFilterConfiguration> FilterConfigurations
         {

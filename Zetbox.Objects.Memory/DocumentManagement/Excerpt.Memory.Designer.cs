@@ -49,6 +49,7 @@ namespace at.dasz.DocumentManagement
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public at.dasz.DocumentManagement.File File
@@ -72,6 +73,14 @@ namespace at.dasz.DocumentManagement
                 _triggerFetchFileTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for File's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_File
+		{
+			get { return _fk_File; }
+			set { _fk_File = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> _triggerFetchFileTask;

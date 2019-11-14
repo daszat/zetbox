@@ -114,6 +114,7 @@ namespace Zetbox.App.Test
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Test.One_to_N_relations_N> NSide
         {
@@ -155,6 +156,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public IList<Zetbox.App.Test.One_to_N_relations_OrderedN> OrderedNSide
         {
@@ -409,9 +411,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
 
             public virtual ICollection<Zetbox.App.Test.One_to_N_relations_OrderedNNHibernateImpl.One_to_N_relations_OrderedNProxy> OrderedNSide { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

@@ -178,6 +178,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity ChangedBy
@@ -201,6 +202,14 @@ namespace Zetbox.App.Base
                 _triggerFetchChangedByTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return _fk_ChangedBy; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
@@ -406,6 +415,7 @@ namespace Zetbox.App.Base
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Base.Constraint> Constraints
         {
@@ -490,6 +500,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity CreatedBy
@@ -513,6 +524,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 _triggerFetchCreatedByTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return _fk_CreatedBy; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
@@ -736,6 +755,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.DefaultPropertyValue DefaultValue
@@ -759,6 +779,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 _triggerFetchDefaultValueTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for DefaultValue's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultValue
+		{
+			get { return _fk_DefaultValue; }
+			set { _fk_DefaultValue = value; }
+		}
 
         private Guid? _fk_guid_DefaultValue = null;
 
@@ -1055,6 +1083,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.PropertyFilterConfiguration FilterConfiguration
@@ -1078,6 +1107,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 _triggerFetchFilterConfigurationTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for FilterConfiguration's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_FilterConfiguration
+		{
+			get { return _fk_FilterConfiguration; }
+			set { _fk_FilterConfiguration = value; }
+		}
 
         private Guid? _fk_guid_FilterConfiguration = null;
 
@@ -1303,6 +1340,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Module Module
@@ -1326,6 +1364,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 _triggerFetchModuleTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return _fk_Module; }
+			set { _fk_Module = value; }
+		}
 
         private Guid? _fk_guid_Module = null;
 
@@ -1477,6 +1523,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.DataType ObjectClass
@@ -1500,6 +1547,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 _triggerFetchObjectClassTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for ObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ObjectClass
+		{
+			get { return _fk_ObjectClass; }
+			set { _fk_ObjectClass = value; }
+		}
 
         private Guid? _fk_guid_ObjectClass = null;
 
@@ -1640,6 +1695,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ControlKind RequestedKind
@@ -1663,6 +1719,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 _triggerFetchRequestedKindTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for RequestedKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RequestedKind
+		{
+			get { return _fk_RequestedKind; }
+			set { _fk_RequestedKind = value; }
+		}
 
         private Guid? _fk_guid_RequestedKind = null;
 
@@ -1814,6 +1878,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ViewModelDescriptor ValueModelDescriptor
@@ -1837,6 +1902,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 _triggerFetchValueModelDescriptorTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for ValueModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ValueModelDescriptor
+		{
+			get { return _fk_ValueModelDescriptor; }
+			set { _fk_ValueModelDescriptor = value; }
+		}
 
         private Guid? _fk_guid_ValueModelDescriptor = null;
 

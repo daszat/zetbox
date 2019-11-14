@@ -123,6 +123,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Test.One_to_N_relations_N> NSide
         {
@@ -197,6 +198,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public IList<Zetbox.App.Test.One_to_N_relations_OrderedN> OrderedNSide
         {

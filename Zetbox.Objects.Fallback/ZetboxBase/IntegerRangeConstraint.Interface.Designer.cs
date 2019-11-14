@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// The smallest value accepted by this constraint
         /// </summary>
@@ -31,5 +32,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

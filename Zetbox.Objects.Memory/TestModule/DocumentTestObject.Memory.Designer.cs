@@ -49,6 +49,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public at.dasz.DocumentManagement.File AnotherFile
@@ -72,6 +73,14 @@ namespace Zetbox.App.Test
                 _triggerFetchAnotherFileTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for AnotherFile's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_AnotherFile
+		{
+			get { return _fk_AnotherFile; }
+			set { _fk_AnotherFile = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> _triggerFetchAnotherFileTask;
@@ -164,6 +173,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public at.dasz.DocumentManagement.File AnyFile
@@ -187,6 +197,14 @@ namespace Zetbox.App.Test
                 _triggerFetchAnyFileTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for AnyFile's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_AnyFile
+		{
+			get { return _fk_AnyFile; }
+			set { _fk_AnyFile = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> _triggerFetchAnyFileTask;

@@ -59,6 +59,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity ChangedBy
         {
@@ -67,6 +68,14 @@ namespace Zetbox.App.SchemaMigration
         }
 
         private int? _fk_ChangedBy;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -250,6 +259,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity CreatedBy
         {
@@ -258,6 +268,14 @@ namespace Zetbox.App.SchemaMigration
         }
 
         private int? _fk_CreatedBy;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -441,6 +459,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.EnumerationEntry DestinationValue
         {
@@ -449,6 +468,14 @@ namespace Zetbox.App.SchemaMigration
         }
 
         private int? _fk_DestinationValue;
+
+        /// <summary>ForeignKey Property for DestinationValue's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DestinationValue
+		{
+			get { return DestinationValue != null ? DestinationValue.ID : (int?)null; }
+			set { _fk_DestinationValue = value; }
+		}
 
         private Guid? _fk_guid_DestinationValue = null;
 
@@ -631,6 +658,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.SchemaMigration.SourceColumn SourceColumn
         {
@@ -639,6 +667,14 @@ namespace Zetbox.App.SchemaMigration
         }
 
         private int? _fk_SourceColumn;
+
+        /// <summary>ForeignKey Property for SourceColumn's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_SourceColumn
+		{
+			get { return SourceColumn != null ? SourceColumn.ID : (int?)null; }
+			set { _fk_SourceColumn = value; }
+		}
 
         private Guid? _fk_guid_SourceColumn = null;
 

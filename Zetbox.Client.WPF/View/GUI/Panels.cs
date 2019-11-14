@@ -175,4 +175,41 @@ namespace Zetbox.Client.WPF.View.GUI
             get { return (TabItemViewModel)DataContext; }
         }
     }
+
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
+    public class ContentPresenterView : ContentPresenter, IHasViewModel<PresenterViewModel>
+    {
+        public ContentPresenterView()
+        {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+
+            this.ContentTemplateSelector = (DataTemplateSelector)FindResource("defaultTemplateSelector");
+            this.DataContextChanged += ViewPanelView_DataContextChanged;
+        }
+
+        private void ViewPanelView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (DataContext is PresenterViewModel)
+            {
+                ViewModel = (PresenterViewModel)DataContext;
+                ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+
+                VisualTypeTemplateSelector.SetRequestedKind(this, ViewModel.ControlKind); // Not RequestedKind, which is for the PresenterViewModel itself
+                this.Content = ViewModel.ViewModel;
+            }
+        }
+
+        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "ViewModel")
+            {
+                this.Content = ViewModel.ViewModel;
+            }
+        }
+
+        public PresenterViewModel ViewModel
+        {
+            get; private set;
+        }
+    }
 }

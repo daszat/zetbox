@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AuditJournal_label" xml:space="preserve">
-    <value>Änderungen</value>
-  </data>
-  <data name="AuditJournal_description" xml:space="preserve">
-    <value>Eine Liste der Änderungen an diesem Datensatz.</value>
-  </data>
   <data name="Certificate_label" xml:space="preserve">
     <value>Certificate</value>
   </data>
@@ -170,5 +164,11 @@
   </data>
   <data name="Password_description" xml:space="preserve">
     <value />
+  </data>
+  <data name="Tags_label" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="Tags_description" xml:space="preserve">
+    <value>Tags of this private key</value>
   </data>
 </root>

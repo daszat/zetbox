@@ -18,10 +18,18 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("40b1123f-b73d-4b33-ae0c-c65fe2c2c19c")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Test.OrderedOneEnd OneEnd {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_OneEnd 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -31,5 +39,6 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
     }
 }

@@ -41,6 +41,7 @@ namespace Zetbox.API
         // http://www.davidhayden.me/2010/01/auto-factories-in-autofac-for-lazy-instantiation-lazydependencymodule.html
         private Func<IFrozenContext> _lazyCtx;
         private IFrozenContext _frozenContext;
+        [System.Runtime.Serialization.IgnoreDataMember]
         public IFrozenContext FrozenContext
         {
             get
@@ -66,6 +67,7 @@ namespace Zetbox.API
         /// Always false, when the object is not attached or a playback is happening.
         /// </remarks>
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public bool IsReadonly
         {
             get
@@ -81,6 +83,7 @@ namespace Zetbox.API
         /// Base implementations returnes always Full
         /// </summary>
         private Zetbox.API.AccessRights? __currentAccessRights;
+        [System.Runtime.Serialization.IgnoreDataMember]
         public virtual Zetbox.API.AccessRights CurrentAccessRights
         {
             get
@@ -105,22 +108,26 @@ namespace Zetbox.API
         /// Gets the <see cref="IZetboxContext"/> containing this object.
         /// </summary>
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public IZetboxContext Context { get; private set; }
         /// <summary>
         /// Gets the <see cref="IReadOnlyZetboxContext"/> containing this object.
         /// </summary>
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public IReadOnlyZetboxContext ReadOnlyContext { get { return Context; } }
 
         /// <summary>
         /// Gets a value indicating whether or not this object is attached to a context.
         /// </summary>
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public abstract bool IsAttached { get; }
 
         /// <summary>
         /// Gets a value indicating the current state of this object.
         /// </summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         public abstract DataObjectState ObjectState { get; }
 
         public virtual void SetNew()
@@ -349,6 +356,7 @@ namespace Zetbox.API
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         string IDataErrorInfo.Error
         {
             get
@@ -381,6 +389,7 @@ namespace Zetbox.API
         /// <value>String.Empty</value> if there is nothing to report.</returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         string IDataErrorInfo.this[string columnName]
         {
             get
@@ -519,6 +528,7 @@ namespace Zetbox.API
         private Dictionary<object, object> _transientState;
         /// <inheritdoc />
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public Dictionary<object, object> TransientState
         {
             get
@@ -530,6 +540,12 @@ namespace Zetbox.API
                 return _transientState;
             }
         }
+
+        #endregion
+
+        #region ISortKey<int>
+        [System.Runtime.Serialization.IgnoreDataMember]
+        int ISortKey<int>.InternalSortKey => ID;
         #endregion
     }
 }

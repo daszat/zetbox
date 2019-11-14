@@ -389,8 +389,6 @@ namespace Zetbox.API.Server
         /// <param name="modifiedObjects">All changed, added and deleted objects</param>
         protected virtual void NotifyChanging(IEnumerable<IDataObject> modifiedObjects)
         {
-            var now = DateTime.Now;
-
             _added = new List<IDataObject>();
             _modified = new List<IDataObject>();
             _deleted = new List<IDataObject>();
@@ -421,6 +419,7 @@ namespace Zetbox.API.Server
                 // Only, if it's not read only. IsReadonly == true is a indicator for a object with no rights & only the fact, that only a calculated property has been changed
                 if (obj.IsReadonly == false && obj is Zetbox.App.Base.IChangedBy && state != DataObjectState.Deleted)
                 {
+                    var now = DateTime.Now.StripMilliseconds();
                     // if the object is new, ChangedBy/ChangedOn has to be set even if nothing else changed
                     var updateChangedInfo = obj is BaseNotifyingObject && ((BaseNotifyingObject)obj).UpdateChangedInfo || state == DataObjectState.New;
                     var cb = (Zetbox.App.Base.IChangedBy)obj;
@@ -988,6 +987,19 @@ namespace Zetbox.API.Server
         public abstract void BeginTransaction();
         public abstract void CommitTransaction();
         public abstract void RollbackTransaction();
+        #endregion
+
+        #region IZetboxServer Context db command
+        /// <summary>
+        /// Creates a native DbCommand object. This can be used to communicated with the database directly.
+        /// </summary>
+        /// <returns></returns>
+        public abstract IDbCommand CreateDbCommand();
+
+        /// <summary>
+        /// Returns the Database Config Name. Currently POSTGRESQL or MSSQL.
+        /// </summary>
+        public string SchemaProvider => config.Server.GetConnectionString("Zetbox").SchemaProvider;
         #endregion
 
         public ZetboxPrincipal Pricipal

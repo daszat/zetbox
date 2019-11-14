@@ -19,6 +19,7 @@ namespace Zetbox.App.Base
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("5fd0ba19-b5e8-4a43-a95e-895a6054dd95")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.AuditEntry> AuditJournal { get; }
     }
 }

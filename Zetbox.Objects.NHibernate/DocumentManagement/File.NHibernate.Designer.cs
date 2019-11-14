@@ -75,6 +75,7 @@ namespace at.dasz.DocumentManagement
         }
 
         /// <summary>backing property for AttachedTo, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.AnyReferenceNHibernateImpl AttachedToImpl
         {
             get
@@ -120,6 +121,7 @@ namespace at.dasz.DocumentManagement
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Blob Blob
         {
             get
@@ -194,6 +196,14 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for Blob's id, used on dehydration only</summary>
         private int? _fk_Blob = null;
 
+        /// <summary>ForeignKey Property for Blob's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Blob
+		{
+			get { return Blob != null ? Blob.ID : (int?)null; }
+			set { _fk_Blob = value; }
+		}
+
         /// <summary>Backing store for Blob's guid, used on import only</summary>
         private Guid? _fk_guid_Blob = null;
 
@@ -220,6 +230,7 @@ namespace at.dasz.DocumentManagement
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity ChangedBy
         {
             get
@@ -293,6 +304,14 @@ namespace at.dasz.DocumentManagement
 
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
@@ -396,6 +415,7 @@ namespace at.dasz.DocumentManagement
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity CreatedBy
         {
             get
@@ -469,6 +489,14 @@ namespace at.dasz.DocumentManagement
 
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
@@ -572,6 +600,7 @@ namespace at.dasz.DocumentManagement
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public at.dasz.DocumentManagement.Excerpt Excerpt
         {
             get
@@ -661,6 +690,14 @@ namespace at.dasz.DocumentManagement
 
         /// <summary>Backing store for Excerpt's id, used on dehydration only</summary>
         private int? _fk_Excerpt = null;
+
+        /// <summary>ForeignKey Property for Excerpt's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Excerpt
+		{
+			get { return Excerpt != null ? Excerpt.ID : (int?)null; }
+			set { _fk_Excerpt = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchExcerptAsync()
@@ -1766,9 +1803,13 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
 
             public virtual string Tags { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

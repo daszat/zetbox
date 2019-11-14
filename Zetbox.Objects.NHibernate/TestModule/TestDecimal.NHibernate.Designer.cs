@@ -419,9 +419,13 @@ namespace Zetbox.App.Test
 
             public virtual decimal? SmallDecimal { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

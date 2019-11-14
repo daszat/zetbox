@@ -60,6 +60,7 @@ namespace Zetbox.App.Base
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Base.AccessControl> AccessControlList
         {
@@ -104,6 +105,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.ObjectClass BaseObjectClass
         {
             get
@@ -201,6 +203,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         /// <summary>Backing store for BaseObjectClass's id, used on dehydration only</summary>
         private int? _fk_BaseObjectClass = null;
 
+        /// <summary>ForeignKey Property for BaseObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_BaseObjectClass
+		{
+			get { return BaseObjectClass != null ? BaseObjectClass.ID : (int?)null; }
+			set { _fk_BaseObjectClass = value; }
+		}
+
         /// <summary>Backing store for BaseObjectClass's guid, used on import only</summary>
         private Guid? _fk_guid_BaseObjectClass = null;
 
@@ -280,6 +290,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
         {
             get
@@ -354,6 +365,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         /// <summary>Backing store for DefaultViewModelDescriptor's id, used on dehydration only</summary>
         private int? _fk_DefaultViewModelDescriptor = null;
 
+        /// <summary>ForeignKey Property for DefaultViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultViewModelDescriptor
+		{
+			get { return DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null; }
+			set { _fk_DefaultViewModelDescriptor = value; }
+		}
+
         /// <summary>Backing store for DefaultViewModelDescriptor's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 
@@ -377,6 +396,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration> FilterConfigurations
         {
@@ -730,6 +750,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Base.ObjectClass> SubClasses
         {

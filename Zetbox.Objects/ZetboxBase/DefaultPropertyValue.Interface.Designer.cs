@@ -18,10 +18,18 @@ namespace Zetbox.App.Base
         /// Property where the default value is set
         /// </summary>
         [Zetbox.API.DefinitionGuid("a2451b2f-2430-4de4-81a6-3d5ac9f0138f")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Property Property {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Property 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// GetDefaultValue

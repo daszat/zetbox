@@ -132,6 +132,7 @@ namespace Zetbox.App.Test
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Test.Muhblah> MubBlah_List_Nav
         {
@@ -176,6 +177,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.Muhblah MubBlah_Nav
         {
             get
@@ -273,6 +275,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         /// <summary>Backing store for MubBlah_Nav's id, used on dehydration only</summary>
         private int? _fk_MubBlah_Nav = null;
 
+        /// <summary>ForeignKey Property for MubBlah_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_MubBlah_Nav
+		{
+			get { return MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null; }
+			set { _fk_MubBlah_Nav = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchMubBlah_NavAsync()
     {
@@ -335,6 +345,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.Muhblah MuhBlah_One_Nav
         {
             get
@@ -425,6 +436,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         /// <summary>Backing store for MuhBlah_One_Nav's id, used on dehydration only</summary>
         private int? _fk_MuhBlah_One_Nav = null;
 
+        /// <summary>ForeignKey Property for MuhBlah_One_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_MuhBlah_One_Nav
+		{
+			get { return MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null; }
+			set { _fk_MuhBlah_One_Nav = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchMuhBlah_One_NavAsync()
     {
@@ -509,6 +528,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         }
 
         /// <summary>backing property for PhoneNumberMobile, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl PhoneNumberMobileImpl
         {
             get
@@ -556,6 +576,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         }
 
         /// <summary>backing property for PhoneNumberOffice, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl PhoneNumberOfficeImpl
         {
             get
@@ -993,9 +1014,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 
             public virtual int? PhoneNumbersOther_pos { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

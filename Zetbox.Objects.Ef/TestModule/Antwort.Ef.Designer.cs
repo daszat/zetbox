@@ -128,6 +128,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Test.Fragebogen Fragebogen
         {
@@ -136,6 +137,14 @@ namespace Zetbox.App.Test
         }
 
         private int? _fk_Fragebogen;
+
+        /// <summary>ForeignKey Property for Fragebogen's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Fragebogen
+		{
+			get { return Fragebogen != null ? Fragebogen.ID : (int?)null; }
+			set { _fk_Fragebogen = value; }
+		}
 
 
         // internal implementation, EF sees only this property

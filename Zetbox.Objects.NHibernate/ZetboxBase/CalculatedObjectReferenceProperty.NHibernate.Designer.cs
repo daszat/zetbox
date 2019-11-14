@@ -97,6 +97,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.ObjectClass ReferencedClass
         {
             get
@@ -170,6 +171,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
 
         /// <summary>Backing store for ReferencedClass's id, used on dehydration only</summary>
         private int? _fk_ReferencedClass = null;
+
+        /// <summary>ForeignKey Property for ReferencedClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ReferencedClass
+		{
+			get { return ReferencedClass != null ? ReferencedClass.ID : (int?)null; }
+			set { _fk_ReferencedClass = value; }
+		}
 
         /// <summary>Backing store for ReferencedClass's guid, used on import only</summary>
         private Guid? _fk_guid_ReferencedClass = null;

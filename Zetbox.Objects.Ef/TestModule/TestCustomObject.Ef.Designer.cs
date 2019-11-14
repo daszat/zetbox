@@ -129,6 +129,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Test.Muhblah> MubBlah_List_Nav
         {
@@ -208,6 +209,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Test.Muhblah MubBlah_Nav
         {
@@ -216,6 +218,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         }
 
         private int? _fk_MubBlah_Nav;
+
+        /// <summary>ForeignKey Property for MubBlah_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_MubBlah_Nav
+		{
+			get { return MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null; }
+			set { _fk_MubBlah_Nav = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -397,6 +407,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Test.Muhblah MuhBlah_One_Nav
         {
@@ -405,6 +416,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         }
 
         private int? _fk_MuhBlah_One_Nav;
+
+        /// <summary>ForeignKey Property for MuhBlah_One_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_MuhBlah_One_Nav
+		{
+			get { return MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null; }
+			set { _fk_MuhBlah_One_Nav = value; }
+		}
 
 
         // internal implementation, EF sees only this property

@@ -80,12 +80,14 @@ namespace Zetbox.API
         public static DateTime ReadDateTime(XmlReader xml)
         {
             if (xml == null) { throw new ArgumentNullException("xml"); }
-            return xml.ReadElementContentAsDateTime().ToLocalTime();
+            // Databases have different time precisions. To unify that, just strip milliseconds
+            return xml.ReadElementContentAsDateTime().ToLocalTime().StripMilliseconds();
         }
         public static DateTime? ReadNullableDateTime(XmlReader xml)
         {
             if (xml == null) { throw new ArgumentNullException("xml"); }
-            return xml.ReadElementContentAsDateTime().ToLocalTime();
+            // Databases have different time precisions. To unify that, just strip milliseconds
+            return xml.ReadElementContentAsDateTime().ToLocalTime().StripMilliseconds();
         }
         #endregion
 

@@ -59,6 +59,7 @@ namespace Zetbox.App.LicenseManagement
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity ChangedBy
         {
@@ -67,6 +68,14 @@ namespace Zetbox.App.LicenseManagement
         }
 
         private int? _fk_ChangedBy;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -250,6 +259,7 @@ namespace Zetbox.App.LicenseManagement
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity CreatedBy
         {
@@ -258,6 +268,14 @@ namespace Zetbox.App.LicenseManagement
         }
 
         private int? _fk_CreatedBy;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -1138,6 +1156,132 @@ namespace Zetbox.App.LicenseManagement
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnExport_License")]
+        public virtual void Export(string file)
+        {
+            // base.Export();
+            if (OnExport_License != null)
+            {
+                OnExport_License(this, file);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method License.Export");
+            }
+        }
+        public delegate void Export_Handler<T>(T obj, string file);
+        public static event Export_Handler<License> OnExport_License;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<License> OnExport_License_CanExec;
+
+        [EventBasedMethod("OnExport_License_CanExec")]
+        public virtual bool ExportCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnExport_License_CanExec != null)
+				{
+					OnExport_License_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<License> OnExport_License_CanExecReason;
+
+        [EventBasedMethod("OnExport_License_CanExecReason")]
+        public virtual string ExportCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnExport_License_CanExecReason != null)
+				{
+					OnExport_License_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// Exports this License
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnExportUI_License")]
+        public virtual void ExportUI()
+        {
+            // base.ExportUI();
+            if (OnExportUI_License != null)
+            {
+                OnExportUI_License(this);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method License.ExportUI");
+            }
+        }
+        public delegate void ExportUI_Handler<T>(T obj);
+        public static event ExportUI_Handler<License> OnExportUI_License;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<License> OnExportUI_License_CanExec;
+
+        [EventBasedMethod("OnExportUI_License_CanExec")]
+        public virtual bool ExportUICanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnExportUI_License_CanExec != null)
+				{
+					OnExportUI_License_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<License> OnExportUI_License_CanExecReason;
+
+        [EventBasedMethod("OnExportUI_License_CanExecReason")]
+        public virtual string ExportUICanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnExportUI_License_CanExecReason != null)
+				{
+					OnExportUI_License_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// Checks, if the signature is valid
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -1266,23 +1410,23 @@ namespace Zetbox.App.LicenseManagement
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
-        /// Signs this certificate
+        /// Sings this license
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnSign_License")]
-        public virtual void Sign(Zetbox.App.LicenseManagement.PrivateKey certificate)
+        public virtual void Sign(Zetbox.App.LicenseManagement.PrivateKey certificate, string password)
         {
             // base.Sign();
             if (OnSign_License != null)
             {
-                OnSign_License(this, certificate);
+                OnSign_License(this, certificate, password);
             }
             else
             {
                 throw new NotImplementedException("No handler registered on method License.Sign");
             }
         }
-        public delegate void Sign_Handler<T>(T obj, Zetbox.App.LicenseManagement.PrivateKey certificate);
+        public delegate void Sign_Handler<T>(T obj, Zetbox.App.LicenseManagement.PrivateKey certificate, string password);
         public static event Sign_Handler<License> OnSign_License;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1318,6 +1462,69 @@ namespace Zetbox.App.LicenseManagement
 				if (OnSign_License_CanExecReason != null)
 				{
 					OnSign_License_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// Sings this license
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnSignUI_License")]
+        public virtual void SignUI()
+        {
+            // base.SignUI();
+            if (OnSignUI_License != null)
+            {
+                OnSignUI_License(this);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method License.SignUI");
+            }
+        }
+        public delegate void SignUI_Handler<T>(T obj);
+        public static event SignUI_Handler<License> OnSignUI_License;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<License> OnSignUI_License_CanExec;
+
+        [EventBasedMethod("OnSignUI_License_CanExec")]
+        public virtual bool SignUICanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnSignUI_License_CanExec != null)
+				{
+					OnSignUI_License_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<License> OnSignUI_License_CanExecReason;
+
+        [EventBasedMethod("OnSignUI_License_CanExecReason")]
+        public virtual string SignUICanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnSignUI_License_CanExecReason != null)
+				{
+					OnSignUI_License_CanExecReason(this, e);
 				}
 				else
 				{

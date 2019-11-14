@@ -117,6 +117,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.RequiredParent Parent
         {
             get
@@ -213,6 +214,14 @@ namespace Zetbox.App.Test
 
         /// <summary>Backing store for Parent's id, used on dehydration only</summary>
         private int? _fk_Parent = null;
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
@@ -441,9 +450,13 @@ namespace Zetbox.App.Test
 
             public virtual Zetbox.App.Test.RequiredParentNHibernateImpl.RequiredParentProxy Parent { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

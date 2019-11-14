@@ -38,6 +38,7 @@ namespace Zetbox.API
 
         #region ICompoundObject Members
 
+        [System.Runtime.Serialization.IgnoreDataMember]
         public IPersistenceObject ParentObject { get; protected set; }
         public string ParentProperty { get; protected set; }
 
@@ -65,6 +66,7 @@ namespace Zetbox.API
         }
 
         public virtual bool IsReadonly { get { return ParentObject != null ? ParentObject.IsReadonly : false; } }
+        [System.Runtime.Serialization.IgnoreDataMember]
         public virtual Zetbox.API.AccessRights CurrentAccessRights
         {
             get
@@ -190,6 +192,7 @@ namespace Zetbox.API
 
         protected DataObjectState ObjectState { get { return ParentObject != null ? ParentObject.ObjectState : DataObjectState.Detached; } }
         private IFrozenContext _frozenContext;
+        [System.Runtime.Serialization.IgnoreDataMember]
         protected IFrozenContext FrozenContext
         {
             get
@@ -227,25 +230,26 @@ namespace Zetbox.API
         #region ISortKey<int> member
         // used for sorting
 
-        private static readonly object _ISortKey_ID_current_lock = new object();
-        private static int _ISortKey_ID_current = 0;
-        private int _ISortKey_ID = 0;
-        int ISortKey<int>.ID
+        private static readonly object _ISortKey_InternalSortKey_current_lock = new object();
+        private static int _ISortKey_InternalSortKey_current = 0;
+        private int _ISortKey_InternalSortKey = 0;
+        [System.Runtime.Serialization.IgnoreDataMember]
+        int ISortKey<int>.InternalSortKey
         {
             get
             {
                 // The CompundObject doesn't have to be thread safe. Therefore we can test _ISortKey_ID outside of the lock.
-                if (_ISortKey_ID == 0)
+                if (_ISortKey_InternalSortKey == 0)
                 {
-                    lock (_ISortKey_ID_current_lock)
+                    lock (_ISortKey_InternalSortKey_current_lock)
                     {
-                        if (_ISortKey_ID == 0)
+                        if (_ISortKey_InternalSortKey == 0)
                         {
-                            _ISortKey_ID = ++_ISortKey_ID_current;
+                            _ISortKey_InternalSortKey = ++_ISortKey_InternalSortKey_current;
                         }
                     }
                 }
-                return _ISortKey_ID;
+                return _ISortKey_InternalSortKey;
             }
         }
         #endregion
@@ -255,6 +259,7 @@ namespace Zetbox.API
         private Dictionary<object, object> _transientState;
         /// <inheritdoc />
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public Dictionary<object, object> TransientState
         {
             get

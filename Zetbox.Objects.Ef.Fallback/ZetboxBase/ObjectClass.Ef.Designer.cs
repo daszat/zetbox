@@ -54,6 +54,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Base.AccessControl> AccessControlList
         {
@@ -133,6 +134,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.ObjectClass BaseObjectClass
         {
@@ -141,6 +143,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         }
 
         private int? _fk_BaseObjectClass;
+
+        /// <summary>ForeignKey Property for BaseObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_BaseObjectClass
+		{
+			get { return BaseObjectClass != null ? BaseObjectClass.ID : (int?)null; }
+			set { _fk_BaseObjectClass = value; }
+		}
 
         private Guid? _fk_guid_BaseObjectClass = null;
 
@@ -309,6 +319,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
         {
@@ -317,6 +328,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         }
 
         private int? _fk_DefaultViewModelDescriptor;
+
+        /// <summary>ForeignKey Property for DefaultViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultViewModelDescriptor
+		{
+			get { return DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null; }
+			set { _fk_DefaultViewModelDescriptor = value; }
+		}
 
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 
@@ -412,6 +431,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration> FilterConfigurations
         {
@@ -814,6 +834,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Base.ObjectClass> SubClasses
         {

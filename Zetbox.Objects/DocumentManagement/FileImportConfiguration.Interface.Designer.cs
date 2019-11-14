@@ -18,10 +18,18 @@ namespace at.dasz.DocumentManagement
         /// Restricts this configuration to a specific identity
         /// </summary>
         [Zetbox.API.DefinitionGuid("4762392e-1902-43ef-a023-9d57047892d9")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Identity Identity {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Identity 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Restricts this configuration to a specific machine
@@ -32,6 +40,7 @@ namespace at.dasz.DocumentManagement
             set;
         }
 
+
         /// <summary>
         /// Pickup directory for the file import service. Env Variables can be used with %VARIABLE%. e.g. %HOMEPATH%\MyPickupDir
         /// </summary>
@@ -40,5 +49,6 @@ namespace at.dasz.DocumentManagement
             get;
             set;
         }
+
     }
 }

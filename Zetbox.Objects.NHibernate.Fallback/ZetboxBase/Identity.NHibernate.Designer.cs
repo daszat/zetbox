@@ -361,6 +361,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         }
 
         /// <summary>backing property for OpenID, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.OpenIDNHibernateImpl OpenIDImpl
         {
             get
@@ -1132,9 +1133,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
 
             public virtual string UserName { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

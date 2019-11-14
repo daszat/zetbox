@@ -23,11 +23,13 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("00c825ba-6df2-4739-8074-2a85aae274a4")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.One_to_N_relations_N> NSide { get; }
 
         /// <summary>
@@ -35,6 +37,7 @@ namespace Zetbox.App.Test
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("084f914f-a4e6-4703-a01a-7fdda5f720d0")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Test.One_to_N_relations_OrderedN> OrderedNSide { get; }
     }
 }

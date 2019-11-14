@@ -59,6 +59,7 @@ namespace Zetbox.App.Base
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.Icon FalseIcon
         {
             get
@@ -132,6 +133,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for FalseIcon's id, used on dehydration only</summary>
         private int? _fk_FalseIcon = null;
+
+        /// <summary>ForeignKey Property for FalseIcon's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_FalseIcon
+		{
+			get { return FalseIcon != null ? FalseIcon.ID : (int?)null; }
+			set { _fk_FalseIcon = value; }
+		}
 
         /// <summary>Backing store for FalseIcon's guid, used on import only</summary>
         private Guid? _fk_guid_FalseIcon = null;
@@ -217,6 +226,7 @@ namespace Zetbox.App.Base
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.Icon NullIcon
         {
             get
@@ -290,6 +300,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for NullIcon's id, used on dehydration only</summary>
         private int? _fk_NullIcon = null;
+
+        /// <summary>ForeignKey Property for NullIcon's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_NullIcon
+		{
+			get { return NullIcon != null ? NullIcon.ID : (int?)null; }
+			set { _fk_NullIcon = value; }
+		}
 
         /// <summary>Backing store for NullIcon's guid, used on import only</summary>
         private Guid? _fk_guid_NullIcon = null;
@@ -375,6 +393,7 @@ namespace Zetbox.App.Base
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.Icon TrueIcon
         {
             get
@@ -448,6 +467,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for TrueIcon's id, used on dehydration only</summary>
         private int? _fk_TrueIcon = null;
+
+        /// <summary>ForeignKey Property for TrueIcon's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_TrueIcon
+		{
+			get { return TrueIcon != null ? TrueIcon.ID : (int?)null; }
+			set { _fk_TrueIcon = value; }
+		}
 
         /// <summary>Backing store for TrueIcon's guid, used on import only</summary>
         private Guid? _fk_guid_TrueIcon = null;

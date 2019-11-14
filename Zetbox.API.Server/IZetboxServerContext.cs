@@ -17,6 +17,7 @@ namespace Zetbox.API.Server
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Linq;
     using System.Text;
     using Zetbox.App.Base;
@@ -45,5 +46,16 @@ namespace Zetbox.API.Server
         /// </remarks>
         /// <returns>Number of affected Objects</returns>
         int SubmitRestore();
+
+        /// <summary>
+        /// Creates a native DbCommand object. This can be used to communicated with the database directly.
+        /// </summary>
+        /// <returns></returns>
+        IDbCommand CreateDbCommand();
+
+        /// <summary>
+        /// Returns the Database SchemaProvider. Currently POSTGRESQL or MSSQL.
+        /// </summary>
+        string SchemaProvider { get; }
     }
 }

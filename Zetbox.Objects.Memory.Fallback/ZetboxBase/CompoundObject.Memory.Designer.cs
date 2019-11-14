@@ -49,6 +49,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ViewModelDescriptor DefaultPropertyViewModelDescriptor
@@ -72,6 +73,14 @@ namespace Zetbox.App.Base
                 _triggerFetchDefaultPropertyViewModelDescriptorTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for DefaultPropertyViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultPropertyViewModelDescriptor
+		{
+			get { return _fk_DefaultPropertyViewModelDescriptor; }
+			set { _fk_DefaultPropertyViewModelDescriptor = value; }
+		}
 
         private Guid? _fk_guid_DefaultPropertyViewModelDescriptor = null;
 
@@ -165,6 +174,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
@@ -188,6 +198,14 @@ namespace Zetbox.App.Base
                 _triggerFetchDefaultViewModelDescriptorTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for DefaultViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultViewModelDescriptor
+		{
+			get { return _fk_DefaultViewModelDescriptor; }
+			set { _fk_DefaultViewModelDescriptor = value; }
+		}
 
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 

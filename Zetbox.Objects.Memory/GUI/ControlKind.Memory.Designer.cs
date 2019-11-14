@@ -44,6 +44,7 @@ namespace Zetbox.App.GUI
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.GUI.ControlKind> ChildControlKinds
         {
@@ -186,6 +187,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Module Module
@@ -209,6 +211,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 _triggerFetchModuleTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return _fk_Module; }
+			set { _fk_Module = value; }
+		}
 
         private Guid? _fk_guid_Module = null;
 
@@ -360,6 +370,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ControlKind Parent
@@ -383,6 +394,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 _triggerFetchParentTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return _fk_Parent; }
+			set { _fk_Parent = value; }
+		}
 
         private Guid? _fk_guid_Parent = null;
 

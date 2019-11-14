@@ -49,6 +49,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Calendar.CalendarBook Calendar
@@ -72,6 +73,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchCalendarTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Calendar's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Calendar
+		{
+			get { return _fk_Calendar; }
+			set { _fk_Calendar = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> _triggerFetchCalendarTask;
@@ -164,6 +173,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Calendar.WorkSchedule WorkSchedule
@@ -187,6 +197,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchWorkScheduleTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for WorkSchedule's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_WorkSchedule
+		{
+			get { return _fk_WorkSchedule; }
+			set { _fk_WorkSchedule = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.WorkSchedule> _triggerFetchWorkScheduleTask;

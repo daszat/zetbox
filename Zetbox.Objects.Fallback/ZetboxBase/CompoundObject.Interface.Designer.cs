@@ -18,18 +18,34 @@ namespace Zetbox.App.Base
         /// An optional default ViewModelDescriptor for Properties of this type
         /// </summary>
         [Zetbox.API.DefinitionGuid("908757d2-053b-40c5-89f8-9e5f79b5fe83")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ViewModelDescriptor DefaultPropertyViewModelDescriptor {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_DefaultPropertyViewModelDescriptor 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// The default ViewModel to use for this Compound Object
         /// </summary>
         [Zetbox.API.DefinitionGuid("863dece6-ff86-41c5-82ad-ec520adf6309")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_DefaultViewModelDescriptor 
+		{ 
+			get; 
+			set;
+		}
     }
 }

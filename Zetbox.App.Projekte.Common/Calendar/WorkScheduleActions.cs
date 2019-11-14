@@ -49,11 +49,18 @@ namespace Zetbox.App.Calendar
             e.Result = (int)Calc(obj, from, until, CalcModes.OffDays);
         }
 
+        [Invocation]
+        public static void GetHolidays(WorkSchedule obj, MethodReturnEventArgs<int> e, DateTime from, DateTime until)
+        {
+            e.Result = (int)Calc(obj, from, until, CalcModes.Holidays);
+        }
+
         private enum CalcModes
         {
             WorkingHours,
             WorkingDays,
-            OffDays
+            OffDays,
+            Holidays
         }
 
         private static List<WorkScheduleRule> RulesAndParents(this WorkSchedule cal)
@@ -103,6 +110,10 @@ namespace Zetbox.App.Calendar
                             break;
                         case CalcModes.OffDays:
                             if (!foundRule.IsWorkingDay)
+                                result++;
+                            break;
+                        case CalcModes.Holidays:
+                            if (foundRule is YearlyWorkScheduleRule && !foundRule.IsWorkingDay)
                                 result++;
                             break;
                     }

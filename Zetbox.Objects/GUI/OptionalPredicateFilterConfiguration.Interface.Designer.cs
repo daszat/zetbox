@@ -22,5 +22,6 @@ namespace Zetbox.App.GUI
             get;
             set;
         }
+
     }
 }

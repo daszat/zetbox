@@ -49,6 +49,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Calendar.WorkSchedule BaseWorkSchedule
@@ -72,6 +73,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchBaseWorkScheduleTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for BaseWorkSchedule's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_BaseWorkSchedule
+		{
+			get { return _fk_BaseWorkSchedule; }
+			set { _fk_BaseWorkSchedule = value; }
+		}
 
         private Guid? _fk_guid_BaseWorkSchedule = null;
 
@@ -181,6 +190,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity ChangedBy
@@ -204,6 +214,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchChangedByTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return _fk_ChangedBy; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
@@ -364,6 +382,7 @@ namespace Zetbox.App.Calendar
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Calendar.WorkSchedule> ChildWorkSchedule
         {
@@ -435,6 +454,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity CreatedBy
@@ -458,6 +478,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 _triggerFetchCreatedByTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return _fk_CreatedBy; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
@@ -694,6 +722,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Module Module
@@ -717,6 +746,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 _triggerFetchModuleTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return _fk_Module; }
+			set { _fk_Module = value; }
+		}
 
         private Guid? _fk_guid_Module = null;
 
@@ -863,6 +900,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Calendar.WorkScheduleRule> WorkScheduleRules
         {
@@ -976,6 +1014,70 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
 				if (OnDuplicate_WorkSchedule_CanExecReason != null)
 				{
 					OnDuplicate_WorkSchedule_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// Gets the number of holidays between two dates. A Holiday is defined as every yearly rule, that is not a working day. All other rules are ignored.
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetHolidays_WorkSchedule")]
+        public virtual int GetHolidays(DateTime from, DateTime until)
+        {
+            var e = new MethodReturnEventArgs<int>();
+            if (OnGetHolidays_WorkSchedule != null)
+            {
+                OnGetHolidays_WorkSchedule(this, e, from, until);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on WorkSchedule.GetHolidays");
+            }
+            return e.Result;
+        }
+        public delegate void GetHolidays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
+        public static event GetHolidays_Handler<WorkSchedule> OnGetHolidays_WorkSchedule;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<WorkSchedule> OnGetHolidays_WorkSchedule_CanExec;
+
+        [EventBasedMethod("OnGetHolidays_WorkSchedule_CanExec")]
+        public virtual bool GetHolidaysCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetHolidays_WorkSchedule_CanExec != null)
+				{
+					OnGetHolidays_WorkSchedule_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<WorkSchedule> OnGetHolidays_WorkSchedule_CanExecReason;
+
+        [EventBasedMethod("OnGetHolidays_WorkSchedule_CanExecReason")]
+        public virtual string GetHolidaysCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetHolidays_WorkSchedule_CanExecReason != null)
+				{
+					OnGetHolidays_WorkSchedule_CanExecReason(this, e);
 				}
 				else
 				{

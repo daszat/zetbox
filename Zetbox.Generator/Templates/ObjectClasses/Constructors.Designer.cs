@@ -11,7 +11,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst")]
     public partial class Constructors : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -39,22 +39,22 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 34 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 34 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        [Obsolete]\r\n");
 this.WriteObjects("        public ",  className , "()\r\n");
 this.WriteObjects("            : base(null)\r\n");
 this.WriteObjects("        {\r\n");
-#line 38 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 38 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(null); 
-#line 39 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 39 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx)\r\n");
 this.WriteObjects("            : base(lazyCtx)\r\n");
 this.WriteObjects("        {\r\n");
-#line 44 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 44 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers("lazyCtx"); 
-#line 45 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 45 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        }\r\n");
 
         }

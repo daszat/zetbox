@@ -62,6 +62,7 @@ namespace Zetbox.App.Calendar
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Calendar.WorkSchedule BaseWorkSchedule
         {
             get
@@ -159,6 +160,14 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for BaseWorkSchedule's id, used on dehydration only</summary>
         private int? _fk_BaseWorkSchedule = null;
 
+        /// <summary>ForeignKey Property for BaseWorkSchedule's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_BaseWorkSchedule
+		{
+			get { return BaseWorkSchedule != null ? BaseWorkSchedule.ID : (int?)null; }
+			set { _fk_BaseWorkSchedule = value; }
+		}
+
         /// <summary>Backing store for BaseWorkSchedule's guid, used on import only</summary>
         private Guid? _fk_guid_BaseWorkSchedule = null;
 
@@ -185,6 +194,7 @@ namespace Zetbox.App.Calendar
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity ChangedBy
         {
             get
@@ -258,6 +268,14 @@ namespace Zetbox.App.Calendar
 
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
@@ -358,6 +376,7 @@ namespace Zetbox.App.Calendar
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Calendar.WorkSchedule> ChildWorkSchedule
         {
@@ -402,6 +421,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity CreatedBy
         {
             get
@@ -475,6 +495,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
 
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
@@ -656,6 +684,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Module Module
         {
             get
@@ -729,6 +758,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
 
         /// <summary>Backing store for Module's id, used on dehydration only</summary>
         private int? _fk_Module = null;
+
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return Module != null ? Module.ID : (int?)null; }
+			set { _fk_Module = value; }
+		}
 
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
@@ -811,6 +848,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Calendar.WorkScheduleRule> WorkScheduleRules
         {
@@ -898,6 +936,70 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
 				if (OnDuplicate_WorkSchedule_CanExecReason != null)
 				{
 					OnDuplicate_WorkSchedule_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// Gets the number of holidays between two dates. A Holiday is defined as every yearly rule, that is not a working day. All other rules are ignored.
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetHolidays_WorkSchedule")]
+        public virtual int GetHolidays(DateTime from, DateTime until)
+        {
+            var e = new MethodReturnEventArgs<int>();
+            if (OnGetHolidays_WorkSchedule != null)
+            {
+                OnGetHolidays_WorkSchedule(this, e, from, until);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on WorkSchedule.GetHolidays");
+            }
+            return e.Result;
+        }
+        public delegate void GetHolidays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
+        public static event GetHolidays_Handler<WorkSchedule> OnGetHolidays_WorkSchedule;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<WorkSchedule> OnGetHolidays_WorkSchedule_CanExec;
+
+        [EventBasedMethod("OnGetHolidays_WorkSchedule_CanExec")]
+        public virtual bool GetHolidaysCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetHolidays_WorkSchedule_CanExec != null)
+				{
+					OnGetHolidays_WorkSchedule_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<WorkSchedule> OnGetHolidays_WorkSchedule_CanExecReason;
+
+        [EventBasedMethod("OnGetHolidays_WorkSchedule_CanExecReason")]
+        public virtual string GetHolidaysCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetHolidays_WorkSchedule_CanExecReason != null)
+				{
+					OnGetHolidays_WorkSchedule_CanExecReason(this, e);
 				}
 				else
 				{
@@ -1518,9 +1620,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
 
             public virtual ICollection<Zetbox.App.Calendar.WorkScheduleRuleNHibernateImpl.WorkScheduleRuleProxy> WorkScheduleRules { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

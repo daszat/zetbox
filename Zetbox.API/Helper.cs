@@ -1567,5 +1567,51 @@ namespace Zetbox.API
             if (birthday > refDate.AddYears(-age)) age--;
             return age;
         }
+        public static int DiffMonths(this DateTime from, DateTime thru)
+        {
+            return ((thru.Year - from.Year) * 12) + thru.Month - from.Month;
+        }
+        public static decimal DiffMinutes(DateTime? until, DateTime? from, bool exact = false)
+        {
+            if (!from.HasValue || !until.HasValue) return 0;
+
+            var hours = (decimal)(new TimeSpan(until.Value.Hour, until.Value.Minute, 0) - new TimeSpan(from.Value.Hour, from.Value.Minute, 0)).TotalMinutes;
+            return exact ? hours : Math.Round(hours, 2);
+        }
+        public static decimal DiffMinutes(TimeSpan? until, TimeSpan? from, bool exact = false)
+        {
+            if (!from.HasValue || !until.HasValue) return 0;
+
+            var hours = (decimal)(new TimeSpan(until.Value.Days, until.Value.Hours, until.Value.Minutes, 0) - new TimeSpan(from.Value.Days, from.Value.Hours, from.Value.Minutes, 0)).TotalMinutes;
+            return exact ? hours : Math.Round(hours, 2);
+        }
+
+        public static TimeSpan StripSeconds(this TimeSpan t)
+        {
+            return new TimeSpan(t.Days, t.Hours, t.Minutes, 0);
+        }
+        public static DateTime StripSeconds(this DateTime dt)
+        {
+            return dt.Date + dt.TimeOfDay.StripSeconds();
+        }
+
+        public static TimeSpan StripMilliseconds(this TimeSpan t)
+        {
+            return new TimeSpan(t.Days, t.Hours, t.Minutes, t.Seconds);
+        }
+        public static DateTime StripMilliseconds(this DateTime dt)
+        {
+            return dt.Date + dt.TimeOfDay.StripMilliseconds();
+        }
+
+        /// <summary>
+        /// Reinterpret DateTime as UTC by NOT converting it.
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static DateTime AsUtc(this DateTime dt)
+        {
+            return new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, DateTimeKind.Utc);
+        }
     }
 }

@@ -102,6 +102,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Projekte.Auftrag> Auftraege
         {
@@ -257,6 +258,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity ChangedBy
         {
             get
@@ -330,6 +332,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
@@ -433,6 +443,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity CreatedBy
         {
             get
@@ -506,6 +517,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
@@ -954,6 +973,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Projekte.Task> Tasks
         {
@@ -1654,9 +1674,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
 
             public virtual ICollection<Projekt_RightsNHibernateImpl> SecurityRightsCollectionImpl { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         private Zetbox.API.AccessRights? __currentAccessRights;
         public override Zetbox.API.AccessRights CurrentAccessRights

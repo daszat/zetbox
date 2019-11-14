@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Name des Moduls
         /// </summary>
@@ -31,6 +32,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// CLR Namespace des Moduls
@@ -41,6 +43,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Name of the database schema
         /// </summary>
@@ -49,5 +52,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

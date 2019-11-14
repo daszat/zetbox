@@ -199,6 +199,7 @@ namespace Zetbox.App.Base
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity ChangedBy
         {
             get
@@ -272,6 +273,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
@@ -425,6 +434,7 @@ namespace Zetbox.App.Base
         // Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Base.Constraint> Constraints
         {
@@ -471,6 +481,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity CreatedBy
         {
             get
@@ -544,6 +555,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
@@ -705,6 +724,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.DefaultPropertyValue DefaultValue
         {
             get
@@ -794,6 +814,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         /// <summary>Backing store for DefaultValue's id, used on dehydration only</summary>
         private int? _fk_DefaultValue = null;
+
+        /// <summary>ForeignKey Property for DefaultValue's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultValue
+		{
+			get { return DefaultValue != null ? DefaultValue.ID : (int?)null; }
+			set { _fk_DefaultValue = value; }
+		}
 
         /// <summary>Backing store for DefaultValue's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultValue = null;
@@ -1015,6 +1043,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.PropertyFilterConfiguration FilterConfiguration
         {
             get
@@ -1104,6 +1133,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         /// <summary>Backing store for FilterConfiguration's id, used on dehydration only</summary>
         private int? _fk_FilterConfiguration = null;
+
+        /// <summary>ForeignKey Property for FilterConfiguration's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_FilterConfiguration
+		{
+			get { return FilterConfiguration != null ? FilterConfiguration.ID : (int?)null; }
+			set { _fk_FilterConfiguration = value; }
+		}
 
         /// <summary>Backing store for FilterConfiguration's guid, used on import only</summary>
         private Guid? _fk_guid_FilterConfiguration = null;
@@ -1247,6 +1284,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Module Module
         {
             get
@@ -1320,6 +1358,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         /// <summary>Backing store for Module's id, used on dehydration only</summary>
         private int? _fk_Module = null;
+
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return Module != null ? Module.ID : (int?)null; }
+			set { _fk_Module = value; }
+		}
 
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
@@ -1405,6 +1451,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.DataType ObjectClass
         {
             get
@@ -1502,6 +1549,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>Backing store for ObjectClass's id, used on dehydration only</summary>
         private int? _fk_ObjectClass = null;
 
+        /// <summary>ForeignKey Property for ObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ObjectClass
+		{
+			get { return ObjectClass != null ? ObjectClass.ID : (int?)null; }
+			set { _fk_ObjectClass = value; }
+		}
+
         /// <summary>Backing store for ObjectClass's guid, used on import only</summary>
         private Guid? _fk_guid_ObjectClass = null;
 
@@ -1558,6 +1613,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ControlKind RequestedKind
         {
             get
@@ -1631,6 +1687,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         /// <summary>Backing store for RequestedKind's id, used on dehydration only</summary>
         private int? _fk_RequestedKind = null;
+
+        /// <summary>ForeignKey Property for RequestedKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RequestedKind
+		{
+			get { return RequestedKind != null ? RequestedKind.ID : (int?)null; }
+			set { _fk_RequestedKind = value; }
+		}
 
         /// <summary>Backing store for RequestedKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedKind = null;
@@ -1716,6 +1780,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.GUI.ViewModelDescriptor ValueModelDescriptor
         {
             get
@@ -1789,6 +1854,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         /// <summary>Backing store for ValueModelDescriptor's id, used on dehydration only</summary>
         private int? _fk_ValueModelDescriptor = null;
+
+        /// <summary>ForeignKey Property for ValueModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ValueModelDescriptor
+		{
+			get { return ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null; }
+			set { _fk_ValueModelDescriptor = value; }
+		}
 
         /// <summary>Backing store for ValueModelDescriptor's guid, used on import only</summary>
         private Guid? _fk_guid_ValueModelDescriptor = null;
@@ -2885,9 +2958,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
             public virtual Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl.ViewModelDescriptorProxy ValueModelDescriptor { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

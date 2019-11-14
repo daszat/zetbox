@@ -280,6 +280,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.RelationEnd RelationEnd
         {
@@ -288,6 +289,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         }
 
         private int? _fk_RelationEnd;
+
+        /// <summary>ForeignKey Property for RelationEnd's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RelationEnd
+		{
+			get { return RelationEnd != null ? RelationEnd.ID : (int?)null; }
+			set { _fk_RelationEnd = value; }
+		}
 
         private Guid? _fk_guid_RelationEnd = null;
 

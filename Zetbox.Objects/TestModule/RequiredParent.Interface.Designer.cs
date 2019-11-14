@@ -19,6 +19,7 @@ namespace Zetbox.App.Test
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("e452deb2-1f35-4b7c-9adc-1f904dfbfc6d")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.RequiredParentChild> Children { get; }
 
         /// <summary>
@@ -29,5 +30,6 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
     }
 }

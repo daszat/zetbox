@@ -155,6 +155,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.CalculatedObjectReferenceProperty A
         {
@@ -163,6 +164,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_A;
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -236,6 +245,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Property B
         {
@@ -244,6 +254,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -588,6 +606,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.DataType A
         {
@@ -596,6 +615,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_A;
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -669,6 +696,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Interface B
         {
@@ -677,6 +705,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -973,6 +1009,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity A
         {
@@ -981,6 +1018,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_A;
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -1053,6 +1098,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Group B
         {
@@ -1061,6 +1107,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -1371,6 +1425,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.NavigationEntry A
         {
@@ -1379,6 +1434,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_A;
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -1452,6 +1515,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Group B
         {
@@ -1460,6 +1524,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -1804,6 +1876,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.ObjectReferenceProperty A
         {
@@ -1812,6 +1885,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_A;
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -1885,6 +1966,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Method B
         {
@@ -1893,6 +1975,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -2238,6 +2328,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ViewModelDescriptor A
         {
@@ -2246,6 +2337,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_A;
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -2319,6 +2418,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind B
         {
@@ -2327,6 +2427,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -2668,6 +2776,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.RoleMembership A
         {
@@ -2676,6 +2785,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_A;
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -2791,6 +2908,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Relation B
         {
@@ -2799,6 +2917,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -3206,6 +3332,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.SchemaMigration.SourceColumn A
         {
@@ -3214,6 +3341,14 @@ namespace Zetbox.App.SchemaMigration
         }
 
         private int? _fk_A;
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -3329,6 +3464,7 @@ namespace Zetbox.App.SchemaMigration
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Property B
         {
@@ -3337,6 +3473,14 @@ namespace Zetbox.App.SchemaMigration
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -3747,6 +3891,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.IndexConstraint A
         {
@@ -3755,6 +3900,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_A;
+
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
 
         private Guid? _fk_guid_A = null;
 
@@ -3828,6 +3981,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Property B
         {
@@ -3836,6 +3990,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 

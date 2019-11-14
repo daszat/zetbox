@@ -18,9 +18,17 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("da080b07-15d2-4cdf-bc1c-df776e094a75")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Group Group {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Group 
+		{ 
+			get; 
+			set;
+		}
     }
 }

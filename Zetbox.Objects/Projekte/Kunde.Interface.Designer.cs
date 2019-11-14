@@ -23,11 +23,13 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// EMails des Kunden - können mehrere sein
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("1d0f6da6-4b69-48d7-9e94-bfb5466654b9")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<string> EMails { get; }
 
         /// <summary>
@@ -39,6 +41,7 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// Land
         /// </summary>
@@ -47,6 +50,7 @@ namespace Zetbox.App.Projekte
             get;
             set;
         }
+
 
         /// <summary>
         /// Ort
@@ -57,6 +61,7 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// Postleitzahl
         /// </summary>
@@ -65,5 +70,6 @@ namespace Zetbox.App.Projekte
             get;
             set;
         }
+
     }
 }

@@ -59,6 +59,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity ChangedBy
         {
@@ -67,6 +68,14 @@ namespace Zetbox.App.Calendar
         }
 
         private int? _fk_ChangedBy;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -250,6 +259,7 @@ namespace Zetbox.App.Calendar
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity CreatedBy
         {
@@ -258,6 +268,14 @@ namespace Zetbox.App.Calendar
         }
 
         private int? _fk_CreatedBy;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -814,6 +832,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity Owner
         {
@@ -822,6 +841,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         }
 
         private int? _fk_Owner;
+
+        /// <summary>ForeignKey Property for Owner's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Owner
+		{
+			get { return Owner != null ? Owner.ID : (int?)null; }
+			set { _fk_Owner = value; }
+		}
 
 
         // internal implementation, EF sees only this property

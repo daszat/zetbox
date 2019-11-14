@@ -1298,12 +1298,6 @@
     
 
     <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->
-    <EntitySet Name="PrivateKey_AuditJournal_CollectionEntry" EntityType="Model.Store.PrivateKey_AuditJournal_CollectionEntry" Schema="lm" Table="PrivateKeys_AuditJournalCollection" />
-    <AssociationSet Name="FK_PrivateKey_value_AuditJournal" Association="Model.Store.FK_PrivateKey_value_AuditJournal" >
-      <End Role="PrivateKey" EntitySet="PrivateKey" />
-      <End Role="CollectionEntry" EntitySet="PrivateKey_AuditJournal_CollectionEntry" />
-    </AssociationSet>
-    
     <EntitySet Name="Projekt_AuditJournal_CollectionEntry" EntityType="Model.Store.Projekt_AuditJournal_CollectionEntry" Schema="projekte" Table="Projekte_AuditJournalCollection" />
     <AssociationSet Name="FK_Projekt_value_AuditJournal" Association="Model.Store.FK_Projekt_value_AuditJournal" >
       <End Role="Projekt" EntitySet="Projekt" />
@@ -1778,10 +1772,10 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Date" Type="datetime2" Nullable="false" />
-    <Property Name="Exception" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="Exception" Type="nvarchar" Nullable="true" />
     <Property Name="Level" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Logger" Type="nvarchar" MaxLength="255" Nullable="false" />
-    <Property Name="Message" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Message" Type="nvarchar" Nullable="false" />
     <Property Name="Thread" Type="nvarchar" MaxLength="255" Nullable="false" />
   </EntityType>
 	
@@ -1994,7 +1988,7 @@
     <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_ObjectClass" Type="int" />
-    <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="CategoryTags" Type="nvarchar" Nullable="true" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CodeTemplate" Type="nvarchar" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
@@ -2238,6 +2232,7 @@
     <Property Name="Description" Type="nvarchar" Nullable="false" />
     <Property Name="IsDeactivated" Type="bit" Nullable="false" />
     <Property Name="Password" Type="nvarchar" Nullable="true" />
+    <Property Name="Tags" Type="nvarchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Projekt">
@@ -2296,7 +2291,7 @@
     <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="AllowFilterCollections" Type="bit" Nullable="false" />
-    <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="CategoryTags" Type="nvarchar" Nullable="true" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CodeTemplate" Type="nvarchar" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
@@ -2788,7 +2783,7 @@
     <Property Name="fk_DefaultGridCellKind" Type="int" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="Deleted" Type="bit" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ViewModelTypeRef" Type="nvarchar" MaxLength="2000" Nullable="true" />
   </EntityType>
@@ -6499,35 +6494,6 @@
 
 
     <!-- EntityTypes and Associations for all object-struct CollectionEntrys -->
-    <EntityType Name="PrivateKey_AuditJournal_CollectionEntry" >
-      <Key>
-        <PropertyRef Name="ID" />
-      </Key>
-      <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-      <Property Name="fk_PrivateKey" Type="int" Nullable="true" />
-    <Property Name="AuditJournal_Identity" Type="nvarchar" Nullable="true" />
-    <Property Name="AuditJournal_MessageFormat" Type="nvarchar" Nullable="true" />
-    <Property Name="AuditJournal_NewValue" Type="nvarchar" Nullable="true" />
-    <Property Name="AuditJournal_OldValue" Type="nvarchar" Nullable="true" />
-    <Property Name="AuditJournal_PropertyName" Type="nvarchar" Nullable="true" />
-    <Property Name="AuditJournal_Timestamp" Type="datetime2" Nullable="true" />
-    </EntityType>
-
-    <Association Name="FK_PrivateKey_value_AuditJournal">
-      <End Role="PrivateKey" Type="Model.Store.PrivateKey" Multiplicity="0..1">
-        <OnDelete Action="Cascade" />
-      </End>
-      <End Role="CollectionEntry" Type="Model.Store.PrivateKey_AuditJournal_CollectionEntry" Multiplicity="*" />
-      <ReferentialConstraint>
-        <Principal Role="PrivateKey">
-          <PropertyRef Name="ID" />
-        </Principal>
-        <Dependent Role="CollectionEntry">
-          <PropertyRef Name="fk_PrivateKey" />
-        </Dependent>
-      </ReferentialConstraint>
-    </Association>
-
     <EntityType Name="Projekt_AuditJournal_CollectionEntry" >
       <Key>
         <PropertyRef Name="ID" />

@@ -121,6 +121,7 @@ namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
             throw new NotImplementedException();
         }
 
+
         #region IComparable
         int System.IComparable.CompareTo(object other)
         {
@@ -139,7 +140,7 @@ namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
         private static readonly object _ISortKey_ID_current_lock = new object();
         private static int _ISortKey_ID_current = 0;
         private int _ISortKey_ID = 0;
-        int ISortKey<int>.ID
+        int ISortKey<int>.InternalSortKey
         {
             get
             {

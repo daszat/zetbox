@@ -63,6 +63,7 @@ namespace Zetbox.App.Calendar
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity ChangedBy
         {
             get
@@ -136,6 +137,14 @@ namespace Zetbox.App.Calendar
 
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
@@ -239,6 +248,7 @@ namespace Zetbox.App.Calendar
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity CreatedBy
         {
             get
@@ -312,6 +322,14 @@ namespace Zetbox.App.Calendar
 
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
@@ -705,6 +723,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity Owner
         {
             get
@@ -778,6 +797,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 
         /// <summary>Backing store for Owner's id, used on dehydration only</summary>
         private int? _fk_Owner = null;
+
+        /// <summary>ForeignKey Property for Owner's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Owner
+		{
+			get { return Owner != null ? Owner.ID : (int?)null; }
+			set { _fk_Owner = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchOwnerAsync()
@@ -1351,9 +1378,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 
             public virtual ICollection<CalendarBook_RightsNHibernateImpl> SecurityRightsCollectionImpl { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         private Zetbox.API.AccessRights? __currentAccessRights;
         public override Zetbox.API.AccessRights CurrentAccessRights

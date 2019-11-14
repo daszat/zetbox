@@ -8,7 +8,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.InterfaceTemplates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst")]
     public partial class SimplePropertyListTemplate : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -32,10 +32,11 @@ namespace Zetbox.Generator.InterfaceTemplates.Properties
 
         public override void Generate()
         {
-#line 27 "C:\Projects\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
+#line 27 "D:\Projects\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
 this.WriteObjects("\r\n");
-#line 30 "C:\Projects\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
+#line 30 "D:\Projects\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
 this.WriteObjects("        [Zetbox.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\r\n");
+this.WriteObjects("        [System.Runtime.Serialization.IgnoreDataMember]\r\n");
 this.WriteObjects("        ",  GetPropertyTypeString() , " ",  GetPropertyName() , " { get; }\r\n");
 
         }

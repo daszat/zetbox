@@ -23,6 +23,7 @@ namespace Zetbox.App.Calendar
             set;
         }
 
+
         /// <summary>
         /// The name of the Rule
         /// </summary>
@@ -31,6 +32,7 @@ namespace Zetbox.App.Calendar
             get;
             set;
         }
+
 
         /// <summary>
         /// Optional valid from date
@@ -41,6 +43,7 @@ namespace Zetbox.App.Calendar
             set;
         }
 
+
         /// <summary>
         /// Optional valid until date
         /// </summary>
@@ -49,6 +52,7 @@ namespace Zetbox.App.Calendar
             get;
             set;
         }
+
 
         /// <summary>
         /// The amount of working hours. 0 if it&apos;s a free day.
@@ -59,14 +63,23 @@ namespace Zetbox.App.Calendar
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("115c1d4c-ddd3-4d33-ae74-a6b676fc0dfa")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Calendar.WorkSchedule WorkSchedule {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_WorkSchedule 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Checks if the Rule applies to the given date

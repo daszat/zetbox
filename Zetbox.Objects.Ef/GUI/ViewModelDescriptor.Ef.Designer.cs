@@ -59,6 +59,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind DefaultDisplayKind
         {
@@ -67,6 +68,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_DefaultDisplayKind;
+
+        /// <summary>ForeignKey Property for DefaultDisplayKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultDisplayKind
+		{
+			get { return DefaultDisplayKind != null ? DefaultDisplayKind.ID : (int?)null; }
+			set { _fk_DefaultDisplayKind = value; }
+		}
 
         private Guid? _fk_guid_DefaultDisplayKind = null;
 
@@ -167,6 +176,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind DefaultEditorKind
         {
@@ -175,6 +185,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_DefaultEditorKind;
+
+        /// <summary>ForeignKey Property for DefaultEditorKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultEditorKind
+		{
+			get { return DefaultEditorKind != null ? DefaultEditorKind.ID : (int?)null; }
+			set { _fk_DefaultEditorKind = value; }
+		}
 
         private Guid? _fk_guid_DefaultEditorKind = null;
 
@@ -275,6 +293,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind DefaultGridCellDisplayKind
         {
@@ -283,6 +302,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_DefaultGridCellDisplayKind;
+
+        /// <summary>ForeignKey Property for DefaultGridCellDisplayKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultGridCellDisplayKind
+		{
+			get { return DefaultGridCellDisplayKind != null ? DefaultGridCellDisplayKind.ID : (int?)null; }
+			set { _fk_DefaultGridCellDisplayKind = value; }
+		}
 
         private Guid? _fk_guid_DefaultGridCellDisplayKind = null;
 
@@ -383,6 +410,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind DefaultGridCellEditorKind
         {
@@ -391,6 +419,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_DefaultGridCellEditorKind;
+
+        /// <summary>ForeignKey Property for DefaultGridCellEditorKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultGridCellEditorKind
+		{
+			get { return DefaultGridCellEditorKind != null ? DefaultGridCellEditorKind.ID : (int?)null; }
+			set { _fk_DefaultGridCellEditorKind = value; }
+		}
 
         private Guid? _fk_guid_DefaultGridCellEditorKind = null;
 
@@ -491,6 +527,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind DefaultGridCellPreEditorKind
         {
@@ -499,6 +536,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_DefaultGridCellPreEditorKind;
+
+        /// <summary>ForeignKey Property for DefaultGridCellPreEditorKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultGridCellPreEditorKind
+		{
+			get { return DefaultGridCellPreEditorKind != null ? DefaultGridCellPreEditorKind.ID : (int?)null; }
+			set { _fk_DefaultGridCellPreEditorKind = value; }
+		}
 
         private Guid? _fk_guid_DefaultGridCellPreEditorKind = null;
 
@@ -832,6 +877,7 @@ namespace Zetbox.App.GUI
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Module Module
         {
@@ -840,6 +886,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_Module;
+
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return Module != null ? Module.ID : (int?)null; }
+			set { _fk_Module = value; }
+		}
 
         private Guid? _fk_guid_Module = null;
 

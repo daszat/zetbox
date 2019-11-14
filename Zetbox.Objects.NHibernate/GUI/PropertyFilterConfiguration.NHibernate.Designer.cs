@@ -59,6 +59,7 @@ namespace Zetbox.App.GUI
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Property Property
         {
             get
@@ -148,6 +149,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for Property's id, used on dehydration only</summary>
         private int? _fk_Property = null;
+
+        /// <summary>ForeignKey Property for Property's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Property
+		{
+			get { return Property != null ? Property.ID : (int?)null; }
+			set { _fk_Property = value; }
+		}
 
         /// <summary>Backing store for Property's guid, used on import only</summary>
         private Guid? _fk_guid_Property = null;

@@ -18,10 +18,18 @@ namespace Zetbox.App.Base
         /// Definition of this Compound Object
         /// </summary>
         [Zetbox.API.DefinitionGuid("0d78c157-c106-4728-9af2-7992da7c935d")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.CompoundObject CompoundObjectDefinition {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_CompoundObjectDefinition 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Whether or not the list has a persistent ordering of elements
@@ -32,6 +40,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Whether or not this CompoundObject property is list valued
         /// </summary>
@@ -40,5 +49,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

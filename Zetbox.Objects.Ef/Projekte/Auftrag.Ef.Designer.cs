@@ -197,6 +197,7 @@ namespace Zetbox.App.Projekte
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity ChangedBy
         {
@@ -205,6 +206,14 @@ namespace Zetbox.App.Projekte
         }
 
         private int? _fk_ChangedBy;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -388,6 +397,7 @@ namespace Zetbox.App.Projekte
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Identity CreatedBy
         {
@@ -396,6 +406,14 @@ namespace Zetbox.App.Projekte
         }
 
         private int? _fk_CreatedBy;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -661,6 +679,7 @@ namespace Zetbox.App.Projekte
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Projekte.Kunde Kunde
         {
@@ -669,6 +688,14 @@ namespace Zetbox.App.Projekte
         }
 
         private int? _fk_Kunde;
+
+        /// <summary>ForeignKey Property for Kunde's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Kunde
+		{
+			get { return Kunde != null ? Kunde.ID : (int?)null; }
+			set { _fk_Kunde = value; }
+		}
 
         private Guid? _fk_guid_Kunde = null;
 
@@ -769,6 +796,7 @@ namespace Zetbox.App.Projekte
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Projekte.Mitarbeiter Mitarbeiter
         {
@@ -777,6 +805,14 @@ namespace Zetbox.App.Projekte
         }
 
         private int? _fk_Mitarbeiter;
+
+        /// <summary>ForeignKey Property for Mitarbeiter's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Mitarbeiter
+		{
+			get { return Mitarbeiter != null ? Mitarbeiter.ID : (int?)null; }
+			set { _fk_Mitarbeiter = value; }
+		}
 
         private Guid? _fk_guid_Mitarbeiter = null;
 
@@ -877,6 +913,7 @@ namespace Zetbox.App.Projekte
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Projekte.Projekt Projekt
         {
@@ -885,6 +922,14 @@ namespace Zetbox.App.Projekte
         }
 
         private int? _fk_Projekt;
+
+        /// <summary>ForeignKey Property for Projekt's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Projekt
+		{
+			get { return Projekt != null ? Projekt.ID : (int?)null; }
+			set { _fk_Projekt = value; }
+		}
 
         private Guid? _fk_guid_Projekt = null;
 

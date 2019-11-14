@@ -23,14 +23,23 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// Workaround for Case 1376
         /// </summary>
         [Zetbox.API.DefinitionGuid("ae20c23b-0cfa-422a-9f8d-797e9f70bf82")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Test.Fragebogen Fragebogen {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Fragebogen 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -41,6 +50,7 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -49,5 +59,6 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
     }
 }

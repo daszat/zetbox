@@ -161,7 +161,7 @@ namespace Zetbox.Client.WPF.Toolkit
             }
             else
             {
-                Logging.Log.WarnFormat("No '{0}' DataTemplate found for {1}", rk == null ? "(default)" : (rk is string ? rk : rk.GetType().FullName), item);
+                Logging.Log.WarnFormat("No '{0}' DataTemplate found for {1}", rk == null ? "(default)" : rk?.ToString(), item);
                 return GetEmptyTemplate(container);
             }
         }

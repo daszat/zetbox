@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -32,6 +33,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -40,5 +42,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

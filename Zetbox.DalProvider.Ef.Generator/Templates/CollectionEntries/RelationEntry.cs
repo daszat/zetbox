@@ -54,6 +54,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
             string eventName = "On" + propertyName;
 
             string fkBackingName = "_fk_" + propertyName;
+            string publicFKBackingName = "FK_" + propertyName;
             string fkGuidBackingName = "_fk_guid_" + propertyName;
 
             string referencedInterface = relEnd.Type.GetDataTypeString();
@@ -85,6 +86,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
                 implName,
                 eventName,
                 fkBackingName,
+                publicFKBackingName,
                 fkGuidBackingName,
                 referencedInterface,
                 referencedImplementation,

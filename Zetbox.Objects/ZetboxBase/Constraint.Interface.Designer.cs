@@ -18,10 +18,18 @@ namespace Zetbox.App.Base
         /// The property to be constrained
         /// </summary>
         [Zetbox.API.DefinitionGuid("438b9307-fb40-4afe-a66f-a5762c41e14b")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Property ConstrainedProperty {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ConstrainedProperty 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// The reason of this constraint
@@ -31,6 +39,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// 

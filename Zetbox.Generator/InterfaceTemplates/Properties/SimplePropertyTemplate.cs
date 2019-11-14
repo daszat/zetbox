@@ -28,5 +28,12 @@ namespace Zetbox.Generator.InterfaceTemplates.Properties
 
     public partial class SimplePropertyTemplate
     {
+        public bool IsObjectReference
+        {
+            get
+            {
+                return this.prop is ObjectReferenceProperty || this.prop is ObjectReferencePlaceholderProperty;
+            }
+        }
     }
 }

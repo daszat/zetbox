@@ -107,6 +107,7 @@ namespace Zetbox.App.Test
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Test.RequiredParent Parent
@@ -130,6 +131,14 @@ namespace Zetbox.App.Test
                 _triggerFetchParentTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return _fk_Parent; }
+			set { _fk_Parent = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent> _triggerFetchParentTask;

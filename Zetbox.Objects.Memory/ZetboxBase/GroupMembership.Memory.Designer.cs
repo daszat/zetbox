@@ -49,6 +49,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Group Group
@@ -72,6 +73,14 @@ namespace Zetbox.App.Base
                 _triggerFetchGroupTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Group's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Group
+		{
+			get { return _fk_Group; }
+			set { _fk_Group = value; }
+		}
 
         private Guid? _fk_guid_Group = null;
 

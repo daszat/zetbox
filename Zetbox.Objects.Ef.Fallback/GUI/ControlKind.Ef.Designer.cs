@@ -54,6 +54,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.GUI.ControlKind> ChildControlKinds
         {
@@ -215,6 +216,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Module Module
         {
@@ -223,6 +225,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         }
 
         private int? _fk_Module;
+
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return Module != null ? Module.ID : (int?)null; }
+			set { _fk_Module = value; }
+		}
 
         private Guid? _fk_guid_Module = null;
 
@@ -392,6 +402,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.GUI.ControlKind Parent
         {
@@ -400,6 +411,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         }
 
         private int? _fk_Parent;
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
 
         private Guid? _fk_guid_Parent = null;
 

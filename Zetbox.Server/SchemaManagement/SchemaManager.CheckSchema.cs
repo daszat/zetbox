@@ -817,6 +817,18 @@ namespace Zetbox.Server.SchemaManagement
                     else if (colSize != size)
                     {
                         Log.WarnFormat("Column '{0}'.'{1}' length mismatch. Columns length is {2} but should be {3}", tblName, colName, colSize, size);
+                        if (repair)
+                        {
+                            if (size > colSize)
+                            {
+                                db.AlterColumn(tblName, colName, type, size, scale, isNullable, defConstr);
+                                Log.Info("Fixed");
+                            }
+                            else
+                            {
+                                Log.WarnFormat("Cannot fix column size as new size is smaller");
+                            }
+                        }
                     }
                 }
                 {
@@ -831,6 +843,7 @@ namespace Zetbox.Server.SchemaManagement
                         if (repair)
                         {
                             db.AlterColumn(tblName, colName, type, size, scale, isNullable, defConstr);
+                            Log.Info("Fixed");
                         }
                     }
                 }

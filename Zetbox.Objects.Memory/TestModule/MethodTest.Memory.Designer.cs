@@ -44,6 +44,7 @@ namespace Zetbox.App.Test
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Test.MethodTest> Children
         {
@@ -115,6 +116,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Test.MethodTest Parent
@@ -138,6 +140,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 _triggerFetchParentTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return _fk_Parent; }
+			set { _fk_Parent = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest> _triggerFetchParentTask;

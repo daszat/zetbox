@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// A HTML string with a help text
         /// </summary>
@@ -31,6 +32,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Parameter wird als List&amp;lt;&amp;gt; generiert
@@ -41,6 +43,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -49,6 +52,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Es darf nur ein Return Parameter angegeben werden
@@ -59,6 +63,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -68,14 +73,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Methode des Parameters
         /// </summary>
         [Zetbox.API.DefinitionGuid("29d7eba7-6b87-438a-910d-1a2bf17d8215")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Method Method {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Method 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Name des Parameter
@@ -85,6 +99,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// 

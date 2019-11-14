@@ -52,49 +52,6 @@ namespace Zetbox.App.LicenseManagement
         internal readonly PrivateKeyProxy Proxy;
 
         /// <summary>
-        /// Eine Liste der Änderungen an diesem Datensatz.
-        /// </summary>
-        // CompoundObject list property
-
-        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
-        public ICollection<Zetbox.App.Base.AuditEntry> AuditJournal
-        {
-            get
-            {
-                if (_AuditJournal == null)
-                {
-                    _AuditJournal = new ClientValueCollectionWrapper<PrivateKey, Zetbox.App.Base.AuditEntry, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntry, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl>>(
-                            this.Context,
-                            this,
-                            () => { this.NotifyPropertyChanged("AuditJournal", null, null); if(OnAuditJournal_PostSetter != null && IsAttached) OnAuditJournal_PostSetter(this); },
-                            AuditJournalCollection);
-                }
-                return _AuditJournal;
-            }
-        }
-
-        private ProjectedCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl.PrivateKey_AuditJournal_CollectionEntryProxy, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl> AuditJournalCollection
-        {
-            get {
-                if (_AuditJournalCollection == null)
-                {
-                    _AuditJournalCollection = new ProjectedCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl.PrivateKey_AuditJournal_CollectionEntryProxy, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl>(
-                        () => this.Proxy.AuditJournal,
-                        p => (Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                        d => (Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl.PrivateKey_AuditJournal_CollectionEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy);
-                }
-                return _AuditJournalCollection;
-            }
-        }
-
-        private ClientValueCollectionWrapper<PrivateKey, Zetbox.App.Base.AuditEntry, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntry, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl>> _AuditJournal;
-        private ProjectedCollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl.PrivateKey_AuditJournal_CollectionEntryProxy, Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl> _AuditJournalCollection;
-        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
-public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.PrivateKey> OnAuditJournal_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.PrivateKey> OnAuditJournal_IsValid;
-
-        /// <summary>
         /// The certificate
         /// </summary>
 
@@ -163,6 +120,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity ChangedBy
         {
             get
@@ -236,6 +194,14 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
 
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
@@ -339,6 +305,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.Identity CreatedBy
         {
             get
@@ -412,6 +379,14 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
 
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
@@ -699,6 +674,64 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
         public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.PrivateKey> OnPassword_IsValid;
 
         /// <summary>
+        /// Tags of this private key
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public string Tags
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.Tags;
+                if (OnTags_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnTags_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.Tags != value)
+                {
+                    var __oldValue = Proxy.Tags;
+                    var __newValue = value;
+                    if (OnTags_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTags_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Tags", __oldValue, __newValue);
+                    Proxy.Tags = __newValue;
+                    NotifyPropertyChanged("Tags", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnTags_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTags_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("Tags");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.LicenseManagement.PrivateKey, string> OnTags_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.LicenseManagement.PrivateKey, string> OnTags_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.LicenseManagement.PrivateKey, string> OnTags_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.PrivateKey> OnTags_IsValid;
+
+        /// <summary>
         /// Asks the user to open a file and loads the certificate
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -842,6 +875,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
             me.Description = other.Description;
             me.IsDeactivated = other.IsDeactivated;
             me.Password = other.Password;
+            me.Tags = other.Tags;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
         }
@@ -894,6 +928,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 case "Description":
                 case "IsDeactivated":
                 case "Password":
+                case "Tags":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -945,15 +980,6 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
-                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<PrivateKey, ICollection<Zetbox.App.Base.AuditEntry>>(
-                        lazyCtx,
-                        new Guid("3ea184f1-d6f7-4ceb-be7f-525da44ed3b4"),
-                        "AuditJournal",
-                        null,
-                        obj => obj.AuditJournal,
-                        null, // lists are read-only properties
-                        obj => OnAuditJournal_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<PrivateKey, string>(
                         lazyCtx,
@@ -1026,6 +1052,15 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                         obj => obj.Password,
                         (obj, val) => obj.Password = val,
 						obj => OnPassword_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<PrivateKey, string>(
+                        lazyCtx,
+                        new Guid("58e7c968-8f8d-4d27-811a-f6dbf48177a0"),
+                        "Tags",
+                        null,
+                        obj => obj.Tags,
+                        (obj, val) => obj.Tags = val,
+						obj => OnTags_IsValid), 
                     // position columns
                 };
             }
@@ -1096,6 +1131,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Password");
+            SetNotInitializedProperty("Tags");
             base.NotifyCreated();
             if (OnNotifyCreated_PrivateKey != null) OnNotifyCreated_PrivateKey(this);
         }
@@ -1106,10 +1142,6 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_PrivateKey != null) OnNotifyDeleting_PrivateKey(this);
-            foreach(NHibernatePersistenceObject x in AuditJournalCollection) {
-                x.ParentsToDelete.Add(this);
-                ChildrenToDelete.Add(x);
-            }
 
             // FK_PrivateKey_was_ChangedBy
             if (ChangedBy != null) {
@@ -1122,7 +1154,6 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
-            AuditJournal.Clear();
             ChangedBy = null;
             CreatedBy = null;
         }
@@ -1135,17 +1166,12 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
         {
             public PrivateKeyProxy()
             {
-                AuditJournal = new Collection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl.PrivateKey_AuditJournal_CollectionEntryProxy>();
             }
 
             public virtual int ID { get; set; }
 
             public virtual Type ZetboxWrapper { get { return typeof(PrivateKeyNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(PrivateKeyProxy); } }
-
-            public virtual ICollection<Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl.PrivateKey_AuditJournal_CollectionEntryProxy> AuditJournal { get; set; }
-
-            public virtual int? AuditJournal_pos { get; set; }
 
             public virtual string Certificate { get; set; }
 
@@ -1163,9 +1189,15 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
 
             public virtual string Password { get; set; }
 
+            public virtual string Tags { get; set; }
+
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 
@@ -1175,7 +1207,6 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.WriteCollectionEntries(this.AuditJournalCollection);
             binStream.Write(this.Proxy.Certificate);
             binStream.Write(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null);
             binStream.Write(this._isChangedOnSet);
@@ -1193,6 +1224,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 binStream.Write(this.Proxy.IsDeactivated);
             }
             binStream.Write(this.Proxy.Password);
+            binStream.Write(this.Proxy.Tags);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1218,6 +1250,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
                 this.Proxy.IsDeactivated = binStream.ReadBoolean();
             }
             this.Proxy.Password = binStream.ReadString();
+            this.Proxy.Tags = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

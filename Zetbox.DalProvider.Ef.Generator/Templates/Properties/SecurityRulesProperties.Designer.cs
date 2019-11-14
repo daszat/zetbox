@@ -10,7 +10,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst")]
     public partial class SecurityRulesProperties : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -42,7 +42,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 35 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst"
+#line 35 "D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        private Zetbox.API.AccessRights? __currentAccessRights;\r\n");
 this.WriteObjects("        public override Zetbox.API.AccessRights CurrentAccessRights\r\n");

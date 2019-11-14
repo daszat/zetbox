@@ -59,6 +59,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.EnumerationEntry EnumValue
         {
@@ -67,6 +68,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_EnumValue;
+
+        /// <summary>ForeignKey Property for EnumValue's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_EnumValue
+		{
+			get { return EnumValue != null ? EnumValue.ID : (int?)null; }
+			set { _fk_EnumValue = value; }
+		}
 
         private Guid? _fk_guid_EnumValue = null;
 

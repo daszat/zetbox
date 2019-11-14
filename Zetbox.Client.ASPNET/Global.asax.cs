@@ -23,6 +23,9 @@ namespace Zetbox.Client.ASPNET
     using System.Web.Mvc;
     using System.Web.Routing;
     using Zetbox.Client;
+    using Autofac.Integration.WebApi;
+    using System.Web.Http;
+    using Autofac;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -30,6 +33,7 @@ namespace Zetbox.Client.ASPNET
     {
         public override void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            WebApiConfig.Register(GlobalConfiguration.Configuration);
             filters.Add(new HandleErrorAttribute());
         }
 
@@ -49,7 +53,15 @@ namespace Zetbox.Client.ASPNET
             base.ConfigureContainerBuilder(builder);
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterApiControllers(typeof(MvcApplication).Assembly);
             builder.RegisterViewModels(typeof(MvcApplication).Assembly);
+        }
+
+        protected override void SetupResolver(IContainer container)
+        {
+            base.SetupResolver(container);
+
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver((IContainer)container); //Set the WebApi DependencyResolver
         }
     }
 }

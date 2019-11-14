@@ -117,6 +117,7 @@ namespace Zetbox.App.Test
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.One_to_N_relations_One OneSide
         {
             get
@@ -213,6 +214,14 @@ namespace Zetbox.App.Test
 
         /// <summary>Backing store for OneSide's id, used on dehydration only</summary>
         private int? _fk_OneSide = null;
+
+        /// <summary>ForeignKey Property for OneSide's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_OneSide
+		{
+			get { return OneSide != null ? OneSide.ID : (int?)null; }
+			set { _fk_OneSide = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchOneSideAsync()
@@ -484,9 +493,13 @@ namespace Zetbox.App.Test
 
             public virtual int? OrderedNSide_pos { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

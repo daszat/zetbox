@@ -71,6 +71,7 @@ namespace Zetbox.App.Test
         }
 
         /// <summary>backing property for Any, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.AnyReferenceNHibernateImpl AnyImpl
         {
             get
@@ -443,9 +444,13 @@ namespace Zetbox.App.Test
 
             public virtual Guid ExportGuid { get; set; }
 
+
+			[System.Runtime.Serialization.IgnoreDataMember]
+			int ISortKey<int>.InternalSortKey { get { return ID; } }
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

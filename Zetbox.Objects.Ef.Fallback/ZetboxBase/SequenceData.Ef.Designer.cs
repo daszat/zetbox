@@ -128,6 +128,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.Sequence Sequence
         {
@@ -136,6 +137,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_Sequence;
+
+        /// <summary>ForeignKey Property for Sequence's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Sequence
+		{
+			get { return Sequence != null ? Sequence.ID : (int?)null; }
+			set { _fk_Sequence = value; }
+		}
 
 
         // internal implementation, EF sees only this property

@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Suggested implementors role name. If empty, class name will be used
         /// </summary>
@@ -31,6 +32,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Whether or not this property placeholder is list valued
@@ -41,6 +43,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Suggested role name for the referenced item
         /// </summary>
@@ -50,14 +53,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// The ObjectClass that is referenced by this placeholder
         /// </summary>
         [Zetbox.API.DefinitionGuid("41da7ae6-aff7-44cf-83be-6150bf7578fd")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.ObjectClass ReferencedObjectClass {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ReferencedObjectClass 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Suggested verb for the new relation
@@ -67,5 +79,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

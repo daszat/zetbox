@@ -33,6 +33,7 @@
 <%@ Parameter Name="implNameUnused" Type="string" %>
 <%@ Parameter Name="eventName" Type="string" %>
 <%@ Parameter Name="fkBackingName" Type="string" %>
+<%@ Parameter Name="publicFKBackingName" Type="string" %>
 <%@ Parameter Name="fkGuidBackingName" Type="string" %>
 <%@ Parameter Name="referencedInterface" Type="string" %>
 <%@ Parameter Name="referencedImplementation" Type="string" %>
@@ -61,6 +62,7 @@
         // Target <%= relDataTypeExportable ? String.Empty : "not " %>exportable; does <%= callGetterSetterEvents ? String.Empty : "not " %>call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         <%= GetModifiers() %> <%= referencedInterface %> <%= name %>
         {
             get
@@ -179,6 +181,14 @@
 
         /// <summary>Backing store for <%= UglyXmlEncode(name) %>'s id, used on dehydration only</summary>
         private int? <%= fkBackingName %> = null;
+
+        /// <summary>ForeignKey Property for <%= UglyXmlEncode(name) %>'s id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? <%= publicFKBackingName %>
+		{
+			get { return <%= name %> != null ? <%= name %>.ID : (int?)null; }
+			set { <%= fkBackingName %> = value; }
+		}
 
 <% if (relDataTypeExportable) { %>
         /// <summary>Backing store for <%= UglyXmlEncode(name) %>'s guid, used on import only</summary>

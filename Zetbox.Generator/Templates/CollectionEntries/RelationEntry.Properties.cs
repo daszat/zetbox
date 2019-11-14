@@ -59,6 +59,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
             string implName = propertyName + ImplementationPropertySuffix;
             string eventName = "On" + name;
             string fkBackingName = "_fk_" + name;
+            string publicFKBackingName = "FK_" + name;
             string fkGuidBackingName = "_fk_guid_" + name;
             string referencedInterface = relEnd.Type.GetDataTypeString();
             string referencedImplementation = referencedInterface + ImplementationSuffix;
@@ -85,6 +86,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
                 implName,
                 eventName,
                 fkBackingName,
+                publicFKBackingName,
                 fkGuidBackingName,
                 referencedInterface,
                 referencedImplementation,

@@ -30,6 +30,7 @@ namespace Zetbox.DalProvider.NHibernate
         {
         }
 
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override bool IsAttached
         {
             get { return Context != null; }
@@ -72,6 +73,7 @@ namespace Zetbox.DalProvider.NHibernate
         }
 
         protected NHibernateContext OurContext { get { return (NHibernateContext)Context; } }
+        [System.Runtime.Serialization.IgnoreDataMember]
         public abstract IProxyObject NHibernateProxy { get; }
 
         public virtual void SaveOrUpdateTo(global::NHibernate.ISession session)
@@ -99,7 +101,9 @@ namespace Zetbox.DalProvider.NHibernate
             }
         }
 
+        [System.Runtime.Serialization.IgnoreDataMember]
         public readonly List<NHibernatePersistenceObject> ChildrenToDelete = new List<NHibernatePersistenceObject>();
+        [System.Runtime.Serialization.IgnoreDataMember]
         public readonly List<NHibernatePersistenceObject> ParentsToDelete = new List<NHibernatePersistenceObject>();
 
         public virtual List<NHibernatePersistenceObject> GetParentsToDelete() 

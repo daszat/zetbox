@@ -23,11 +23,13 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Einträge der Enumeration
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("1619c8a7-b969-4c05-851c-7a2545cda484")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Base.EnumerationEntry> EnumerationEntries { get; }
 
         /// <summary>

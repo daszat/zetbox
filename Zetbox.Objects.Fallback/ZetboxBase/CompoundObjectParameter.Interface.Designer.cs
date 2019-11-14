@@ -18,9 +18,17 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("43d03fec-b595-46d0-b5d5-cf4c5d21fda7")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.CompoundObject CompoundObject {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_CompoundObject 
+		{ 
+			get; 
+			set;
+		}
     }
 }

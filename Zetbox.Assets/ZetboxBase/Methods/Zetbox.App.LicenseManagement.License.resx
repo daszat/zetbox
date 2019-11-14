@@ -135,6 +135,24 @@
   <data name="Check(certificate)_description" xml:space="preserve">
     <value>Certificate either as byte array or as X509Certificate class</value>
   </data>
+  <data name="Export_label" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Export_description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Export(file)_label" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Export(file)_description" xml:space="preserve">
+    <value>Target filename</value>
+  </data>
+  <data name="ExportUI_label" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="ExportUI_description" xml:space="preserve">
+    <value>Exports this License</value>
+  </data>
   <data name="IsSignatureValid_label" xml:space="preserve">
     <value>Is signature valid</value>
   </data>
@@ -169,12 +187,24 @@
     <value>Sign</value>
   </data>
   <data name="Sign_description" xml:space="preserve">
-    <value>Signs this certificate</value>
+    <value>Sings this license</value>
   </data>
   <data name="Sign(certificate)_label" xml:space="preserve">
     <value>certificate</value>
   </data>
   <data name="Sign(certificate)_description" xml:space="preserve">
     <value />
+  </data>
+  <data name="Sign(password)_label" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Sign(password)_description" xml:space="preserve">
+    <value>if empty, the password is used from the private key</value>
+  </data>
+  <data name="SignUI_label" xml:space="preserve">
+    <value>Sign</value>
+  </data>
+  <data name="SignUI_description" xml:space="preserve">
+    <value>Sings this license</value>
   </data>
 </root>
