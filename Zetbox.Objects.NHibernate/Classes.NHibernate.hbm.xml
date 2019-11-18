@@ -24,18 +24,21 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=Calendar_shared_r_GroupReaders_RelationEntry -->
@@ -57,11 +60,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="IsDeactivated" 
                   column="`IsDeactivated`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Owner" column="`fk_Owner`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -125,7 +130,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Body" 
                   column="`Body`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Calendar" column="`fk_Calendar`" class="Zetbox.App.Calendar.CalendarBookNHibernateImpl+CalendarBookProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -135,120 +141,147 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="EndDate" type="Timestamp"
                   column="`EndDate`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsAllDay" 
                   column="`IsAllDay`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsViewReadOnly" 
                   column="`IsViewReadOnly`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Location" 
                   column="`Location`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- CompoundObjectProperty isValue -->
         <component name="Recurrence" class="Zetbox.App.Base.RecurrenceRuleNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
         <property name="ByDay" 
                   column="`Recurrence_ByDay`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ByHour" 
                   column="`Recurrence_ByHour`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ByMinute" 
                   column="`Recurrence_ByMinute`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ByMonth" 
                   column="`Recurrence_ByMonth`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ByMonthDay" 
                   column="`Recurrence_ByMonthDay`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="BySecond" 
                   column="`Recurrence_BySecond`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="BySetPos" 
                   column="`Recurrence_BySetPos`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ByWeekNumber" 
                   column="`Recurrence_ByWeekNumber`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ByYearDay" 
                   column="`Recurrence_ByYearDay`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="Count" 
                   column="`Recurrence_Count`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Frequency" 
                   column="`Recurrence_Frequency`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Interval" 
                   column="`Recurrence_Interval`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Until" type="Timestamp"
                   column="`Recurrence_Until`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="WeekStart" 
                   column="`Recurrence_WeekStart`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         </component>
         <!-- CompoundObjectProperty isValue -->
         <component name="Source" class="Zetbox.App.Base.AnyReferenceNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
         <property name="ObjClass" 
                   column="`Source_ObjClass`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ObjGuid" 
                   column="`Source_ObjGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ObjID" 
                   column="`Source_ObjID`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         </component>
         <!-- ValueTypeProperty isValue -->
         <property name="StartDate" type="Timestamp"
                   column="`StartDate`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Summary" 
                   column="`Summary`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="SyncHash" 
                   column="`SyncHash`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="500" />
 
         <!-- map rights -->
         <set name="SecurityRightsCollectionImpl"
@@ -290,22 +323,26 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="NextSync" type="Timestamp"
                   column="`NextSync`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
         <joined-subclass
@@ -357,7 +394,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <set name="ChildWorkSchedule" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_BaseWorkSchedule`" />
@@ -370,18 +408,21 @@
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <set name="WorkScheduleRules" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_WorkSchedule`" />
@@ -419,41 +460,49 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsWorkingDay" 
                   column="`IsWorkingDay`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="ValidFrom" type="Timestamp"
                   column="`ValidFrom`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ValidUntil" type="Timestamp"
                   column="`ValidUntil`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="WorkingHours" 
                   column="`WorkingHours`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="WorkSchedule" column="`fk_WorkSchedule`" class="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -482,7 +531,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="DayOfWeek" 
                   column="`DayOfWeekWorkScheduleRules_DayOfWeek`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -508,7 +558,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Offset" 
                   column="`EasterWorkScheduleRules_Offset`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -524,11 +575,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Day" 
                   column="`FixedYearlyWorkScheduleRules_Day`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Month" 
                   column="`FixedYearlyWorkScheduleRules_Month`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -560,7 +613,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Text" 
                   column="`Text`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
 
@@ -587,15 +641,18 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ObjClass" 
                   column="`AttachedTo_ObjClass`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ObjGuid" 
                   column="`AttachedTo_ObjGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ObjID" 
                   column="`AttachedTo_ObjID`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         </component>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Blob" column="`fk_Blob`" class="Zetbox.App.Base.BlobNHibernateImpl+BlobProxy, Zetbox.Objects.NHibernateImpl" />
@@ -606,32 +663,38 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <one-to-one name="Excerpt" class="at.dasz.DocumentManagement.ExcerptNHibernateImpl+ExcerptProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="File" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsFileReadonly" 
                   column="`IsFileReadonly`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="KeepRevisions" 
                   column="`KeepRevisions`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="1024" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=Document_has_Revisions_RelationEntry -->
@@ -644,7 +707,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Tags" 
                   column="`Tags`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2000" />
 
         <!-- define the subclasses -->
         <joined-subclass
@@ -732,29 +796,34 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Identity" column="`fk_Identity`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="MachineName" 
                   column="`MachineName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="PickupDirectory" 
                   column="`PickupDirectory`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
 
@@ -782,22 +851,26 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Icon" column="`fk_Icon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -807,7 +880,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="RootScreen" column="`fk_RootScreen`" class="Zetbox.App.GUI.NavigationScreenNHibernateImpl+NavigationScreenProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -844,14 +918,16 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Parent" column="`fk_Parent`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -886,36 +962,42 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Label" 
                   column="`Label`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="RefreshOnFilterChanged" 
                   column="`RefreshOnFilterChanged`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="RequestedKind" column="`fk_RequestedKind`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Required" 
                   column="`Required`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ViewModelDescriptor" column="`fk_ViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -945,7 +1027,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Predicate" 
                   column="`OptionalPredicateFilterConfigurations_Predicate`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
             <!-- define the subclasses -->
 
@@ -976,15 +1059,18 @@
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentMonthDefault" 
                   column="`DateRangeFilterConfigurations_IsCurrentMonthDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentQuaterDefault" 
                   column="`DateRangeFilterConfigurations_IsCurrentQuaterDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentYearDefault" 
                   column="`DateRangeFilterConfigurations_IsCurrentYearDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -1000,7 +1086,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentMonthDefault" 
                   column="`MonthFilterConfigurations_IsCurrentMonthDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -1040,7 +1127,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentYearDefault" 
                   column="`YearFilterConfigurations_IsCurrentYearDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -1072,11 +1160,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IconFile" 
                   column="`IconFile`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -1107,7 +1197,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <set name="Children" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Parent`" />
@@ -1117,18 +1208,21 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Color" 
                   column="`Color`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="7" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=NavigationScreen_accessed_by_Groups_RelationEntry -->
@@ -1151,7 +1245,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Title" 
                   column="`Title`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="500" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ViewModelDescriptor" column="`fk_ViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -1199,47 +1294,58 @@
         <!-- ValueTypeProperty isValue -->
         <property name="AllowAddNew" 
                   column="`AllowAddNew`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="AllowDelete" 
                   column="`AllowDelete`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="AllowExport" 
                   column="`AllowExport`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="AllowOpen" 
                   column="`AllowOpen`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="AllowSelectColumns" 
                   column="`AllowSelectColumns`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="AllowUserFilter" 
                   column="`AllowUserFilter`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="EnableAutoFilter" 
                   column="`EnableAutoFilter`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="InitialSort" 
                   column="`InitialSort`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="InitialSortDirection" 
                   column="`InitialSortDirection`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsEditable" 
                   column="`IsEditable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsMultiselect" 
                   column="`IsMultiselect`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="RequestedEditorKind" column="`fk_RequestedEditorKind`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -1249,26 +1355,31 @@
         <!-- ValueTypeProperty isValue -->
         <property name="RespectRequiredFilter" 
                   column="`RespectRequiredFilter`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ShowCommands" 
                   column="`ShowCommands`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ShowFilter" 
                   column="`ShowFilter`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ShowMasterDetail" 
                   column="`ShowMasterDetail`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Type" column="`fk_Type`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ViewMethod" 
                   column="`ViewMethod`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -1297,11 +1408,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Configuration" 
                   column="`Configuration`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Owner" column="`fk_Owner`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -1332,7 +1445,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 
         <!-- define the subclasses -->
 
@@ -1360,22 +1474,26 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ControlTypeRef" 
                   column="`ControlTypeRef`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2000" />
         <!-- ValueTypeProperty isValue -->
         <property name="Deleted" 
                   column="`Deleted`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Toolkit" 
                   column="`Toolkit`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -1415,15 +1533,18 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Deleted" 
                   column="`Deleted`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -1439,7 +1560,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ViewModelTypeRef" 
                   column="`ViewModelTypeRef`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2000" />
 
         <!-- define the subclasses -->
 
@@ -1467,50 +1589,61 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="LicenseData" 
                   column="`LicenseData`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="Licensee" 
                   column="`Licensee`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="LicenseSubject" 
                   column="`LicenseSubject`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Licensor" 
                   column="`Licensor`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="Signature" 
                   column="`Signature`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="ValidFrom" type="Timestamp"
                   column="`ValidFrom`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ValidThru" type="Timestamp"
                   column="`ValidThru`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -1535,37 +1668,44 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Certificate" 
                   column="`Certificate`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsDeactivated" 
                   column="`IsDeactivated`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Password" 
                   column="`Password`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="Tags" 
                   column="`Tags`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
 
@@ -1590,29 +1730,34 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Auftragsname" 
                   column="`Auftragsname`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="Auftragswert" 
                   column="`Auftragswert`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Kunde" column="`fk_Kunde`" class="Zetbox.App.Projekte.KundeNHibernateImpl+KundeProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -1660,21 +1805,24 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Adresse" 
                   column="`Adresse`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isList -->
         <set name="EMails"  inverse="true" batch-size="100">
             <key column="`fk_Kunde`" />
@@ -1683,23 +1831,28 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Kundenname" 
                   column="`Kundenname`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="Land" 
                   column="`Land`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="50" />
         <!-- ValueTypeProperty isValue -->
         <property name="Ort" 
                   column="`Ort`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="PLZ" 
                   column="`PLZ`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="10" />
 
         <!-- define the subclasses -->
 
@@ -1727,33 +1880,39 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="EMail" 
                   column="`EMail`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Geburtstag" type="Timestamp"
                   column="`Geburtstag`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Identity" column="`fk_Identity`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=Projekte_haben_Mitarbeiter_RelationEntry -->
@@ -1766,11 +1925,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="SVNr" 
                   column="`SVNr`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="20" />
         <!-- ValueTypeProperty isValue -->
         <property name="TelefonNummer" 
                   column="`TelefonNummer`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="50" />
 
         <!-- define the subclasses -->
 
@@ -1807,41 +1968,49 @@
         <!-- ValueTypeProperty isValue -->
         <property name="AufwandGes" 
                   column="`AufwandGes`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Bis" type="Timestamp"
                   column="`Bis`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="KickOffAm" type="Timestamp"
                   column="`KickOffAm`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="KickOffBis" type="Timestamp"
                   column="`KickOffBis`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Kundenname" 
                   column="`Kundenname`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=Projekte_haben_Mitarbeiter_RelationEntry -->
@@ -1854,7 +2023,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 <!-- ObjectReferenceProperty -->
         <set name="Tasks" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Projekt`" />
@@ -1864,7 +2034,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Von" type="Timestamp"
                   column="`Von`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- map rights -->
         <set name="SecurityRightsCollectionImpl"
@@ -1903,37 +2074,44 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Aufwand" 
                   column="`Aufwand`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="DatumBis" type="Timestamp"
                   column="`DatumBis`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="DatumVon" type="Timestamp"
                   column="`DatumVon`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Projekt" column="`fk_Projekt`" class="Zetbox.App.Projekte.ProjektNHibernateImpl+ProjektProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -1975,23 +2153,28 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Destination" 
                   column="`Destination`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="255" />
         <!-- ValueTypeProperty isValue -->
         <property name="DestinationRows" 
                   column="`DestinationRows`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Source" 
                   column="`Source`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="255" />
         <!-- ValueTypeProperty isValue -->
         <property name="SourceRows" 
                   column="`SourceRows`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Timestamp" type="Timestamp"
                   column="`Timestamp`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -2019,25 +2202,29 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="250" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DestinationModule" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <set name="StagingDatabases" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_MigrationProject`" />
@@ -2071,30 +2258,36 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Comment" 
                   column="`Comment`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="CompareNulls" 
                   column="`CompareNulls`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="DbType" 
                   column="`DbType`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="250" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=SourceColumn_created_Property_RelationEntry -->
@@ -2113,15 +2306,18 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsNullable" 
                   column="`IsNullable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="250" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="References" column="`fk_PK_Column`" class="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -2134,14 +2330,16 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Size" 
                   column="`Size`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="SourceTable" column="`fk_SourceTable`" class="Zetbox.App.SchemaMigration.SourceTableNHibernateImpl+SourceTableProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Status" 
                   column="`Status`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -2169,28 +2367,32 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DestinationValue" column="`fk_DestinationValue`" class="Zetbox.App.Base.EnumerationEntryNHibernateImpl+EnumerationEntryProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="SourceColumn" column="`fk_SourceColumn`" class="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="SourceValue" 
                   column="`SourceValue`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
 
@@ -2218,33 +2420,39 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Comment" 
                   column="`Comment`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="250" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DestinationObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="250" />
 <!-- ObjectReferenceProperty -->
         <set name="SourceColumn" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_SourceTable`" />
@@ -2257,7 +2465,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Status" 
                   column="`Status`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -2285,37 +2494,44 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ConnectionStringKey" 
                   column="`ConnectionStringKey`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="MigrationProject" column="`fk_MigrationProject`" class="Zetbox.App.SchemaMigration.MigrationProjectNHibernateImpl+MigrationProjectProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="OriginConnectionStringKey" 
                   column="`OriginConnectionStringKey`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="Schema" 
                   column="`Schema`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="63" />
 <!-- ObjectReferenceProperty -->
         <set name="SourceTables" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_StagingDatabase`" />
@@ -2346,7 +2562,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="TestString" 
                   column="`TestString`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
 
@@ -2392,7 +2609,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Frage" 
                   column="`Frage`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Fragebogen" column="`fk_Ein_Fragebogen`" class="Zetbox.App.Test.FragebogenNHibernateImpl+FragebogenProxy, Zetbox.Objects.NHibernateImpl" />
         <property name="gute_Antworten_pos" column="`fk_Ein_Fragebogen_pos`" />
@@ -2400,11 +2618,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="FragenNummer" 
                   column="`FragenNummer`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="GegebeneAntwort" 
                   column="`GegebeneAntwort`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -2431,24 +2651,29 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ObjClass" 
                   column="`Any_ObjClass`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ObjGuid" 
                   column="`Any_ObjGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ObjID" 
                   column="`Any_ObjID`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         </component>
         <!-- ValueTypeProperty isValue -->
         <property name="DisplayName" 
                   column="`DisplayName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -2473,7 +2698,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
 
@@ -2498,11 +2724,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="IsDeactivated" 
                   column="`IsDeactivated`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 
         <!-- define the subclasses -->
 
@@ -2533,7 +2761,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 
         <!-- define the subclasses -->
 
@@ -2561,7 +2790,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 
         <!-- define the subclasses -->
 
@@ -2592,7 +2822,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="BogenNummer" 
                   column="`BogenNummer`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=Student_füllt_aus_Testbogen_RelationEntry -->
@@ -2635,7 +2866,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="StringProp" 
                   column="`StringProp`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 
         <!-- define the subclasses -->
 
@@ -2665,7 +2897,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="TestBool" 
                   column="`TestBool`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <set name="TestCustomObjects_List_Nav" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_MB_Role`" />
@@ -2690,15 +2923,18 @@
         <!-- ValueTypeProperty isValue -->
         <property name="TestDateTime" type="Timestamp"
                   column="`TestDateTime`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="TestEnum" 
                   column="`TestEnum`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="TestString" 
                   column="`TestString`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
 
@@ -2732,7 +2968,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
 
@@ -2766,7 +3003,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
 
@@ -2791,7 +3029,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="OneSide" column="`fk_OneSide`" class="Zetbox.App.Test.One_to_N_relations_OneNHibernateImpl+One_to_N_relations_OneProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -2819,7 +3058,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 <!-- ObjectReferenceProperty -->
         <set name="NSide" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_OneSide`" />
@@ -2856,7 +3096,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="OneSide" column="`fk_OneSide`" class="Zetbox.App.Test.One_to_N_relations_OneNHibernateImpl+One_to_N_relations_OneProxy, Zetbox.Objects.NHibernateImpl" />
         <property name="OrderedNSide_pos" column="`fk_OneSide_pos`" />
@@ -2889,7 +3130,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="OtherInt" 
                   column="`OtherInt`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -2920,7 +3162,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="SomeInt" 
                   column="`SomeInt`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -2959,19 +3202,23 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Nullable" 
                   column="`PropertyBoolTests_Nullable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="NullableWithDefault" 
                   column="`PropertyBoolTests_NullableWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Standard" 
                   column="`PropertyBoolTests_Standard`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="StandardWithDefault" 
                   column="`PropertyBoolTests_StandardWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -2987,19 +3234,23 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Nullable" type="Timestamp"
                   column="`PropertyDateTimeTests_Nullable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="NullableWithDefault" type="Timestamp"
                   column="`PropertyDateTimeTests_NullableWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Standard" type="Timestamp"
                   column="`PropertyDateTimeTests_Standard`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="StandardWithDefault" type="Timestamp"
                   column="`PropertyDateTimeTests_StandardWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -3015,19 +3266,23 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Nullable" 
                   column="`PropertyDecimalTests_Nullable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="NullableWithDefault" 
                   column="`PropertyDecimalTests_NullableWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Standard" 
                   column="`PropertyDecimalTests_Standard`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="StandardWithDefault" 
                   column="`PropertyDecimalTests_StandardWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -3043,19 +3298,23 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Nullable" 
                   column="`PropertyDoubleTests_Nullable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="NullableWithDefault" 
                   column="`PropertyDoubleTests_NullableWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Standard" 
                   column="`PropertyDoubleTests_Standard`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="StandardWithDefault" 
                   column="`PropertyDoubleTests_StandardWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -3071,19 +3330,23 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Nullable" 
                   column="`PropertyEnumTests_Nullable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="NullableWithDefault" 
                   column="`PropertyEnumTests_NullableWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Standard" 
                   column="`PropertyEnumTests_Standard`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="StandardWithDefault" 
                   column="`PropertyEnumTests_StandardWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -3099,19 +3362,23 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Nullable" 
                   column="`PropertyGuidTests_Nullable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="NullableWithDefault" 
                   column="`PropertyGuidTests_NullableWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Standard" 
                   column="`PropertyGuidTests_Standard`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="StandardWithDefault" 
                   column="`PropertyGuidTests_StandardWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -3127,19 +3394,23 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Nullable" 
                   column="`PropertyIntTests_Nullable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="NullableWithDefault" 
                   column="`PropertyIntTests_NullableWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Standard" 
                   column="`PropertyIntTests_Standard`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="StandardWithDefault" 
                   column="`PropertyIntTests_StandardWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -3155,19 +3426,23 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Nullable" 
                   column="`PropertyStringTests_Nullable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="NullableWithDefault" 
                   column="`PropertyStringTests_NullableWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="Standard" 
                   column="`PropertyStringTests_Standard`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="StandardWithDefault" 
                   column="`PropertyStringTests_StandardWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
             <!-- define the subclasses -->
 
@@ -3196,59 +3471,73 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ByDay" 
                   column="`Rule_ByDay`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ByHour" 
                   column="`Rule_ByHour`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ByMinute" 
                   column="`Rule_ByMinute`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ByMonth" 
                   column="`Rule_ByMonth`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ByMonthDay" 
                   column="`Rule_ByMonthDay`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="BySecond" 
                   column="`Rule_BySecond`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="BySetPos" 
                   column="`Rule_BySetPos`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ByWeekNumber" 
                   column="`Rule_ByWeekNumber`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="ByYearDay" 
                   column="`Rule_ByYearDay`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="Count" 
                   column="`Rule_Count`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Frequency" 
                   column="`Rule_Frequency`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Interval" 
                   column="`Rule_Interval`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Until" type="Timestamp"
                   column="`Rule_Until`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="WeekStart" 
                   column="`Rule_WeekStart`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         </component>
 
         <!-- define the subclasses -->
@@ -3280,7 +3569,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
 
@@ -3305,7 +3595,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Parent" column="`fk_Parent`" class="Zetbox.App.Test.RequiredParentNHibernateImpl+RequiredParentProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -3333,7 +3624,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 
         <!-- define the subclasses -->
 
@@ -3361,21 +3653,24 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Identity" column="`fk_Identity`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Parent" column="`fk_Parent`" class="Zetbox.App.Test.SecurityTestParentNHibernateImpl+SecurityTestParentProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -3383,7 +3678,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ParentName" 
                   column="`ParentName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 
         <!-- map rights -->
         <set name="SecurityRightsCollectionImpl"
@@ -3428,7 +3724,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 
         <!-- define the subclasses -->
 
@@ -3453,7 +3750,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Birthday" type="Timestamp"
                   column="`Birthday`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <set name="MubBlah_List_Nav" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_TCO_Role`" />
@@ -3477,28 +3775,33 @@
         <!-- ValueTypeProperty isValue -->
         <property name="PersonName" 
                   column="`PersonName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- CompoundObjectProperty isValue -->
         <component name="PhoneNumberMobile" class="Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
         <property name="AreaCode" 
                   column="`PhoneNumberMobile_AreaCode`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="50" />
         <!-- ValueTypeProperty isValue -->
         <property name="Number" 
                   column="`PhoneNumberMobile_Number`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="50" />
         </component>
         <!-- CompoundObjectProperty isValue -->
         <component name="PhoneNumberOffice" class="Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
         <property name="AreaCode" 
                   column="`PhoneNumberOffice_AreaCode`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="50" />
         <!-- ValueTypeProperty isValue -->
         <property name="Number" 
                   column="`PhoneNumberOffice_Number`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="50" />
         </component>
         <!-- CompoundObjectProperty IsList -->
         <set name="PhoneNumbersOther" inverse="true" batch-size="100">
@@ -3529,15 +3832,18 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Large" 
                   column="`Large`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="NoScale" 
                   column="`NoScale`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="SmallDecimal" 
                   column="`SmallDecimal`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -3563,26 +3869,31 @@
         <!-- ValueTypeProperty isValue -->
         <property name="CalculatedEnumeration" 
                   column="`CalculatedEnumeration`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="MyIntProperty" 
                   column="`MyIntProperty`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ObjectProp" column="`fk_ObjectProp`" class="Zetbox.App.Projekte.KundeNHibernateImpl+KundeProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="StringProp" 
                   column="`StringProp`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="TestEnumProp" 
                   column="`TestEnumProp`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="TestEnumWithDefault" 
                   column="`TestEnumWithDefault`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -3607,7 +3918,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=Student_füllt_aus_Testbogen_RelationEntry -->
@@ -3648,22 +3960,26 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
         <subclass
@@ -3677,11 +3993,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="AInt" 
                   column="`TPHDerivedAObjs_AInt`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="AString" 
                   column="`TPHDerivedAObjs_AString`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 
             <!-- define the subclasses -->
 
@@ -3697,7 +4015,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="BString" 
                   column="`TPHDerivedBObjs_BString`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 
             <!-- define the subclasses -->
 
@@ -3727,18 +4046,21 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -3769,37 +4091,43 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ValueTypeProperty Description is calculated and persisted -->
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="500" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Notes" 
                   column="`Notes`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="500" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Rights" 
                   column="`Rights`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
         <joined-subclass
@@ -3869,29 +4197,34 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="DeploymentRestrictions" 
                   column="`DeploymentRestrictions`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 
         <!-- define the subclasses -->
 
@@ -3923,42 +4256,51 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="HelpText" 
                   column="`HelpText`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
                   column="`IsList`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsNullable" 
                   column="`IsNullable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsReturnParameter" 
                   column="`IsReturnParameter`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Label" 
                   column="`Label`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Method" column="`fk_Method`" class="Zetbox.App.Base.MethodNHibernateImpl+MethodProxy, Zetbox.Objects.NHibernateImpl" />
         <property name="Parameter_pos" column="`fk_Method_pos`" />
@@ -3966,7 +4308,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 
         <!-- define the subclasses -->
         <subclass
@@ -3992,7 +4335,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="TypeRef" 
                   column="`CLRObjectParameters_TypeRef`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2000" />
 
             <!-- define the subclasses -->
 
@@ -4023,7 +4367,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="DateTimeStyle" 
                   column="`DateTimeParameters_DateTimeStyle`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -4131,30 +4476,36 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="MimeType" 
                   column="`MimeType`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="OriginalName" 
                   column="`OriginalName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="500" />
         <!-- ValueTypeProperty isValue -->
         <property name="StoragePath" 
                   column="`StoragePath`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="500" />
 
         <!-- define the subclasses -->
 
@@ -4186,7 +4537,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ConstrainedProperty" column="`fk_ConstrainedProperty`" class="Zetbox.App.Base.PropertyNHibernateImpl+PropertyProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -4196,15 +4548,18 @@
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Reason" 
                   column="`Reason`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="400" />
 
         <!-- define the subclasses -->
         <subclass
@@ -4218,11 +4573,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Max" 
                   column="`IntegerRangeConstraints_Max`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Min" 
                   column="`IntegerRangeConstraints_Min`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -4346,11 +4703,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="MaxLength" 
                   column="`StringRangeConstraints_MaxLength`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="MinLength" 
                   column="`StringRangeConstraints_MinLength`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -4377,11 +4736,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Schema" 
                   column="`Schema`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="Version" 
                   column="`Version`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -4409,7 +4770,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <set name="Constraints" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Constrained`" />
@@ -4422,22 +4784,26 @@
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DefaultIcon" column="`fk_DefaultIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="HelpText" 
                   column="`HelpText`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=DataType_implements_ImplementedInterfaces_RelationEntry -->
@@ -4459,7 +4825,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="51" />
 <!-- ObjectReferenceProperty -->
         <set name="Properties" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ObjectClass`" />
@@ -4472,15 +4839,18 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ShowIconInLists" 
                   column="`ShowIconInLists`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ShowIdInLists" 
                   column="`ShowIdInLists`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ShowNameInLists" 
                   column="`ShowNameInLists`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
         <joined-subclass
@@ -4518,7 +4888,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="AreFlags" 
                   column="`AreFlags`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <set name="EnumerationEntries" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Enumeration`" />
@@ -4568,7 +4939,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="CodeTemplate" 
                   column="`CodeTemplate`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DefaultViewModelDescriptor" column="`fk_DefaultViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -4581,19 +4953,23 @@
         <!-- ValueTypeProperty isValue -->
         <property name="IsAbstract" 
                   column="`IsAbstract`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsCreatedProgrammatically" 
                   column="`IsCreatedProgrammatically`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsFrozenObject" 
                   column="`IsFrozenObject`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsSimpleObject" 
                   column="`IsSimpleObject`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <set name="SubClasses" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_BaseObjectClass`" />
@@ -4603,11 +4979,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="TableMapping" 
                   column="`TableMapping`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="TableName" 
                   column="`TableName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 
             <!-- define the subclasses -->
 
@@ -4641,18 +5019,21 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Property" column="`fk_Property`" class="Zetbox.App.Base.PropertyNHibernateImpl+PropertyProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
 
@@ -4669,7 +5050,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="BoolValue" 
                   column="`BoolDefaultValues_BoolValue`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -4697,7 +5079,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="DecimalValue" 
                   column="`DecimalDefaultValues_DecimalValue`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -4713,7 +5096,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="DoubleValue" 
                   column="`DoubleDefaultValues_DoubleValue`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -4744,7 +5128,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="IntValue" 
                   column="`IntDefaultValues_IntValue`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -4772,7 +5157,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="DefaultValue" 
                   column="`StringDefaultValues_DefaultValue`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
             <!-- define the subclasses -->
 
@@ -4802,18 +5188,21 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Enumeration" column="`fk_Enumeration`" class="Zetbox.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Zetbox.Objects.NHibernateImpl" />
         <property name="EnumerationEntries_pos" column="`fk_Enumeration_pos`" />
@@ -4821,23 +5210,28 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Label" 
                   column="`Label`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="NotSelectable" 
                   column="`NotSelectable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Value" 
                   column="`Value`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
         <!-- define the subclasses -->
 
@@ -4862,27 +5256,33 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Date" type="Timestamp"
                   column="`Date`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Exception" 
                   column="`Exception`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="Level" 
                   column="`Level`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="20" />
         <!-- ValueTypeProperty isValue -->
         <property name="Logger" 
                   column="`Logger`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="255" />
         <!-- ValueTypeProperty isValue -->
         <property name="Message" 
                   column="`Message`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="Thread" 
                   column="`Thread`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="255" />
 
         <!-- define the subclasses -->
 
@@ -4907,7 +5307,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=Identities_memberOf_Groups_RelationEntry -->
@@ -4923,7 +5324,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
 
@@ -4948,11 +5350,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="CalendarConfiguration" 
                   column="`CalendarConfiguration`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="DisplayName" 
                   column="`DisplayName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=Identities_memberOf_Groups_RelationEntry -->
@@ -4965,30 +5369,36 @@
         <!-- ValueTypeProperty isValue -->
         <property name="IsDeactivated" 
                   column="`IsDeactivated`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="LoginToken" 
                   column="`LoginToken`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- CompoundObjectProperty isValue -->
         <component name="OpenID" class="Zetbox.App.Base.OpenIDNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
         <property name="Provider" 
                   column="`OpenID_Provider`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="50" />
         <!-- ValueTypeProperty isValue -->
         <property name="UserID" 
                   column="`OpenID_UserID`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="255" />
         </component>
         <!-- ValueTypeProperty isValue -->
         <property name="Password" 
                   column="`Password`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
         <!-- ValueTypeProperty isValue -->
         <property name="UserName" 
                   column="`UserName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 
         <!-- define the subclasses -->
 
@@ -5016,11 +5426,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Reason" 
                   column="`Reason`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
         <!-- define the subclasses -->
         <joined-subclass
@@ -5037,7 +5449,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="IsUnique" 
                   column="`IsUnique`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=UniqueContraints_ensures_unique_on_Properties_RelationEntry -->
@@ -5088,60 +5501,71 @@
         <!-- ValueTypeProperty isValue -->
         <property name="CategoryTags" 
                   column="`CategoryTags`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ValueTypeProperty CodeTemplate is calculated and persisted -->
         <!-- ValueTypeProperty isValue -->
         <property name="CodeTemplate" 
                   column="`CodeTemplate`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="HelpText" 
                   column="`HelpText`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Icon" column="`fk_Icon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="InvokeOnServer" 
                   column="`InvokeOnServer`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsDisplayable" 
                   column="`IsDisplayable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Label" 
                   column="`Label`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -5187,34 +5611,41 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="Namespace" 
                   column="`Namespace`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="SchemaName" 
                   column="`SchemaName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="60" />
 
         <!-- define the subclasses -->
 
@@ -5243,23 +5674,27 @@
         <!-- ValueTypeProperty isValue -->
         <property name="AllowFilterCollections" 
                   column="`AllowFilterCollections`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="CategoryTags" 
                   column="`CategoryTags`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ValueTypeProperty CodeTemplate is calculated and persisted -->
         <!-- ValueTypeProperty isValue -->
         <property name="CodeTemplate" 
                   column="`CodeTemplate`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <set name="Constraints" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ConstrainedProperty`" />
@@ -5272,42 +5707,50 @@
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="DefaultSortPriority" 
                   column="`DefaultSortPriority`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <one-to-one name="DefaultValue" class="Zetbox.App.Base.DefaultPropertyValueNHibernateImpl+DefaultPropertyValueProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="Property" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="DisableExport" 
                   column="`DisableExport`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <one-to-one name="FilterConfiguration" class="Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl+PropertyFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="Property" />
         <!-- ValueTypeProperty isValue -->
         <property name="HelpText" 
                   column="`HelpText`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="Label" 
                   column="`Label`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Zetbox.Objects.NHibernateImpl" />
         <property name="Properties_pos" column="`fk_ObjectClass_pos`" />
@@ -5318,7 +5761,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="RequestedWidth" 
                   column="`RequestedWidth`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ValueModelDescriptor" column="`fk_ValueModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -5362,11 +5806,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="HasPersistentOrder" 
                   column="`CompoundObjectProperties_HasPersistentOrder`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
                   column="`CompoundObjectProperties_IsList`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -5382,26 +5828,31 @@
         <!-- ValueTypeProperty isValue -->
         <property name="HasPersistentOrder" 
                   column="`ObjectReferencePlaceholderProperties_HasPersistentOrder`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ImplementorRoleName" 
                   column="`ObjectReferencePlaceholderProperties_ImplementorRoleName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
                   column="`ObjectReferencePlaceholderProperties_IsList`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ItemRoleName" 
                   column="`ObjectReferencePlaceholderProperties_ItemRoleName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ReferencedObjectClass" column="`ObjectReferencePlaceholderProperties_fk_ReferencedClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Verb" 
                   column="`ObjectReferencePlaceholderProperties_Verb`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
             <!-- define the subclasses -->
 
@@ -5417,11 +5868,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="EagerLoading" 
                   column="`ObjectReferenceProperties_EagerLoading`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsInlineEditable" 
                   column="`ObjectReferenceProperties_IsInlineEditable`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=ObjRefProp_shows_Methods_RelationEntry -->
@@ -5449,15 +5902,18 @@
         <!-- ValueTypeProperty isValue -->
         <property name="HasPersistentOrder" 
                   column="`ValueTypeProperties_HasPersistentOrder`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsCalculated" 
                   column="`ValueTypeProperties_IsCalculated`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
                   column="`ValueTypeProperties_IsList`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
         <subclass
@@ -5474,21 +5930,24 @@
         <!-- ValueTypeProperty isValue -->
         <property name="FalseLabel" 
                   column="`BoolProperties_FalseLabel`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="NullIcon" column="`BoolProperties_fk_NullIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="NullLabel" 
                   column="`BoolProperties_NullLabel`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="TrueIcon" column="`BoolProperties_fk_TrueIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="TrueLabel" 
                   column="`BoolProperties_TrueLabel`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
 
             <!-- define the subclasses -->
 
@@ -5504,7 +5963,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="DateTimeStyle" 
                   column="`DateTimeProperties_DateTimeStyle`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -5520,11 +5980,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Precision" 
                   column="`DecimalProperties_Precision`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Scale" 
                   column="`DecimalProperties_Scale`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 
             <!-- define the subclasses -->
 
@@ -5625,37 +6087,44 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Containment" 
                   column="`Containment`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Storage" 
                   column="`Storage`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Verb" 
                   column="`Verb`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 
         <!-- define the subclasses -->
 
@@ -5687,32 +6156,38 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="HasPersistentOrder" 
                   column="`HasPersistentOrder`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Multiplicity" 
                   column="`Multiplicity`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <one-to-one name="Navigator" class="Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl+ObjectReferencePropertyProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="RelationEnd" />
         <!-- ValueTypeProperty isValue -->
         <property name="RoleName" 
                   column="`RoleName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Type" column="`fk_Type`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -5743,35 +6218,41 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <one-to-one name="Data" class="Zetbox.App.Base.SequenceDataNHibernateImpl+SequenceDataProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="Sequence" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="IsContinuous" 
                   column="`IsContinuous`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="100" />
 
         <!-- define the subclasses -->
 
@@ -5796,7 +6277,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="CurrentNumber" 
                   column="`CurrentNumber`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Sequence" column="`fk_Sequence`" class="Zetbox.App.Base.SequenceNHibernateImpl+SequenceProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
 
@@ -5827,26 +6309,31 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
-                  optimistic-lock="true"/>
+                  optimistic-lock="true"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="DeploymentRestriction" 
                   column="`DeploymentRestriction`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 

@@ -56,6 +56,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 typeAttr = "type=\"Timestamp\"";
             }
 
+            int length = 0;
             string ceClassAttr;
             if (prop.IsList && !forceDefinition)
             {
@@ -69,6 +70,11 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             {
                 // not needed
                 ceClassAttr = String.Empty;
+
+                if(prop is StringProperty)
+                {
+                    length = ((StringProperty)prop).GetMaxLength();
+                }
             }
 
             string ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop);
@@ -83,7 +89,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 ceClassAttr,
                 ceReverseKeyColumnName,
                 listPositionColumnName,
-                optimisticLock);
+                optimisticLock,
+                length);
         }
     }
 }

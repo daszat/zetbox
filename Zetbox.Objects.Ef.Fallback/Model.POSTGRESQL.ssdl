@@ -1707,6 +1707,7 @@
     <Property Name="Description" Type="varchar" Nullable="false" />
     <Property Name="IsDeactivated" Type="bool" Nullable="false" />
     <Property Name="Password" Type="varchar" Nullable="true" />
+    <Property Name="Tags" Type="varchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Projekt">

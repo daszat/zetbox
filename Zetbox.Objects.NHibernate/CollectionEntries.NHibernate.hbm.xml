@@ -357,7 +357,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Value" 
                   column="`EMails`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="200" />
         <!-- export guid is not needed since serialization is always "in-place"
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
         -->
@@ -380,7 +381,8 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Value" 
                   column="`StringCollection`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
     </class>
 
     <!-- CompoundObjectCollectionEntries -->
@@ -403,27 +405,33 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Identity" 
                   column="`AuditJournal_Identity`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="MessageFormat" 
                   column="`AuditJournal_MessageFormat`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="NewValue" 
                   column="`AuditJournal_NewValue`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="OldValue" 
                   column="`AuditJournal_OldValue`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="PropertyName" 
                   column="`AuditJournal_PropertyName`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="Timestamp" type="Timestamp"
                   column="`AuditJournal_Timestamp`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  />
         </component>
         <!-- export guid is not needed since serialization is always "in-place"
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
@@ -449,11 +457,13 @@
         <!-- ValueTypeProperty isValue -->
         <property name="AreaCode" 
                   column="`PhoneNumbersOther_AreaCode`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="50" />
         <!-- ValueTypeProperty isValue -->
         <property name="Number" 
                   column="`PhoneNumbersOther_Number`" 
-                  optimistic-lock="false"/>
+                  optimistic-lock="false"
+                  length="50" />
         </component>
     </class>
 
