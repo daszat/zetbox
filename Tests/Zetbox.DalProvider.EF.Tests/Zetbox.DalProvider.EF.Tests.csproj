@@ -4,6 +4,8 @@
     <RootNamespace>Zetbox.DalProvider.Ef</RootNamespace>
     <AssemblyName>Zetbox.DalProvider.Ef.Tests</AssemblyName>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>

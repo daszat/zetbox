@@ -2,6 +2,8 @@
   <PropertyGroup>
     <ProductVersion>8.0.30703</ProductVersion>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
