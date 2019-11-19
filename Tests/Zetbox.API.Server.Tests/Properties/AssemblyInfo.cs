@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -15,18 +15,6 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("Zetbox.API.Server.Tests")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("dasz.at OG")]
-[assembly: AssemblyProduct("zetbox")]
-[assembly: AssemblyCopyright("Copyright © 2007-2013 dasz.at OG")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

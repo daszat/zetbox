@@ -1,87 +1,33 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zetbox.App.Tests.Server</RootNamespace>
-    <AssemblyName>Zetbox.App.Tests.Server</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>net462</TargetFramework>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
-    <TargetFrameworkProfile />
+    <AssemblyTitle>Zetbox.App.Tests.Server</AssemblyTitle>
+    <Product>Zetbox.App.Tests.Server</Product>
+    <Copyright>Copyright ©  2015</Copyright>
+    <OutputPath>..\..\bin\$(Configuration)\Server\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\Server\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Release\Server\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.9.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Autofac.4.9.2\lib\net45\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
+    <PackageReference Include="Autofac" Version="4.9.2" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomServerTestActionsModule.cs" />
-    <Compile Include="Projekte\ProjektActions.cs" />
-    <Compile Include="Projekte\TaskActions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestModule\MethodTestActions.cs" />
+    <ProjectReference Include="..\..\Zetbox.API.Server\Zetbox.API.Server.csproj" />
+    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
+    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj" />
+    <ProjectReference Include="..\Zetbox.App.Tests.Common\Zetbox.App.Tests.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <Compile Remove="Properties\VersionInfo.Designer.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Zetbox.API.Server\Zetbox.API.Server.csproj">
-      <Project>{08902397-b9ca-43da-8c8d-27dcec097611}</Project>
-      <Name>Zetbox.API.Server</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj">
-      <Project>{ad0c7b9c-3c92-4f19-bbdf-416ad4700cb9}</Project>
-      <Name>Zetbox.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
-      <Project>{0c9e6e69-309f-46f7-a936-d5762229deb9}</Project>
-      <Name>Zetbox.Objects</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.App.Tests.Common\Zetbox.App.Tests.Common.csproj">
-      <Project>{e8691675-a0ac-40dc-b482-a6284b0ba3c6}</Project>
-      <Name>Zetbox.App.Tests.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

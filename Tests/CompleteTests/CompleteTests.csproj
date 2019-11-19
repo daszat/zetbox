@@ -1,48 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\..\packages\NUnit.3.11.0\build\NUnit.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{26C035B1-A53D-44E0-BEED-CB97EC56B38E}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CompleteTests</RootNamespace>
-    <AssemblyName>CompleteTests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>net462</TargetFramework>
     <StartAction>Program</StartAction>
     <StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
     <StartArguments>CompleteTests.nunit /config:Studio</StartArguments>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
     <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+    <AssemblyTitle>CompleteTests</AssemblyTitle>
+    <Company>dasz.at OG</Company>
+    <Product>zetbox</Product>
+    <Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <BuildDependsOn>$(BuildDependsOn);AfterBuildMigrated</BuildDependsOn>
+    <PostBuildEvent>
+IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
+</PostBuildEvent>
+    <PostBuildEvent>
+IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
+</PostBuildEvent>
+    <PostBuildEvent>
+IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
+</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\Tests</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
+    <OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Release\Tests</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
+    <OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -50,76 +38,34 @@
     <Optimize>false</Optimize>
     <OutputPath>..\..\bin\Debug\Tests</OutputPath>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
+</PostBuildEvent>
+  </PropertyGroup>
+  <Target Name="BeforeBuildMigrated" BeforeTargets="PreBuildEvent" />
+  <Target Name="AfterBuildMigrated" />
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml" />
+    <PackageReference Include="NUnit" Version="3.11.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
     <None Include="CompleteTests.nunit">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="CompleteTests.PartCoverSettings.xml" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Zetbox.Client.WPF\Zetbox.Client.WPF.csproj">
-      <Project>{2C899579-BF78-442B-8810-8C7E7A2CA212}</Project>
-      <Name>Zetbox.Client.WPF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.API.Client.Tests\Zetbox.API.Client.Tests.csproj">
-      <Project>{382F1331-A177-4B38-A3E7-6D1B9A0F812B}</Project>
-      <Name>Zetbox.API.Client.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.API.Server.Tests\Zetbox.API.Server.Tests.csproj">
-      <Project>{980874F0-D9C1-4EDB-8143-AD51C1E2666E}</Project>
-      <Name>Zetbox.API.Server.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.API.Tests\Zetbox.API.Tests.csproj">
-      <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
-      <Name>Zetbox.API.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Client.Tests\Zetbox.Client.Tests.csproj">
-      <Project>{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}</Project>
-      <Name>Zetbox.Client.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.DalProvider.ClientObjects.Tests\Zetbox.DalProvider.ClientObjects.Tests.csproj">
-      <Project>{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}</Project>
-      <Name>Zetbox.DalProvider.ClientObjects.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.DalProvider.EF.Tests\Zetbox.DalProvider.EF.Tests.csproj">
-      <Project>{980874F0-D9C1-4EDB-8143-AD51C1E2666F}</Project>
-      <Name>Zetbox.DalProvider.EF.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.DalProvider.Memory.Tests\Zetbox.DalProvider.Memory.Tests.csproj">
-      <Project>{CF5E170F-DC31-4AAE-AFFC-8BECA0B366EF}</Project>
-      <Name>Zetbox.DalProvider.Memory.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.IntegrationTests\Zetbox.IntegrationTests.csproj">
-      <Project>{12B58C14-4FE7-4FF6-A03A-5A220571FD5C}</Project>
-      <Name>Zetbox.IntegrationTests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Server.Tests\Zetbox.Server.Tests.csproj">
-      <Project>{C93A48F5-8DF9-4A40-BB3B-FDE1CA9D6BA8}</Project>
-      <Name>Zetbox.Server.Tests</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Zetbox.Client.WPF\Zetbox.Client.WPF.csproj" />
+    <ProjectReference Include="..\Zetbox.API.Client.Tests\Zetbox.API.Client.Tests.csproj" />
+    <ProjectReference Include="..\Zetbox.API.Server.Tests\Zetbox.API.Server.Tests.csproj" />
+    <ProjectReference Include="..\Zetbox.API.Tests\Zetbox.API.Tests.csproj" />
+    <ProjectReference Include="..\Zetbox.Client.Tests\Zetbox.Client.Tests.csproj" />
+    <ProjectReference Include="..\Zetbox.DalProvider.ClientObjects.Tests\Zetbox.DalProvider.ClientObjects.Tests.csproj" />
+    <ProjectReference Include="..\Zetbox.DalProvider.EF.Tests\Zetbox.DalProvider.EF.Tests.csproj" />
+    <ProjectReference Include="..\Zetbox.DalProvider.Memory.Tests\Zetbox.DalProvider.Memory.Tests.csproj" />
+    <ProjectReference Include="..\Zetbox.IntegrationTests\Zetbox.IntegrationTests.csproj" />
+    <ProjectReference Include="..\Zetbox.Server.Tests\Zetbox.Server.Tests.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="env.xml">
@@ -127,23 +73,7 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  -->
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  <PropertyGroup>
-    <PostBuildEvent>
-IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
-</PostBuildEvent>
-  </PropertyGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit.3.11.0\build\NUnit.props'))" />
-  </Target>
+  <ItemGroup>
+    <Compile Remove="Properties\VersionInfo.cs" />
+  </ItemGroup>
 </Project>

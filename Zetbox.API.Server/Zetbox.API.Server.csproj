@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProductVersion>9.0.30729</ProductVersion>
-    <ProjectGuid>{08902397-B9CA-43DA-8C8D-27DCEC097611}</ProjectGuid>
-    <TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
@@ -11,9 +10,9 @@
     <AssemblyTitle>Zetbox.API.Server</AssemblyTitle>
     <Company>dasz.at OG</Company>
     <Product>zetbox</Product>
-    <Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
+    <Copyright>Copyright © 2007-2019 dasz.at OG</Copyright>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Version>2.10.0.0</Version>
+    <Version>3.0.0.0</Version>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>

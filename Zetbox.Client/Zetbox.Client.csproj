@@ -1,48 +1,30 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props" Condition="Exists('..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zetbox.Client</RootNamespace>
-    <AssemblyName>Zetbox.Client</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>net462</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
     <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+    <AssemblyTitle>Zetbox.Client</AssemblyTitle>
+    <Company>dasz.at OG</Company>
+    <Product>zetbox</Product>
+    <Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
+    <PostBuildEvent />
+    <PostBuildEvent />
+    <PostBuildEvent />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Client\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>..\bin\Debug\Client\Zetbox.Client.xml</DocumentationFile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Prefer32Bit>false</Prefer32Bit>
+    <OutputPath>..\bin\$(Configuration)\Client\</OutputPath>
+    <DocumentationFile>..\bin\$(Configuration)\Client\Zetbox.Client.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\Client\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>..\bin\Release\Client\Zetbox.Client.xml</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
+    <OutputPath>..\bin\$(Configuration)\Client\</OutputPath>
+    <DocumentationFile>..\bin\$(Configuration)\Client\Zetbox.Client.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -50,706 +32,295 @@
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
     <DocumentationFile>..\bin\Debug\Client\Zetbox.Client.xml</DocumentationFile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <NoWarn>1591,1584,1574</NoWarn>
-    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Arebis.CodeGeneration, Version=1.3.6.0, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
-      <HintPath>..\packages\Arebis.CodeGeneration.1.3.6\lib\net462\Arebis.CodeGeneration.dll</HintPath>
-    </Reference>
-    <Reference Include="Arebis.CodeGenerator, Version=1.3.6.0, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
-      <HintPath>..\packages\Arebis.CodeGenerator.1.3.6\lib\net462\Arebis.CodeGenerator.dll</HintPath>
-    </Reference>
-    <Reference Include="Autofac, Version=4.9.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.9.2\lib\net45\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.3887.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3887.0\lib\net35\MigraDoc.DocumentObjectModel.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MigraDoc.Rendering, Version=1.32.3887.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3887.0\lib\net35\MigraDoc.Rendering.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MigraDoc.RtfRendering, Version=1.32.3887.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3887.0\lib\net35\MigraDoc.RtfRendering.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PdfSharp, Version=1.32.3887.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3887.0\lib\net35\PdfSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PdfSharp.Charting, Version=1.32.3887.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3887.0\lib\net35\PdfSharp.Charting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickGraph.Graphviz, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.CodeDom, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.CodeDom.4.6.0\lib\net461\System.CodeDom.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.ServiceModel">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationProvider">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
+    <PackageReference Include="Arebis.CodeGeneration" Version="1.3.6" />
+    <PackageReference Include="Arebis.CodeGenerator" Version="1.3.6" />
+    <PackageReference Include="Autofac" Version="4.9.2" />
+    <PackageReference Include="GitVersionTask" Version="4.0.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="PDFsharp-MigraDoc-GDI-dasz" Version="1.32.3887.0" />
+    <PackageReference Include="QuickGraph" Version="3.6.61119.7" />
+    <PackageReference Include="System.CodeDom" Version="4.6.0" />
+    <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientModule.cs" />
-    <Compile Include="CredentialsResolver.cs" />
-    <Compile Include="CredentialsResolverResources.Designer.cs">
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="CredentialsResolverResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CredentialsResolverResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="GUI\DialogCreator.cs" />
-    <Compile Include="GUI\DialogCreatorResources.Designer.cs">
+    <Compile Update="GUI\DialogCreatorResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DialogCreatorResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="GUI\IHasViewModel.cs" />
-    <Compile Include="GUI\IRenderer.cs" />
-    <Compile Include="GUI\UICreator.cs" />
-    <Compile Include="GUI\ViewDescriptorAttribute.cs" />
-    <Compile Include="DefaultFulltextSupport.cs" />
-    <Compile Include="Launcher.cs" />
-    <Compile Include="Models\FilterModelsResources.Designer.cs">
+    <Compile Update="Models\FilterModelsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FilterModelsResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\FilterValueSource.cs" />
-    <Compile Include="Models\IValueModel.cs" />
-    <Compile Include="Models\PropertyValueModel.cs" />
-    <Compile Include="Models\ValueModel.cs" />
-    <Compile Include="Presentables\ActionViewModel.cs" />
-    <Compile Include="Presentables\ActionViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ActionViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ActionViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\Debugger\PerfMonDebuggerViewModel.cs" />
-    <Compile Include="Presentables\Debugger\PerfMonDebuggerViewModelResources.Designer.cs">
+    <Compile Update="Presentables\Debugger\PerfMonDebuggerViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PerfMonDebuggerViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\Debugger\RequestDebuggerViewModel.cs" />
-    <Compile Include="Presentables\Debugger\DebuggerWindowViewModel.cs" />
-    <Compile Include="Presentables\Debugger\CacheDebuggerViewModel.cs" />
-    <Compile Include="Models\ColumnDisplayModel.cs" />
-    <Compile Include="Presentables\Debugger\CacheDebuggerViewModelResources.Designer.cs">
+    <Compile Update="Presentables\Debugger\CacheDebuggerViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CacheDebuggerViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\Calendar\CalendarConfiguration.cs" />
-    <Compile Include="Presentables\Calendar\CalendarResources1.Designer.cs">
+    <Compile Update="Presentables\Calendar\CalendarResources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CalendarResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\Calendar\CalendarViewModel.cs" />
-    <Compile Include="Presentables\Calendar\FetchCache.cs" />
-    <Compile Include="Presentables\Calendar\ICalendarDisplayViewModel.cs" />
-    <Compile Include="Presentables\Calendar\NewEventDialogViewModel.cs" />
-    <Compile Include="Presentables\Calendar\EventViewModel.cs" />
-    <Compile Include="Presentables\Calendar\EventInputViewModel.cs" />
-    <Compile Include="Presentables\Calendar\NewEventViewModelsArgs.cs" />
-    <Compile Include="Presentables\Calendar\NextEventsSummaryViewModel.cs" />
-    <Compile Include="Presentables\Calendar\WeekCalendar\CalendarItemViewModel.cs" />
-    <Compile Include="Presentables\Calendar\CalendarRuleInstanceViewModel.cs" />
-    <Compile Include="Presentables\Calendar\CalendarWorkspaceViewModel.cs" />
-    <Compile Include="Presentables\Calendar\WeekCalendar\DayCalendarViewModel.cs" />
-    <Compile Include="Presentables\Calendar\WeekCalendar\LedgerItemViewModel.cs" />
-    <Compile Include="Presentables\Calendar\WeekCalendar\LedgerViewModel.cs" />
-    <Compile Include="Presentables\Calendar\WeekCalendar\TimeSlotItemViewModel.cs" />
-    <Compile Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModel.cs" />
-    <Compile Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.Designer.cs">
+    <Compile Update="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WeekCalendarViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\DataObjectViewModelResources.Designer.cs">
+    <Compile Update="Presentables\DataObjectViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataObjectViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\Debugger\DebuggerWindowViewModelResources.Designer.cs">
+    <Compile Update="Presentables\Debugger\DebuggerWindowViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DebuggerWindowViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\Debugger\RequestDebuggerViewModelResources.Designer.cs">
+    <Compile Update="Presentables\Debugger\RequestDebuggerViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RequestDebuggerViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\Debugger\ZetboxContextDebuggerViewModelResources.Designer.cs">
+    <Compile Update="Presentables\Debugger\ZetboxContextDebuggerViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ZetboxContextDebuggerViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModel.cs" />
-    <Compile Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.Designer.cs">
+    <Compile Update="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ImportedFileNavigationSearchScreenViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\DocumentManagement\ImportedFileViewModel.cs" />
-    <Compile Include="Presentables\DocumentManagement\FilePropertyViewModel.cs" />
-    <Compile Include="Presentables\DtoViewModels\DtoExporter.cs" />
-    <Compile Include="Presentables\DtoViewModels\DtoBuilder.cs" />
-    <Compile Include="Presentables\DtoViewModels\DtoBaseViewModel.cs" />
-    <Compile Include="Presentables\DtoViewModels\DtoGroupedViewModel.cs" />
-    <Compile Include="Presentables\DtoViewModels\DtoPrinter.cs" />
-    <Compile Include="Presentables\DtoViewModels\DtoTabbedViewModel.cs" />
-    <Compile Include="Presentables\DtoViewModels\DtoTableViewModel.cs" />
-    <Compile Include="Presentables\DtoViewModels\DtoValueViewModel.cs" />
-    <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
-    <Compile Include="Presentables\GuiExtensions.cs" />
-    <Compile Include="Presentables\GUI\NavigationTreeScreenViewModel.cs" />
-    <Compile Include="Presentables\GUI\NavigationTabbedScreenViewModel.cs" />
-    <Compile Include="Presentables\GUI\NavigationActionViewModel.cs" />
-    <Compile Include="Presentables\GUI\NavigationReportScreenViewModel.cs" />
-    <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />
-    <Compile Include="Presentables\GUI\NavigationSearchScreenViewModel.cs" />
-    <Compile Include="Presentables\GUI\Panels.cs" />
-    <Compile Include="Presentables\GUI\SavedListConfiguratorViewModel.cs" />
-    <Compile Include="Presentables\GUI\SavedListConfiguratorViewModel.Model.cs" />
-    <Compile Include="Presentables\GUI\SavedListConfiguratorViewModelResources.Designer.cs">
+    <Compile Update="Presentables\GUI\SavedListConfiguratorViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SavedListConfiguratorViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\IContextViewModel.cs" />
-    <Compile Include="Presentables\ISortableViewModel.cs" />
-    <Compile Include="Presentables\ModuleEditor\CommonCommands.cs" />
-    <Compile Include="Presentables\ModuleEditor\DataTypeViewModels.cs" />
-    <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
-    <Compile Include="Presentables\ModuleEditor\GroupingTreeItemViewModel.cs" />
-    <Compile Include="Presentables\ModuleEditor\TreeItemIconInstanceListViewModel.cs" />
-    <Compile Include="Presentables\ObjectBrowser\ObjectClassViewModel.cs" />
-    <Compile Include="Presentables\EnumerationViewModel.cs" />
-    <Compile Include="Presentables\ObjectEditor\MergeObjectsTaskViewModel.cs" />
-    <Compile Include="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MergeObjectsTaskViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ObjectEditor\MergePropertyViewModel.cs" />
-    <Compile Include="Presentables\ObjectEditor\MergePropertyViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ObjectEditor\MergePropertyViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MergePropertyViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
-    <Compile Include="Presentables\TextViewModel.cs" />
-    <Compile Include="Presentables\ValueViewModels\CompoundCollectionViewModel.cs" />
-    <Compile Include="Presentables\ValueViewModels\CompoundListViewModel.cs" />
-    <Compile Include="Presentables\ViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ZetboxBase\GroupMembershipViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\AnyReferencePropertyViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.DragDrop.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Paging.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Commands.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.PrintExport.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.GridSupport.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Selection.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Filter.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FilterListEntryViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ZetboxBase\InstanceList\FilterListViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FilterListViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Sorting.cs" />
-    <Compile Include="Presentables\ZetboxBase\PropertySelectionTaskViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PropertySelectionTaskViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\SimpleDataObjectEditorTaskViewModelResources1.Designer.cs">
+    <Compile Update="Presentables\SimpleDataObjectEditorTaskViewModelResources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SimpleDataObjectEditorTaskViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\SimpleDataObjectEditorTaskViewModel.cs" />
-    <Compile Include="Presentables\DataObjectSelectionTaskViewModelResources.Designer.cs">
+    <Compile Update="Presentables\DataObjectSelectionTaskViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataObjectSelectionTaskViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ExceptionReporterViewModel.cs" />
-    <Compile Include="Presentables\ExceptionReporterViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ExceptionReporterViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ExceptionReporterViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\FilterViewModels\FilterViewModelResources.Designer.cs">
+    <Compile Update="Presentables\FilterViewModels\FilterViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FilterViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\GUI\MultiLineEditorDialogViewModelResources.Designer.cs">
+    <Compile Update="Presentables\GUI\MultiLineEditorDialogViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MultiLineEditorDialogViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\GUI\NavigatorViewModelResources.Designer.cs">
+    <Compile Update="Presentables\GUI\NavigatorViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NavigatorViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\IValueInputTaskViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\ApplicationViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ZetboxBase\ApplicationViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplicationViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ZetboxBase\AuditJournalViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\CommonCommandsResources.Designer.cs">
+    <Compile Update="Presentables\ZetboxBase\CommonCommandsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommonCommandsResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InstanceListViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ZetboxBase\RecurrenceRulePropertyViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\RelationChainViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ZetboxBase\RelationChainViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RelationChainViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ModuleEditor\NavigationScreenHierarchyViewModel.cs" />
-    <Compile Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ObjectBrowser\WorkspaceViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WorkspaceViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ObjectEditor\WorkspaceViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ObjectEditor\WorkspaceViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WorkspaceViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ParameterInputTaskViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ParameterInputTaskViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ParameterInputTaskViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ValueInputTaskViewModel.cs" />
-    <Compile Include="Presentables\DocumentManagement\FileViewModel.cs" />
-    <Compile Include="Presentables\DocumentManagement\ImageViewModel.cs" />
-    <Compile Include="Presentables\FilterViewModels\FilterViewModel.cs" />
-    <Compile Include="Presentables\FilterViewModels\OptionalPredicateFilterViewModel.cs" />
-    <Compile Include="Presentables\FilterViewModels\RangeFilterViewModel.cs" />
-    <Compile Include="Presentables\FilterViewModels\SingleValueFilterViewModel.cs" />
-    <Compile Include="Presentables\GUI\ControlKindViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\RoleMembershipViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\RelationChainViewModel.cs" />
-    <Compile Include="Presentables\ModuleEditor\ControlKindHierarchyViewModel.cs" />
-    <Compile Include="Presentables\ModuleEditor\TreeItemInstanceListViewModel.cs" />
-    <Compile Include="Presentables\ParameterInputTaskViewModel.cs" />
-    <Compile Include="Presentables\SchemaMigration\DestinationPropertyViewModel.cs" />
-    <Compile Include="Presentables\ValueInputTaskViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ValueInputTaskViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ValueInputTaskViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseObjectCollectionViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ValueViewModels\BaseCompoundCollectionViewModel.cs" />
-    <Compile Include="Presentables\ValueViewModels\CompoundObjectPropertyViewModel.cs" />
-    <Compile Include="Presentables\CompoundObjectViewModel.cs" />
-    <Compile Include="Presentables\GUI\NavigatorViewModel.cs" />
-    <Compile Include="Presentables\GUI\NavigationEntryViewModel.cs" />
-    <Compile Include="Models\FilterModels.cs" />
-    <Compile Include="Presentables\DataObjectViewModel.cs" />
-    <Compile Include="Presentables\DataTypeViewModel.cs" />
-    <Compile Include="Presentables\GUI\MultiLineEditorDialogViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\CommonCommands.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.cs" />
-    <Compile Include="Presentables\ICommandViewModel.cs" />
-    <Compile Include="Presentables\ILabeledViewModel.cs" />
-    <Compile Include="Presentables\IViewModelFactory.cs" />
-    <Compile Include="Presentables\IMultipleInstancesManager.cs" />
-    <Compile Include="Presentables\ZetboxBase\ApplicationViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\TagPropertyEditorViewModel.cs" />
-    <Compile Include="Presentables\Debugger\ZetboxContextDebuggerViewModel.cs" />
-    <Compile Include="Presentables\ValueViewModels\DataObjectViewModelProxy.cs" />
-    <Compile Include="Presentables\ValueViewModels\ObjectReferenceHelper.cs" />
-    <Compile Include="Presentables\ValueViewModels\ObjectReferenceViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ValueViewModels\ObjectReferenceViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ObjectReferenceViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ValueViewModels\ValueViewModelResources.Designer.cs">
+    <Compile Update="Presentables\ValueViewModels\ValueViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ValueViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ViewModelCache.cs" />
-    <Compile Include="Presentables\ViewModelFactory.cs" />
-    <Compile Include="Presentables\ModuleEditor\WorkspaceViewModel.cs" />
-    <Compile Include="Presentables\ObjectBrowser\ModuleViewModel.cs" />
-    <Compile Include="Presentables\ObjectBrowser\WorkspaceViewModel.cs" />
-    <Compile Include="Presentables\ObjectClassViewModel.cs" />
-    <Compile Include="Presentables\ValueViewModels\BaseObjectCollectionViewModel.cs" />
-    <Compile Include="Presentables\ValueViewModels\ObjectListViewModel.cs" />
-    <Compile Include="Presentables\ValueViewModels\ObjectCollectionViewModel.cs" />
-    <Compile Include="Presentables\ValueViewModels\ObjectReferenceViewModel.cs" />
-    <Compile Include="Presentables\ValueViewModels\ValueViewModel.cs" />
-    <Compile Include="Presentables\ValueViewModels\IValueViewModel.cs" />
-    <Compile Include="Presentables\ViewModel.cs" />
-    <Compile Include="Presentables\PropertyGroupViewModel.cs" />
-    <Compile Include="Presentables\Relations\RelationEndViewModel.cs" />
-    <Compile Include="Presentables\Relations\RelationViewModel.cs" />
-    <Compile Include="Presentables\DataObjectSelectionTaskViewModel.cs" />
-    <Compile Include="Presentables\ObjectEditor\WorkspaceViewModel.cs" />
-    <Compile Include="Presentables\WindowViewModel.cs" />
-    <Compile Include="Reporting\Calendar\Events.Designer.cs">
+    <Compile Update="Reporting\Calendar\Events.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Events.cst</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\Calendar\EventsResources.Designer.cs">
+    <Compile Update="Reporting\Calendar\EventsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EventsResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\Calendar\SheetDays.Designer.cs">
+    <Compile Update="Reporting\Calendar\SheetDays.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SheetDays.cst</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\ReportingErrorDialog.cs" />
-    <Compile Include="Reporting\ReportingHost.cs" />
-    <Compile Include="ServerDomainManager.cs" />
-    <Compile Include="ClientHelper.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ValidationManager.cs" />
-    <Compile Include="ZetboxContextExceptionHandler.cs" />
-    <Compile Include="ZetboxContextExceptionHandlerResources.Designer.cs">
+    <Compile Update="ZetboxContextExceptionHandlerResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ZetboxContextExceptionHandlerResources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CredentialsResolverResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="GUI\DialogCreatorResources.de.resx" />
-    <EmbeddedResource Include="GUI\DialogCreatorResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>DialogCreatorResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Models\FilterModelsResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ActionViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\Debugger\CacheDebuggerViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\Calendar\CalendarResources.de.resx" />
-    <EmbeddedResource Include="Presentables\Calendar\CalendarResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CalendarResources1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\Calendar\CalendarResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>WeekCalendarViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\DataObjectViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\Debugger\DebuggerWindowViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>DebuggerWindowViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\Debugger\PerfMonDebuggerViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>PerfMonDebuggerViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\Debugger\RequestDebuggerViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RequestDebuggerViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\Debugger\ZetboxContextDebuggerViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ZetboxContextDebuggerViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\FilterViewModels\FilterViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\GUI\MultiLineEditorDialogViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\GUI\NavigatorViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\GUI\SavedListConfiguratorViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>MergeObjectsTaskViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ObjectEditor\MergePropertyViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\ObjectEditor\MergePropertyViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>MergePropertyViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ObjectEditor\WorkspaceViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ParameterInputTaskViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ValueInputTaskViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ValueViewModels\ObjectReferenceViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ValueViewModels\ValueViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\ViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\ApplicationViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\CommonCommandsResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\RelationChainViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Properties\Resources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Reporting\Calendar\EventsResources.de.resx" />
-    <EmbeddedResource Include="Reporting\Calendar\EventsResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>EventsResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reporting\Calendar\EventsResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.de.resx" />
-    <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ZetboxContextExceptionHandlerResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.x-zb-Pseudo.resx" />
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
+    <Compile Update="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="CredentialsResolverResources.de.resx" />
-    <EmbeddedResource Include="CredentialsResolverResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CredentialsResolverResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Models\FilterModelsResources.de.resx" />
-    <EmbeddedResource Include="Models\FilterModelsResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>FilterModelsResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ActionViewModelResources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ActionViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ActionViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\Debugger\CacheDebuggerViewModelResources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\Debugger\CacheDebuggerViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CacheDebuggerViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\DataObjectViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\DataObjectViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>DataObjectViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ImportedFileNavigationSearchScreenViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\GUI\SavedListConfiguratorViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\GUI\SavedListConfiguratorViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SavedListConfiguratorViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.resx">
+    <EmbeddedResource Update="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FilterListEntryViewModelResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Zetbox.Client.Presentables.ZetboxBase</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.resx">
+    <EmbeddedResource Update="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FilterListViewModelResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Zetbox.Client.Presentables.ZetboxBase</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>PropertySelectionTaskViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SimpleDataObjectEditorTaskViewModelResources1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.de.resx">
+    <EmbeddedResource Update="Presentables\DataObjectSelectionTaskViewModelResources.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>DataObjectSelectionTaskViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ExceptionReporterViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\FilterViewModels\FilterViewModelResources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\FilterViewModels\FilterViewModelResources.resx">
+    <EmbeddedResource Update="Presentables\FilterViewModels\FilterViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FilterViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\GUI\MultiLineEditorDialogViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>MultiLineEditorDialogViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\GUI\NavigatorViewModelResources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\GUI\NavigatorViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>NavigatorViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\ApplicationViewModelResources.de.resx">
+    <EmbeddedResource Update="Presentables\ZetboxBase\ApplicationViewModelResources.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\ApplicationViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ApplicationViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\CommonCommandsResources.de.resx">
+    <EmbeddedResource Update="Presentables\ZetboxBase\CommonCommandsResources.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\CommonCommandsResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CommonCommandsResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.resx">
+    <EmbeddedResource Update="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>InstanceListViewModelResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Zetbox.Client.Presentables.ZetboxBase</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\RelationChainViewModelResources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\RelationChainViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RelationChainViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.resx">
+    <EmbeddedResource Update="Presentables\ObjectBrowser\WorkspaceViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>WorkspaceViewModelResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx">
+    <EmbeddedResource Update="Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ObjectEditor\WorkspaceViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>WorkspaceViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ParameterInputTaskViewModelResources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ParameterInputTaskViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ParameterInputTaskViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ValueInputTaskViewModelResources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ValueInputTaskViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ValueInputTaskViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx">
+    <EmbeddedResource Update="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>BaseObjectCollectionViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx">
+    <EmbeddedResource Update="Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ValueViewModels\ObjectReferenceViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ObjectReferenceViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ValueViewModels\ValueViewModelResources.de.resx">
+    <EmbeddedResource Update="Presentables\ValueViewModels\ValueViewModelResources.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ValueViewModels\ValueViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ValueViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
@@ -768,46 +339,14 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj">
-      <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
-      <Name>Zetbox.API.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
-      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Zetbox.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
-      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Zetbox.Objects</Name>
-      <Private>false</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
-      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Zetbox.API.Common</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" />
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\GitVersionTask.4.0.0\build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.4.0.0\build\GitVersionTask.targets'))" />
-    <Error Condition="!Exists('..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props'))" />
-  </Target>
-  <Import Project="..\packages\GitVersionTask.4.0.0\build\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.4.0.0\build\GitVersionTask.targets')" />
+  <ItemGroup>
+    <Compile Remove="Properties\VersionInfo.Designer.cs" />
+  </ItemGroup>
 </Project>

@@ -1,315 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Zetbox.Objects</RootNamespace>
-    <AssemblyName>Zetbox.Objects</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>net462</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
     <!-- this is referenced by the generator to put the results in their right place -->
     <RelativeOutputPath>Common</RelativeOutputPath>
-    <TargetFrameworkProfile />
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>1591,0168,0414,0219</NoWarn>
+    <BuildDependsOn>$(BuildDependsOn);AfterBuildMigrated</BuildDependsOn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>1591,0168,0414,0219</NoWarn>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Common\Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\$(Configuration)\Common\Generated\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>1591,0168,0414,0219</NoWarn>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Common\Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\$(Configuration)\Common\Generated\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <!-- mono is quite more pedantic; ignore superfluous local vars and fields for now -->
-    <NoWarn>1591,0168,0414,0219</NoWarn>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Common\Generated\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
   <PropertyGroup>
     <DocumentationFile>$(OutputPath)\Zetbox.Objects.xml</DocumentationFile>
   </PropertyGroup>
+  <Target Name="AfterBuildMigrated" />
   <ItemGroup>
-    <AdditionalReferencePath Include="$(OutputPath)" />
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="log4net">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\log4net.dll</HintPath>
       <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Zetbox.API">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
       <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Autofac">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\Autofac.dll</HintPath>
       <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ZetboxBase\AbstractModuleMember.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\AccessControl.Interface.Designer.cs" />
-    <Compile Include="TestModule\ANewObjectClass.Interface.Designer.cs" />
-    <Compile Include="TestModule\AnotherTest.Interface.Designer.cs" />
-    <Compile Include="TestModule\Antwort.Interface.Designer.cs" />
-    <Compile Include="TestModule\AnyReferenceTestObject.Interface.Designer.cs" />
-    <Compile Include="GUI\Application.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Assembly.Interface.Designer.cs" />
-    <Compile Include="Projekte\Auftrag.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\BaseParameter.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Blob.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\BoolDefaultValue.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\BoolParameter.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\BoolProperty.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\CalculatedObjectReferenceProperty.Interface.Designer.cs" />
-    <Compile Include="Calendar\CalendarBook.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\ClientReadOnlyConstraint.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\CLRObjectParameter.Interface.Designer.cs" />
-    <Compile Include="Calendar\CommonWorkScheduleRule.Interface.Designer.cs" />
-    <Compile Include="TestModule\Company.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\CompoundObject.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\CompoundObjectParameter.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\CompoundObjectProperty.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Constraint.Interface.Designer.cs" />
-    <Compile Include="GUI\ControlKind.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\CurrentDateTimeDefaultValue.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\CurrentSchema.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DataType.Interface.Designer.cs" />
-    <Compile Include="GUI\DateRangeFilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DateTimeParameter.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DateTimeProperty.Interface.Designer.cs" />
-    <Compile Include="Calendar\DayOfWeekWorkScheduleRule.Interface.Designer.cs" />
-    <Compile Include="TestModule\DeactivatableTestObject.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DecimalDefaultValue.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DecimalParameter.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DecimalProperty.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DefaultPropertyValue.Interface.Designer.cs" />
-    <Compile Include="DocumentManagement\Document.Interface.Designer.cs" />
-    <Compile Include="TestModule\DocumentTestObject.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DoubleDefaultValue.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DoubleParameter.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DoubleProperty.Interface.Designer.cs" />
-    <Compile Include="DocumentManagement\DynamicFile.Interface.Designer.cs" />
-    <Compile Include="Calendar\EasterWorkScheduleRule.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\EnumDefaultValue.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Enumeration.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\EnumerationEntry.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\EnumerationProperty.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\EnumParameter.Interface.Designer.cs" />
-    <Compile Include="Calendar\Event.Interface.Designer.cs" />
-    <Compile Include="TestModule\EventTestObject.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\ExceptionLogEntry.Interface.Designer.cs" />
-    <Compile Include="DocumentManagement\Excerpt.Interface.Designer.cs" />
-    <Compile Include="DocumentManagement\File.Interface.Designer.cs" />
-    <Compile Include="DocumentManagement\FileImportConfiguration.Interface.Designer.cs" />
-    <Compile Include="GUI\FilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="Calendar\FixedYearlyWorkScheduleRule.Interface.Designer.cs" />
-    <Compile Include="TestModule\Fragebogen.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\FullTextIndexConstraint.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Group.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\GroupMembership.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\GuidProperty.Interface.Designer.cs" />
-    <Compile Include="GUI\Icon.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Identity.Interface.Designer.cs" />
-    <Compile Include="DocumentManagement\ImportedFile.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IndexConstraint.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\InitOnlyConstraint.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\InstanceConstraint.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IntDefaultValue.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IntegerRangeConstraint.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Interface.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IntParameter.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IntProperty.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\InvokingConstraint.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IsValidIdentifierConstraint.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IsValidNamespaceConstraint.Interface.Designer.cs" />
-    <Compile Include="Projekte\Kunde.Interface.Designer.cs" />
-    <Compile Include="LicenseManagement\License.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Method.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\MethodInvocationConstraint.Interface.Designer.cs" />
-    <Compile Include="TestModule\MethodTest.Interface.Designer.cs" />
-    <Compile Include="SchemaMigration\MigrationLog.Interface.Designer.cs" />
-    <Compile Include="SchemaMigration\MigrationProject.Interface.Designer.cs" />
-    <Compile Include="Projekte\Mitarbeiter.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Module.Interface.Designer.cs" />
-    <Compile Include="GUI\MonthFilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="TestModule\Muhblah.Interface.Designer.cs" />
-    <Compile Include="TestModule\N_to_M_relations_A.Interface.Designer.cs" />
-    <Compile Include="TestModule\N_to_M_relations_B.Interface.Designer.cs" />
-    <Compile Include="GUI\NavigationAction.Interface.Designer.cs" />
-    <Compile Include="GUI\NavigationEntry.Interface.Designer.cs" />
-    <Compile Include="GUI\NavigationScreen.Interface.Designer.cs" />
-    <Compile Include="GUI\NavigationSearchScreen.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\NewGuidDefaultValue.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\NotNullableConstraint.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\ObjectClass.Interface.Designer.cs" />
-    <Compile Include="GUI\ObjectClassFilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\ObjectReferenceParameter.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\ObjectReferencePlaceholderProperty.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\ObjectReferenceProperty.Interface.Designer.cs" />
-    <Compile Include="TestModule\One_to_N_relations_N.Interface.Designer.cs" />
-    <Compile Include="TestModule\One_to_N_relations_One.Interface.Designer.cs" />
-    <Compile Include="TestModule\One_to_N_relations_OrderedN.Interface.Designer.cs" />
-    <Compile Include="GUI\OptionalPredicateFilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="TestModule\OrderedNEnd.Interface.Designer.cs" />
-    <Compile Include="TestModule\OrderedOneEnd.Interface.Designer.cs" />
-    <Compile Include="LicenseManagement\PrivateKey.Interface.Designer.cs" />
-    <Compile Include="Projekte\Projekt.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Property.Interface.Designer.cs" />
-    <Compile Include="TestModule\PropertyBoolTest.Interface.Designer.cs" />
-    <Compile Include="TestModule\PropertyDateTimeTest.Interface.Designer.cs" />
-    <Compile Include="TestModule\PropertyDecimalTest.Interface.Designer.cs" />
-    <Compile Include="TestModule\PropertyDoubleTest.Interface.Designer.cs" />
-    <Compile Include="TestModule\PropertyEnumTest.Interface.Designer.cs" />
-    <Compile Include="GUI\PropertyFilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="TestModule\PropertyGuidTest.Interface.Designer.cs" />
-    <Compile Include="TestModule\PropertyIntTest.Interface.Designer.cs" />
-    <Compile Include="TestModule\PropertyStringTest.Interface.Designer.cs" />
-    <Compile Include="TestModule\PropertyTestBase.Interface.Designer.cs" />
-    <Compile Include="GUI\RangeFilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\ReadOnlyConstraint.Interface.Designer.cs" />
-    <Compile Include="TestModule\RecurrenceRuleTester.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Relation.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\RelationEnd.Interface.Designer.cs" />
-    <Compile Include="TestModule\RequiredParent.Interface.Designer.cs" />
-    <Compile Include="TestModule\RequiredParentChild.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\RoleMembership.Interface.Designer.cs" />
-    <Compile Include="GUI\SavedListConfiguration.Interface.Designer.cs" />
-    <Compile Include="TestModule\SecurityChangeRight.Interface.Designer.cs" />
-    <Compile Include="TestModule\SecurityTestChild.Interface.Designer.cs" />
-    <Compile Include="TestModule\SecurityTestParent.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Sequence.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\SequenceData.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\ServiceDescriptor.Interface.Designer.cs" />
-    <Compile Include="GUI\SinglePropertyFilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="SchemaMigration\SourceColumn.Interface.Designer.cs" />
-    <Compile Include="SchemaMigration\SourceEnum.Interface.Designer.cs" />
-    <Compile Include="SchemaMigration\SourceTable.Interface.Designer.cs" />
-    <Compile Include="SchemaMigration\StagingDatabase.Interface.Designer.cs" />
-    <Compile Include="DocumentManagement\StaticFile.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\StringDefaultValue.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\StringParameter.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\StringProperty.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\StringRangeConstraint.Interface.Designer.cs" />
-    <Compile Include="Calendar\SyncProvider.Interface.Designer.cs" />
-    <Compile Include="GUI\TagCache.Interface.Designer.cs" />
-    <Compile Include="Projekte\Task.Interface.Designer.cs" />
-    <Compile Include="TestModule\TestCustomObject.Interface.Designer.cs" />
-    <Compile Include="TestModule\TestDecimal.Interface.Designer.cs" />
-    <Compile Include="TestModule\TestObjClass.Interface.Designer.cs" />
-    <Compile Include="TestModule\TestStudent.Interface.Designer.cs" />
-    <Compile Include="TestModule\TPHBaseObj.Interface.Designer.cs" />
-    <Compile Include="TestModule\TPHDerivedAObj.Interface.Designer.cs" />
-    <Compile Include="TestModule\TPHDerivedBObj.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\ValueTypeProperty.Interface.Designer.cs" />
-    <Compile Include="GUI\ViewDescriptor.Interface.Designer.cs" />
-    <Compile Include="GUI\ViewModelDescriptor.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\ViewReadOnlyConstraint.Interface.Designer.cs" />
-    <Compile Include="Calendar\WorkSchedule.Interface.Designer.cs" />
-    <Compile Include="Calendar\WorkScheduleRule.Interface.Designer.cs" />
-    <Compile Include="Calendar\WorkScheduleSyncProvider.Interface.Designer.cs" />
-    <Compile Include="GUI\YearFilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="Calendar\YearlyWorkScheduleRule.Interface.Designer.cs" />
-    <Compile Include="CollectionEntries.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IAuditable.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IChangedBy.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\ICustomFulltextFormat.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IDeactivatable.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IExportable.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IInvocation.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IMergeable.Interface.Designer.cs" />
-    <Compile Include="SchemaMigration\IMigrationInfo.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\IModuleMember.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\INamedObject.Interface.Designer.cs" />
-    <Compile Include="GUI\IRenderer.Interface.Designer.cs" />
-    <Compile Include="TestModule\ITestInterface.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\AccessRights.Interface.Designer.cs" />
-    <Compile Include="SchemaMigration\ColumnType.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\ContainmentSpecification.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DateTimeStyles.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DayOfWeek.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DeploymentRestriction.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Frequency.Interface.Designer.cs" />
-    <Compile Include="GUI\HighlightState.Interface.Designer.cs" />
-    <Compile Include="GUI\InstanceListViewMethod.Interface.Designer.cs" />
-    <Compile Include="GUI\ListSortDirection.Interface.Designer.cs" />
-    <Compile Include="SchemaMigration\MappingStatus.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\Multiplicity.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\StorageType.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\TableMapping.Interface.Designer.cs" />
-    <Compile Include="TestModule\TestEnum.Interface.Designer.cs" />
-    <Compile Include="GUI\Toolkit.Interface.Designer.cs" />
-    <Compile Include="GUI\WidthHint.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\AnyReference.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\AuditEntry.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DateTimeOffset.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\DateTimeRange.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\OpenID.Interface.Designer.cs" />
-    <Compile Include="ZetboxBase\RecurrenceRule.Interface.Designer.cs" />
-    <Compile Include="TestModule\TestPhoneCompoundObject.Interface.Designer.cs" />
-    <Compile Include="AssemblyInfo.Interface.cs" />
-    <Compile Include="Module.Interface.cs" />
-    <Compile Include="NamedObjects.Interface.Designer.cs" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Zetbox.Objects.snk" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  -->
-  <Target Name="AfterBuild">
-  </Target>
 </Project>

@@ -1,50 +1,29 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props" Condition="Exists('..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D5ADAF5E-024D-46B1-B75D-0F93A3E4A50B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zetbox.Client.WPF.Toolkit</RootNamespace>
-    <AssemblyName>Zetbox.Client.WPF.Toolkit</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>net462</TargetFramework>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
     <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+    <AssemblyTitle>Zetbox.Client.WPF.Toolkit</AssemblyTitle>
+    <Company>dasz.at OG</Company>
+    <Product>zetbox</Product>
+    <Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Client\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Client\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
+    <OutputPath>..\bin\$(Configuration)\Client\</OutputPath>
+    <DocumentationFile>..\bin\$(Configuration)\Client\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\Client\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <OutputPath>..\bin\$(Configuration)\Client\</OutputPath>
     <DocumentationFile>..\bin\Debug\Client\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -52,202 +31,48 @@
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\bin\Debug\Client\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.9.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.9.2\lib\net45\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Autofac" Version="4.9.2" />
+    <PackageReference Include="GitVersionTask" Version="4.0.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="WPFExtensions" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="PresentationCore">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="PresentationFramework">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Drawing" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationProvider">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WPFExtensions">
-      <HintPath>..\packages\WPFExtensions.1.0.0\lib\WPFExtensions.dll</HintPath>
-    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Converter.cs" />
-    <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Commands\SmartRoutedUICommand.cs" />
-    <Compile Include="Commands\WrappedZetboxCommand.cs" />
-    <Compile Include="Converter\ContentAlignmentConverters.cs" />
-    <Compile Include="Converter\Converters.cs" />
-    <Compile Include="Converter\EmptyCountToCollapsedConverter.cs" />
-    <Compile Include="Converter\EmptyStringToCollapsedConverter.cs" />
-    <Compile Include="Converter\FormattingToFontWeightConverter.cs" />
-    <Compile Include="Converter\DebugConverter.cs" />
-    <Compile Include="Converter\ImageConverter.cs" />
-    <Compile Include="Converter\ImageCtrlConverter.cs" />
-    <Compile Include="Converter\ObjectStateConverter.cs" />
-    <Compile Include="CustomControls\ContentAdorner.cs" />
-    <Compile Include="CustomControls\HelpButton.cs" />
-    <Compile Include="CustomControls\DataObjectActionsTray.cs" />
-    <Compile Include="CustomControls\ErrorMarker.cs" />
-    <Compile Include="CustomControls\ObjectHeader.cs" />
-    <Compile Include="CustomControls\CustomControlsResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomControlsResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\DtoDisplayer.xaml.cs">
-      <DependentUpon>DtoDisplayer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\LabeledContainer.cs" />
-    <Compile Include="CustomControls\LabeledView.cs" />
-    <Compile Include="CustomControls\LabeledViewHorizontal.cs" />
-    <Compile Include="CustomControls\TracingUserControl.cs" />
-    <Compile Include="CustomControls\ZetboxDatePicker.cs" />
-    <Compile Include="CustomControls\ZoomBorder.cs" />
-    <Compile Include="ObjectEditor\ErrorList.xaml.cs">
-      <DependentUpon>ErrorList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ObjectEditor\SideBarLeft.xaml.cs">
-      <DependentUpon>SideBarLeft.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ObjectEditor\WorkspaceButtons.xaml.cs">
-      <DependentUpon>WorkspaceButtons.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Styles\Controls.cs" />
-    <Compile Include="Styles\Defaults.cs" />
-    <Compile Include="Styles\Margin.cs" />
-    <Compile Include="WpfDelayedTask.cs" />
-    <Compile Include="TypeNameTemplateSelector.cs" />
-    <Compile Include="CustomControls\CommandButton.cs" />
-    <Compile Include="CustomControls\PropertyEditor.cs" />
-    <Compile Include="CustomControls\ZetboxDataGrid.cs" />
-    <Compile Include="CustomControls\DropDownButton.cs" />
-    <Compile Include="CustomControls\ErrorReporter.xaml.cs">
-      <DependentUpon>ErrorReporter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\WindowView.cs" />
-    <Compile Include="CustomControls\WorkaroundToolBar.cs" />
-    <Compile Include="CustomControls\ZetboxListView.cs" />
-    <Compile Include="WpfDragDropHelper.cs" />
-    <Compile Include="WPFHelper.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WPFToolkitResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WPFToolkitResources.resx</DependentUpon>
-    </Compile>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <Compile Include="VisualTypeTemplateSelector.cs" />
-    <Compile Include="WpfSortHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj">
-      <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
-      <Name>Zetbox.API.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
-      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Zetbox.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj">
-      <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
-      <Name>Zetbox.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
-      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Zetbox.Objects</Name>
-      <Private>false</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
-      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Zetbox.API.Common</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
+    <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj" />
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" />
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Zetbox.snk" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CustomControls\DtoDisplayer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="CustomControls\ErrorReporter.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ObjectEditor\ErrorList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ObjectEditor\SideBarLeft.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ObjectEditor\WorkspaceButtons.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CustomControls\CustomControlsResources.de.resx" />
-    <EmbeddedResource Include="CustomControls\CustomControlsResources.resx">
+    <EmbeddedResource Update="CustomControls\CustomControlsResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CustomControlsResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Zetbox.Client.WPF.CustomControls</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\CustomControlsResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="WPFToolkitResources.de.resx" />
-    <EmbeddedResource Include="WPFToolkitResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>WPFToolkitResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WPFToolkitResources.x-zb-Pseudo.resx" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\printer.png" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\GitVersionTask.4.0.0\build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.4.0.0\build\GitVersionTask.targets'))" />
-    <Error Condition="!Exists('..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props'))" />
-  </Target>
-  <Import Project="..\packages\GitVersionTask.4.0.0\build\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.4.0.0\build\GitVersionTask.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <Compile Remove="Properties\VersionInfo.Designer.cs" />
+  </ItemGroup>
 </Project>
