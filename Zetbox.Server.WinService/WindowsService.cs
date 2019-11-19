@@ -8,17 +8,16 @@ using System.ServiceProcess;
 using System.Text;
 using Zetbox.API;
 
-namespace Zetbox.Server.Service
+namespace Zetbox.Server.WinService
 {
     partial class WindowsService : ServiceBase
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Service");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(WindowsService));
 
         private IServiceControlManager _scm;
         public WindowsService(IServiceControlManager scm)
         {
             this._scm = scm;
-            InitializeComponent();
         }
 
         protected override void OnStart(string[] args)

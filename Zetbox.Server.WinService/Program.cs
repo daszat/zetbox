@@ -1,19 +1,5 @@
-// This file is part of zetbox.
-//
-// Zetbox is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as
-// published by the Free Software Foundation, either version 3 of
-// the License, or (at your option) any later version.
-//
-// Zetbox is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-
-namespace Zetbox.Server.Service
+﻿
+namespace Zetbox.Server.WinService
 {
     using System;
     using System.Collections.Generic;
@@ -24,13 +10,10 @@ namespace Zetbox.Server.Service
     using Autofac;
     using Autofac.Configuration;
     using Zetbox.API;
-    using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
     using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
-    using Zetbox.App.Extensions;
-    using Zetbox.App.Packaging;
     using System.Configuration;
 
     /// <summary>
@@ -56,18 +39,55 @@ namespace Zetbox.Server.Service
             try
             {
                 var config = ExtractConfig(ref arguments);
+                bool consoleMode = false;
+                if (arguments.Length == 0)
+                {
+                    consoleMode = false;
+                    Log.InfoFormat("Changed working directory to '{0}'", Environment.CurrentDirectory);
+                }
+                else if (arguments.Length == 1)
+                {
+                    switch (arguments[0])
+                    {
+                        case "/console":
+                        case "-console":
+                        case "--console":
+                            consoleMode = true;
+                            Log.Info("Staying in foreground");
+                            break;
+                        case "/help":
+                        case "-help":
+                        case "--help":
+                            Log.Warn("Start with --console to keep the service in the foreground.");
+                            Environment.Exit(1);
+                            break;
+                    }
+                }
+                else
+                {
+                    Log.Fatal("Too many parameters. Start with --help to see usage.");
+                    Environment.Exit(1);
+                }
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 using (var container = CreateMasterContainer(config))
                 {
-                    var scm = container.Resolve<IServiceControlManager>();
-                    scm.Start();
-                    Log.Info("Waiting for console input to shutdown");
-                    Console.WriteLine("Services started, press the anykey to exit");
-                    Console.ReadKey();
-                    Log.Info("Shutting down");
-                    scm.Stop();
+                    var service = container.Resolve<WindowsService>();
+                    if (consoleMode)
+                    {
+                        service.StartService();
+                        Log.Info("Waiting for console input to shutdown");
+                        Console.WriteLine("Services started, press the anykey to exit");
+                        Console.ReadKey();
+                        Log.Info("Shutting down");
+                        service.StopService();
+                    }
+                    else
+                    {
+                        var ServicesToRun = new System.ServiceProcess.ServiceBase[] { service };
+                        System.ServiceProcess.ServiceBase.Run(ServicesToRun);
+                    }
                 }
                 Log.Info("Exiting");
                 return 0;
@@ -82,6 +102,8 @@ namespace Zetbox.Server.Service
         internal static IContainer CreateMasterContainer(ZetboxConfig config)
         {
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
+
+            builder.RegisterType<WindowsService>().SingleInstance();
 
             var container = builder.Build();
             container.ApplyPerfCounterTracker();
