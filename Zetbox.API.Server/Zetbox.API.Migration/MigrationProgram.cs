@@ -30,7 +30,7 @@ namespace Zetbox.API.Migration
 
     public abstract class MigrationProgram
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.API.Migration");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(MigrationProgram));
         private static bool _isInitialized = false;
 
         private readonly string _name;

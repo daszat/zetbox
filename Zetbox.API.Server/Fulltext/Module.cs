@@ -28,6 +28,7 @@ namespace Zetbox.API.Server.Fulltext
     using Lucene.Net.Analysis.Standard;
     using Lucene.Net.Index;
     using Lucene.Net.QueryParsers;
+    using Lucene.Net.QueryParsers.Classic;
     using Lucene.Net.Search;
     using Lucene.Net.Store;
     using Zetbox.API.Common;
@@ -88,13 +89,13 @@ namespace Zetbox.API.Server.Fulltext
                 .SingleInstance();
 
             builder
-                .Register<StandardAnalyzer>(c => new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_30))
+                .Register<StandardAnalyzer>(c => new StandardAnalyzer(Lucene.Net.Util.LuceneVersion.LUCENE_48))
                 .As<Analyzer>()
                 .Named<Analyzer>("en")
                 .SingleInstance();
 
             builder
-                .Register<GermanAnalyzer>(c => new GermanAnalyzer(Lucene.Net.Util.Version.LUCENE_30))
+                .Register<GermanAnalyzer>(c => new GermanAnalyzer(Lucene.Net.Util.LuceneVersion.LUCENE_48))
                 .Named<Analyzer>("de")
                 .SingleInstance();
 
@@ -106,7 +107,7 @@ namespace Zetbox.API.Server.Fulltext
                         ? c.ResolveNamed<Analyzer>(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
                         : c.Resolve<Analyzer>();
 
-                    return new IndexWriter(directory, analyzer, IndexWriter.MaxFieldLength.LIMITED);
+                    return new IndexWriter(directory, new IndexWriterConfig(Lucene.Net.Util.LuceneVersion.LUCENE_48, analyzer));
                 })
                 .InstancePerDependency();
 
@@ -115,7 +116,7 @@ namespace Zetbox.API.Server.Fulltext
                 .SingleInstance();
 
             builder
-               .Register<QueryParser>(c => new QueryParser(Lucene.Net.Util.Version.LUCENE_30, FIELD_BODY, c.Resolve<Analyzer>()))
+               .Register<QueryParser>(c => new QueryParser(Lucene.Net.Util.LuceneVersion.LUCENE_48, FIELD_BODY, c.Resolve<Analyzer>()))
                .InstancePerLifetimeScope();
 
             builder
@@ -140,20 +141,6 @@ namespace Zetbox.API.Server.Fulltext
                         rebuilder.Rebuild();
                     }
                 });
-
-            builder
-                 .RegisterCmdLineAction("optimize-fulltext-index=", "Optimize the fulltext index.",
-                 (scope, v) =>
-                 {
-                     var Log = log4net.LogManager.GetLogger("Zetbox.API.Server.Fulltext.Optimizer");
-                     using (Log.InfoTraceMethodCall("Optimize"))
-                     {
-                         using (var indexWriter = scope.Resolve<IndexWriter>())
-                         {
-                             indexWriter.Optimize();
-                         }
-                     }
-                 });
         }
     }
 }

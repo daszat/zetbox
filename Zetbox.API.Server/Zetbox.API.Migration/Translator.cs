@@ -28,7 +28,7 @@ namespace Zetbox.API.Migration
     internal sealed class Translator
         : IDataReader
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.API.Migration.Translator");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(Translator));
 
         //private readonly SourceTable _tbl;
         private readonly IDataReader _source;

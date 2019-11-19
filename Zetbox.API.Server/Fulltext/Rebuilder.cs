@@ -30,7 +30,7 @@ namespace Zetbox.API.Server.Fulltext
 
     internal class Rebuilder
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.API.Server.Fulltext.Rebuilder");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(Rebuilder));
         private readonly ILifetimeScope _scope;
         private readonly Func<IndexWriter> _indexWriterFactory;
         private readonly Common.Fulltext.DataObjectFormatter _formatter;
@@ -143,13 +143,13 @@ namespace Zetbox.API.Server.Fulltext
                                 var txt = ExtractText(obj, _formatter, _resolver);
 
                                 var doc = new Document();
-                                doc.Add(new Field(Module.FIELD_CLASS, dtType.FullName, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
-                                doc.Add(new Field(Module.FIELD_CLASS_ID, clsId, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
-                                doc.Add(new Field(Module.FIELD_ID, obj.ID.ToString(CultureInfo.InvariantCulture), Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
-                                doc.Add(new Field(Module.FIELD_BODY, txt.Body, Field.Store.NO, Field.Index.ANALYZED));
+                                doc.Add(new Field(Module.FIELD_CLASS, dtType.FullName, new FieldType() { IsStored = true }));
+                                doc.Add(new Field(Module.FIELD_CLASS_ID, clsId, new FieldType() { IsStored = true }));
+                                doc.Add(new Field(Module.FIELD_ID, obj.ID.ToString(CultureInfo.InvariantCulture), new FieldType() { IsStored = true }));
+                                doc.Add(new Field(Module.FIELD_BODY, txt.Body, new FieldType() { IsStored = false }));
                                 if (txt.Fields != null)
                                 {
-                                    txt.Fields.ForEach(kvp => doc.Add(new Field(kvp.Key.ToLowerInvariant(), kvp.Value, Field.Store.NO, Field.Index.ANALYZED)));
+                                    txt.Fields.ForEach(kvp => doc.Add(new Field(kvp.Key.ToLowerInvariant(), kvp.Value, new FieldType() { IsStored = false })));
                                 }
 
                                 idxWriter.AddDocument(doc);
@@ -164,7 +164,6 @@ namespace Zetbox.API.Server.Fulltext
                         } while (parcel != null && parcel.Count > 0);
                     }
                     idxWriter.Commit();
-                    idxWriter.Optimize();
                 }
                 finally
                 {
