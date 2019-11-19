@@ -32,9 +32,11 @@ namespace Zetbox.Unix
         protected override void Load(Autofac.ContainerBuilder builder)
         {
             base.Load(builder);
-            builder.RegisterType<PosixIdentitySource>()
-                .AsImplementedInterfaces()
-                .InstancePerLifetimeScope();
+
+            // TODO
+            //builder.RegisterType<PosixIdentitySource>()
+            //    .AsImplementedInterfaces()
+            //    .InstancePerLifetimeScope();
         }
     }
 }
