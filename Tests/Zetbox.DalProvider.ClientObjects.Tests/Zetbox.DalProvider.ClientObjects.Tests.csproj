@@ -40,10 +40,6 @@
     <PackageReference Include="NUnit" Version="3.11.0" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="WindowsBase" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Zetbox.DalProvider.ClientObjects.Tests.nunit">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

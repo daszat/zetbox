@@ -20,10 +20,6 @@
     <PackageReference Include="Autofac" Version="4.9.2" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Zetbox.API.Server\Zetbox.API.Server.csproj" />
     <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
     <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj" />

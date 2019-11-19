@@ -22,7 +22,6 @@ namespace Zetbox.Server.Tests
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Autofac.Integration.Wcf;
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
     using Zetbox.API;
@@ -34,7 +33,7 @@ namespace Zetbox.Server.Tests
     [SetUpFixture]
     public class SetUpFixture : AbstractSetUpFixture, IDisposable
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.Server.SetUp");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(SetUpFixture));
 
         protected override void SetupBuilder(ContainerBuilder builder)
         {
@@ -47,8 +46,6 @@ namespace Zetbox.Server.Tests
         protected override void SetUp(IContainer container)
         {
             base.SetUp(container);
-
-            AutofacServiceHostFactory.Container = container;
 
             var config = container.Resolve<ZetboxConfig>();
         }
