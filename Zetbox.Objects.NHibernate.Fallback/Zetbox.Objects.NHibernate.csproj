@@ -3,7 +3,7 @@
     <ProductVersion>9.0.21022</ProductVersion>
     <RootNamespace>Zetbox.Objects.NHibernateImpl</RootNamespace>
     <AssemblyName>Zetbox.Objects.NHibernateImpl</AssemblyName>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
     <!-- this is referenced by the generator to put the results in their right place -->

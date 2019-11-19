@@ -3,7 +3,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <RootNamespace>Zetbox.DalProvider.Ef</RootNamespace>
     <AssemblyName>Zetbox.DalProvider.Ef.Tests</AssemblyName>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
