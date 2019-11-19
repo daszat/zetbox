@@ -104,7 +104,7 @@ namespace Zetbox.App.LicenseManagement
         public static void Sign(License obj, Zetbox.App.LicenseManagement.PrivateKey certificate, string password)
         {
             var key = new X509Certificate2(Convert.FromBase64String(certificate.Certificate), !string.IsNullOrWhiteSpace(password) ? password : certificate.Password);
-            var cng_private = (System.Security.Cryptography.RSACng)key.GetRSAPrivateKey();
+            var cng_private = key.GetRSAPrivateKey();
             var hash = ComputeHash(obj);
             obj.Signature = Convert.ToBase64String(cng_private.SignHash(hash, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1));
         }

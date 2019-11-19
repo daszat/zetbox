@@ -30,7 +30,7 @@ namespace Zetbox.App.SchemaMigration
     [Implementor]
     public class MigrationProjectActions
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.SchemaMigration");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox", "Zetbox.SchemaMigration");
 
         // TODO: fix this, as it is currently only working by accident
         private static ILifetimeScope _scope;

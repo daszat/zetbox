@@ -2,6 +2,8 @@
   <PropertyGroup>
     <ProductVersion>9.0.30729</ProductVersion>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
@@ -22,17 +24,9 @@
     <OutputPath>..\bin\$(Configuration)\Common\</OutputPath>
     <DocumentationFile>..\bin\$(Configuration)\Common\Zetbox.App.Projekte.Common.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Common\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-    <DocumentationFile>..\bin\Debug\Common\Zetbox.App.Projekte.Common.xml</DocumentationFile>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.2" />
-    <PackageReference Include="CryptSharpOfficial" Version="2.1.0.0" />
+    <PackageReference Include="BCrypt.Net-Next" Version="3.2.1" />
     <PackageReference Include="GitVersionTask" Version="4.0.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -40,10 +34,6 @@
     <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Security" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="ZetboxBase\Strings.Designer.cs">
