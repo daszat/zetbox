@@ -52,10 +52,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="WindowsBase" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Configuration\SampleConfig.xml" />
     <None Include="ClassDiagram.Zetbox.API.cd" />
     <None Include="Configuration\CreateSchema.cmd" />
