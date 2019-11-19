@@ -23,15 +23,15 @@ namespace Zetbox.API.Client
     using System.Linq;
     using System.Net;
     using System.Security.Authentication;
-    using System.ServiceModel;
     using System.Text;
+    using Zetbox.API.Configuration;
 
     public sealed class HttpServiceClient
         : Zetbox.API.Client.ZetboxService.IZetboxService
     {
         private const int MAX_RETRY_COUNT = 2;
 
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.API.Client.HttpServiceClient");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(HttpServiceClient));
 
         private readonly Uri SetObjectsUri;
         private readonly Uri GetObjectsUri;
@@ -44,19 +44,19 @@ namespace Zetbox.API.Client
         private readonly ZetboxStreamReader.Factory _readerFactory;
         private readonly ZetboxStreamWriter.Factory _writerFactory;
 
-        public HttpServiceClient(ICredentialsResolver credentialsResolver, ZetboxStreamReader.Factory readerFactory, ZetboxStreamWriter.Factory writerFactory)
+        public HttpServiceClient(ZetboxConfig config, ICredentialsResolver credentialsResolver, ZetboxStreamReader.Factory readerFactory, ZetboxStreamWriter.Factory writerFactory)
         {
             if (credentialsResolver == null) throw new ArgumentNullException("credentialsResolver");
             if (readerFactory == null) throw new ArgumentNullException("readerFactory");
             if (writerFactory == null) throw new ArgumentNullException("writerFactory");
 
-            SetObjectsUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/SetObjects");
-            GetObjectsUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetObjects");
-            GetListOfUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetListOf");
-            FetchRelationUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/FetchRelation");
-            GetBlobStreamUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetBlobStream");
-            SetBlobStreamUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/SetBlobStream");
-            InvokeServerMethodUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/InvokeServerMethod");
+            SetObjectsUri = new Uri(config.Client?.ServiceUri + "/SetObjects");
+            GetObjectsUri = new Uri(config.Client?.ServiceUri + "/GetObjects");
+            GetListOfUri = new Uri(config.Client?.ServiceUri + "/GetListOf");
+            FetchRelationUri = new Uri(config.Client?.ServiceUri + "/FetchRelation");
+            GetBlobStreamUri = new Uri(config.Client?.ServiceUri + "/GetBlobStream");
+            SetBlobStreamUri = new Uri(config.Client?.ServiceUri + "/SetBlobStream");
+            InvokeServerMethodUri = new Uri(config.Client?.ServiceUri + "/InvokeServerMethod");
 
             _credentialsResolver = credentialsResolver;
             _readerFactory = readerFactory;
@@ -110,7 +110,7 @@ namespace Zetbox.API.Client
                         case HttpStatusCode.PreconditionFailed:
                             throw new InvalidZetboxGeneratedVersionException();
                         case HttpStatusCode.InternalServerError:
-                            throw new FaultException<WebException>(ex);
+                            throw new WebException(ex.Message, ex);
                     }
                 }
                 else

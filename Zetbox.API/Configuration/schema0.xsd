@@ -68,6 +68,7 @@
   </xs:complexType>
   <xs:complexType name="ClientConfig">
     <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ServiceUri" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="Application" nillable="true" xmlns:q1="http://microsoft.com/wsdl/types/" type="q1:guid" />
       <xs:element minOccurs="0" maxOccurs="1" name="Culture" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="UICulture" nillable="true" type="xs:string" />

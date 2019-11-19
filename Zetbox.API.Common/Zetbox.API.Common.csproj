@@ -2,6 +2,8 @@
   <PropertyGroup>
     <ProductVersion>9.0.30729</ProductVersion>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
@@ -24,16 +26,8 @@
     <OutputPath>..\bin\$(Configuration)\Common\</OutputPath>
     <DocumentationFile>..\bin\$(Configuration)\Common\Zetbox.API.Common.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Common\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-    <DocumentationFile>..\bin\Debug\Common\Zetbox.API.Common.xml</DocumentationFile>
-  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Arebis.CodeGenerator" Version="1.3.0.0" />
+    <PackageReference Include="Arebis.CodeGenerator" Version="1.3.6" />
     <PackageReference Include="Autofac" Version="4.9.2" />
     <PackageReference Include="Autofac.Configuration" Version="4.0.0" />
     <PackageReference Include="GitVersionTask" Version="4.0.0">
@@ -44,7 +38,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="1.0.2" />
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="1.0.1" />
-    <PackageReference Include="PDFsharp-MigraDoc-GDI-dasz" Version="1.32.3887.0" />
+    <PackageReference Include="PDFsharp-MigraDoc-GDI-dasz" Version="2.0.0" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.Composition" Version="4.6.0" />
     <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
@@ -58,9 +52,6 @@
     <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />

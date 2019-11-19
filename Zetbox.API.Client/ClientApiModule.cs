@@ -78,22 +78,4 @@ namespace Zetbox.API.Client
                 .InstancePerLifetimeScope();
         }
     }
-
-    [Feature]
-    [Description("WCF Proxy implementation")]
-    public sealed class WcfClientModule : Autofac.Module
-    {
-        protected override void Load(ContainerBuilder moduleBuilder)
-        {
-            base.Load(moduleBuilder);
-
-            moduleBuilder.RegisterType<ZetboxService.ZetboxServiceClient>()
-                .AsImplementedInterfaces()
-                .OnActivating(args =>
-                {
-                    args.Context.Resolve<ICredentialsResolver>().SetCredentialsTo(args.Instance.ClientCredentials);
-                })
-                .InstancePerLifetimeScope();
-        }
-    }
 }

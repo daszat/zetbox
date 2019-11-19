@@ -25,8 +25,6 @@ namespace Zetbox.API.Client
     using System.Linq.Expressions;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Security.Authentication;
-    using System.ServiceModel;
-    using System.ServiceModel.Security;
     using System.Text;
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.API.Client.ZetboxService;
@@ -118,14 +116,6 @@ namespace Zetbox.API.Client
                     request();
                     break;
                 }
-                catch (FaultException<ZetboxContextExceptionMessage> ex)
-                {
-                    throw ex.Detail.Exception.ToException();
-                }
-                catch (FaultException<InvalidZetboxGeneratedVersionExceptionMessage> ex)
-                {
-                    throw ex.Detail.ToException();
-                }
                 catch (ConcurrencyException)
                 {
                     throw;
@@ -146,21 +136,9 @@ namespace Zetbox.API.Client
                 {
                     throw;
                 }
-                catch (MessageSecurityException)
-                {
-                    throw;
-                }
-                catch (FaultException)
-                {
-                    throw;
-                }
                 catch (AuthenticationException)
                 {
                     throw;
-                }
-                catch (EndpointNotFoundException ex)
-                {
-                    throw new ZetboxServerIOException("Error when accessing server: " + ex.GetInnerException().Message, ex);
                 }
                 catch (Exception ex)
                 {
