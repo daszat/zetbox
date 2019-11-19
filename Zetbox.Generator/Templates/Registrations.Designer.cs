@@ -6,7 +6,7 @@ using Zetbox.API;
 
 namespace Zetbox.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.Generator\Templates\Registrations.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox.core\Zetbox.Generator\Templates\Registrations.cst")]
     public partial class Registrations : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -30,7 +30,7 @@ namespace Zetbox.Generator.Templates
 
         public override void Generate()
         {
-#line 27 "D:\Projects\zetbox\Zetbox.Generator\Templates\Registrations.cst"
+#line 27 "D:\Projects\zetbox.core\Zetbox.Generator\Templates\Registrations.cst"
 this.WriteObjects("            builder\r\n");
 this.WriteObjects("                .Register<",  shortName , "ImplementationTypeChecker>(\r\n");
 this.WriteObjects("                    c => new ",  shortName , "ImplementationTypeChecker(\r\n");
