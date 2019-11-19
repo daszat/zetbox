@@ -33,11 +33,7 @@
   </PropertyGroup>
   <Target Name="AfterBuildMigrated" />
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>$(ZetboxAPIPath)\Common\log4net.dll</HintPath>
-      <Private>False</Private>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
+    <PackageReference Include="log4net" Version="2.0.8" />
     <Reference Include="Zetbox.API">
       <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
       <Private>False</Private>
@@ -48,7 +44,6 @@
       <Private>False</Private>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="WindowsBase" />
     <!-- local reference to newly generated code -->
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" />
     <Reference Include="Zetbox.DalProvider.Base">
@@ -61,8 +56,6 @@
       <Private>False</Private>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="WindowsBase" />
     <Reference Include="Zetbox.DalProvider.Memory">
       <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Memory.dll</HintPath>
       <Private>False</Private>

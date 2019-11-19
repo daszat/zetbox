@@ -31,15 +31,17 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
 
+    // Npgsql is not CLS Complient
+#pragma warning disable CS3002, CS3009
     public class Postgresql
         : AdoNetSchemaProvider<NpgsqlConnection, NpgsqlTransaction, NpgsqlCommand>
     {
-        private readonly static log4net.ILog _log = log4net.LogManager.GetLogger("Zetbox.Server.Schema.Npgsql");
+        private readonly static log4net.ILog _log = log4net.LogManager.GetLogger(typeof(Postgresql));
         protected override log4net.ILog Log { get { return _log; } }
-        private readonly static log4net.ILog _queryLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.Npgsql.Queries");
+        private readonly static log4net.ILog _queryLog = log4net.LogManager.GetLogger("Zetbox", "Zetbox.Server.SchemaManagement.NpgsqlProvider.Queries");
         protected override log4net.ILog QueryLog { get { return _queryLog; } }
 
-        private readonly static log4net.ILog _copyLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.Npgsql.COPY");
+        private readonly static log4net.ILog _copyLog = log4net.LogManager.GetLogger("Zetbox", "Zetbox.Server.SchemaManagement.NpgsqlProvider.COPY");
 
         public Postgresql(bool force) 
             : base(force)
@@ -91,7 +93,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
             ExecuteScalar("SELECT dblink_connect(@alias, @connstr)",
                 new Dictionary<string, object>() {
                     { "@alias", tblName.Database},
-                    { "@connstr", String.Format("dbname={0} port={1} user={2} password={3}", tblName.Database, CurrentConnection.Port, _connectionSettings.UserName, new string(Encoding.UTF8.GetChars(_connectionSettings.PasswordAsByteArray))) }
+                    { "@connstr", String.Format("dbname={0} port={1} user={2} password={3}", tblName.Database, CurrentConnection.Port, _connectionSettings.Username, _connectionSettings.Password) }
                 });
             _dblinks[tblName.Database] = tblName.Database;
         }
@@ -1710,17 +1712,12 @@ END$BODY$
             var query = String.Format("COPY {0} ({1}) FROM STDIN WITH DELIMITER '{2}' NULL E'{3}'", FormatSchemaName(destTbl), String.Join(",", cols), COPY_SEPARATOR, COPY_NULL.Replace(@"\", @"\\"));
             _log.DebugFormat("Copy from: [{0}]", query);
             _copyLog.Info(query);
-            var bulkCopy = new NpgsqlCopyIn(query, CurrentConnection);
 
             try
             {
-                bulkCopy.Start();
                 // explicitly use Npgsql's default encoding, without BOM
-                using (var dst = new StreamWriter(bulkCopy.CopyStream, new System.Text.UTF8Encoding(false)))
+                using (var dst = CurrentConnection.BeginTextImport(query))
                 {
-                    // normal windows newline confuses npgsql
-                    dst.NewLine = "\n";
-
                     while (source.Read())
                     {
                         var vals = new string[cols.Length];
@@ -1820,15 +1817,13 @@ END$BODY$
                         }
                         string line = String.Join(COPY_SEPARATOR, vals);
                         _copyLog.Debug(line);
-                        dst.WriteLine(line);
+                        dst.Write(line + "\n");
                     }
                 }
-                bulkCopy.End();
             }
             catch (Exception ex)
             {
                 Log.Error("Error bulk writing to destination", ex);
-                bulkCopy.Cancel("Aborting COPY operation");
                 throw;
             }
             finally
@@ -1936,3 +1931,4 @@ END$BODY$
         }
     }
 }
+#pragma warning restore CS3002, CS3009

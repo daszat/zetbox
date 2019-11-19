@@ -39,7 +39,7 @@ namespace Zetbox.Server
     internal sealed class Server
         : IDisposable, IServer
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(Server));
 
         public Server(ILifetimeScope container)
         {

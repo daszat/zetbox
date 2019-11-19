@@ -32,7 +32,7 @@ namespace Zetbox.Server.SchemaManagement
     internal class Cases
         : IDisposable
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Schema.Cases");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(Cases));
 
         #region Fields
         private readonly IZetboxContext schema;

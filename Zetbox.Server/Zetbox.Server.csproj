@@ -26,14 +26,6 @@
     <OutputPath>..\bin\$(Configuration)\Server\</OutputPath>
     <DocumentationFile>..\bin\$(Configuration)\Server\Zetbox.Server.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Server\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;MONO</DefineConstants>
-    <DocumentationFile>..\bin\Debug\Server\Zetbox.Server.xml</DocumentationFile>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.2" />
     <PackageReference Include="GitVersionTask" Version="4.0.0">
@@ -42,6 +34,8 @@
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Npgsql" Version="4.1.2" />
     <PackageReference Include="Microsoft.Build.Framework" Version="16.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.7.0" />
+    <PackageReference Include="System.DirectoryServices" Version="4.6.0" />
     <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

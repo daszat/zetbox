@@ -40,7 +40,7 @@ namespace Zetbox.Server.SchemaManagement
             if (provider == null)
                 throw new ArgumentNullException("provider");
             _provider = provider;
-            Log = log4net.LogManager.GetLogger("Zetbox.Server.Schema.Report." + provider.ConfigName);
+            Log = log4net.LogManager.GetLogger("Zetbox", "Zetbox.Server.Schema.Report." + provider.ConfigName);
         }
 
         #region Logging

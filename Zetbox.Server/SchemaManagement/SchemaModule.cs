@@ -57,11 +57,6 @@ namespace Zetbox.Server.SchemaManagement
                 .InstancePerDependency();
 
             builder
-                .Register(c => new LoggingSchemaProviderAdapter(new OleDbProvider.OleDb()))
-                .As<ISchemaProvider>()
-                .Named<ISchemaProvider>("OLEDB")
-                .InstancePerDependency();
-            builder
                 .Register(c =>
                 {
                     ZetboxConfig cfg = c.Resolve<ZetboxConfig>();
