@@ -22,14 +22,6 @@
     <PackageReference Include="Autofac" Version="4.9.2" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
     <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
     <ProjectReference Include="..\..\Zetbox.Client.WPF.Toolkit\Zetbox.Client.WPF.Toolkit.csproj" />

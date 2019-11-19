@@ -28,21 +28,10 @@
     <DebugType>pdbonly</DebugType>
     <OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\Tests</OutputPath>
-    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.2" />
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="NUnit" Version="3.11.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Zetbox.API.Client.Tests.PartCoverSettings.xml" />

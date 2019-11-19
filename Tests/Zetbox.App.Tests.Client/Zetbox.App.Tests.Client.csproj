@@ -23,10 +23,6 @@
     <PackageReference Include="System.CodeDom" Version="4.6.0" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="DerivedReportTest\Common\DocumentStyles.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -29,7 +29,7 @@ namespace Zetbox.API.Tests
     [TestFixture]
     public class ExpressionFilterTest : AbstractApiTestFixture
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.Api.ExpressionFilter");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(ExpressionFilterTest));
 
         TestQuery<IDataObject> ctx;
 

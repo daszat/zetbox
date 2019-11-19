@@ -23,19 +23,9 @@
     <DebugType>pdbonly</DebugType>
     <OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\Tests</OutputPath>
-    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.2" />
     <PackageReference Include="NUnit" Version="3.11.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />

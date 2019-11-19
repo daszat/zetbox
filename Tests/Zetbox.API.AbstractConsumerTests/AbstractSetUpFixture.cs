@@ -29,7 +29,7 @@ namespace Zetbox.API.AbstractConsumerTests
 
     public abstract class AbstractSetUpFixture
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.AbstractSetup");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(AbstractSetUpFixture));
 
         static AbstractSetUpFixture()
         {
