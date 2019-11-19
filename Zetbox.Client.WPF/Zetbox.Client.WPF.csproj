@@ -67,7 +67,7 @@
     <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="WPFExtensions" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="3.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
