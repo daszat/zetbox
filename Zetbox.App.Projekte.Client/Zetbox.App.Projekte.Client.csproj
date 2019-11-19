@@ -32,7 +32,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="log4net" Version="2.0.8" />
-    <PackageReference Include="PDFsharp-MigraDoc-GDI-dasz" Version="1.32.3887.0" />
+    <PackageReference Include="PDFsharp-MigraDoc-GDI-dasz" Version="2.0.0.0" />
     <PackageReference Include="System.CodeDom" Version="4.6.0" />
     <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
       <PrivateAssets>all</PrivateAssets>
