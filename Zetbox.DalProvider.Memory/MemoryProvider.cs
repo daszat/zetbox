@@ -34,7 +34,7 @@ namespace Zetbox.DalProvider.Memory
     public class MemoryProvider
         : Autofac.Module
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.DalProvider.Memory");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(MemoryProvider));
 
         public static readonly string ContextClassName = "Zetbox.Objects.Memory.MemoryContext";
         public static readonly string GeneratedAssemblyName = "Zetbox.Objects.MemoryImpl";

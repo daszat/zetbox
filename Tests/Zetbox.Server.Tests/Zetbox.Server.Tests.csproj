@@ -37,19 +37,7 @@
     <PackageReference Include="Autofac.Wcf" Version="4.0.0" />
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="NUnit" Version="3.11.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Mono.Security">
-      <HintPath>..\..\packages\Npgsql.2.2.2\lib\net40\Mono.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Npgsql">
-      <HintPath>..\..\packages\Npgsql.2.2.2\lib\net40\Npgsql.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceModel.Activation" />
-    <Reference Include="WindowsBase" />
+    <PackageReference Include="Npgsql" Version="4.1.2" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Zetbox.Server.Tests.PartCoverSettings.xml" />

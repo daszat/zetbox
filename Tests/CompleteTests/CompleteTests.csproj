@@ -64,7 +64,6 @@ IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
     <ProjectReference Include="..\Zetbox.API.Tests\Zetbox.API.Tests.csproj" />
     <ProjectReference Include="..\Zetbox.Client.Tests\Zetbox.Client.Tests.csproj" />
     <ProjectReference Include="..\Zetbox.DalProvider.ClientObjects.Tests\Zetbox.DalProvider.ClientObjects.Tests.csproj" />
-    <ProjectReference Include="..\Zetbox.DalProvider.EF.Tests\Zetbox.DalProvider.EF.Tests.csproj" />
     <ProjectReference Include="..\Zetbox.DalProvider.Memory.Tests\Zetbox.DalProvider.Memory.Tests.csproj" />
     <ProjectReference Include="..\Zetbox.IntegrationTests\Zetbox.IntegrationTests.csproj" />
     <ProjectReference Include="..\Zetbox.Server.Tests\Zetbox.Server.Tests.csproj" />

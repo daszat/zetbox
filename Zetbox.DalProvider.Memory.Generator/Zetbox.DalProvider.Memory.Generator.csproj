@@ -48,9 +48,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="Templates\ObjectClasses\ApplyChangesFromMethod.cs">
       <DependentUpon>ApplyChangesFromMethod.cst</DependentUpon>
     </Compile>

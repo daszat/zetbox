@@ -38,9 +38,8 @@
     <PackageReference Include="GitVersionTask" Version="4.0.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Iesi.Collections" Version="3.3.3-DASZ2" />
     <PackageReference Include="log4net" Version="2.0.8" />
-    <PackageReference Include="NHibernate-dasz" Version="3.3.3-DASZ2" />
+    <PackageReference Include="NHibernate" Version="5.2.6" />
     <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
