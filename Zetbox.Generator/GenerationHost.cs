@@ -39,7 +39,7 @@ namespace Zetbox.Generator
     public class ResourceBasedGenerationHost
         : IGenerationHost, IDisposable
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator.Host");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(ResourceBasedGenerationHost));
 
         private Dictionary<string, TemplateInfo> templates;
         private List<IFileWriter> fileWriters;

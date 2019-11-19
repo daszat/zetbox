@@ -24,53 +24,54 @@ namespace Zetbox.Generator
     using Zetbox.API;
     using Microsoft.Build.Framework;
 
-    public class MsBuildCompiler : Compiler
-    {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(MsBuildCompiler));
+    // TODO
+    //public class MsBuildCompiler : Compiler
+    //{
+    //    private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(MsBuildCompiler));
 
-        public MsBuildCompiler(ILifetimeScope container, IEnumerable<AbstractBaseGenerator> generatorProviders)
-            : base(container, generatorProviders)
-        {
-        }
+    //    public MsBuildCompiler(ILifetimeScope container, IEnumerable<AbstractBaseGenerator> generatorProviders)
+    //        : base(container, generatorProviders)
+    //    {
+    //    }
 
-        protected override bool CompileSingle(AbstractBaseGenerator gen, Dictionary<string, string> buildProps, string workingPath, string target)
-        {
-            try
-            {
-                using (log4net.NDC.Push("Compiling " + gen.Description))
-                {
-                    Log.DebugFormat("Loading MsBuild Project");
-                    var projectFile = Helper.PathCombine(workingPath, gen.TargetNameSpace, gen.ProjectFileName);
-                    var req = new BuildRequestData(
-                        projectFile,
-                        buildProps,
-                        null,
-                        new[] { target },
-                        null);
+    //    protected override bool CompileSingle(AbstractBaseGenerator gen, Dictionary<string, string> buildProps, string workingPath, string target)
+    //    {
+    //        try
+    //        {
+    //            using (log4net.NDC.Push("Compiling " + gen.Description))
+    //            {
+    //                Log.DebugFormat("Loading MsBuild Project");
+    //                var projectFile = Helper.PathCombine(workingPath, gen.TargetNameSpace, gen.ProjectFileName);
+    //                var req = new BuildRequestData(
+    //                    projectFile,
+    //                    buildProps,
+    //                    null,
+    //                    new[] { target },
+    //                    null);
 
-                    var logger = new Microsoft.Build.Logging.ConsoleLogger(LoggerVerbosity.Minimal);
-                    var buildParameter = new BuildParameters();
-                    buildParameter.Loggers = new List<ILogger>() { logger };
+    //                var logger = new Microsoft.Build.Logging.ConsoleLogger(LoggerVerbosity.Minimal);
+    //                var buildParameter = new BuildParameters();
+    //                buildParameter.Loggers = new List<ILogger>() { logger };
 
-                    Log.DebugFormat("Compiling");
-                    var result = BuildManager.DefaultBuildManager.Build(buildParameter, req);
+    //                Log.DebugFormat("Compiling");
+    //                var result = BuildManager.DefaultBuildManager.Build(buildParameter, req);
 
-                    if (result.OverallResult == BuildResultCode.Success)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        Log.ErrorFormat("Failed to compile {0}", gen.Description);
-                        return false;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Failed compiling " + gen.Description, ex);
-                return false;
-            }
-        }
-    }
+    //                if (result.OverallResult == BuildResultCode.Success)
+    //                {
+    //                    return true;
+    //                }
+    //                else
+    //                {
+    //                    Log.ErrorFormat("Failed to compile {0}", gen.Description);
+    //                    return false;
+    //                }
+    //            }
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            Log.Error("Failed compiling " + gen.Description, ex);
+    //            return false;
+    //        }
+    //    }
+    //}
 }

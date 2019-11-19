@@ -26,7 +26,7 @@ namespace Zetbox.Generator
 
     public abstract class AbstractBaseGenerator
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(AbstractBaseGenerator));
 
         private readonly IEnumerable<ISchemaProvider> _schemaProviders;
         protected IEnumerable<ISchemaProvider> SchemaProviders

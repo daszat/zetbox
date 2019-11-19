@@ -109,10 +109,11 @@ namespace Zetbox.Generator
                .As<AbstractBaseGenerator>()
                .SingleInstance();
 
-            builder
-                .RegisterType<MsBuildCompiler>()
-                .As<Compiler>()
-                .SingleInstance();
+            // TODO
+            //builder
+            //    .RegisterType<MsBuildCompiler>()
+            //    .As<Compiler>()
+            //    .SingleInstance();
 
             GeneratorModule.RegisterCommon(builder);
         }

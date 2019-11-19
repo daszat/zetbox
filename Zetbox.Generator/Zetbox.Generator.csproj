@@ -20,13 +20,6 @@
     <DebugType>pdbonly</DebugType>
     <OutputPath>..\bin\$(Configuration)\Server\</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Server\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Arebis Generation Tools\ArebisGenTask.targets" />
   <ItemGroup>
     <PackageReference Include="Arebis.CodeGeneration" Version="1.3.6" />
