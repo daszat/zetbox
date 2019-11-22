@@ -19,13 +19,12 @@ namespace Zetbox.Client.ASPNET
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Web.Mvc;
     using Zetbox.Client.Presentables;
     using Zetbox.API;
-    using System.Web.Http;
     using System.IO;
+    using Microsoft.AspNetCore.Mvc;
 
-    public class ZetboxApiController : ApiController
+    public class ZetboxApiController : Controller
     {
         private ZetboxContextHttpScope _contextScope;
         protected IZetboxContext DataContext

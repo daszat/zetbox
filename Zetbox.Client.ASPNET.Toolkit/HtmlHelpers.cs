@@ -19,15 +19,17 @@ namespace Zetbox.Client.ASPNET
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Web.Mvc;
     using System.IO;
-    using System.Web.Mvc.Html;
     using System.Linq.Expressions;
     using Zetbox.Client.Presentables;
     using System.Reflection;
     using Zetbox.API;
     using Zetbox.Client.Presentables.ValueViewModels;
     using System.Web;
+    using Microsoft.AspNetCore.Mvc.ViewFeatures;
+    using Microsoft.AspNetCore.Html;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
     public static class HtmlHelpers
     {
@@ -60,9 +62,9 @@ namespace Zetbox.Client.ASPNET
         #endregion
 
         #region ZbHiddenID
-        public static MvcHtmlString ZbHiddenID(this HtmlHelper helper, int ID)
+        public static IHtmlContent ZbHiddenID(this HtmlHelper helper, int ID)
         {
-            return InputExtensions.Hidden(helper, "ID", ID > Helper.INVALIDID ? ID : Helper.INVALIDID);
+            return helper.Hidden("ID", ID > Helper.INVALIDID ? ID : Helper.INVALIDID, null);
         }
         #endregion
 
@@ -77,10 +79,10 @@ namespace Zetbox.Client.ASPNET
         /// <param name="name">overrides expression</param>
         /// <param name="asReadOnly">Renders the for attribute always with FormattedValue</param>
         /// <returns></returns>
-        public static MvcHtmlString ZbLabelFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, ILabeledViewModel>> expression, object htmlAttributes = null, string name = null, bool asReadOnly = false)
+        public static IHtmlContent ZbLabelFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, ILabeledViewModel>> expression, object htmlAttributes = null, string name = null, bool asReadOnly = false)
         {
             var exprStr = name ?? ExpressionHelper.GetExpressionText(expression);
-            var mdl = System.Web.Mvc.ModelMetadata.FromLambdaExpression<TModel, ILabeledViewModel>(expression, html.ViewData).IfNotNull(meta => meta.Model);
+            var mdl = ModelMetadata.FromLambdaExpression<TModel, ILabeledViewModel>(expression, html.ViewData).IfNotNull(meta => meta.Model);
             var lbmdl = mdl as ILabeledViewModel;
             var basemdl = mdl as BaseValueViewModel;
 
@@ -105,12 +107,12 @@ namespace Zetbox.Client.ASPNET
                                                 html.Encode(lbmdl.IfNotNull(v => v.Label).IfNullOrEmpty(exprStr)),
                                                 !asReadOnly && lbmdl.Required ? " <span class=\"required\"></span>" : "",
                                                 !asReadOnly && lbmdl.Required ? "required" : "");
-            return MvcHtmlString.Create(labelStr);
+            return new HtmlString(labelStr);
         }
         #endregion
 
         #region Display
-        public static MvcHtmlString ZbDisplayFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
+        public static IHtmlContent ZbDisplayFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
             where TValue : BaseValueViewModel
         {
             var newExpression = AppendMember<TModel, TValue, string>(expression, "FormattedValue");
@@ -132,7 +134,7 @@ namespace Zetbox.Client.ASPNET
         /// <param name="additionalViewData"></param>
         /// <returns></returns>
         [Obsolete("Use MVC Editor Templates instead!")]
-        public static MvcHtmlString ZbEditorFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
+        public static IHtmlContent ZbEditorFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
             where TValue : BaseValueViewModel
         {
             var vmdl = (BaseValueViewModel)ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
@@ -146,7 +148,7 @@ namespace Zetbox.Client.ASPNET
                 if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
                 {
                     var enumVmdl = (EnumerationValueViewModel)vmdl;
-                    return SelectExtensions.DropDownList(
+                    return html.DropDownList(
                         html,
                         ExpressionHelper.GetExpressionText(expression) + ".Value",
                         enumVmdl
@@ -160,7 +162,7 @@ namespace Zetbox.Client.ASPNET
                 }
                 else
                 {
-                    return EditorExtensions.EditorFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
+                    return html.EditorFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
                 }
             }
         }
@@ -168,42 +170,42 @@ namespace Zetbox.Client.ASPNET
 
         #region ValidationMessages
         [Obsolete("Add them in MVC Editor Templates instead!")]
-        public static MvcHtmlString ZbValidationMessageFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string validationMessage = null, object htmlAttributes = null)
+        public static IHtmlContent ZbValidationMessageFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string validationMessage = null, object htmlAttributes = null)
              where TValue : BaseValueViewModel
         {
             var vmdl = (BaseValueViewModel)ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
             var type = vmdl.GetType();
             if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
             {
-                return ValidationExtensions.ValidationMessageFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "Value"), validationMessage, htmlAttributes);
+                return html.ValidationMessageFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "Value"), validationMessage, htmlAttributes);
             }
             else
             {
-                return ValidationExtensions.ValidationMessageFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), validationMessage, htmlAttributes);
+                return html.ValidationMessageFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), validationMessage, htmlAttributes);
             }
         }
 
-        public static MvcHtmlString StatusMessage(this HtmlHelper helper, string msg)
+        public static IHtmlContent StatusMessage(this HtmlHelper helper, string msg)
         {
             if (string.IsNullOrWhiteSpace(msg))
             {
-                return MvcHtmlString.Empty;
+                return HtmlString.Empty;
             }
 
-            return new MvcHtmlString(string.Format("<div class=\"alert alert-success\">{0}</div>", HttpUtility.HtmlEncode(msg)));
+            return new HtmlString(string.Format("<div class=\"alert alert-success\">{0}</div>", HttpUtility.HtmlEncode(msg)));
         }
 
-        public static MvcHtmlString WarningMessage(this HtmlHelper helper, string msg)
+        public static IHtmlContent WarningMessage(this HtmlHelper helper, string msg)
         {
             if (string.IsNullOrWhiteSpace(msg))
             {
-                return MvcHtmlString.Empty;
+                return HtmlString.Empty;
             }
 
-            return new MvcHtmlString(string.Format("<div class=\"alert alert-warning\">{0}</div>", HttpUtility.HtmlEncode(msg)));
+            return new HtmlString(string.Format("<div class=\"alert alert-warning\">{0}</div>", HttpUtility.HtmlEncode(msg)));
         }
 
-        public static MvcHtmlString BootstrapValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors = false)
+        public static IHtmlContent BootstrapValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors = false)
         {
             if (htmlHelper == null)
             {
@@ -212,20 +214,20 @@ namespace Zetbox.Client.ASPNET
 
             if (htmlHelper.ViewData.ModelState.IsValid || (excludePropertyErrors && (htmlHelper.ViewData.ModelState[""] == null || htmlHelper.ViewData.ModelState[""].Errors.Count() == 0)))
             {
-                return MvcHtmlString.Empty;
+                return HtmlString.Empty;
             }
 
-            return new MvcHtmlString(string.Format("<div class=\"alert alert-danger\">{0}</div>",
+            return new HtmlString(string.Format("<div class=\"alert alert-danger\">{0}</div>",
                 htmlHelper.ValidationSummary(excludePropertyErrors).ToHtmlString()));
         }
         #endregion
 
 
         #region TextBox
-        public static MvcHtmlString ZbTextBoxFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null)
+        public static IHtmlContent ZbTextBoxFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null)
             where TValue : BaseValueViewModel
         {
-            return InputExtensions.TextBoxFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), htmlAttributes);
+            return html.TextBoxFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), htmlAttributes);
         }
         #endregion
 

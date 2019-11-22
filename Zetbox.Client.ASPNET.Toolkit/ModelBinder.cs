@@ -19,16 +19,16 @@ namespace Zetbox.Client.ASPNET
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Web.Mvc;
     using Autofac;
     using Zetbox.Client.Presentables;
     using System.ComponentModel;
     using Zetbox.API.Utils;
-    using Autofac.Integration.Mvc;
     using Zetbox.API;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using Microsoft.AspNetCore.Mvc;
 
     #region ZetboxViewModelBinder
-    public interface IZetboxViewModelBinder : System.Web.Mvc.IModelBinder
+    public interface IZetboxViewModelBinder : IModelBinder
     {
     }
 
@@ -97,7 +97,7 @@ namespace Zetbox.Client.ASPNET
     #endregion
 
     #region LookupDictionaryModelBinder
-    public interface ILookupDictionaryModelBinder : System.Web.Mvc.IModelBinder
+    public interface ILookupDictionaryModelBinder : IModelBinder
     {
     }
 

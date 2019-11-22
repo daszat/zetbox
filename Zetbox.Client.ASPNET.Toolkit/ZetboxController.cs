@@ -19,9 +19,9 @@ namespace Zetbox.Client.ASPNET
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Web.Mvc;
     using Zetbox.Client.Presentables;
     using Zetbox.API;
+    using Microsoft.AspNetCore.Mvc;
 
     public class ZetboxController : Controller
     {

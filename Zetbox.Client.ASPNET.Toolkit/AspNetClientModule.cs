@@ -21,7 +21,6 @@ namespace Zetbox.Client.ASPNET
     using System.Text;
     using System.ComponentModel;
     using Autofac;
-    using Autofac.Integration.Mvc;
     using Zetbox.Client.Presentables;
     using Zetbox.API;
     using Zetbox.API.Common;
