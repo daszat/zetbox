@@ -22,14 +22,6 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\bin\$(Configuration)\Client\</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Client\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-    <DebugType>full</DebugType>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="GitVersionTask" Version="4.0.0">
       <PrivateAssets>all</PrivateAssets>
