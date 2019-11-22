@@ -67,7 +67,6 @@ namespace Zetbox.Client.WPF
             this.DispatcherUnhandledException += Application_DispatcherUnhandledException;
         }
 
-        private static ServerDomainManager serverDomain;
         private static IContainer container;
 
         private string[] HandleCommandline(string[] args, out string configFilePath)
@@ -144,12 +143,6 @@ namespace Zetbox.Client.WPF
             InitializeSplashScreenImageResource();
 
             StartupScreen.ShowSplashScreen(Zetbox.Client.Properties.Resources.Startup_Message, Zetbox.Client.Properties.Resources.Startup_InitApp, 6, config);
-            if (config.Server != null && config.Server.StartServer)
-            {
-                StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Server);
-                serverDomain = new ServerDomainManager();
-                serverDomain.Start(config);
-            }
 
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
             ConfigureContainerBuilder(config, builder);
@@ -319,9 +312,6 @@ namespace Zetbox.Client.WPF
             {
                 Logging.Log.Info("Service control manager not registered");
             }
-
-            if (serverDomain != null)
-                serverDomain.Stop();
 
             try
             {

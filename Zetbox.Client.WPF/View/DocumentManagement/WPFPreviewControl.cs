@@ -26,7 +26,8 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
     public class WPFPreviewControl : ContentPresenter
     {
         Rect actualRect = new Rect();
-        System.Windows.Forms.Integration.WindowsFormsHost host;
+        // TODO
+        // System.Windows.Forms.Integration.WindowsFormsHost host;
         PreviewersManager pManager;
 
         public WPFPreviewControl()
@@ -36,10 +37,11 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
 
             this.Unloaded += new RoutedEventHandler(WPFPreviewControl_Unloaded);
 
-            host = new System.Windows.Forms.Integration.WindowsFormsHost();
-            host.Child = new System.Windows.Forms.Panel();
-            host.Loaded += new RoutedEventHandler(host_Loaded);
-            this.Content = host;
+            // TODO
+            //host = new System.Windows.Forms.Integration.WindowsFormsHost();
+            //host.Child = new System.Windows.Forms.Panel();
+            //host.Loaded += new RoutedEventHandler(host_Loaded);
+            //this.Content = host;
         }
 
         void WPFPreviewControl_Unloaded(object sender, RoutedEventArgs e)
@@ -83,19 +85,21 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
         private void InvalidateAttachedPreview()
         {
             EnsurePreviewManager();
-            if (host != null && host.Handle != IntPtr.Zero)
-            {
-                pManager.InvalidateAttachedPreview(host.Handle, actualRect);
-            }
+            // TODO
+            //if (host != null && host.Handle != IntPtr.Zero)
+            //{
+            //    pManager.InvalidateAttachedPreview(host.Handle, actualRect);
+            //}
         }
 
         private void AttachPreview()
         {
             EnsurePreviewManager();
-            if (host != null && host.Handle != IntPtr.Zero && !string.IsNullOrEmpty(PreviewFilePath))
-            {
-                pManager.AttachPreview(host.Handle, PreviewFilePath, actualRect);
-            }
+            // TODO
+            //if (host != null && host.Handle != IntPtr.Zero && !string.IsNullOrEmpty(PreviewFilePath))
+            //{
+            //    pManager.AttachPreview(host.Handle, PreviewFilePath, actualRect);
+            //}
         }
 
         private void EnsurePreviewManager()
