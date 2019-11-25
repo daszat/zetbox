@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProductVersion>8.0.30703</ProductVersion>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <SignAssembly>true</SignAssembly>
@@ -11,6 +11,9 @@
     <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -29,6 +32,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Microsoft.Build" Version="16.3.0" />
     <PackageReference Include="Microsoft.Build.Framework" Version="16.3.0" />
     <PackageReference Include="System.CodeDom" Version="4.6.0" />
     <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
@@ -352,7 +356,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EnumWithDefaultBinarySerialization.cst</DependentUpon>
     </Compile>
-    <None Include="InterfaceTemplates\NamedObjects.cst">
+    <None Update="InterfaceTemplates\NamedObjects.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>NamedObjects.Designer.cs</LastGenOutput>
     </None>
@@ -448,204 +452,204 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Zetbox.Objects.snk" />
-    <None Include="Templates\ObjectClasses\TriggerFetchMethod.cst">
+    <None Update="Templates\ObjectClasses\TriggerFetchMethod.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>TriggerFetchMethod.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Serialization\EnumWithDefaultBinarySerialization.cst">
+    <None Update="Templates\Serialization\EnumWithDefaultBinarySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>EnumWithDefaultBinarySerialization.Designer.cs</LastGenOutput>
     </None>
     <None Include="Zetbox.snk" />
-    <None Include="InterfaceTemplates\CollectionEntries\CollectionEntries.cst">
+    <None Update="InterfaceTemplates\CollectionEntries\CollectionEntries.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionEntries.Designer.cs</LastGenOutput>
     </None>
-    <None Include="InterfaceTemplates\CollectionEntries\Template.cst">
+    <None Update="InterfaceTemplates\CollectionEntries\Template.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Template.Designer.cs</LastGenOutput>
     </None>
-    <None Include="InterfaceTemplates\Enumerations\Template.cst">
+    <None Update="InterfaceTemplates\Enumerations\Template.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Template.Designer.cs</LastGenOutput>
     </None>
-    <None Include="InterfaceTemplates\Properties\SimplePropertyListTemplate.cst">
+    <None Update="InterfaceTemplates\Properties\SimplePropertyListTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SimplePropertyListTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="InterfaceTemplates\Properties\SimplePropertyTemplate.cst">
+    <None Update="InterfaceTemplates\Properties\SimplePropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SimplePropertyTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\AssemblyInfoTemplate.cst">
+    <None Update="Templates\AssemblyInfoTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>AssemblyInfoTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\CollectionEntries\CollectionEntryTemplate.cst">
+    <None Update="Templates\CollectionEntries\CollectionEntryTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionEntryTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\CollectionEntries\ManageObjectState.cst">
+    <None Update="Templates\CollectionEntries\ManageObjectState.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ManageObjectState.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\CollectionEntries\ValueCollectionEntryParentReference.cst">
+    <None Update="Templates\CollectionEntries\ValueCollectionEntryParentReference.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ValueCollectionEntryParentReference.Designer.cs</LastGenOutput>
     </None>
-    <None Include="InterfaceTemplates\Module.cst">
+    <None Update="InterfaceTemplates\Module.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Module.Designer.cs</LastGenOutput>
     </None>
-    <None Include="InterfaceTemplates\Interfaces\Template.cst">
+    <None Update="InterfaceTemplates\Interfaces\Template.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Template.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\CompoundObjects\DefaultMethods.cst">
+    <None Update="Templates\CompoundObjects\DefaultMethods.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>DefaultMethods.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Module.cst">
+    <None Update="Templates\Module.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Module.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\ApplyChangesFromMethod.cst">
+    <None Update="Templates\ObjectClasses\ApplyChangesFromMethod.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ApplyChangesFromMethod.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\CollectionEntries.cst">
+    <None Update="Templates\ObjectClasses\CollectionEntries.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionEntries.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\Constructors.cst">
+    <None Update="Templates\ObjectClasses\Constructors.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Constructors.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\OnPropertyChange.cst">
+    <None Update="Templates\ObjectClasses\OnPropertyChange.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>OnPropertyChange.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\CustomTypeDescriptor.cst">
+    <None Update="Templates\ObjectClasses\CustomTypeDescriptor.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CustomTypeDescriptor.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\Method.cst">
+    <None Update="Templates\ObjectClasses\Method.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Method.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\MethodCanExec.cst">
+    <None Update="Templates\ObjectClasses\MethodCanExec.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>MethodCanExec.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\ReloadOneReference.cst">
+    <None Update="Templates\ObjectClasses\ReloadOneReference.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ReloadOneReference.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\ReloadReferences.cst">
+    <None Update="Templates\ObjectClasses\ReloadReferences.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ReloadReferences.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\CalculatedProperty.cst">
+    <None Update="Templates\Properties\CalculatedProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CalculatedProperty.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\CollectionEntryListProperty.cst">
+    <None Update="Templates\Properties\CollectionEntryListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionEntryListProperty.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\CompoundObjectPropertyInitialisation.cst">
+    <None Update="Templates\Properties\CompoundObjectPropertyInitialisation.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CompoundObjectPropertyInitialisation.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\CompoundObjectPropertyTemplate.cst">
+    <None Update="Templates\Properties\CompoundObjectPropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CompoundObjectPropertyTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\PropertyListChangedEvent.cst">
+    <None Update="Templates\Properties\PropertyListChangedEvent.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ListEvent1.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\DefaultProperty.cst">
+    <None Update="Templates\Properties\DefaultProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>DefaultProperty.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\ListProperty.cst">
+    <None Update="Templates\Properties\ListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ListProperty.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\NotifyingValueProperty.cst">
+    <None Update="Templates\Properties\NotifyingValueProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>NotifyingValueProperty.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\ObjectListProperty.cst">
+    <None Update="Templates\Properties\ObjectListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\ObjectReferencePropertyTemplate.cst">
+    <None Update="Templates\Properties\ObjectReferencePropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertyTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\UpdateParentTemplate.cst">
+    <None Update="Templates\ObjectClasses\UpdateParentTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>UpdateParentTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\PropertyEvents.cst">
+    <None Update="Templates\Properties\PropertyEvents.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>PropertyEvents.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\ValueCollectionProperty.cst">
+    <None Update="Templates\Properties\ValueCollectionProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ValueCollectionProperty.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ProjectFile.cst">
+    <None Update="Templates\ProjectFile.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProjectFile.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Registrations.cst">
+    <None Update="Templates\Registrations.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Registrations.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Serialization\CollectionSerialization.cst">
+    <None Update="Templates\Serialization\CollectionSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionSerialization.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Serialization\CompoundObjectSerialization.cst">
+    <None Update="Templates\Serialization\CompoundObjectSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CompoundObjectSerialization.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Serialization\SimplePropertyWithDefaultSerialization.cst">
+    <None Update="Templates\Serialization\SimplePropertyWithDefaultSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SimplePropertyWithDefaultSerialization.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Serialization\SimplePropertySerialization.cst">
+    <None Update="Templates\Serialization\SimplePropertySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SimplePropertySerialization.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Serialization\EagerLoadingSerialization.cst">
+    <None Update="Templates\Serialization\EagerLoadingSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>EagerLoadingSerialization.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Serialization\EagerObjectLoadingSerialization.cst">
+    <None Update="Templates\Serialization\EagerObjectLoadingSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>EagerObjectLoadingSerialization.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Serialization\EnumBinarySerialization.cst">
+    <None Update="Templates\Serialization\EnumBinarySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>EnumBinarySerialization.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Serialization\ObjectReferencePropertySerialization.cst">
+    <None Update="Templates\Serialization\ObjectReferencePropertySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertySerialization.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Serialization\SerializerTemplate.cst">
+    <None Update="Templates\Serialization\SerializerTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SerializerTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\TypeBase.cst">
+    <None Update="Templates\TypeBase.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>TypeBase.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\TypeChecker.cst">
+    <None Update="Templates\TypeChecker.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>TypeChecker.Designer.cs</LastGenOutput>
     </None>
@@ -657,19 +661,19 @@
     <ProjectReference Include="..\Zetbox.Objects.Fallback\Zetbox.Objects.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\Properties\DelegatingProperty.cst">
+    <None Update="Templates\Properties\DelegatingProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>DelegatingProperty.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\ObjectClasses\DefaultMethods.cst">
+    <None Update="Templates\ObjectClasses\DefaultMethods.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>DefaultMethods.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\Properties\ComputeDefaultValue.cst">
+    <None Update="Templates\Properties\ComputeDefaultValue.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ComputeDefaultValue.Designer.cs</LastGenOutput>
     </None>

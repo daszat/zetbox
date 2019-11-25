@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProductVersion>8.0.30703</ProductVersion>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <SignAssembly>true</SignAssembly>
@@ -35,6 +35,9 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Arebis Generation Tools\ArebisGenTask.targets" />
   <ItemGroup>
+    <ArebisTemplates Remove="Templates\Mappings\VersionColumnHbm.cst" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Arebis.CodeGeneration" Version="1.3.6" />
     <PackageReference Include="Arebis.CodeGenerator" Version="1.3.6" />
     <PackageReference Include="Autofac" Version="4.9.2" />
@@ -46,9 +49,6 @@
     <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Templates\CollectionEntries\RememberToDeleteTemplate.Designer.cs">
@@ -126,6 +126,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PropertiesHbm.cst</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Mappings\VersionColumnHbm.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VersionColumnHbm.cst</DependentUpon>
     </Compile>
     <Compile Update="Templates\ObjectClasses\Constructors.cs">
       <DependentUpon>Constructors.cst</DependentUpon>
@@ -245,107 +250,107 @@
     <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\CompoundObjects\Constructors.cst">
+    <None Update="Templates\CompoundObjects\Constructors.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Constructors.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Mappings\CollectionEntriesHbm.cst">
+    <None Update="Templates\Mappings\CollectionEntriesHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionEntriesHbm.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Mappings\CompoundObjectPropertyHbm.cst">
+    <None Update="Templates\Mappings\CompoundObjectPropertyHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CompoundObjectPropertyHbm.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Mappings\ClassesHbm.cst">
+    <None Update="Templates\Mappings\ClassesHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ClassesHbm.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Mappings\DiscriminatorColumnHbm.cst">
+    <None Update="Templates\Mappings\DiscriminatorColumnHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>DiscriminatorColumnHbm.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Mappings\IdGeneratorHbm.cst">
+    <None Update="Templates\Mappings\IdGeneratorHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>IdGeneratorHbm.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Mappings\ValueTypePropertyHbm.cst">
+    <None Update="Templates\Mappings\ValueTypePropertyHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ValueTypePropertyHbm.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Mappings\ObjectClassHbm.cst">
+    <None Update="Templates\Mappings\ObjectClassHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectClassHbm.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Mappings\PropertiesHbm.cst">
+    <None Update="Templates\Mappings\PropertiesHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>PropertiesHbm.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\Constructors.cst">
+    <None Update="Templates\ObjectClasses\Constructors.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Constructors.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\RightsClass.cst">
+    <None Update="Templates\ObjectClasses\RightsClass.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>RightsClass.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\ProxyClassChild.cst">
+    <None Update="Templates\ObjectClasses\ProxyClassChild.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProxyClassChild.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\ProxyClass.cst">
+    <None Update="Templates\ObjectClasses\ProxyClass.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProxyClass.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\ReloadOneReference.cst">
+    <None Update="Templates\ObjectClasses\ReloadOneReference.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ReloadOneReference.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\ReloadReferences.cst">
+    <None Update="Templates\ObjectClasses\ReloadReferences.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ReloadReferences.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\CollectionEntryListProperty.cst">
+    <None Update="Templates\Properties\CollectionEntryListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionEntryListProperty.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\CompoundObjectPropertyTemplate.cst">
+    <None Update="Templates\Properties\CompoundObjectPropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CompoundObjectPropertyTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\ObjectListProperty.cst">
+    <None Update="Templates\Properties\ObjectListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\ObjectReferencePropertyTemplate.cst">
+    <None Update="Templates\Properties\ObjectReferencePropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertyTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\ProxyProperty.cst">
+    <None Update="Templates\Properties\ProxyProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProxyProperty.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Properties\ValueCollectionProperty.cst">
+    <None Update="Templates\Properties\ValueCollectionProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ValueCollectionProperty.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Registrations.cst">
+    <None Update="Templates\Registrations.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Registrations.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Serialization\ObjectReferencePropertySerialization.cst">
+    <None Update="Templates\Serialization\ObjectReferencePropertySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertySerialization.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\Mappings\SubclassHbm.cst">
+    <None Update="Templates\Mappings\SubclassHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SubclassHbm1.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\CollectionEntries\RememberToDeleteTemplate.cst">
+    <None Update="Templates\CollectionEntries\RememberToDeleteTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>RememberToDeleteTemplate.Designer.cs</LastGenOutput>
     </None>
@@ -354,5 +359,11 @@
     <Compile Remove="Properties\VersionInfo.Designer.cs" />
     <Compile Remove="Templates\Mappings\DiscriminatorGeneratorHbm.Designer.cs" />
     <Compile Remove="Templates\Mappings\SubclassHbm.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Templates\Mappings\VersionColumnHbm.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>VersionColumnHbm.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>

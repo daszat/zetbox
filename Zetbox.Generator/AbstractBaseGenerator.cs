@@ -228,7 +228,7 @@ namespace Zetbox.Generator
             {
                 filename = filename.Replace(kvp.Key, kvp.Value);
             }
-            return Encoding.ASCII.GetString(Encoding.GetEncoding("Cyrillic").GetBytes(filename));
+            return Helper.GetLegalFileName(filename);
         }
 
         protected virtual string Generate_AssemblyInfo(IZetboxContext ctx)

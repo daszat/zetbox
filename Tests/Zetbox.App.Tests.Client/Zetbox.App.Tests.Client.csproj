@@ -55,23 +55,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DerivedReportTest\Common\DocumentStyles.cst">
+    <None Update="DerivedReportTest\Common\DocumentStyles.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>DocumentStyles.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Projekte\Reporting\Common\DocumentInfo.cst">
+    <None Update="Projekte\Reporting\Common\DocumentInfo.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>DocumentInfo.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Projekte\Reporting\Common\DocumentStyles.cst">
+    <None Update="Projekte\Reporting\Common\DocumentStyles.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>DocumentStyles.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Projekte\Reporting\Common\PageSetup.cst">
+    <None Update="Projekte\Reporting\Common\PageSetup.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>PageSetup.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Projekte\Reporting\ProjectReport.cst">
+    <None Update="Projekte\Reporting\ProjectReport.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProjectReport.Designer.cs</LastGenOutput>
     </None>

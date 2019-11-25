@@ -2,7 +2,7 @@
   "profiles": {
     "Zetbox.Cli": {
       "commandName": "Project",
-      "commandLineArgs": "--generate",
+      "commandLineArgs": "--fallback --generate",
       "workingDirectory": "D:\\Projects\\zetbox.core"
     }
   }

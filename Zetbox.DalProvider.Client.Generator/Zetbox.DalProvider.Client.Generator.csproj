@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProductVersion>8.0.30703</ProductVersion>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <SignAssembly>true</SignAssembly>
@@ -77,11 +77,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Zetbox.snk" />
-    <None Include="Templates\ObjectClasses\ApplyChangesFromMethod.cst">
+    <None Update="Templates\ObjectClasses\ApplyChangesFromMethod.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ApplyChangesFromMethod.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\ObjectClasses\InvokeServerMethod.cst">
+    <None Update="Templates\ObjectClasses\InvokeServerMethod.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>InvokeServerMethod.Designer.cs</LastGenOutput>
     </None>

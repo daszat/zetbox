@@ -312,11 +312,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="Reporting\Calendar\Events.cst">
+    <None Update="Reporting\Calendar\Events.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Events.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Reporting\Calendar\SheetDays.cst">
+    <None Update="Reporting\Calendar\SheetDays.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SheetDays.Designer.cs</LastGenOutput>
     </None>
