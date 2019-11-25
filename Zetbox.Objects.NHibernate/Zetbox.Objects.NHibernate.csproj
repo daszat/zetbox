@@ -35,13 +35,9 @@
   <ItemGroup>
     <PackageReference Include="NHibernate" Version="5.2.6" />
     <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Autofac" Version="4.9.2" />
     <Reference Include="Zetbox.API">
       <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
-      <Private>False</Private>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="Autofac">
-      <HintPath>$(ZetboxAPIPath)\Common\Autofac.dll</HintPath>
       <Private>False</Private>
       <SpecificVersion>False</SpecificVersion>
     </Reference>

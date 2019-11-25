@@ -24,121 +24,52 @@
 <%@ Parameter Name="projectGuid" Type="string" %>
 <%@ Parameter Name="fileNames" Type="List<string>" %>
 <%@ Parameter Name="schemaProviders" Type="IEnumerable<ISchemaProvider>" %>
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid><%= projectGuid %></ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace><%= GetAssemblyName() %></RootNamespace>
-    <AssemblyName><%= GetAssemblyName() %></AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
     <!-- this is referenced by the generator to put the results in their right place -->
     <RelativeOutputPath><%= GetRelativeOutputPath() %></RelativeOutputPath>
-    <TargetFrameworkProfile />
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>1591,0168,0414,0219</NoWarn>
+    <BuildDependsOn>$(BuildDependsOn);AfterBuildMigrated</BuildDependsOn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>1591,0168,0414,0219</NoWarn>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\<%= GetRelativeOutputPath().Replace('/', '\\') %>\<%= RelativeExternBuildOutputSubDirectory %>\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath().Replace('/', '\\') %>\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>1591,0168,0414,0219</NoWarn>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\<%= GetRelativeOutputPath().Replace('/', '\\') %>\<%= RelativeExternBuildOutputSubDirectory %>\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath().Replace('/', '\\') %>\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <!-- mono is quite more pedantic; ignore superfluous local vars and fields for now -->
-    <NoWarn>1591,0168,0414,0219</NoWarn>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\<%= GetRelativeOutputPath().Replace('/', '\\') %>\<%= RelativeExternBuildOutputSubDirectory %>\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath().Replace('/', '\\') %>\Generated\</OutputPath>
-    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
-    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
   <PropertyGroup>
 <% ApplyAdditionalProperties(); %>
   </PropertyGroup>
   <ItemGroup>
-    <AdditionalReferencePath Include="$(OutputPath)" />
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="log4net">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\log4net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Autofac" Version="4.9.2" />
     <Reference Include="Zetbox.API">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="Autofac">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Autofac.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    </Reference>  
 <% ApplyAdditionalReferences(); %>
-  </ItemGroup>
-  <ItemGroup>
-<% foreach (var name in fileNames) { %>
-    <Compile Include="<%= name.Replace('/', '\\') %>" />
-<% } %>
   </ItemGroup>
   <ItemGroup>
     <None Include="Zetbox.Objects.snk" />
   </ItemGroup>
 <% ApplyAdditionalItemGroups(); %>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  -->
-  <Target Name="AfterBuild">
-  </Target>
-<% ApplyAdditionalPropertyGroups(); %>
 </Project>

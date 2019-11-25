@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProductVersion>9.0.21022</ProductVersion>
     <TargetFramework>netstandard2.1</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
@@ -35,8 +34,12 @@
   <Target Name="AfterBuildMigrated" />
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />
-    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
     <PackageReference Include="Autofac" Version="4.9.2" />
+    <Reference Include="Zetbox.API">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Zetbox.Objects.snk" />

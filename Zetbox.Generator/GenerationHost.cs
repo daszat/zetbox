@@ -185,7 +185,7 @@ namespace Zetbox.Generator
                 }
                 else
                 {
-                    Log.InfoFormat("provided template [{0}] not found, using [{1}] instead", providerName, defaultName);
+                    Log.DebugFormat("provided template [{0}] not found, using [{1}] instead", providerName, defaultName);
                 }
             }
 
@@ -228,7 +228,7 @@ namespace Zetbox.Generator
 
         void IGenerationHost.Log(string fmt, params object[] args)
         {
-            Log.InfoFormat(fmt, args);
+            Log.DebugFormat(fmt, args);
         }
 
         public void Dispose()

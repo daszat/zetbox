@@ -111,12 +111,12 @@ namespace Zetbox.Generator
 
             if (failed != null)
             {
-                throw new ApplicationException("Compilation failed", failed);
+                throw new InvalidOperationException("Compilation failed", failed);
             }
 
             if (!success)
             {
-                throw new ApplicationException("Compilation failed");
+                throw new InvalidOperationException("Compilation failed");
             }
         }
 
