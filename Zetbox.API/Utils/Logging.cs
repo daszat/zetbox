@@ -85,8 +85,13 @@ namespace Zetbox.API.Utils
 
         public static void Configure()
         {
+            var logfile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log4net.config");
+
+            var zetboxLogRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+            log4net.Config.XmlConfigurator.Configure(zetboxLogRepository, new FileInfo(logfile));
+
             var logRepository = LogManager.CreateRepository("Zetbox");
-            log4net.Config.XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+            log4net.Config.XmlConfigurator.Configure(logRepository, new FileInfo(logfile));
 
             _logger = LogManager.GetLogger("Zetbox", "Zetbox");
             _client = LogManager.GetLogger("Zetbox", "Zetbox.Client");
@@ -98,7 +103,6 @@ namespace Zetbox.API.Utils
             _methods = LogManager.GetLogger("Zetbox", "Zetbox.PerfCounter.Methods");
             _exporter = LogManager.GetLogger("Zetbox", "Zetbox.Exporter");
             _mails = LogManager.GetLogger("Zetbox", "Zetbox.MailNotification");
-
 
             ResetDefaultProperties();
 

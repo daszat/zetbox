@@ -57,4 +57,9 @@
   <ItemGroup>
     <Compile Remove="Properties\VersionInfo.Designer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
