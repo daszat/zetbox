@@ -8,10 +8,6 @@ rem *********** Interface ***********
 del /S /Q .\Zetbox.Objects\*.* >nul
 xcopy /s /y bin\CodeGen\Zetbox.Objects\*.* .\Zetbox.Objects >nul
 
-rem *********** Server - EF *********** 
-del /S /Q .\Zetbox.Objects.Ef\*.* >nul
-xcopy /s /y bin\CodeGen\Zetbox.Objects.Ef\*.* .\Zetbox.Objects.Ef >nul
-
 rem *********** Server - NHibernate *********** 
 del /S /Q .\Zetbox.Objects.NHibernate\*.* >nul
 xcopy /s /y bin\CodeGen\Zetbox.Objects.NHibernate\*.* .\Zetbox.Objects.NHibernate >nul
