@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using System.Text;
 
 using Zetbox.API.Configuration;
@@ -392,7 +393,8 @@ namespace Zetbox.API
                     else
                     {
                         assemblyName.CodeBase = dllToLoad;
-                        result = Assembly.Load(assemblyName);
+                        //result = Assembly.Load(assemblyName);
+                        result = AssemblyLoadContext.Default.LoadFromAssemblyPath(dllToLoad);
                     }
 
                     // If the assembly could not be loaded, do nothing! Return null. 

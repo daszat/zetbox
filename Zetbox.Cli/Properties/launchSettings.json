@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Zetbox.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": "--generate",
+      "workingDirectory": "D:\\Projects\\zetbox.core"
+    }
+  }
+}

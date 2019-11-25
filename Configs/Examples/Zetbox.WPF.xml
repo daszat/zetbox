@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
-  <ConfigName>Default Client Configuration</ConfigName>
+  <ConfigName>Default Client Core Configuration</ConfigName>
   <Client StartClient="false" ThrowErrors="false">
     <!--<Application>6be0ba52-4589-48f1-832f-6cd463ba319a</Application>-->
 	<clientUri>http://localhost:11936/Zetboxservice.facade</clientUri>

@@ -32,7 +32,7 @@ namespace Zetbox.Cli
     /// </summary>
     public class Program : MarshalByRefObject
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Cli");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(Program));
 
         public static int Main(string[] arguments)
         {
