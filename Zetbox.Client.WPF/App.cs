@@ -92,6 +92,9 @@ namespace Zetbox.Client.WPF
                 .RegisterType<Launcher>()
                 .SingleInstance();
 
+            builder.RegisterModule<ClientModule>();
+            builder.RegisterModule<WPF.WPFModule>();
+
             builder
                 .Register<Zetbox.Client.WPF.Toolkit.VisualTypeTemplateSelector>((c, p) => new Zetbox.Client.WPF.Toolkit.VisualTypeTemplateSelector(
                     p.Named<object>("requestedKind"),
@@ -117,7 +120,7 @@ namespace Zetbox.Client.WPF
                     var args = HandleCommandline(e.Args, out configFilePath);
 
                     var config = ZetboxConfig.FromFile(HostType.Client, configFilePath, GetConfigFileName());
-                    AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+                    AssemblyLoader.Bootstrap(config);
 
                     InitCulture(config);
                     InfoLoggingProxyDecorator.SetUiThread(System.Threading.Thread.CurrentThread);

@@ -41,40 +41,7 @@ namespace Zetbox.API
         private readonly static object _lock = new object();
         private readonly static HashSet<string> _missingAssemblies = new HashSet<string>();
 
-        /// <summary>
-        /// Initializes the AssemblyLoader in the <see cref="AppDomain">target AppDomain</see> with a minimal search path.
-        /// </summary>
-        public static void Bootstrap(AppDomain domain, ZetboxConfig config)
-        {
-            if (domain == null) { throw new ArgumentNullException("domain"); }
-            if (config == null) { throw new ArgumentNullException("config"); }
-
-#if NETFULL
-            var init = (AssemblyLoaderInitializer)domain.CreateInstanceAndUnwrap(
-                "Zetbox.API",
-                "Zetbox.API.AssemblyLoaderInitializer");
-#else
-            var init = new AssemblyLoaderInitializer();
-#endif
-
-            init.Init(config);
-        }
-
-        public static void Unload(AppDomain domain)
-        {
-            if (domain == null) { throw new ArgumentNullException("domain"); }
-
-#if NETFULL
-            var init = (AssemblyLoaderInitializer)domain.CreateInstanceAndUnwrap(
-                "Zetbox.API",
-                "Zetbox.API.AssemblyLoaderInitializer");
-#else
-            var init = new AssemblyLoaderInitializer();
-#endif
-            init.Unload();
-        }
-
-        internal static void Unload()
+        public static void Unload()
         {
             lock (_lock)
             {
@@ -85,7 +52,7 @@ namespace Zetbox.API
         }
 
         private static bool _isInitialised = false;
-        public static void EnsureInitialisation(ZetboxConfig config)
+        public static void Bootstrap(ZetboxConfig config)
         {
             if (config == null) { throw new ArgumentNullException("config"); }
 
@@ -410,19 +377,6 @@ namespace Zetbox.API
                     _currentlyLoading = null;
                 }
             }
-        }
-    }
-
-    public class AssemblyLoaderInitializer : MarshalByRefObject
-    {
-        public void Init(ZetboxConfig config)
-        {
-            AssemblyLoader.EnsureInitialisation(config);
-        }
-
-        public void Unload()
-        {
-            AssemblyLoader.Unload();
         }
     }
 }

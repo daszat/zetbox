@@ -57,7 +57,7 @@ namespace Zetbox.Server.Service
             {
                 var config = ExtractConfig(ref arguments);
 
-                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+                AssemblyLoader.Bootstrap(config);
 
                 using (var container = CreateMasterContainer(config))
                 {

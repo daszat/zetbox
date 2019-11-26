@@ -69,7 +69,7 @@ namespace Zetbox.Server.WinService
                     Environment.Exit(1);
                 }
 
-                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+                AssemblyLoader.Bootstrap(config);
 
                 using (var container = CreateMasterContainer(config))
                 {

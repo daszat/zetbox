@@ -8,9 +8,7 @@
     <UICulture>de-AT</UICulture>
     <DocumentStore>d:\projects\Zetbox.core\DocumentStore\Client\</DocumentStore>
     <Modules>
-      <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
       <!--<Module>Zetbox.Client.BasicAuthCredentialsResolver+Module, Zetbox.Client</Module>-->
-      <Module>Zetbox.Client.WPF.WPFModule, Zetbox.Client.WPF</Module>
       <Module>Zetbox.API.MailProblemReporter+Module, Zetbox.API</Module>
       <Module>Zetbox.App.Projekte.DocumentManagement.FileImportService+Module, Zetbox.App.Projekte.Common</Module>
 	  <Module>Zetbox.Client.DefaultFulltextSupport+Module, Zetbox.Client</Module>

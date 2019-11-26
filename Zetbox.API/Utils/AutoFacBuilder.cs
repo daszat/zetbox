@@ -35,7 +35,7 @@ namespace Zetbox.API.Utils
         public static ContainerBuilder CreateContainerBuilder(ZetboxConfig config, IEnumerable<ZetboxConfig.Module> modules)
         {
             var builder = new ContainerBuilder();
-            return CreateContainerBuilder(builder, config, null);
+            return CreateContainerBuilder(builder, config, modules);
         }
         public static ContainerBuilder CreateContainerBuilder(ContainerBuilder builder, ZetboxConfig config, IEnumerable<ZetboxConfig.Module> modules)
         {

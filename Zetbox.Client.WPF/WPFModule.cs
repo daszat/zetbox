@@ -27,7 +27,7 @@ namespace Zetbox.Client.WPF
     using Zetbox.Client.Presentables;
     using Zetbox.Client.WPF.View;
 
-    [Feature]
+    // [Feature] not a feature, default
     [Description("Client Toolkit Module for WPF")]
     public class WPFModule : Module
     {

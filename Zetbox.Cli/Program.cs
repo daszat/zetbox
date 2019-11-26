@@ -44,7 +44,7 @@ namespace Zetbox.Cli
 
             try
             {
-                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+                AssemblyLoader.Bootstrap(config);
 
                 using (var container = CreateMasterContainer(config))
                 {
