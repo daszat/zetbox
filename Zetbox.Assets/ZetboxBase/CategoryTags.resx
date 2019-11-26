@@ -1,110 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+﻿<root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -117,136 +11,136 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Änderungen" xml:space="preserve">
+  <data name="Änderungen" space="preserve">
     <value>Änderungen</value>
   </data>
-  <data name="Check" xml:space="preserve">
+  <data name="Check" space="preserve">
     <value>Check</value>
   </data>
-  <data name="Children" xml:space="preserve">
+  <data name="Children" space="preserve">
     <value>Children</value>
   </data>
-  <data name="CodeTemplate" xml:space="preserve">
+  <data name="CodeTemplate" space="preserve">
     <value>CodeTemplate</value>
   </data>
-  <data name="Columns" xml:space="preserve">
+  <data name="Columns" space="preserve">
     <value>Columns</value>
   </data>
-  <data name="CompoundObjects" xml:space="preserve">
+  <data name="CompoundObjects" space="preserve">
     <value>CompoundObjects</value>
   </data>
-  <data name="Configuration" xml:space="preserve">
+  <data name="Configuration" space="preserve">
     <value>Configuration</value>
   </data>
-  <data name="Constraint" xml:space="preserve">
+  <data name="Constraint" space="preserve">
     <value>Constraint</value>
   </data>
-  <data name="DataModel" xml:space="preserve">
+  <data name="DataModel" space="preserve">
     <value>DataModel</value>
   </data>
-  <data name="Edit" xml:space="preserve">
+  <data name="Edit" space="preserve">
     <value>Edit</value>
   </data>
-  <data name="Enumeration" xml:space="preserve">
+  <data name="Enumeration" space="preserve">
     <value>Enumeration</value>
   </data>
-  <data name="EnumMapping" xml:space="preserve">
+  <data name="EnumMapping" space="preserve">
     <value>EnumMapping</value>
   </data>
-  <data name="Filter" xml:space="preserve">
+  <data name="Filter" space="preserve">
     <value>Filter</value>
   </data>
-  <data name="Group" xml:space="preserve">
+  <data name="Group" space="preserve">
     <value>Group</value>
   </data>
-  <data name="Groups" xml:space="preserve">
+  <data name="Groups" space="preserve">
     <value>Groups</value>
   </data>
-  <data name="GUI" xml:space="preserve">
+  <data name="GUI" space="preserve">
     <value>GUI</value>
   </data>
-  <data name="Hidden" xml:space="preserve">
+  <data name="Hidden" space="preserve">
     <value>Hidden</value>
   </data>
-  <data name="Hierarchie" xml:space="preserve">
+  <data name="Hierarchie" space="preserve">
     <value>Hierarchie</value>
   </data>
-  <data name="Hierarchy" xml:space="preserve">
+  <data name="Hierarchy" space="preserve">
     <value>Hierarchy</value>
   </data>
-  <data name="Identities" xml:space="preserve">
+  <data name="Identities" space="preserve">
     <value>Identities</value>
   </data>
-  <data name="Internal" xml:space="preserve">
+  <data name="Internal" space="preserve">
     <value>Internal</value>
   </data>
-  <data name="List" xml:space="preserve">
+  <data name="List" space="preserve">
     <value>List</value>
   </data>
-  <data name="Lists" xml:space="preserve">
+  <data name="Lists" space="preserve">
     <value>Lists</value>
   </data>
-  <data name="Login" xml:space="preserve">
+  <data name="Login" space="preserve">
     <value>Login</value>
   </data>
-  <data name="Main" xml:space="preserve">
+  <data name="Main" space="preserve">
     <value>Main</value>
   </data>
-  <data name="Meta" xml:space="preserve">
+  <data name="Meta" space="preserve">
     <value>Meta</value>
   </data>
-  <data name="MetaData" xml:space="preserve">
+  <data name="MetaData" space="preserve">
     <value>MetaData</value>
   </data>
-  <data name="Methods" xml:space="preserve">
+  <data name="Methods" space="preserve">
     <value>Methods</value>
   </data>
-  <data name="Migration" xml:space="preserve">
+  <data name="Migration" space="preserve">
     <value>Migration</value>
   </data>
-  <data name="Objects" xml:space="preserve">
+  <data name="Objects" space="preserve">
     <value>Objects</value>
   </data>
-  <data name="Physical" xml:space="preserve">
+  <data name="Physical" space="preserve">
     <value>Physical</value>
   </data>
-  <data name="Properties" xml:space="preserve">
+  <data name="Properties" space="preserve">
     <value>Properties</value>
   </data>
-  <data name="Recurrence" xml:space="preserve">
+  <data name="Recurrence" space="preserve">
     <value>Recurrence</value>
   </data>
-  <data name="RelationChain" xml:space="preserve">
+  <data name="RelationChain" space="preserve">
     <value>RelationChain</value>
   </data>
-  <data name="Revisions" xml:space="preserve">
+  <data name="Revisions" space="preserve">
     <value>Revisions</value>
   </data>
-  <data name="Rules" xml:space="preserve">
+  <data name="Rules" space="preserve">
     <value>Rules</value>
   </data>
-  <data name="Search" xml:space="preserve">
+  <data name="Search" space="preserve">
     <value>Search</value>
   </data>
-  <data name="Security" xml:space="preserve">
+  <data name="Security" space="preserve">
     <value>Security</value>
   </data>
-  <data name="Server" xml:space="preserve">
+  <data name="Server" space="preserve">
     <value>Server</value>
   </data>
-  <data name="Span" xml:space="preserve">
+  <data name="Span" space="preserve">
     <value>Span</value>
   </data>
-  <data name="SuggestedRelation" xml:space="preserve">
+  <data name="SuggestedRelation" space="preserve">
     <value>SuggestedRelation</value>
   </data>
-  <data name="Summary" xml:space="preserve">
+  <data name="Summary" space="preserve">
     <value>Summary</value>
   </data>
-  <data name="Tables" xml:space="preserve">
+  <data name="Tables" space="preserve">
     <value>Tables</value>
   </data>
-  <data name="Tasks" xml:space="preserve">
+  <data name="Tasks" space="preserve">
     <value>Tasks</value>
   </data>
 </root>
