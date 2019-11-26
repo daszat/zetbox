@@ -62,16 +62,6 @@ namespace Zetbox.API.Client
                 .Register<TestScreenshotTool>(c => new TestScreenshotTool())
                 .As<IScreenshotTool>()
                 .SingleInstance();
-        }
-    }
-
-    [Feature]
-    [Description("HTTP Proxy implementation")]
-    public sealed class HttpClientModule : Autofac.Module
-    {
-        protected override void Load(ContainerBuilder moduleBuilder)
-        {
-            base.Load(moduleBuilder);
 
             moduleBuilder.RegisterType<HttpServiceClient>()
                 .AsImplementedInterfaces()
