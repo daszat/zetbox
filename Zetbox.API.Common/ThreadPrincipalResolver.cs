@@ -35,11 +35,10 @@ namespace Zetbox.API.Common
 
         public override ZetboxPrincipal GetCurrent()
         {
-            if (!string.IsNullOrEmpty(Thread.CurrentPrincipal.Identity.Name))
+            if (!string.IsNullOrEmpty(Thread.CurrentPrincipal?.Identity?.Name))
                 return Resolve(Thread.CurrentPrincipal.Identity);
             else
-                throw new InvalidOperationException("Thread.CurrentPrincipal.Identity is not set");
-                //return Resolve(WindowsIdentity.GetCurrent());
+                return Resolve(WindowsIdentity.GetCurrent());
         }
     }
 }

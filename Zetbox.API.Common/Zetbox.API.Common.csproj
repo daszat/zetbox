@@ -48,6 +48,7 @@
     <PackageReference Include="System.Runtime" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="4.6.0" />
     <PackageReference Include="System.Threading" Version="4.3.0" />
     <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
       <PrivateAssets>all</PrivateAssets>
