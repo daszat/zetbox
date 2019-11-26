@@ -17,29 +17,25 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Icon" column="`fk_Icon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -48,8 +44,7 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="RootScreen" column="`fk_RootScreen`" class="Zetbox.App.GUI.NavigationScreenNHibernateImpl+NavigationScreenProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -85,15 +80,13 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Parent" column="`fk_Parent`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -121,43 +114,37 @@
                        type="String" />
 
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Label" 
-                  column="`Label`" 
-                  />
+                  column="`Label`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="RefreshOnFilterChanged" 
-                  column="`RefreshOnFilterChanged`" 
-                  />
+                  column="`RefreshOnFilterChanged`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="RequestedKind" column="`fk_RequestedKind`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Required" 
-                  column="`Required`" 
-                  />
+                  column="`Required`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ViewModelDescriptor" column="`fk_ViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -186,8 +173,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Predicate" 
-                  column="`OptionalPredicateFilterConfigurations_Predicate`" 
-                  />
+                  column="`OptionalPredicateFilterConfigurations_Predicate`" />
 
             <!-- define the subclasses -->
 
@@ -217,16 +203,13 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentMonthDefault" 
-                  column="`DateRangeFilterConfigurations_IsCurrentMonthDefault`" 
-                  />
+                  column="`DateRangeFilterConfigurations_IsCurrentMonthDefault`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentQuaterDefault" 
-                  column="`DateRangeFilterConfigurations_IsCurrentQuaterDefault`" 
-                  />
+                  column="`DateRangeFilterConfigurations_IsCurrentQuaterDefault`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentYearDefault" 
-                  column="`DateRangeFilterConfigurations_IsCurrentYearDefault`" 
-                  />
+                  column="`DateRangeFilterConfigurations_IsCurrentYearDefault`" />
 
             <!-- define the subclasses -->
 
@@ -241,8 +224,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentMonthDefault" 
-                  column="`MonthFilterConfigurations_IsCurrentMonthDefault`" 
-                  />
+                  column="`MonthFilterConfigurations_IsCurrentMonthDefault`" />
 
             <!-- define the subclasses -->
 
@@ -281,8 +263,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentYearDefault" 
-                  column="`YearFilterConfigurations_IsCurrentYearDefault`" 
-                  />
+                  column="`YearFilterConfigurations_IsCurrentYearDefault`" />
 
             <!-- define the subclasses -->
 
@@ -313,12 +294,10 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IconFile" 
-                  column="`IconFile`" 
-                  />
+                  column="`IconFile`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -341,11 +320,11 @@
                 <param name="sequence">`NavigationEntries_ID_seq`</param>
             </generator>
         </id>
-      <!-- ValueTypeProperty isValue -->
+
       <version name="ChangedOn" type="Timestamp"
                 column="`ChangedOn`" />
 
-      <!-- define the properties -->
+        <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -357,19 +336,16 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="Color" 
-                  column="`Color`" 
-                  />
+                  column="`Color`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=NavigationScreen_accessed_by_Groups_RelationEntry -->
@@ -391,8 +367,7 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="Title" 
-                  column="`Title`" 
-                  />
+                  column="`Title`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ViewModelDescriptor" column="`fk_ViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -439,48 +414,37 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="AllowAddNew" 
-                  column="`AllowAddNew`" 
-                  />
+                  column="`AllowAddNew`" />
         <!-- ValueTypeProperty isValue -->
         <property name="AllowDelete" 
-                  column="`AllowDelete`" 
-                  />
+                  column="`AllowDelete`" />
         <!-- ValueTypeProperty isValue -->
         <property name="AllowExport" 
-                  column="`AllowExport`" 
-                  />
+                  column="`AllowExport`" />
         <!-- ValueTypeProperty isValue -->
         <property name="AllowOpen" 
-                  column="`AllowOpen`" 
-                  />
+                  column="`AllowOpen`" />
         <!-- ValueTypeProperty isValue -->
         <property name="AllowSelectColumns" 
-                  column="`AllowSelectColumns`" 
-                  />
+                  column="`AllowSelectColumns`" />
         <!-- ValueTypeProperty isValue -->
         <property name="AllowUserFilter" 
-                  column="`AllowUserFilter`" 
-                  />
+                  column="`AllowUserFilter`" />
         <!-- ValueTypeProperty isValue -->
         <property name="EnableAutoFilter" 
-                  column="`EnableAutoFilter`" 
-                  />
+                  column="`EnableAutoFilter`" />
         <!-- ValueTypeProperty isValue -->
         <property name="InitialSort" 
-                  column="`InitialSort`" 
-                  />
+                  column="`InitialSort`" />
         <!-- ValueTypeProperty isValue -->
         <property name="InitialSortDirection" 
-                  column="`InitialSortDirection`" 
-                  />
+                  column="`InitialSortDirection`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsEditable" 
-                  column="`IsEditable`" 
-                  />
+                  column="`IsEditable`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsMultiselect" 
-                  column="`IsMultiselect`" 
-                  />
+                  column="`IsMultiselect`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="RequestedEditorKind" column="`fk_RequestedEditorKind`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -489,27 +453,22 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="RespectRequiredFilter" 
-                  column="`RespectRequiredFilter`" 
-                  />
+                  column="`RespectRequiredFilter`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ShowCommands" 
-                  column="`ShowCommands`" 
-                  />
+                  column="`ShowCommands`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ShowFilter" 
-                  column="`ShowFilter`" 
-                  />
+                  column="`ShowFilter`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ShowMasterDetail" 
-                  column="`ShowMasterDetail`" 
-                  />
+                  column="`ShowMasterDetail`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Type" column="`fk_Type`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ViewMethod" 
-                  column="`ViewMethod`" 
-                  />
+                  column="`ViewMethod`" />
 
             <!-- define the subclasses -->
 
@@ -537,12 +496,10 @@
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Configuration" 
-                  column="`Configuration`" 
-                  />
+                  column="`Configuration`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Owner" column="`fk_Owner`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -572,8 +529,7 @@
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
 
         <!-- define the subclasses -->
 
@@ -600,23 +556,19 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="ControlTypeRef" 
-                  column="`ControlTypeRef`" 
-                  />
+                  column="`ControlTypeRef`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Deleted" 
-                  column="`Deleted`" 
-                  />
+                  column="`Deleted`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Toolkit" 
-                  column="`Toolkit`" 
-                  />
+                  column="`Toolkit`" />
 
         <!-- define the subclasses -->
 
@@ -655,16 +607,13 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="Deleted" 
-                  column="`Deleted`" 
-                  />
+                  column="`Deleted`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -679,8 +628,7 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="ViewModelTypeRef" 
-                  column="`ViewModelTypeRef`" 
-                  />
+                  column="`ViewModelTypeRef`" />
 
         <!-- define the subclasses -->
 
@@ -704,24 +652,19 @@
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Destination" 
-                  column="`Destination`" 
-                  />
+                  column="`Destination`" />
         <!-- ValueTypeProperty isValue -->
         <property name="DestinationRows" 
-                  column="`DestinationRows`" 
-                  />
+                  column="`DestinationRows`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Source" 
-                  column="`Source`" 
-                  />
+                  column="`Source`" />
         <!-- ValueTypeProperty isValue -->
         <property name="SourceRows" 
-                  column="`SourceRows`" 
-                  />
+                  column="`SourceRows`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Timestamp" type="Timestamp"
-                  column="`Timestamp`" 
-                  />
+                  column="`Timestamp`" />
 
         <!-- define the subclasses -->
 
@@ -742,32 +685,28 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DestinationModule" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <set name="StagingDatabases" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_MigrationProject`" />
@@ -794,37 +733,31 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
-        <!-- ValueTypeProperty isValue -->
         <property name="Comment" 
-                  column="`Comment`" 
-                  />
+                  column="`Comment`" />
         <!-- ValueTypeProperty isValue -->
         <property name="CompareNulls" 
-                  column="`CompareNulls`" 
-                  />
+                  column="`CompareNulls`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="DbType" 
-                  column="`DbType`" 
-                  />
+                  column="`DbType`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=SourceColumn_created_Property_RelationEntry -->
@@ -842,16 +775,13 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsNullable" 
-                  column="`IsNullable`" 
-                  />
+                  column="`IsNullable`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="References" column="`fk_PK_Column`" class="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -863,15 +793,13 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="Size" 
-                  column="`Size`" 
-                  />
+                  column="`Size`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="SourceTable" column="`fk_SourceTable`" class="Zetbox.App.SchemaMigration.SourceTableNHibernateImpl+SourceTableProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Status" 
-                  column="`Status`" 
-                  />
+                  column="`Status`" />
 
         <!-- define the subclasses -->
 
@@ -892,35 +820,31 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DestinationValue" column="`fk_DestinationValue`" class="Zetbox.App.Base.EnumerationEntryNHibernateImpl+EnumerationEntryProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="SourceColumn" column="`fk_SourceColumn`" class="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="SourceValue" 
-                  column="`SourceValue`" 
-                  />
+                  column="`SourceValue`" />
 
         <!-- define the subclasses -->
 
@@ -941,40 +865,34 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
-        <!-- ValueTypeProperty isValue -->
         <property name="Comment" 
-                  column="`Comment`" 
-                  />
+                  column="`Comment`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DestinationObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
 <!-- ObjectReferenceProperty -->
         <set name="SourceColumn" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_SourceTable`" />
@@ -986,8 +904,7 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="Status" 
-                  column="`Status`" 
-                  />
+                  column="`Status`" />
 
         <!-- define the subclasses -->
 
@@ -1008,44 +925,37 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
-        <!-- ValueTypeProperty isValue -->
         <property name="ConnectionStringKey" 
-                  column="`ConnectionStringKey`" 
-                  />
+                  column="`ConnectionStringKey`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="MigrationProject" column="`fk_MigrationProject`" class="Zetbox.App.SchemaMigration.MigrationProjectNHibernateImpl+MigrationProjectProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="OriginConnectionStringKey" 
-                  column="`OriginConnectionStringKey`" 
-                  />
+                  column="`OriginConnectionStringKey`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Schema" 
-                  column="`Schema`" 
-                  />
+                  column="`Schema`" />
 <!-- ObjectReferenceProperty -->
         <set name="SourceTables" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_StagingDatabase`" />
@@ -1072,25 +982,22 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -1114,44 +1021,38 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
 <!-- ValueTypeProperty Description is calculated and persisted -->
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Notes" 
-                  column="`Notes`" 
-                  />
+                  column="`Notes`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Rights" 
-                  column="`Rights`" 
-                  />
+                  column="`Rights`" />
 
         <!-- define the subclasses -->
         <joined-subclass
@@ -1214,36 +1115,31 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="DeploymentRestrictions" 
-                  column="`DeploymentRestrictions`" 
-                  />
+                  column="`DeploymentRestrictions`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
 
         <!-- define the subclasses -->
 
@@ -1268,57 +1164,47 @@
                        type="String" />
 
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="HelpText" 
-                  column="`HelpText`" 
-                  />
+                  column="`HelpText`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
-                  column="`IsList`" 
-                  />
+                  column="`IsList`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsNullable" 
-                  column="`IsNullable`" 
-                  />
+                  column="`IsNullable`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsReturnParameter" 
-                  column="`IsReturnParameter`" 
-                  />
+                  column="`IsReturnParameter`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Label" 
-                  column="`Label`" 
-                  />
+                  column="`Label`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Method" column="`fk_Method`" class="Zetbox.App.Base.MethodNHibernateImpl+MethodProxy, Zetbox.Objects.NHibernateImpl" />
         <property name="Parameter_pos" column="`fk_Method_pos`" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
 
         <!-- define the subclasses -->
         <subclass
@@ -1343,8 +1229,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="TypeRef" 
-                  column="`CLRObjectParameters_TypeRef`" 
-                  />
+                  column="`CLRObjectParameters_TypeRef`" />
 
             <!-- define the subclasses -->
 
@@ -1374,8 +1259,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="DateTimeStyle" 
-                  column="`DateTimeParameters_DateTimeStyle`" 
-                  />
+                  column="`DateTimeParameters_DateTimeStyle`" />
 
             <!-- define the subclasses -->
 
@@ -1476,37 +1360,31 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="MimeType" 
-                  column="`MimeType`" 
-                  />
+                  column="`MimeType`" />
         <!-- ValueTypeProperty isValue -->
         <property name="OriginalName" 
-                  column="`OriginalName`" 
-                  />
+                  column="`OriginalName`" />
         <!-- ValueTypeProperty isValue -->
         <property name="StoragePath" 
-                  column="`StoragePath`" 
-                  />
+                  column="`StoragePath`" />
 
         <!-- define the subclasses -->
 
@@ -1531,14 +1409,13 @@
                        type="String" />
 
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ConstrainedProperty" column="`fk_ConstrainedProperty`" class="Zetbox.App.Base.PropertyNHibernateImpl+PropertyProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -1547,16 +1424,13 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Reason" 
-                  column="`Reason`" 
-                  />
+                  column="`Reason`" />
 
         <!-- define the subclasses -->
         <subclass
@@ -1569,12 +1443,10 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Max" 
-                  column="`IntegerRangeConstraints_Max`" 
-                  />
+                  column="`IntegerRangeConstraints_Max`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Min" 
-                  column="`IntegerRangeConstraints_Min`" 
-                  />
+                  column="`IntegerRangeConstraints_Min`" />
 
             <!-- define the subclasses -->
 
@@ -1697,12 +1569,10 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="MaxLength" 
-                  column="`StringRangeConstraints_MaxLength`" 
-                  />
+                  column="`StringRangeConstraints_MaxLength`" />
         <!-- ValueTypeProperty isValue -->
         <property name="MinLength" 
-                  column="`StringRangeConstraints_MinLength`" 
-                  />
+                  column="`StringRangeConstraints_MinLength`" />
 
             <!-- define the subclasses -->
 
@@ -1728,12 +1598,10 @@
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Schema" 
-                  column="`Schema`" 
-                  />
+                  column="`Schema`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Version" 
-                  column="`Version`" 
-                  />
+                  column="`Version`" />
 
         <!-- define the subclasses -->
 
@@ -1754,14 +1622,13 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <set name="Constraints" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Constrained`" />
@@ -1773,23 +1640,19 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DefaultIcon" column="`fk_DefaultIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="HelpText" 
-                  column="`HelpText`" 
-                  />
+                  column="`HelpText`" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=DataType_implements_ImplementedInterfaces_RelationEntry -->
@@ -1810,8 +1673,7 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
 <!-- ObjectReferenceProperty -->
         <set name="Properties" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ObjectClass`" />
@@ -1823,16 +1685,13 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="ShowIconInLists" 
-                  column="`ShowIconInLists`" 
-                  />
+                  column="`ShowIconInLists`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ShowIdInLists" 
-                  column="`ShowIdInLists`" 
-                  />
+                  column="`ShowIdInLists`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ShowNameInLists" 
-                  column="`ShowNameInLists`" 
-                  />
+                  column="`ShowNameInLists`" />
 
         <!-- define the subclasses -->
         <joined-subclass
@@ -1869,8 +1728,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="AreFlags" 
-                  column="`AreFlags`" 
-                  />
+                  column="`AreFlags`" />
 <!-- ObjectReferenceProperty -->
         <set name="EnumerationEntries" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Enumeration`" />
@@ -1919,8 +1777,7 @@
 <!-- ValueTypeProperty CodeTemplate is calculated and persisted -->
         <!-- ValueTypeProperty isValue -->
         <property name="CodeTemplate" 
-                  column="`CodeTemplate`" 
-                  />
+                  column="`CodeTemplate`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DefaultViewModelDescriptor" column="`fk_DefaultViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -1932,20 +1789,16 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="IsAbstract" 
-                  column="`IsAbstract`" 
-                  />
+                  column="`IsAbstract`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsCreatedProgrammatically" 
-                  column="`IsCreatedProgrammatically`" 
-                  />
+                  column="`IsCreatedProgrammatically`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsFrozenObject" 
-                  column="`IsFrozenObject`" 
-                  />
+                  column="`IsFrozenObject`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsSimpleObject" 
-                  column="`IsSimpleObject`" 
-                  />
+                  column="`IsSimpleObject`" />
 <!-- ObjectReferenceProperty -->
         <set name="SubClasses" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_BaseObjectClass`" />
@@ -1954,12 +1807,10 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="TableMapping" 
-                  column="`TableMapping`" 
-                  />
+                  column="`TableMapping`" />
         <!-- ValueTypeProperty isValue -->
         <property name="TableName" 
-                  column="`TableName`" 
-                  />
+                  column="`TableName`" />
 
             <!-- define the subclasses -->
 
@@ -1986,25 +1837,22 @@
                        type="String" />
 
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Property" column="`fk_Property`" class="Zetbox.App.Base.PropertyNHibernateImpl+PropertyProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
 
@@ -2020,8 +1868,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="BoolValue" 
-                  column="`BoolDefaultValues_BoolValue`" 
-                  />
+                  column="`BoolDefaultValues_BoolValue`" />
 
             <!-- define the subclasses -->
 
@@ -2048,8 +1895,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="DecimalValue" 
-                  column="`DecimalDefaultValues_DecimalValue`" 
-                  />
+                  column="`DecimalDefaultValues_DecimalValue`" />
 
             <!-- define the subclasses -->
 
@@ -2064,8 +1910,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="DoubleValue" 
-                  column="`DoubleDefaultValues_DoubleValue`" 
-                  />
+                  column="`DoubleDefaultValues_DoubleValue`" />
 
             <!-- define the subclasses -->
 
@@ -2095,8 +1940,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="IntValue" 
-                  column="`IntDefaultValues_IntValue`" 
-                  />
+                  column="`IntDefaultValues_IntValue`" />
 
             <!-- define the subclasses -->
 
@@ -2123,8 +1967,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="DefaultValue" 
-                  column="`StringDefaultValues_DefaultValue`" 
-                  />
+                  column="`StringDefaultValues_DefaultValue`" />
 
             <!-- define the subclasses -->
 
@@ -2147,49 +1990,41 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Enumeration" column="`fk_Enumeration`" class="Zetbox.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Zetbox.Objects.NHibernateImpl" />
         <property name="EnumerationEntries_pos" column="`fk_Enumeration_pos`" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Label" 
-                  column="`Label`" 
-                  />
+                  column="`Label`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
         <!-- ValueTypeProperty isValue -->
         <property name="NotSelectable" 
-                  column="`NotSelectable`" 
-                  />
+                  column="`NotSelectable`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Value" 
-                  column="`Value`" 
-                  />
+                  column="`Value`" />
 
         <!-- define the subclasses -->
 
@@ -2213,28 +2048,22 @@
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Date" type="Timestamp"
-                  column="`Date`" 
-                  />
+                  column="`Date`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Exception" 
-                  column="`Exception`" 
-                  />
+                  column="`Exception`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Level" 
-                  column="`Level`" 
-                  />
+                  column="`Level`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Logger" 
-                  column="`Logger`" 
-                  />
+                  column="`Logger`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Message" 
-                  column="`Message`" 
-                  />
+                  column="`Message`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Thread" 
-                  column="`Thread`" 
-                  />
+                  column="`Thread`" />
 
         <!-- define the subclasses -->
 
@@ -2258,8 +2087,7 @@
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=Identities_memberOf_Groups_RelationEntry -->
@@ -2274,8 +2102,7 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
 
         <!-- define the subclasses -->
 
@@ -2299,12 +2126,10 @@
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="CalendarConfiguration" 
-                  column="`CalendarConfiguration`" 
-                  />
+                  column="`CalendarConfiguration`" />
         <!-- ValueTypeProperty isValue -->
         <property name="DisplayName" 
-                  column="`DisplayName`" 
-                  />
+                  column="`DisplayName`" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=Identities_memberOf_Groups_RelationEntry -->
@@ -2316,31 +2141,25 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="IsDeactivated" 
-                  column="`IsDeactivated`" 
-                  />
+                  column="`IsDeactivated`" />
         <!-- ValueTypeProperty isValue -->
         <property name="LoginToken" 
-                  column="`LoginToken`" 
-                  />
+                  column="`LoginToken`" />
         <!-- CompoundObjectProperty isValue -->
         <component name="OpenID" class="Zetbox.App.Base.OpenIDNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
         <property name="Provider" 
-                  column="`OpenID_Provider`" 
-                  />
+                  column="`OpenID_Provider`" />
         <!-- ValueTypeProperty isValue -->
         <property name="UserID" 
-                  column="`OpenID_UserID`" 
-                  />
+                  column="`OpenID_UserID`" />
         </component>
         <!-- ValueTypeProperty isValue -->
         <property name="Password" 
-                  column="`Password`" 
-                  />
+                  column="`Password`" />
         <!-- ValueTypeProperty isValue -->
         <property name="UserName" 
-                  column="`UserName`" 
-                  />
+                  column="`UserName`" />
 
         <!-- define the subclasses -->
 
@@ -2367,12 +2186,10 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Reason" 
-                  column="`Reason`" 
-                  />
+                  column="`Reason`" />
 
         <!-- define the subclasses -->
         <joined-subclass
@@ -2388,8 +2205,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="IsUnique" 
-                  column="`IsUnique`" 
-                  />
+                  column="`IsUnique`" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=UniqueContraints_ensures_unique_on_Properties_RelationEntry -->
@@ -2436,64 +2252,53 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="CategoryTags" 
-                  column="`CategoryTags`" 
-                  />
+                  column="`CategoryTags`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ValueTypeProperty CodeTemplate is calculated and persisted -->
         <!-- ValueTypeProperty isValue -->
         <property name="CodeTemplate" 
-                  column="`CodeTemplate`" 
-                  />
+                  column="`CodeTemplate`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="HelpText" 
-                  column="`HelpText`" 
-                  />
+                  column="`HelpText`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Icon" column="`fk_Icon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="InvokeOnServer" 
-                  column="`InvokeOnServer`" 
-                  />
+                  column="`InvokeOnServer`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsDisplayable" 
-                  column="`IsDisplayable`" 
-                  />
+                  column="`IsDisplayable`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Label" 
-                  column="`Label`" 
-                  />
+                  column="`Label`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -2532,41 +2337,34 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Namespace" 
-                  column="`Namespace`" 
-                  />
+                  column="`Namespace`" />
         <!-- ValueTypeProperty isValue -->
         <property name="SchemaName" 
-                  column="`SchemaName`" 
-                  />
+                  column="`SchemaName`" />
 
         <!-- define the subclasses -->
 
@@ -2591,27 +2389,23 @@
                        type="String" />
 
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="AllowFilterCollections" 
-                  column="`AllowFilterCollections`" 
-                  />
+                  column="`AllowFilterCollections`" />
         <!-- ValueTypeProperty isValue -->
         <property name="CategoryTags" 
-                  column="`CategoryTags`" 
-                  />
+                  column="`CategoryTags`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ValueTypeProperty CodeTemplate is calculated and persisted -->
         <!-- ValueTypeProperty isValue -->
         <property name="CodeTemplate" 
-                  column="`CodeTemplate`" 
-                  />
+                  column="`CodeTemplate`" />
 <!-- ObjectReferenceProperty -->
         <set name="Constraints" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ConstrainedProperty`" />
@@ -2623,43 +2417,35 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="DefaultSortPriority" 
-                  column="`DefaultSortPriority`" 
-                  />
+                  column="`DefaultSortPriority`" />
 <!-- ObjectReferenceProperty -->
         <one-to-one name="DefaultValue" class="Zetbox.App.Base.DefaultPropertyValueNHibernateImpl+DefaultPropertyValueProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="Property" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
         <!-- ValueTypeProperty isValue -->
         <property name="DisableExport" 
-                  column="`DisableExport`" 
-                  />
+                  column="`DisableExport`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <one-to-one name="FilterConfiguration" class="Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl+PropertyFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="Property" />
         <!-- ValueTypeProperty isValue -->
         <property name="HelpText" 
-                  column="`HelpText`" 
-                  />
+                  column="`HelpText`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Label" 
-                  column="`Label`" 
-                  />
+                  column="`Label`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Zetbox.Objects.NHibernateImpl" />
         <property name="Properties_pos" column="`fk_ObjectClass_pos`" />
@@ -2669,8 +2455,7 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="RequestedWidth" 
-                  column="`RequestedWidth`" 
-                  />
+                  column="`RequestedWidth`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ValueModelDescriptor" column="`fk_ValueModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -2713,12 +2498,10 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="HasPersistentOrder" 
-                  column="`CompoundObjectProperties_HasPersistentOrder`" 
-                  />
+                  column="`CompoundObjectProperties_HasPersistentOrder`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
-                  column="`CompoundObjectProperties_IsList`" 
-                  />
+                  column="`CompoundObjectProperties_IsList`" />
 
             <!-- define the subclasses -->
 
@@ -2733,27 +2516,22 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="HasPersistentOrder" 
-                  column="`ObjectReferencePlaceholderProperties_HasPersistentOrder`" 
-                  />
+                  column="`ObjectReferencePlaceholderProperties_HasPersistentOrder`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ImplementorRoleName" 
-                  column="`ObjectReferencePlaceholderProperties_ImplementorRoleName`" 
-                  />
+                  column="`ObjectReferencePlaceholderProperties_ImplementorRoleName`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
-                  column="`ObjectReferencePlaceholderProperties_IsList`" 
-                  />
+                  column="`ObjectReferencePlaceholderProperties_IsList`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ItemRoleName" 
-                  column="`ObjectReferencePlaceholderProperties_ItemRoleName`" 
-                  />
+                  column="`ObjectReferencePlaceholderProperties_ItemRoleName`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ReferencedObjectClass" column="`ObjectReferencePlaceholderProperties_fk_ReferencedClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Verb" 
-                  column="`ObjectReferencePlaceholderProperties_Verb`" 
-                  />
+                  column="`ObjectReferencePlaceholderProperties_Verb`" />
 
             <!-- define the subclasses -->
 
@@ -2768,12 +2546,10 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="EagerLoading" 
-                  column="`ObjectReferenceProperties_EagerLoading`" 
-                  />
+                  column="`ObjectReferenceProperties_EagerLoading`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsInlineEditable" 
-                  column="`ObjectReferenceProperties_IsInlineEditable`" 
-                  />
+                  column="`ObjectReferenceProperties_IsInlineEditable`" />
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=ObjRefProp_shows_Methods_RelationEntry -->
@@ -2800,16 +2576,13 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="HasPersistentOrder" 
-                  column="`ValueTypeProperties_HasPersistentOrder`" 
-                  />
+                  column="`ValueTypeProperties_HasPersistentOrder`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsCalculated" 
-                  column="`ValueTypeProperties_IsCalculated`" 
-                  />
+                  column="`ValueTypeProperties_IsCalculated`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
-                  column="`ValueTypeProperties_IsList`" 
-                  />
+                  column="`ValueTypeProperties_IsList`" />
 
             <!-- define the subclasses -->
         <subclass
@@ -2825,22 +2598,19 @@
 
         <!-- ValueTypeProperty isValue -->
         <property name="FalseLabel" 
-                  column="`BoolProperties_FalseLabel`" 
-                  />
+                  column="`BoolProperties_FalseLabel`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="NullIcon" column="`BoolProperties_fk_NullIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="NullLabel" 
-                  column="`BoolProperties_NullLabel`" 
-                  />
+                  column="`BoolProperties_NullLabel`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="TrueIcon" column="`BoolProperties_fk_TrueIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="TrueLabel" 
-                  column="`BoolProperties_TrueLabel`" 
-                  />
+                  column="`BoolProperties_TrueLabel`" />
 
             <!-- define the subclasses -->
 
@@ -2855,8 +2625,7 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="DateTimeStyle" 
-                  column="`DateTimeProperties_DateTimeStyle`" 
-                  />
+                  column="`DateTimeProperties_DateTimeStyle`" />
 
             <!-- define the subclasses -->
 
@@ -2871,12 +2640,10 @@
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Precision" 
-                  column="`DecimalProperties_Precision`" 
-                  />
+                  column="`DecimalProperties_Precision`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Scale" 
-                  column="`DecimalProperties_Scale`" 
-                  />
+                  column="`DecimalProperties_Scale`" />
 
             <!-- define the subclasses -->
 
@@ -2964,6 +2731,9 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="A" column="`fk_A`" class="Zetbox.App.Base.RelationEndNHibernateImpl+RelationEndProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
@@ -2975,39 +2745,29 @@
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
-        <!-- ValueTypeProperty isValue -->
         <property name="Containment" 
-                  column="`Containment`" 
-                  />
+                  column="`Containment`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Storage" 
-                  column="`Storage`" 
-                  />
+                  column="`Storage`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Verb" 
-                  column="`Verb`" 
-                  />
+                  column="`Verb`" />
 
         <!-- define the subclasses -->
 
@@ -3028,6 +2788,9 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <one-to-one name="AParent" class="Zetbox.App.Base.RelationNHibernateImpl+RelationProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="A" />
@@ -3036,35 +2799,26 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="HasPersistentOrder" 
-                  column="`HasPersistentOrder`" 
-                  />
+                  column="`HasPersistentOrder`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Multiplicity" 
-                  column="`Multiplicity`" 
-                  />
+                  column="`Multiplicity`" />
 <!-- ObjectReferenceProperty -->
         <one-to-one name="Navigator" class="Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl+ObjectReferencePropertyProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="RelationEnd" />
         <!-- ValueTypeProperty isValue -->
         <property name="RoleName" 
-                  column="`RoleName`" 
-                  />
+                  column="`RoleName`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Type" column="`fk_Type`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -3088,42 +2842,36 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
 <!-- ObjectReferenceProperty -->
         <one-to-one name="Data" class="Zetbox.App.Base.SequenceDataNHibernateImpl+SequenceDataProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="Sequence" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
         <!-- ValueTypeProperty isValue -->
         <property name="IsContinuous" 
-                  column="`IsContinuous`" 
-                  />
+                  column="`IsContinuous`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
-                  column="`Name`" 
-                  />
+                  column="`Name`" />
 
         <!-- define the subclasses -->
 
@@ -3147,8 +2895,7 @@
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="CurrentNumber" 
-                  column="`CurrentNumber`" 
-                  />
+                  column="`CurrentNumber`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Sequence" column="`fk_Sequence`" class="Zetbox.App.Base.SequenceNHibernateImpl+SequenceProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
 
@@ -3172,33 +2919,28 @@
             </generator>
         </id>
 
+      <version name="ChangedOn" type="Timestamp"
+                column="`ChangedOn`" />
+
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  />
+                  column="`CreatedOn`" />
         <!-- ValueTypeProperty isValue -->
         <property name="DeploymentRestriction" 
-                  column="`DeploymentRestriction`" 
-                  />
+                  column="`DeploymentRestriction`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
-                  column="`Description`" 
-                  />
+                  column="`Description`" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  />
+                  column="`ExportGuid`" />
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
