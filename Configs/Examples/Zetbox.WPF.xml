@@ -3,7 +3,7 @@
   <ConfigName>Default Client Configuration</ConfigName>
   <Client StartClient="true" ThrowErrors="false">
     <!--<Application>6be0ba52-4589-48f1-832f-6cd463ba319a</Application>-->
-	<ServiceUri>http://localhost:11936/ZetboxService</ServiceUri>
+	<ServiceUri>http://localhost:35201/ZetboxService</ServiceUri>
     <Culture>de-AT</Culture>
     <UICulture>de-AT</UICulture>
     <DocumentStore>d:\projects\Zetbox.core\DocumentStore\Client\</DocumentStore>
