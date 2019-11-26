@@ -1,19 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
-  <ConfigName>Default Client Core Configuration</ConfigName>
-  <Client StartClient="false" ThrowErrors="false">
+  <ConfigName>Default Client Configuration</ConfigName>
+  <Client StartClient="true" ThrowErrors="false">
     <!--<Application>6be0ba52-4589-48f1-832f-6cd463ba319a</Application>-->
-	<clientUri>http://localhost:11936/Zetboxservice.facade</clientUri>
+	<ServiceUri>http://localhost:11936/ZetboxService</ServiceUri>
     <Culture>de-AT</Culture>
     <UICulture>de-AT</UICulture>
-    <DevelopmentEnvironment>false</DevelopmentEnvironment>
+    <DocumentStore>d:\projects\Zetbox.core\DocumentStore\Client\</DocumentStore>
     <Modules>
       <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
-      <Module>Zetbox.API.Client.HttpClientModule, Zetbox.API.Client</Module>
+      <!--<Module>Zetbox.Client.BasicAuthCredentialsResolver+Module, Zetbox.Client</Module>-->
       <Module>Zetbox.Client.WPF.WPFModule, Zetbox.Client.WPF</Module>
       <Module>Zetbox.API.MailProblemReporter+Module, Zetbox.API</Module>
       <Module>Zetbox.App.Projekte.DocumentManagement.FileImportService+Module, Zetbox.App.Projekte.Common</Module>
-      <Module>Zetbox.Client.BasicAuthCredentialsResolver+Module, Zetbox.Client</Module>
 	  <Module>Zetbox.Client.DefaultFulltextSupport+Module, Zetbox.Client</Module>
     </Modules>
   </Client>
