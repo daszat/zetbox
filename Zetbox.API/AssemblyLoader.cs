@@ -118,11 +118,13 @@ namespace Zetbox.API
                     hostTypePaths.Add("Server");
                     break;
                 case HostType.AspNetService:
-                    hostTypePrefix = "bin";
+                    // Not in .net core
+                    // hostTypePrefix = "bin";
                     hostTypePaths.Add("Server");
                     break;
                 case HostType.AspNetClient:
-                    hostTypePrefix = "bin";
+                    // Not in .net core
+                    // hostTypePrefix = "bin";
                     hostTypePaths.Add("Client");
                     hostTypePaths.Add("Server");
                     break;
