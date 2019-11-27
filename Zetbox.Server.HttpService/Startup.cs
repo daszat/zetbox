@@ -12,6 +12,7 @@ using Autofac.Extensions.DependencyInjection;
 using Zetbox.API;
 using Zetbox.API.Configuration;
 using System.IO;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace Zetbox.Server.HttpService
 {
@@ -31,10 +32,18 @@ namespace Zetbox.Server.HttpService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddControllersWithViews();
-
             // Add controllers as services so they'll be resolved.
             services.AddMvc().AddControllersAsServices();
+
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
         }
 
         // ConfigureContainer is where you can register things directly
@@ -83,6 +92,7 @@ namespace Zetbox.Server.HttpService
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

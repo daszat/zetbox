@@ -57,7 +57,7 @@ namespace Zetbox.Server
 
         private static void DebugLogIdentity()
         {
-            Logging.Facade.DebugFormat("Called IsAuthenticated = {0}, Identity = {1}", System.Threading.Thread.CurrentPrincipal.Identity.IsAuthenticated, System.Threading.Thread.CurrentPrincipal.Identity.Name);
+            Logging.Facade.DebugFormat("Called IsAuthenticated = {0}, Identity = {1}", System.Threading.Thread.CurrentPrincipal?.Identity?.IsAuthenticated, System.Threading.Thread.CurrentPrincipal?.Identity?.Name);
         }
 
         /// <summary>

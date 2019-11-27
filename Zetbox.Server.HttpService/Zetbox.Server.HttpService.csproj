@@ -31,14 +31,16 @@
   <PropertyGroup>
     <!-- deploys the compiled binaries into the local inetpub for debugging -->
     <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(MSBuildProjectDirectory)\bin\$(Configuration)\Common"
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(MSBuildProjectDirectory)\bin\$(Configuration)\Server"
-rem del "$(MSBuildProjectDirectory)\bin\$(Configuration)\Zetbox.Objects.*"
+      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(MSBuildProjectDirectory)\bin\$(Configuration)\Common"
+      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(MSBuildProjectDirectory)\bin\$(Configuration)\Server"
+      del "$(MSBuildProjectDirectory)\bin\$(Configuration)\Zetbox.Objects.*"
+      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common\Generated\Zetbox.Objects.dll" "$(MSBuildProjectDirectory)\bin\$(Configuration)"
     </PostBuildEvent>
     <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
-bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server} "$(MSBuildProjectDirectory)/bin/$(Configuration)"'
-rem bash -c 'rm -f "$(MSBuildProjectDirectory)"/bin/$(Configuration)/Zetbox.Objects.*'
-     </PostBuildEvent>
+      bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server} "$(MSBuildProjectDirectory)/bin/$(Configuration)"'
+      bash -c 'rm -f "$(MSBuildProjectDirectory)"/bin/$(Configuration)/Zetbox.Objects.*'
+      bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)/Common/Generated/Zetbox.Objects.dll" "$(MSBuildProjectDirectory)/bin/$(Configuration)"'
+    </PostBuildEvent>
   </PropertyGroup>
 
 </Project>

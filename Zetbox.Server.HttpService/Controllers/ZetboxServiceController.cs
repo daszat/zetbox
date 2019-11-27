@@ -49,10 +49,6 @@ namespace Zetbox.Server.HttpService.Controllers
                 Log.Error("Error while trying to resolve user", ex);
                 username = "(unknown)";
             }
-            Log.DebugFormat("Processing {0}-request for [url={1}], as [user={2}]",
-                Request.Method,
-                Request.Path.Value,
-                username);
         }
 
         [HttpPost]
