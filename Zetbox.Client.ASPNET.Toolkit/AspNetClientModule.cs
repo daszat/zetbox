@@ -26,7 +26,7 @@ namespace Zetbox.Client.ASPNET
     using Zetbox.API.Common;
     using Zetbox.API.Common.GUI;
     using Zetbox.API.Client;
-using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Client.PerfCounter;
 
     public class ZetboxContextHttpScope
     {
@@ -37,7 +37,7 @@ using Zetbox.API.Client.PerfCounter;
         }
 
         public IZetboxContext Context { get; private set; }
-        public IMVCValidationManager Validation {get; private set;}
+        public IMVCValidationManager Validation { get; private set; }
     }
 
     [Description("The ASP.NET MVC Client Module. It replaces the Client Module.")]
@@ -110,6 +110,11 @@ using Zetbox.API.Client.PerfCounter;
 
             moduleBuilder.RegisterModule<Zetbox.API.Common.ApiCommonModule>();
             moduleBuilder.RegisterModule<Zetbox.API.Client.ClientApiModule>();
+            moduleBuilder.RegisterModule<Zetbox.Client.ClientModule>();
+            // This is a client and server application
+            moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.Server.ServerModule, Zetbox.Server", true)));
+            // TODO: This should be done by the server module itself
+            moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.DalProvider.NHibernate.NHibernateProvider, Zetbox.DalProvider.NHibernate", true)));
 
             moduleBuilder
                 .Register<ViewModelDependencies>(c => new ViewModelDependencies(
@@ -129,13 +134,13 @@ using Zetbox.API.Client.PerfCounter;
 
             moduleBuilder
                 .Register<ZetboxContextHttpScope>(c => new ZetboxContextHttpScope(c.Resolve<IZetboxContext>(), c.Resolve<IMVCValidationManager>()))
-                .InstancePerRequest();
+                .InstancePerLifetimeScope();
 
             moduleBuilder
                 .RegisterType<AspNetViewModelFactory>()
                 .As<IViewModelFactory>()
                 .As<IToolkit>()
-                .InstancePerLifetimeScope(); // Not per HTTP Request, as custom actions also need a ViewModelFactory. They'll get the root scope.
+                .InstancePerLifetimeScope();
 
             moduleBuilder
                 .RegisterType<Zetbox.Client.GUI.DialogCreator>()
@@ -146,7 +151,7 @@ using Zetbox.API.Client.PerfCounter;
                 .RegisterType<MVCValidationManager>()
                 .As<IValidationManager>()
                 .As<IMVCValidationManager>()
-                .InstancePerRequest();
+                .InstancePerLifetimeScope();
 
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
             moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client", true)));

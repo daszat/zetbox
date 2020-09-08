@@ -1,0 +1,70 @@
+﻿@model Zetbox.Client.ASPNET.ViewModels.MvcProjektListViewModel
+@{
+    ViewBag.Title = "Projekte";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <a class="btn btn-default" role="button" data-toggle="collapse" href="#filter"><span class="glyphicon glyphicon-chevron-down"></span> Filter</a>
+    </div>
+    <div class="btn-group pull-right">
+        <a class="btn btn-primary" href="@Url.Action("Create", "Projekt", new { })">New Project</a>
+    </div>
+</div>
+
+@using (Html.BeginForm("Index", "Projekt", FormMethod.Post, new { id = "searchForm", @class = "" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div id="filter" class="panel panel-default no-print">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Name
+                            </label>
+                            <div class="col-md-6">
+                                @Html.EditorFor(m => m.NamePart)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn btn-default">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row voffset4">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name <span class="glyphicon glyphicon-sort-by-order"></span></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Result)
+                    {
+                        <tr>
+                            <td>@item.PropertyModelsByName["Name"].FormattedValue</td>
+                            <td class="text-right">
+                                <a class="btn btn-primary" href="@Url.Action("Edit", "Projekt", new { ID = item.ID })">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @await Html.PartialAsync("_Paging", Model, new ViewDataDictionary(ViewData) { { "formSelector", "#searchForm" } })
+}

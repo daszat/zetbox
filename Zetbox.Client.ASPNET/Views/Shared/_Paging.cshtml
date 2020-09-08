@@ -1,0 +1,29 @@
+﻿@model Zetbox.Client.ASPNET.ISearchViewModel
+<div class="row">
+    @*Use a html input to preserve value roundtip. This is only used by the navigate to buttons to signal paging.
+        A search should lead the user back to page 1
+
+        This only works if this is also used within the search box of a page.
+    *@
+    @{
+        var idPrefix = Html.IdForModel();
+        if (!string.IsNullOrWhiteSpace(idPrefix)) { idPrefix += "_"; }
+
+        var namePrefix = Html.NameForModel();
+        if (!string.IsNullOrWhiteSpace(namePrefix)) { namePrefix += "."; }
+    }
+    <input id="@(idPrefix + "NavigateTo")" name="@(namePrefix + "NavigateTo")" type="hidden" value="0" />
+    <div class="col-md-1">
+        @if (Model.ShowPrevPage)
+        {
+            <button class="btn btn-default" onclick="$('@ViewData["formSelector"]').find('#@(idPrefix + "NavigateTo")').val('@Model.PrevPage'); $('@ViewData["formSelector"]').submit(); return false;">Zurück</button>
+        }
+    </div>
+    <div class="col-md-3">@Model.CountAsText</div>
+    <div class="col-md-1">
+        @if (Model.ShowNextPage)
+        {
+            <button class="btn btn-default" onclick="$('@ViewData["formSelector"]').find('#@(idPrefix + "NavigateTo")').val('@Model.NextPage'); $('@ViewData["formSelector"]').submit(); return false;">Weiter</button>
+        }
+    </div>
+</div>

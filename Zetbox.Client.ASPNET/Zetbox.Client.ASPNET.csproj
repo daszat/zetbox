@@ -1,8 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
@@ -14,5 +18,9 @@
     <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj" />
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Common&quot; &quot;$(ProjectDir)\$(OutDir)\Common&quot;&#xD;&#xA;xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Server&quot; &quot;$(ProjectDir)\$(OutDir)\Server&quot;&#xD;&#xA;xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Client&quot; &quot;$(ProjectDir)\$(OutDir)\Client&quot;&#xD;&#xA;" />
+  </Target>
 
 </Project>
