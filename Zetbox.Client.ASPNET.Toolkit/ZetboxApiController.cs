@@ -45,9 +45,8 @@ namespace Zetbox.Client.ASPNET
         protected T ExtractIDataObjectFromBody<T>() where T : class, IPersistenceObject
         {
             var data = DataContext.Internals().CreateUnattached<T>();
-            var body = Request.Content.ReadAsStreamAsync().Result;
-            body.Position = 0;
-            var sr = new StreamReader(body);
+            Request.Body.Position = 0;
+            var sr = new StreamReader(Request.Body);
             var json = sr.ReadToEnd();
             Newtonsoft.Json.JsonConvert.PopulateObject(json, data);
             return data;

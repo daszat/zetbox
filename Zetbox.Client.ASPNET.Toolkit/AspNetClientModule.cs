@@ -129,7 +129,7 @@ using Zetbox.API.Client.PerfCounter;
 
             moduleBuilder
                 .Register<ZetboxContextHttpScope>(c => new ZetboxContextHttpScope(c.Resolve<IZetboxContext>(), c.Resolve<IMVCValidationManager>()))
-                .InstancePerHttpRequest();
+                .InstancePerRequest();
 
             moduleBuilder
                 .RegisterType<AspNetViewModelFactory>()
@@ -146,7 +146,7 @@ using Zetbox.API.Client.PerfCounter;
                 .RegisterType<MVCValidationManager>()
                 .As<IValidationManager>()
                 .As<IMVCValidationManager>()
-                .InstancePerHttpRequest();
+                .InstancePerRequest();
 
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
             moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client", true)));

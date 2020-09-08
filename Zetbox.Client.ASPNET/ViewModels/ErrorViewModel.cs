@@ -1,6 +1,6 @@
 using System;
 
-namespace Zetbox.Client.ASPNET.Models
+namespace Zetbox.Client.ASPNET.ViewModels
 {
     public class ErrorViewModel
     {
