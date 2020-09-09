@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Zetbox.API;
 using Zetbox.API.Configuration;
@@ -41,10 +42,8 @@ namespace Zetbox.Client.ASPNET.Toolkit
 
             AssemblyLoader.Bootstrap(config);
 
-            builder
-                .RegisterInstance(config)
-                .ExternallyOwned()
-                .SingleInstance();
+            var allModules = config.Server.Modules.Concat(config.Client.Modules);
+            AutoFacBuilder.CreateContainerBuilder(builder, config, allModules);
 
             builder.RegisterModule<AspNetClientModule>();
             builder.RegisterViewModels(typeof(ZetboxStartup).Assembly);
