@@ -1,0 +1,20 @@
+﻿@model NullableDateTimePropertyViewModel
+
+@using Zetbox.API
+@using Zetbox.Client.Presentables.ValueViewModels
+
+<div class="input-group">
+    <div class="form-control">
+        @Html.DisplayFor(m => m.FormattedValue)
+    </div>
+    <span class="input-group-addon">
+        @if (Model.DatePartVisible)
+        {
+            <span class="glyphicon glyphicon-calendar"></span>
+        }
+        else if (Model.TimePartVisible)
+        {
+            <span class="glyphicon glyphicon-time"></span>
+        }
+    </span>
+</div>

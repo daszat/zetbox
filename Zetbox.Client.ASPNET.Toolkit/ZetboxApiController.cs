@@ -23,6 +23,7 @@ namespace Zetbox.Client.ASPNET
     using Zetbox.API;
     using System.IO;
     using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json;
 
     public class ZetboxApiController : Controller
     {
@@ -48,7 +49,7 @@ namespace Zetbox.Client.ASPNET
             Request.Body.Position = 0;
             var sr = new StreamReader(Request.Body);
             var json = sr.ReadToEnd();
-            Newtonsoft.Json.JsonConvert.PopulateObject(json, data);
+            JsonConvert.PopulateObject(json, data);
             return data;
         }
     }

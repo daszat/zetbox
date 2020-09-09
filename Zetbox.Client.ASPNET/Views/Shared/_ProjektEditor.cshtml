@@ -1,0 +1,22 @@
+﻿@model Zetbox.Client.ASPNET.ViewModels.MvcProjektViewModel
+
+@using Zetbox.API
+@using Zetbox.Client.ASPNET
+@using Zetbox.Client.Presentables.ValueViewModels
+
+<div class="form-group">
+    <label class="col-md-3 control-label">
+        @Html.ZbLabelFor(m => m.ViewModel.PropertyModelsByName["Name"])
+    </label>
+    <div class="col-md-6">
+        @Html.ZbEditorFor(m => m.ViewModel.PropertyModelsByName["Name"], additionalViewData: new { @class = "autofocus" })
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-3 control-label">
+        @Html.ZbLabelFor(m => m.ViewModel.PropertyModelsByName["Kundenname"])
+    </label>
+    <div class="col-md-6">
+        @Html.ZbEditorFor(m => m.ViewModel.PropertyModelsByName["Kundenname"])
+    </div>
+</div>

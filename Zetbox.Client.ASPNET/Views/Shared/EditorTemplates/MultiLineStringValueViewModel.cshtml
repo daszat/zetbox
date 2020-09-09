@@ -1,0 +1,11 @@
+﻿@model Zetbox.Client.Presentables.ValueViewModels.MultiLineStringValueViewModel
+
+@if (Model.IsReadOnly)
+{
+    @Html.DisplayFor(m => m.FormattedValue.Replace("\n", "<br/>"), new { @class = ViewData["class"] })
+}
+else
+{
+    @Html.TextAreaFor(m => m.FormattedValue, 10, 0, new { @class = "form-control " + ViewData["class"], placeholder = Model.ToolTip })
+    @Html.ValidationMessageFor(m => m)
+}

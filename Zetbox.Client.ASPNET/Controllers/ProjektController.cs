@@ -56,5 +56,54 @@ namespace Zetbox.Client.ASPNET.Controllers
             vmdl.InvalidateResult();
             return View(vmdl);
         }
+
+        public ActionResult Create()
+        {
+            var vmdl = GetViewModel(0);
+            return View(vmdl);
+        }
+
+        [HttpPost]
+        public ActionResult Create(MvcProjektViewModel vmdl)
+        {
+            var obj = vmdl.Object;
+
+            Validate(vmdl);
+            if (ModelState.IsValid)
+            {
+                DataContext.SubmitChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(vmdl);
+        }
+
+        public ActionResult Edit(int ID)
+        {
+            var vmdl = GetViewModel(ID);
+            return View(vmdl);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int ID, string action, MvcProjektViewModel vmdl)
+        {
+            var obj = vmdl.Object;
+            switch (action)
+            {
+                case "Delete":
+                    DataContext.Delete(obj);
+                    DataContext.SubmitChanges();
+                    return RedirectToAction("Index");
+            }
+
+            Validate(vmdl);
+            if (ModelState.IsValid)
+            {
+                DataContext.SubmitChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(vmdl);
+        }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model NullableDateTimePropertyViewModel
+
+@using Zetbox.API
+@using Zetbox.Client.Presentables.ValueViewModels
+
+@if (Model.IsReadOnly)
+{
+    @Html.DisplayFor(m => m.FormattedValue, new { @class = ViewData["class"] })
+}
+else
+{
+    if (Model.DatePartVisible)
+    {
+        <div class="input-group date">
+            @Html.TextBoxFor(m => m.DatePartString, null, new { @class = "form-control " + ViewData["class"], placeholder = Model.ToolTip, autocomplete = "off" })
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    }
+    if (Model.TimePartVisible)
+    {
+        <div class="input-group time">
+            @Html.TextBoxFor(m => m.TimePartString, null, new { @class = "form-control " + ViewData["class"], placeholder = Model.ToolTip, autocomplete = "off" })
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+        </div>
+    }
+    @Html.ValidationMessageFor(m => m)
+}

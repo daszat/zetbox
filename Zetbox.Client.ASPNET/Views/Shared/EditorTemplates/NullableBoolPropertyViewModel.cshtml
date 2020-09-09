@@ -1,0 +1,16 @@
+﻿@model NullableBoolPropertyViewModel
+
+@using Zetbox.API
+@using Zetbox.Client.Presentables.ValueViewModels
+
+@if (Model.IsReadOnly)
+{
+    @Html.DisplayFor(m => m.FormattedValue, new { @class = ViewData["class"] })
+}
+else
+{
+    <div class="input-group control-label">
+        @Html.CheckBox("Value", Model.Value ?? false, new { @class = "" + ViewData["class"], placeholder = ViewData["placeholder"] as string })
+        @Html.ValidationMessageFor(m => m)
+    </div>
+}

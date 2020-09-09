@@ -1,0 +1,19 @@
+﻿@model NullableDecimalPropertyViewModel
+
+@using Zetbox.API
+@using Zetbox.Client.Presentables.ValueViewModels
+
+@if (Model.IsReadOnly)
+{
+    @Html.DisplayFor(m => m.FormattedValue, new { @class = ViewData["class"] })
+}
+else
+{
+    <div class="input-group">
+        @Html.TextBoxFor(m => m.FormattedValue, null, new { @class = "form-control " + ViewData["class"], placeholder = Model.ToolTip })
+        <span class="input-group-addon">
+            %
+        </span>
+    </div>
+    @Html.ValidationMessageFor(m => m)
+}

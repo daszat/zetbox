@@ -29,7 +29,6 @@ namespace Zetbox.Client.ASPNET
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
-    using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     public static class HtmlHelpers
@@ -56,14 +55,14 @@ namespace Zetbox.Client.ASPNET
                 _writer.Write("</div></div></div></div></div></div></div></div></div>\n");
             }
         }
-        public static IDisposable Widget(this HtmlHelper html, string title)
+        public static IDisposable Widget(this IHtmlHelper html, string title)
         {
             return new WidgetContainer(html.ViewContext.Writer, title);
         }
         #endregion
 
         #region ZbHiddenID
-        public static IHtmlContent ZbHiddenID(this HtmlHelper helper, int ID)
+        public static IHtmlContent ZbHiddenID(this IHtmlHelper helper, int ID)
         {
             return helper.Hidden("ID", ID > Helper.INVALIDID ? ID : Helper.INVALIDID, null);
         }
@@ -80,10 +79,14 @@ namespace Zetbox.Client.ASPNET
         /// <param name="name">overrides expression</param>
         /// <param name="asReadOnly">Renders the for attribute always with FormattedValue</param>
         /// <returns></returns>
-        public static IHtmlContent ZbLabelFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, ILabeledViewModel>> expression, object htmlAttributes = null, string name = null, bool asReadOnly = false)
+        public static IHtmlContent ZbLabelFor<TModel>(this IHtmlHelper<TModel> html, Expression<Func<TModel, ILabeledViewModel>> expression, object htmlAttributes = null, string name = null, bool asReadOnly = false)
         {
-            var exprStr = name ?? ExpressionHelper.GetExpressionText(expression);
-            var mdl = ExpressionMetadataProvider.FromLambdaExpression(expression, html.ViewData, html.MetadataProvider)?.Model;
+            ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
+
+            var exprStr = name ?? modelExpressionProvider.GetExpressionText(expression);
+            var mdl = modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
+
+
             var lbmdl = mdl as ILabeledViewModel;
             var basemdl = mdl as BaseValueViewModel;
 
@@ -113,11 +116,14 @@ namespace Zetbox.Client.ASPNET
         #endregion
 
         #region Display
-        public static IHtmlContent ZbDisplayFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
+        public static IHtmlContent ZbDisplayFor<TModel, TValue>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
             where TValue : BaseValueViewModel
         {
             var newExpression = AppendMember<TModel, TValue, string>(expression, "FormattedValue");
-            var vmdl = (BaseValueViewModel)ExpressionMetadataProvider.FromLambdaExpression(expression, html.ViewData, html.MetadataProvider)?.Model;
+
+            ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
+            var vmdl = modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
+
             return html.DisplayFor<string>(newExpression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
         }
         #endregion
@@ -134,11 +140,12 @@ namespace Zetbox.Client.ASPNET
         /// <param name="htmlFieldName"></param>
         /// <param name="additionalViewData"></param>
         /// <returns></returns>
-        [Obsolete("Use MVC Editor Templates instead!")]
-        public static IHtmlContent ZbEditorFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
+        public static IHtmlContent ZbEditorFor<TModel, TValue>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
             where TValue : BaseValueViewModel
         {
-            var vmdl = (BaseValueViewModel)ExpressionMetadataProvider.FromLambdaExpression(expression, html.ViewData, html.MetadataProvider)?.Model;
+            ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
+            var vmdl = (BaseValueViewModel)modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
+
             var type = vmdl.GetType();
             if (vmdl.IsReadOnly)
             {
@@ -150,7 +157,7 @@ namespace Zetbox.Client.ASPNET
                 {
                     var enumVmdl = (EnumerationValueViewModel)vmdl;
                     return html.DropDownList(
-                        ExpressionHelper.GetExpressionText(expression) + ".Value",
+                        modelExpressionProvider.GetExpressionText(expression) + ".Value",
                         enumVmdl
                             .PossibleValues
                             .Select(i => new SelectListItem()
@@ -162,7 +169,7 @@ namespace Zetbox.Client.ASPNET
                 }
                 else
                 {
-                    return html.EditorFor<string>(AppendMember<TModel, TValue, string>(expression, "FormattedValue"), GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
+                    return html.EditorFor(expression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
                 }
             }
         }
@@ -173,7 +180,9 @@ namespace Zetbox.Client.ASPNET
         public static IHtmlContent ZbValidationMessageFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string validationMessage = null, object htmlAttributes = null)
              where TValue : BaseValueViewModel
         {
-            var vmdl = (BaseValueViewModel)ExpressionMetadataProvider.FromLambdaExpression(expression, html.ViewData, html.MetadataProvider)?.Model;
+            ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
+            var vmdl = (BaseValueViewModel)modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
+
             var type = vmdl.GetType();
             if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
             {
@@ -185,7 +194,7 @@ namespace Zetbox.Client.ASPNET
             }
         }
 
-        public static IHtmlContent StatusMessage(this HtmlHelper helper, string msg)
+        public static IHtmlContent StatusMessage(this IHtmlHelper helper, string msg)
         {
             if (string.IsNullOrWhiteSpace(msg))
             {
@@ -195,7 +204,7 @@ namespace Zetbox.Client.ASPNET
             return new HtmlString(string.Format("<div class=\"alert alert-success\">{0}</div>", HttpUtility.HtmlEncode(msg)));
         }
 
-        public static IHtmlContent WarningMessage(this HtmlHelper helper, string msg)
+        public static IHtmlContent WarningMessage(this IHtmlHelper helper, string msg)
         {
             if (string.IsNullOrWhiteSpace(msg))
             {
@@ -205,7 +214,7 @@ namespace Zetbox.Client.ASPNET
             return new HtmlString(string.Format("<div class=\"alert alert-warning\">{0}</div>", HttpUtility.HtmlEncode(msg)));
         }
 
-        public static IHtmlContent BootstrapValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors = false)
+        public static IHtmlContent BootstrapValidationSummary(this IHtmlHelper htmlHelper, bool excludePropertyErrors = false)
         {
             if (htmlHelper == null)
             {
@@ -256,35 +265,35 @@ namespace Zetbox.Client.ASPNET
             var type = vmdl.GetType();
             if (typeof(NullableDateTimePropertyViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "DateTime";
+                return templateName ?? "NullableDateTimePropertyViewModel";
             }
             else if (typeof(NullableDecimalPropertyViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "Decimal";
+                return templateName ?? "NullableDecimalPropertyViewModel";
             }
             else if (typeof(NullableIntPropertyViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "Integer";
+                return templateName ?? "NullableIntPropertyViewModel";
             }
             else if (typeof(NullableDoublePropertyViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "Double";
+                return templateName ?? "NullableDoublePropertyViewModel";
             }
             else if (typeof(NullableGuidPropertyViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "Guid";
+                return templateName ?? "NullableGuidPropertyViewModel";
             }
             else if (typeof(StringValueViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "String";
+                return templateName ?? "StringValueViewModel";
             }
             else if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "Enumeration";
+                return templateName ?? "EnumerationValueViewModel";
             }
             else if (typeof(ObjectReferenceViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "ObjectReference";
+                return templateName ?? "ObjectReferenceViewModel";
             }
             else
             {

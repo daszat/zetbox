@@ -94,6 +94,10 @@ namespace Zetbox.Client.ASPNET
 
         DataObjectViewModel IGenericDataObjectEditViewModel.ViewModel => this.ViewModel;
 
+        public string StatusMessage { get; set; }
+        public string ErrorMessage { get; set; }
+        public string SuccessMessage { get; set; }
+
         protected virtual TModel CreateNewInstance()
         {
             return DataContext.Create<TModel>();

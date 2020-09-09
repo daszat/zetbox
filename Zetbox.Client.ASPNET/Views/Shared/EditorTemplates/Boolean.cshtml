@@ -1,0 +1,9 @@
+﻿@model System.Boolean
+
+@using Zetbox.API
+@using Zetbox.Client.Presentables.ValueViewModels
+
+<div class="input-group control-label">
+    @Html.CheckBox("", Model, new { @class = "" + ViewData["class"], placeholder = ViewData["placeholder"] as string })
+    @Html.ValidationMessageFor(m => m)
+</div>

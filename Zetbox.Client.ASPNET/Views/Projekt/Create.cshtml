@@ -1,0 +1,22 @@
+﻿@model Zetbox.Client.ASPNET.ViewModels.MvcProjektViewModel
+
+@{
+    ViewData["Title"] = "Create a new Project";
+}
+
+<h1>@ViewBag.Title</h1>
+
+@using (Html.BeginForm("Create", "Projekt", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.BootstrapValidationSummary()
+    @Html.ZbHiddenID(Model.ID)
+    @await Html.PartialAsync("_ProjektEditor", Model)
+    @Html.StatusMessage(Model.StatusMessage)
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-6">
+            <button id="btnSave" type="submit" class="btn btn-primary">Save</button>
+            <a href="@Url.Action("Index", "Projekt")" class="btn btn-default">Back</a>
+        </div>
+    </div>
+}
