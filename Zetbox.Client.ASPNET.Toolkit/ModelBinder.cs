@@ -28,32 +28,50 @@ namespace Zetbox.Client.ASPNET
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
     using System.Threading.Tasks;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.DependencyInjection;
 
     #region ZetboxViewModelBinder
     public interface IZetboxViewModelBinder : IModelBinder
     {
     }
 
-    public class ZetboxViewModelBinder : IZetboxViewModelBinder
+    public class ZetboxViewModelBinder : ComplexTypeModelBinder, IZetboxViewModelBinder
     {
         IViewModelFactory _vmf;
         IMVCValidationManager _validation;
         ZetboxContextHttpScope _scope;
 
-        public ZetboxViewModelBinder(IViewModelFactory vmf, IMVCValidationManager validation, ZetboxContextHttpScope scope)
+        public ZetboxViewModelBinder(IViewModelFactory vmf, IMVCValidationManager validation, ZetboxContextHttpScope scope, 
+            IDictionary<ModelMetadata, IModelBinder> propertyBinders, ILoggerFactory loggerFactory)
+            : base(propertyBinders, loggerFactory, allowValidatingTopLevelNodes: true)
         {
             _vmf = vmf;
             _validation = validation;
             _scope = scope;
         }
 
-        public Task BindModelAsync(ModelBindingContext bindingContext)
+        protected override object CreateModel(ModelBindingContext bindingContext)
         {
-            if (bindingContext == null) throw new ArgumentNullException(nameof(bindingContext));
-
-
-            return Task.CompletedTask;
+            return _vmf.CreateViewModel<ViewModel.Factory>(bindingContext.ModelType).Invoke(_scope.Context, null);
         }
+
+        //public Task BindModelAsync(ModelBindingContext bindingContext)
+        //{
+        //    if (bindingContext == null) throw new ArgumentNullException(nameof(bindingContext));
+
+        //    var modelName = bindingContext.ModelName;
+
+        //    var vmdl = _vmf.CreateViewModel<ViewModel.Factory>(bindingContext.ModelType).Invoke(_scope.Context, null);
+
+
+
+
+
+        //    bindingContext.Result = ModelBindingResult.Success(vmdl);
+
+        //    return Task.CompletedTask;
+        //}
     }
 
     public interface IZetboxViewModelBinderProvider : IModelBinderProvider
@@ -70,7 +88,19 @@ namespace Zetbox.Client.ASPNET
         {
             if (typeof(ViewModel).IsAssignableFrom(context.Metadata.ModelType))
             {
-                return new BinderTypeModelBinder(typeof(ZetboxViewModelBinder));
+                var propertyBinders = new Dictionary<ModelMetadata, IModelBinder>();
+                for (var i = 0; i < context.Metadata.Properties.Count; i++)
+                {
+                    var property = context.Metadata.Properties[i];
+                    propertyBinders.Add(property, context.CreateBinder(property));
+                }
+
+                return new ZetboxViewModelBinder(
+                    context.Services.GetRequiredService<IViewModelFactory>(),
+                    context.Services.GetRequiredService<IMVCValidationManager>(),
+                    context.Services.GetRequiredService<ZetboxContextHttpScope>(),
+                    propertyBinders,
+                    context.Services.GetRequiredService<ILoggerFactory>());
             }
 
             return null;
@@ -85,6 +115,18 @@ namespace Zetbox.Client.ASPNET
 
     public class LookupDictionaryModelBinder : ILookupDictionaryModelBinder
     {
+        private readonly ModelBinderProviderContext binderProviderContext;
+
+        public readonly Type TKey;
+        public readonly Type TValue;
+
+        public LookupDictionaryModelBinder(Type TKey, Type TValue, ModelBinderProviderContext binderProviderContext)
+        {
+            this.TKey = TKey;
+            this.TValue = TValue;
+            this.binderProviderContext = binderProviderContext;
+        }
+
         private IEnumerable<string> GetValueProviderKeys(ModelBindingContext context)
         {
             List<string> keys = new List<string>();
@@ -107,46 +149,40 @@ namespace Zetbox.Client.ASPNET
             }
         }
 
-        public Task BindModelAsync(ModelBindingContext bindingContext)
+        public async Task BindModelAsync(ModelBindingContext bindingContext)
         {
             object result = bindingContext.Model;
-            if (result == null) return null; // Cannot bind on empty list
+            if (result == null) return; // Cannot bind on empty list
 
-            throw new NotImplementedException();
+            foreach (string key in GetValueProviderKeys(bindingContext))
+            {
+                if (key.StartsWith(bindingContext.ModelName + "[", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    int endbracket = key.IndexOf("]", bindingContext.ModelName.Length + 1);
+                    if (endbracket == -1) continue;
 
-            //Type[] ga = bindingContext.ModelType.GetGenericArguments();
-            //var TKey = ga[0];
-            //var TValue = ga[2];
-            //IModelBinder valueBinder = Binders.GetBinder(TValue);
+                    var strDictKey = key.Substring(bindingContext.ModelName.Length + 1, endbracket - bindingContext.ModelName.Length - 1);
+                    var dictKey = ConvertType(strDictKey, TKey);
+                    if (dictKey == null) continue;
 
-            //foreach (string key in GetValueProviderKeys(bindingContext))
-            //{
-            //    if (key.StartsWith(bindingContext.ModelName + "[", StringComparison.InvariantCultureIgnoreCase))
-            //    {
-            //        int endbracket = key.IndexOf("]", bindingContext.ModelName.Length + 1);
-            //        if (endbracket == -1) continue;
+                    var currentValue = bindingContext.ModelType.GetProperty("Item").GetValue(result, new object[] { dictKey });
+                    var modelName = key.Substring(0, endbracket + 1);
+                    var fieldName = key.Substring(endbracket + 2);
 
-            //        var strDictKey = key.Substring(bindingContext.ModelName.Length + 1, endbracket - bindingContext.ModelName.Length - 1);
-            //        var dictKey = ConvertType(strDictKey, TKey);
-            //        if (dictKey == null) continue;
+                    var provider = new EmptyModelMetadataProvider();
+                    var nestedMetaData = provider.GetMetadataForType(currentValue.GetType());
 
-            //        var currentValue = bindingContext.ModelType.GetProperty("Item").GetValue(result, new object[] { dictKey });
-            //        var modelName = key.Substring(0, endbracket + 1);
-
-            //        ModelBindingContext innerBindingContext = new ModelBindingContext()
-            //        {
-            //            ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => currentValue, currentValue.GetType()),
-            //            ModelName = modelName,
-            //            ModelState = bindingContext.ModelState,
-            //            PropertyFilter = bindingContext.PropertyFilter,
-            //            ValueProvider = bindingContext.ValueProvider
-            //        };
-
-            //        valueBinder.BindModelAsync(bindingContext, innerBindingContext);
-            //    }
-            //}
-
-            //return Task.CompletedTask;
+                    using (bindingContext.EnterNestedScope(
+                        modelMetadata: nestedMetaData,
+                        fieldName: fieldName,
+                        modelName: modelName,
+                        model: currentValue))
+                    {
+                        IModelBinder valueBinder = binderProviderContext.CreateBinder(nestedMetaData);
+                        await valueBinder.BindModelAsync(bindingContext);
+                    }
+                }
+            }
         }
     }
 
@@ -156,17 +192,18 @@ namespace Zetbox.Client.ASPNET
 
     public class LookupDictionaryModelBinderProvider : ILookupDictionaryModelBinderProvider
     {
-        private readonly Func<ILookupDictionaryModelBinder> _factory;
-
-        public LookupDictionaryModelBinderProvider(Func<ILookupDictionaryModelBinder> factory)
+        public LookupDictionaryModelBinderProvider()
         {
-            _factory = factory;
         }
         public IModelBinder GetBinder(ModelBinderProviderContext context)
         {
             if (context.Metadata.ModelType.IsGenericType && context.Metadata.ModelType.GetGenericTypeDefinition() == typeof(LookupDictionary<,,>))
             {
-                return new BinderTypeModelBinder(typeof(ZetboxViewModelBinder));
+                Type[] ga = context.Metadata.ModelType.GetGenericArguments();
+                var TKey = ga[0];
+                var TValue = ga[2];
+
+                return new LookupDictionaryModelBinder(TKey, TValue, context);
             }
 
             return null;

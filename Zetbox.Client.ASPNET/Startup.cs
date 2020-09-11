@@ -30,9 +30,9 @@ namespace Zetbox.Client.ASPNET
         public override string ContentRootPath => WebHostEnvironment.ContentRootPath;
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            base.ConfigureServices(services);
         }
 
         public override void ConfigureContainer(ContainerBuilder builder)

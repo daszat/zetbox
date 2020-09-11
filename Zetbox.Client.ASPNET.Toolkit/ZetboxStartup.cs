@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,6 +24,21 @@ namespace Zetbox.Client.ASPNET.Toolkit
         public IConfiguration Configuration { get; }
         public ILifetimeScope AutofacContainer { get; protected set; }
         public abstract string ContentRootPath { get; }
+
+        public virtual void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllersWithViews(options =>
+            {
+                options.ModelBinderProviders.Insert(0, new ZetboxViewModelBinderProvider());
+                options.ModelBinderProviders.Insert(0, new LookupDictionaryModelBinderProvider());
+
+                OnConfigureControllersWithViews(options);
+            });
+        }
+
+        protected virtual void OnConfigureControllersWithViews(MvcOptions options)
+        {
+        }
 
         public virtual void ConfigureContainer(ContainerBuilder builder)
         {
