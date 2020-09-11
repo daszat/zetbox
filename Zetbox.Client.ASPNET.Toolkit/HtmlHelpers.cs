@@ -30,37 +30,10 @@ namespace Zetbox.Client.ASPNET
     using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using System.Text.Encodings.Web;
 
     public static class HtmlHelpers
     {
-        #region Widget
-        private class WidgetContainer : IDisposable
-        {
-            private readonly TextWriter _writer;
-            public WidgetContainer(TextWriter writer, string title)
-            {
-                _writer = writer;
-
-                _writer.Write("<div class=\"widget\"><div class=\"top\"><div class=\"bottom\"><div class=\"left\"><div class=\"right\"><div class=\"ro\"><div class=\"lo\"><div class=\"ru\"><div class=\"lu\">\n");
-                _writer.Write("<h4 class=\"widget-title\">");
-                _writer.Write(title);
-                _writer.Write("</h4>\n");
-
-                _writer.Write("<div class=\"widget-content\">\n");
-            }
-
-            public void Dispose()
-            {
-                _writer.Write("</div>\n");
-                _writer.Write("</div></div></div></div></div></div></div></div></div>\n");
-            }
-        }
-        public static IDisposable Widget(this IHtmlHelper html, string title)
-        {
-            return new WidgetContainer(html.ViewContext.Writer, title);
-        }
-        #endregion
-
         #region ZbHiddenID
         public static IHtmlContent ZbHiddenID(this IHtmlHelper helper, int ID)
         {
@@ -153,24 +126,7 @@ namespace Zetbox.Client.ASPNET
             }
             else
             {
-                if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
-                {
-                    var enumVmdl = (EnumerationValueViewModel)vmdl;
-                    return html.DropDownList(
-                        modelExpressionProvider.GetExpressionText(expression) + ".Value",
-                        enumVmdl
-                            .PossibleValues
-                            .Select(i => new SelectListItem()
-                            {
-                                Text = i.Value,
-                                Value = i.Key != null ? i.Key.Value.ToString() : string.Empty,
-                                Selected = i.Key == enumVmdl.Value
-                            }));
-                }
-                else
-                {
-                    return html.EditorFor(expression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
-                }
+                return html.EditorFor(expression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
             }
         }
         #endregion
@@ -226,8 +182,11 @@ namespace Zetbox.Client.ASPNET
                 return HtmlString.Empty;
             }
 
-            return new HtmlString(string.Format("<div class=\"alert alert-danger\">{0}</div>",
-                htmlHelper.ValidationSummary(excludePropertyErrors, "Error", null, null)));
+            using (var writer = new System.IO.StringWriter())
+            {
+                htmlHelper.ValidationSummary(excludePropertyErrors, "Error", null, null).WriteTo(writer, HtmlEncoder.Default);
+                return new HtmlString(string.Format("<div class=\"alert alert-danger\">{0}</div>", writer.ToString()));
+            }
         }
         #endregion
 
