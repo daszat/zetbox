@@ -31,6 +31,8 @@ namespace Zetbox.Client.ASPNET
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using System.Text.Encodings.Web;
+    using System.Data;
+    using Zetbox.Client.Models;
 
     public static class HtmlHelpers
     {
@@ -92,12 +94,10 @@ namespace Zetbox.Client.ASPNET
         public static IHtmlContent ZbDisplayFor<TModel, TValue>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
             where TValue : BaseValueViewModel
         {
-            var newExpression = AppendMember<TModel, TValue, string>(expression, "FormattedValue");
-
             ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
             var vmdl = modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
 
-            return html.DisplayFor<string>(newExpression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
+            return html.DisplayFor(expression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
         }
         #endregion
 
@@ -122,11 +122,46 @@ namespace Zetbox.Client.ASPNET
             var type = vmdl.GetType();
             if (vmdl.IsReadOnly)
             {
-                return html.DisplayFor<string>(AppendMember<TModel, TValue, string>(expression, "FormattedValue"), GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
+                return html.ZbDisplayFor(expression, null, htmlFieldName, additionalViewData);
             }
             else
             {
                 return html.EditorFor(expression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
+            }
+        }
+
+        public static IHtmlContent ZbEditorFor<TModel, TValue>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression)
+            where TValue : DataObjectViewModel
+        {
+            ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
+            var vmdl = (DataObjectViewModel)modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
+
+            using (var writer = new System.IO.StringWriter())
+            {
+                foreach (var prop in vmdl.PropertyModels)
+                {
+                    if (prop is ObjectListViewModel || prop is ObjectCollectionViewModel) continue;
+
+                    var propName = ((BasePropertyValueModel)prop.ValueModel).Property.Name;
+
+                    Expression<Func<TModel, ILabeledViewModel>> lbExpr = Expression.Lambda<Func<TModel, ILabeledViewModel>>(
+                            Expression.Call(Expression.Property(expression.Body, "PropertyModelsByName"), "get_Item", null, Expression.Constant(propName)),
+                            expression.Parameters.ToArray());
+                    Expression<Func<TModel, BaseValueViewModel>> propExpr = Expression.Lambda<Func<TModel, BaseValueViewModel>>(
+                            Expression.Call(Expression.Property(expression.Body, "PropertyModelsByName"), "get_Item", null, Expression.Constant(propName)),
+                            expression.Parameters.ToArray());
+
+                    writer.WriteLine("<div class=\"form-group\">");
+                    writer.WriteLine("<label class=\"col-md-3 control-label\">");
+                    html.ZbLabelFor(lbExpr).WriteTo(writer, HtmlEncoder.Default);
+                    writer.WriteLine("</label>");
+                    writer.WriteLine("<div class=\"col-md-6\">");
+                    html.ZbEditorFor(propExpr).WriteTo(writer, HtmlEncoder.Default);
+                    writer.WriteLine("</div>");
+                    writer.WriteLine("</div>");
+                }
+
+                return new HtmlString(writer.ToString());
             }
         }
         #endregion
@@ -134,7 +169,7 @@ namespace Zetbox.Client.ASPNET
         #region ValidationMessages
         [Obsolete("Add them in MVC Editor Templates instead!")]
         public static IHtmlContent ZbValidationMessageFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string validationMessage = null, object htmlAttributes = null)
-             where TValue : BaseValueViewModel
+         where TValue : BaseValueViewModel
         {
             ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
             var vmdl = (BaseValueViewModel)modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
@@ -189,7 +224,6 @@ namespace Zetbox.Client.ASPNET
             }
         }
         #endregion
-
 
         #region TextBox
         public static IHtmlContent ZbTextBoxFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null)
