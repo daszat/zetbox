@@ -281,6 +281,10 @@ namespace Zetbox.Client.ASPNET
             {
                 return templateName ?? "EnumerationValueViewModel";
             }
+            else if (typeof(CompoundCollectionViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "CompoundCollectionViewModel";
+            }
             else if (typeof(ObjectReferenceViewModel).IsAssignableFrom(type))
             {
                 return templateName ?? "ObjectReferenceViewModel";
