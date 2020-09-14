@@ -16,16 +16,17 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 		protected string ceClassAttr;
 		protected string ceReverseKeyColumnName;
 		protected string listPositionColumnName;
+		protected int length;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, string prefix, string propName, string columnName, bool isList, string typeAttr, string ceClassAttr, string ceReverseKeyColumnName, string listPositionColumnName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, string prefix, string propName, string columnName, bool isList, string typeAttr, string ceClassAttr, string ceReverseKeyColumnName, string listPositionColumnName, int length)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("Mappings.ValueTypePropertyHbm", prefix, propName, columnName, isList, typeAttr, ceClassAttr, ceReverseKeyColumnName, listPositionColumnName);
+            _host.CallTemplate("Mappings.ValueTypePropertyHbm", prefix, propName, columnName, isList, typeAttr, ceClassAttr, ceReverseKeyColumnName, listPositionColumnName, length);
         }
 
-        public ValueTypePropertyHbm(Arebis.CodeGeneration.IGenerationHost _host, string prefix, string propName, string columnName, bool isList, string typeAttr, string ceClassAttr, string ceReverseKeyColumnName, string listPositionColumnName)
+        public ValueTypePropertyHbm(Arebis.CodeGeneration.IGenerationHost _host, string prefix, string propName, string columnName, bool isList, string typeAttr, string ceClassAttr, string ceReverseKeyColumnName, string listPositionColumnName, int length)
             : base(_host)
         {
 			this.prefix = prefix;
@@ -36,26 +37,27 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 			this.ceClassAttr = ceClassAttr;
 			this.ceReverseKeyColumnName = ceReverseKeyColumnName;
 			this.listPositionColumnName = listPositionColumnName;
+			this.length = length;
 
         }
 
         public override void Generate()
         {
-#line 32 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
-if (isList) {                                                                    
 #line 33 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+if (isList) {                                                                    
+#line 34 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 this.WriteObjects("        <!-- ValueTypeProperty isList -->\r\n");
 this.WriteObjects("        <set name=\"",  propName , "\" ",  typeAttr , " inverse=\"true\" batch-size=\"100\">\r\n");
 this.WriteObjects("            <key column=\"`",  ceReverseKeyColumnName , "`\" />\r\n");
 this.WriteObjects("            <one-to-many ",  ceClassAttr , " />\r\n");
 this.WriteObjects("        </set>\r\n");
-#line 38 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
-} else {                                                                         
 #line 39 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+} else {                                                                         
+#line 40 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 this.WriteObjects("        <!-- ValueTypeProperty isValue -->\r\n");
 this.WriteObjects("        <property name=\"",  propName , "\" ",  typeAttr , "\r\n");
-this.WriteObjects("                  column=\"`",  columnName , "`\" />\r\n");
-#line 42 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+this.WriteObjects("                  ",  length > 0 ? "length=\"" + length + "\" "  : "" , "/>\r\n");
+#line 43 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 }                                                                                
 
         }

@@ -63,8 +63,8 @@ namespace Zetbox.App.Packaging
                 Log.InfoFormat("Starting Publish for Modules {0}", string.Join(", ", ownerModules));
                 Log.Debug("Loading modulelist");
                 var moduleList = PackagingHelper.GetModules(ctx, ownerModules);
-                WriteStartDocument(s, ctx, new Zetbox.App.Base.Module[] 
-                        { 
+                WriteStartDocument(s, ctx, new Zetbox.App.Base.Module[]
+                        {
                             ctx.GetQuery<Zetbox.App.Base.Module>().First(m => m.Name == "ZetboxBase"),
                             ctx.GetQuery<Zetbox.App.Base.Module>().First(m => m.Name == "GUI"),
                         });
@@ -280,13 +280,29 @@ namespace Zetbox.App.Packaging
                 foreach (var rel in cls.GetRelations())
                 {
                     IEnumerable<IDataObject> lst = null;
-                    if (rel.Containment == ContainmentSpecification.AContainsB && rel.A.Type == cls && rel.A.Navigator != null)
+                    if (rel.Containment == ContainmentSpecification.AContainsB && rel.A.Type == cls && rel.A.Navigator != null && rel.A.Navigator.GetIsList())
                     {
                         lst = obj.GetPropertyValue<IEnumerable>(rel.A.Navigator.Name).OfType<IDataObject>();
                     }
-                    else if (rel.Containment == ContainmentSpecification.BContainsA && rel.B.Type == cls && rel.B.Navigator != null)
+                    else if (rel.Containment == ContainmentSpecification.BContainsA && rel.B.Type == cls && rel.B.Navigator != null && rel.B.Navigator.GetIsList())
                     {
                         lst = obj.GetPropertyValue<IEnumerable>(rel.B.Navigator.Name).OfType<IDataObject>();
+                    }
+                    else if (rel.Containment == ContainmentSpecification.AContainsB && rel.A.Type == cls && rel.A.Navigator != null && !rel.A.Navigator.GetIsList())
+                    {
+                        var relObj = obj.GetPropertyValue<IDataObject>(rel.A.Navigator.Name);
+                        if (relObj != null)
+                        {
+                            lst = new List<IDataObject>(new[] { relObj });
+                        }
+                    }
+                    else if (rel.Containment == ContainmentSpecification.BContainsA && rel.B.Type == cls && rel.B.Navigator != null && !rel.B.Navigator.GetIsList())
+                    {
+                        var relObj = obj.GetPropertyValue<IDataObject>(rel.B.Navigator.Name);
+                        if (relObj != null)
+                        {
+                            lst = new List<IDataObject>(new[] { relObj });
+                        }
                     }
 
                     if (lst != null && lst.Any())

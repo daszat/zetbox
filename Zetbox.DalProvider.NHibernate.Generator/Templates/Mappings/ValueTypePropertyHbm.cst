@@ -29,6 +29,7 @@
 <%@ Parameter Name="ceClassAttr" Type="string" %>
 <%@ Parameter Name="ceReverseKeyColumnName" Type="string" %>
 <%@ Parameter Name="listPositionColumnName" Type="string" %>
+<%@ Parameter Name="length" Type="int" %>
 <% if (isList) {                                                                    %>
         <!-- ValueTypeProperty isList -->
         <set name="<%= propName %>" <%= typeAttr %> inverse="true" batch-size="100">
@@ -38,5 +39,5 @@
 <% } else {                                                                         %>
         <!-- ValueTypeProperty isValue -->
         <property name="<%= propName %>" <%= typeAttr %>
-                  column="`<%= columnName %>`" />
+                  <%= length > 0 ? "length=\"" + length + "\" "  : "" %>/>
 <% }                                                                                %>
