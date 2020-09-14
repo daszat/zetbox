@@ -30,6 +30,7 @@ namespace Zetbox.Client.ASPNET
     using System.Threading.Tasks;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.DependencyInjection;
+    using Newtonsoft.Json;
 
     #region ZetboxViewModelBinder
     public interface IZetboxViewModelBinder : IModelBinder
@@ -39,15 +40,13 @@ namespace Zetbox.Client.ASPNET
     public class ZetboxViewModelBinder : ComplexTypeModelBinder, IZetboxViewModelBinder
     {
         IViewModelFactory _vmf;
-        IMVCValidationManager _validation;
         ZetboxContextHttpScope _scope;
 
-        public ZetboxViewModelBinder(IViewModelFactory vmf, IMVCValidationManager validation, ZetboxContextHttpScope scope, 
+        public ZetboxViewModelBinder(IViewModelFactory vmf, ZetboxContextHttpScope scope, 
             IDictionary<ModelMetadata, IModelBinder> propertyBinders, ILoggerFactory loggerFactory)
             : base(propertyBinders, loggerFactory, allowValidatingTopLevelNodes: true)
         {
             _vmf = vmf;
-            _validation = validation;
             _scope = scope;
         }
 
@@ -55,23 +54,6 @@ namespace Zetbox.Client.ASPNET
         {
             return _vmf.CreateViewModel<ViewModel.Factory>(bindingContext.ModelType).Invoke(_scope.Context, null);
         }
-
-        //public Task BindModelAsync(ModelBindingContext bindingContext)
-        //{
-        //    if (bindingContext == null) throw new ArgumentNullException(nameof(bindingContext));
-
-        //    var modelName = bindingContext.ModelName;
-
-        //    var vmdl = _vmf.CreateViewModel<ViewModel.Factory>(bindingContext.ModelType).Invoke(_scope.Context, null);
-
-
-
-
-
-        //    bindingContext.Result = ModelBindingResult.Success(vmdl);
-
-        //    return Task.CompletedTask;
-        //}
     }
 
     public interface IZetboxViewModelBinderProvider : IModelBinderProvider
@@ -97,7 +79,6 @@ namespace Zetbox.Client.ASPNET
 
                 return new ZetboxViewModelBinder(
                     context.Services.GetRequiredService<IViewModelFactory>(),
-                    context.Services.GetRequiredService<IMVCValidationManager>(),
                     context.Services.GetRequiredService<ZetboxContextHttpScope>(),
                     propertyBinders,
                     context.Services.GetRequiredService<ILoggerFactory>());
@@ -116,7 +97,6 @@ namespace Zetbox.Client.ASPNET
     public class LookupDictionaryModelBinder : ILookupDictionaryModelBinder
     {
         private readonly ModelBinderProviderContext binderProviderContext;
-
         public readonly Type TKey;
         public readonly Type TValue;
 
@@ -131,9 +111,7 @@ namespace Zetbox.Client.ASPNET
         {
             List<string> keys = new List<string>();
             keys.AddRange(context.HttpContext.Request.Form.Keys.Cast<string>());
-            // keys.AddRange(((IDictionary<string, object>)context.RouteData.Values).Keys.Cast<string>());
             keys.AddRange(context.HttpContext.Request.Query.Keys.Cast<string>());
-            // keys.AddRange(context.HttpContext.Request.Files.Keys.Cast<string>());
             return keys;
         }
 
@@ -169,7 +147,8 @@ namespace Zetbox.Client.ASPNET
                     var modelName = key.Substring(0, endbracket + 1);
                     var fieldName = key.Substring(endbracket + 2);
 
-                    var provider = new EmptyModelMetadataProvider();
+                    var services = bindingContext.HttpContext.RequestServices;
+                    var provider = services.GetRequiredService<IModelMetadataProvider>();
                     var nestedMetaData = provider.GetMetadataForType(currentValue.GetType());
 
                     using (bindingContext.EnterNestedScope(

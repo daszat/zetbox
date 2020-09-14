@@ -3,6 +3,7 @@
 @using Zetbox.Client.ASPNET
 @using Zetbox.Client.Presentables.ValueViewModels
 
+
 @Html.DropDownListFor(
     m => m.Value,
     Model.PossibleValues
@@ -14,4 +15,4 @@
          }),
     new { @class = "form-control " + ViewData["class"], placeholder = Model.ToolTip }
 )
-@Html.ValidationMessageFor(m => m)
+@Html.ZbValidationMessageFor(m => m)

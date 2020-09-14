@@ -7,5 +7,5 @@
 else
 {
     @Html.TextAreaFor(m => m.FormattedValue, 10, 0, new { @class = "form-control " + ViewData["class"], placeholder = Model.ToolTip })
-    @Html.ValidationMessageFor(m => m)
+    @Html.ZbValidationMessageFor(m => m)
 }

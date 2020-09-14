@@ -15,4 +15,4 @@
     string.Empty,  // Add empty value, PossibleValues don't return a empty value
     new { @class = "form-control " + ViewData["class"], placeholder = Model.ToolTip }
 )
-@Html.ValidationMessageFor(m => m)
+@Html.ZbValidationMessageFor(m => m)

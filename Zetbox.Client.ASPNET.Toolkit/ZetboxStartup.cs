@@ -27,6 +27,8 @@ namespace Zetbox.Client.ASPNET.Toolkit
 
         public virtual void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().AddControllersAsServices();
+
             services.AddControllersWithViews(options =>
             {
                 options.ModelBinderProviders.Insert(0, new ZetboxViewModelBinderProvider());

@@ -119,7 +119,14 @@ namespace Zetbox.Client.ASPNET
             ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
             var vmdl = (BaseValueViewModel)modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
 
-            var type = vmdl.GetType();
+            if (vmdl.ValidationError.HasErrors)
+            {
+                html.ViewData.ModelState.AddModelError(htmlFieldName ?? html.NameFor(expression), string.Join(", ", vmdl.ValidationError.Errors));
+                // Not the best solution
+                html.ViewData.ModelState.AddModelError((htmlFieldName ?? html.NameFor(expression)) + ".Value", string.Join(", ", vmdl.ValidationError.Errors));
+                html.ViewData.ModelState.AddModelError((htmlFieldName ?? html.NameFor(expression)) + ".FormattedValue", string.Join(", ", vmdl.ValidationError.Errors));
+            }
+
             if (vmdl.IsReadOnly)
             {
                 return html.ZbDisplayFor(expression, null, htmlFieldName, additionalViewData);
@@ -136,12 +143,10 @@ namespace Zetbox.Client.ASPNET
             ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
             var vmdl = (DataObjectViewModel)modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
 
-            using (var writer = new System.IO.StringWriter())
+            using (var writer = new StringWriter())
             {
                 foreach (var prop in vmdl.PropertyModels)
                 {
-                    if (prop is ObjectListViewModel || prop is ObjectCollectionViewModel) continue;
-
                     var propName = ((BasePropertyValueModel)prop.ValueModel).Property.Name;
 
                     Expression<Func<TModel, ILabeledViewModel>> lbExpr = Expression.Lambda<Func<TModel, ILabeledViewModel>>(
@@ -167,22 +172,10 @@ namespace Zetbox.Client.ASPNET
         #endregion
 
         #region ValidationMessages
-        [Obsolete("Add them in MVC Editor Templates instead!")]
-        public static IHtmlContent ZbValidationMessageFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string validationMessage = null, object htmlAttributes = null)
-         where TValue : BaseValueViewModel
+        public static IHtmlContent ZbValidationMessageFor<TModel, TValue>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string validationMessage = null, object htmlAttributes = null)
+            where TValue : BaseValueViewModel
         {
-            ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
-            var vmdl = (BaseValueViewModel)modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
-
-            var type = vmdl.GetType();
-            if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
-            {
-                return html.ValidationMessageFor<string>(AppendMember<TModel, TValue, string>(expression, "Value"), validationMessage, htmlAttributes, null);
-            }
-            else
-            {
-                return html.ValidationMessageFor<string>(AppendMember<TModel, TValue, string>(expression, "FormattedValue"), validationMessage, htmlAttributes, null);
-            }
+            return html.ValidationMessageFor(expression, validationMessage, htmlAttributes, null);
         }
 
         public static IHtmlContent StatusMessage(this IHtmlHelper helper, string msg)
@@ -276,6 +269,10 @@ namespace Zetbox.Client.ASPNET
             {
                 return templateName ?? "NullableGuidPropertyViewModel";
             }
+            else if (typeof(MultiLineStringValueViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "MultiLineStringValueViewModel";
+            }
             else if (typeof(StringValueViewModel).IsAssignableFrom(type))
             {
                 return templateName ?? "StringValueViewModel";
@@ -287,6 +284,14 @@ namespace Zetbox.Client.ASPNET
             else if (typeof(ObjectReferenceViewModel).IsAssignableFrom(type))
             {
                 return templateName ?? "ObjectReferenceViewModel";
+            }
+            else if (typeof(ObjectListViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "ObjectListViewModel";
+            }
+            else if (typeof(ObjectCollectionViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "ObjectCollectionViewModel";
             }
             else
             {

@@ -41,15 +41,9 @@ namespace Zetbox.Client.ASPNET
             this.ViewModelFactory = vmf;
         }
 
-        protected void Validate()
-        {
-            ModelState.Clear();
-            _contextScope.Validation.Validate(ModelState);
-        }
-
         protected void Validate(ViewModel vmdl)
         {
-            this.Validate();
+            ModelState.Clear();
             if (vmdl == null) return;
 
             vmdl.Validate();

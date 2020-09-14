@@ -30,14 +30,12 @@ namespace Zetbox.Client.ASPNET
 
     public class ZetboxContextHttpScope
     {
-        public ZetboxContextHttpScope(IZetboxContext ctx, IMVCValidationManager validation)
+        public ZetboxContextHttpScope(IZetboxContext ctx)
         {
             Context = ctx;
-            Validation = validation;
         }
 
         public IZetboxContext Context { get; private set; }
-        public IMVCValidationManager Validation { get; private set; }
     }
 
     [Description("The ASP.NET MVC Client Module. It replaces the Client Module.")]
@@ -133,7 +131,7 @@ namespace Zetbox.Client.ASPNET
                 .SingleInstance();
 
             moduleBuilder
-                .Register<ZetboxContextHttpScope>(c => new ZetboxContextHttpScope(c.Resolve<IZetboxContext>(), c.Resolve<IMVCValidationManager>()))
+                .Register<ZetboxContextHttpScope>(c => new ZetboxContextHttpScope(c.Resolve<IZetboxContext>()))
                 .InstancePerLifetimeScope();
 
             moduleBuilder
@@ -146,12 +144,6 @@ namespace Zetbox.Client.ASPNET
                 .RegisterType<Zetbox.Client.GUI.DialogCreator>()
                 .AsSelf()
                 .InstancePerDependency();
-
-            moduleBuilder
-                .RegisterType<MVCValidationManager>()
-                .As<IValidationManager>()
-                .As<IMVCValidationManager>()
-                .InstancePerLifetimeScope();
 
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
             moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client", true)));
