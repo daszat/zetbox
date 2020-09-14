@@ -36,32 +36,16 @@
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Autofac" Version="4.9.2" />
-    <Reference Include="Zetbox.API">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
-      <Private>False</Private>
-    </Reference>  
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
+    <ProjectReference Include="..\Zetbox.DalProvider.Base\Zetbox.DalProvider.Base.csproj" />
+    <ProjectReference Include="..\Zetbox.DalProvider.Memory\Zetbox.DalProvider.Memory.csproj" />
     <!-- local reference to newly generated code -->
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <Reference Include="Zetbox.DalProvider.Base">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Zetbox.API.Common">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Zetbox.DalProvider.Memory">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Memory.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Zetbox.Objects.snk" />

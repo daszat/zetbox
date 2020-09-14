@@ -37,11 +37,7 @@
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Autofac" Version="4.9.2" />
-    <Reference Include="Zetbox.API">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
-      <Private>False</Private>
-    </Reference>  
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Zetbox.Objects.snk" />

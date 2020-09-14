@@ -3188,15 +3188,6 @@
         <property name="Number" 
                   column="`PhoneNumberMobile_Number`" />
         </component>
-        <!-- CompoundObjectProperty isValue -->
-        <component name="PhoneNumberOffice" class="Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl,Zetbox.Objects.NHibernateImpl">
-        <!-- ValueTypeProperty isValue -->
-        <property name="AreaCode" 
-                  column="`PhoneNumberOffice_AreaCode`" />
-        <!-- ValueTypeProperty isValue -->
-        <property name="Number" 
-                  column="`PhoneNumberOffice_Number`" />
-        </component>
         <!-- CompoundObjectProperty IsList -->
         <set name="PhoneNumbersOther" inverse="true" batch-size="100">
             <key column="`fk_TestCustomObject`" />
