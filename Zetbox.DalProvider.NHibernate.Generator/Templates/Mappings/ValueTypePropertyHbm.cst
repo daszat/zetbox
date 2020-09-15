@@ -39,5 +39,6 @@
 <% } else {                                                                         %>
         <!-- ValueTypeProperty isValue -->
         <property name="<%= propName %>" <%= typeAttr %>
+                  column="`<%= columnName %>`"
                   <%= length > 0 ? "length=\"" + length + "\" "  : "" %>/>
 <% }                                                                                %>

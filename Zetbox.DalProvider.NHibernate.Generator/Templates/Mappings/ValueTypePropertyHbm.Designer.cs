@@ -56,8 +56,9 @@ this.WriteObjects("        </set>\r\n");
 #line 40 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 this.WriteObjects("        <!-- ValueTypeProperty isValue -->\r\n");
 this.WriteObjects("        <property name=\"",  propName , "\" ",  typeAttr , "\r\n");
+this.WriteObjects("                  column=\"`",  columnName , "`\"\r\n");
 this.WriteObjects("                  ",  length > 0 ? "length=\"" + length + "\" "  : "" , "/>\r\n");
-#line 43 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+#line 44 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 }                                                                                
 
         }
