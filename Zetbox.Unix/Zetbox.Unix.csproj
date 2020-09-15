@@ -32,7 +32,7 @@
     <DocumentationFile>..\bin\Debug\Server\Zetbox.Unix.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.9.2" />
+    <PackageReference Include="Autofac" Version="5.2.0" />
     <PackageReference Include="GitVersionTask" Version="5.3.7">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

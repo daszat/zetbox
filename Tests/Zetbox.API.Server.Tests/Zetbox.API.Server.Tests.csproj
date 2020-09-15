@@ -41,8 +41,8 @@
     <OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.9.2" />
-    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Zetbox.API.ServerTests.nunit">

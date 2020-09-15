@@ -39,12 +39,12 @@
     <PostBuildEvent>copy $(SolutionDir)\bin\Debug\Client\Generated\*.* $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.9.2" />
-    <PackageReference Include="Castle.Core" Version="4.3.1" />
-    <PackageReference Include="Moq" Version="4.10.1" />
-    <PackageReference Include="NUnit" Version="3.11.0" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.6.0" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.2" />
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="Castle.Core" Version="4.4.1" />
+    <PackageReference Include="Moq" Version="4.14.5" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.7.1" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj" />

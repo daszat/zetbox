@@ -24,8 +24,8 @@
     <OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.9.2" />
-    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
