@@ -100,7 +100,7 @@
 <% ValueTypePropertyHbm.Call(Host, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix, false); %>
 <% if (prop.HasPersistentOrder) { %>
         <property name="Value_pos"
-                  column="`Index`" />
+                  column="`<%= prop.Name + "Index" %>`" />
 <% } %>
 <% if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { %>
         <!-- export guid is not needed since serialization is always "in-place"
@@ -138,7 +138,7 @@
 <% CompoundObjectPropertyHbm.Call(Host, ctx, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix); %>
 <% if (prop.HasPersistentOrder) { %>
         <property name="Value_pos"
-                  column="`Index`" />
+                  column="`<%= prop.Name + "Index" %>`" />
 <% } %>
 <% if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { %>
         <!-- export guid is not needed since serialization is always "in-place"

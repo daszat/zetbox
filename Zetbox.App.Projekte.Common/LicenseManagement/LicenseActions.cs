@@ -59,7 +59,7 @@ namespace Zetbox.App.LicenseManagement
         public static void IsValid(License obj, MethodReturnEventArgs<bool> e)
         {
             var today = DateTime.Today;
-            e.Result = obj.ValidFrom >= today && obj.ValidThru <= today;
+            e.Result = obj.ValidFrom <= today && today <= obj.ValidThru;
         }
 
         private static byte[] ComputeHash(License obj)
