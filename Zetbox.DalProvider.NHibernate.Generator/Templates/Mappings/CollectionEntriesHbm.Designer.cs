@@ -127,7 +127,7 @@ ValueTypePropertyHbm.Call(Host, String.Empty, prop, "Value", prop.Name, true, Im
 if (prop.HasPersistentOrder) { 
 #line 102 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("        <property name=\"Value_pos\"\r\n");
-this.WriteObjects("                  column=\"`Index`\" />\r\n");
+this.WriteObjects("                  column=\"`",  prop.Name + "Index" , "`\" />\r\n");
 #line 104 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 } 
 #line 105 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
@@ -178,7 +178,7 @@ CompoundObjectPropertyHbm.Call(Host, ctx, String.Empty, prop, "Value", prop.Name
 if (prop.HasPersistentOrder) { 
 #line 140 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("        <property name=\"Value_pos\"\r\n");
-this.WriteObjects("                  column=\"`Index`\" />\r\n");
+this.WriteObjects("                  column=\"`",  prop.Name + "Index" , "`\" />\r\n");
 #line 142 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 } 
 #line 143 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
