@@ -157,7 +157,6 @@
     <Compile Include="ZetboxBase\ClientReadOnlyConstraint.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\CLRObjectParameter.NHibernate.Designer.cs" />
     <Compile Include="Calendar\CommonWorkScheduleRule.NHibernate.Designer.cs" />
-    <Compile Include="TestModule\Company.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\CompoundObject.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\CompoundObjectParameter.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\CompoundObjectProperty.NHibernate.Designer.cs" />
@@ -285,6 +284,7 @@
     <Compile Include="Calendar\SyncProvider.NHibernate.Designer.cs" />
     <Compile Include="GUI\TagCache.NHibernate.Designer.cs" />
     <Compile Include="Projekte\Task.NHibernate.Designer.cs" />
+    <Compile Include="TestModule\TestCompany.NHibernate.Designer.cs" />
     <Compile Include="TestModule\TestCustomObject.NHibernate.Designer.cs" />
     <Compile Include="TestModule\TestDecimal.NHibernate.Designer.cs" />
     <Compile Include="TestModule\TestObjClass.NHibernate.Designer.cs" />

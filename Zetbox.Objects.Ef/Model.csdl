@@ -25,7 +25,6 @@
       <End Role="CalendarBook" EntitySet="CalendarBookEfImpl" />
       <End Role="CalendarBook_Rights" EntitySet="CalendarBook_Rights" />
     </AssociationSet>
-    <EntitySet Name="CompanyEfImpl" EntityType="Model.CompanyEfImpl" />
     <EntitySet Name="ConstraintEfImpl" EntityType="Model.ConstraintEfImpl" />
     <EntitySet Name="ControlKindEfImpl" EntityType="Model.ControlKindEfImpl" />
     <EntitySet Name="CurrentSchemaEfImpl" EntityType="Model.CurrentSchemaEfImpl" />
@@ -106,6 +105,7 @@
       <End Role="Task" EntitySet="TaskEfImpl" />
       <End Role="Task_Rights" EntitySet="Task_Rights" />
     </AssociationSet>
+    <EntitySet Name="TestCompanyEfImpl" EntityType="Model.TestCompanyEfImpl" />
     <EntitySet Name="TestCustomObjectEfImpl" EntityType="Model.TestCustomObjectEfImpl" />
     <EntitySet Name="TestDecimalEfImpl" EntityType="Model.TestDecimalEfImpl" />
     <EntitySet Name="TestObjClassEfImpl" EntityType="Model.TestObjClassEfImpl" />
@@ -296,6 +296,11 @@
     <AssociationSet Name="FK_Projekt_value_AuditJournal" Association="Model.FK_Projekt_value_AuditJournal" >
       <End Role="Projekt" EntitySet="ProjektEfImpl" />
       <End Role="CollectionEntry" EntitySet="Projekt_AuditJournal_CollectionEntryEfImpl" />
+    </AssociationSet>
+    <EntitySet Name="TestCompany_Phones_CollectionEntryEfImpl" EntityType="Model.TestCompany_Phones_CollectionEntryEfImpl" />
+    <AssociationSet Name="FK_TestCompany_value_Phones" Association="Model.FK_TestCompany_value_Phones" >
+      <End Role="TestCompany" EntitySet="TestCompanyEfImpl" />
+      <End Role="CollectionEntry" EntitySet="TestCompany_Phones_CollectionEntryEfImpl" />
     </AssociationSet>
     <EntitySet Name="TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl" EntityType="Model.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl" />
     <AssociationSet Name="FK_TestCustomObject_value_PhoneNumbersOther" Association="Model.FK_TestCustomObject_value_PhoneNumbersOther" >
@@ -1400,13 +1405,6 @@
 	  </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="CompanyEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="2147483647"  />
-  </EntityType>
   <EntityType Name="ConstraintEfImpl" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
@@ -2797,6 +2795,17 @@
 	  </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="TestCompanyEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="2147483647"  />
+    <NavigationProperty Name="PhonesImpl"
+                        Relationship="Model.FK_TestCompany_value_Phones"
+                        FromRole="TestCompany"
+                        ToRole="CollectionEntry" />
+  </EntityType>
   <EntityType Name="TestCustomObjectEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -4247,6 +4256,32 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.Projekt_AuditJournal_CollectionEntryEfImpl" 
+         Multiplicity="*" />
+  </Association>
+  <!-- TestCompany.Phones -->
+  <EntityType Name="TestCompany_Phones_CollectionEntryEfImpl" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    
+    <!-- A -->
+    <NavigationProperty Name="ParentImpl"
+                        Relationship="Model.FK_TestCompany_value_Phones"
+                        FromRole="CollectionEntry"
+                        ToRole="TestCompany" />
+    <!-- B -->
+    <Property Name="ValueImpl"
+              Type="Model.TestPhoneCompoundObjectEfImpl"
+              Nullable="false" />
+    <Property Name="Index" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_TestCompany_value_Phones" >
+    <End Role="TestCompany"
+         Type="Model.TestCompanyEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.TestCompany_Phones_CollectionEntryEfImpl" 
          Multiplicity="*" />
   </Association>
   <!-- TestCustomObject.PhoneNumbersOther -->

@@ -361,7 +361,7 @@
         if (prop.HasPersistentOrder)
         {
 %>
-    <Property Name="B<%= Zetbox.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
+    <Property Name="Index" Type="Int32" Nullable="false" />
 <%
         }
 %>

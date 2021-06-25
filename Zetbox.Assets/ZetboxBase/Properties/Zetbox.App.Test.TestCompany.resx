@@ -117,139 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Änderungen" xml:space="preserve">
-    <value>Änderungen</value>
+  <data name="Name_label" xml:space="preserve">
+    <value>Name</value>
   </data>
-  <data name="Check" xml:space="preserve">
-    <value>Check</value>
+  <data name="Name_description" xml:space="preserve">
+    <value>Company name</value>
   </data>
-  <data name="Children" xml:space="preserve">
-    <value>Children</value>
+  <data name="Phones_label" xml:space="preserve">
+    <value>Phones</value>
   </data>
-  <data name="CodeTemplate" xml:space="preserve">
-    <value>CodeTemplate</value>
-  </data>
-  <data name="Columns" xml:space="preserve">
-    <value>Columns</value>
-  </data>
-  <data name="CompoundObjects" xml:space="preserve">
-    <value>CompoundObjects</value>
-  </data>
-  <data name="Configuration" xml:space="preserve">
-    <value>Configuration</value>
-  </data>
-  <data name="Constraint" xml:space="preserve">
-    <value>Constraint</value>
-  </data>
-  <data name="DataModel" xml:space="preserve">
-    <value>DataModel</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="Enumeration" xml:space="preserve">
-    <value>Enumeration</value>
-  </data>
-  <data name="EnumMapping" xml:space="preserve">
-    <value>EnumMapping</value>
-  </data>
-  <data name="Filter" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="Group" xml:space="preserve">
-    <value>Group</value>
-  </data>
-  <data name="Groups" xml:space="preserve">
-    <value>Groups</value>
-  </data>
-  <data name="GUI" xml:space="preserve">
-    <value>GUI</value>
-  </data>
-  <data name="Hidden" xml:space="preserve">
-    <value>Hidden</value>
-  </data>
-  <data name="Hierarchie" xml:space="preserve">
-    <value>Hierarchie</value>
-  </data>
-  <data name="Hierarchy" xml:space="preserve">
-    <value>Hierarchy</value>
-  </data>
-  <data name="Identities" xml:space="preserve">
-    <value>Identities</value>
-  </data>
-  <data name="Internal" xml:space="preserve">
-    <value>Internal</value>
-  </data>
-  <data name="List" xml:space="preserve">
-    <value>List</value>
-  </data>
-  <data name="Lists" xml:space="preserve">
-    <value>Lists</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="Main" xml:space="preserve">
-    <value>Main</value>
-  </data>
-  <data name="Meta" xml:space="preserve">
-    <value>Meta</value>
-  </data>
-  <data name="MetaData" xml:space="preserve">
-    <value>MetaData</value>
-  </data>
-  <data name="Methods" xml:space="preserve">
-    <value>Methods</value>
-  </data>
-  <data name="Migration" xml:space="preserve">
-    <value>Migration</value>
-  </data>
-  <data name="Objects" xml:space="preserve">
-    <value>Objects</value>
-  </data>
-  <data name="Physical" xml:space="preserve">
-    <value>Physical</value>
-  </data>
-  <data name="Properties" xml:space="preserve">
-    <value>Properties</value>
-  </data>
-  <data name="Recurrence" xml:space="preserve">
-    <value>Recurrence</value>
-  </data>
-  <data name="RelationChain" xml:space="preserve">
-    <value>RelationChain</value>
-  </data>
-  <data name="Revisions" xml:space="preserve">
-    <value>Revisions</value>
-  </data>
-  <data name="Rules" xml:space="preserve">
-    <value>Rules</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="Security" xml:space="preserve">
-    <value>Security</value>
-  </data>
-  <data name="Server" xml:space="preserve">
-    <value>Server</value>
-  </data>
-  <data name="Span" xml:space="preserve">
-    <value>Span</value>
-  </data>
-  <data name="SuggestedRelation" xml:space="preserve">
-    <value>SuggestedRelation</value>
-  </data>
-  <data name="Summary" xml:space="preserve">
-    <value>Summary</value>
-  </data>
-  <data name="Summay" xml:space="preserve">
-    <value>Summay</value>
-  </data>
-  <data name="Tables" xml:space="preserve">
-    <value>Tables</value>
-  </data>
-  <data name="Tasks" xml:space="preserve">
-    <value>Tasks</value>
+  <data name="Phones_description" xml:space="preserve">
+    <value />
   </data>
 </root>

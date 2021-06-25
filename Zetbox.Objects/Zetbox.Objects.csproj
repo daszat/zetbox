@@ -116,7 +116,6 @@
     <Compile Include="ZetboxBase\ClientReadOnlyConstraint.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\CLRObjectParameter.Interface.Designer.cs" />
     <Compile Include="Calendar\CommonWorkScheduleRule.Interface.Designer.cs" />
-    <Compile Include="TestModule\Company.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\CompoundObject.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\CompoundObjectParameter.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\CompoundObjectProperty.Interface.Designer.cs" />
@@ -244,6 +243,7 @@
     <Compile Include="Calendar\SyncProvider.Interface.Designer.cs" />
     <Compile Include="GUI\TagCache.Interface.Designer.cs" />
     <Compile Include="Projekte\Task.Interface.Designer.cs" />
+    <Compile Include="TestModule\TestCompany.Interface.Designer.cs" />
     <Compile Include="TestModule\TestCustomObject.Interface.Designer.cs" />
     <Compile Include="TestModule\TestDecimal.Interface.Designer.cs" />
     <Compile Include="TestModule\TestObjClass.Interface.Designer.cs" />

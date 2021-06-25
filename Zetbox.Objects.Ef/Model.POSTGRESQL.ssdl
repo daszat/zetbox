@@ -29,7 +29,6 @@
       <End Role="CalendarBook" EntitySet="CalendarBook" />
       <End Role="CalendarBook_Rights" EntitySet="CalendarBook_Rights" />
     </AssociationSet>
-    <EntitySet Name="Company" EntityType="Model.Store.Company" Schema="test" Table="Companies"/>
     <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Schema="base" Table="Constraints"/>
     <EntitySet Name="ControlKind" EntityType="Model.Store.ControlKind" Schema="gui" Table="ControlKinds"/>
     <EntitySet Name="CurrentSchema" EntityType="Model.Store.CurrentSchema" Schema="base" Table="CurrentSchema"/>
@@ -110,6 +109,7 @@
       <End Role="Task" EntitySet="Task" />
       <End Role="Task_Rights" EntitySet="Task_Rights" />
     </AssociationSet>
+    <EntitySet Name="TestCompany" EntityType="Model.Store.TestCompany" Schema="test" Table="TestCompanies"/>
     <EntitySet Name="TestCustomObject" EntityType="Model.Store.TestCustomObject" Schema="test" Table="TestCustomObjects"/>
     <EntitySet Name="TestDecimal" EntityType="Model.Store.TestDecimal" Schema="test" Table="TestDecimals"/>
     <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Schema="test" Table="TestObjClasses"/>
@@ -1304,6 +1304,12 @@
       <End Role="CollectionEntry" EntitySet="Projekt_AuditJournal_CollectionEntry" />
     </AssociationSet>
     
+    <EntitySet Name="TestCompany_Phones_CollectionEntry" EntityType="Model.Store.TestCompany_Phones_CollectionEntry" Schema="test" Table="TestCompanies_PhonesCollection" />
+    <AssociationSet Name="FK_TestCompany_value_Phones" Association="Model.Store.FK_TestCompany_value_Phones" >
+      <End Role="TestCompany" EntitySet="TestCompany" />
+      <End Role="CollectionEntry" EntitySet="TestCompany_Phones_CollectionEntry" />
+    </AssociationSet>
+    
     <EntitySet Name="TestCustomObject_PhoneNumbersOther_CollectionEntry" EntityType="Model.Store.TestCustomObject_PhoneNumbersOther_CollectionEntry" Schema="test" Table="TestCustomObjects_PhoneNumbersOtherCollection" />
     <AssociationSet Name="FK_TestCustomObject_value_PhoneNumbersOther" Association="Model.Store.FK_TestCustomObject_value_PhoneNumbersOther" >
       <End Role="TestCustomObject" EntitySet="TestCustomObject" />
@@ -1537,14 +1543,6 @@
         </Dependent>
       </ReferentialConstraint>
     </Association>
-	
-  <EntityType Name="Company">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="varchar" Nullable="false" />
-  </EntityType>
 	
   <EntityType Name="CompoundObject">
     <Key>
@@ -2695,6 +2693,14 @@
         </Dependent>
       </ReferentialConstraint>
     </Association>
+	
+  <EntityType Name="TestCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" />
+  </EntityType>
 	
   <EntityType Name="TestCustomObject">
     <Key>
@@ -6519,6 +6525,32 @@
         </Principal>
         <Dependent Role="CollectionEntry">
           <PropertyRef Name="fk_Projekt" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
+
+    <EntityType Name="TestCompany_Phones_CollectionEntry" >
+      <Key>
+        <PropertyRef Name="ID" />
+      </Key>
+      <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+      <Property Name="fk_TestCompany" Type="int4" Nullable="true" />
+    <Property Name="Phones_AreaCode" Type="varchar" MaxLength="50" Nullable="true" />
+    <Property Name="Phones_Number" Type="varchar" MaxLength="50" Nullable="true" />
+    <Property Name="PhonesIndex" Type="int4" Nullable="true" />
+    </EntityType>
+
+    <Association Name="FK_TestCompany_value_Phones">
+      <End Role="TestCompany" Type="Model.Store.TestCompany" Multiplicity="0..1">
+        <OnDelete Action="Cascade" />
+      </End>
+      <End Role="CollectionEntry" Type="Model.Store.TestCompany_Phones_CollectionEntry" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="TestCompany">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="CollectionEntry">
+          <PropertyRef Name="fk_TestCompany" />
         </Dependent>
       </ReferentialConstraint>
     </Association>

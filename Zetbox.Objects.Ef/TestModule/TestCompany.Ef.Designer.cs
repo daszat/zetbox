@@ -22,20 +22,20 @@ namespace Zetbox.App.Test
     /// <summary>
     /// Describes a Company
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="CompanyEfImpl")]
-    [System.Diagnostics.DebuggerDisplay("Company")]
-    public class CompanyEfImpl : BaseServerDataObject_EntityFramework, Company
+    [EdmEntityType(NamespaceName="Model", Name="TestCompanyEfImpl")]
+    [System.Diagnostics.DebuggerDisplay("TestCompany")]
+    public class TestCompanyEfImpl : BaseServerDataObject_EntityFramework, TestCompany
     {
         private static readonly Guid _objectClassID = new Guid("352a4ade-1dca-4d28-9630-66bbcc1622ea");
         public override Guid ObjectClassID { get { return _objectClassID; } }
 
         [Obsolete]
-        public CompanyEfImpl()
+        public TestCompanyEfImpl()
             : base(null)
         {
         }
 
-        public CompanyEfImpl(Func<IFrozenContext> lazyCtx)
+        public TestCompanyEfImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -103,23 +103,82 @@ namespace Zetbox.App.Test
             }
         }
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Test.Company, string> OnName_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Test.Company, string> OnName_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Test.Company, string> OnName_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Test.TestCompany, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.TestCompany, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.TestCompany, string> OnName_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Test.Company> OnName_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Test.TestCompany> OnName_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // CompoundObject list property
+        // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public IList<Zetbox.App.Test.TestPhoneCompoundObject> Phones
+        {
+            get
+            {
+                if (_Phones == null)
+                {
+                    _Phones = new EfValueListWrapper<TestCompany, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestCompany_Phones_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryEfImpl>>(
+                        this.Context,
+                        this,
+                        null, // see GetPhonesImplCollection()
+                        PhonesImpl);
+                }
+                return _Phones;
+            }
+        }
+
+        [EdmRelationshipNavigationProperty("Model", "FK_TestCompany_value_Phones", "CollectionEntry")]
+        public EntityCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryEfImpl> PhonesImpl
+        {
+            get
+            {
+                return GetPhonesImplCollection();
+            }
+        }
+
+        internal EntityCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryEfImpl> GetPhonesImplCollection()
+        {
+            if (_PhonesImplEntityCollection == null)
+            {
+                _PhonesImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryEfImpl>(
+                        "Model.FK_TestCompany_value_Phones",
+                        "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_PhonesImplEntityCollection.IsLoaded)
+                {
+                    _PhonesImplEntityCollection.Load();
+                }
+                _PhonesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Phones", null, null); if (OnPhones_PostSetter != null && IsAttached) OnPhones_PostSetter(this); };
+            }
+            return _PhonesImplEntityCollection;
+        }
+        private EntityCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryEfImpl> _PhonesImplEntityCollection;
+        private EfValueListWrapper<TestCompany, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestCompany_Phones_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryEfImpl>> _Phones;
+public static event PropertyListChangedHandler<Zetbox.App.Test.TestCompany> OnPhones_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.TestCompany> OnPhones_IsValid;
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Company);
+            return typeof(TestCompany);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Company)obj;
-            var otherImpl = (CompanyEfImpl)obj;
-            var me = (Company)this;
+            var other = (TestCompany)obj;
+            var otherImpl = (TestCompanyEfImpl)obj;
+            var me = (TestCompany)this;
 
             me.Name = other.Name;
         }
@@ -176,7 +235,7 @@ namespace Zetbox.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<Company, string>(
+                    new PropertyDescriptorEfImpl<TestCompany, string>(
                         lazyCtx,
                         new Guid("4a038e35-fffb-4ba7-8009-1954c317a799"),
                         "Name",
@@ -184,6 +243,15 @@ namespace Zetbox.App.Test
                         obj => obj.Name,
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorEfImpl<TestCompany, IList<Zetbox.App.Test.TestPhoneCompoundObject>>(
+                        lazyCtx,
+                        new Guid("477dd46f-24d1-4db8-934b-131adea34f13"),
+                        "Phones",
+                        null,
+                        obj => obj.Phones,
+                        null, // lists are read-only properties
+                        obj => OnPhones_IsValid), 
                     // position columns
                 };
             }
@@ -199,66 +267,67 @@ namespace Zetbox.App.Test
         #region Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_Company")]
+        [EventBasedMethod("OnToString_TestCompany")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_Company != null)
+            if (OnToString_TestCompany != null)
             {
-                OnToString_Company(this, e);
+                OnToString_TestCompany(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<Company> OnToString_Company;
+        public static event ToStringHandler<TestCompany> OnToString_TestCompany;
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnObjectIsValid_Company")]
+        [EventBasedMethod("OnObjectIsValid_TestCompany")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
             e.Errors.AddRange(b.Errors);
-            if (OnObjectIsValid_Company != null)
+            if (OnObjectIsValid_TestCompany != null)
             {
-                OnObjectIsValid_Company(this, e);
+                OnObjectIsValid_TestCompany(this, e);
             }
             return new ObjectIsValidResult(e.IsValid, e.Errors);
         }
-        public static event ObjectIsValidHandler<Company> OnObjectIsValid_Company;
+        public static event ObjectIsValidHandler<TestCompany> OnObjectIsValid_TestCompany;
 
-        [EventBasedMethod("OnNotifyPreSave_Company")]
+        [EventBasedMethod("OnNotifyPreSave_TestCompany")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnNotifyPreSave_Company != null) OnNotifyPreSave_Company(this);
+            if (OnNotifyPreSave_TestCompany != null) OnNotifyPreSave_TestCompany(this);
         }
-        public static event ObjectEventHandler<Company> OnNotifyPreSave_Company;
+        public static event ObjectEventHandler<TestCompany> OnNotifyPreSave_TestCompany;
 
-        [EventBasedMethod("OnNotifyPostSave_Company")]
+        [EventBasedMethod("OnNotifyPostSave_TestCompany")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnNotifyPostSave_Company != null) OnNotifyPostSave_Company(this);
+            if (OnNotifyPostSave_TestCompany != null) OnNotifyPostSave_TestCompany(this);
         }
-        public static event ObjectEventHandler<Company> OnNotifyPostSave_Company;
+        public static event ObjectEventHandler<TestCompany> OnNotifyPostSave_TestCompany;
 
-        [EventBasedMethod("OnNotifyCreated_Company")]
+        [EventBasedMethod("OnNotifyCreated_TestCompany")]
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("Name");
             base.NotifyCreated();
-            if (OnNotifyCreated_Company != null) OnNotifyCreated_Company(this);
+            if (OnNotifyCreated_TestCompany != null) OnNotifyCreated_TestCompany(this);
         }
-        public static event ObjectEventHandler<Company> OnNotifyCreated_Company;
+        public static event ObjectEventHandler<TestCompany> OnNotifyCreated_TestCompany;
 
-        [EventBasedMethod("OnNotifyDeleting_Company")]
+        [EventBasedMethod("OnNotifyDeleting_TestCompany")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnNotifyDeleting_Company != null) OnNotifyDeleting_Company(this);
+            if (OnNotifyDeleting_TestCompany != null) OnNotifyDeleting_TestCompany(this);
+            Phones.Clear();
         }
-        public static event ObjectEventHandler<Company> OnNotifyDeleting_Company;
+        public static event ObjectEventHandler<TestCompany> OnNotifyDeleting_TestCompany;
 
         #endregion // Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
@@ -303,6 +372,7 @@ namespace Zetbox.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Name);
+            binStream.WriteCollectionEntries(this.PhonesImpl);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

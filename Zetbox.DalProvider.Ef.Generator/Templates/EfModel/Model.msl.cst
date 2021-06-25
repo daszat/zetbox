@@ -243,7 +243,7 @@
 		if (prop.HasPersistentOrder)
 		{
 %>
-          <ScalarProperty Name="Value<%= Zetbox.API.Helper.PositionSuffix %>" ColumnName="BIndex" />
+          <ScalarProperty Name="Index" ColumnName="<%= prop.Name %>Index" />
 <%
 		}
 %>

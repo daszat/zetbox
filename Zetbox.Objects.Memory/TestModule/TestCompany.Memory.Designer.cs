@@ -14,66 +14,55 @@ namespace Zetbox.App.Test
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Utils;
     using Zetbox.DalProvider.Base;
-    using Zetbox.DalProvider.NHibernate;
+    using Zetbox.DalProvider.Memory;
 
     /// <summary>
     /// Describes a Company
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("Company")]
-    public class CompanyNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Company
+    [System.Diagnostics.DebuggerDisplay("TestCompany")]
+    public class TestCompanyMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, TestCompany
     {
         private static readonly Guid _objectClassID = new Guid("352a4ade-1dca-4d28-9630-66bbcc1622ea");
         public override Guid ObjectClassID { get { return _objectClassID; } }
 
-        public CompanyNHibernateImpl()
-            : this(null)
+        [Obsolete]
+        public TestCompanyMemoryImpl()
+            : base(null)
         {
         }
 
-        /// <summary>Create a new unattached instance</summary>
-        public CompanyNHibernateImpl(Func<IFrozenContext> lazyCtx)
-            : this(lazyCtx, new CompanyProxy())
+        public TestCompanyMemoryImpl(Func<IFrozenContext> lazyCtx)
+            : base(lazyCtx)
         {
         }
-
-        /// <summary>Create a instance, wrapping the specified proxy</summary>
-        public CompanyNHibernateImpl(Func<IFrozenContext> lazyCtx, CompanyProxy proxy)
-            : base(lazyCtx) // do not pass proxy to base data object
-        {
-            this.Proxy = proxy;
-        }
-
-        /// <summary>the NHibernate proxy of the represented entity</summary>
-        internal readonly CompanyProxy Proxy;
 
         /// <summary>
         /// Company name
         /// </summary>
-
-        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
         public string Name
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.Name;
+                var __result = _Name;
                 if (OnName_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Name = __e.Result;
                 }
                 return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (Proxy.Name != value)
+                if (_Name != value)
                 {
-                    var __oldValue = Proxy.Name;
+                    var __oldValue = _Name;
                     var __newValue = value;
                     if (OnName_PreSetter != null && IsAttached)
                     {
@@ -82,7 +71,7 @@ namespace Zetbox.App.Test
                         __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
-                    Proxy.Name = __newValue;
+                    _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
 
@@ -98,27 +87,56 @@ namespace Zetbox.App.Test
                 }
             }
         }
+        private string _Name;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Test.TestCompany, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.TestCompany, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.TestCompany, string> OnName_PostSetter;
 
-        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-		public static event PropertyGetterHandler<Zetbox.App.Test.Company, string> OnName_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Test.Company, string> OnName_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Test.Company, string> OnName_PostSetter;
+        public static event PropertyIsValidHandler<Zetbox.App.Test.TestCompany> OnName_IsValid;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Test.Company> OnName_IsValid;
+        /// <summary>
+        /// 
+        /// </summary>
+        // CompoundObject list property
+		// Zetbox.Generator.Templates.Properties.ValueCollectionProperty
+		public IList<Zetbox.App.Test.TestPhoneCompoundObject> Phones
+		{
+			get
+			{
+				if (_Phones == null)
+				{
+				    _Phones 
+				        = new ClientValueListWrapper<TestCompany, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestCompany_Phones_CollectionEntry, Zetbox.App.Test.TestCompany_Phones_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryMemoryImpl>>(
+							this.Context,
+				            this, 
+				            () => { this.NotifyPropertyChanged("Phones", null, null); if(OnPhones_PostSetter != null && IsAttached) OnPhones_PostSetter(this); },
+				            _PhonesCollection);
+				}
+				return _Phones;
+			}
+		}
+
+		private ClientValueListWrapper<TestCompany, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestCompany_Phones_CollectionEntry, Zetbox.App.Test.TestCompany_Phones_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryMemoryImpl>> _Phones;
+		private ObservableCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryMemoryImpl> _PhonesCollection = new ObservableCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryMemoryImpl>();
+public static event PropertyListChangedHandler<Zetbox.App.Test.TestCompany> OnPhones_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.TestCompany> OnPhones_IsValid;
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Company);
+            return typeof(TestCompany);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Company)obj;
-            var otherImpl = (CompanyNHibernateImpl)obj;
-            var me = (Company)this;
+            var other = (TestCompany)obj;
+            var otherImpl = (TestCompanyMemoryImpl)obj;
+            var me = (TestCompany)this;
 
             me.Name = other.Name;
+            SynchronizeLists(this._PhonesCollection, otherImpl._PhonesCollection);
         }
         public override void SetNew()
         {
@@ -158,6 +176,7 @@ namespace Zetbox.App.Test
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -173,7 +192,7 @@ namespace Zetbox.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<Company, string>(
+                    new PropertyDescriptorMemoryImpl<TestCompany, string>(
                         lazyCtx,
                         new Guid("4a038e35-fffb-4ba7-8009-1954c317a799"),
                         "Name",
@@ -181,6 +200,15 @@ namespace Zetbox.App.Test
                         obj => obj.Name,
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorMemoryImpl<TestCompany, IList<Zetbox.App.Test.TestPhoneCompoundObject>>(
+                        lazyCtx,
+                        new Guid("477dd46f-24d1-4db8-934b-131adea34f13"),
+                        "Phones",
+                        null,
+                        obj => obj.Phones,
+                        null, // lists are read-only properties
+                        obj => OnPhones_IsValid), 
                     // position columns
                 };
             }
@@ -193,96 +221,73 @@ namespace Zetbox.App.Test
             props.AddRange(_properties);
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        #region Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
+        #region Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_Company")]
+        [EventBasedMethod("OnToString_TestCompany")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_Company != null)
+            if (OnToString_TestCompany != null)
             {
-                OnToString_Company(this, e);
+                OnToString_TestCompany(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<Company> OnToString_Company;
+        public static event ToStringHandler<TestCompany> OnToString_TestCompany;
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnObjectIsValid_Company")]
+        [EventBasedMethod("OnObjectIsValid_TestCompany")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
             e.Errors.AddRange(b.Errors);
-            if (OnObjectIsValid_Company != null)
+            if (OnObjectIsValid_TestCompany != null)
             {
-                OnObjectIsValid_Company(this, e);
+                OnObjectIsValid_TestCompany(this, e);
             }
             return new ObjectIsValidResult(e.IsValid, e.Errors);
         }
-        public static event ObjectIsValidHandler<Company> OnObjectIsValid_Company;
+        public static event ObjectIsValidHandler<TestCompany> OnObjectIsValid_TestCompany;
 
-        [EventBasedMethod("OnNotifyPreSave_Company")]
+        [EventBasedMethod("OnNotifyPreSave_TestCompany")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnNotifyPreSave_Company != null) OnNotifyPreSave_Company(this);
+            if (OnNotifyPreSave_TestCompany != null) OnNotifyPreSave_TestCompany(this);
         }
-        public static event ObjectEventHandler<Company> OnNotifyPreSave_Company;
+        public static event ObjectEventHandler<TestCompany> OnNotifyPreSave_TestCompany;
 
-        [EventBasedMethod("OnNotifyPostSave_Company")]
+        [EventBasedMethod("OnNotifyPostSave_TestCompany")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnNotifyPostSave_Company != null) OnNotifyPostSave_Company(this);
+            if (OnNotifyPostSave_TestCompany != null) OnNotifyPostSave_TestCompany(this);
         }
-        public static event ObjectEventHandler<Company> OnNotifyPostSave_Company;
+        public static event ObjectEventHandler<TestCompany> OnNotifyPostSave_TestCompany;
 
-        [EventBasedMethod("OnNotifyCreated_Company")]
+        [EventBasedMethod("OnNotifyCreated_TestCompany")]
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("Name");
             base.NotifyCreated();
-            if (OnNotifyCreated_Company != null) OnNotifyCreated_Company(this);
+            if (OnNotifyCreated_TestCompany != null) OnNotifyCreated_TestCompany(this);
         }
-        public static event ObjectEventHandler<Company> OnNotifyCreated_Company;
+        public static event ObjectEventHandler<TestCompany> OnNotifyCreated_TestCompany;
 
-        [EventBasedMethod("OnNotifyDeleting_Company")]
+        [EventBasedMethod("OnNotifyDeleting_TestCompany")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnNotifyDeleting_Company != null) OnNotifyDeleting_Company(this);
-
-
+            if (OnNotifyDeleting_TestCompany != null) OnNotifyDeleting_TestCompany(this);
+            Phones.Clear();
         }
-        public static event ObjectEventHandler<Company> OnNotifyDeleting_Company;
+        public static event ObjectEventHandler<TestCompany> OnNotifyDeleting_TestCompany;
 
-        #endregion // Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
+        #endregion // Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
-        public class CompanyProxy
-            : IProxyObject, ISortKey<int>
-        {
-            public CompanyProxy()
-            {
-            }
-
-            public virtual int ID { get; set; }
-
-            public virtual Type ZetboxWrapper { get { return typeof(CompanyNHibernateImpl); } }
-            public virtual Type ZetboxProxy { get { return typeof(CompanyProxy); } }
-
-            public virtual string Name { get; set; }
-
-
-			[System.Runtime.Serialization.IgnoreDataMember]
-			int ISortKey<int>.InternalSortKey { get { return ID; } }
-        }
-
-        // make proxy available for the provider
-        [System.Runtime.Serialization.IgnoreDataMember]
-        public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 
 
@@ -291,7 +296,8 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this.Proxy.Name);
+            binStream.Write(this._Name);
+            binStream.WriteCollectionEntries(this._PhonesCollection);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -300,7 +306,8 @@ namespace Zetbox.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this.Proxy.Name = binStream.ReadString();
+            this._Name = binStream.ReadString();
+            binStream.ReadCollectionEntries(this, this._PhonesCollection);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

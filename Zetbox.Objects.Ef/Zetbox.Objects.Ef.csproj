@@ -145,7 +145,6 @@
     <Compile Include="ZetboxBase\ClientReadOnlyConstraint.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\CLRObjectParameter.Ef.Designer.cs" />
     <Compile Include="Calendar\CommonWorkScheduleRule.Ef.Designer.cs" />
-    <Compile Include="TestModule\Company.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\CompoundObject.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\CompoundObjectParameter.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\CompoundObjectProperty.Ef.Designer.cs" />
@@ -273,6 +272,7 @@
     <Compile Include="Calendar\SyncProvider.Ef.Designer.cs" />
     <Compile Include="GUI\TagCache.Ef.Designer.cs" />
     <Compile Include="Projekte\Task.Ef.Designer.cs" />
+    <Compile Include="TestModule\TestCompany.Ef.Designer.cs" />
     <Compile Include="TestModule\TestCustomObject.Ef.Designer.cs" />
     <Compile Include="TestModule\TestDecimal.Ef.Designer.cs" />
     <Compile Include="TestModule\TestObjClass.Ef.Designer.cs" />

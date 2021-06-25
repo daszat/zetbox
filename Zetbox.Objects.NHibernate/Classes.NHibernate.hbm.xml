@@ -2678,32 +2678,6 @@
         <!-- define the subclasses -->
 
     </class>
-    <class name="Zetbox.App.Test.CompanyNHibernateImpl+CompanyProxy, Zetbox.Objects.NHibernateImpl"
-           proxy="Zetbox.App.Test.CompanyNHibernateImpl+CompanyProxy, Zetbox.Objects.NHibernateImpl"
-           schema="`test`"
-           table="`Companies`"
-           abstract="false"
-           dynamic-update="false"
-           optimistic-lock="none"
-           batch-size="100">
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`test`</param>
-                <param name="sequence">`Companies_ID_seq`</param>
-            </generator>
-        </id>
-
-        <!-- define the properties -->
-        <!-- ValueTypeProperty isValue -->
-        <property name="Name" 
-                  column="`Name`" 
-                  optimistic-lock="false"
-                  length="2147483647" />
-
-        <!-- define the subclasses -->
-
-    </class>
     <class name="Zetbox.App.Test.DeactivatableTestObjectNHibernateImpl+DeactivatableTestObjectProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Test.DeactivatableTestObjectNHibernateImpl+DeactivatableTestObjectProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"
@@ -3726,6 +3700,37 @@
                   column="`Name`" 
                   optimistic-lock="false"
                   length="200" />
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.Test.TestCompanyNHibernateImpl+TestCompanyProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.TestCompanyNHibernateImpl+TestCompanyProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`TestCompanies`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`TestCompanies_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"
+                  length="2147483647" />
+        <!-- CompoundObjectProperty IsList -->
+        <set name="Phones" inverse="true" batch-size="100">
+            <key column="`fk_TestCompany`" />
+            <one-to-many class="Zetbox.App.Test.TestCompany_Phones_CollectionEntryNHibernateImpl+TestCompany_Phones_CollectionEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
 
         <!-- define the subclasses -->
 
