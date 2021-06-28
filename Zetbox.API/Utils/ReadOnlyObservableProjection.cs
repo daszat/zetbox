@@ -104,7 +104,8 @@ namespace Zetbox.API.Utils
         {
             if (CollectionChanged != null)
             {
-                CollectionChanged(this, args);
+                // TODO: CollectionChanged(this, args);
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
 

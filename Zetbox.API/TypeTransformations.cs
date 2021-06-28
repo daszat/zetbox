@@ -215,6 +215,8 @@ namespace Zetbox.API
             typeof(IRelationEntry),
             typeof(IValueCollectionEntry<,>),
             typeof(IValueCollectionEntry),
+            typeof(IValueListEntry<,>),
+            typeof(IValueListEntry),
             typeof(IPersistenceObject) 
         };
 

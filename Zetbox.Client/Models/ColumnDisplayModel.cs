@@ -539,9 +539,13 @@ namespace Zetbox.Client.Models
             if (props == null) throw new ArgumentNullException("props");
             if (methods == null) throw new ArgumentNullException("methods");
 
-            ShowIcon = cls.ShowIconInLists;
-            ShowId = cls.ShowIdInLists;
-            ShowName = cls.ShowNameInLists;
+            if (cls is ObjectClass)
+            {
+                // Makes no sense on CompoundObjects 
+                ShowIcon = cls.ShowIconInLists;
+                ShowId = cls.ShowIdInLists;
+                ShowName = cls.ShowNameInLists;
+            }
 
             this.Columns = new ObservableCollection<ColumnDisplayModel>(
                 props.Select(p => ColumnDisplayModel.Create(mode, p))
