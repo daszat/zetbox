@@ -132,6 +132,7 @@
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.BaseParameter.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.Blob.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.Blob.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.CompoundObject.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.Constraint.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.Constraint.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.DataType.resx" />
@@ -148,8 +149,10 @@
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.Group.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.ICustomFulltextFormat.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.ICustomFulltextFormat.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.Identity.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.IInvocation.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.IInvocation.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.IMergeable.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.INamedObject.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.INamedObject.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Base.InstanceConstraint.resx" />
@@ -198,12 +201,15 @@
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.GUI.Template.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.GUI.ViewModelDescriptor.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.GUI.ViewModelDescriptor.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.LicenseManagement.License.resx" />
+    <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.LicenseManagement.PrivateKey.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Projekte.Auftrag.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Projekte.Auftrag.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Projekte.Mitarbeiter.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Projekte.Mitarbeiter.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Projekte.Projekt.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Projekte.Projekt.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Projekte.Task.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.SchemaMigration.MigrationProject.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.SchemaMigration.MigrationProject.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.SchemaMigration.SourceColumn.resx" />
@@ -410,6 +416,8 @@
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.GUI.Visual.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.GUI.YearFilterConfiguration.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.GUI.YearFilterConfiguration.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.LicenseManagement.License.resx" />
+    <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.LicenseManagement.PrivateKey.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Projekte.Auftrag.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Projekte.Auftrag.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Projekte.Kunde.resx" />
@@ -496,6 +504,7 @@
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.SecurityTestChild.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.SecurityTestParent.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.SecurityTestParent.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.TestCompany.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.TestCustomObject.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.TestCustomObject.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.TestDecimal.resx" />
