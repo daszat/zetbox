@@ -3254,6 +3254,14 @@ using Zetbox.DalProvider.Ef;
 
 // object-struct association
 [assembly: EdmRelationship(
+    "Model", "FK_TestCompany_value_Phones",
+    "TestCompany", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.TestCompanyEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.TestCompany_Phones_CollectionEntryEfImpl)
+    )]
+
+
+// object-struct association
+[assembly: EdmRelationship(
     "Model", "FK_TestCustomObject_value_PhoneNumbersOther",
     "TestCustomObject", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.TestCustomObjectEfImpl),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl)

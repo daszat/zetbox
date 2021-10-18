@@ -347,14 +347,6 @@
         <ScalarProperty Name="Identity" ColumnName="Identity" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="CompanyEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CompanyEfImpl)">
-	    <MappingFragment StoreEntitySet="Company">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ConstraintEfImpl">
       <EntityTypeMapping TypeName="Model.IntegerRangeConstraintEfImpl">
 	    <MappingFragment StoreEntitySet="Constraint">
@@ -1818,6 +1810,14 @@
         <ScalarProperty Name="Identity" ColumnName="Identity" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="TestCompanyEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestCompanyEfImpl)">
+	    <MappingFragment StoreEntitySet="TestCompany">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TestCustomObjectEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObjectEfImpl)">
 	    <MappingFragment StoreEntitySet="TestCustomObject">
@@ -6053,6 +6053,29 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Projekt" IsNull="false"/>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="TestCompany_Phones_CollectionEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.TestCompany_Phones_CollectionEntryEfImpl">
+        <MappingFragment StoreEntitySet="TestCompany_Phones_CollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+                    <ComplexProperty Name="ValueImpl" TypeName="Model.TestPhoneCompoundObjectEfImpl">
+          <ScalarProperty Name="AreaCode" ColumnName="Phones_AreaCode" />
+          <ScalarProperty Name="Number" ColumnName="Phones_Number" />
+          </ComplexProperty>
+          <ScalarProperty Name="Index" ColumnName="PhonesIndex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_TestCompany_value_Phones"
+                           TypeName="Model.FK_TestCompany_value_Phones"
+                           StoreEntitySet="TestCompany_Phones_CollectionEntry" >
+      <EndProperty Name="TestCompany">
+        <ScalarProperty Name="ID" ColumnName="fk_TestCompany"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_TestCompany" IsNull="false"/>
     </AssociationSetMapping>
     <EntitySetMapping Name="TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl">
       <EntityTypeMapping TypeName="Model.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl">

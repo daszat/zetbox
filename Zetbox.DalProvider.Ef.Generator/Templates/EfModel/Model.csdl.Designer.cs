@@ -403,7 +403,7 @@ if (prop.HasPersistentOrder)
         {
 
 #line 364 "D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-this.WriteObjects("    <Property Name=\"B",  Zetbox.API.Helper.PositionSuffix , "\" Type=\"Int32\" Nullable=\"false\" />\r\n");
+this.WriteObjects("    <Property Name=\"Index\" Type=\"Int32\" Nullable=\"false\" />\r\n");
 #line 366 "D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
 }
 

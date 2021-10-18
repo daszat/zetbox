@@ -101,7 +101,14 @@ namespace Zetbox.Client.Models
                 var cop = (CompoundObjectProperty)prop;
                 if (cop.IsList)
                 {
-                    return new CompoundCollectionPropertyValueModel(obj, cop);
+                    if (cop.HasPersistentOrder)
+                    {
+                        return new CompoundListPropertyValueModel(obj, cop);
+                    }
+                    else
+                    {
+                        return new CompoundCollectionPropertyValueModel(obj, cop);
+                    }
                 }
                 else
                 {

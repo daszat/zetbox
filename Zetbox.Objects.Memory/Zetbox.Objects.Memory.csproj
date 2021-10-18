@@ -142,7 +142,6 @@
     <Compile Include="ZetboxBase\ClientReadOnlyConstraint.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\CLRObjectParameter.Memory.Designer.cs" />
     <Compile Include="Calendar\CommonWorkScheduleRule.Memory.Designer.cs" />
-    <Compile Include="TestModule\Company.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\CompoundObject.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\CompoundObjectParameter.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\CompoundObjectProperty.Memory.Designer.cs" />
@@ -270,6 +269,7 @@
     <Compile Include="Calendar\SyncProvider.Memory.Designer.cs" />
     <Compile Include="GUI\TagCache.Memory.Designer.cs" />
     <Compile Include="Projekte\Task.Memory.Designer.cs" />
+    <Compile Include="TestModule\TestCompany.Memory.Designer.cs" />
     <Compile Include="TestModule\TestCustomObject.Memory.Designer.cs" />
     <Compile Include="TestModule\TestDecimal.Memory.Designer.cs" />
     <Compile Include="TestModule\TestObjClass.Memory.Designer.cs" />

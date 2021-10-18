@@ -85,15 +85,35 @@ namespace Zetbox.App.Calendar
             {
                 WorkScheduleRule foundRule = null;
                 // Find YearlyRule
-                foundRule = rules.OfType<YearlyWorkScheduleRule>().FirstOrDefault(r => r.AppliesTo(from));
+                var yearlyRule = rules.OfType<YearlyWorkScheduleRule>().FirstOrDefault(r => r.AppliesTo(from));
                 // Find DayOfWeekRule
-                if (foundRule == null)
+                var dayOfWeekRule = rules.OfType<DayOfWeekWorkScheduleRule>().FirstOrDefault(r => r.AppliesTo(from));
+
+                if (yearlyRule == null)
                 {
-                    foundRule = rules.OfType<DayOfWeekWorkScheduleRule>().FirstOrDefault(r => r.AppliesTo(from));
+                    foundRule = dayOfWeekRule;
                 }
-                // Find CommonRule
+                else if(dayOfWeekRule != null)
+                {
+                    // Use the most "free" rule
+                    if (dayOfWeekRule.IsWorkingDay == false || dayOfWeekRule.WorkingHours < yearlyRule.WorkingHours)
+                    {
+                        foundRule = dayOfWeekRule;
+                    }
+                    else
+                    {
+                        // use the more specific rule
+                        foundRule = yearlyRule;
+                    }
+                }
+                else
+                {
+                    foundRule = yearlyRule;
+                }
+
                 if (foundRule == null)
                 {
+                    // Find CommonRule
                     foundRule = rules.OfType<CommonWorkScheduleRule>().FirstOrDefault(r => r.AppliesTo(from));
                 }
 

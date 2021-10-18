@@ -9112,6 +9112,309 @@ namespace Zetbox.App.Projekte
 namespace Zetbox.App.Test
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    [System.Diagnostics.DebuggerDisplay("TestCompany_Phones_CollectionEntryMemoryImpl")]
+    public class TestCompany_Phones_CollectionEntryMemoryImpl : Zetbox.DalProvider.Memory.CompoundCollectionEntryMemoryImpl<Zetbox.App.Test.TestCompany, Zetbox.App.Test.TestCompanyMemoryImpl, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl>, TestCompany_Phones_CollectionEntry
+    {
+        [Obsolete]
+        public TestCompany_Phones_CollectionEntryMemoryImpl()
+            : base(null)
+        {
+            ValueImpl = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(null, this, "Value");
+        }
+
+        public TestCompany_Phones_CollectionEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+            : base(lazyCtx)
+        {
+            ValueImpl = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(lazyCtx, this, "Value");
+        }
+        // BEGIN Zetbox.Generator.Templates.Properties.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
+            }
+        }
+        private int _ID;
+        // END Zetbox.Generator.Templates.Properties.IdProperty
+        private static readonly Guid _propertyID = new Guid("477dd46f-24d1-4db8-934b-131adea34f13");
+        public override Guid PropertyID { get { return _propertyID; } }
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        public Zetbox.App.Test.TestCompany Parent
+        {
+            get
+            {
+                if (_ParentCache != null && _ParentCache.ID == _fk_Parent)
+                    return _ParentCache;
+
+                if (_fk_Parent.HasValue)
+                    _ParentCache = this.Context.Find<Zetbox.App.Test.TestCompany>(_fk_Parent.Value);
+                else
+                    _ParentCache = null;
+
+                return _ParentCache;
+            }
+            set
+            {
+                if (value == null && !_fk_Parent.HasValue)
+                    return;
+                if (value != null && _fk_Parent.HasValue && value.ID == _fk_Parent.Value)
+                    return;
+
+                _ParentCache = value;
+                if (value != null)
+                    fk_Parent = value.ID;
+                else
+                    fk_Parent = null;
+            }
+        }
+        private Zetbox.App.Test.TestCompany _ParentCache;
+
+        public int? fk_Parent
+        {
+            get
+            {
+                return _fk_Parent;
+            }
+            set
+            {
+                if (_fk_Parent != value)
+                {
+                    var __oldValue = _fk_Parent;
+                    NotifyPropertyChanging("Parent", __oldValue, value);
+                    _fk_Parent = value;
+                    NotifyPropertyChanged("Parent", __oldValue, value);
+                }
+            }
+        }
+
+        // backing store for serialization
+        private int? _fk_Parent;
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.API.IDataObject ParentObject
+        {
+            get { return Parent; }
+            set { Parent = (Zetbox.App.Test.TestCompanyMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // implement the user-visible interface
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.Test.TestPhoneCompoundObject Value
+        {
+            get { return ValueImpl; }
+            set { ValueImpl = (Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        /// <summary>backing store for Value</summary>
+        private Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl _Value;
+
+        /// <summary>backing property for Value, takes care of attaching/detaching the values</summary>
+        public Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl ValueImpl
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if (!object.Equals(_Value, value))
+                {
+                    var __oldValue = _Value;
+                    var __newValue = value;
+
+                    NotifyPropertyChanging("Value", __oldValue, __newValue);
+
+                    if (_Value != null)
+                    {
+                        _Value.DetachFromObject(this, "Value");
+                    }
+                    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl)__newValue.Clone();
+                    _Value = __newValue;
+                    _Value.AttachToObject(this, "Value");
+
+                    NotifyPropertyChanged("Value", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public object ValueObject
+        {
+            get { return Value; }
+            set { Value = (Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        /// <summary>
+        /// Index into the A-side list of this relation
+        /// </summary>
+
+        /// <summary>
+        /// Index into the B-side list of this relation
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
+        public int? Index
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Index;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Index != value)
+                {
+                    var __oldValue = _Index;
+                    var __newValue = value;
+                    NotifyPropertyChanging("Index", __oldValue, __newValue);
+                    _Index = __newValue;
+                    NotifyPropertyChanged("Index", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+                else
+                {
+                    SetInitializedProperty("Index");
+                }
+            }
+        }
+        private int? _Index;
+        // END Zetbox.Generator.Templates.Properties.NotifyingValueProperty
+
+        #region Serializer
+
+
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this._fk_Parent);
+            binStream.Write(this.Value);
+            binStream.Write(this._Index);
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._fk_Parent = binStream.ReadNullableInt32();
+            {
+                // use backing store to avoid notifications
+                this.ValueImpl = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl>();
+                this.ValueImpl.AttachToObject(this, "Value");
+            }
+            this._Index = binStream.ReadNullableInt32();
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
+            return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(TestCompany_Phones_CollectionEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (TestCompany_Phones_CollectionEntryMemoryImpl)obj;
+            var me = (TestCompany_Phones_CollectionEntryMemoryImpl)this;
+
+            me._fk_Parent = other._fk_Parent;
+            if (me.Value == null && other.Value != null) {
+                me.Value = (Zetbox.App.Test.TestPhoneCompoundObject)other.Value.Clone();
+            } else if (me.Value != null && other.Value == null) {
+                me.Value = null;
+            } else if (me.Value != null && other.Value != null) {
+                me.Value.ApplyChangesFrom(other.Value);
+            }
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_Parent.HasValue)
+                Parent = (Zetbox.App.Test.TestCompanyMemoryImpl)Context.Find<Zetbox.App.Test.TestCompany>(_fk_Parent.Value);
+            else
+                Parent = null;
+
+        }
+
+
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
+                case "Parent":
+                    {
+                        var __oldValue = _fk_Parent;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Parent", __oldValue, __newValue);
+                        _fk_Parent = __newValue;
+                        NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                    }
+                    break;
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
+    }
+    // END Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
+}
+
+namespace Zetbox.App.Test
+{
+    // BEGIN Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
     [System.Diagnostics.DebuggerDisplay("TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl")]
     public class TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl : Zetbox.DalProvider.Memory.CompoundCollectionEntryMemoryImpl<Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.TestCustomObjectMemoryImpl, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl>, TestCustomObject_PhoneNumbersOther_CollectionEntry
     {

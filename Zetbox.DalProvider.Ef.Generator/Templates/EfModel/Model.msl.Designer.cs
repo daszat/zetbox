@@ -272,7 +272,7 @@ if (prop.HasPersistentOrder)
 		{
 
 #line 246 "D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-this.WriteObjects("          <ScalarProperty Name=\"Value",  Zetbox.API.Helper.PositionSuffix , "\" ColumnName=\"BIndex\" />\r\n");
+this.WriteObjects("          <ScalarProperty Name=\"Index\" ColumnName=\"",  prop.Name , "Index\" />\r\n");
 #line 248 "D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
 

@@ -11,7 +11,7 @@ namespace Zetbox.App.Test
     /// Describes a Company
     /// </summary>
     [Zetbox.API.DefinitionGuid("352a4ade-1dca-4d28-9630-66bbcc1622ea")]
-    public interface Company : IDataObject 
+    public interface TestCompany : IDataObject 
     {
 
         /// <summary>
@@ -23,5 +23,13 @@ namespace Zetbox.App.Test
             set;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+        [Zetbox.API.DefinitionGuid("477dd46f-24d1-4db8-934b-131adea34f13")]
+        [System.Runtime.Serialization.IgnoreDataMember]
+        IList<Zetbox.App.Test.TestPhoneCompoundObject> Phones { get; }
     }
 }
