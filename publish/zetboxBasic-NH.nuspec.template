@@ -20,17 +20,13 @@
   <files>
     <!-- Dependencies -->
     <file src="Server\NHibernate.dll" target="zetbox/Server" />
-    <file src="Server\NHibernate.xml" target="zetbox/Server" />
     <file src="Server\Iesi.Collections.dll" target="zetbox/Server" />
-    <file src="Server\Iesi.Collections.xml" target="zetbox/Server" />
 
     <!-- Core Assemblies -->
     <file src="Server\Zetbox.DalProvider.NHibernate.dll" target="zetbox/Server" />
     <file src="Server\Zetbox.DalProvider.NHibernate.pdb" target="zetbox/Server" />
-    <file src="Server\Zetbox.DalProvider.NHibernate.xml" target="zetbox/Server" />
     <file src="Server\Zetbox.DalProvider.NHibernate.Generator.dll" target="zetbox/Server" />
     <file src="Server\Zetbox.DalProvider.NHibernate.Generator.pdb" target="zetbox/Server" />
-    <file src="Server\Zetbox.DalProvider.NHibernate.Generator.xml" target="zetbox/Server" />
 
     <file src="Server\Fallback\Zetbox.Objects.NHibernateImpl.dll" target="zetbox/Server/Fallback" />
     <file src="Server\Fallback\Zetbox.Objects.NHibernateImpl.pdb" target="zetbox/Server/Fallback" />

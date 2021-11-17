@@ -17,8 +17,6 @@
 	<group targetFramework="net50">
         <dependency id="zetboxBasic" version="[##version##]" />
         <dependency id="zetboxBasic-Client" version="[##version##]" />
-	    
-        <dependency id="Autofac.Mvc4" version="[3.1,4)" />
 	  </group>
     </dependencies>
   </metadata>

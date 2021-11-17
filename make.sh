@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dotnet build --disable-parallel --ignore-failed-sources --configuration Release Zetbox.Core.sln
+dotnet publish --disable-parallel --ignore-failed-sources --configuration Release  Zetbox.Server.HttpService/Zetbox.Server.HttpService.csproj --output ./bin/Release/HttpService
 
 # publish
 rm publish/*.nupkg || true
@@ -28,5 +29,5 @@ cp ./publish/*.nuspec ./bin/Release
 
 echo "packing files"
 for f in ./bin/Release/*.nuspec; do
-	nuget pack $f -OutputDirectory ./publish/
+	nuget pack -NoPackageAnalysis $f -OutputDirectory ./publish/
 done

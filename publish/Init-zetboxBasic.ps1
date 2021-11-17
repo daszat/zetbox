@@ -2,7 +2,14 @@ param($installPath, $toolsPath, $package, $project)
 # $installPath is packages\zetboxBasic...\
 # $toolsPath is $installPath\tools\
 
-$zetbox = [System.IO.Path]::Combine($installPath, "..\..\.zetbox\")
+$pname=$project.ProjectName
+"Hello from install-zetboxBasic.ps1 in $pname" | Out-Host
+
+$solutionPath = [IO.Path]::GetDirectoryName($dte.Solution.Properties.Item("Path").Value)
+$zetbox = [System.IO.Path]::Combine($solutionPath, ".zetbox\")
+
+"solutionPath = $solutionPath" | Out-Host
+"zetbox = $zetbox" | Out-Host
 
 if (!(Test-Path -path $zetbox)) { mkdir $zetbox }
 cp "$toolsPath\*.targets" $zetbox
@@ -12,3 +19,5 @@ cp "$toolsPath\PrepareEnv.exe" $zetbox
 cp "$toolsPath\..\zetbox\Server\Npgsql.*" $zetbox
 # Required to create click once packages
 cp "$toolsPath\..\zetbox\Server\Mono.Security.*" $zetbox
+
+cp -Recurse "$toolsPath\..\zetbox" "$zetbox\bin"

@@ -7,6 +7,9 @@
 $pname=$project.ProjectName
 "Hello from install-references.ps1 in $pname" | Out-Host
 
+$solutionPath = [IO.Path]::GetDirectoryName($dte.Solution.Properties.Item("Path").Value)
+$zetbox = [System.IO.Path]::Combine($solutionPath, ".zetbox\")
+
 # this is the project type gouid of an ASP.NET MVC 4 Application type
 $isMVC = (Get-MSBuildProperty "ProjectTypeGuids" -ProjectName $pname).EvaluatedValue -match "{E3E379DF-F4C6-4180-9B81-6769533ABE47}"
 
