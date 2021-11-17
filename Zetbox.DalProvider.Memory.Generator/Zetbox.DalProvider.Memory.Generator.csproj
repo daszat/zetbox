@@ -33,7 +33,7 @@
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <DocumentationFile>..\bin\Debug\Server\Zetbox.DalProvider.Memory.Generator.xml</DocumentationFile>
   </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Arebis Generation Tools\ArebisGenTask.targets" />
+  <Import Project="..\Libs\ArebisCGen\ArebisGenTask.targets" />
   <ItemGroup>
     <PackageReference Include="Arebis.CodeGeneration" Version="1.3.6" />
     <PackageReference Include="Arebis.CodeGenerator" Version="1.3.6" />

@@ -1,65 +1,68 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
-    <NoWarn>1591</NoWarn>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
-    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
-    <AssemblyTitle>Zetbox.Cli</AssemblyTitle>
-    <Company>dasz.at OG</Company>
-    <Product>zetbox</Product>
-    <Description>Contains the command line interface of the zetbox</Description>
-    <Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <OutputPath>..\bin\$(Configuration)\</OutputPath>
-    <DocumentationFile>..\bin\$(Configuration)\Zetbox.Cli.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Autofac" Version="5.2.0" />
-    <PackageReference Include="Autofac.Configuration" Version="5.1.0" />
-    <PackageReference Include="GitVersionTask" Version="5.3.7">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="log4net" Version="2.0.10" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.8" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.8" />
-    <PackageReference Include="Microsoft.Extensions.Primitives" Version="3.1.8" />
-    <PackageReference Include="System.Collections" Version="4.3.0" />
-    <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
-    <PackageReference Include="System.IO" Version="4.3.0" />
-    <PackageReference Include="System.Linq" Version="4.3.0" />
-    <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
-    <PackageReference Include="System.Runtime" Version="4.3.1" />
-    <PackageReference Include="System.Runtime.Extensions" Version="4.3.1" />
-    <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
-    <PackageReference Include="System.Threading" Version="4.3.0" />
-    <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Zetbox.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Properties\VersionInfo.Designer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="log4net.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<PropertyGroup>
+		<ProductVersion>8.0.30703</ProductVersion>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net5.0</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
+		<NoWarn>1591</NoWarn>
+		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
+		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<AssemblyTitle>Zetbox.Cli</AssemblyTitle>
+		<Company>dasz.at OG</Company>
+		<Product>zetbox</Product>
+		<Description>Contains the command line interface of the zetbox</Description>
+		<Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<OutputPath>..\bin\$(Configuration)\</OutputPath>
+		<DocumentationFile>..\bin\$(Configuration)\Zetbox.Cli.xml</DocumentationFile>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="5.2.0" />
+		<PackageReference Include="Autofac.Configuration" Version="5.1.0" />
+		<PackageReference Include="GitVersionTask" Version="5.3.7">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="log4net" Version="2.0.10" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.8" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.8" />
+		<PackageReference Include="Microsoft.Extensions.Primitives" Version="3.1.8" />
+		<PackageReference Include="System.Collections" Version="4.3.0" />
+		<PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
+		<PackageReference Include="System.IO" Version="4.3.0" />
+		<PackageReference Include="System.Linq" Version="4.3.0" />
+		<PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
+		<PackageReference Include="System.Runtime" Version="4.3.1" />
+		<PackageReference Include="System.Runtime.Extensions" Version="4.3.1" />
+		<PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
+		<PackageReference Include="System.Threading" Version="4.3.0" />
+		<PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Zetbox.snk" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\Zetbox.Server\Zetbox.Server.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Properties\VersionInfo.Designer.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="log4net.config">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 </Project>

@@ -14,16 +14,17 @@
     <copyright>Copyright © 2019 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
-      <dependency id="zetboxBasic" version="[##version##]" />
-      <dependency id="zetboxBasic-Client" version="[##version##]" />
-
-      <dependency id="Autofac.Mvc4" version="[3.1,4)" />
+	<group targetFramework="net50">
+        <dependency id="zetboxBasic" version="[##version##]" />
+        <dependency id="zetboxBasic-Client" version="[##version##]" />
+	    
+        <dependency id="Autofac.Mvc4" version="[3.1,4)" />
+	  </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="Client\Zetbox.Client.ASPNET.Toolkit.dll" target="lib\net40" />
-    <file src="Client\Zetbox.Client.ASPNET.Toolkit.pdb" target="lib\net40" />
-    <file src="Client\Zetbox.Client.ASPNET.Toolkit.xml" target="lib\net40" />
+    <file src="Client\Zetbox.Client.ASPNET.Toolkit.dll" target="lib\net5.0" />
+    <file src="Client\Zetbox.Client.ASPNET.Toolkit.pdb" target="lib\net5.0" />
 
     <file src="install-clientaspnet.ps1" target="tools\install.ps1" />
     <file src="Global.asax.cs.txt.pp" target="content" />

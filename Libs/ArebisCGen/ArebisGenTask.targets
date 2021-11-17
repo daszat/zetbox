@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Example usage:
+	<Import Project="$(MSBuildExtensionsPath)\Arebis\ArebisGenTask.targets"/>
+  -->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- The items that get processed by the task -->
+  <ItemGroup>
+    <ArebisTemplates Include="**\*.cst"/>
+  </ItemGroup>
+
+  <!-- Import the task using a relative path -->
+  <UsingTask AssemblyFile="Arebis.CodeGeneration.MsBuild.dll" TaskName="ArebisGenTask"/>
+
+  <!-- Re-define CoreCompileDependsOn to ensure the template files are processed before compilation. -->
+  <PropertyGroup>
+    <CoreCompileDependsOn>
+      $(CoreCompileDependsOn);
+      ArebisCodeGeneration
+    </CoreCompileDependsOn>
+  </PropertyGroup>
+
+  <!-- The target that acutally does all the work. The inputs are the same as the CoreCompileDependsOn target
+  (with the addition of @(ArebisTemplates) to ensure that we only ever update the ArebisTemplates files if a 
+  compile is actually going to take place. The outputs are the generated files. -->
+  <Target Name="ArebisCodeGeneration"
+          Inputs="$(MSBuildAllProjects);
+                @(Compile);
+                @(ArebisTemplates)"
+          Outputs="@(ArebisTemplates->'%(Filename).Designer.cs')">
+    <ArebisGenTask Templates="@(ArebisTemplates)" >
+      <Output TaskParameter="GeneratedFiles" ItemName="ArebisTemplateOutput"/>
+    </ArebisGenTask>
+  </Target>
+</Project>

@@ -1,73 +1,75 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
-    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
-    <AssemblyTitle>PrepareEnv</AssemblyTitle>
-    <Company>dasz.at OG</Company>
-    <Product>zetbox</Product>
-    <Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>full</DebugType>
-    <OutputPath>..\bin\Debug</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <DebugType>pdbonly</DebugType>
-    <OutputPath>..\bin\Release</OutputPath>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="5.3.7">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Npgsql" Version="4.1.4" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
-    <PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.0" />
-    <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UpdateCodeFromSchema.cmd" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Examples\01 DevEnvConfig.xml">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Examples\02 BuildServerConfig.xml" />
-    <None Include="Examples\02a BuildServerTestsConfig.xml" />
-    <None Include="Examples\03 DeployConfig.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="EnvConfig.xsd">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Examples\04 CopyDirsConfig.xml">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Templates\ClickOnce.application.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Templates\ClickOnce.manifest.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Templates\SignatureBlock.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Examples\05 ClickOnceConfig.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Properties\VersionInfo.Designer.cs" />
-    <Compile Remove="obj\x86\Debug\GitVersionInformation.g.cs" />
-    <Compile Remove="obj\x86\Debug\GitVersionTaskAssemblyInfo.g.cs" />
-  </ItemGroup>
+	<PropertyGroup>
+		<Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+		<ProductVersion>8.0.30703</ProductVersion>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net5.0</TargetFramework>
+		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
+		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<AssemblyTitle>PrepareEnv</AssemblyTitle>
+		<Company>dasz.at OG</Company>
+		<Product>zetbox</Product>
+		<Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<DebugType>full</DebugType>
+		<OutputPath>..\bin\Debug</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<OutputPath>..\bin\Release</OutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="GitVersionTask" Version="5.3.7">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Npgsql" Version="4.1.4" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+		<PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.0" />
+		<PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="UpdateCodeFromSchema.cmd" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Examples\01 DevEnvConfig.xml">
+			<SubType>Designer</SubType>
+		</None>
+		<None Include="Examples\02 BuildServerConfig.xml" />
+		<None Include="Examples\02a BuildServerTestsConfig.xml" />
+		<None Include="Examples\03 DeployConfig.xml" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="EnvConfig.xsd">
+			<SubType>Designer</SubType>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Examples\04 CopyDirsConfig.xml">
+			<SubType>Designer</SubType>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Templates\ClickOnce.application.xml">
+			<SubType>Designer</SubType>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Templates\ClickOnce.manifest.xml" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Templates\SignatureBlock.xml" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Examples\05 ClickOnceConfig.xml" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Properties\VersionInfo.Designer.cs" />
+		<Compile Remove="obj\x86\Debug\GitVersionInformation.g.cs" />
+		<Compile Remove="obj\x86\Debug\GitVersionTaskAssemblyInfo.g.cs" />
+	</ItemGroup>
 </Project>

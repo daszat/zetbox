@@ -14,16 +14,18 @@
     <copyright>Copyright © 2019 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
-      <dependency id="zetboxBasic" version="[##version##]" />
-      <dependency id="zetboxBasic-Client" version="[##version##]" />
+	  <group targetFramework="net50">
+        <dependency id="zetboxBasic" version="[##version##]" />
+        <dependency id="zetboxBasic-Client" version="[##version##]" />
 
-      <dependency id="GraphSharp" version="[1.1,2)" />
+        <dependency id="GraphSharp" version="[1.1,2)" />
+	  </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="Client\Zetbox.Client.WPF.Toolkit.dll" target="lib\net40" />
-    <file src="Client\Zetbox.Client.WPF.Toolkit.pdb" target="lib\net40" />
-    <file src="Client\Zetbox.Client.WPF.Toolkit.xml" target="lib\net40" />
+    <file src="Client\Zetbox.Client.WPF.Toolkit.dll" target="lib\net5.0" />
+    <file src="Client\Zetbox.Client.WPF.Toolkit.pdb" target="lib\net5.0" />
+    <file src="Client\Zetbox.Client.WPF.Toolkit.xml" target="lib\net5.0" />
 
     <file src="install-references.ps1" target="tools\install.ps1" />
   </files>

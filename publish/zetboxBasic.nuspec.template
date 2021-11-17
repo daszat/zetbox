@@ -14,34 +14,27 @@
     <copyright>Copyright © 2019 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
-      <dependency id="NuGetPowerTools" version="[0.29,1)" />
+  	  <group targetFramework="net50">
+		<!-- dependencies go here -->
+	  </group>
     </dependencies>
   </metadata>
   <files>
     <!-- Executables and scripts -->
     <file src="Zetbox.Cli.exe" target="zetbox" />
     <file src="Zetbox.Cli.pdb" target="zetbox" />
-    <file src="Zetbox.Cli.exe.config" target="zetbox" />
 
     <file src="Zetbox.ConfigEditor.exe" target="zetbox" />
     <file src="Zetbox.ConfigEditor.pdb" target="zetbox" />
-    <file src="Zetbox.ConfigEditor.exe.config" target="zetbox" />
 
     <file src="Zetbox.Server.Service.exe" target="zetbox" />
     <file src="Zetbox.Server.Service.pdb" target="zetbox" />
-    <file src="Zetbox.Server.Service.exe.config" target="zetbox" />
-
-    <file src="Zetbox.Server.Service32.exe" target="zetbox" />
-    <file src="Zetbox.Server.Service32.pdb" target="zetbox" />
-    <file src="Zetbox.Server.Service32.exe.config" target="zetbox" />
 
     <file src="Zetbox.WPF.exe" target="zetbox" />
     <file src="Zetbox.WPF.pdb" target="zetbox" />
-    <file src="Zetbox.WPF.exe.config" target="zetbox" />
 
     <file src="PrepareEnv.exe" target="zetbox" />
     <file src="PrepareEnv.pdb" target="zetbox" />
-    <file src="PrepareEnv.exe.config" target="zetbox" />
 
     <file src="ZbDeploy.cmd" target="zetbox" />
     <file src="ZbLocalPull.cmd" target="zetbox" />

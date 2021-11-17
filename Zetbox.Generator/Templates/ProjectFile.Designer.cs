@@ -72,8 +72,8 @@ ApplyAdditionalProperties();
 #line 62 "D:\Projects\zetbox.core\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
-this.WriteObjects("    <PackageReference Include=\"log4net\" Version=\"2.0.8\" />\r\n");
-this.WriteObjects("    <PackageReference Include=\"Autofac\" Version=\"4.9.2\" />\r\n");
+this.WriteObjects("    <PackageReference Include=\"log4net\" Version=\"2.0.10\" />\r\n");
+this.WriteObjects("    <PackageReference Include=\"Autofac\" Version=\"5.2.0\" />\r\n");
 this.WriteObjects("    <Reference Include=\"Zetbox.API\">\r\n");
 this.WriteObjects("      <SpecificVersion>False</SpecificVersion>\r\n");
 this.WriteObjects("      <HintPath>$(ZetboxAPIPath)\\Common\\Zetbox.API.dll</HintPath>\r\n");

@@ -23,7 +23,7 @@
     <DebugType>pdbonly</DebugType>
     <OutputPath>..\bin\$(Configuration)\Server\</OutputPath>
   </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Arebis Generation Tools\ArebisGenTask.targets" />
+  <Import Project="..\Libs\ArebisCGen\ArebisGenTask.targets" />
   <ItemGroup>
     <PackageReference Include="Arebis.CodeGeneration" Version="1.3.6" />
     <PackageReference Include="Arebis.CodeGenerator" Version="1.3.6" />

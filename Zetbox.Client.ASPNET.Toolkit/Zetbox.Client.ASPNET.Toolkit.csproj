@@ -1,35 +1,49 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <OutputType>Library</OutputType>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<OutputType>Library</OutputType>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  </ItemGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+		<OutputPath>..\bin\$(Configuration)\Client\</OutputPath>
+		<GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+		<DocumentationFile>..\bin\$(Configuration)\Client\Zetbox.API.Client.xml</DocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<OutputPath>..\bin\$(Configuration)\Client\</OutputPath>
+		<DocumentationFile>..\bin\$(Configuration)\Client\Zetbox.API.Client.xml</DocumentationFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
-    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
-    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
-    <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj" />
-    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="ASPNETToolkitResources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ASPNETToolkitResources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
+		<ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
+		<ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj" />
+		<ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="ASPNETToolkitResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ASPNETToolkitResources.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Zetbox.Client.ASPNET</CustomToolNamespace>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="ASPNETToolkitResources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>ASPNETToolkitResources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="ASPNETToolkitResources.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>ASPNETToolkitResources.Designer.cs</LastGenOutput>
+			<CustomToolNamespace>Zetbox.Client.ASPNET</CustomToolNamespace>
+		</EmbeddedResource>
+	</ItemGroup>
 </Project>

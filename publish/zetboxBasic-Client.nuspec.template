@@ -14,19 +14,22 @@
     <copyright>Copyright © 2019 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
-      <dependency id="zetboxBasic" version="[##version##]" />
-      <dependency id="zetboxBasic-Common" version="[##version##]" />
-
-      <dependency id="QuickGraph" version="[3.6,4)" />
+  	  <group targetFramework="net50">
+		<!-- dependencies go here -->
+        <dependency id="zetboxBasic" version="[##version##]" />
+        <dependency id="zetboxBasic-Common" version="[##version##]" />
+  
+        <dependency id="QuickGraph" version="[3.6,4)" />
+	  </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="Client\Zetbox.API.Client.dll" target="lib\net40" />
-    <file src="Client\Zetbox.API.Client.pdb" target="lib\net40" />
-    <file src="Client\Zetbox.API.Client.xml" target="lib\net40" />
-    <file src="Client\Zetbox.Client.dll" target="lib\net40" />
-    <file src="Client\Zetbox.Client.pdb" target="lib\net40" />
-    <file src="Client\Zetbox.Client.xml" target="lib\net40" />
+    <file src="Client\Zetbox.API.Client.dll" target="lib\net5.0" />
+    <file src="Client\Zetbox.API.Client.pdb" target="lib\net5.0" />
+    <file src="Client\Zetbox.API.Client.xml" target="lib\net5.0" />
+    <file src="Client\Zetbox.Client.dll" target="lib\net5.0" />
+    <file src="Client\Zetbox.Client.pdb" target="lib\net5.0" />
+    <file src="Client\Zetbox.Client.xml" target="lib\net5.0" />
 
     <file src="install-references.ps1" target="tools\install.ps1" />
   </files>

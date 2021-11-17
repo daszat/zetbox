@@ -13,17 +13,19 @@
     <releaseNotes>First package.</releaseNotes>
     <copyright>Copyright © 2019 dasz.at OG</copyright>
     <dependencies>
-      <dependency id="NUnit" version="[3.10.1,4)" />
-      <dependency id="zetboxBasic" version="[##version##]" />
-      <dependency id="zetboxBasic-Common" version="[##version##]" />
-      <!-- "everything" -->
+	  <group targetFramework="net50">
+        <dependency id="NUnit" version="[3.10.1,4)" />
+        <dependency id="zetboxBasic" version="[##version##]" />
+        <dependency id="zetboxBasic-Common" version="[##version##]" />
+        <!-- "everything" -->
+	  </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="Tests\Zetbox.Tests.Utilities.*.dll" target="lib\net40" />
-    <file src="Tests\Zetbox.Tests.Utilities.*.pdb" target="lib\net40" />
-    <file src="Tests\Zetbox.API.AbstractConsumerTests.dll" target="lib\net40" />
-    <file src="Tests\Zetbox.API.AbstractConsumerTests.pdb" target="lib\net40" />
+    <file src="Tests\Zetbox.Tests.Utilities.*.dll" target="lib\net5.0" />
+    <file src="Tests\Zetbox.Tests.Utilities.*.pdb" target="lib\net5.0" />
+    <file src="Tests\Zetbox.API.AbstractConsumerTests.dll" target="lib\net5.0" />
+    <file src="Tests\Zetbox.API.AbstractConsumerTests.pdb" target="lib\net5.0" />
 
     <!-- Don't use this here, as tests always need a local copy! -->
     <!-- <file src="install-references.ps1" target="tools\install.ps1" /> -->
