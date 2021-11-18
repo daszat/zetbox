@@ -1,0 +1,49 @@
+variables:
+  GIT_DEPTH: "100000"
+  MSBuildThisFileDirectory: "./"
+  IGNORE_NORMALISATION_GIT_HEAD_MOVE: "1"
+
+stages:
+  - build
+  - deploy
+  - publish
+
+build-authentication:
+  stage: build
+  image: mcr.microsoft.com/dotnet/sdk:5.0
+  tags:
+    - Linux  
+  script: |
+    dotnet --info
+    ls -la
+    ./make.sh
+  artifacts:
+    paths:
+      - 'publish/*.nupkg'
+    name: 'zetbox'
+    expire_in: 1 hrs
+        
+create-artifacts:
+  stage: deploy
+  image: mcr.microsoft.com/dotnet/sdk:5.0
+  tags:
+    - Linux  
+  script: |
+    echo "Creating a final package"
+    dotnet nuget push ./publish/*.nupkg -s zetbox --skip-duplicate
+  artifacts:
+    paths:
+      - 'publish/'
+    name: 'All'
+
+publish-master:
+  stage: publish
+  image: mcr.microsoft.com/dotnet/sdk:5.0
+  tags:
+    - Linux
+  only:
+    refs:
+      - master
+  script: |
+    dotnet nuget push ./publish/*.nupkg -s zetbox --skip-duplicate
+

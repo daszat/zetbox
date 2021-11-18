@@ -9,7 +9,7 @@ rm publish/*.nuspec || true
 cp publish/* ./bin/Release
 
 
-version="3.0.0-alpha"
+version="$(gitversion -nofetch -showvariable NuGetVersionV2)"
 echo "Version = $version"
 
 echo ""
