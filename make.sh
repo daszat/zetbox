@@ -1,7 +1,10 @@
 #!/bin/bash
 
-dotnet build --disable-parallel --ignore-failed-sources --configuration Release Zetbox.Core.sln
-dotnet publish --disable-parallel --ignore-failed-sources --configuration Release  Zetbox.Server.HttpService/Zetbox.Server.HttpService.csproj --output ./bin/Release/HttpService
+dotnet publish --disable-parallel --ignore-failed-sources --configuration Release --output ./bin/Release/ Zetbox.Core.sln
+dotnet publish --disable-parallel --ignore-failed-sources --configuration Release --output ./bin/Release/HttpService Zetbox.Server.HttpService/Zetbox.Server.HttpService.csproj
+cp -r ./bin/Release/Common ./bin/Release/HttpService
+cp -r ./bin/Release/Server ./bin/Release/HttpService
+cp -r ./Configs ./bin/Release
 
 # publish
 rm publish/*.nupkg || true

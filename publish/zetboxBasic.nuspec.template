@@ -22,19 +22,38 @@
   <files>
     <!-- Executables and scripts -->
     <file src="Zetbox.Cli.exe" target="zetbox" />
+    <file src="Zetbox.Cli.dll" target="zetbox" />
+    <file src="Zetbox.Cli.deps.json" target="zetbox" />
+    <file src="Zetbox.Cli.runtimeconfig.json" target="zetbox" />
     <file src="Zetbox.Cli.pdb" target="zetbox" />
 
     <file src="Zetbox.ConfigEditor.exe" target="zetbox" />
+    <file src="Zetbox.ConfigEditor.dll" target="zetbox" />
+    <file src="Zetbox.ConfigEditor.deps.json" target="zetbox" />
+    <file src="Zetbox.ConfigEditor.runtimeconfig.json" target="zetbox" />
     <file src="Zetbox.ConfigEditor.pdb" target="zetbox" />
 
     <file src="Zetbox.Server.Service.exe" target="zetbox" />
+    <file src="Zetbox.Server.Service.dll" target="zetbox" />
+    <file src="Zetbox.Server.Service.deps.json" target="zetbox" />
+    <file src="Zetbox.Server.Service.runtimeconfig.json" target="zetbox" />
     <file src="Zetbox.Server.Service.pdb" target="zetbox" />
 
     <file src="Zetbox.WPF.exe" target="zetbox" />
+    <file src="Zetbox.WPF.dll" target="zetbox" />
+    <file src="Zetbox.WPF.deps.json" target="zetbox" />
+    <file src="Zetbox.WPF.runtimeconfig.json" target="zetbox" />
     <file src="Zetbox.WPF.pdb" target="zetbox" />
 
     <file src="PrepareEnv.exe" target="zetbox" />
+    <file src="PrepareEnv.dll" target="zetbox" />
+    <file src="PrepareEnv.deps.json" target="zetbox" />
+    <file src="PrepareEnv.runtimeconfig.json" target="zetbox" />
     <file src="PrepareEnv.pdb" target="zetbox" />
+
+	<!-- dotnet -->
+    <file src="Microsoft.*" target="zetbox" />
+    <file src="System.*" target="zetbox" />
 
     <file src="ZbDeploy.cmd" target="zetbox" />
     <file src="ZbLocalPull.cmd" target="zetbox" />
@@ -69,6 +88,7 @@
     <file src="Common/MigraDoc.DocumentObjectModel.dll" target="zetbox\Common" />
     <file src="Common/MigraDoc.Rendering.dll" target="zetbox\Common" />
     <file src="Common/MigraDoc.RtfRendering.dll" target="zetbox\Common" />
+    <file src="Common/MimeTypesMap.dll" target="zetbox\Common" />
     <file src="Common/Mono.Cecil.dll" target="zetbox\Common" />
     <file src="Common/Mono.Cecil.Mdb.dll" target="zetbox\Common" />
     <file src="Common/Mono.Cecil.Pdb.dll" target="zetbox\Common" />
@@ -128,23 +148,36 @@
     <!-- Empty folder <file src="..\..\Modules\ZetboxUtils\**" target="zetbox/Modules/ZetboxUtils" />-->
 
     <!-- HttpService loose files -->
-    <file src="HttpService/wwwroot/**" target="zetbox/HttpService" exclude="HttpService/wwwroot" />
+    <file src="HttpService/wwwroot/**" target="zetbox/HttpService/wwwroot" />
 
     <!-- HttpService Component -->
+    <file src="HttpService\Zetbox.Server.HttpService.exe" target="zetbox/HttpService" />
     <file src="HttpService\Zetbox.Server.HttpService.dll" target="zetbox/HttpService" />
+    <file src="HttpService\Zetbox.Server.HttpService.deps.json" target="zetbox/HttpService" />
+    <file src="HttpService\Zetbox.Server.HttpService.runtimeconfig.json" target="zetbox/HttpService" />
     <file src="HttpService\Zetbox.Server.HttpService.pdb" target="zetbox/HttpService" />
+    <file src="HttpService\Zetbox.Server.HttpService.Views.dll" target="zetbox/HttpService" />
+    <file src="HttpService\Zetbox.Server.HttpService.Views.pdb" target="zetbox/HttpService" />
 
     <!-- HttpService Dependencies -->
     <file src="HttpService\Autofac.dll" target="zetbox/HttpService" />
     <file src="HttpService\Autofac.Configuration.dll" target="zetbox/HttpService" />
+    <file src="HttpService\Autofac.Extensions.DependencyInjection.dll" target="zetbox/HttpService" />
     <file src="HttpService\log4net.dll" target="zetbox/HttpService" />
-    <file src="HttpService\Zetbox.API.dll" target="zetbox/HttpService" />
+    <file src="HttpService\Newtonsoft.Json.dll" target="zetbox/HttpService" />
+    <file src="HttpService\NuGet.Frameworks.dll" target="zetbox/HttpService" />
+	<file src="HttpService\dotnet-aspnet-codegenerator-design.dll" target="zetbox/HttpService" />
 
     <file src="*.targets" target="tools" />
 
     <file src="Init-zetboxBasic.ps1" target="tools/Init.ps1" />
     <file src="env.xml" target="tools" />
     <file src="PrepareEnv.exe" target="tools" />
+    <file src="PrepareEnv.dll" target="tools" />
+    <file src="PrepareEnv.deps.json" target="tools" />
+    <file src="PrepareEnv.runtimeconfig.json" target="tools" />
+
+    <file src="runtimes/**" target="tools/runtimes" />
 
     <!-- this is required to avoid being seen as empty package by nuget -->
     <!-- see #595 and #2590 on the nuget issue tracker                  -->

@@ -31,6 +31,8 @@
     <file src="Server\Fallback\Zetbox.Objects.NHibernateImpl.dll" target="zetbox/Server/Fallback" />
     <file src="Server\Fallback\Zetbox.Objects.NHibernateImpl.pdb" target="zetbox/Server/Fallback" />
 
+    <file src="Init-binaries.ps1" target="tools/Init.ps1" />
+
     <!-- this is required to avoid being seen as empty package by nuget -->
     <!-- see #595 and #2590 on the nuget issue tracker                  -->
     <file src="README.zetbox.txt" target="content" />
