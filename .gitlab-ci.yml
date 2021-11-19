@@ -12,7 +12,7 @@ build-zetbox:
   stage: build
   image: mcr.microsoft.com/dotnet/sdk:5.0
   tags:
-    - Linux  
+    - Windows  
   script: |
     dotnet --info
     ls -la
@@ -29,7 +29,7 @@ create-artifacts:
   stage: deploy
   image: mcr.microsoft.com/dotnet/sdk:5.0
   tags:
-    - Linux  
+    - Windows  
   script: |
     echo "Creating local packages"
     rm publish/*.nupkg || true
@@ -71,7 +71,7 @@ publish-master:
   stage: publish
   image: mcr.microsoft.com/dotnet/sdk:5.0
   tags:
-    - Linux
+    - Windows
   only:
     refs:
       - master
