@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+	  <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Zetbox.Objects.MemoryImpl</RootNamespace>
     <AssemblyName>Zetbox.Objects.MemoryImpl</AssemblyName>
 	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -45,7 +45,7 @@
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Zetbox.Objects</Name>
-      <Private>False</Private>
+	    <PrivateAssets>all</PrivateAssets>
     </ProjectReference>
     <Reference Include="Zetbox.DalProvider.Base">
       <SpecificVersion>False</SpecificVersion>

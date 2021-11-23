@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProductVersion>9.0.30729</ProductVersion>
-    <TargetFramework>netstandard2.1</TargetFramework>
+	  <TargetFramework>net5.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <SignAssembly>true</SignAssembly>
@@ -34,7 +34,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="log4net" Version="2.0.10" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="3.1.8" />
@@ -57,7 +56,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
     <ProjectReference Include="..\Zetbox.Assets\Zetbox.Assets.csproj" />
-    <ProjectReference Include="..\Zetbox.Objects.Fallback\Zetbox.Objects.csproj" />
+    <ProjectReference Include="..\Zetbox.Objects.Fallback\Zetbox.Objects.csproj">
+	    <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Zetbox.snk" />

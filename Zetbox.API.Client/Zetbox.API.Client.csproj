@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<ProductVersion>9.0.30729</ProductVersion>
-		<TargetFramework>netstandard2.1</TargetFramework>
+		<TargetFramework>net5.0</TargetFramework>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 		<SignAssembly>true</SignAssembly>
@@ -52,7 +52,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
-		<ProjectReference Include="..\Zetbox.Objects.Fallback\Zetbox.Objects.csproj" />
+		<ProjectReference Include="..\Zetbox.Objects.Fallback\Zetbox.Objects.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="ClassDiagram.Zetbox.API.Client.cd" />

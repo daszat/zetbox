@@ -1,88 +1,88 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>Zetbox.Objects.NHibernateImpl</RootNamespace>
-    <AssemblyName>Zetbox.Objects.NHibernateImpl</AssemblyName>
-	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
-    <!-- this is referenced by the generator to put the results in their right place -->
-    <RelativeOutputPath>Server</RelativeOutputPath>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn>1591,0168,0414,0219</NoWarn>
-    <BuildDependsOn>$(BuildDependsOn);AfterBuildMigrated</BuildDependsOn>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\$(Configuration)\Server\Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
-    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\$(Configuration)\</ZetboxAPIPath>
-    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\$(Configuration)\Server\Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
-    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\$(Configuration)\</ZetboxAPIPath>
-    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
-  </PropertyGroup>
-  <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
-  <PropertyGroup>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.10" />
-    <PackageReference Include="Autofac" Version="5.2.0" />
-    <Reference Include="Zetbox.API">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
-      <Private>False</Private>
-    </Reference>  
-    <!-- local reference to newly generated code -->
-    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
-      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Zetbox.Objects</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <Reference Include="Zetbox.DalProvider.Base">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Zetbox.API.Common">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Zetbox.API.Server">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Server\Zetbox.API.Server.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Zetbox.DalProvider.NHibernate">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Server\Zetbox.DalProvider.NHibernate.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="NHibernate">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Server\NHibernate.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Zetbox.DalProvider.Base">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Zetbox.Objects.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="*.hbm.xml" />
-    <EmbeddedResource Include="*/*.hbm.xml" />
-  </ItemGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<RootNamespace>Zetbox.Objects.NHibernateImpl</RootNamespace>
+		<AssemblyName>Zetbox.Objects.NHibernateImpl</AssemblyName>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
+		<!-- this is referenced by the generator to put the results in their right place -->
+		<RelativeOutputPath>Server</RelativeOutputPath>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<NoWarn>1591,0168,0414,0219</NoWarn>
+		<BuildDependsOn>$(BuildDependsOn);AfterBuildMigrated</BuildDependsOn>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+		<!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+		<OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\$(Configuration)\Server\Fallback\</OutputPath>
+		<OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
+		<ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\$(Configuration)\</ZetboxAPIPath>
+		<ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+		<OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\$(Configuration)\Server\Fallback\</OutputPath>
+		<OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
+		<ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\$(Configuration)\</ZetboxAPIPath>
+		<ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
+	</PropertyGroup>
+	<!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
+	<PropertyGroup>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="log4net" Version="2.0.10" />
+		<PackageReference Include="Autofac" Version="5.2.0" />
+		<Reference Include="Zetbox.API">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<!-- local reference to newly generated code -->
+		<ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
+			<Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+			<Name>Zetbox.Objects</Name>
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<Reference Include="Zetbox.DalProvider.Base">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Zetbox.API.Common">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.Common.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Zetbox.API.Server">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(ZetboxAPIPath)\Server\Zetbox.API.Server.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Zetbox.DalProvider.NHibernate">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(ZetboxAPIPath)\Server\Zetbox.DalProvider.NHibernate.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="NHibernate">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(ZetboxAPIPath)\Server\NHibernate.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Zetbox.DalProvider.Base">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Zetbox.Objects.snk" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="*.hbm.xml" />
+		<EmbeddedResource Include="*/*.hbm.xml" />
+	</ItemGroup>
 </Project>

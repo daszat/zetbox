@@ -1,57 +1,59 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <RootNamespace>Zetbox.API</RootNamespace>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <StartupObject />
-    <StartAction>Program</StartAction>
-    <StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
-    <StartArguments>Zetbox.API.Tests.nunit /config:Studio</StartArguments>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
-    <NoWarn>1591</NoWarn>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
-    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
-    <AssemblyTitle>Zetbox.API.Tests</AssemblyTitle>
-    <Company>dasz.at OG</Company>
-    <Product>zetbox</Product>
-    <Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-    <OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Autofac" Version="5.2.0" />
-    <PackageReference Include="log4net" Version="2.0.10" />
-    <PackageReference Include="NUnit" Version="3.12.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
-    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
-    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj" />
-    <ProjectReference Include="..\Zetbox.API.AbstractConsumerTests\Zetbox.API.AbstractConsumerTests.csproj" />
-    <ProjectReference Include="..\Zetbox.API.Mocks\Zetbox.API.Mocks.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Zetbox.API.Tests.nunit">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Zetbox.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TestConfig.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Properties\VersionInfo.Designer.cs" />
-  </ItemGroup>
+	<PropertyGroup>
+		<ProductVersion>9.0.30729</ProductVersion>
+		<RootNamespace>Zetbox.API</RootNamespace>
+		<TargetFramework>net5.0</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<StartupObject />
+		<StartAction>Program</StartAction>
+		<StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
+		<StartArguments>Zetbox.API.Tests.nunit /config:Studio</StartArguments>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
+		<NoWarn>1591</NoWarn>
+		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
+		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<AssemblyTitle>Zetbox.API.Tests</AssemblyTitle>
+		<Company>dasz.at OG</Company>
+		<Product>zetbox</Product>
+		<Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+		<OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="5.2.0" />
+		<PackageReference Include="log4net" Version="2.0.10" />
+		<PackageReference Include="NUnit" Version="3.12.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Zetbox.API.AbstractConsumerTests\Zetbox.API.AbstractConsumerTests.csproj" />
+		<ProjectReference Include="..\Zetbox.API.Mocks\Zetbox.API.Mocks.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Zetbox.API.Tests.nunit">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="Zetbox.snk" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="TestConfig.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Properties\VersionInfo.Designer.cs" />
+	</ItemGroup>
 </Project>

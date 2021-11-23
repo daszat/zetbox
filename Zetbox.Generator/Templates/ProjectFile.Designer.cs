@@ -35,7 +35,7 @@ namespace Zetbox.Generator.Templates
 #line 27 "D:\Projects\zetbox.core\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("<Project Sdk=\"Microsoft.NET.Sdk\">\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
-this.WriteObjects("    <TargetFramework>netstandard2.1</TargetFramework>\r\n");
+this.WriteObjects("    <TargetFramework>net5.0</TargetFramework>\r\n");
 this.WriteObjects("    <RootNamespace>",  GetAssemblyName() , "</RootNamespace>\r\n");
 this.WriteObjects("    <AssemblyName>",  GetAssemblyName() , "</AssemblyName>\r\n");
 this.WriteObjects("	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>\r\n");

@@ -165,7 +165,7 @@ namespace Zetbox.API
                 {
                     if (_shutdownTimeout.HasValue && !_processingThread.Join(_shutdownTimeout.Value))
                     {
-                        _processingThread.Abort();
+                        Log.Warn("Cannot abort thread");
                     }
                     else if (!_shutdownTimeout.HasValue)
                     {

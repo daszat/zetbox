@@ -1,32 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
-    <AssemblyTitle>Zetbox.App.Tests.Client.WPF</AssemblyTitle>
-    <Product>Zetbox.App.Tests.Client.WPF</Product>
-    <Copyright>Copyright ©  2015</Copyright>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-    <OutputPath>..\..\bin\$(Configuration)\Client\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Autofac" Version="5.2.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
-    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
-    <ProjectReference Include="..\..\Zetbox.Client.WPF.Toolkit\Zetbox.Client.WPF.Toolkit.csproj" />
-    <ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj" />
-    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj" />
-    <ProjectReference Include="..\Zetbox.App.Tests.Client\Zetbox.App.Tests.Client.csproj" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<AssemblyTitle>Zetbox.App.Tests.Client.WPF</AssemblyTitle>
+		<Product>Zetbox.App.Tests.Client.WPF</Product>
+		<Copyright>Copyright ©  2015</Copyright>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+		<OutputPath>..\..\bin\$(Configuration)\Client\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<OutputPath>bin\$(Configuration)\</OutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="5.2.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Client.WPF.Toolkit\Zetbox.Client.WPF.Toolkit.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Zetbox.App.Tests.Client\Zetbox.App.Tests.Client.csproj" />
+	</ItemGroup>
 </Project>

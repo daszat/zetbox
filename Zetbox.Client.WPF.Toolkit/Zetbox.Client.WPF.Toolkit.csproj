@@ -53,7 +53,9 @@
     <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
     <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
     <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj" />
-    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" />
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" >
+	    <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
     <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
   </ItemGroup>
   <ItemGroup>

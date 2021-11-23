@@ -1,31 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
-    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
-    <AssemblyTitle>Zetbox.App.Tests.Server</AssemblyTitle>
-    <Product>Zetbox.App.Tests.Server</Product>
-    <Copyright>Copyright ©  2015</Copyright>
-    <OutputPath>..\..\bin\$(Configuration)\Server\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Autofac" Version="5.2.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Zetbox.API.Server\Zetbox.API.Server.csproj" />
-    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
-    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj" />
-    <ProjectReference Include="..\Zetbox.App.Tests.Common\Zetbox.App.Tests.Common.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Properties\VersionInfo.Designer.cs" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<AssemblyTitle>Zetbox.App.Tests.Server</AssemblyTitle>
+		<Product>Zetbox.App.Tests.Server</Product>
+		<Copyright>Copyright ©  2015</Copyright>
+		<OutputPath>..\..\bin\$(Configuration)\Server\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="5.2.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Zetbox.API.Server\Zetbox.API.Server.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Zetbox.App.Tests.Common\Zetbox.App.Tests.Common.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Properties\VersionInfo.Designer.cs" />
+	</ItemGroup>
 </Project>

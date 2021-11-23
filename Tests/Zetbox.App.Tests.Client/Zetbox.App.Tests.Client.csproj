@@ -1,88 +1,90 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
-    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
-    <AssemblyTitle>Zetbox.App.Tests.Client</AssemblyTitle>
-    <Product>Zetbox.App.Tests.Client</Product>
-    <Copyright>Copyright ©  2015</Copyright>
-    <OutputPath>..\..\bin\$(Configuration)\Client\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Arebis.CodeGeneration" Version="1.3.6" />
-    <PackageReference Include="Arebis.CodeGenerator" Version="1.3.6" />
-    <PackageReference Include="Autofac" Version="5.2.0" />
-    <PackageReference Include="System.CodeDom" Version="4.7.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="DerivedReportTest\Common\DocumentStyles.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DocumentStyles.cst</DependentUpon>
-    </Compile>
-    <Compile Update="Projekte\Reporting\Common\DocumentInfo.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DocumentInfo.cst</DependentUpon>
-    </Compile>
-    <Compile Update="Projekte\Reporting\Common\DocumentStyles.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DocumentStyles.cst</DependentUpon>
-    </Compile>
-    <Compile Update="Projekte\Reporting\Common\PageSetup.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PageSetup.cst</DependentUpon>
-    </Compile>
-    <Compile Update="Projekte\Reporting\ProjectReport.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProjectReport.cst</DependentUpon>
-    </Compile>
-    <Compile Update="ViewModels\LicenseManagement\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="DerivedReportTest\Common\DocumentStyles.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>DocumentStyles.Designer.cs</LastGenOutput>
-    </None>
-    <None Update="Projekte\Reporting\Common\DocumentInfo.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>DocumentInfo.Designer.cs</LastGenOutput>
-    </None>
-    <None Update="Projekte\Reporting\Common\DocumentStyles.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>DocumentStyles.Designer.cs</LastGenOutput>
-    </None>
-    <None Update="Projekte\Reporting\Common\PageSetup.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>PageSetup.Designer.cs</LastGenOutput>
-    </None>
-    <None Update="Projekte\Reporting\ProjectReport.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>ProjectReport.Designer.cs</LastGenOutput>
-    </None>
-    <EmbeddedResource Include="ViewModels\LicenseManagement\test.cer" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
-    <ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
-    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
-    <ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj" />
-    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj" />
-    <ProjectReference Include="..\Zetbox.App.Tests.Common\Zetbox.App.Tests.Common.csproj" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<AssemblyTitle>Zetbox.App.Tests.Client</AssemblyTitle>
+		<Product>Zetbox.App.Tests.Client</Product>
+		<Copyright>Copyright ©  2015</Copyright>
+		<OutputPath>..\..\bin\$(Configuration)\Client\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Arebis.CodeGeneration" Version="1.3.6" />
+		<PackageReference Include="Arebis.CodeGenerator" Version="1.3.6" />
+		<PackageReference Include="Autofac" Version="5.2.0" />
+		<PackageReference Include="System.CodeDom" Version="4.7.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="DerivedReportTest\Common\DocumentStyles.Designer.cs">
+			<AutoGen>True</AutoGen>
+			<DesignTime>True</DesignTime>
+			<DependentUpon>DocumentStyles.cst</DependentUpon>
+		</Compile>
+		<Compile Update="Projekte\Reporting\Common\DocumentInfo.Designer.cs">
+			<AutoGen>True</AutoGen>
+			<DesignTime>True</DesignTime>
+			<DependentUpon>DocumentInfo.cst</DependentUpon>
+		</Compile>
+		<Compile Update="Projekte\Reporting\Common\DocumentStyles.Designer.cs">
+			<AutoGen>True</AutoGen>
+			<DesignTime>True</DesignTime>
+			<DependentUpon>DocumentStyles.cst</DependentUpon>
+		</Compile>
+		<Compile Update="Projekte\Reporting\Common\PageSetup.Designer.cs">
+			<AutoGen>True</AutoGen>
+			<DesignTime>True</DesignTime>
+			<DependentUpon>PageSetup.cst</DependentUpon>
+		</Compile>
+		<Compile Update="Projekte\Reporting\ProjectReport.Designer.cs">
+			<AutoGen>True</AutoGen>
+			<DesignTime>True</DesignTime>
+			<DependentUpon>ProjectReport.cst</DependentUpon>
+		</Compile>
+		<Compile Update="ViewModels\LicenseManagement\Resources.Designer.cs">
+			<AutoGen>True</AutoGen>
+			<DesignTime>True</DesignTime>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="DerivedReportTest\Common\DocumentStyles.cst">
+			<Generator>Arebis Template Processor</Generator>
+			<LastGenOutput>DocumentStyles.Designer.cs</LastGenOutput>
+		</None>
+		<None Update="Projekte\Reporting\Common\DocumentInfo.cst">
+			<Generator>Arebis Template Processor</Generator>
+			<LastGenOutput>DocumentInfo.Designer.cs</LastGenOutput>
+		</None>
+		<None Update="Projekte\Reporting\Common\DocumentStyles.cst">
+			<Generator>Arebis Template Processor</Generator>
+			<LastGenOutput>DocumentStyles.Designer.cs</LastGenOutput>
+		</None>
+		<None Update="Projekte\Reporting\Common\PageSetup.cst">
+			<Generator>Arebis Template Processor</Generator>
+			<LastGenOutput>PageSetup.Designer.cs</LastGenOutput>
+		</None>
+		<None Update="Projekte\Reporting\ProjectReport.cst">
+			<Generator>Arebis Template Processor</Generator>
+			<LastGenOutput>ProjectReport.Designer.cs</LastGenOutput>
+		</None>
+		<EmbeddedResource Include="ViewModels\LicenseManagement\test.cer" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Zetbox.App.Tests.Common\Zetbox.App.Tests.Common.csproj" />
+	</ItemGroup>
 </Project>

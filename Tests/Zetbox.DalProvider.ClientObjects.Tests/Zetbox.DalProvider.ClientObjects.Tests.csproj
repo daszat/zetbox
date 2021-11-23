@@ -1,65 +1,67 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <RootNamespace>Zetbox.DalProvider.Client</RootNamespace>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <StartAction>Program</StartAction>
-    <StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
-    <StartArguments>Zetbox.DalProvider.ClientObjects.Tests.nunit /config:Studio</StartArguments>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
-    <NoWarn>1591</NoWarn>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
-    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
-    <AssemblyTitle>Zetbox.DalProvider.Client.Tests</AssemblyTitle>
-    <Company>dasz.at OG</Company>
-    <Product>zetbox</Product>
-    <Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-    <OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\Tests</OutputPath>
-    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Autofac" Version="5.2.0" />
-    <PackageReference Include="log4net" Version="2.0.10" />
-    <PackageReference Include="NUnit" Version="3.12.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Zetbox.DalProvider.ClientObjects.Tests.nunit">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Zetbox.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
-    <ProjectReference Include="..\..\Zetbox.API.Server\Zetbox.API.Server.csproj" />
-    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
-    <ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj" />
-    <ProjectReference Include="..\..\Zetbox.DalProvider.Base\Zetbox.DalProvider.Base.csproj" />
-    <ProjectReference Include="..\..\Zetbox.DalProvider.ClientObjects\Zetbox.DalProvider.ClientObjects.csproj" />
-    <ProjectReference Include="..\..\Zetbox.DalProvider.Memory\Zetbox.DalProvider.Memory.csproj" />
-    <ProjectReference Include="..\..\Zetbox.Objects.Memory\Zetbox.Objects.Memory.csproj" />
-    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj" />
-    <ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
-    <ProjectReference Include="..\Zetbox.API.AbstractConsumerTests\Zetbox.API.AbstractConsumerTests.csproj" />
-    <ProjectReference Include="..\Zetbox.API.Tests\Zetbox.API.Tests.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Properties\VersionInfo.Designer.cs" />
-  </ItemGroup>
+	<PropertyGroup>
+		<ProductVersion>9.0.30729</ProductVersion>
+		<RootNamespace>Zetbox.DalProvider.Client</RootNamespace>
+		<TargetFramework>net5.0</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<StartAction>Program</StartAction>
+		<StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
+		<StartArguments>Zetbox.DalProvider.ClientObjects.Tests.nunit /config:Studio</StartArguments>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
+		<NoWarn>1591</NoWarn>
+		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
+		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<AssemblyTitle>Zetbox.DalProvider.Client.Tests</AssemblyTitle>
+		<Company>dasz.at OG</Company>
+		<Product>zetbox</Product>
+		<Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+		<OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>..\..\bin\Debug\Tests</OutputPath>
+		<DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="5.2.0" />
+		<PackageReference Include="log4net" Version="2.0.10" />
+		<PackageReference Include="NUnit" Version="3.12.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Zetbox.DalProvider.ClientObjects.Tests.nunit">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="Zetbox.snk" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API.Server\Zetbox.API.Server.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.DalProvider.Base\Zetbox.DalProvider.Base.csproj" />
+		<ProjectReference Include="..\..\Zetbox.DalProvider.ClientObjects\Zetbox.DalProvider.ClientObjects.csproj" />
+		<ProjectReference Include="..\..\Zetbox.DalProvider.Memory\Zetbox.DalProvider.Memory.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Objects.Memory\Zetbox.Objects.Memory.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
+		<ProjectReference Include="..\Zetbox.API.AbstractConsumerTests\Zetbox.API.AbstractConsumerTests.csproj" />
+		<ProjectReference Include="..\Zetbox.API.Tests\Zetbox.API.Tests.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Properties\VersionInfo.Designer.cs" />
+	</ItemGroup>
 </Project>

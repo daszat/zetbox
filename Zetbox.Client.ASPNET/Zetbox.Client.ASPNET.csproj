@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -17,7 +17,9 @@
     <ProjectReference Include="..\Zetbox.Assets\Zetbox.Assets.csproj" />
     <ProjectReference Include="..\Zetbox.Client.ASPNET.Toolkit\Zetbox.Client.ASPNET.Toolkit.csproj" />
     <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj" />
-    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" />
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" >
+	    <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

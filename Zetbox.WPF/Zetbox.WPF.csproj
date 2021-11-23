@@ -1,54 +1,55 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <NoWin32Manifest>true</NoWin32Manifest>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
-    <AssemblyTitle>Zetbox.WPF</AssemblyTitle>
-    <Company>dasz.at OG</Company>
-    <Product>zetbox</Product>
-    <Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
-    <OutputPath>..\bin\$(Configuration)\</OutputPath>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>full</DebugType>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Autofac" Version="5.2.0" />
-    <PackageReference Include="GitVersionTask" Version="5.3.7">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="3.1.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
-    <ProjectReference Include="..\Zetbox.Client.WPF\Zetbox.Client.WPF.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="SplashScreenImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="AppIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="obj\x86\Debug\GitVersionInformation.g.cs" />
-    <Compile Remove="obj\x86\Debug\GitVersionTaskAssemblyInfo.g.cs" />
-  </ItemGroup>
+	<PropertyGroup>
+		<ProductVersion>8.0.30703</ProductVersion>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+		<NoWin32Manifest>true</NoWin32Manifest>
+		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<AssemblyTitle>Zetbox.WPF</AssemblyTitle>
+		<Company>dasz.at OG</Company>
+		<Product>zetbox</Product>
+		<Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
+		<OutputPath>..\bin\$(Configuration)\</OutputPath>
+		<UseWPF>true</UseWPF>
+		<GenerateDependencyFile>false</GenerateDependencyFile>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<DebugType>full</DebugType>
+		<UseVSHostingProcess>false</UseVSHostingProcess>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+	</PropertyGroup>
+	<PropertyGroup>
+		<ApplicationIcon>AppIcon.ico</ApplicationIcon>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="5.2.0" />
+		<PackageReference Include="GitVersionTask" Version="5.3.7">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="3.1.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\Zetbox.Client.WPF\Zetbox.Client.WPF.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Resource Include="SplashScreenImage.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="AppIcon.ico" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="obj\x86\Debug\GitVersionInformation.g.cs" />
+		<Compile Remove="obj\x86\Debug\GitVersionTaskAssemblyInfo.g.cs" />
+	</ItemGroup>
 </Project>

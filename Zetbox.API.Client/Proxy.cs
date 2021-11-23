@@ -443,7 +443,8 @@ namespace Zetbox.API.Client
                 }
                 else if (resultStream.Length > 0)
                 {
-                    result = new BinaryFormatter().Deserialize(resultStream);
+                    // result = new BinaryFormatter().Deserialize(resultStream);
+                    throw new NotSupportedException("Returning a generic result form a sever side method call is not supported.");
                 }
                 else
                 {

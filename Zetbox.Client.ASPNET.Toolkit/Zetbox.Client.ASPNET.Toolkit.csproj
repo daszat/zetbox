@@ -5,6 +5,7 @@
 		<OutputType>Library</OutputType>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<NoWarn>1591</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -28,7 +29,9 @@
 		<ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
 		<ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
 		<ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj" />
-		<ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" />
+		<ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" >
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
 	</ItemGroup>
 
 	<ItemGroup>

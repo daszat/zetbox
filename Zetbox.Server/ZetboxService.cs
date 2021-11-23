@@ -462,13 +462,15 @@ namespace Zetbox.Server
                         Logging.Facade.DebugFormat("Serializing method result type is '{0}'", result.GetType().FullName);
                     }
 
-                    if (result != null && result.GetType() == typeof(string))
+                    if (result != null && result is string)
                     {
                         Logging.Facade.Debug("Serializing method result as string");
                         // string is also a IEnumerable, but FindElementTypes returns nothing
                         MemoryStream resultStream = new MemoryStream();
-                        new BinaryFormatter().Serialize(resultStream, result);
-                        return resultStream.ToArray();
+                        // new BinaryFormatter().Serialize(resultStream, result);
+                        // return resultStream.ToArray();
+                        throw new NotSupportedException("Returning a generic result form a sever side method call is not supported.");
+
                     }
                     else if (result != null && result.GetType().IsIStreamable())
                     {
@@ -486,8 +488,9 @@ namespace Zetbox.Server
                     {
                         Logging.Facade.Debug("Serializing method result as object with BinaryFormatter");
                         MemoryStream resultStream = new MemoryStream();
-                        new BinaryFormatter().Serialize(resultStream, result);
-                        return resultStream.ToArray();
+                        // new BinaryFormatter().Serialize(resultStream, result);
+                        // return resultStream.ToArray();
+                        throw new NotSupportedException("Returning a generic result form a sever side method call is not supported.");
                     }
                     else
                     {
