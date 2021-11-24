@@ -6,14 +6,15 @@ cp -r ./bin/Release/Common ./bin/Release/HttpService
 cp -r ./bin/Release/Server ./bin/Release/HttpService
 cp -r ./Configs ./bin/Release
 
+version="$(gitversion -nofetch -showvariable NuGetVersionV2)"
+echo "Version = $version"
+
+echo "@nuget install ZetboxBasic -Version $version -OutputDirectory \"%~dp0\bin\"" > publish/DownloadZetbox.cmd
+
 # publish
 rm publish/*.nupkg || true
 rm publish/*.nuspec || true
 cp publish/* ./bin/Release
-
-
-version="$(gitversion -nofetch -showvariable NuGetVersionV2)"
-echo "Version = $version"
 
 echo ""
 echo "Converting files"
