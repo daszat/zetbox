@@ -50,6 +50,9 @@ namespace Zetbox.API.Client
             if (readerFactory == null) throw new ArgumentNullException("readerFactory");
             if (writerFactory == null) throw new ArgumentNullException("writerFactory");
 
+            if (string.IsNullOrWhiteSpace(config.Client?.ServiceUri))
+                throw new InvalidOperationException("ServiceUri is not configured");
+
             SetObjectsUri = new Uri(config.Client?.ServiceUri + "/SetObjects");
             GetObjectsUri = new Uri(config.Client?.ServiceUri + "/GetObjects");
             GetListOfUri = new Uri(config.Client?.ServiceUri + "/GetListOf");

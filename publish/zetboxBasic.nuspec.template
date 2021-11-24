@@ -161,7 +161,6 @@
     <!-- HttpService Component -->
     <file src="HttpService\Zetbox.Server.HttpService.exe" target="zetbox/HttpService" />
     <file src="HttpService\Zetbox.Server.HttpService.dll" target="zetbox/HttpService" />
-    <file src="HttpService\Zetbox.Server.HttpService.deps.json" target="zetbox/HttpService" />
     <file src="HttpService\Zetbox.Server.HttpService.runtimeconfig.json" target="zetbox/HttpService" />
     <file src="HttpService\Zetbox.Server.HttpService.pdb" target="zetbox/HttpService" />
     <file src="HttpService\Zetbox.Server.HttpService.Views.dll" target="zetbox/HttpService" />

@@ -14,7 +14,7 @@
       <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
   </ItemGroup>
-  <Target Name="BeforeBuild">
+  <Target Name="PrepareEnv" BeforeTargets="BeforeBuild">
     <Exec WorkingDirectory="$(SolutionDir)" Command="$(PrepareEnvCommand) .zetbox" />
   </Target>
 </Project>
