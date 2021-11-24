@@ -14,7 +14,7 @@
     <copyright>Copyright © 2019 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
-	  <group targetFramework="netstandard21">
+	  <group targetFramework="net50">
 		  <dependency id="zetboxBasic" version="[##version##]" />
 
 		  <dependency id="Arebis.CodeGeneration" version="[1.3.6,2)" />
@@ -31,15 +31,13 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Common\Zetbox.API.dll" target="lib\netstandard2.1" />
-    <file src="Common\Zetbox.API.pdb" target="lib\netstandard2.1" />
-    <file src="Common\Zetbox.API.xml" target="lib\netstandard2.1" />
-    <file src="Common\Zetbox.API.Common.dll" target="lib\netstandard2.1" />
-    <file src="Common\Zetbox.API.Common.pdb" target="lib\netstandard2.1" />
-    <file src="Common\Zetbox.API.Common.xml" target="lib\netstandard2.1" />
-    <file src="Common\Zetbox.Assets.dll" target="lib\netstandard2.1" />
-    <file src="Common\Zetbox.Assets.pdb" target="lib\netstandard2.1" />
-
-    <file src="install-references.ps1" target="tools\install.ps1" />
+    <file src="Common\Zetbox.API.dll" target="lib\net5.0" />
+    <file src="Common\Zetbox.API.pdb" target="lib\net5.0" />
+    <file src="Common\Zetbox.API.xml" target="lib\net5.0" />
+    <file src="Common\Zetbox.API.Common.dll" target="lib\net5.0" />
+    <file src="Common\Zetbox.API.Common.pdb" target="lib\net5.0" />
+    <file src="Common\Zetbox.API.Common.xml" target="lib\net5.0" />
+    <file src="Common\Zetbox.Assets.dll" target="lib\net5.0" />
+    <file src="Common\Zetbox.Assets.pdb" target="lib\net5.0" />
   </files>
 </package>
