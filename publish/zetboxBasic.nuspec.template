@@ -189,6 +189,7 @@
     <file src="runtimes/**" target="tools/runtimes" />
     <file src="runtimes/**" target="zetbox/runtimes" />
 
+	<file src="Init-zetboxBasic.ps1" target="tools/Init.ps1" />
     <!-- this is required to avoid being seen as empty package by nuget -->
     <!-- see #595 and #2590 on the nuget issue tracker                  -->
     <file src="README.zetbox.txt" target="content" />
