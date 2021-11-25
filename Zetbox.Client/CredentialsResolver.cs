@@ -66,8 +66,15 @@ namespace Zetbox.Client
 
         public void InvalidCredentials()
         {
+            string name;
+
+            if (!string.IsNullOrEmpty(Thread.CurrentPrincipal?.Identity?.Name))
+                name = Thread.CurrentPrincipal.Identity.Name;
+            else
+                name = WindowsIdentity.GetCurrent()?.Name ?? string.Empty;
+
             throw new AuthenticationException(string.Format("You are not authorized to access this application. (username={0})",
-                Thread.CurrentPrincipal.Identity != null && !string.IsNullOrWhiteSpace(Thread.CurrentPrincipal.Identity.Name) ? Thread.CurrentPrincipal.Identity.Name : "<empty>"));
+                !string.IsNullOrWhiteSpace(name) ? name : "<empty>"));
         }
 
         public void Freeze()
