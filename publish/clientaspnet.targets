@@ -6,17 +6,12 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <PropertyGroup>
-    <!-- deploys the compiled binaries into the local inetpub for debugging -->
-    <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">
-      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\bin"
-      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\bin"
-      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Client" "$(ProjectDir)\bin\Client"
-      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Npgsql.*" "$(ProjectDir)\bin"
-      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Mono.Security.*" "$(ProjectDir)\bin"
-    </PostBuildEvent>
-    <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
-      bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Client,Common,Server} "$(ProjectDir)/bin"'
-    </PostBuildEvent>
-  </PropertyGroup>
+  <Target Name="CopyToHttpApp" BeforeTargets="AfterBuild">
+    <Exec WorkingDirectory="$(SolutionDir)" Command="echo copy from $(SolutionDir)\bin\$(Configuration)\ to $(ProjectDir)\bin" />
+    <Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Common&quot; &quot;$(ProjectDir)\bin&quot;" />
+    <Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Server&quot; &quot;$(ProjectDir)\bin&quot;" />
+    <Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Client&quot; &quot;$(ProjectDir)\bin\Client&quot;" />
+    <Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Npgsql.*&quot; &quot;$(ProjectDir)\bin&quot;" />
+    <Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Mono.Security.*&quot; &quot;$(ProjectDir)\bin&quot;" />
+  </Target>
 </Project>
