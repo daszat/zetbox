@@ -27,11 +27,12 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Autofac" Version="5.2.0" />
-		<PackageReference Include="BCrypt.Net-Next" Version="4.0.0" />
+		<PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
 		<PackageReference Include="GitVersionTask" Version="5.3.7">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 		<PackageReference Include="log4net" Version="2.0.10" />
+		<PackageReference Include="System.Security.Cryptography.Cng" Version="5.0.0" />
 		<PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
@@ -45,7 +46,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
-		<ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" >
+		<ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
 			<PrivateAssets>all</PrivateAssets>
 		</ProjectReference>
 		<ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
