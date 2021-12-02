@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
 namespace Zetbox.Client.ASPNET
 {
     using System;
@@ -10,7 +13,11 @@ namespace Zetbox.Client.ASPNET
 
     public interface IGenericDataObjectEditViewModel
     {
+        [BindNever]
+        [ValidateNever]
         IDataObject Object { get; }
+
+        [ValidateNever]
         DataObjectViewModel ViewModel { get; }
     }
 
@@ -58,6 +65,9 @@ namespace Zetbox.Client.ASPNET
         public int ID { get; set; }
 
         private TModel _object;
+
+        [BindNever]
+        [ValidateNever]
         public TModel Object
         {
             get
@@ -78,6 +88,8 @@ namespace Zetbox.Client.ASPNET
         }
 
         private TViewModel _viewModel;
+
+        [ValidateNever]
         public TViewModel ViewModel
         {
             get

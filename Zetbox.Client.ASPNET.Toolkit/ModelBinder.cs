@@ -39,20 +39,16 @@ namespace Zetbox.Client.ASPNET
 
     public class ZetboxViewModelBinder : ComplexTypeModelBinder, IZetboxViewModelBinder
     {
-        IViewModelFactory _vmf;
-        ZetboxContextHttpScope _scope;
-
-        public ZetboxViewModelBinder(IViewModelFactory vmf, ZetboxContextHttpScope scope, 
-            IDictionary<ModelMetadata, IModelBinder> propertyBinders, ILoggerFactory loggerFactory)
+        public ZetboxViewModelBinder(IDictionary<ModelMetadata, IModelBinder> propertyBinders, ILoggerFactory loggerFactory)
             : base(propertyBinders, loggerFactory, allowValidatingTopLevelNodes: true)
         {
-            _vmf = vmf;
-            _scope = scope;
         }
 
         protected override object CreateModel(ModelBindingContext bindingContext)
         {
-            return _vmf.CreateViewModel<ViewModel.Factory>(bindingContext.ModelType).Invoke(_scope.Context, null);
+            var vmf = bindingContext.HttpContext.RequestServices.GetRequiredService<IViewModelFactory>();
+            var scope = bindingContext.HttpContext.RequestServices.GetRequiredService<ZetboxContextHttpScope>();
+            return vmf.CreateViewModel<ViewModel.Factory>(bindingContext.ModelType).Invoke(scope.Context, null);
         }
     }
 
@@ -77,11 +73,7 @@ namespace Zetbox.Client.ASPNET
                     propertyBinders.Add(property, context.CreateBinder(property));
                 }
 
-                return new ZetboxViewModelBinder(
-                    context.Services.GetRequiredService<IViewModelFactory>(),
-                    context.Services.GetRequiredService<ZetboxContextHttpScope>(),
-                    propertyBinders,
-                    context.Services.GetRequiredService<ILoggerFactory>());
+                return new ZetboxViewModelBinder(propertyBinders, context.Services.GetRequiredService<ILoggerFactory>());
             }
 
             return null;

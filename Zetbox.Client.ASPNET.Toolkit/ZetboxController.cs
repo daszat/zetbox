@@ -46,7 +46,9 @@ namespace Zetbox.Client.ASPNET
             ModelState.Clear();
             if (vmdl == null) return;
 
+            vmdl.ValidationManager.Validate();
             vmdl.Validate();
+
             if (vmdl is DataObjectViewModel)
             {
                 foreach (var prop in ((DataObjectViewModel)vmdl).PropertyModels)

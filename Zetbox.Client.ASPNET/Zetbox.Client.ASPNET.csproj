@@ -1,29 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<GenerateDependencyFile>false</GenerateDependencyFile>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<OutputPath>bin\</OutputPath>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
-    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
-    <ProjectReference Include="..\Zetbox.API.Server\Zetbox.API.Server.csproj" />
-    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
-    <ProjectReference Include="..\Zetbox.Assets\Zetbox.Assets.csproj" />
-    <ProjectReference Include="..\Zetbox.Client.ASPNET.Toolkit\Zetbox.Client.ASPNET.Toolkit.csproj" />
-    <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj" />
-    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" >
-	    <PrivateAssets>all</PrivateAssets>
-    </ProjectReference>
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
+		<ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
+		<ProjectReference Include="..\Zetbox.API.Server\Zetbox.API.Server.csproj" />
+		<ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\Zetbox.Assets\Zetbox.Assets.csproj" />
+		<ProjectReference Include="..\Zetbox.Client.ASPNET.Toolkit\Zetbox.Client.ASPNET.Toolkit.csproj" />
+		<ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj" />
+		<ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" >
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+	</ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Common&quot; &quot;$(ProjectDir)\$(OutDir)\Common&quot;&#xD;&#xA;xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Server&quot; &quot;$(ProjectDir)\$(OutDir)\Server&quot;&#xD;&#xA;xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Client&quot; &quot;$(ProjectDir)\$(OutDir)\Client&quot;&#xD;&#xA;" />
-  </Target>
-
+	<Target Name="CopyToHttpApp" BeforeTargets="AfterBuild">
+		<Exec WorkingDirectory="$(SolutionDir)" Command="echo copy from $(SolutionDir)\bin\$(Configuration)\ to $(ProjectDir)\bin" />
+		<Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Common&quot; &quot;$(ProjectDir)\bin&quot;" />
+		<Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Server&quot; &quot;$(ProjectDir)\bin&quot;" />
+		<Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Server\Generated\*.*&quot; &quot;$(ProjectDir)\bin&quot;" />
+		<Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Client&quot; &quot;$(ProjectDir)\bin\Client&quot;" />
+		<Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Npgsql.*&quot; &quot;$(ProjectDir)\bin&quot;" />
+		<Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Mono.Security.*&quot; &quot;$(ProjectDir)\bin&quot;" />
+	</Target>
 </Project>
