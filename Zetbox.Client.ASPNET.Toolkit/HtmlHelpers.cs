@@ -261,6 +261,10 @@ namespace Zetbox.Client.ASPNET
             {
                 return templateName ?? "NullableIntPropertyViewModel";
             }
+            else if (typeof(NullableBoolPropertyViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "NullableBoolPropertyViewModel";
+            }
             else if (typeof(NullableDoublePropertyViewModel).IsAssignableFrom(type))
             {
                 return templateName ?? "NullableDoublePropertyViewModel";
