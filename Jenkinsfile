@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker { 
-			image 'mcr.microsoft.com/dotnet/sdk:5.0' 
+			// Not yet, missing windows 10/11 machine image 'mcr.microsoft.com/dotnet/sdk:5.0' 
 			label 'Windows' 
 		}
     }
@@ -12,11 +12,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-				sh 'dotnet publish --disable-parallel --ignore-failed-sources --configuration Release --output ./bin/Release/ Zetbox.Core.sln'
-				sh 'dotnet publish --disable-parallel --ignore-failed-sources --configuration Release --output ./bin/Release/HttpService Zetbox.Server.HttpService/Zetbox.Server.HttpService.csproj'
-				sh 'cp -r ./bin/Release/Common ./bin/Release/HttpService'
-				sh 'cp -r ./bin/Release/Server ./bin/Release/HttpService'
-				sh 'cp -r ./Configs ./bin/Release'
+				sh  '''
+				dotnet publish --disable-parallel --ignore-failed-sources --configuration Release --output ./bin/Release/ Zetbox.Core.sln
+				dotnet publish --disable-parallel --ignore-failed-sources --configuration Release --output ./bin/Release/HttpService Zetbox.Server.HttpService/Zetbox.Server.HttpService.csproj
+				cp -r ./bin/Release/Common ./bin/Release/HttpService
+				cp -r ./bin/Release/Server ./bin/Release/HttpService
+				cp -r ./Configs ./bin/Release
+				'''
 
 				archiveArtifacts artifacts: './bin', fingerprint: true
             }        
