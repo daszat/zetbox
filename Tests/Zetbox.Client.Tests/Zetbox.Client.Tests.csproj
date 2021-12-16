@@ -16,9 +16,6 @@
 		<Product>zetbox</Product>
 		<Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<PostBuildEvent>copy $(SolutionDir)\bin\Debug\Client\Generated\*.* $(TargetDir)</PostBuildEvent>
-		<PostBuildEvent>copy $(SolutionDir)\bin\Debug\Client\Generated\*.* $(TargetDir)</PostBuildEvent>
-		<PostBuildEvent>copy $(SolutionDir)\bin\Debug\Client\Generated\*.* $(TargetDir)</PostBuildEvent>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<DebugType>full</DebugType>
@@ -34,9 +31,6 @@
 		<Optimize>false</Optimize>
 		<OutputPath>..\..\bin\Debug\Tests</OutputPath>
 		<DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup>
-		<PostBuildEvent>copy $(SolutionDir)\bin\Debug\Client\Generated\*.* $(TargetDir)</PostBuildEvent>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Autofac" Version="5.2.0" />
@@ -70,4 +64,9 @@
 	<ItemGroup>
 		<Compile Remove="Properties\VersionInfo.Designer.cs" />
 	</ItemGroup>
+	<PropertyGroup>
+		<PostBuildEvent>
+			xcopy /y /q /s /e /i  "$(SolutionDir)\bin\Debug\Client\Generated\*.*" "$(MSBuildProjectDirectory)\bin\$(Configuration)"
+		</PostBuildEvent>
+	</PropertyGroup>
 </Project>

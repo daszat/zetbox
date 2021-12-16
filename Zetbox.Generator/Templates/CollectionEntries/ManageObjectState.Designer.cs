@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.CollectionEntries
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox.core\Zetbox.Generator\Templates\CollectionEntries\ManageObjectState.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\ManageObjectState.cst")]
     public partial class ManageObjectState : Zetbox.Generator.ResourceTemplate
     {
 
@@ -29,7 +29,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 28 "D:\Projects\zetbox.core\Zetbox.Generator\Templates\CollectionEntries\ManageObjectState.cst"
+#line 28 "D:\Projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\ManageObjectState.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        protected override void OnPropertyChanged(string property, object oldValue, object newValue)\r\n");
 this.WriteObjects("        {\r\n");

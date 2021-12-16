@@ -16,15 +16,6 @@
     <Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <BuildDependsOn>$(BuildDependsOn);AfterBuildMigrated</BuildDependsOn>
-    <PostBuildEvent>
-IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
-</PostBuildEvent>
-    <PostBuildEvent>
-IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
-</PostBuildEvent>
-    <PostBuildEvent>
-IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
-</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -77,4 +68,9 @@ IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
   <ItemGroup>
     <Compile Remove="Properties\VersionInfo.cs" />
   </ItemGroup>
+  <PropertyGroup>
+	  <PostBuildEvent>
+		  IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
+	  </PostBuildEvent>
+  </PropertyGroup>
 </Project>

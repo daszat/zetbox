@@ -3,7 +3,7 @@ using System;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\DiscriminatorColumnHbm.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\DiscriminatorColumnHbm.cst")]
     public partial class DiscriminatorColumnHbm : Zetbox.Generator.ResourceTemplate
     {
 		protected Zetbox.App.Base.TableMapping mappingType;
@@ -25,13 +25,13 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
         public override void Generate()
         {
-#line 23 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\DiscriminatorColumnHbm.cst"
+#line 23 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\DiscriminatorColumnHbm.cst"
 if (mappingType == Zetbox.App.Base.TableMapping.TPH) { 
-#line 24 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\DiscriminatorColumnHbm.cst"
+#line 24 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\DiscriminatorColumnHbm.cst"
 this.WriteObjects("        <discriminator column=\"`",  Zetbox.API.Server.TableMapper.DiscriminatorColumnName , "`\"\r\n");
 this.WriteObjects("                       type=\"String\" />\r\n");
 this.WriteObjects("\r\n");
-#line 27 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\DiscriminatorColumnHbm.cst"
+#line 27 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\DiscriminatorColumnHbm.cst"
 } 
 
         }

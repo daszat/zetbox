@@ -6,7 +6,7 @@ using Zetbox.API;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst")]
     public partial class Registrations : Zetbox.Generator.Templates.Registrations
     {
 
@@ -26,11 +26,11 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates
 
         public override void Generate()
         {
-#line 25 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+#line 25 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
 this.WriteObjects("\r\n");
-#line 26 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+#line 26 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
 base.Generate(); 
-#line 27 "D:\Projects\zetbox.core\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+#line 27 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("            builder\r\n");
 this.WriteObjects("                .Register<ISessionFactory>(\r\n");

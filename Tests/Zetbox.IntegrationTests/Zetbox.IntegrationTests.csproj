@@ -32,11 +32,6 @@
 		<PackageReference Include="NUnit" Version="3.12.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<Reference Include="Zetbox.Objects.ClientImpl">
-			<HintPath>..\..\bin\Debug\Client\Generated\Zetbox.Objects.ClientImpl.dll</HintPath>
-		</Reference>
-	</ItemGroup>
-	<ItemGroup>
 		<None Include="Zetbox.IntegrationTests.nunit">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
