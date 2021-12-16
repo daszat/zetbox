@@ -32,11 +32,6 @@
     <OutputPath>..\..\bin\Debug\Tests</OutputPath>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>
-IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
-</PostBuildEvent>
-  </PropertyGroup>
   <Target Name="BeforeBuildMigrated" BeforeTargets="PreBuildEvent" />
   <Target Name="AfterBuildMigrated" />
   <ItemGroup>

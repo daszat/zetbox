@@ -66,7 +66,7 @@
 	</ItemGroup>
 	<PropertyGroup>
 		<PostBuildEvent>
-			xcopy /y /q /s /e /i  "$(SolutionDir)\bin\Debug\Client\Generated\*.*" "$(MSBuildProjectDirectory)\bin\$(Configuration)"
+			IF EXIST "$(SolutionDir)\bin\Debug\Client\Generated" (xcopy /y /q /s /e /i  "$(SolutionDir)\bin\Debug\Client\Generated\*.*" "$(MSBuildProjectDirectory)\bin\$(Configuration)")
 		</PostBuildEvent>
 	</PropertyGroup>
 </Project>
