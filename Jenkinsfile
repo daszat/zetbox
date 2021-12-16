@@ -1,9 +1,10 @@
 pipeline {
     agent {
-        docker { 
-			// Not yet, missing windows 10/11 machine image 'mcr.microsoft.com/dotnet/sdk:5.0' 
-			label 'Windows' 
-		}
+	    // Not yet, missing windows 10/11 machine 
+        // docker { 
+		// 	image 'mcr.microsoft.com/dotnet/sdk:5.0' 
+		// }
+		label 'Windows' 
     }
     environment {
         HOME = '/tmp'
