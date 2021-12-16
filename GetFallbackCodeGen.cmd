@@ -8,10 +8,6 @@ rem *********** Interface ***********
 del /S /Q .\Zetbox.Objects.Fallback\*.* >nul
 xcopy /s /y bin\CodeGen\Zetbox.Objects\*.* .\Zetbox.Objects.Fallback >nul
 
-rem *********** Server - EF *********** 
-del /S /Q .\Zetbox.Objects.Ef.Fallback\*.* >nul
-xcopy /s /y bin\CodeGen\Zetbox.Objects.Ef\*.* .\Zetbox.Objects.Ef.Fallback >nul
-
 rem *********** Server - NHibernate *********** 
 del /S /Q .\Zetbox.Objects.NHibernate.Fallback\*.* >nul
 xcopy /s /y bin\CodeGen\Zetbox.Objects.NHibernate\*.* .\Zetbox.Objects.NHibernate.Fallback >nul

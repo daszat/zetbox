@@ -80,7 +80,10 @@ namespace Zetbox.DalProvider.NHibernate
 
             _sqlErrorTranslator = sqlErrorTranslator;
 
-            _nhSession = nhSessionFactory.OpenSession(new NHInterceptor(this, lazyCtx));
+            _nhSession = nhSessionFactory
+                .WithOptions()
+                .Interceptor(new NHInterceptor(this, lazyCtx))
+                .OpenSession();
         }
 
         public override void Dispose()

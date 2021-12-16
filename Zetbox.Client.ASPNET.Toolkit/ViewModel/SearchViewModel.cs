@@ -9,7 +9,6 @@ namespace Zetbox.Client.ASPNET
     using Zetbox.Client.Models;
     using Zetbox.App.Base;
     using Zetbox.Client.Presentables.ValueViewModels;
-    using System.Web.Mvc;
     using System.ComponentModel;
 
     public interface ISearchViewModel

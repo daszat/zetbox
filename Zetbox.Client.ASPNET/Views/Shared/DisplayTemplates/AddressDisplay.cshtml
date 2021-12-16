@@ -1,0 +1,24 @@
+﻿@model Zetbox.Client.Presentables.ValueViewModels.CompoundObjectPropertyViewModel
+
+@using Zetbox.Client.ASPNET
+
+<tr>
+    <td>
+        Adresse
+    </td>
+    <td>
+        @Model.Value.PropertyModelsByName["Line1"].FormattedValue
+        <br/>
+        @Model.Value.PropertyModelsByName["Line2"].FormattedValue
+    </td>
+</tr>
+<tr>
+    <td>
+        PLZ/Ort
+    </td>
+    <td>
+        @Model.Value.PropertyModelsByName["ZIPCode"].FormattedValue
+        /
+        @Model.Value.PropertyModelsByName["City"].FormattedValue
+    </td>
+</tr>

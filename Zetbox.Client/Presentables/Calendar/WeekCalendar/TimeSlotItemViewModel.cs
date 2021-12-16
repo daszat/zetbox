@@ -19,7 +19,6 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using System.Windows.Media;
     using System.Drawing;
     using Zetbox.API;
 

@@ -48,7 +48,7 @@ namespace Zetbox.Client.WPF
             Log.Debug("Initialization complete");
         }
 
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Client.WPF.SplashScreen");
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(StartupScreen));
         private static readonly object _lock = new object();
         private static StartupScreen _current = null;
         private static Thread _thread = null;

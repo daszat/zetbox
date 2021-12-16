@@ -34,7 +34,6 @@ namespace Zetbox.API.Client.Tests
 
             builder.RegisterModule(new Zetbox.API.ApiModule());
             builder.RegisterModule(new Zetbox.API.Client.ClientApiModule());
-            builder.RegisterModule(new Zetbox.API.Client.HttpClientModule());
             builder.RegisterModule(new Zetbox.DalProvider.Memory.MemoryProvider());
         }
 

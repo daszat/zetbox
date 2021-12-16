@@ -27,7 +27,9 @@ VersionInfo.Designer.cs
 /Templates/ProjectTemplates/ZetboxApp/packages/Npgsql.*
 
 /publish/*.nupkg
+/publish/*.nuspec
 
 /TestResults/Zetbox.Complete.TE.Tests.mdf
 /TestResults/Zetbox.Complete.TE.Tests_log.ldf
 /UpgradeLog.htm
+/Zetbox.Cli/Properties/launchSettings.json

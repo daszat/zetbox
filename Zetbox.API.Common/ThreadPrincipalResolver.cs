@@ -35,7 +35,7 @@ namespace Zetbox.API.Common
 
         public override ZetboxPrincipal GetCurrent()
         {
-            if (!string.IsNullOrEmpty(Thread.CurrentPrincipal.Identity.Name))
+            if (!string.IsNullOrEmpty(Thread.CurrentPrincipal?.Identity?.Name))
                 return Resolve(Thread.CurrentPrincipal.Identity);
             else
                 return Resolve(WindowsIdentity.GetCurrent());

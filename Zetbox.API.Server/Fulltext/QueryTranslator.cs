@@ -66,7 +66,7 @@ namespace Zetbox.API.Server.Fulltext
 
         protected virtual Term VisitTerm(Term t)
         {
-            return new Term(VisitField(t.Field), t.Text);
+            return new Term(VisitField(t.Field), t.Bytes);
         }
 
         protected virtual string VisitField(string f)
@@ -86,7 +86,7 @@ namespace Zetbox.API.Server.Fulltext
 
         protected virtual FuzzyQuery VisitFuzzyQuery(FuzzyQuery f)
         {
-            return new FuzzyQuery(VisitTerm(f.Term), f.MinSimilarity, f.PrefixLength);
+            return new FuzzyQuery(VisitTerm(f.Term), f.MaxEdits, f.PrefixLength);
         }
 
         protected virtual MultiPhraseQuery VisitMultiPhraseQuery(MultiPhraseQuery m)
@@ -121,7 +121,7 @@ namespace Zetbox.API.Server.Fulltext
 
         protected virtual BooleanQuery VisitBooleanQuery(BooleanQuery b)
         {
-            var qry = new BooleanQuery(b.IsCoordDisabled());
+            var qry = new BooleanQuery(b.CoordDisabled);
             foreach (var c in b.GetClauses())
             {
                 qry.Add(new BooleanClause(VisitQuery(c.Query), c.Occur));
@@ -139,17 +139,17 @@ namespace Zetbox.API.Server.Fulltext
             else if (n is NumericRangeQuery<float>)
             {
                 var q = (NumericRangeQuery<float>)n;
-                return NumericRangeQuery.NewFloatRange(VisitField(q.Field), q.Min, q.Max, q.IncludesMin, q.IncludesMax);
+                return NumericRangeQuery.NewSingleRange(VisitField(q.Field), q.Min, q.Max, q.IncludesMin, q.IncludesMax);
             }
             else if (n is NumericRangeQuery<int>)
             {
                 var q = (NumericRangeQuery<int>)n;
-                return NumericRangeQuery.NewIntRange(VisitField(q.Field), q.Min, q.Max, q.IncludesMin, q.IncludesMax);
+                return NumericRangeQuery.NewInt32Range(VisitField(q.Field), q.Min, q.Max, q.IncludesMin, q.IncludesMax);
             }
             else if (n is NumericRangeQuery<long>)
             {
                 var q = (NumericRangeQuery<long>)n;
-                return NumericRangeQuery.NewLongRange(VisitField(q.Field), q.Min, q.Max, q.IncludesMin, q.IncludesMax);
+                return NumericRangeQuery.NewInt64Range(VisitField(q.Field), q.Min, q.Max, q.IncludesMin, q.IncludesMax);
             }
             else
             {

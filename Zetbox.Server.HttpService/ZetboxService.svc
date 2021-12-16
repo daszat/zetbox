@@ -1,3 +1,0 @@
-<%@ ServiceHost 
-	Service="Zetbox.Server.ZetboxService, Zetbox.Server" 
-	Factory="Autofac.Integration.Wcf.AutofacServiceHostFactory, Autofac.Integration.Wcf" %>

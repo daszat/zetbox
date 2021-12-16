@@ -35,7 +35,7 @@ namespace Zetbox.Server.SchemaManagement
     public partial class SchemaManager
         : IDisposable
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Schema");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(SchemaManager));
 
         #region Fields
         private IZetboxContext schema;
@@ -74,7 +74,7 @@ namespace Zetbox.Server.SchemaManagement
 
         private void WriteReportHeader(string reportName)
         {
-            var headerLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.Report.Header");
+            var headerLog = log4net.LogManager.GetLogger("Zetbox", "Zetbox.Server.Schema.Report.Header");
             var connectionString = config.Server.GetConnectionString(Helper.ZetboxConnectionStringKey);
 
             headerLog.WarnFormat("== {0} ==", reportName);

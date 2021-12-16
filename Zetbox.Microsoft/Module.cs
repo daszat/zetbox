@@ -39,18 +39,6 @@ namespace Zetbox.Microsoft
                 .Register<ScreenshotTool>(c => new ScreenshotTool())
                 .As<IScreenshotTool>()
                 .SingleInstance();
-
-            builder
-                .RegisterCmdLineAction("register-pseudo-culture", "Installs the pseudo culture de-PZ with the current cultures defaults. Must be run with elevated windows priviledges. Don't forget to restart Visual Studio to apply the new culture.",
-                scope =>
-                {
-                    CultureAndRegionInfoBuilder cib = new CultureAndRegionInfoBuilder("x-zb-Pseudo", CultureAndRegionModifiers.None);
-                    cib.LoadDataFromCultureInfo(CultureInfo.CurrentCulture);
-                    cib.LoadDataFromRegionInfo(RegionInfo.CurrentRegion);
-                    cib.Register();
-
-                    Logging.Server.Info("pseudo-culture sucessfully registered.");
-                });
         }
     }
 }

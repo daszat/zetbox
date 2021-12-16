@@ -43,7 +43,7 @@ namespace Zetbox.Generator.Templates
             this.WriteLine("    <ProjectReference Include=\"..\\Zetbox.Objects\\Zetbox.Objects.csproj\">");
             this.WriteLine("      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>");
             this.WriteLine("      <Name>Zetbox.Objects</Name>");
-            this.WriteLine("      <Private>False</Private>");
+            this.WriteLine("      <PrivateAssets>all</PrivateAssets>");
             this.WriteLine("    </ProjectReference>");
 
             // DAL Provider Base

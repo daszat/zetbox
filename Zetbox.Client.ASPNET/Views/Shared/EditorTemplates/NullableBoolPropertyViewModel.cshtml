@@ -9,6 +9,8 @@
 }
 else
 {
-    @Html.CheckBox("Value", Model.Value ?? false, new { @class = "" + ViewData["class"], placeholder = ViewData["placeholder"] as string })
-    @Html.ValidationMessageFor(m => m)
+    <div class="input-group control-label">
+        @Html.CheckBox("Value", Model.Value ?? false, new { @class = "" + ViewData["class"], placeholder = ViewData["placeholder"] as string })
+        @Html.ZbValidationMessageFor(m => m)
+    </div>
 }

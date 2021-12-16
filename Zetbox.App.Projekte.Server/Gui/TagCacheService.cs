@@ -34,7 +34,7 @@ namespace Zetbox.App.Projekte.Server.Gui
     /// </summary>
     public class TagCacheService : IService
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.App.Projekte.Server.Gui.TagCacheService");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(TagCacheService));
 
         private readonly ILifetimeScope _scopeFactory;
 

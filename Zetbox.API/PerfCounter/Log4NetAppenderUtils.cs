@@ -23,8 +23,8 @@ namespace Zetbox.API.PerfCounter
 
     public class Log4NetAppenderUtils
     {
-        private readonly static ILog _mainLogger = LogManager.GetLogger("Zetbox.PerfCounter.Main");
-        private readonly static ILog _objectsLogger = LogManager.GetLogger("Zetbox.PerfCounter.Objects");
+        private readonly static ILog _mainLogger = LogManager.GetLogger("Zetbox", "Zetbox.PerfCounter.Main");
+        private readonly static ILog _objectsLogger = LogManager.GetLogger("Zetbox", "Zetbox.PerfCounter.Objects");
 
         private static bool firstObjectWrite = true;
         private static object firstObjectWriteLock = new object();

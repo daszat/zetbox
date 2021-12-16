@@ -1,110 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+﻿<root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -117,106 +11,106 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetEnd_label" xml:space="preserve">
+  <data name="GetEnd_label" space="preserve">
     <value>GetEnd</value>
   </data>
-  <data name="GetEnd_description" xml:space="preserve">
+  <data name="GetEnd_description" space="preserve">
     <value />
   </data>
-  <data name="GetEnd(result)_label" xml:space="preserve">
+  <data name="GetEnd(result)_label" space="preserve">
     <value>result</value>
   </data>
-  <data name="GetEnd(result)_description" xml:space="preserve">
+  <data name="GetEnd(result)_description" space="preserve">
     <value />
   </data>
-  <data name="GetEnd(prop)_label" xml:space="preserve">
+  <data name="GetEnd(prop)_label" space="preserve">
     <value>prop</value>
   </data>
-  <data name="GetEnd(prop)_description" xml:space="preserve">
+  <data name="GetEnd(prop)_description" space="preserve">
     <value />
   </data>
-  <data name="GetEndFromRole_label" xml:space="preserve">
+  <data name="GetEndFromRole_label" space="preserve">
     <value>GetEndFromRole</value>
   </data>
-  <data name="GetEndFromRole_description" xml:space="preserve">
+  <data name="GetEndFromRole_description" space="preserve">
     <value />
   </data>
-  <data name="GetEndFromRole(result)_label" xml:space="preserve">
+  <data name="GetEndFromRole(result)_label" space="preserve">
     <value>result</value>
   </data>
-  <data name="GetEndFromRole(result)_description" xml:space="preserve">
+  <data name="GetEndFromRole(result)_description" space="preserve">
     <value />
   </data>
-  <data name="GetEndFromRole(role)_label" xml:space="preserve">
+  <data name="GetEndFromRole(role)_label" space="preserve">
     <value>role</value>
   </data>
-  <data name="GetEndFromRole(role)_description" xml:space="preserve">
+  <data name="GetEndFromRole(role)_description" space="preserve">
     <value />
   </data>
-  <data name="GetEntryInterfaceType_label" xml:space="preserve">
+  <data name="GetEntryInterfaceType_label" space="preserve">
     <value>GetEntryInterfaceType</value>
   </data>
-  <data name="GetEntryInterfaceType_description" xml:space="preserve">
+  <data name="GetEntryInterfaceType_description" space="preserve">
     <value />
   </data>
-  <data name="GetEntryInterfaceType(result)_label" xml:space="preserve">
+  <data name="GetEntryInterfaceType(result)_label" space="preserve">
     <value>result</value>
   </data>
-  <data name="GetEntryInterfaceType(result)_description" xml:space="preserve">
+  <data name="GetEntryInterfaceType(result)_description" space="preserve">
     <value>The InterfaceType of the described RelationEntry</value>
   </data>
-  <data name="GetOtherEnd_label" xml:space="preserve">
+  <data name="GetOtherEnd_label" space="preserve">
     <value>GetOtherEnd</value>
   </data>
-  <data name="GetOtherEnd_description" xml:space="preserve">
+  <data name="GetOtherEnd_description" space="preserve">
     <value />
   </data>
-  <data name="GetOtherEnd(result)_label" xml:space="preserve">
+  <data name="GetOtherEnd(result)_label" space="preserve">
     <value>result</value>
   </data>
-  <data name="GetOtherEnd(result)_description" xml:space="preserve">
+  <data name="GetOtherEnd(result)_description" space="preserve">
     <value />
   </data>
-  <data name="GetOtherEnd(relEnd)_label" xml:space="preserve">
+  <data name="GetOtherEnd(relEnd)_label" space="preserve">
     <value>relEnd</value>
   </data>
-  <data name="GetOtherEnd(relEnd)_description" xml:space="preserve">
+  <data name="GetOtherEnd(relEnd)_description" space="preserve">
     <value />
   </data>
-  <data name="GetRelationType_label" xml:space="preserve">
+  <data name="GetRelationType_label" space="preserve">
     <value>GetRelationType</value>
   </data>
-  <data name="GetRelationType_description" xml:space="preserve">
+  <data name="GetRelationType_description" space="preserve">
     <value />
   </data>
-  <data name="GetRelationType(result)_label" xml:space="preserve">
+  <data name="GetRelationType(result)_label" space="preserve">
     <value>result</value>
   </data>
-  <data name="GetRelationType(result)_description" xml:space="preserve">
+  <data name="GetRelationType(result)_description" space="preserve">
     <value />
   </data>
-  <data name="NeedsPositionStorage_label" xml:space="preserve">
+  <data name="NeedsPositionStorage_label" space="preserve">
     <value>NeedsPositionStorage</value>
   </data>
-  <data name="NeedsPositionStorage_description" xml:space="preserve">
+  <data name="NeedsPositionStorage_description" space="preserve">
     <value />
   </data>
-  <data name="NeedsPositionStorage(result)_label" xml:space="preserve">
+  <data name="NeedsPositionStorage(result)_label" space="preserve">
     <value>result</value>
   </data>
-  <data name="NeedsPositionStorage(result)_description" xml:space="preserve">
+  <data name="NeedsPositionStorage(result)_description" space="preserve">
     <value />
   </data>
-  <data name="NeedsPositionStorage(endRole)_label" xml:space="preserve">
+  <data name="NeedsPositionStorage(endRole)_label" space="preserve">
     <value>endRole</value>
   </data>
-  <data name="NeedsPositionStorage(endRole)_description" xml:space="preserve">
+  <data name="NeedsPositionStorage(endRole)_description" space="preserve">
     <value />
   </data>
-  <data name="SwapRelationEnds_label" xml:space="preserve">
+  <data name="SwapRelationEnds_label" space="preserve">
     <value>SwapRelationEnds</value>
   </data>
-  <data name="SwapRelationEnds_description" xml:space="preserve">
+  <data name="SwapRelationEnds_description" space="preserve">
     <value />
   </data>
 </root>

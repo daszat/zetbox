@@ -1,6 +1,0 @@
-<PartCoverSettings>
-  <Target>E:\Program Files\NUnit 2.4.7\bin\nunit-console.exe</Target>
-  <TargetWorkDir>P:\Zetbox\Tests\Zetbox.DalProvider.Ef.Tests</TargetWorkDir>
-  <TargetArgs>Zetbox.DalProvider.Ef.Tests.nunit</TargetArgs>
-  <Rule>+[Zetbox.DalProvider.*]*</Rule>
-</PartCoverSettings>

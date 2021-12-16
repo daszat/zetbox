@@ -1,0 +1,19 @@
+﻿@model ObjectCollectionViewModel
+
+@using Zetbox.Client.ASPNET
+@using Zetbox.Client.Presentables
+@using Zetbox.Client.Presentables.ValueViewModels
+
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th></th>
+    </tr>
+    @foreach(var child in Model.Value)
+    {
+        <tr>
+            <td>@child.Name</td>
+            <td></td>
+        </tr>
+    }
+</table>

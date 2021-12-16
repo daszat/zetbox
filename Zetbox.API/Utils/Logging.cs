@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -24,16 +25,16 @@ namespace Zetbox.API.Utils
 {
     public static class Logging
     {
-        private readonly static ILog _logger = LogManager.GetLogger("Zetbox");
-        private readonly static ILog _client = LogManager.GetLogger("Zetbox.Client");
-        private readonly static ILog _server = LogManager.GetLogger("Zetbox.Server");
-        private readonly static ILog _facade = LogManager.GetLogger("Zetbox.Facade");
-        private readonly static ILog _linq = LogManager.GetLogger("Zetbox.Linq");
-        private readonly static ILog _linqquery = LogManager.GetLogger("Zetbox.Linq.Query");
-        private readonly static ILog _reflection = LogManager.GetLogger("Zetbox.Reflection");
-        private readonly static ILog _methods = LogManager.GetLogger("Zetbox.PerfCounter.Methods");
-        private readonly static ILog _exporter = LogManager.GetLogger("Zetbox.Exporter");
-        private readonly static ILog _mails = LogManager.GetLogger("Zetbox.MailNotification");
+        private static ILog _logger;
+        private static ILog _client;
+        private static ILog _server;
+        private static ILog _facade;
+        private static ILog _linq;
+        private static ILog _linqquery;
+        private static ILog _reflection;
+        private static ILog _methods;
+        private static ILog _exporter;
+        private static ILog _mails;
 
         public static ILog Log
         {
@@ -84,7 +85,24 @@ namespace Zetbox.API.Utils
 
         public static void Configure()
         {
-            log4net.Config.XmlConfigurator.Configure();
+            var logfile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log4net.config");
+
+            var zetboxLogRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+            log4net.Config.XmlConfigurator.Configure(zetboxLogRepository, new FileInfo(logfile));
+
+            var logRepository = LogManager.CreateRepository("Zetbox");
+            log4net.Config.XmlConfigurator.Configure(logRepository, new FileInfo(logfile));
+
+            _logger = LogManager.GetLogger("Zetbox", "Zetbox");
+            _client = LogManager.GetLogger("Zetbox", "Zetbox.Client");
+            _server = LogManager.GetLogger("Zetbox", "Zetbox.Server");
+            _facade = LogManager.GetLogger("Zetbox", "Zetbox.Facade");
+            _linq = LogManager.GetLogger("Zetbox", "Zetbox.Linq");
+            _linqquery = LogManager.GetLogger("Zetbox", "Zetbox.Linq.Query");
+            _reflection = LogManager.GetLogger("Zetbox", "Zetbox.Reflection");
+            _methods = LogManager.GetLogger("Zetbox", "Zetbox.PerfCounter.Methods");
+            _exporter = LogManager.GetLogger("Zetbox", "Zetbox.Exporter");
+            _mails = LogManager.GetLogger("Zetbox", "Zetbox.MailNotification");
 
             ResetDefaultProperties();
 

@@ -98,15 +98,6 @@
                                            Margin="3,0,0,0" />
                             </StackPanel>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type moduleEditor:DiagramViewModel}">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
-                                       Width="14"
-                                       Height="14" />
-                                <TextBlock Text="{Binding Name}"
-                                           Margin="3,0,0,0" />
-                            </StackPanel>
-                        </DataTemplate>
                     </TreeView.Resources>
                 </TreeView>
             </DockPanel>

@@ -112,10 +112,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     lstMdl.Commands.Insert(0, NewObjectClassCommand);
                     grpMdl.Children.Add(lstMdl);
 
-                    // Diagram
-                    var diagMdl = ViewModelFactory.CreateViewModel<DiagramViewModel.Factory>().Invoke(DataContext, this, CurrentModule);
-                    grpMdl.Children.Add(diagMdl);
-
                     // Interface
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Interface).GetObjectClass(FrozenContext),

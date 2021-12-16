@@ -35,16 +35,6 @@ namespace Zetbox.DalProvider.Memory.Generator.Templates
         {
             base.ApplyAdditionalReferences();
 
-            // used all over the place
-            this.WriteLine(@"    <Reference Include=""System.Data.Linq"">");
-            this.WriteLine(@"      <RequiredTargetFramework>3.5</RequiredTargetFramework>");
-            this.WriteLine(@"    </Reference>");
-
-            // used for INotifyCollectionChanged
-            this.WriteLine(@"    <Reference Include=""WindowsBase"">");
-            this.WriteLine(@"      <RequiredTargetFramework>3.0</RequiredTargetFramework>");
-            this.WriteLine(@"    </Reference>");
-
             // DAL Provider
             this.WriteLine(@"    <Reference Include=""Zetbox.DalProvider.Memory"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");

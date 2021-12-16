@@ -19,11 +19,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Xml;
-using Mono.Security;
-using Mono.Security.X509;
 
 namespace PrepareEnv
 {
@@ -309,10 +308,10 @@ namespace PrepareEnv
 
             // insert publisher identity
             var pfx = UnlockPfx(File.ReadAllBytes(envConfig.ClickOnce.KeyFile));
-            var cert = pfx.Certificates.Cast<X509Certificate>().Single();
-            var publisherName = cert.SubjectName;
+            var cert = pfx;
+            var publisherName = cert.Subject;
             // as described on http://msdn.microsoft.com/en-us/library/dd996956.aspx
-            var issuerKeyHash = FormatKey(_sha1.ComputeHash(cert.PublicKey));
+            var issuerKeyHash = FormatKey(_sha1.ComputeHash(cert.GetPublicKey()));
 
             var publisherIdentity = docTemplate.CreateElement("publisherIdentity", ASMv2_NS);
             SetOrReplaceAttribute(publisherIdentity, "name", null, publisherName);
@@ -594,47 +593,41 @@ namespace PrepareEnv
         private static byte[] PublicKeyTokenFromPfx(string filename)
         {
             var data = File.ReadAllBytes(filename);
+
+            // check magic number for PKCS12
+            if (data.Length == 0 || data[0] != 0x30)
+                throw new InvalidOperationException("not a valid PFX file"); // awww
+
+            var pfx = UnlockPfx(data);
+
             try
             {
-                return new StrongName(data).PublicKeyToken;
+                return pfx.GetPublicKey();
             }
             catch
             {
-                // check magic number for PKCS12
-                if (data.Length == 0 || data[0] != 0x30)
-                    throw; // awww
-
-                var pfx = UnlockPfx(data);
-
-                try
-                {
-                    return new StrongName((RSA)pfx.Keys[0]).PublicKeyToken;
-                }
-                catch
-                {
-                    Console.Error.WriteLine();
-                    Console.Error.WriteLine("Error while trying to read key file");
-                    Console.Error.WriteLine("Hint: The PFX file must contain the signing RSA key as first entry");
-                    Console.Error.WriteLine();
-                    throw;
-                }
+                Console.Error.WriteLine();
+                Console.Error.WriteLine("Error while trying to read key file");
+                Console.Error.WriteLine("Hint: The PFX file must contain the signing RSA key as first entry");
+                Console.Error.WriteLine();
+                throw;
             }
         }
 
         [DebuggerNonUserCode] // ignore the exception-based control flow in this method
-        private static PKCS12 UnlockPfx(byte[] data)
+        private static X509Certificate UnlockPfx(byte[] data)
         {
-            PKCS12 pfx;
+            X509Certificate pfx;
 
             try
             {
-                pfx = new PKCS12(data);
+                pfx = new X509Certificate(data);
             }
             catch
             {
                 try
                 {
-                    pfx = new PKCS12(data, string.Empty);
+                    pfx = new X509Certificate(data, string.Empty);
                 }
                 catch
                 {
@@ -645,7 +638,7 @@ namespace PrepareEnv
                             Console.Write("Please enter the passphrase for the KeyFile (will be visible when typed): ");
                             _passphrase = Console.ReadLine();
                         }
-                        pfx = new PKCS12(data, _passphrase);
+                        pfx = new X509Certificate(data, _passphrase);
                     }
                     catch
                     {

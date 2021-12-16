@@ -31,7 +31,8 @@ namespace Zetbox.Client
     using Zetbox.API.Common.Reporting;
 using Zetbox.API.Client.PerfCounter;
 
-    [Feature]
+    // [Feature]
+    // Not a feature, default
     [Description("The Client Module")]
     public sealed class ClientModule : Module
     {

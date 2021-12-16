@@ -23,7 +23,7 @@ namespace Zetbox.Server
 {
     public class ActiveDirectoryIdentitySource : IIdentitySource
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(ActiveDirectoryIdentitySource));
 
         public IEnumerable<IdentitySourceItem> GetAllIdentities(string source)
         {

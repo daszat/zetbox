@@ -268,6 +268,9 @@ namespace Zetbox.API.Configuration
         [Serializable]
         public class ClientConfig
         {
+            [XmlElement(IsNullable = false)]
+            public string ServiceUri { get; set; }
+
             /// <summary>
             /// If a Guid is specified, the given Application is launched
             /// </summary>

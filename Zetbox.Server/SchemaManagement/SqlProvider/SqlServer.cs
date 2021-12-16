@@ -35,9 +35,9 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
     public class SqlServer
         : AdoNetSchemaProvider<SqlConnection, SqlTransaction, SqlCommand>
     {
-        private readonly static log4net.ILog _log = log4net.LogManager.GetLogger("Zetbox.Server.Schema.MSSQL");
+        private readonly static log4net.ILog _log = log4net.LogManager.GetLogger(typeof(SqlServer));
         protected override log4net.ILog Log { get { return _log; } }
-        private readonly static log4net.ILog _queryLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.MSSQL.Queries");
+        private readonly static log4net.ILog _queryLog = log4net.LogManager.GetLogger("Zetbox", "Zetbox.Server.SchemaManagement.SqlProvider.Queries");
         protected override log4net.ILog QueryLog { get { return _queryLog; } }
 
         public SqlServer(bool force)

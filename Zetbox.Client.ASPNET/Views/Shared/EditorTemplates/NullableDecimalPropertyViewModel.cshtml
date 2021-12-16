@@ -2,6 +2,7 @@
 
 @using Zetbox.API
 @using Zetbox.Client.Presentables.ValueViewModels
+@using Zetbox.Client.ASPNET
 
 @if (Model.IsReadOnly)
 {
@@ -9,6 +10,6 @@
 }
 else
 {
-    @Html.TextBoxFor(m => m.FormattedValue, new { @class = ViewData["class"], placeholder = Model.ToolTip })
-    @Html.ValidationMessageFor(model => model)
+    @Html.TextBoxFor(m => m.FormattedValue, null, new { @class = "form-control " + ViewData["class"], placeholder = Model.ToolTip })
+    @Html.ZbValidationMessageFor(m => m)
 }

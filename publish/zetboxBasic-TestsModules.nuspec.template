@@ -14,11 +14,13 @@
     <copyright>Copyright © 2019 dasz.at e.U.</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
+	  <group>
 		<!-- Content only package -->
+	  </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\Modules\TestModules.xml" target="zetbox/Modules" />
+    <file src="..\..\Modules\TestModules.xml" target="content/zetbox/Modules" />
     <!-- Empty folder <file src="..\..\Modules\TestModules\**" target="zetbox/Modules/TestModules" />-->
 
     <!-- this is required to avoid being seen as empty package by nuget -->

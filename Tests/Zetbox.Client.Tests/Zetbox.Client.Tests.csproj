@@ -1,186 +1,73 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\..\packages\NUnit.3.11.0\build\NUnit.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FixMe</RootNamespace>
-    <AssemblyName>Zetbox.Client.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <StartAction>Program</StartAction>
-    <StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
-    <StartArguments>Zetbox.Client.Tests.nunit /config:Studio</StartArguments>
-    <NoWarn>1591</NoWarn>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\Tests</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Release\Tests</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\Tests</OutputPath>
-    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Moq, Version=4.10.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Moq.4.10.1\lib\net45\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AbstractClientTestFixture.cs" />
-    <Compile Include="Zetbox.Client.Mocks\CustomActionsManagerClientTests.cs" />
-    <Compile Include="Zetbox.Client.Mocks\ZetboxMockFactory.cs" />
-    <Compile Include="Zetbox.Client.Mocks\NullIdentityResolver.cs" />
-    <Compile Include="Zetbox.Client.Mocks\TestObjClass.cs" />
-    <Compile Include="Zetbox.Client.Mocks\TestObjClass_TestNameCollectionEntry.cs" />
-    <Compile Include="Zetbox.Client.Mocks\TestObject.cs" />
-    <Compile Include="Zetbox.Client.Mocks\TestProxy.cs" />
-    <Compile Include="Zetbox.Client.Mocks\TestViewModelFactory.cs" />
-    <Compile Include="Zetbox.Client.Tests\DateTimeOffsetTests.cs" />
-    <Compile Include="Zetbox.Client.Tests\DataObjectModelTests.cs" />
-    <Compile Include="Zetbox.Client.Tests\ObjectListModelTests.cs" />
-    <Compile Include="Zetbox.Client.Tests\PresenterModelTests.cs" />
-    <Compile Include="Zetbox.Client.Tests\RecurrenceRuleTests.cs" />
-    <Compile Include="Zetbox.Client.Tests\ValueViewModels\DateTimes\MonthFixture.cs" />
-    <Compile Include="Zetbox.Client.Tests\ValueViewModels\DateTimes\DateTimeFixture.cs" />
-    <Compile Include="Zetbox.Client.Tests\ValueViewModels\Enumerations\EnumerationFixture.cs" />
-    <Compile Include="Zetbox.Client.Tests\ValueViewModels\in_state_B_PUI.cs" />
-    <Compile Include="Zetbox.Client.Tests\ValueViewModels\in_state_F_PUI.cs" />
-    <Compile Include="Zetbox.Client.Tests\ValueViewModels\in_state_F_UV.cs" />
-    <Compile Include="Zetbox.Client.Tests\ValueViewModels\in_state_B_UV.cs" />
-    <Compile Include="Zetbox.Client.Tests\ValueViewModels\in_state_IF_PUI.cs" />
-    <Compile Include="Zetbox.Client.Tests\ValueViewModels\ViewModelTestFixture.cs" />
-    <Compile Include="Zetbox.Client.Tests\ValueViewModels\when_creating.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="packages.config" />
-    <Compile Include="SetUpFixture.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj">
-      <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
-      <Name>Zetbox.API.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj">
-      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Zetbox.API.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj">
-      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Zetbox.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj">
-      <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
-      <Name>Zetbox.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.DalProvider.Base\Zetbox.DalProvider.Base.csproj">
-      <Project>{A242A751-9F97-4F1C-ABE5-57B28133DEF4}</Project>
-      <Name>Zetbox.DalProvider.Base</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.DalProvider.ClientObjects\Zetbox.DalProvider.ClientObjects.csproj">
-      <Project>{3760694D-3B35-41D4-B1A3-41BB288AA19F}</Project>
-      <Name>Zetbox.DalProvider.ClientObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
-      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Zetbox.Objects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.API.AbstractConsumerTests\Zetbox.API.AbstractConsumerTests.csproj">
-      <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
-      <Name>Zetbox.API.AbstractConsumerTests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.API.Mocks\Zetbox.API.Mocks.csproj">
-      <Project>{95E39A40-35BC-4214-86E5-EE451C138EE1}</Project>
-      <Name>Zetbox.API.Mocks</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Zetbox.Client.Tests.nunit">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Zetbox.Client.Tests.PartCoverSettings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>copy $(SolutionDir)\bin\Debug\Client\Generated\*.* $(TargetDir)</PostBuildEvent>
-  </PropertyGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit.3.11.0\build\NUnit.props'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<ProductVersion>9.0.30729</ProductVersion>
+		<RootNamespace>FixMe</RootNamespace>
+		<TargetFramework>net5.0</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<StartAction>Program</StartAction>
+		<StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
+		<StartArguments>Zetbox.Client.Tests.nunit /config:Studio</StartArguments>
+		<NoWarn>1591</NoWarn>
+		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
+		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<AssemblyTitle>Zetbox.Client.Tests</AssemblyTitle>
+		<Company>dasz.at OG</Company>
+		<Product>zetbox</Product>
+		<Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<PostBuildEvent>copy $(SolutionDir)\bin\Debug\Client\Generated\*.* $(TargetDir)</PostBuildEvent>
+		<PostBuildEvent>copy $(SolutionDir)\bin\Debug\Client\Generated\*.* $(TargetDir)</PostBuildEvent>
+		<PostBuildEvent>copy $(SolutionDir)\bin\Debug\Client\Generated\*.* $(TargetDir)</PostBuildEvent>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+		<OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>..\..\bin\Debug\Tests</OutputPath>
+		<DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup>
+		<PostBuildEvent>copy $(SolutionDir)\bin\Debug\Client\Generated\*.* $(TargetDir)</PostBuildEvent>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="5.2.0" />
+		<PackageReference Include="Castle.Core" Version="4.4.1" />
+		<PackageReference Include="Moq" Version="4.14.5" />
+		<PackageReference Include="NUnit" Version="3.12.0" />
+		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.7.1" />
+		<PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.DalProvider.Base\Zetbox.DalProvider.Base.csproj" />
+		<ProjectReference Include="..\..\Zetbox.DalProvider.ClientObjects\Zetbox.DalProvider.ClientObjects.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Zetbox.API.AbstractConsumerTests\Zetbox.API.AbstractConsumerTests.csproj" />
+		<ProjectReference Include="..\Zetbox.API.Mocks\Zetbox.API.Mocks.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Zetbox.Client.Tests.nunit">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Zetbox.Client.Tests.PartCoverSettings.xml" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Properties\VersionInfo.Designer.cs" />
+	</ItemGroup>
 </Project>

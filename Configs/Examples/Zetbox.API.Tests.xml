@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- This config is used as test for the alternate config file loading code path -->
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
-  <ConfigName>Zetbox.API.Tests' MSSQL Configuration</ConfigName>
+  <ConfigName>Zetbox.API.Tests Core MSSQL Configuration</ConfigName>
   <Server StartServer="false">
     <ConnectionStrings>
       <Database Name="Zetbox" Schema="MSSQL" Provider="System.Data.SqlClient">Data Source=.\SQLEXPRESS;Initial Catalog=zetbox_test;Integrated Security=True;MultipleActiveResultSets=true;</Database>

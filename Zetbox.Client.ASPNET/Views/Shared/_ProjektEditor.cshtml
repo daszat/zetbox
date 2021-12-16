@@ -1,0 +1,9 @@
+﻿@model Zetbox.Client.ASPNET.ViewModels.MvcProjektViewModel
+
+@using Zetbox.API
+@using Zetbox.Client.ASPNET
+@using Zetbox.Client.Presentables.ValueViewModels
+
+@Html.ZbLabelFor(m => m.ViewModel.PropertyModelsByName["Name"])
+
+@Html.ZbEditorFor(m => m.ViewModel)

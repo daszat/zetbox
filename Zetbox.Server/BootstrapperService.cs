@@ -20,8 +20,6 @@ namespace Zetbox.Server
     using System.IO;
     using System.Linq;
     using System.Runtime.Serialization;
-    using System.ServiceModel;
-    using System.ServiceModel.Web;
     using System.Text;
     using Zetbox.API.Configuration;
     using System.Text.RegularExpressions;
@@ -32,7 +30,6 @@ namespace Zetbox.Server
         Exec = 2,
     }
 
-    [DataContract(Namespace = "http://dasz.at/Zetbox/Bootstrapper")]
     public class FileInfo
     {
         [DataMember(Name = "Name")]
@@ -47,22 +44,16 @@ namespace Zetbox.Server
         public FileType Type { get; set; }
     }
 
-    [ServiceContract(SessionMode = SessionMode.NotAllowed, Namespace = "http://dasz.at/Zetbox/Bootstrapper")]
     public interface IBootstrapperService
     {
-        [OperationContract]
-        [WebGet(UriTemplate = "/GetFileInfos")]
         FileInfo[] GetFileInfos();
 
-        [OperationContract]
-        [WebGet(UriTemplate = "/GetFile/{*path}")]
         Stream GetFile(string path);
     }
 
     /// <summary>
     /// Bootstrapper service
     /// </summary>
-    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any, Namespace = "http://dasz.at/Zetbox/Bootstrapper")]
     public class BootstrapperService
         : IBootstrapperService
     {
@@ -193,7 +184,7 @@ namespace Zetbox.Server
             var probe = GetFilePath(path);
             if (File.Exists(probe))
             {
-                WebOperationContext.Current.OutgoingResponse.ContentType = "application/octet-stream";
+                // WebOperationContext.Current.OutgoingResponse.ContentType = "application/octet-stream";
                 System.IO.FileInfo fi = new System.IO.FileInfo(probe);
                 return fi.OpenRead();
             }

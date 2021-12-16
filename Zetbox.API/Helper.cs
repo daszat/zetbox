@@ -1493,16 +1493,8 @@ namespace Zetbox.API
         {
             if (file == null) throw new ArgumentNullException("file");
 
-            var mimeType = "application/unknown";
-            var ext = System.IO.Path.GetExtension(file.FullName).ToLower();
-            using (Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext))
-            {
-                if (regKey != null)
-                {
-                    mimeType = regKey.GetValue("Content Type", mimeType).ToString();
-                }
-            }
-            return mimeType;
+            //            var mimeType = "application/unknown";
+            return global::HeyRed.Mime.MimeTypesMap.GetMimeType(file.Name);
         }
     }
 

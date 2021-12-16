@@ -37,7 +37,7 @@ namespace Zetbox.Generator.InterfaceTemplates
 
     public partial class NamedObjects
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator.InterfaceTemplates.NamedObjects");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(NamedObjects));
 
         private List<string> currentPrefix;
         private string currentPrefixString;

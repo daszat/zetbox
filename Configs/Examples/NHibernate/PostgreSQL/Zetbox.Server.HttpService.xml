@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
-  <ConfigName>Default Server Configuration</ConfigName>
+  <ConfigName>Default Server Core Configuration</ConfigName>
   <Server StartServer="true">
     <ConnectionStrings>
       <Database Name="Zetbox" Schema="POSTGRESQL" Provider="NHibernate.Dialect.PostgreSQL82Dialect">Server=localhost;Port=5432;Database=zetbox;User Id=zetbox;Password=b-cXqMyXEYea2kkjUhkS</Database>

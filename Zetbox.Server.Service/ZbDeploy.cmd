@@ -13,6 +13,8 @@ set config=%1
 
 :GOON
 
+call "ZbInstall.cmd" %config%
+
 Libs\Zetbox\Zetbox.Server.Service.exe %config% -deploy-update -generate
 IF ERRORLEVEL 1 GOTO FAIL
 

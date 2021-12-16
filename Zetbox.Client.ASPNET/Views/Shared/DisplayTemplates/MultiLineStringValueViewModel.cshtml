@@ -1,0 +1,8 @@
+﻿@model MultiLineStringValueViewModel
+
+@using Zetbox.API
+@using Zetbox.Client.Presentables.ValueViewModels
+
+<div class="form-control">
+    @Model.FormattedValue.Replace("\r\n", "<br/>")
+</div>
