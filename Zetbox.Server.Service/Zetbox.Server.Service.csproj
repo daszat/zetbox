@@ -10,6 +10,7 @@
 		<NoWarn>1591</NoWarn>
 		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
 		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<AssemblyTitle>Zetbox.Server.Service</AssemblyTitle>
 		<Company>dasz.at OG</Company>
 		<Product>zetbox</Product>

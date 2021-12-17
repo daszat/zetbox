@@ -62,70 +62,82 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
                 string[] exts = fileName.Split('.');
                 string ext = exts[exts.Length - 1];
                 var regKey = string.Format(@".{0}\ShellEx\{1:B}", ext, g);
-                using (RegistryKey hk = Registry.ClassesRoot.OpenSubKey(regKey))
+                // Fix CA1416
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    if (hk == null)
+                    using (RegistryKey hk = Registry.ClassesRoot.OpenSubKey(regKey))
                     {
-                        Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - Registry Key not found: " + regKey);
-                        return;
-                    }
-                    var objValue = hk.GetValue("");
-                    if (objValue == null)
-                    {
-                        Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - no handler registrated in Registry");
-                        return;
-                    }
-                    if (!Guid.TryParse(objValue.ToString(), out g))
-                    {
-                        Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - cannot parse guid from registry: " + objValue);
-                        return;
-                    }
+                        if (hk == null)
+                        {
+                            Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - Registry Key not found: " +
+                                                 regKey);
+                            return;
+                        }
 
-                    Type type = Type.GetTypeFromCLSID(g, false);
-                    if (type == null)
-                    {
-                        Logging.Log.WarnOnce(string.Format("Unable to initialize IPreviewHandler - could not load COM Object, Type.GetTypeFromCLSID({0}) returend false", g));
-                        return;
-                    }
-                    object comObj = Activator.CreateInstance(type);
+                        var objValue = hk.GetValue("");
+                        if (objValue == null)
+                        {
+                            Logging.Log.WarnOnce(
+                                "Unable to initialize IPreviewHandler - no handler registrated in Registry");
+                            return;
+                        }
 
-                    IInitializeWithFile fileInit = comObj as IInitializeWithFile;
-                    IInitializeWithStream streamInit = comObj as IInitializeWithStream;
-                    IInitializeWithItem itemInit = comObj as IInitializeWithItem;
+                        if (!Guid.TryParse(objValue.ToString(), out g))
+                        {
+                            Logging.Log.WarnOnce(
+                                "Unable to initialize IPreviewHandler - cannot parse guid from registry: " + objValue);
+                            return;
+                        }
 
-                    bool isInitialized = false;
-                    if (fileInit != null)
-                    {
-                        fileInit.Initialize(fileName, 0); // 0 = STGM_READ
-                        isInitialized = true;
-                    }
-                    else if (streamInit != null)
-                    {
-                        stream = new COMStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read));
-                        streamInit.Initialize((IStream)stream, 0); // 0 = STGM_READ
-                        isInitialized = true;
-                    }
-                    else if (itemInit != null)
-                    {
-                        IShellItem shellItem;
-                        SHCreateItemFromParsingName(fileName, IntPtr.Zero, typeof(IShellItem).GUID, out shellItem);
-                        itemInit.Initialize(shellItem, 0); // 0 = STGM_READ
-                        isInitialized = true;
-                    }
+                        Type type = Type.GetTypeFromCLSID(g, false);
+                        if (type == null)
+                        {
+                            Logging.Log.WarnOnce(string.Format(
+                                "Unable to initialize IPreviewHandler - could not load COM Object, Type.GetTypeFromCLSID({0}) returend false",
+                                g));
+                            return;
+                        }
 
-                    pHandler = comObj as IPreviewHandler;
-                    if (isInitialized && pHandler != null)
-                    {
-                        RECT r = new RECT(viewRect);
+                        object comObj = Activator.CreateInstance(type);
 
-                        pHandler.SetWindow(handler, ref r);
-                        pHandler.SetRect(ref r);
+                        IInitializeWithFile fileInit = comObj as IInitializeWithFile;
+                        IInitializeWithStream streamInit = comObj as IInitializeWithStream;
+                        IInitializeWithItem itemInit = comObj as IInitializeWithItem;
 
-                        pHandler.DoPreview();
-                    }
-                    else
-                    {
-                        Release();
+                        bool isInitialized = false;
+                        if (fileInit != null)
+                        {
+                            fileInit.Initialize(fileName, 0); // 0 = STGM_READ
+                            isInitialized = true;
+                        }
+                        else if (streamInit != null)
+                        {
+                            stream = new COMStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read));
+                            streamInit.Initialize((IStream) stream, 0); // 0 = STGM_READ
+                            isInitialized = true;
+                        }
+                        else if (itemInit != null)
+                        {
+                            IShellItem shellItem;
+                            SHCreateItemFromParsingName(fileName, IntPtr.Zero, typeof(IShellItem).GUID, out shellItem);
+                            itemInit.Initialize(shellItem, 0); // 0 = STGM_READ
+                            isInitialized = true;
+                        }
+
+                        pHandler = comObj as IPreviewHandler;
+                        if (isInitialized && pHandler != null)
+                        {
+                            RECT r = new RECT(viewRect);
+
+                            pHandler.SetWindow(handler, ref r);
+                            pHandler.SetRect(ref r);
+
+                            pHandler.DoPreview();
+                        }
+                        else
+                        {
+                            Release();
+                        }
                     }
                 }
             }
@@ -149,8 +161,16 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
                 {
                     pHandler.Unload();
                 }
-                catch { }
-                Marshal.FinalReleaseComObject(pHandler);
+                catch
+                {
+                    // ignore all errors
+                }
+                // Fix CA1416
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    Marshal.FinalReleaseComObject(pHandler);
+                }
+
                 pHandler = null;
             }
 
