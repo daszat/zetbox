@@ -25,7 +25,6 @@ pipeline {
             }        
         }
 		stage('Build Nuget Packages') {
-			agent { label 'Windows' }
 			steps {
 				sh  '''
 				version="$(gitversion -nofetch -showvariable NuGetVersionV2)"
@@ -63,7 +62,6 @@ pipeline {
 			}        
 		}	
 		stage('Publish Nuget Packages') {
-			agent { label 'Windows' }
 			when {
 				branch 'master'
 			}
@@ -74,7 +72,6 @@ pipeline {
 			}        
 		}			
         stage('Description') {
-            agent { label 'Windows' }
             steps {
                 sh 'GitVersion /nofetch'
                 sh "GitVersion /nofetch | sed -n 's/\"FullSemVer\":\"\\(.*\\)\",/\\1/p' > VERSION.txt"
