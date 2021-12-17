@@ -77,7 +77,7 @@ pipeline {
         stage('Description') {
             steps {
                 sh 'GitVersion /nofetch'
-                sh "GitVersion /nofetch | sed -n 's/\"FullSemVer\":\"\\(.*\\)\",/\\1/p' > VERSION.txt"
+                sh "GitVersion /nofetch | sed -n 's/\"FullSemVer\": \"\\(.*\\)\",/\\1/p' > VERSION.txt"
                 script {
                     def ver = readFile 'VERSION.txt'
                     currentBuild.description = ver
