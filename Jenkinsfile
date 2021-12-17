@@ -21,7 +21,7 @@ pipeline {
 				cp -r ./Configs ./bin/Release
 				'''
 
-				archiveArtifacts artifacts: 'bin/Release, publish', fingerprint: true
+				archiveArtifacts artifacts: 'bin/Release/**, publish/**', fingerprint: true
             }        
         }
         stage('Artifacts') {
