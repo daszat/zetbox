@@ -24,51 +24,55 @@ pipeline {
 				archiveArtifacts artifacts: 'bin/Release/**, publish/**', fingerprint: true
             }        
         }
-        stage('Artifacts') {
-            failFast true
-            parallel {
-				stage('Build Nuget Packages') {
-					when {
-						branch 'master'
-					}
-					steps {
-						sh  '''
-						version="$(gitversion -nofetch -showvariable NuGetVersionV2)"
-						echo "Version = $version"
+		stage('Build Nuget Packages') {
+			agent { label 'Windows' }
+			steps {
+				sh  '''
+				version="$(gitversion -nofetch -showvariable NuGetVersionV2)"
+				echo "Version = $version"
 
-						echo "@nuget install ZetboxBasic -Version $version -OutputDirectory \"%~dp0\bin\"" > publish/DownloadZetbox.cmd
+				echo "@nuget install ZetboxBasic -Version $version -OutputDirectory \"%~dp0\bin\"" > publish/DownloadZetbox.cmd
 
-						# publish
-						rm publish/*.nupkg || true
-						rm publish/*.nuspec || true
-						cp publish/* ./bin/Release
+				# publish
+				rm publish/*.nupkg || true
+				rm publish/*.nuspec || true
+				cp publish/* ./bin/Release
 
-						echo ""
-						echo "Converting files"
+				echo ""
+				echo "Converting files"
 
-						for f in publish/*.nuspec.template; do
+				for f in publish/*.nuspec.template; do
 
-							baseName=`echo $f | cut -d "." -f 1`
-							newExtension=".new"
+					baseName=`echo $f | cut -d "." -f 1`
+					newExtension=".new"
 
-							cp -f $f $baseName.nuspec
-							sed -i "s/##version##/$version/g" $baseName.nuspec
+					cp -f $f $baseName.nuspec
+					sed -i "s/##version##/$version/g" $baseName.nuspec
 
-						done
+				done
 
-						cp ./publish/*.nuspec ./bin/Release
+				cp ./publish/*.nuspec ./bin/Release
 
-						echo "packing files"
-						for f in ./bin/Release/*.nuspec; do
-							nuget pack -NoPackageAnalysis $f -OutputDirectory ./publish/
-						done
-						'''
-						
-						archiveArtifacts artifacts: 'publish/*.nupkg', fingerprint: true
-					}        
-				}			
-            }
-        }
+				echo "packing files"
+				for f in ./bin/Release/*.nuspec; do
+					nuget pack -NoPackageAnalysis $f -OutputDirectory ./publish/
+				done
+				'''
+				
+				archiveArtifacts artifacts: 'publish/*.nupkg', fingerprint: true
+			}        
+		}	
+		stage('Publish Nuget Packages') {
+			agent { label 'Windows' }
+			when {
+				branch 'master'
+			}
+			steps {
+				sh  '''
+				dotnet nuget push publish/*.nupkg -k $DASZ_NUGET_KEY -s https://office.dasz.at/ngf/api/v2/package
+				'''
+			}        
+		}			
         stage('Description') {
             agent { label 'Windows' }
             steps {
