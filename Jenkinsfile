@@ -14,6 +14,7 @@ pipeline {
         stage('Build') {
             steps {
 				sh  '''
+				set +x
 				dotnet publish --disable-parallel --ignore-failed-sources --configuration Release --output ./bin/Release/ Zetbox.Core.sln
 				dotnet publish --disable-parallel --ignore-failed-sources --configuration Release --output ./bin/Release/HttpService Zetbox.Server.HttpService/Zetbox.Server.HttpService.csproj
 				cp -r ./bin/Release/Common ./bin/Release/HttpService
@@ -27,6 +28,7 @@ pipeline {
 		stage('Build Nuget Packages') {
 			steps {
 				sh  '''
+				set +x
 				version="$(gitversion -nofetch -showvariable NuGetVersionV2)"
 				echo "Version = $version"
 
@@ -67,6 +69,7 @@ pipeline {
 			}
 			steps {
 				sh  '''
+				set +x
 				dotnet nuget push publish/*.nupkg -k $DASZ_NUGET_KEY -s https://office.dasz.at/ngf/api/v2/package
 				'''
 			}        
