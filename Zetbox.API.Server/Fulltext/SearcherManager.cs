@@ -43,7 +43,7 @@ namespace Zetbox.API.Server.Fulltext
             {
                 if (_currentReader == null)
                 {
-                    _currentReader = IndexReader.Open(_path, true); ;
+                    _currentReader = DirectoryReader.Open(_path);
                     _threadCount[_currentReader] = 0;
                 }
                 _threadCount[_currentReader] += 1;
@@ -65,29 +65,6 @@ namespace Zetbox.API.Server.Fulltext
                 else
                 {
                     _threadCount[searcher.IndexReader] -= 1;
-                }
-
-                searcher.Dispose();
-            }
-        }
-
-        public void MaybeReopen()
-        {
-            lock (_lock)
-            {
-                if (_currentReader == null) return;
-
-                var newReader = _currentReader.Reopen();
-                if (newReader != _currentReader)
-                {
-                    if (_threadCount.ContainsKey(_currentReader))
-                    {
-                        _currentReader.Dispose();
-                        _threadCount.Remove(_currentReader);
-                    }
-
-                    _currentReader = newReader;
-                    _threadCount[_currentReader] = 0;
                 }
             }
         }

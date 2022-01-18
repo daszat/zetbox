@@ -1,314 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{01E60FD5-CD96-466A-83B1-8EFC7452B47C}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Zetbox.Objects.MemoryImpl</RootNamespace>
-    <AssemblyName>Zetbox.Objects.MemoryImpl</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
-    <!-- this is referenced by the generator to put the results in their right place -->
-    <RelativeOutputPath>Common</RelativeOutputPath>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>1591,0168,0414,0219</NoWarn>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Common\Generated\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
-    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
-    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>1591,0168,0414,0219</NoWarn>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Common\Generated\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
-    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
-    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <!-- mono is quite more pedantic; ignore superfluous local vars and fields for now -->
-    <NoWarn>1591,0168,0414,0219</NoWarn>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Common\Generated\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
-    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
-    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
-  <PropertyGroup>
-  </PropertyGroup>
-  <ItemGroup>
-    <AdditionalReferencePath Include="$(OutputPath)" />
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="log4net">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\log4net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Zetbox.API">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Autofac">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Autofac.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <!-- local reference to newly generated code -->
-    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
-      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Zetbox.Objects</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <Reference Include="Zetbox.DalProvider.Base">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Zetbox.API.Common">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Data.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="Zetbox.DalProvider.Memory">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Memory.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ZetboxBase\AbstractModuleMember.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\AccessControl.Memory.Designer.cs" />
-    <Compile Include="TestModule\ANewObjectClass.Memory.Designer.cs" />
-    <Compile Include="TestModule\AnotherTest.Memory.Designer.cs" />
-    <Compile Include="TestModule\Antwort.Memory.Designer.cs" />
-    <Compile Include="TestModule\AnyReferenceTestObject.Memory.Designer.cs" />
-    <Compile Include="GUI\Application.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\Assembly.Memory.Designer.cs" />
-    <Compile Include="Projekte\Auftrag.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\BaseParameter.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\Blob.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\BoolDefaultValue.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\BoolParameter.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\BoolProperty.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\CalculatedObjectReferenceProperty.Memory.Designer.cs" />
-    <Compile Include="Calendar\CalendarBook.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\ClientReadOnlyConstraint.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\CLRObjectParameter.Memory.Designer.cs" />
-    <Compile Include="Calendar\CommonWorkScheduleRule.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\CompoundObject.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\CompoundObjectParameter.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\CompoundObjectProperty.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\Constraint.Memory.Designer.cs" />
-    <Compile Include="GUI\ControlKind.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\CurrentDateTimeDefaultValue.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\CurrentSchema.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\DataType.Memory.Designer.cs" />
-    <Compile Include="GUI\DateRangeFilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\DateTimeParameter.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\DateTimeProperty.Memory.Designer.cs" />
-    <Compile Include="Calendar\DayOfWeekWorkScheduleRule.Memory.Designer.cs" />
-    <Compile Include="TestModule\DeactivatableTestObject.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\DecimalDefaultValue.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\DecimalParameter.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\DecimalProperty.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\DefaultPropertyValue.Memory.Designer.cs" />
-    <Compile Include="DocumentManagement\Document.Memory.Designer.cs" />
-    <Compile Include="TestModule\DocumentTestObject.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\DoubleDefaultValue.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\DoubleParameter.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\DoubleProperty.Memory.Designer.cs" />
-    <Compile Include="DocumentManagement\DynamicFile.Memory.Designer.cs" />
-    <Compile Include="Calendar\EasterWorkScheduleRule.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\EnumDefaultValue.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\Enumeration.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\EnumerationEntry.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\EnumerationProperty.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\EnumParameter.Memory.Designer.cs" />
-    <Compile Include="Calendar\Event.Memory.Designer.cs" />
-    <Compile Include="TestModule\EventTestObject.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\ExceptionLogEntry.Memory.Designer.cs" />
-    <Compile Include="DocumentManagement\Excerpt.Memory.Designer.cs" />
-    <Compile Include="DocumentManagement\File.Memory.Designer.cs" />
-    <Compile Include="DocumentManagement\FileImportConfiguration.Memory.Designer.cs" />
-    <Compile Include="GUI\FilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="Calendar\FixedYearlyWorkScheduleRule.Memory.Designer.cs" />
-    <Compile Include="TestModule\Fragebogen.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\FullTextIndexConstraint.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\Group.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\GroupMembership.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\GuidProperty.Memory.Designer.cs" />
-    <Compile Include="GUI\Icon.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\Identity.Memory.Designer.cs" />
-    <Compile Include="DocumentManagement\ImportedFile.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\IndexConstraint.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\InitOnlyConstraint.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\InstanceConstraint.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\IntDefaultValue.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\IntegerRangeConstraint.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\Interface.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\IntParameter.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\IntProperty.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\InvokingConstraint.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\IsValidIdentifierConstraint.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\IsValidNamespaceConstraint.Memory.Designer.cs" />
-    <Compile Include="Projekte\Kunde.Memory.Designer.cs" />
-    <Compile Include="LicenseManagement\License.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\Method.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\MethodInvocationConstraint.Memory.Designer.cs" />
-    <Compile Include="TestModule\MethodTest.Memory.Designer.cs" />
-    <Compile Include="SchemaMigration\MigrationLog.Memory.Designer.cs" />
-    <Compile Include="SchemaMigration\MigrationProject.Memory.Designer.cs" />
-    <Compile Include="Projekte\Mitarbeiter.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\Module.Memory.Designer.cs" />
-    <Compile Include="GUI\MonthFilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="TestModule\Muhblah.Memory.Designer.cs" />
-    <Compile Include="TestModule\N_to_M_relations_A.Memory.Designer.cs" />
-    <Compile Include="TestModule\N_to_M_relations_B.Memory.Designer.cs" />
-    <Compile Include="GUI\NavigationAction.Memory.Designer.cs" />
-    <Compile Include="GUI\NavigationEntry.Memory.Designer.cs" />
-    <Compile Include="GUI\NavigationScreen.Memory.Designer.cs" />
-    <Compile Include="GUI\NavigationSearchScreen.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\NewGuidDefaultValue.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\NotNullableConstraint.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\ObjectClass.Memory.Designer.cs" />
-    <Compile Include="GUI\ObjectClassFilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\ObjectReferenceParameter.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\ObjectReferencePlaceholderProperty.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\ObjectReferenceProperty.Memory.Designer.cs" />
-    <Compile Include="TestModule\One_to_N_relations_N.Memory.Designer.cs" />
-    <Compile Include="TestModule\One_to_N_relations_One.Memory.Designer.cs" />
-    <Compile Include="TestModule\One_to_N_relations_OrderedN.Memory.Designer.cs" />
-    <Compile Include="GUI\OptionalPredicateFilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="TestModule\OrderedNEnd.Memory.Designer.cs" />
-    <Compile Include="TestModule\OrderedOneEnd.Memory.Designer.cs" />
-    <Compile Include="LicenseManagement\PrivateKey.Memory.Designer.cs" />
-    <Compile Include="Projekte\Projekt.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\Property.Memory.Designer.cs" />
-    <Compile Include="TestModule\PropertyBoolTest.Memory.Designer.cs" />
-    <Compile Include="TestModule\PropertyDateTimeTest.Memory.Designer.cs" />
-    <Compile Include="TestModule\PropertyDecimalTest.Memory.Designer.cs" />
-    <Compile Include="TestModule\PropertyDoubleTest.Memory.Designer.cs" />
-    <Compile Include="TestModule\PropertyEnumTest.Memory.Designer.cs" />
-    <Compile Include="GUI\PropertyFilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="TestModule\PropertyGuidTest.Memory.Designer.cs" />
-    <Compile Include="TestModule\PropertyIntTest.Memory.Designer.cs" />
-    <Compile Include="TestModule\PropertyStringTest.Memory.Designer.cs" />
-    <Compile Include="TestModule\PropertyTestBase.Memory.Designer.cs" />
-    <Compile Include="GUI\RangeFilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\ReadOnlyConstraint.Memory.Designer.cs" />
-    <Compile Include="TestModule\RecurrenceRuleTester.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\Relation.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\RelationEnd.Memory.Designer.cs" />
-    <Compile Include="TestModule\RequiredParent.Memory.Designer.cs" />
-    <Compile Include="TestModule\RequiredParentChild.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\RoleMembership.Memory.Designer.cs" />
-    <Compile Include="GUI\SavedListConfiguration.Memory.Designer.cs" />
-    <Compile Include="TestModule\SecurityChangeRight.Memory.Designer.cs" />
-    <Compile Include="TestModule\SecurityTestChild.Memory.Designer.cs" />
-    <Compile Include="TestModule\SecurityTestParent.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\Sequence.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\SequenceData.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\ServiceDescriptor.Memory.Designer.cs" />
-    <Compile Include="GUI\SinglePropertyFilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="SchemaMigration\SourceColumn.Memory.Designer.cs" />
-    <Compile Include="SchemaMigration\SourceEnum.Memory.Designer.cs" />
-    <Compile Include="SchemaMigration\SourceTable.Memory.Designer.cs" />
-    <Compile Include="SchemaMigration\StagingDatabase.Memory.Designer.cs" />
-    <Compile Include="DocumentManagement\StaticFile.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\StringDefaultValue.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\StringParameter.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\StringProperty.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\StringRangeConstraint.Memory.Designer.cs" />
-    <Compile Include="Calendar\SyncProvider.Memory.Designer.cs" />
-    <Compile Include="GUI\TagCache.Memory.Designer.cs" />
-    <Compile Include="Projekte\Task.Memory.Designer.cs" />
-    <Compile Include="TestModule\TestCompany.Memory.Designer.cs" />
-    <Compile Include="TestModule\TestCustomObject.Memory.Designer.cs" />
-    <Compile Include="TestModule\TestDecimal.Memory.Designer.cs" />
-    <Compile Include="TestModule\TestObjClass.Memory.Designer.cs" />
-    <Compile Include="TestModule\TestStudent.Memory.Designer.cs" />
-    <Compile Include="TestModule\TPHBaseObj.Memory.Designer.cs" />
-    <Compile Include="TestModule\TPHDerivedAObj.Memory.Designer.cs" />
-    <Compile Include="TestModule\TPHDerivedBObj.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\ValueTypeProperty.Memory.Designer.cs" />
-    <Compile Include="GUI\ViewDescriptor.Memory.Designer.cs" />
-    <Compile Include="GUI\ViewModelDescriptor.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\ViewReadOnlyConstraint.Memory.Designer.cs" />
-    <Compile Include="Calendar\WorkSchedule.Memory.Designer.cs" />
-    <Compile Include="Calendar\WorkScheduleRule.Memory.Designer.cs" />
-    <Compile Include="Calendar\WorkScheduleSyncProvider.Memory.Designer.cs" />
-    <Compile Include="GUI\YearFilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="Calendar\YearlyWorkScheduleRule.Memory.Designer.cs" />
-    <Compile Include="CollectionEntries.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\AnyReference.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\AuditEntry.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\DateTimeOffset.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\DateTimeRange.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\OpenID.Memory.Designer.cs" />
-    <Compile Include="ZetboxBase\RecurrenceRule.Memory.Designer.cs" />
-    <Compile Include="TestModule\TestPhoneCompoundObject.Memory.Designer.cs" />
-    <Compile Include="AssemblyInfo.Memory.cs" />
-    <Compile Include="Module.Memory.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Zetbox.Objects.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="FrozenObjects.xml" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  -->
-  <Target Name="AfterBuild">
-  </Target>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<RootNamespace>Zetbox.Objects.MemoryImpl</RootNamespace>
+		<AssemblyName>Zetbox.Objects.MemoryImpl</AssemblyName>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
+		<!-- this is referenced by the generator to put the results in their right place -->
+		<RelativeOutputPath>Common</RelativeOutputPath>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<NoWarn>1591,0168,0414,0219</NoWarn>
+		<BuildDependsOn>$(BuildDependsOn);AfterBuildMigrated</BuildDependsOn>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+		<!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+		<OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\$(Configuration)\Common\Generated\</OutputPath>
+		<OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
+		<ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\$(Configuration)\</ZetboxAPIPath>
+		<ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+		<OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\$(Configuration)\Common\Generated\</OutputPath>
+		<OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
+		<ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\$(Configuration)\</ZetboxAPIPath>
+		<ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
+	</PropertyGroup>
+	<!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
+	<PropertyGroup>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="log4net" Version="2.0.10" />
+		<PackageReference Include="Autofac" Version="5.2.0" />
+		<Reference Include="Zetbox.API">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<!-- local reference to newly generated code -->
+		<ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
+			<Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+			<Name>Zetbox.Objects</Name>
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<Reference Include="Zetbox.DalProvider.Base">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Zetbox.API.Common">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.Common.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Zetbox.DalProvider.Memory">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Memory.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Zetbox.Objects.snk" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="FrozenObjects.xml" />
+	</ItemGroup>
 </Project>

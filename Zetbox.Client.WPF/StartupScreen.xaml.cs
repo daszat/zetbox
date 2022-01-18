@@ -12,6 +12,9 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+
+using System.Runtime.InteropServices;
+
 namespace Zetbox.Client.WPF
 {
     using System;
@@ -48,7 +51,7 @@ namespace Zetbox.Client.WPF
             Log.Debug("Initialization complete");
         }
 
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Client.WPF.SplashScreen");
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(StartupScreen));
         private static readonly object _lock = new object();
         private static StartupScreen _current = null;
         private static Thread _thread = null;
@@ -114,7 +117,12 @@ namespace Zetbox.Client.WPF
                     _config = config;
 
                     _thread = new Thread(new ThreadStart(Run));
-                    _thread.SetApartmentState(ApartmentState.STA);
+                    // Fix CA1416
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    {
+                        _thread.SetApartmentState(ApartmentState.STA);
+                    }
+
                     _thread.IsBackground = true; // do not block main process from closing
                     _thread.Start();
 

@@ -19,50 +19,27 @@ namespace Zetbox.Client.ASPNET
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Web.Mvc;
     using System.IO;
-    using System.Web.Mvc.Html;
     using System.Linq.Expressions;
     using Zetbox.Client.Presentables;
     using System.Reflection;
     using Zetbox.API;
     using Zetbox.Client.Presentables.ValueViewModels;
     using System.Web;
+    using Microsoft.AspNetCore.Mvc.ViewFeatures;
+    using Microsoft.AspNetCore.Html;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using System.Text.Encodings.Web;
+    using System.Data;
+    using Zetbox.Client.Models;
 
     public static class HtmlHelpers
     {
-        #region Widget
-        private class WidgetContainer : IDisposable
-        {
-            private readonly TextWriter _writer;
-            public WidgetContainer(TextWriter writer, string title)
-            {
-                _writer = writer;
-
-                _writer.Write("<div class=\"widget\"><div class=\"top\"><div class=\"bottom\"><div class=\"left\"><div class=\"right\"><div class=\"ro\"><div class=\"lo\"><div class=\"ru\"><div class=\"lu\">\n");
-                _writer.Write("<h4 class=\"widget-title\">");
-                _writer.Write(title);
-                _writer.Write("</h4>\n");
-
-                _writer.Write("<div class=\"widget-content\">\n");
-            }
-
-            public void Dispose()
-            {
-                _writer.Write("</div>\n");
-                _writer.Write("</div></div></div></div></div></div></div></div></div>\n");
-            }
-        }
-        public static IDisposable Widget(this HtmlHelper html, string title)
-        {
-            return new WidgetContainer(html.ViewContext.Writer, title);
-        }
-        #endregion
-
         #region ZbHiddenID
-        public static MvcHtmlString ZbHiddenID(this HtmlHelper helper, int ID)
+        public static IHtmlContent ZbHiddenID(this IHtmlHelper helper, int ID)
         {
-            return InputExtensions.Hidden(helper, "ID", ID > Helper.INVALIDID ? ID : Helper.INVALIDID);
+            return helper.Hidden("ID", ID > Helper.INVALIDID ? ID : Helper.INVALIDID, null);
         }
         #endregion
 
@@ -77,10 +54,14 @@ namespace Zetbox.Client.ASPNET
         /// <param name="name">overrides expression</param>
         /// <param name="asReadOnly">Renders the for attribute always with FormattedValue</param>
         /// <returns></returns>
-        public static MvcHtmlString ZbLabelFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, ILabeledViewModel>> expression, object htmlAttributes = null, string name = null, bool asReadOnly = false)
+        public static IHtmlContent ZbLabelFor<TModel>(this IHtmlHelper<TModel> html, Expression<Func<TModel, ILabeledViewModel>> expression, object htmlAttributes = null, string name = null, bool asReadOnly = false)
         {
-            var exprStr = name ?? ExpressionHelper.GetExpressionText(expression);
-            var mdl = System.Web.Mvc.ModelMetadata.FromLambdaExpression<TModel, ILabeledViewModel>(expression, html.ViewData).IfNotNull(meta => meta.Model);
+            ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
+
+            var exprStr = name ?? modelExpressionProvider.GetExpressionText(expression);
+            var mdl = modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
+
+
             var lbmdl = mdl as ILabeledViewModel;
             var basemdl = mdl as BaseValueViewModel;
 
@@ -105,17 +86,18 @@ namespace Zetbox.Client.ASPNET
                                                 html.Encode(lbmdl.IfNotNull(v => v.Label).IfNullOrEmpty(exprStr)),
                                                 !asReadOnly && lbmdl.Required ? " <span class=\"required\"></span>" : "",
                                                 !asReadOnly && lbmdl.Required ? "required" : "");
-            return MvcHtmlString.Create(labelStr);
+            return new HtmlString(labelStr);
         }
         #endregion
 
         #region Display
-        public static MvcHtmlString ZbDisplayFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
+        public static IHtmlContent ZbDisplayFor<TModel, TValue>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
             where TValue : BaseValueViewModel
         {
-            var newExpression = AppendMember<TModel, TValue, string>(expression, "FormattedValue");
-            var vmdl = (BaseValueViewModel)System.Web.Mvc.ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
-            return DisplayExtensions.DisplayFor<TModel, string>(html, newExpression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
+            ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
+            var vmdl = modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
+
+            return html.DisplayFor(expression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
         }
         #endregion
 
@@ -131,79 +113,92 @@ namespace Zetbox.Client.ASPNET
         /// <param name="htmlFieldName"></param>
         /// <param name="additionalViewData"></param>
         /// <returns></returns>
-        [Obsolete("Use MVC Editor Templates instead!")]
-        public static MvcHtmlString ZbEditorFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
+        public static IHtmlContent ZbEditorFor<TModel, TValue>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
             where TValue : BaseValueViewModel
         {
-            var vmdl = (BaseValueViewModel)ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
-            var type = vmdl.GetType();
+            ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
+            var vmdl = (BaseValueViewModel)modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
+
+            if (vmdl.ValidationError.HasErrors)
+            {
+                html.ViewData.ModelState.AddModelError(htmlFieldName ?? html.NameFor(expression), string.Join(", ", vmdl.ValidationError.Errors));
+                // Not the best solution
+                html.ViewData.ModelState.AddModelError((htmlFieldName ?? html.NameFor(expression)) + ".Value", string.Join(", ", vmdl.ValidationError.Errors));
+                html.ViewData.ModelState.AddModelError((htmlFieldName ?? html.NameFor(expression)) + ".FormattedValue", string.Join(", ", vmdl.ValidationError.Errors));
+            }
+
             if (vmdl.IsReadOnly)
             {
-                return DisplayExtensions.DisplayFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
+                return html.ZbDisplayFor(expression, null, htmlFieldName, additionalViewData);
             }
             else
             {
-                if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
+                return html.EditorFor(expression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
+            }
+        }
+
+        public static IHtmlContent ZbEditorFor<TModel, TValue>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression)
+            where TValue : DataObjectViewModel
+        {
+            ModelExpressionProvider modelExpressionProvider = (ModelExpressionProvider)html.ViewContext.HttpContext.RequestServices.GetService(typeof(IModelExpressionProvider));
+            var vmdl = (DataObjectViewModel)modelExpressionProvider.CreateModelExpression(html.ViewData, expression)?.Model;
+
+            using (var writer = new StringWriter())
+            {
+                foreach (var prop in vmdl.PropertyModels)
                 {
-                    var enumVmdl = (EnumerationValueViewModel)vmdl;
-                    return SelectExtensions.DropDownList(
-                        html,
-                        ExpressionHelper.GetExpressionText(expression) + ".Value",
-                        enumVmdl
-                            .PossibleValues
-                            .Select(i => new SelectListItem()
-                            {
-                                Text = i.Value,
-                                Value = i.Key != null ? i.Key.Value.ToString() : string.Empty,
-                                Selected = i.Key == enumVmdl.Value
-                            }));
+                    var propName = ((BasePropertyValueModel)prop.ValueModel).Property.Name;
+
+                    Expression<Func<TModel, ILabeledViewModel>> lbExpr = Expression.Lambda<Func<TModel, ILabeledViewModel>>(
+                            Expression.Call(Expression.Property(expression.Body, "PropertyModelsByName"), "get_Item", null, Expression.Constant(propName)),
+                            expression.Parameters.ToArray());
+                    Expression<Func<TModel, BaseValueViewModel>> propExpr = Expression.Lambda<Func<TModel, BaseValueViewModel>>(
+                            Expression.Call(Expression.Property(expression.Body, "PropertyModelsByName"), "get_Item", null, Expression.Constant(propName)),
+                            expression.Parameters.ToArray());
+
+                    writer.WriteLine("<div class=\"form-group\">");
+                    writer.WriteLine("<label class=\"col-md-3 control-label\">");
+                    html.ZbLabelFor(lbExpr).WriteTo(writer, HtmlEncoder.Default);
+                    writer.WriteLine("</label>");
+                    writer.WriteLine("<div class=\"col-md-6\">");
+                    html.ZbEditorFor(propExpr).WriteTo(writer, HtmlEncoder.Default);
+                    writer.WriteLine("</div>");
+                    writer.WriteLine("</div>");
                 }
-                else
-                {
-                    return EditorExtensions.EditorFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
-                }
+
+                return new HtmlString(writer.ToString());
             }
         }
         #endregion
 
         #region ValidationMessages
-        [Obsolete("Add them in MVC Editor Templates instead!")]
-        public static MvcHtmlString ZbValidationMessageFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string validationMessage = null, object htmlAttributes = null)
-             where TValue : BaseValueViewModel
+        public static IHtmlContent ZbValidationMessageFor<TModel, TValue>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string validationMessage = null, object htmlAttributes = null)
+            where TValue : BaseValueViewModel
         {
-            var vmdl = (BaseValueViewModel)ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
-            var type = vmdl.GetType();
-            if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
-            {
-                return ValidationExtensions.ValidationMessageFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "Value"), validationMessage, htmlAttributes);
-            }
-            else
-            {
-                return ValidationExtensions.ValidationMessageFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), validationMessage, htmlAttributes);
-            }
+            return html.ValidationMessageFor(expression, validationMessage, htmlAttributes, null);
         }
 
-        public static MvcHtmlString StatusMessage(this HtmlHelper helper, string msg)
+        public static IHtmlContent StatusMessage(this IHtmlHelper helper, string msg)
         {
             if (string.IsNullOrWhiteSpace(msg))
             {
-                return MvcHtmlString.Empty;
+                return HtmlString.Empty;
             }
 
-            return new MvcHtmlString(string.Format("<div class=\"alert alert-success\">{0}</div>", HttpUtility.HtmlEncode(msg)));
+            return new HtmlString(string.Format("<div class=\"alert alert-success\">{0}</div>", HttpUtility.HtmlEncode(msg)));
         }
 
-        public static MvcHtmlString WarningMessage(this HtmlHelper helper, string msg)
+        public static IHtmlContent WarningMessage(this IHtmlHelper helper, string msg)
         {
             if (string.IsNullOrWhiteSpace(msg))
             {
-                return MvcHtmlString.Empty;
+                return HtmlString.Empty;
             }
 
-            return new MvcHtmlString(string.Format("<div class=\"alert alert-warning\">{0}</div>", HttpUtility.HtmlEncode(msg)));
+            return new HtmlString(string.Format("<div class=\"alert alert-warning\">{0}</div>", HttpUtility.HtmlEncode(msg)));
         }
 
-        public static MvcHtmlString BootstrapValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors = false)
+        public static IHtmlContent BootstrapValidationSummary(this IHtmlHelper htmlHelper, bool excludePropertyErrors = false)
         {
             if (htmlHelper == null)
             {
@@ -212,20 +207,22 @@ namespace Zetbox.Client.ASPNET
 
             if (htmlHelper.ViewData.ModelState.IsValid || (excludePropertyErrors && (htmlHelper.ViewData.ModelState[""] == null || htmlHelper.ViewData.ModelState[""].Errors.Count() == 0)))
             {
-                return MvcHtmlString.Empty;
+                return HtmlString.Empty;
             }
 
-            return new MvcHtmlString(string.Format("<div class=\"alert alert-danger\">{0}</div>",
-                htmlHelper.ValidationSummary(excludePropertyErrors).ToHtmlString()));
+            using (var writer = new System.IO.StringWriter())
+            {
+                htmlHelper.ValidationSummary(excludePropertyErrors, "Error", null, null).WriteTo(writer, HtmlEncoder.Default);
+                return new HtmlString(string.Format("<div class=\"alert alert-danger\">{0}</div>", writer.ToString()));
+            }
         }
         #endregion
 
-
         #region TextBox
-        public static MvcHtmlString ZbTextBoxFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null)
+        public static IHtmlContent ZbTextBoxFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null)
             where TValue : BaseValueViewModel
         {
-            return InputExtensions.TextBoxFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), htmlAttributes);
+            return html.TextBoxFor<string>(AppendMember<TModel, TValue, string>(expression, "FormattedValue"), null, htmlAttributes);
         }
         #endregion
 
@@ -254,35 +251,55 @@ namespace Zetbox.Client.ASPNET
             var type = vmdl.GetType();
             if (typeof(NullableDateTimePropertyViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "DateTime";
+                return templateName ?? "NullableDateTimePropertyViewModel";
             }
             else if (typeof(NullableDecimalPropertyViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "Decimal";
+                return templateName ?? "NullableDecimalPropertyViewModel";
             }
             else if (typeof(NullableIntPropertyViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "Integer";
+                return templateName ?? "NullableIntPropertyViewModel";
+            }
+            else if (typeof(NullableBoolPropertyViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "NullableBoolPropertyViewModel";
             }
             else if (typeof(NullableDoublePropertyViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "Double";
+                return templateName ?? "NullableDoublePropertyViewModel";
             }
             else if (typeof(NullableGuidPropertyViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "Guid";
+                return templateName ?? "NullableGuidPropertyViewModel";
+            }
+            else if (typeof(MultiLineStringValueViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "MultiLineStringValueViewModel";
             }
             else if (typeof(StringValueViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "String";
+                return templateName ?? "StringValueViewModel";
             }
             else if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "Enumeration";
+                return templateName ?? "EnumerationValueViewModel";
+            }
+            else if (typeof(CompoundCollectionViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "CompoundCollectionViewModel";
             }
             else if (typeof(ObjectReferenceViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "ObjectReference";
+                return templateName ?? "ObjectReferenceViewModel";
+            }
+            else if (typeof(ObjectListViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "ObjectListViewModel";
+            }
+            else if (typeof(ObjectCollectionViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "ObjectCollectionViewModel";
             }
             else
             {

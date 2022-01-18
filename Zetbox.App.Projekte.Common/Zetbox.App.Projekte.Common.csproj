@@ -1,240 +1,64 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\GitVersionTask.5.3.7\build\GitVersionTask.props" Condition="Exists('..\packages\GitVersionTask.5.3.7\build\GitVersionTask.props')" />
-  <Import Project="..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props" Condition="Exists('..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B1AE679D-BA5A-4E70-8D21-D99C46A34F79}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zetbox.App.Projekte.Common</RootNamespace>
-    <AssemblyName>Zetbox.App.Projekte.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
-    <NoWarn>1591</NoWarn>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Common\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Debug\Common\Zetbox.App.Projekte.Common.xml</DocumentationFile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\Common\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Release\Common\Zetbox.App.Projekte.Common.xml</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Common\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Debug\Common\Zetbox.App.Projekte.Common.xml</DocumentationFile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="CryptSharp, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CryptSharpOfficial.2.1.0.0\lib\CryptSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Security" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Calendar\CalendarBookActions.cs" />
-    <Compile Include="Calendar\SyncProviderActions.cs" />
-    <Compile Include="Calendar\EventActions.cs" />
-    <Compile Include="Calendar\WorkScheduleActions.cs" />
-    <Compile Include="Calendar\WorkScheduleRuleActions.cs" />
-    <Compile Include="Calendar\CommonWorkScheduleRuleActions.cs" />
-    <Compile Include="Calendar\DayOfWeekWorkScheduleRuleActions.cs" />
-    <Compile Include="Calendar\EasterWorkScheduleRuleActions.cs" />
-    <Compile Include="Calendar\FixedYearlyWorkScheduleRuleActions.cs" />
-    <Compile Include="Calendar\YearlyWorkScheduleRuleActions.cs" />
-    <Compile Include="DocumentManagement\ExcerptActions.cs" />
-    <Compile Include="DocumentManagement\FileImportService.cs" />
-    <Compile Include="DocumentManagement\ImportedFileActions.cs" />
-    <Compile Include="Gui\ApplicationActions.cs" />
-    <Compile Include="Gui\TagCacheActions.cs" />
-    <Compile Include="Gui\FilterConfigurationActions.cs" />
-    <Compile Include="Gui\PropertyFilterConfigurationActions.cs" />
-    <Compile Include="Gui\NavigationEntryActions.cs" />
-    <Compile Include="Gui\ViewDescriptorActions.cs" />
-    <Compile Include="Gui\ViewModelDescriptorActions.cs" />
-    <Compile Include="LicenseManagement\PrivateKeyActions.cs" />
-    <Compile Include="LicenseManagement\LicenseActions.cs" />
-    <Compile Include="ZetboxBase\CompoundObjectActions.cs" />
-    <Compile Include="ZetboxBase\OpenIDActions.cs" />
-    <Compile Include="ZetboxBase\BaseParameterActions.cs" />
-    <Compile Include="ZetboxBase\AssemblyActions.cs" />
-    <Compile Include="ZetboxBase\BoolPropertyActions.cs" />
-    <Compile Include="ZetboxBase\CompoundObjectPropertyActions.cs" />
-    <Compile Include="ZetboxBase\ConstraintActions.cs" />
-    <Compile Include="ZetboxBase\BoolDefaultValueActions.cs" />
-    <Compile Include="ZetboxBase\CompoundObjectParameterActions.cs" />
-    <Compile Include="ZetboxBase\AnyReferenceActions.cs" />
-    <Compile Include="ZetboxBase\DateTimeOffsetActions.cs" />
-    <Compile Include="ZetboxBase\DoubleDefaultValueActions.cs" />
-    <Compile Include="ZetboxBase\GroupMembershipActions.cs" />
-    <Compile Include="ZetboxBase\RoleMembershipActions.cs" />
-    <Compile Include="ZetboxBase\DecimalDefaultValueActions.cs" />
-    <Compile Include="ZetboxBase\RecurrenceRuleActions.cs" />
-    <Compile Include="ZetboxBase\SequenceActions.cs" />
-    <Compile Include="ZetboxBase\DateTimeRangeActions.cs" />
-    <Compile Include="ZetboxBase\Strings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ZetboxBase\ValueTypePropertyActions.cs" />
-    <Compile Include="ZetboxBase\StringDefaultValueActions.cs" />
-    <Compile Include="ZetboxBase\IntDefaultValueActions.cs" />
-    <Compile Include="ZetboxBase\IsValidNamespaceConstraintActions.cs" />
-    <Compile Include="ZetboxBase\StringParameterActions.cs" />
-    <Compile Include="ZetboxBase\DoubleParameterActions.cs" />
-    <Compile Include="ZetboxBase\BoolParameterActions.cs" />
-    <Compile Include="ZetboxBase\IntParameterActions.cs" />
-    <Compile Include="ZetboxBase\DateTimeParameterActions.cs" />
-    <Compile Include="ZetboxBase\CLRObjectParameterActions.cs" />
-    <Compile Include="ZetboxBase\EnumParameterActions.cs" />
-    <Compile Include="ZetboxBase\ObjectReferenceParameterActions.cs" />
-    <Compile Include="ZetboxBase\IntPropertyActions.cs" />
-    <Compile Include="ZetboxBase\DecimalPropertyActions.cs" />
-    <Compile Include="ZetboxBase\DateTimePropertyActions.cs" />
-    <Compile Include="ZetboxBase\GuidPropertyActions.cs" />
-    <Compile Include="ZetboxBase\EnumerationPropertyActions.cs" />
-    <Compile Include="ZetboxBase\CalculatedObjectReferencePropertyActions.cs" />
-    <Compile Include="ZetboxBase\DoublePropertyActions.cs" />
-    <Compile Include="ZetboxBase\StringPropertyActions.cs" />
-    <Compile Include="ZetboxBase\IdentityActions.cs" />
-    <Compile Include="ZetboxBase\GroupActions.cs" />
-    <Compile Include="ZetboxBase\AccessControlActions.cs" />
-    <Compile Include="ZetboxBase\BlobActions.cs" />
-    <Compile Include="ZetboxBase\ModuleActions.cs" />
-    <Compile Include="ZetboxBase\DataTypeActions.cs" />
-    <Compile Include="ZetboxBase\DecimalParameterActions.cs" />
-    <Compile Include="ZetboxBase\ToStringHelper.cs" />
-    <Compile Include="CustomCommonActionsModule.cs" />
-    <Compile Include="DocumentManagement\DocumentActions.cs" />
-    <Compile Include="DocumentManagement\StaticFileActions.cs" />
-    <Compile Include="DocumentManagement\DynamicFileActions.cs" />
-    <Compile Include="DocumentManagement\FileActions.cs" />
-    <Compile Include="Gui\ControlKindActions.cs" />
-    <Compile Include="Gui\IconActions.cs" />
-    <Compile Include="ZetboxBase\ClientReadOnlyConstraintActions.cs" />
-    <Compile Include="ZetboxBase\EnumDefaultValueActions.cs" />
-    <Compile Include="ZetboxBase\CurrentDateTimeDefaultValueActions.cs" />
-    <Compile Include="ZetboxBase\NewGuidDefaultValueActions.cs" />
-    <Compile Include="ZetboxBase\PropertyActions.cs" />
-    <Compile Include="ZetboxBase\EnumerationActions.cs" />
-    <Compile Include="ZetboxBase\EnumerationEntryActions.cs" />
-    <Compile Include="ZetboxBase\ObjectReferencePlaceholderPropertyActions.cs" />
-    <Compile Include="ZetboxBase\MethodActions.cs" />
-    <Compile Include="ZetboxBase\ObjectClassActions.cs" />
-    <Compile Include="ZetboxBase\ReadOnlyConstraintActions.cs" />
-    <Compile Include="ZetboxBase\IndexConstraintActions.cs" />
-    <Compile Include="ZetboxBase\InitOnlyConstraintActions.cs" />
-    <Compile Include="ZetboxBase\ViewReadOnlyConstraintActions.cs" />
-    <Compile Include="ZetboxBase\IsValidIdentifierConstraintActions.cs" />
-    <Compile Include="ZetboxBase\StringRangeConstraintActions.cs" />
-    <Compile Include="ZetboxBase\IntegerRangeConstraintActions.cs" />
-    <Compile Include="ZetboxBase\NotNullableConstraintActions.cs" />
-    <Compile Include="ZetboxBase\ObjectReferencePropertyActions.cs" />
-    <Compile Include="ZetboxBase\RelationActions.cs" />
-    <Compile Include="ZetboxBase\RelationEndActions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <Compile Include="SchemaMigration\SourceColumnActions.cs" />
-    <Compile Include="SchemaMigration\StagingDatabaseActions.cs" />
-    <Compile Include="SchemaMigration\SourceTableActions.cs" />
-    <Compile Include="SchemaMigration\MigrationProjectActions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
-      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Zetbox.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
-      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Zetbox.Objects</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
-      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Zetbox.API.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Zetbox.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ZetboxBase\Strings.de.resx" />
-    <EmbeddedResource Include="ZetboxBase\Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props'))" />
-    <Error Condition="!Exists('..\packages\GitVersionTask.5.3.7\build\GitVersionTask.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.5.3.7\build\GitVersionTask.props'))" />
-    <Error Condition="!Exists('..\packages\GitVersionTask.5.3.7\build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.5.3.7\build\GitVersionTask.targets'))" />
-  </Target>
-  <Import Project="..\packages\GitVersionTask.5.3.7\build\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.5.3.7\build\GitVersionTask.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-    <Copy SourceFiles="$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).pdb" DestinationFolder="$(OutputPath)\..\Client" />
-  </Target>
-  -->
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<ProductVersion>9.0.30729</ProductVersion>
+		<TargetFramework>net5.0</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
+		<NoWarn>1591</NoWarn>
+		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
+		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<AssemblyTitle>Zetbox.App.Projekte.Common</AssemblyTitle>
+		<Company>dasz.at OG</Company>
+		<Product>zetbox</Product>
+		<Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+		<OutputPath>..\bin\$(Configuration)\Common\</OutputPath>
+		<DocumentationFile>..\bin\$(Configuration)\Common\Zetbox.App.Projekte.Common.xml</DocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<OutputPath>..\bin\$(Configuration)\Common\</OutputPath>
+		<DocumentationFile>..\bin\$(Configuration)\Common\Zetbox.App.Projekte.Common.xml</DocumentationFile>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="5.2.0" />
+		<PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
+		<PackageReference Include="GitVersion.Core" Version="5.6.6">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="GitVersion.MsBuild" Version="5.6.6">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="log4net" Version="2.0.10" />
+		<PackageReference Include="System.Security.Cryptography.Cng" Version="5.0.0" />
+		<PackageReference Include="UtilPack.NuGet.MSBuild" Version="2.9.1">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="ZetboxBase\Strings.Designer.cs">
+			<AutoGen>True</AutoGen>
+			<DesignTime>True</DesignTime>
+			<DependentUpon>Strings.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Zetbox.snk" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Properties\VersionInfo.Designer.cs" />
+	</ItemGroup>
 </Project>

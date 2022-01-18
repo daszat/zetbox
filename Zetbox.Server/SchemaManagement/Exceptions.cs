@@ -66,7 +66,6 @@ namespace Zetbox.Server.SchemaManagement
             ClrType = info.GetString("CLRType");
         }
 
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);

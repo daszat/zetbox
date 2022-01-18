@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
-  <ConfigName>Zetbox.DalProvider.NHibernate's Test MSSQL Configuration</ConfigName>
+  <ConfigName>Zetbox.DalProvider.NHibernate Core Test MSSQL Configuration</ConfigName>
   <Server StartServer="false">
     <ConnectionStrings>
       <Database Name="Zetbox" Schema="MSSQL" Provider="NHibernate.Dialect.MsSql2005Dialect">Data Source=.\SQLEXPRESS;Initial Catalog=zetbox;Integrated Security=True;MultipleActiveResultSets=true;</Database>

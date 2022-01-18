@@ -153,13 +153,15 @@ namespace Zetbox.API.Tests.BinarySerializers
         private void BinaryWrite(object stuff)
         {
             BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(stream, stuff);
+            //bf.Serialize(stream, stuff);
+            throw new NotSupportedException("BinaryFormatter is not supported.");
         }
 
         private object BinaryRead()
         {
             BinaryFormatter bf = new BinaryFormatter();
-            return bf.Deserialize(stream);
+            // return bf.Deserialize(stream);
+            throw new NotSupportedException("BinaryFormatter is not supported.");
         }
     }
 }

@@ -1,110 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+﻿<root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -117,88 +11,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ByDay_label" xml:space="preserve">
+  <data name="ByDay_label" space="preserve">
     <value>ByDay</value>
   </data>
-  <data name="ByDay_description" xml:space="preserve">
+  <data name="ByDay_description" space="preserve">
     <value>Specifies a comma separated list of days of the week. Also it may indicate the nth occurrence of the specific day within a month. (MO,TU,1SA,-2SU)</value>
   </data>
-  <data name="ByHour_label" xml:space="preserve">
+  <data name="ByHour_label" space="preserve">
     <value>ByHour</value>
   </data>
-  <data name="ByHour_description" xml:space="preserve">
+  <data name="ByHour_description" space="preserve">
     <value>Specifies a comma separated list of hours. (0,1,22,23)</value>
   </data>
-  <data name="ByMinute_label" xml:space="preserve">
+  <data name="ByMinute_label" space="preserve">
     <value>ByMinute</value>
   </data>
-  <data name="ByMinute_description" xml:space="preserve">
+  <data name="ByMinute_description" space="preserve">
     <value>Specifies a comma separated list of minutes. (0,1,58,59)</value>
   </data>
-  <data name="ByMonth_label" xml:space="preserve">
+  <data name="ByMonth_label" space="preserve">
     <value>ByMonth</value>
   </data>
-  <data name="ByMonth_description" xml:space="preserve">
+  <data name="ByMonth_description" space="preserve">
     <value>Specifies a comma separated list of months of the year (1,2,3,4,11,12)</value>
   </data>
-  <data name="ByMonthDay_label" xml:space="preserve">
+  <data name="ByMonthDay_label" space="preserve">
     <value>ByMonthDay</value>
   </data>
-  <data name="ByMonthDay_description" xml:space="preserve">
+  <data name="ByMonthDay_description" space="preserve">
     <value>Specifies a comma separated list of days of the month. (1,2,30,31,-1,-2,-31)</value>
   </data>
-  <data name="BySecond_label" xml:space="preserve">
+  <data name="BySecond_label" space="preserve">
     <value>BySecond</value>
   </data>
-  <data name="BySecond_description" xml:space="preserve">
+  <data name="BySecond_description" space="preserve">
     <value>Specifies a comma separated list of seconds. (0,1,58,59)</value>
   </data>
-  <data name="BySetPos_label" xml:space="preserve">
+  <data name="BySetPos_label" space="preserve">
     <value>BySetPos</value>
   </data>
-  <data name="BySetPos_description" xml:space="preserve">
+  <data name="BySetPos_description" space="preserve">
     <value>Specifies a comma separated list of nth occurrences</value>
   </data>
-  <data name="ByWeekNumber_label" xml:space="preserve">
+  <data name="ByWeekNumber_label" space="preserve">
     <value>ByWeekNumber</value>
   </data>
-  <data name="ByWeekNumber_description" xml:space="preserve">
+  <data name="ByWeekNumber_description" space="preserve">
     <value>Specifies a comma separated list of weeks of the year. Valid values are 1 to 53 or -53 to -1. (1,5,-2)</value>
   </data>
-  <data name="ByYearDay_label" xml:space="preserve">
+  <data name="ByYearDay_label" space="preserve">
     <value>ByYearDay</value>
   </data>
-  <data name="ByYearDay_description" xml:space="preserve">
+  <data name="ByYearDay_description" space="preserve">
     <value>Specifies a comma separated list of days of the year. (1,2,365,366,-1,-2,-366)</value>
   </data>
-  <data name="Count_label" xml:space="preserve">
+  <data name="Count_label" space="preserve">
     <value>Count</value>
   </data>
-  <data name="Count_description" xml:space="preserve">
+  <data name="Count_description" space="preserve">
     <value>Specifies how often the recurrence will be repeated. The start date counts as the first one</value>
   </data>
-  <data name="Frequency_label" xml:space="preserve">
+  <data name="Frequency_label" space="preserve">
     <value>Frequency</value>
   </data>
-  <data name="Frequency_description" xml:space="preserve">
+  <data name="Frequency_description" space="preserve">
     <value />
   </data>
-  <data name="Interval_label" xml:space="preserve">
+  <data name="Interval_label" space="preserve">
     <value>Interval</value>
   </data>
-  <data name="Interval_description" xml:space="preserve">
+  <data name="Interval_description" space="preserve">
     <value>Specifies how often the recurrence rule repeats, null is equivalent to 1</value>
   </data>
-  <data name="Until_label" xml:space="preserve">
+  <data name="Until_label" space="preserve">
     <value>Until</value>
   </data>
-  <data name="Until_description" xml:space="preserve">
+  <data name="Until_description" space="preserve">
     <value>Recurrents ends at this date, including this date</value>
   </data>
-  <data name="WeekStart_label" xml:space="preserve">
+  <data name="WeekStart_label" space="preserve">
     <value>WeekStart</value>
   </data>
-  <data name="WeekStart_description" xml:space="preserve">
+  <data name="WeekStart_description" space="preserve">
     <value />
   </data>
 </root>

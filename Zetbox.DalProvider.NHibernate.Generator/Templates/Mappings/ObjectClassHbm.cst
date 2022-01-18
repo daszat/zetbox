@@ -49,11 +49,14 @@
            table="`<%= tableName %>`"
            abstract="<%= isAbstract ? "true" : "false" %>"
            dynamic-update="<%= needsConcurrency ? "true" : "false" %>"
-           optimistic-lock="<%= needsConcurrency ? "dirty" : "none" %>"
+           optimistic-lock="<%= needsConcurrency ? "version" : "none" %>"
            batch-size="100">
 
 <% IdGeneratorHbm.Call(Host, "id", schemaName, tableName); %>
 <% DiscriminatorColumnHbm.Call(Host, mappingType); %>
+<% if(needsConcurrency) { %>
+<% VersionColumnHbm.Call(Host); %>
+<% } %>
 
         <!-- define the properties -->
 <% ApplyPropertyDefinitions(properties); %>

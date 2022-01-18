@@ -1,0 +1,81 @@
+variables:
+  GIT_DEPTH: "100000"
+  MSBuildThisFileDirectory: "./"
+  IGNORE_NORMALISATION_GIT_HEAD_MOVE: "1"
+
+stages:
+  - build
+  - deploy
+  - publish
+
+build-zetbox:
+  stage: build
+  image: mcr.microsoft.com/dotnet/sdk:5.0
+  tags:
+    - Windows  
+  script: |
+    dotnet --info
+    ls -la
+    dotnet build --disable-parallel --ignore-failed-sources --configuration Release Zetbox.Core.sln
+    dotnet publish --disable-parallel --ignore-failed-sources --configuration Release  Zetbox.Server.HttpService/Zetbox.Server.HttpService.csproj --output ./bin/Release/HttpService
+  artifacts:
+    paths:
+      - 'bin'
+      - 'publish'
+    name: 'zetbox'
+    expire_in: 1 hrs
+        
+create-artifacts:
+  stage: deploy
+  image: mcr.microsoft.com/dotnet/sdk:5.0
+  tags:
+    - Windows  
+  script: |
+    echo "Creating local packages"
+    rm publish/*.nupkg || true
+    rm publish/*.nuspec || true
+    cp publish/* ./bin/Release
+    
+    version="$(gitversion -nofetch -showvariable NuGetVersionV2)"
+    echo "Version = $version"
+    
+    echo ""
+    echo "setting version"
+    
+    for f in publish/*.nuspec.template; do
+    
+    	baseName=`echo $f | cut -d "." -f 1`
+    	newExtension=".new"
+    
+    	cp -f $f $baseName.nuspec
+    	sed -i "s/##version##/$version/g" $baseName.nuspec
+    
+    done
+    
+    cp ./publish/*.nuspec ./bin/Release
+    
+    echo "packing files"
+    for f in ./bin/Release/*.nuspec; do
+    	nuget pack -NoPackageAnalysis $f -OutputDirectory ./publish/
+    done
+    
+    
+    # for now, publish them
+    dotnet nuget push ./publish/*.nupkg -s zetbox --skip-duplicate
+  artifacts:
+    paths:
+      - 'publish/*.nupkg'
+    name: 'zetbox-packages'
+
+publish-master:
+  stage: publish
+  image: mcr.microsoft.com/dotnet/sdk:5.0
+  tags:
+    - Windows
+  only:
+    refs:
+      - master
+  script: |
+    echo "Creating final packages"
+    dotnet nuget push ./publish/*.nupkg -s zetbox --skip-duplicate
+

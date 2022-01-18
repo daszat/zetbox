@@ -48,7 +48,11 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
             propName = string.IsNullOrEmpty(propName) ? prop.Name : propName;
             columnName = string.IsNullOrEmpty(columnName) ? Construct.ColumnName(prop, prefix) : prefix + columnName;
-            var optimisticLock = needsConcurrency && propName == "ChangedOn";
+            if (needsConcurrency && propName == "ChangedOn")
+            {
+                // Will be generated via the version tag.
+                return;
+            }
 
             string typeAttr = String.Empty;
             if (prop is DateTimeProperty)
@@ -71,7 +75,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 // not needed
                 ceClassAttr = String.Empty;
 
-                if(prop is StringProperty)
+                if (prop is StringProperty)
                 {
                     length = ((StringProperty)prop).GetMaxLength();
                 }
@@ -89,7 +93,6 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 ceClassAttr,
                 ceReverseKeyColumnName,
                 listPositionColumnName,
-                optimisticLock,
                 length);
         }
     }

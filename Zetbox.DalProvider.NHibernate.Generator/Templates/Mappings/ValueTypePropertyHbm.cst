@@ -29,7 +29,6 @@
 <%@ Parameter Name="ceClassAttr" Type="string" %>
 <%@ Parameter Name="ceReverseKeyColumnName" Type="string" %>
 <%@ Parameter Name="listPositionColumnName" Type="string" %>
-<%@ Parameter Name="optimisticLock" Type="bool" %>
 <%@ Parameter Name="length" Type="int" %>
 <% if (isList) {                                                                    %>
         <!-- ValueTypeProperty isList -->
@@ -40,7 +39,6 @@
 <% } else {                                                                         %>
         <!-- ValueTypeProperty isValue -->
         <property name="<%= propName %>" <%= typeAttr %>
-                  column="`<%= columnName %>`" 
-                  optimistic-lock="<%= optimisticLock ? "true" : "false" %>"
+                  column="`<%= columnName %>`"
                   <%= length > 0 ? "length=\"" + length + "\" "  : "" %>/>
 <% }                                                                                %>

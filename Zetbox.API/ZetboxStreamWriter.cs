@@ -44,7 +44,7 @@ namespace Zetbox.API
                 return new ZetboxStreamWriter(_map, destination);
             }
         }
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Serialization");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(ZetboxStreamWriter));
 
         private readonly TypeMap _typeMap;
 

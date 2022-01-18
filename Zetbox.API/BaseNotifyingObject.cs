@@ -197,7 +197,7 @@ namespace Zetbox.API
         private Dictionary<string, Notification> _auditLog;
         protected Dictionary<string, Notification> AuditLog { get { return _auditLog; } }
 
-        private static readonly log4net.ILog _auditLogger = log4net.LogManager.GetLogger("Zetbox.Audits");
+        private static readonly log4net.ILog _auditLogger = log4net.LogManager.GetLogger("Zetbox", "Zetbox.Audits");
 
         protected void LogAudits()
         {

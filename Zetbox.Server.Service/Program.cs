@@ -38,7 +38,7 @@ namespace Zetbox.Server.Service
     /// </summary>
     public static class Program
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Service");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(Program));
 
         public static int Main(string[] arguments)
         {
@@ -56,55 +56,18 @@ namespace Zetbox.Server.Service
             try
             {
                 var config = ExtractConfig(ref arguments);
-                bool consoleMode = false;
-                if (arguments.Length == 0)
-                {
-                    consoleMode = false;
-                    Log.InfoFormat("Changed working directory to '{0}'", Environment.CurrentDirectory);
-                }
-                else if (arguments.Length == 1)
-                {
-                    switch (arguments[0])
-                    {
-                        case "/console":
-                        case "-console":
-                        case "--console":
-                            consoleMode = true;
-                            Log.Info("Staying in foreground");
-                            break;
-                        case "/help":
-                        case "-help":
-                        case "--help":
-                            Log.Warn("Start with --console to keep the service in the foreground.");
-                            Environment.Exit(1);
-                            break;
-                    }
-                }
-                else
-                {
-                    Log.Fatal("Too many parameters. Start with --help to see usage.");
-                    Environment.Exit(1);
-                }
 
-                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+                AssemblyLoader.Bootstrap(config);
 
                 using (var container = CreateMasterContainer(config))
                 {
-                    var service = container.Resolve<WindowsService>();
-                    if (consoleMode)
-                    {
-                        service.StartService();
-                        Log.Info("Waiting for console input to shutdown");
-                        Console.WriteLine("Services started, press the anykey to exit");
-                        Console.ReadKey();
-                        Log.Info("Shutting down");
-                        service.StopService();
-                    }
-                    else
-                    {
-                        var ServicesToRun = new System.ServiceProcess.ServiceBase[] { service };
-                        System.ServiceProcess.ServiceBase.Run(ServicesToRun);
-                    }
+                    var scm = container.Resolve<IServiceControlManager>();
+                    scm.Start();
+                    Log.Info("Waiting for console input to shutdown");
+                    Console.WriteLine("Services started, press the anykey to exit");
+                    Console.ReadKey();
+                    Log.Info("Shutting down");
+                    scm.Stop();
                 }
                 Log.Info("Exiting");
                 return 0;
@@ -119,8 +82,6 @@ namespace Zetbox.Server.Service
         internal static IContainer CreateMasterContainer(ZetboxConfig config)
         {
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
-
-            builder.RegisterType<WindowsService>().SingleInstance();
 
             var container = builder.Build();
             container.ApplyPerfCounterTracker();

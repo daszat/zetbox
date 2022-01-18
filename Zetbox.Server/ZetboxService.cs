@@ -21,7 +21,6 @@ namespace Zetbox.Server
     using System.IO;
     using System.Linq;
     using System.Runtime.Serialization.Formatters.Binary;
-    using System.ServiceModel;
     using Zetbox.API;
     using Zetbox.API.Server;
     using Zetbox.API.Server.PerfCounter;
@@ -58,7 +57,7 @@ namespace Zetbox.Server
 
         private static void DebugLogIdentity()
         {
-            Logging.Facade.DebugFormat("Called IsAuthenticated = {0}, Identity = {1}", System.Threading.Thread.CurrentPrincipal.Identity.IsAuthenticated, System.Threading.Thread.CurrentPrincipal.Identity.Name);
+            Logging.Facade.DebugFormat("Called IsAuthenticated = {0}, Identity = {1}", System.Threading.Thread.CurrentPrincipal?.Identity?.IsAuthenticated, System.Threading.Thread.CurrentPrincipal?.Identity?.Name);
         }
 
         /// <summary>
@@ -96,12 +95,6 @@ namespace Zetbox.Server
                     }
 
                 }
-                catch (Exception ex)
-                {
-                    Helper.ThrowFaultException(ex);
-                    // Never called, Handle errors throws an Exception
-                    return null;
-                }
                 finally
                 {
                     _perfCounter.DecrementSetObjects(resultCount, ticks);
@@ -121,37 +114,28 @@ namespace Zetbox.Server
             using (Logging.Facade.DebugTraceMethodCallFormat("GetObjects", "query={0}", query))
             {
                 DebugLogIdentity();
+                ZetboxGeneratedVersionAttribute.Check(version);
+
+                var type = query.SerializableType.GetSystemType();
+                var ifType = _iftFactory(type.IsGenericType && typeof(IQueryable).IsAssignableFrom(type)
+                    ? type.GetGenericArguments()[0]
+                    : type);
+                int resultCount = 0;
+                var ticks = _perfCounter.IncrementGetObjects(ifType);
                 try
                 {
-                    ZetboxGeneratedVersionAttribute.Check(version);
-
-                    var type = query.SerializableType.GetSystemType();
-                    var ifType = _iftFactory(type.IsGenericType && typeof(IQueryable).IsAssignableFrom(type)
-                        ? type.GetGenericArguments()[0]
-                        : type);
-                    int resultCount = 0;
-                    var ticks = _perfCounter.IncrementGetObjects(ifType);
-                    try
+                    using (IZetboxContext ctx = _ctxFactory())
                     {
-                        using (IZetboxContext ctx = _ctxFactory())
-                        {
-                            IEnumerable<IStreamable> lst = _sohFactory
-                                .GetServerObjectHandler(ifType)
-                                .GetObjects(version, ctx, SerializableExpression.ToExpression(ctx, query, _iftFactory));
-                            resultCount = lst.Count();
-                            return SendObjects(lst, resultCount <= 1).ToArray();
-                        }
-                    }
-                    finally
-                    {
-                        _perfCounter.DecrementGetObjects(ifType, resultCount, ticks);
+                        IEnumerable<IStreamable> lst = _sohFactory
+                            .GetServerObjectHandler(ifType)
+                            .GetObjects(version, ctx, SerializableExpression.ToExpression(ctx, query, _iftFactory));
+                        resultCount = lst.Count();
+                        return SendObjects(lst, resultCount <= 1).ToArray();
                     }
                 }
-                catch (Exception ex)
+                finally
                 {
-                    Helper.ThrowFaultException(ex);
-                    // Never called, Handle errors throws an Exception
-                    return null;
+                    _perfCounter.DecrementGetObjects(ifType, resultCount, ticks);
                 }
             }
         }
@@ -253,34 +237,25 @@ namespace Zetbox.Server
             using (Logging.Facade.DebugTraceMethodCallFormat("GetListOf", "type={0}", type))
             {
                 DebugLogIdentity();
-                try
-                {
-                    if (type == null) { throw new ArgumentNullException("type"); }
+                if (type == null) { throw new ArgumentNullException("type"); }
 
-                    using (var ctx = _ctxFactory())
-                    {
-                        var ifType = _iftFactory(type.GetSystemType());
-                        int resultCount = 0;
-                        var ticks = _perfCounter.IncrementGetListOf(ifType);
-                        try
-                        {
-                            IEnumerable<IStreamable> lst = _sohFactory
-                                .GetServerObjectHandler(ifType)
-                                .GetListOf(version, ctx, ID, property);
-                            resultCount = lst.Count();
-                            return SendObjects(lst, false /*true*/).ToArray();
-                        }
-                        finally
-                        {
-                            _perfCounter.DecrementGetListOf(ifType, resultCount, ticks);
-                        }
-                    }
-                }
-                catch (Exception ex)
+                using (var ctx = _ctxFactory())
                 {
-                    Helper.ThrowFaultException(ex);
-                    // Never called, Handle errors throws an Exception
-                    return null;
+                    var ifType = _iftFactory(type.GetSystemType());
+                    int resultCount = 0;
+                    var ticks = _perfCounter.IncrementGetListOf(ifType);
+                    try
+                    {
+                        IEnumerable<IStreamable> lst = _sohFactory
+                            .GetServerObjectHandler(ifType)
+                            .GetListOf(version, ctx, ID, property);
+                        resultCount = lst.Count();
+                        return SendObjects(lst, false /*true*/).ToArray();
+                    }
+                    finally
+                    {
+                        _perfCounter.DecrementGetListOf(ifType, resultCount, ticks);
+                    }
                 }
             }
         }
@@ -299,43 +274,34 @@ namespace Zetbox.Server
         {
             using (Logging.Facade.DebugTraceMethodCallFormat("FetchRelation", "relId = [{0}], role = [{1}], parentObjID = [{2}]", relId, serializableRole, parentObjID))
             {
-                try
-                {
-                    DebugLogIdentity();
+                DebugLogIdentity();
 
-                    using (IZetboxContext ctx = _ctxFactory())
-                    {
-                        var endRole = (RelationEndRole)serializableRole;
-                        // TODO: Use FrozenContext
-                        Relation rel = ctx.FindPersistenceObject<Relation>(relId);
-                        var ifTypeA = _iftFactory(rel.A.Type.GetDataType());
-                        var ifTypeB = _iftFactory(rel.B.Type.GetDataType());
-                        var ifType = endRole == RelationEndRole.A ? ifTypeA : ifTypeB;
-                        int resultCount = 0;
-                        var ticks = _perfCounter.IncrementFetchRelation(ifType);
-                        try
-                        {
-                            var lst = _sohFactory
-                                .GetServerCollectionHandler(
-                                    ctx,
-                                    ifTypeA,
-                                    ifTypeB,
-                                    endRole)
-                                .GetCollectionEntries(version, ctx, relId, endRole, parentObjID);
-                            resultCount = lst.Count();
-                            return SendObjects(lst.Cast<IStreamable>(), true).ToArray();
-                        }
-                        finally
-                        {
-                            _perfCounter.DecrementFetchRelation(ifType, resultCount, ticks);
-                        }
-                    }
-                }
-                catch (Exception ex)
+                using (IZetboxContext ctx = _ctxFactory())
                 {
-                    Helper.ThrowFaultException(ex);
-                    // Never called, Handle errors throws an Exception
-                    return null;
+                    var endRole = (RelationEndRole)serializableRole;
+                    // TODO: Use FrozenContext
+                    Relation rel = ctx.FindPersistenceObject<Relation>(relId);
+                    var ifTypeA = _iftFactory(rel.A.Type.GetDataType());
+                    var ifTypeB = _iftFactory(rel.B.Type.GetDataType());
+                    var ifType = endRole == RelationEndRole.A ? ifTypeA : ifTypeB;
+                    int resultCount = 0;
+                    var ticks = _perfCounter.IncrementFetchRelation(ifType);
+                    try
+                    {
+                        var lst = _sohFactory
+                            .GetServerCollectionHandler(
+                                ctx,
+                                ifTypeA,
+                                ifTypeB,
+                                endRole)
+                            .GetCollectionEntries(version, ctx, relId, endRole, parentObjID);
+                        resultCount = lst.Count();
+                        return SendObjects(lst.Cast<IStreamable>(), true).ToArray();
+                    }
+                    finally
+                    {
+                        _perfCounter.DecrementFetchRelation(ifType, resultCount, ticks);
+                    }
                 }
             }
         }
@@ -350,32 +316,23 @@ namespace Zetbox.Server
         {
             using (Logging.Facade.DebugTraceMethodCallFormat("GetBlobStream", "ID={0}", ID))
             {
-                try
-                {
-                    DebugLogIdentity();
+                DebugLogIdentity();
 
-                    using (IZetboxContext ctx = _ctxFactory())
+                using (IZetboxContext ctx = _ctxFactory())
+                {
+                    var result = _sohFactory
+                        .GetServerDocumentHandler()
+                        .GetBlobStream(version, ctx, ID);
+
+                    if (result == null)
                     {
-                        var result = _sohFactory
-                            .GetServerDocumentHandler()
-                            .GetBlobStream(version, ctx, ID);
-
-                        if (result == null)
-                        {
-                            Logging.Facade.Debug("GetBlobStream returns null");
-                        }
-                        else
-                        {
-                            Logging.Facade.DebugFormat("GetBlobStream returns {0} of {1} bytes.", result.GetType().FullName, result.Length);
-                        }
-                        return result;
+                        Logging.Facade.Debug("GetBlobStream returns null");
                     }
-                }
-                catch (Exception ex)
-                {
-                    Helper.ThrowFaultException(ex);
-                    // Never called, Handle errors throws an Exception
-                    return null;
+                    else
+                    {
+                        Logging.Facade.DebugFormat("GetBlobStream returns {0} of {1} bytes.", result.GetType().FullName, result.Length);
+                    }
+                    return result;
                 }
             }
         }
@@ -391,54 +348,45 @@ namespace Zetbox.Server
             {
                 if (blob == null)
                     throw new ArgumentNullException("blob");
-                try
+                DebugLogIdentity();
+                if (Logging.Facade.IsDebugEnabled)
                 {
-                    DebugLogIdentity();
+                    long length = -1;
+                    try { length = blob.Stream.Length; }
+                    catch (NotSupportedException)
+                    {
+                        // ignore missing support for accessing the stream's length
+                        length = -2;
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Facade.Debug(string.Format("SetBlobStream failed to access {0}.Length", blob.Stream.GetType()), ex);
+                        length = -3;
+                    }
+
+                    Logging.Facade.DebugFormat("SetBlobStream started with BlobMessage ( FileName='{0}', MimeType='{1}', Stream='{2}' of length={3} )",
+                        blob.FileName,
+                        blob.MimeType,
+                        blob.Stream.GetType().FullName,
+                        length);
+                }
+
+                using (IZetboxContext ctx = _ctxFactory())
+                {
+                    var result = _sohFactory
+                        .GetServerDocumentHandler()
+                        .SetBlobStream(blob.Version, ctx, blob.Stream, blob.FileName, blob.MimeType);
+
                     if (Logging.Facade.IsDebugEnabled)
                     {
-                        long length = -1;
-                        try { length = blob.Stream.Length; }
-                        catch (NotSupportedException)
-                        {
-                            // ignore missing support for accessing the stream's length
-                            length = -2;
-                        }
-                        catch (Exception ex)
-                        {
-                            Logging.Facade.Debug(string.Format("SetBlobStream failed to access {0}.Length", blob.Stream.GetType()), ex);
-                            length = -3;
-                        }
-
-                        Logging.Facade.DebugFormat("SetBlobStream started with BlobMessage ( FileName='{0}', MimeType='{1}', Stream='{2}' of length={3} )",
-                            blob.FileName,
-                            blob.MimeType,
-                            blob.Stream.GetType().FullName,
-                            length);
+                        using (var stream = result.GetStream())
+                            Logging.Facade.DebugFormat("SetBlobStream created Blob with ID=#{0}, length={1}.", result.ID, stream.Length);
                     }
-
-                    using (IZetboxContext ctx = _ctxFactory())
+                    return new BlobResponse()
                     {
-                        var result = _sohFactory
-                            .GetServerDocumentHandler()
-                            .SetBlobStream(blob.Version, ctx, blob.Stream, blob.FileName, blob.MimeType);
-
-                        if (Logging.Facade.IsDebugEnabled)
-                        {
-                            using (var stream = result.GetStream())
-                                Logging.Facade.DebugFormat("SetBlobStream created Blob with ID=#{0}, length={1}.", result.ID, stream.Length);
-                        }
-                        return new BlobResponse()
-                        {
-                            ID = result.ID,
-                            BlobInstance = SendObjects(new IDataObject[] { result }, true)
-                        };
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Helper.ThrowFaultException(ex);
-                    // Never called, Handle errors throws an Exception
-                    return null;
+                        ID = result.ID,
+                        BlobInstance = SendObjects(new IDataObject[] { result }, true)
+                    };
                 }
             }
         }
@@ -461,100 +409,94 @@ namespace Zetbox.Server
                 _perfCounter.IncrementServerMethodInvocation();
                 retChangedObjects = null;
 
-                try
+                DebugLogIdentity();
+
+                using (IZetboxContext ctx = _ctxFactory())
                 {
-                    DebugLogIdentity();
-
-                    using (IZetboxContext ctx = _ctxFactory())
+                    var parameter = new MemoryStream(parameterArray);
+                    parameter.Seek(0, SeekOrigin.Begin);
+                    List<object> parameterList = new List<object>();
+                    using (var parameterReader = _readerFactory.Invoke(new BinaryReader(parameter)))
                     {
-                        var parameter = new MemoryStream(parameterArray);
-                        parameter.Seek(0, SeekOrigin.Begin);
-                        List<object> parameterList = new List<object>();
-                        using (var parameterReader = _readerFactory.Invoke(new BinaryReader(parameter)))
+                        foreach (var t in parameterTypes)
                         {
-                            foreach (var t in parameterTypes)
-                            {
-                                object val;
-                                var systemType = t.GetSystemType();
-                                parameterReader.Read(out val,
-                                    systemType.IsICompoundObject() // IDataObjects are serialized as proxy, only ICompoundObject are serialized directoy
-                                        ? ctx.ToImplementationType(ctx.GetInterfaceType(systemType)).Type
-                                        : systemType);
-                                parameterList.Add(val);
-                            }
-                        }
-
-                        var changedObjects = new MemoryStream(changedObjectsArray);
-                        changedObjects.Seek(0, SeekOrigin.Begin);
-
-                        var readObjects = ReadObjects(changedObjects, ctx);
-
-                        // Context is ready, translate IDataObjectParameter
-                        for(int i=0;i<parameterList.Count;i++)
-                        {
-                            var p = parameterList[i] as ZetboxStreamReader.IDataObjectProxy;
-                            if(p != null)
-                            {
-                                parameterList[i] = ctx.Find(_iftFactory(p.Type.GetSystemType()), p.ID);
-                            }
-                        }
-
-                        IEnumerable<IPersistenceObject> changedObjectsList;
-                        var result = _sohFactory
-                            .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
-                            .InvokeServerMethod(version, ctx, ID, method,
-                                parameterTypes.Select(t => t.GetSystemType()),
-                                parameterList,
-                                readObjects,
-                                notificationRequests ?? new ObjectNotificationRequest[0],
-                                out changedObjectsList);
-
-                        retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true).ToArray();
-
-                        if (Logging.Facade.IsDebugEnabled && result != null)
-                        {
-                            Logging.Facade.DebugFormat("Serializing method result type is '{0}'", result.GetType().FullName);
-                        }
-
-                        if (result != null && result.GetType() == typeof(string))
-                        {
-                            Logging.Facade.Debug("Serializing method result as string");
-                            // string is also a IEnumerable, but FindElementTypes returns nothing
-                            MemoryStream resultStream = new MemoryStream();
-                            new BinaryFormatter().Serialize(resultStream, result);
-                            return resultStream.ToArray();
-                        }
-                        else if (result != null && result.GetType().IsIStreamable())
-                        {
-                            Logging.Facade.Debug("Serializing method result as IStreamable");
-                            IStreamable resultObj = (IStreamable)result;
-                            return SendObjects(new IStreamable[] { resultObj }, true).ToArray();
-                        }
-                        else if (result != null && result.GetType().IsIEnumerable() && result.GetType().FindElementTypes().Any(t => t.IsIStreamable()))
-                        {
-                            Logging.Facade.Debug("Serializing method result as IEnumerable<IStreamable>");
-                            var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Zetbox.API.Helper.MAXLISTCOUNT);
-                            return SendObjects(lst, true).ToArray();
-                        }
-                        else if (result != null)
-                        {
-                            Logging.Facade.Debug("Serializing method result as object with BinaryFormatter");
-                            MemoryStream resultStream = new MemoryStream();
-                            new BinaryFormatter().Serialize(resultStream, result);
-                            return resultStream.ToArray();
-                        }
-                        else
-                        {
-                            Logging.Facade.Debug("Serializing empty method");
-                            return new byte[] { };
+                            object val;
+                            var systemType = t.GetSystemType();
+                            parameterReader.Read(out val,
+                                systemType.IsICompoundObject() // IDataObjects are serialized as proxy, only ICompoundObject are serialized directoy
+                                    ? ctx.ToImplementationType(ctx.GetInterfaceType(systemType)).Type
+                                    : systemType);
+                            parameterList.Add(val);
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Helper.ThrowFaultException(ex);
-                    // Never called, Handle errors throws an Exception
-                    return null;
+
+                    var changedObjects = new MemoryStream(changedObjectsArray);
+                    changedObjects.Seek(0, SeekOrigin.Begin);
+
+                    var readObjects = ReadObjects(changedObjects, ctx);
+
+                    // Context is ready, translate IDataObjectParameter
+                    for (int i = 0; i < parameterList.Count; i++)
+                    {
+                        var p = parameterList[i] as ZetboxStreamReader.IDataObjectProxy;
+                        if (p != null)
+                        {
+                            parameterList[i] = ctx.Find(_iftFactory(p.Type.GetSystemType()), p.ID);
+                        }
+                    }
+
+                    IEnumerable<IPersistenceObject> changedObjectsList;
+                    var result = _sohFactory
+                        .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
+                        .InvokeServerMethod(version, ctx, ID, method,
+                            parameterTypes.Select(t => t.GetSystemType()),
+                            parameterList,
+                            readObjects,
+                            notificationRequests ?? new ObjectNotificationRequest[0],
+                            out changedObjectsList);
+
+                    retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true).ToArray();
+
+                    if (Logging.Facade.IsDebugEnabled && result != null)
+                    {
+                        Logging.Facade.DebugFormat("Serializing method result type is '{0}'", result.GetType().FullName);
+                    }
+
+                    if (result != null && result is string)
+                    {
+                        Logging.Facade.Debug("Serializing method result as string");
+                        // string is also a IEnumerable, but FindElementTypes returns nothing
+                        MemoryStream resultStream = new MemoryStream();
+                        // new BinaryFormatter().Serialize(resultStream, result);
+                        // return resultStream.ToArray();
+                        throw new NotSupportedException("Returning a generic result form a sever side method call is not supported.");
+
+                    }
+                    else if (result != null && result.GetType().IsIStreamable())
+                    {
+                        Logging.Facade.Debug("Serializing method result as IStreamable");
+                        IStreamable resultObj = (IStreamable)result;
+                        return SendObjects(new IStreamable[] { resultObj }, true).ToArray();
+                    }
+                    else if (result != null && result.GetType().IsIEnumerable() && result.GetType().FindElementTypes().Any(t => t.IsIStreamable()))
+                    {
+                        Logging.Facade.Debug("Serializing method result as IEnumerable<IStreamable>");
+                        var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Zetbox.API.Helper.MAXLISTCOUNT);
+                        return SendObjects(lst, true).ToArray();
+                    }
+                    else if (result != null)
+                    {
+                        Logging.Facade.Debug("Serializing method result as object with BinaryFormatter");
+                        MemoryStream resultStream = new MemoryStream();
+                        // new BinaryFormatter().Serialize(resultStream, result);
+                        // return resultStream.ToArray();
+                        throw new NotSupportedException("Returning a generic result form a sever side method call is not supported.");
+                    }
+                    else
+                    {
+                        Logging.Facade.Debug("Serializing empty method");
+                        return new byte[] { };
+                    }
                 }
             }
         }

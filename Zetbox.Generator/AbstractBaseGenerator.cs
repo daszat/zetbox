@@ -26,7 +26,7 @@ namespace Zetbox.Generator
 
     public abstract class AbstractBaseGenerator
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(AbstractBaseGenerator));
 
         private readonly IEnumerable<ISchemaProvider> _schemaProviders;
         protected IEnumerable<ISchemaProvider> SchemaProviders
@@ -219,7 +219,7 @@ namespace Zetbox.Generator
         };
 
         /// <summary>
-        /// converts the string to ascii using transliteration. uses the _transliterationTable and a nice hack to reduce utf-8 to ASCII. probably works only with western characters.
+        /// converts the string to ascii using transliteration. uses the _transliterationTable to reduce utf-8 to ASCII. probably works only with western characters.
         /// </summary>
         /// <remarks>See http://stackoverflow.com/questions/2173825/slugify-and-character-transliteration-in-c/2173922#2173922 </remarks>
         protected static string Unidecode(string filename)
@@ -228,7 +228,7 @@ namespace Zetbox.Generator
             {
                 filename = filename.Replace(kvp.Key, kvp.Value);
             }
-            return Encoding.ASCII.GetString(Encoding.GetEncoding("Cyrillic").GetBytes(filename));
+            return Helper.GetLegalPathName(filename);
         }
 
         protected virtual string Generate_AssemblyInfo(IZetboxContext ctx)

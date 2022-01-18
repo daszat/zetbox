@@ -1,0 +1,8 @@
+﻿@model System.DateTime
+
+<div class="input-group date">
+    @Html.TextBox("", Model.ToShortDateString(), new { @class = "form-control " + ViewData["class"], placeholder = ViewData["placeholder"] })
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+</div>

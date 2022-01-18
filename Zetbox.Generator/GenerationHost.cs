@@ -39,7 +39,7 @@ namespace Zetbox.Generator
     public class ResourceBasedGenerationHost
         : IGenerationHost, IDisposable
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator.Host");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(ResourceBasedGenerationHost));
 
         private Dictionary<string, TemplateInfo> templates;
         private List<IFileWriter> fileWriters;
@@ -185,7 +185,7 @@ namespace Zetbox.Generator
                 }
                 else
                 {
-                    Log.InfoFormat("provided template [{0}] not found, using [{1}] instead", providerName, defaultName);
+                    Log.DebugFormat("provided template [{0}] not found, using [{1}] instead", providerName, defaultName);
                 }
             }
 
@@ -228,7 +228,7 @@ namespace Zetbox.Generator
 
         void IGenerationHost.Log(string fmt, params object[] args)
         {
-            Log.InfoFormat(fmt, args);
+            Log.DebugFormat(fmt, args);
         }
 
         public void Dispose()

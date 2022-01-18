@@ -18,7 +18,6 @@ namespace Zetbox.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using CryptSharp;
     using Zetbox.API;
     using Zetbox.API.Common;
 
@@ -63,7 +62,7 @@ namespace Zetbox.App.Base
         {
             if (!string.IsNullOrEmpty(plainTextPassword))
             {
-                obj.Password = Crypter.Blowfish.Crypt(plainTextPassword);
+                obj.Password = BCrypt.Net.BCrypt.HashPassword(plainTextPassword);
             }
             else
             {

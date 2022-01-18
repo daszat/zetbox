@@ -1,221 +1,62 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\..\packages\NUnit.3.11.0\build\NUnit.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{12B58C14-4FE7-4FF6-A03A-5A220571FD5C}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zetbox.IntegrationTests</RootNamespace>
-    <AssemblyName>Zetbox.IntegrationTests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <StartupObject>
-    </StartupObject>
-    <StartAction>Program</StartAction>
-    <StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
-    <StartArguments>Zetbox.IntegrationTests.nunit /config:Studio</StartArguments>
-    <StartWorkingDirectory>..\..\bin\Debug\Tests</StartWorkingDirectory>
-    <NoWarn>1591</NoWarn>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\Tests</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Release\Tests</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\Tests</OutputPath>
-    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="Zetbox.Objects.ClientImpl">
-      <HintPath>..\..\bin\Debug\Client\Core.Generated\Zetbox.Objects.ClientImpl.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AbstractIntegrationTestFixture.cs" />
-    <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
-    <Compile Include="Tests\Blobs\when_using.cs" />
-    <Compile Include="Tests\Client\GuiExtensionTests.cs" />
-    <Compile Include="Tests\Client\InstanceListTests.cs" />
-    <Compile Include="Tests\Client\ViewModelFactoryTests.cs" />
-    <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_list.cs" />
-    <Compile Include="Tests\CompoundObjects\when_changing.cs" />
-    <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
-    <Compile Include="Tests\ContextTests.cs" />
-    <Compile Include="Tests\DefaultValues\when_submitting.cs" />
-    <Compile Include="Tests\Enums\when_querying.cs" />
-    <Compile Include="Tests\GetObjectsTests.cs" />
-    <Compile Include="Tests\InheritanceTests.cs" />
-    <Compile Include="Tests\ListPropertiesTests.cs" />
-    <Compile Include="Tests\Methods\when_invoking_on_server.cs" />
-    <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
-    <Compile Include="Tests\N_to_M_relations\when_adding.cs" />
-    <Compile Include="Tests\N_to_M_relations\when_deleting.cs" />
-    <Compile Include="Tests\ObjectListModels\when_moving_items.cs" />
-    <Compile Include="Tests\ObjectTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetUpFixture.cs" />
-    <Compile Include="Tests\OneNRelationTests.cs" />
-    <Compile Include="Tests\optional_parent\when_deleting_NSide_object.cs" />
-    <Compile Include="Tests\optional_parent\when_adding_to_NSide_property.cs" />
-    <Compile Include="Tests\optional_parent\when_clearing_nside.cs" />
-    <Compile Include="Tests\optional_parent\when_initializing.cs" />
-    <Compile Include="Tests\optional_parent\when_removing_from_NSide_property.cs" />
-    <Compile Include="Tests\optional_parent\when_resetting_one_side.cs" />
-    <Compile Include="Tests\optional_parent\when_setting_OneSide_property.cs" />
-    <Compile Include="Tests\optional_parent\with_persistent_order\when_adding_multiple_items.cs" />
-    <Compile Include="Tests\optional_parent\with_persistent_order\when_setting_via_index.cs" />
-    <Compile Include="Tests\PersistenceObjects\when_changed.cs" />
-    <Compile Include="Tests\PersistenceObjects\when_loaded.cs" />
-    <Compile Include="Tests\Presentables\ObjectReferenceModels\should_present_underlying_property_as_value.cs" />
-    <Compile Include="Tests\Presentables\Properties\should_have_models.cs" />
-    <Compile Include="Tests\PropertyTests\Fixture.cs" />
-    <Compile Include="Tests\RelationDefinitionTests.cs" />
-    <Compile Include="Tests\RelationTests.cs" />
-    <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
-    <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
-    <Compile Include="Tests\Security\AbstractSecurityTest.cs" />
-    <Compile Include="Tests\Security\when_no_delete_rights.cs" />
-    <Compile Include="Tests\Security\when_cheating.cs" />
-    <Compile Include="Tests\Security\when_updating_calcprop.cs" />
-    <Compile Include="Tests\Simple.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Zetbox.IntegrationTests.nunit">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Zetbox.IntegrationTests.PartCoverSettings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj">
-      <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
-      <Name>Zetbox.API.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj">
-      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Zetbox.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.App.Projekte.Client\Zetbox.App.Projekte.Client.csproj">
-      <Project>{379A67E8-388E-47B6-A591-5D4C05DAFBDB}</Project>
-      <Name>Zetbox.App.Projekte.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.App.Projekte.Common\Zetbox.App.Projekte.Common.csproj">
-      <Project>{B1AE679D-BA5A-4E70-8D21-D99C46A34F79}</Project>
-      <Name>Zetbox.App.Projekte.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.Client.WPF\Zetbox.Client.WPF.csproj">
-      <Project>{2C899579-BF78-442B-8810-8C7E7A2CA212}</Project>
-      <Name>Zetbox.Client.WPF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj">
-      <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
-      <Name>Zetbox.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.DalProvider.Base\Zetbox.DalProvider.Base.csproj">
-      <Project>{A242A751-9F97-4F1C-ABE5-57B28133DEF4}</Project>
-      <Name>Zetbox.DalProvider.Base</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.DalProvider.ClientObjects\Zetbox.DalProvider.ClientObjects.csproj">
-      <Project>{3760694D-3B35-41D4-B1A3-41BB288AA19F}</Project>
-      <Name>Zetbox.DalProvider.ClientObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
-      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Zetbox.Objects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj">
-      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Zetbox.API.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.API.AbstractConsumerTests\Zetbox.API.AbstractConsumerTests.csproj">
-      <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
-      <Name>Zetbox.API.AbstractConsumerTests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.API.Tests\Zetbox.API.Tests.csproj">
-      <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
-      <Name>Zetbox.API.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.App.Tests.Client\Zetbox.App.Tests.Client.csproj">
-      <Project>{84913d6b-f56c-4812-a2ec-4ac0f5c42ff4}</Project>
-      <Name>Zetbox.App.Tests.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.App.Tests.Common\Zetbox.App.Tests.Common.csproj">
-      <Project>{e8691675-a0ac-40dc-b482-a6284b0ba3c6}</Project>
-      <Name>Zetbox.App.Tests.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit.3.11.0\build\NUnit.props'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<ProductVersion>9.0.30729</ProductVersion>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<StartupObject />
+		<StartAction>Program</StartAction>
+		<StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
+		<StartArguments>Zetbox.IntegrationTests.nunit /config:Studio</StartArguments>
+		<StartWorkingDirectory>..\..\bin\Debug\Tests</StartWorkingDirectory>
+		<NoWarn>1591</NoWarn>
+		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
+		<GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+		<AssemblyTitle>Zetbox.Tests</AssemblyTitle>
+		<Company>dasz.at OG</Company>
+		<Product>zetbox</Product>
+		<Copyright>Copyright © 2007-2013 dasz.at OG</Copyright>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+		<OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<OutputPath>..\..\bin\$(Configuration)\Tests</OutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="5.2.0" />
+		<PackageReference Include="log4net" Version="2.0.10" />
+		<PackageReference Include="NUnit" Version="3.12.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Zetbox.IntegrationTests.nunit">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\..\Zetbox.App.Projekte.Client\Zetbox.App.Projekte.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.App.Projekte.Common\Zetbox.App.Projekte.Common.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Client.WPF\Zetbox.Client.WPF.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.DalProvider.Base\Zetbox.DalProvider.Base.csproj" />
+		<ProjectReference Include="..\..\Zetbox.DalProvider.ClientObjects\Zetbox.DalProvider.ClientObjects.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
+		<ProjectReference Include="..\Zetbox.API.AbstractConsumerTests\Zetbox.API.AbstractConsumerTests.csproj" />
+		<ProjectReference Include="..\Zetbox.API.Tests\Zetbox.API.Tests.csproj" />
+		<ProjectReference Include="..\Zetbox.App.Tests.Client\Zetbox.App.Tests.Client.csproj" />
+		<ProjectReference Include="..\Zetbox.App.Tests.Common\Zetbox.App.Tests.Common.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Properties\VersionInfo.Designer.cs" />
+		<Compile Remove="Tests\optional_parent\should_obey_order.cs" />
+		<Compile Remove="Tests\optional_parent\should_synchronize.cs" />
+	</ItemGroup>
 </Project>

@@ -38,7 +38,7 @@ namespace Zetbox.App.Extensions
     public abstract class BaseCustomActionsManager
         : ICustomActionsManager
     {
-        protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Common.BaseCustomActionsManager");
+        protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(BaseCustomActionsManager));
 
         private readonly List<ImplementorAssembly> _assemblies;
         private readonly ILifetimeScope _container;

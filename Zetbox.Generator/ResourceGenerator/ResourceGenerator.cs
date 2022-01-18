@@ -19,6 +19,7 @@ namespace Zetbox.Generator.ResourceGenerator
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Xml;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Configuration;
@@ -104,30 +105,60 @@ namespace Zetbox.Generator.ResourceGenerator
 
     internal class ResXWriter : IResourceWriter
     {
-        private readonly System.Resources.ResXResourceWriter _writer;
+        private readonly XmlTextWriter _writer;
 
         public ResXWriter(string fileName)
         {
-            _writer = new System.Resources.ResXResourceWriter(fileName);
+            _writer = new XmlTextWriter(fileName, Encoding.UTF8);
+            _writer.Formatting = Formatting.Indented;
+            _writer.WriteStartElement("root");
+
+            _writer.WriteStartElement("resheader");
+            _writer.WriteAttributeString("name", "resmimetype");
+            _writer.WriteElementString("value", "text/microsoft-resx");
+            _writer.WriteEndElement();
+
+            _writer.WriteStartElement("resheader");
+            _writer.WriteAttributeString("name", "version");
+            _writer.WriteElementString("value", "2.0");
+            _writer.WriteEndElement();
+
+            _writer.WriteStartElement("resheader");
+            _writer.WriteAttributeString("name", "reader");
+            _writer.WriteElementString("value", "System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
+            _writer.WriteEndElement();
+
+            _writer.WriteStartElement("resheader");
+            _writer.WriteAttributeString("name", "writer");
+            _writer.WriteElementString("value", "System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
+            _writer.WriteEndElement();
         }
 
         public void AddResource(string name, byte[] value)
         {
-            _writer.AddResource(name, value);
+            throw new NotImplementedException();
         }
 
         public void AddResource(string name, object value)
         {
-            _writer.AddResource(name, value);
+            throw new NotImplementedException();
         }
 
         public void AddResource(string name, string value)
         {
-            _writer.AddResource(name, value ?? string.Empty);
+            // 
+            _writer.WriteStartElement("data");
+            _writer.WriteAttributeString("name", name);
+            _writer.WriteAttributeString("space", "preserve");
+            _writer.WriteElementString("value", value ?? string.Empty);
+            _writer.WriteEndElement();
         }
 
         public void Dispose()
         {
+            _writer.WriteEndElement();
+            _writer.Flush();
+            _writer.Close();
             _writer.Dispose();
         }
     }

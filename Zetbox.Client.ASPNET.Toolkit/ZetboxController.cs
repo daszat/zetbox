@@ -19,9 +19,9 @@ namespace Zetbox.Client.ASPNET
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Web.Mvc;
     using Zetbox.Client.Presentables;
     using Zetbox.API;
+    using Microsoft.AspNetCore.Mvc;
 
     public class ZetboxController : Controller
     {
@@ -41,18 +41,14 @@ namespace Zetbox.Client.ASPNET
             this.ViewModelFactory = vmf;
         }
 
-        protected void Validate()
-        {
-            ModelState.Clear();
-            _contextScope.Validation.Validate(ModelState);
-        }
-
         protected void Validate(ViewModel vmdl)
         {
-            this.Validate();
+            ModelState.Clear();
             if (vmdl == null) return;
 
+            vmdl.ValidationManager.Validate();
             vmdl.Validate();
+
             if (vmdl is DataObjectViewModel)
             {
                 foreach (var prop in ((DataObjectViewModel)vmdl).PropertyModels)

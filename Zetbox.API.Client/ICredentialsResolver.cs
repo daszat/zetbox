@@ -16,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.ServiceModel.Description;
 using System.Net;
 
 namespace Zetbox.API.Client
@@ -27,12 +26,6 @@ namespace Zetbox.API.Client
         /// Ensures that credentials are initialized
         /// </summary>
         void EnsureCredentials();
-
-        /// <summary>
-        /// Initializes the given ClientCredentials
-        /// </summary>
-        /// <param name="c">ClientCredentials to initialize</param>
-        void SetCredentialsTo(ClientCredentials c);
 
         /// <summary>
         /// Initializes the given WebRequest

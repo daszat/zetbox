@@ -30,7 +30,7 @@ namespace Zetbox.Client.WPF.CustomControls
 
     public class ZetboxDataGrid : DataGrid
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Client.WPF.Grid");
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(ZetboxDataGrid));
 
         public ZetboxDataGrid()
         {

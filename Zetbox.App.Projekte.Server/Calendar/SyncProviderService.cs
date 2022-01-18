@@ -45,7 +45,7 @@ namespace Zetbox.App.Projekte.Server.Calendar
         }
         #endregion
 
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.App.Projekte.Server.Calendar.SyncProviderService");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(SyncProviderService));
 
         private readonly ILifetimeScope _scopeFactory;
 

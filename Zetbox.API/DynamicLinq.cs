@@ -173,6 +173,7 @@ namespace System.Linq.Dynamic
             return (Expression<Func<T, S>>)ParseLambda(typeof(T), typeof(S), expression, values);
         }
 
+#if NETFULL
         public static Type CreateClass(params DynamicProperty[] properties) {
             return ClassFactory.Instance.GetDynamicClass(properties);
         }
@@ -180,6 +181,7 @@ namespace System.Linq.Dynamic
         public static Type CreateClass(IEnumerable<DynamicProperty> properties) {
             return ClassFactory.Instance.GetDynamicClass(properties);
         }
+#endif
     }
 
     internal class DynamicOrdering
@@ -219,6 +221,7 @@ namespace System.Linq.Dynamic
         }        
     }
 
+#if NETFULL
     internal class ClassFactory
     {
         public static readonly ClassFactory Instance = new ClassFactory();
@@ -374,7 +377,7 @@ namespace System.Linq.Dynamic
             gen.Emit(OpCodes.Ret);
         }
     }
-
+#endif
     [Serializable]
     public sealed class ParseException : Exception
     {
@@ -1048,6 +1051,7 @@ namespace System.Linq.Dynamic
         }
 
         Expression ParseNew() {
+#if NETFULL
             NextToken();
             ValidateToken(TokenId.OpenParen, Res.OpenParenExpected);
             NextToken();
@@ -1079,6 +1083,9 @@ namespace System.Linq.Dynamic
             for (int i = 0; i < bindings.Length; i++)
                 bindings[i] = Expression.Bind(type.GetProperty(properties[i].Name), expressions[i]);
             return Expression.MemberInit(Expression.New(type), bindings);
+#else
+            throw new NotSupportedException("Not supported in .NET Standard");
+#endif
         }
 
         Expression ParseLambdaInvocation(LambdaExpression lambda) {

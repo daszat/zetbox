@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
-  <ConfigName>Zetbox.IntegrationTests Configuration</ConfigName>
+  <ConfigName>Zetbox.IntegrationTests Core Configuration</ConfigName>
   <Server StartServer="false" />
   <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>DocumentStore\Client\</DocumentStore>

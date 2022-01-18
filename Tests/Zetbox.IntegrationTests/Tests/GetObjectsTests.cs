@@ -29,7 +29,7 @@ namespace Zetbox.IntegrationTests
     [TestFixture]
     public class GetObjectsTests : AbstractIntegrationTestFixture
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.Integration.GetObjects");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(GetObjectsTests));
 
         [Test]
         public void GetObjects()

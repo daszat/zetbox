@@ -46,13 +46,13 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         private Exception TranslateNpgsqlErrors(NpgsqlException ex)
         {
-            if (ex.Errors.OfType<NpgsqlError>().Any(e => e.Code == "23505"))
+            if (ex.ErrorCode == 23505)
             {
-                return new UniqueConstraintViolationException(ex.Errors.OfType<NpgsqlError>().Where(e => e.Code == "23505").Select(e => ConstructUniqueConstraintDetail(e.Message)).ToList());
+                return new UniqueConstraintViolationException();
             }
-            else if (ex.Errors.OfType<NpgsqlError>().Any(e => e.Code == "23503"))
+            else if (ex.ErrorCode == 23503)
             {
-                return new FKViolationException(ex.Errors.OfType<NpgsqlError>().Where(e => e.Code == "23503").Select(e => ConstructFKDetail(e.Message)).ToList());
+                return new FKViolationException();
             }
             return ex;
         }

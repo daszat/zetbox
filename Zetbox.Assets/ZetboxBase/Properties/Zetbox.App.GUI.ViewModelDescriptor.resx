@@ -1,110 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+﻿<root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -117,70 +11,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DefaultDisplayKind_label" xml:space="preserve">
+  <data name="DefaultDisplayKind_label" space="preserve">
     <value>DefaultDisplayKind</value>
   </data>
-  <data name="DefaultDisplayKind_description" xml:space="preserve">
+  <data name="DefaultDisplayKind_description" space="preserve">
     <value>The default ControlKind to use for displaying this Presentable readonly. Defaults to DefaultKind with editing disabled.</value>
   </data>
-  <data name="DefaultEditorKind_label" xml:space="preserve">
+  <data name="DefaultEditorKind_label" space="preserve">
     <value>DefaultEditorKind</value>
   </data>
-  <data name="DefaultEditorKind_description" xml:space="preserve">
+  <data name="DefaultEditorKind_description" space="preserve">
     <value>The default ControlKind to use for this Presentable.</value>
   </data>
-  <data name="DefaultGridCellDisplayKind_label" xml:space="preserve">
+  <data name="DefaultGridCellDisplayKind_label" space="preserve">
     <value>DefaultGridCellDisplayKind</value>
   </data>
-  <data name="DefaultGridCellDisplayKind_description" xml:space="preserve">
+  <data name="DefaultGridCellDisplayKind_description" space="preserve">
     <value>The default ControlKind to use for displaying this Presentable readonly in a GridCell. Defaults to DefaultDisplayKind.</value>
   </data>
-  <data name="DefaultGridCellEditorKind_label" xml:space="preserve">
+  <data name="DefaultGridCellEditorKind_label" space="preserve">
     <value>DefaultGridCellEditorKind</value>
   </data>
-  <data name="DefaultGridCellEditorKind_description" xml:space="preserve">
+  <data name="DefaultGridCellEditorKind_description" space="preserve">
     <value>The default ControlKind for displaying this model in a GridCell in editing mode. Defaults to DefaultKind.</value>
   </data>
-  <data name="DefaultGridCellPreEditorKind_label" xml:space="preserve">
+  <data name="DefaultGridCellPreEditorKind_label" space="preserve">
     <value>DefaultGridCellPreEditorKind</value>
   </data>
-  <data name="DefaultGridCellPreEditorKind_description" xml:space="preserve">
+  <data name="DefaultGridCellPreEditorKind_description" space="preserve">
     <value>.The default ControlKind for displaying this model in a GridCell befor editing starts. Defaults to DefaultGridCellDisplayKind.</value>
   </data>
-  <data name="Deleted_label" xml:space="preserve">
+  <data name="Deleted_label" space="preserve">
     <value>Deleted</value>
   </data>
-  <data name="Deleted_description" xml:space="preserve">
+  <data name="Deleted_description" space="preserve">
     <value>Indicates that the referenced viewmodel type is deleted. Descriptors with this flag set require action to finally delete them and handle their users.</value>
   </data>
-  <data name="Description_label" xml:space="preserve">
+  <data name="Description_label" space="preserve">
     <value>Description</value>
   </data>
-  <data name="Description_description" xml:space="preserve">
+  <data name="Description_description" space="preserve">
     <value>describe this ViewModel</value>
   </data>
-  <data name="ExportGuid_label" xml:space="preserve">
+  <data name="ExportGuid_label" space="preserve">
     <value>ExportGuid</value>
   </data>
-  <data name="ExportGuid_description" xml:space="preserve">
+  <data name="ExportGuid_description" space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="Module_label" xml:space="preserve">
+  <data name="Module_label" space="preserve">
     <value>Module</value>
   </data>
-  <data name="Module_description" xml:space="preserve">
+  <data name="Module_description" space="preserve">
     <value />
   </data>
-  <data name="SecondaryControlKinds_label" xml:space="preserve">
+  <data name="SecondaryControlKinds_label" space="preserve">
     <value>SecondaryControlKinds</value>
   </data>
-  <data name="SecondaryControlKinds_description" xml:space="preserve">
+  <data name="SecondaryControlKinds_description" space="preserve">
     <value />
   </data>
-  <data name="ViewModelTypeRef_label" xml:space="preserve">
+  <data name="ViewModelTypeRef_label" space="preserve">
     <value>ViewModelTypeRef</value>
   </data>
-  <data name="ViewModelTypeRef_description" xml:space="preserve">
+  <data name="ViewModelTypeRef_description" space="preserve">
     <value>The described CLR class' Type</value>
   </data>
 </root>

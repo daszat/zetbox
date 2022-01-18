@@ -62,37 +62,9 @@ namespace Zetbox.API.Client
                 .Register<TestScreenshotTool>(c => new TestScreenshotTool())
                 .As<IScreenshotTool>()
                 .SingleInstance();
-        }
-    }
-
-    [Feature]
-    [Description("HTTP Proxy implementation")]
-    public sealed class HttpClientModule : Autofac.Module
-    {
-        protected override void Load(ContainerBuilder moduleBuilder)
-        {
-            base.Load(moduleBuilder);
 
             moduleBuilder.RegisterType<HttpServiceClient>()
                 .AsImplementedInterfaces()
-                .InstancePerLifetimeScope();
-        }
-    }
-
-    [Feature]
-    [Description("WCF Proxy implementation")]
-    public sealed class WcfClientModule : Autofac.Module
-    {
-        protected override void Load(ContainerBuilder moduleBuilder)
-        {
-            base.Load(moduleBuilder);
-
-            moduleBuilder.RegisterType<ZetboxService.ZetboxServiceClient>()
-                .AsImplementedInterfaces()
-                .OnActivating(args =>
-                {
-                    args.Context.Resolve<ICredentialsResolver>().SetCredentialsTo(args.Instance.ClientCredentials);
-                })
                 .InstancePerLifetimeScope();
         }
     }

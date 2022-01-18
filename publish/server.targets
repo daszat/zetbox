@@ -2,8 +2,19 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Reference Include="Zetbox.Objects">
-      <HintPath>..\bin\CodeGen\bin\Debug\Common\Generated\Zetbox.Objects.dll</HintPath>
+      <HintPath>..\bin\CodeGen\bin\Release\Common\Generated\Zetbox.Objects.dll</HintPath>
       <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
   </ItemGroup>
+  <PropertyGroup>
+    <!-- deploys the compiled binaries into the local inetpub for debugging -->
+    <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">
+	  echo copy from $(SolutionDir)\bin\$(Configuration) to $(SolutionDir)\bin\$(Configuration)\HttpService
+      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common\*.*" "$(SolutionDir)\bin\$(Configuration)\HttpService"
+      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server\*.*" "$(SolutionDir)\bin\$(Configuration)\HttpService"
+    </PostBuildEvent>
+    <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
+      bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server}/* "$(SolutionDir)/bin/$(Configuration)/HttpService"'
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

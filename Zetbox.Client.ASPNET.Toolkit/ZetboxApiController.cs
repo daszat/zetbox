@@ -19,13 +19,13 @@ namespace Zetbox.Client.ASPNET
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Web.Mvc;
     using Zetbox.Client.Presentables;
     using Zetbox.API;
-    using System.Web.Http;
     using System.IO;
+    using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json;
 
-    public class ZetboxApiController : ApiController
+    public class ZetboxApiController : Controller
     {
         private ZetboxContextHttpScope _contextScope;
         protected IZetboxContext DataContext
@@ -46,11 +46,10 @@ namespace Zetbox.Client.ASPNET
         protected T ExtractIDataObjectFromBody<T>() where T : class, IPersistenceObject
         {
             var data = DataContext.Internals().CreateUnattached<T>();
-            var body = Request.Content.ReadAsStreamAsync().Result;
-            body.Position = 0;
-            var sr = new StreamReader(body);
+            Request.Body.Position = 0;
+            var sr = new StreamReader(Request.Body);
             var json = sr.ReadToEnd();
-            Newtonsoft.Json.JsonConvert.PopulateObject(json, data);
+            JsonConvert.PopulateObject(json, data);
             return data;
         }
     }

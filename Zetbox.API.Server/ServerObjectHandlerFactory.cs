@@ -29,7 +29,7 @@ namespace Zetbox.API.Server
     public abstract class ServerObjectHandlerFactory
         : IServerObjectHandlerFactory
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(ServerObjectHandlerFactory));
 
         private readonly LuceneSearchDeps _searchDependencies;
 

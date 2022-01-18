@@ -1,6 +1,9 @@
 ﻿@model ObjectReferenceViewModel
 
 @using Zetbox.Client.ASPNET
+@using Zetbox.Client.Presentables
 @using Zetbox.Client.Presentables.ValueViewModels
 
-@Html.DisplayFor(m => m.FormattedValue, new { @class = ViewData["class"] })
+<div class="form-control">
+    @Html.DisplayFor(m => m.FormattedValue)
+</div>

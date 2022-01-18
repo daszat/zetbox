@@ -356,8 +356,7 @@
                      column="`fk_Kunde`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Value" 
-                  column="`EMails`" 
-                  optimistic-lock="false"
+                  column="`EMails`"
                   length="200" />
         <!-- export guid is not needed since serialization is always "in-place"
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
@@ -380,8 +379,7 @@
                      column="`fk_Muhblah`" />
         <!-- ValueTypeProperty isValue -->
         <property name="Value" 
-                  column="`StringCollection`" 
-                  optimistic-lock="false"
+                  column="`StringCollection`"
                   length="2147483647" />
     </class>
 
@@ -404,33 +402,27 @@
         <component name="Value" class="Zetbox.App.Base.AuditEntryNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
         <property name="Identity" 
-                  column="`AuditJournal_Identity`" 
-                  optimistic-lock="false"
+                  column="`AuditJournal_Identity`"
                   length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="MessageFormat" 
-                  column="`AuditJournal_MessageFormat`" 
-                  optimistic-lock="false"
+                  column="`AuditJournal_MessageFormat`"
                   length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="NewValue" 
-                  column="`AuditJournal_NewValue`" 
-                  optimistic-lock="false"
+                  column="`AuditJournal_NewValue`"
                   length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="OldValue" 
-                  column="`AuditJournal_OldValue`" 
-                  optimistic-lock="false"
+                  column="`AuditJournal_OldValue`"
                   length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="PropertyName" 
-                  column="`AuditJournal_PropertyName`" 
-                  optimistic-lock="false"
+                  column="`AuditJournal_PropertyName`"
                   length="2147483647" />
         <!-- ValueTypeProperty isValue -->
         <property name="Timestamp" type="Timestamp"
-                  column="`AuditJournal_Timestamp`" 
-                  optimistic-lock="false"
+                  column="`AuditJournal_Timestamp`"
                   />
         </component>
         <!-- export guid is not needed since serialization is always "in-place"
@@ -487,13 +479,11 @@
         <component name="Value" class="Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
         <property name="AreaCode" 
-                  column="`PhoneNumbersOther_AreaCode`" 
-                  optimistic-lock="false"
+                  column="`PhoneNumbersOther_AreaCode`"
                   length="50" />
         <!-- ValueTypeProperty isValue -->
         <property name="Number" 
-                  column="`PhoneNumbersOther_Number`" 
-                  optimistic-lock="false"
+                  column="`PhoneNumbersOther_Number`"
                   length="50" />
         </component>
     </class>

@@ -29,7 +29,7 @@ namespace Zetbox.Server.Tests
     [TestFixture]
     public class SequenceTests : AbstractServerTestFixture
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.Server.SequenceTests");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(SequenceTests));
 
         private IZetboxContext ctx;
 

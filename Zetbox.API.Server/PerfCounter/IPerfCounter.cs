@@ -29,7 +29,7 @@ namespace Zetbox.API.Server.PerfCounter
 
     public static class LifetimeScopeExtensions
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.PerfCounter.LifetimeScopeExtensions");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(LifetimeScopeExtensions));
         private static readonly object _allocationTraceLock = new object();
         private static readonly List<object> allocationTraces = new List<object>();
         private static int debuggedTraces = 0;

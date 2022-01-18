@@ -1,0 +1,66 @@
+﻿@model Zetbox.Client.ASPNET.ViewModels.MvcProjektListViewModel
+@{
+    ViewData["Title"] = "Projekte";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div class="btn-toolbar justify-content-between">
+    <div class="btn-group">
+        <a class="btn btn-outline-dark" role="button" data-toggle="collapse" href="#filter"><span class="glyphicon glyphicon-chevron-down"></span> Filter</a>
+    </div>
+    <div class="btn-group float-right">
+        <a class="btn btn-primary" href="@Url.Action("Create", "Projekt", new { })">New Project</a>
+    </div>
+</div>
+
+@using (Html.BeginForm("Index", "Projekt", FormMethod.Post, new { id = "searchForm", @class = "" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div id="filter" class="card no-print collapse show">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Name
+                            </label>
+                            <div class="col-md-6">
+                                @Html.EditorFor(m => m.NamePart)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn btn-default">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Name <span class="glyphicon glyphicon-sort-by-order"></span></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Result)
+            {
+                <tr>
+                    <td>@item.PropertyModelsByName["Name"].FormattedValue</td>
+                    <td class="text-right">
+                        <a class="btn btn-primary" href="@Url.Action("Edit", "Projekt", new { ID = item.ID })">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @await Html.PartialAsync("_Paging", Model, new ViewDataDictionary(ViewData) { { "formSelector", "#searchForm" } })
+}

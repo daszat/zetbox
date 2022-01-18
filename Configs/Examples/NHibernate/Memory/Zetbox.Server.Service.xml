@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
-  <ConfigName>Default Server Configuration</ConfigName>
+  <ConfigName>Default Server Core Configuration</ConfigName>
   <Server StartServer="true">
     <ConnectionStrings>
       <Database Name="Zetbox" Schema="Memory" Provider="System.Data.SqlClient">P:\Zetbox\Zetbox.Server\Database\Database.xml</Database>

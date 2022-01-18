@@ -72,8 +72,8 @@ namespace Zetbox.Client.WPF.Toolkit
             DependencyProperty.RegisterAttached("NoDragSource", typeof(bool), typeof(WpfDragDropHelper), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits));
         #endregion
 
-        public static readonly string[] ZetboxObjectDataFormats = new[] 
-        { 
+        public static readonly string[] ZetboxObjectDataFormats = new[]
+        {
             ZetboxObjectDataFormat,
         };
         public static readonly string[] ZetboxObjectDataFormatsWithFileDrop = new[]
@@ -81,18 +81,18 @@ namespace Zetbox.Client.WPF.Toolkit
             ZetboxObjectDataFormat,
             "FileDrop",
         };
-        public static readonly string[] AllAcceptableDataFormats = new[] 
+        public static readonly string[] AllAcceptableDataFormats = new[]
         {
-            WpfDragDropHelper.ZetboxObjectDataFormat, 
-            "FileDrop", 
-            DataFormats.Bitmap, 
-            DataFormats.Dib, 
-            DataFormats.EnhancedMetafile, 
-            DataFormats.Rtf, 
-            DataFormats.Html, 
+            WpfDragDropHelper.ZetboxObjectDataFormat,
+            "FileDrop",
+            DataFormats.Bitmap,
+            DataFormats.Dib,
+            DataFormats.EnhancedMetafile,
+            DataFormats.Rtf,
+            DataFormats.Html,
             DataFormats.UnicodeText,
-            DataFormats.OemText, 
-            DataFormats.Text, 
+            DataFormats.OemText,
+            DataFormats.Text,
         };
 
         private FrameworkElement _uiSourceElement;
@@ -686,9 +686,14 @@ namespace Zetbox.Client.WPF.Toolkit
                                 streamData(stream);
                             }
                         }
+
                         // Return an IntPtr for the IStream
-                        ptr = Marshal.GetComInterfaceForObject(iStream, typeof(IStream));
-                        Marshal.ReleaseComObject(iStream);
+                        // Fix CA1416
+                        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                        {
+                            ptr = Marshal.GetComInterfaceForObject(iStream, typeof(IStream));
+                            Marshal.ReleaseComObject(iStream);
+                        }
                         return new Tuple<IntPtr, int>(ptr, NativeMethods.S_OK);
                     },
                 });

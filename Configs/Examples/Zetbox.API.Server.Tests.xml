@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
-  <ConfigName>Server.API's Test Configuration</ConfigName>
+  <ConfigName>Server.API Core Test Configuration</ConfigName>
   <Server StartServer="false">
     <ConnectionStrings>
       <Database Name="Zetbox" Schema="SQLCE" Provider="System.Data.SqlServerCe.3.5"></Database>

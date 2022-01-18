@@ -649,12 +649,6 @@ namespace Zetbox.Client.Presentables
 
         public static bool operator ==(Highlight a, Highlight b)
         {
-            // If both are null, or both are same instance, return true.
-            if (System.Object.ReferenceEquals(a, b))
-            {
-                return true;
-            }
-
             // If one is null, but not both, return false.
             if (((object)a == null) || ((object)b == null))
             {

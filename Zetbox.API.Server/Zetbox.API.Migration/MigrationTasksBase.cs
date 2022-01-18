@@ -27,7 +27,7 @@ namespace Zetbox.API.Migration
     public class MigrationTasksBase
         : IMigrationTasks
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.API.Migration");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(MigrationTasksBase));
 
         private readonly ISchemaProvider _src;
         private readonly ISchemaProvider _dst;

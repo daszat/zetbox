@@ -42,7 +42,6 @@ namespace Zetbox.DalProvider.Client.Tests
         {
             base.SetupBuilder(builder);
             builder.RegisterModule(new Zetbox.Client.ClientModule());
-            builder.RegisterModule(new Zetbox.API.Client.HttpClientModule());
 
             builder
                 .RegisterType<ProxyMock>()

@@ -1,0 +1,14 @@
+mode: ContinuousDelivery
+branches:
+  dotnetcore:
+    regex: dotnet-core
+    source-branches: ['develop']
+    tag: dotnet-core
+    increment: None
+  develop:
+    tag: develop
+  master:
+    tag: beta
+ignore:
+  sha: []
+merge-message-formats: {}

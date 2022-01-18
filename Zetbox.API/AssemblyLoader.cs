@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using System.Text;
 
 using Zetbox.API.Configuration;
@@ -36,37 +37,11 @@ namespace Zetbox.API
     // or Mono.Addins; or push all Assemblies to the GAC to avoid this mess.
     public static class AssemblyLoader
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.AssemblyLoader");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(AssemblyLoader));
         private readonly static object _lock = new object();
         private readonly static HashSet<string> _missingAssemblies = new HashSet<string>();
 
-        /// <summary>
-        /// Initializes the AssemblyLoader in the <see cref="AppDomain">target AppDomain</see> with a minimal search path.
-        /// </summary>
-        public static void Bootstrap(AppDomain domain, ZetboxConfig config)
-        {
-            if (domain == null) { throw new ArgumentNullException("domain"); }
-            if (config == null) { throw new ArgumentNullException("config"); }
-
-            var init = (AssemblyLoaderInitializer)domain.CreateInstanceAndUnwrap(
-                "Zetbox.API",
-                "Zetbox.API.AssemblyLoaderInitializer");
-
-            init.Init(config);
-        }
-
-        public static void Unload(AppDomain domain)
-        {
-            if (domain == null) { throw new ArgumentNullException("domain"); }
-
-            var init = (AssemblyLoaderInitializer)domain.CreateInstanceAndUnwrap(
-                "Zetbox.API",
-                "Zetbox.API.AssemblyLoaderInitializer");
-
-            init.Unload();
-        }
-
-        internal static void Unload()
+        public static void Unload()
         {
             lock (_lock)
             {
@@ -77,7 +52,7 @@ namespace Zetbox.API
         }
 
         private static bool _isInitialised = false;
-        public static void EnsureInitialisation(ZetboxConfig config)
+        public static void Bootstrap(ZetboxConfig config)
         {
             if (config == null) { throw new ArgumentNullException("config"); }
 
@@ -110,11 +85,13 @@ namespace Zetbox.API
                     hostTypePaths.Add("Server");
                     break;
                 case HostType.AspNetService:
-                    hostTypePrefix = "bin";
+                    // Not in .net core
+                    // hostTypePrefix = "bin";
                     hostTypePaths.Add("Server");
                     break;
                 case HostType.AspNetClient:
-                    hostTypePrefix = "bin";
+                    // Not in .net core
+                    // hostTypePrefix = "bin";
                     hostTypePaths.Add("Client");
                     hostTypePaths.Add("Server");
                     break;
@@ -385,7 +362,8 @@ namespace Zetbox.API
                     else
                     {
                         assemblyName.CodeBase = dllToLoad;
-                        result = Assembly.Load(assemblyName);
+                        //result = Assembly.Load(assemblyName);
+                        result = AssemblyLoadContext.Default.LoadFromAssemblyPath(dllToLoad);
                     }
 
                     // If the assembly could not be loaded, do nothing! Return null. 
@@ -399,19 +377,6 @@ namespace Zetbox.API
                     _currentlyLoading = null;
                 }
             }
-        }
-    }
-
-    public class AssemblyLoaderInitializer : MarshalByRefObject
-    {
-        public void Init(ZetboxConfig config)
-        {
-            AssemblyLoader.EnsureInitialisation(config);
-        }
-
-        public void Unload()
-        {
-            AssemblyLoader.Unload();
         }
     }
 }

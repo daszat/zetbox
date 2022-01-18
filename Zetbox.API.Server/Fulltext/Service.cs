@@ -69,13 +69,13 @@ namespace Zetbox.API.Server.Fulltext
                     var txt = idxItem.Item3;
 
                     var doc = new Document();
-                    doc.Add(new Field(Module.FIELD_CLASS, idxItem.Item1.Type.FullName, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
-                    doc.Add(new Field(Module.FIELD_CLASS_ID, clsId, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
-                    doc.Add(new Field(Module.FIELD_ID, idxItem.Item2.ToString(CultureInfo.InvariantCulture), Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
-                    doc.Add(new Field(Module.FIELD_BODY, txt.Body, Field.Store.NO, Field.Index.ANALYZED));
+                    doc.Add(new Field(Module.FIELD_CLASS, idxItem.Item1.Type.FullName, new FieldType() { IsStored=true }));
+                    doc.Add(new Field(Module.FIELD_CLASS_ID, clsId, new FieldType() { IsStored = true }));
+                    doc.Add(new Field(Module.FIELD_ID, idxItem.Item2.ToString(CultureInfo.InvariantCulture), new FieldType() { IsStored = true }));
+                    doc.Add(new Field(Module.FIELD_BODY, txt.Body, new FieldType() { IsStored = false }));
                     if (txt.Fields != null)
                     {
-                        txt.Fields.ForEach(kvp => doc.Add(new Field(kvp.Key.ToLowerInvariant(), kvp.Value, Field.Store.NO, Field.Index.ANALYZED)));
+                        txt.Fields.ForEach(kvp => doc.Add(new Field(kvp.Key.ToLowerInvariant(), kvp.Value, new FieldType() { IsStored = false })));
                     }
 
                     idxWriter.UpdateDocument(new Term(Module.FIELD_CLASS_ID, clsId), doc);
@@ -88,7 +88,6 @@ namespace Zetbox.API.Server.Fulltext
                 }
 
                 idxWriter.Commit();
-                _searcherManager.MaybeReopen();
             }
         }
     }

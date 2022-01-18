@@ -34,9 +34,13 @@ namespace Zetbox.API.Utils
 
         public static ContainerBuilder CreateContainerBuilder(ZetboxConfig config, IEnumerable<ZetboxConfig.Module> modules)
         {
-            if (config == null) throw new ArgumentNullException("config");
-
             var builder = new ContainerBuilder();
+            return CreateContainerBuilder(builder, config, modules);
+        }
+        public static ContainerBuilder CreateContainerBuilder(ContainerBuilder builder, ZetboxConfig config, IEnumerable<ZetboxConfig.Module> modules)
+        {
+            if (builder == null) throw new ArgumentNullException("builder");
+            if (config == null) throw new ArgumentNullException("config");
 
             // register the configuration
             builder
@@ -99,7 +103,8 @@ namespace Zetbox.API.Utils
             {
                 case HostType.AspNetClient:
                 case HostType.AspNetService:
-                    hostTypeDir = "bin";
+                    // Not in .net core
+                    // hostTypeDir = "bin";
                     break;
                 case HostType.Client:
                 case HostType.Server:

@@ -29,7 +29,7 @@ namespace Zetbox.Generator
     /// </summary>
     public class TemplateExecutor
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator.Templates");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(TemplateExecutor));
 
         private NameValueCollection settings = new NameValueCollection();
         private object[] templateParameters = new object[0];

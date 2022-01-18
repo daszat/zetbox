@@ -5,7 +5,6 @@ namespace Zetbox.API.AbstractConsumerTests
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
-    using System.ServiceModel.Description;
     using System.Text;
     using Zetbox.API.Client;
 
@@ -16,12 +15,6 @@ namespace Zetbox.API.AbstractConsumerTests
     {
         public void EnsureCredentials()
         {
-        }
-
-        public void SetCredentialsTo(ClientCredentials c)
-        {
-            c.UserName.UserName = "jenkins";
-            c.UserName.Password = "jenkins";
         }
 
         public void SetCredentialsTo(WebRequest req)

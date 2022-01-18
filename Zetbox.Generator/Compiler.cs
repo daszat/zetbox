@@ -28,11 +28,10 @@ namespace Zetbox.Generator
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
-    using Microsoft.Build.Execution;
 
     public abstract class Compiler
     {
-        private readonly static log4net.ILog _log = log4net.LogManager.GetLogger("Zetbox.Generator.Compiler");
+        private readonly static log4net.ILog _log = log4net.LogManager.GetLogger(typeof(Compiler));
 
         private readonly ILifetimeScope _container;
         private readonly IEnumerable<AbstractBaseGenerator> _generatorProviders;
@@ -112,12 +111,12 @@ namespace Zetbox.Generator
 
             if (failed != null)
             {
-                throw new ApplicationException("Compilation failed", failed);
+                throw new InvalidOperationException("Compilation failed", failed);
             }
 
             if (!success)
             {
-                throw new ApplicationException("Compilation failed");
+                throw new InvalidOperationException("Compilation failed");
             }
         }
 
