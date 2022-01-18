@@ -48,8 +48,15 @@ namespace Zetbox.Client.ASPNET.Toolkit
             Logging.Configure();
 
             var appBasePath = ContentRootPath;
-            var zbBasePath = Path.Combine(appBasePath, "..");
-            var configsPath = Path.Combine(zbBasePath, "Configs");
+            var configsPath = Path.Combine(appBasePath, "Configs");
+            if (Directory.Exists(configsPath))
+            {
+                // during development, this folder is one level higher
+                // after deployment, the web-application is at the same
+                // level as the zetbox application to prevent multiple
+                // copies of dlls.
+                configsPath = Path.Combine(appBasePath, "..", "Configs");
+            }
 
             var config = ZetboxConfig.FromFile(
                 HostType.AspNetClient,
