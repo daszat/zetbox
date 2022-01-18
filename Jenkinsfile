@@ -70,7 +70,7 @@ pipeline {
 			steps {
 				sh  '''
 				set +x
-				dotnet nuget push publish/*.nupkg -k $DASZ_NUGET_KEY -s https://office.dasz.at/ngf/api/v2/package
+				dotnet nuget push publish/*.nupkg --skip-duplicate -k $DASZ_NUGET_KEY -s https://office.dasz.at/ngf/api/v2/package
 				'''
 			}        
 		}			
