@@ -49,7 +49,7 @@ namespace Zetbox.Client.ASPNET.Toolkit
 
             var appBasePath = ContentRootPath;
             var configsPath = Path.Combine(appBasePath, "Configs");
-            if (Directory.Exists(configsPath))
+            if (!Directory.Exists(configsPath))
             {
                 // during development, this folder is one level higher
                 // after deployment, the web-application is at the same
