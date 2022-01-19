@@ -86,6 +86,11 @@ namespace Zetbox.API.Utils
         public static void Configure()
         {
             var logfile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log4net.config");
+            if (!File.Exists(logfile))
+            {
+                // Try one level up, we might be in a ASP.NET App
+                logfile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "log4net.config");
+            }
 
             var zetboxLogRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             log4net.Config.XmlConfigurator.Configure(zetboxLogRepository, new FileInfo(logfile));
