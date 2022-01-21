@@ -29,10 +29,46 @@
   <data name="GetCurrent(start)_description" space="preserve">
     <value />
   </data>
+  <data name="GetCurrent_label" space="preserve">
+    <value>GetCurrent</value>
+  </data>
+  <data name="GetCurrent_description" space="preserve">
+    <value />
+  </data>
+  <data name="GetCurrent(retval)_label" space="preserve">
+    <value>retval</value>
+  </data>
+  <data name="GetCurrent(retval)_description" space="preserve">
+    <value />
+  </data>
+  <data name="GetCurrent(start)_label" space="preserve">
+    <value>start</value>
+  </data>
+  <data name="GetCurrent(start)_description" space="preserve">
+    <value />
+  </data>
   <data name="GetCurrent(dt)_label" space="preserve">
     <value>dt</value>
   </data>
   <data name="GetCurrent(dt)_description" space="preserve">
+    <value />
+  </data>
+  <data name="GetNext_label" space="preserve">
+    <value>GetNext</value>
+  </data>
+  <data name="GetNext_description" space="preserve">
+    <value />
+  </data>
+  <data name="GetNext(retval)_label" space="preserve">
+    <value>retval</value>
+  </data>
+  <data name="GetNext(retval)_description" space="preserve">
+    <value />
+  </data>
+  <data name="GetNext(start)_label" space="preserve">
+    <value>start</value>
+  </data>
+  <data name="GetNext(start)_description" space="preserve">
     <value />
   </data>
   <data name="GetNext(dt)_label" space="preserve">

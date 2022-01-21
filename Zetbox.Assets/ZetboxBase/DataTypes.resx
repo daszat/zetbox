@@ -149,12 +149,6 @@
   <data name="Zetbox.App.Calendar.CommonWorkScheduleRule_description" space="preserve">
     <value>This rule applies every day</value>
   </data>
-  <data name="Zetbox.App.Test.Company" space="preserve">
-    <value>Company</value>
-  </data>
-  <data name="Zetbox.App.Test.Company_description" space="preserve">
-    <value>Describes a Company</value>
-  </data>
   <data name="Zetbox.App.Base.CompoundObject" space="preserve">
     <value>CompoundObject</value>
   </data>
@@ -1084,6 +1078,12 @@
   </data>
   <data name="Zetbox.App.Projekte.Task_description" space="preserve">
     <value />
+  </data>
+  <data name="Zetbox.App.Test.TestCompany" space="preserve">
+    <value>TestCompany</value>
+  </data>
+  <data name="Zetbox.App.Test.TestCompany_description" space="preserve">
+    <value>Describes a Company</value>
   </data>
   <data name="Zetbox.App.Test.TestCustomObject" space="preserve">
     <value>TestCustomObject</value>

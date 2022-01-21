@@ -9,4 +9,4 @@
 [assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
 // [assembly: System.CLSCompliantAttribute(true)] // TODO: needs PositionSuffix without underscore and naming columns differently
 [assembly: System.CLSCompliantAttribute(true)]
-[assembly: Zetbox.API.ZetboxGeneratedVersion("d2f9edb8-a08a-4e0b-8521-4923a0d36814")]
+[assembly: Zetbox.API.ZetboxGeneratedVersion("b72cb55e-957d-405a-bbb5-c94c2565a975")]

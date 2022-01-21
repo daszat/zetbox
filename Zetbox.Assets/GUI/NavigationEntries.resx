@@ -29,6 +29,24 @@
   <data name="Zetbox.App.Test.Entry 1_color" space="preserve">
     <value />
   </data>
+  <data name="Zetbox.App.Test.Entry 1" space="preserve">
+    <value>Entry 1</value>
+  </data>
+  <data name="Zetbox.App.Test.Entry 1_color" space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Entry 2" space="preserve">
+    <value>Entry 2</value>
+  </data>
+  <data name="Zetbox.App.Test.Entry 2_color" space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Entry 2" space="preserve">
+    <value>Entry 2</value>
+  </data>
+  <data name="Zetbox.App.Test.Entry 2_color" space="preserve">
+    <value />
+  </data>
   <data name="Zetbox.App.Test.Expenses" space="preserve">
     <value>Expenses</value>
   </data>
@@ -99,6 +117,18 @@
     <value>Root</value>
   </data>
   <data name="Zetbox.App.Projekte.Root_color" space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Search 1" space="preserve">
+    <value>Search 1</value>
+  </data>
+  <data name="Zetbox.App.Test.Search 1_color" space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Search 1" space="preserve">
+    <value>Search 1</value>
+  </data>
+  <data name="Zetbox.App.Test.Search 1_color" space="preserve">
     <value />
   </data>
   <data name="Zetbox.App.Test.Search 2" space="preserve">

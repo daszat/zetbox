@@ -5,25 +5,22 @@ rem Used by other command files
 rem ********************************************************************************
 
 rem *********** Interface *********** 
+echo Interfaces
 del /S /Q .\Zetbox.Objects\*.* >nul
 xcopy /s /y bin\CodeGen\Zetbox.Objects\*.* .\Zetbox.Objects >nul
 
 rem *********** Server - NHibernate *********** 
+echo Server
 del /S /Q .\Zetbox.Objects.NHibernate\*.* >nul
 xcopy /s /y bin\CodeGen\Zetbox.Objects.NHibernate\*.* .\Zetbox.Objects.NHibernate >nul
 
 rem *********** Memory *********** 
+echo Memory
 del /S /Q .\Zetbox.Objects.Memory\*.* >nul
 xcopy /s /y bin\CodeGen\Zetbox.Objects.Memory\*.* .\Zetbox.Objects.Memory >nul
 
 rem *********** Assets *********** 
+echo Assets
 xcopy /s /y bin\CodeGen\Assets\*.* .\Zetbox.Assets >nul
-
-rem *********** Assemblies *********** 
-rem Do not copy assemblies
-
-rem *********** Build *********** 
-rem do not rebuild code as we can't find Arebis
-rem C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe /m Zetbox.Complete.sln
 
 exit /b 0

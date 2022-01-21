@@ -448,13 +448,11 @@
         <component name="Value" class="Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
         <property name="AreaCode" 
-                  column="`Phones_AreaCode`" 
-                  optimistic-lock="false"
+                  column="`Phones_AreaCode`"
                   length="50" />
         <!-- ValueTypeProperty isValue -->
         <property name="Number" 
-                  column="`Phones_Number`" 
-                  optimistic-lock="false"
+                  column="`Phones_Number`"
                   length="50" />
         </component>
         <property name="Value_pos"
