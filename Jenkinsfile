@@ -29,7 +29,7 @@ pipeline {
 			steps {
 				sh  '''
 				set +x
-				version="$(gitversion -nofetch -showvariable NuGetVersionV2 | sed -z 's/[\r\n]//')"
+				version="$(gitversion -nofetch -showvariable NuGetVersionV2 | sed -z 's/[\\r\\n]//g')"
 				echo "Version = $version"
 
 				echo "@nuget install ZetboxBasic -Version $version -DependencyVersion Ignore -OutputDirectory \"%~dp0\\bin\"" > publish/DownloadZetbox.cmd
