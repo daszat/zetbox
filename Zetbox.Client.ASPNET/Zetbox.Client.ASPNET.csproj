@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
 	</ItemGroup>
 
@@ -23,7 +24,7 @@
 		<ProjectReference Include="..\Zetbox.Assets\Zetbox.Assets.csproj" />
 		<ProjectReference Include="..\Zetbox.Client.ASPNET.Toolkit\Zetbox.Client.ASPNET.Toolkit.csproj" />
 		<ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj" />
-		<ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" >
+		<ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
 			<PrivateAssets>all</PrivateAssets>
 		</ProjectReference>
 	</ItemGroup>

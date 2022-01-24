@@ -13,6 +13,9 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
+using Microsoft.AspNetCore.Http;
+using Zetbox.Client.ASPNET.Toolkit;
+
 namespace Zetbox.Client.ASPNET
 {
     using System;
@@ -128,6 +131,11 @@ namespace Zetbox.Client.ASPNET
             moduleBuilder
                 .Register<LoggingProblemReporter>(c => new LoggingProblemReporter())
                 .As<IProblemReporter>()
+                .SingleInstance();
+
+            moduleBuilder
+                .Register<HttpContextPrincipalResolver>(c => new HttpContextPrincipalResolver(c.Resolve<ILifetimeScope>(), c.Resolve<IHttpContextAccessor>()))
+                .As<IPrincipalResolver>()
                 .SingleInstance();
 
             moduleBuilder

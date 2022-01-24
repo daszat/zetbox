@@ -27,6 +27,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -40,7 +43,14 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - Zetbox.Client.ASPNET - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-lg-8">
+                    &copy; 2019 - Zetbox.Client.ASPNET - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+                <div class="col-lg-4 text-right">
+                    @User.Identity?.Name
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

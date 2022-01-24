@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -33,6 +34,13 @@ namespace Zetbox.Client.ASPNET
         public override void ConfigureServices(IServiceCollection services)
         {
             base.ConfigureServices(services);
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = "/account/login";
+                });
+
         }
 
         public override void ConfigureContainer(ContainerBuilder builder)
@@ -59,6 +67,7 @@ namespace Zetbox.Client.ASPNET
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

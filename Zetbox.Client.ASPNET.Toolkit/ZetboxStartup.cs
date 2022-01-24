@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Zetbox.API;
 using Zetbox.API.Configuration;
 using Zetbox.API.Utils;
@@ -36,6 +38,10 @@ namespace Zetbox.Client.ASPNET.Toolkit
 
                 OnConfigureControllersWithViews(options);
             });
+
+            services.AddHttpContextAccessor();
+            // TODO: Is there a "official" extension method?
+            services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
         }
 
         protected virtual void OnConfigureControllersWithViews(MvcOptions options)
