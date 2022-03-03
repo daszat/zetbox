@@ -8,7 +8,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox.net4\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst")]
     public partial class CollectionEntryListProperty : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -62,10 +62,10 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 45 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 45 "D:\Projects\zetbox.net4\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 string eventName = "On" + name + "_PostSetter";
 
-#line 47 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 47 "D:\Projects\zetbox.net4\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("		",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedInterface , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");
@@ -96,7 +96,7 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            return new Zetbox.API.Async.ZbTask<",  exposedCollectionInterface , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-#line 77 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 77 "D:\Projects\zetbox.net4\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, name, eagerLoading); 
 
         }

@@ -4,7 +4,7 @@ using Zetbox.API;
 
 namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Properties\PropertyEvents.cst")]
     public partial class PropertyEvents : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -36,18 +36,18 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 29 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 29 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasGetters) { 
-#line 30 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 30 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 this.WriteObjects("		",  GetModifiers() , " event PropertyGetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_Getter;\r\n");
-#line 31 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 31 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 } 
-#line 32 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 32 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasSetters) { 
-#line 33 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 33 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 this.WriteObjects("		",  GetModifiers() , " event PropertyPreSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PreSetter;\r\n");
 this.WriteObjects("		",  GetModifiers() , " event PropertyPostSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PostSetter;\r\n");
-#line 35 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 35 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 } 
 
         }

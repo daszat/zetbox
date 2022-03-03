@@ -10,7 +10,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox.net4\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst")]
     public partial class ReloadReferences : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -34,7 +34,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 31 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 31 "D:\Projects\zetbox.net4\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override void ReloadReferences()\r\n");
 this.WriteObjects("        {\r\n");
@@ -44,7 +44,7 @@ this.WriteObjects("            //if (this.ObjectState == DataObjectState.Deleted
 this.WriteObjects("            base.ReloadReferences();\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            // fix direct object references\r\n");
-#line 41 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 41 "D:\Projects\zetbox.net4\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 // TODO: Use only 1 side relation ends
     foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
         .Where(orp => !orp.IsList())
@@ -54,7 +54,7 @@ this.WriteObjects("            // fix direct object references\r\n");
         ReloadOneReference.Call(Host, ctx, prop);
     }
 
-#line 50 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 50 "D:\Projects\zetbox.net4\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("        }\r\n");
 
         }

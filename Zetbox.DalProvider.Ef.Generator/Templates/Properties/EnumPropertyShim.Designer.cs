@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumPropertyShim.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox.net4\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumPropertyShim.cst")]
     public partial class EnumPropertyShim : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -39,7 +39,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 33 "D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumPropertyShim.cst"
+#line 33 "D:\Projects\zetbox.net4\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumPropertyShim.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>EF sees only this property, for ",  UglyXmlEncode(name) , "</summary>\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");

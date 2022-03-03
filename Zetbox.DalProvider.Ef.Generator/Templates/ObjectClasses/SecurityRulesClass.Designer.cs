@@ -10,7 +10,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox.net4\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst")]
     public partial class SecurityRulesClass : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -40,7 +40,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 34 "D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst"
+#line 34 "D:\Projects\zetbox.net4\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    [System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName=\"Model\", Name=\"",  targetRoleName , "\")]\r\n");
 this.WriteObjects("    public class ",  referencedImplementation , " : System.Data.Objects.DataClasses.EntityObject\r\n");

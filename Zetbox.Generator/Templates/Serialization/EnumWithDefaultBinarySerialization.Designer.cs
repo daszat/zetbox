@@ -10,7 +10,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.Serialization
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst")]
     public partial class EnumWithDefaultBinarySerialization : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -46,7 +46,7 @@ namespace Zetbox.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 38 "D:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
+#line 38 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
 ////
     ////  This class always serializes as int? to avoid complicating the code
     ////
@@ -54,37 +54,37 @@ namespace Zetbox.Generator.Templates.Serialization
     switch(direction){
         case SerializerDirection.ToStream:
 
-#line 45 "D:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
+#line 45 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
 this.WriteObjects("            ",  streamName , ".Write(this.",  isSetFlagName , ");\r\n");
 this.WriteObjects("            if (this.",  isSetFlagName , ") {\r\n");
 this.WriteObjects("                ",  streamName , ".Write((int?)",  backingStoreName , ");\r\n");
 this.WriteObjects("            }\r\n");
-#line 50 "D:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
+#line 50 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
-#line 53 "D:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
+#line 53 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
 this.WriteObjects("            this.",  isSetFlagName , " = ",  streamName , ".ReadBoolean();\r\n");
 this.WriteObjects("            if (this.",  isSetFlagName , ") {\r\n");
 this.WriteObjects("                ",  backingStoreName , " = (",  enumerationType , ")",  streamName , ".ReadNullableInt32();\r\n");
 this.WriteObjects("            }\r\n");
-#line 58 "D:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
+#line 58 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
 break;
         case SerializerDirection.Export:
 
-#line 61 "D:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
+#line 61 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream((int?)",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 63 "D:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
+#line 63 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
-#line 66 "D:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
+#line 66 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
 this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
 this.WriteObjects("                // Import must have default value set\r\n");
 this.WriteObjects("                ",  backingStoreName , " = (",  enumerationType , ")XmlStreamer.ReadNullableInt32(",  streamName , ");\r\n");
 this.WriteObjects("                this.",  isSetFlagName , " = true;\r\n");
 this.WriteObjects("                break;\r\n");
-#line 72 "D:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
+#line 72 "D:\Projects\zetbox.net4\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

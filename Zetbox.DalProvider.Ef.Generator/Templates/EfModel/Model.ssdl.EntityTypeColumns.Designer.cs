@@ -13,7 +13,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox.net4\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst")]
     public partial class ModelSsdlEntityTypeColumns : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -41,7 +41,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 
         public override void Generate()
         {
-#line 38 "D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 38 "D:\Projects\zetbox.net4\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 /*
 	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
 	 */
@@ -92,9 +92,9 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 				nullableAttr = String.Format("Nullable=\"{0}\" ", IsRealNullable(p).ToString().ToLowerInvariant());
 			}
 
-#line 88 "D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 88 "D:\Projects\zetbox.net4\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 this.WriteObjects("    <Property Name=\"",  columnName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  precScaleAttr , "",  nullableAttr , "/>\r\n");
-#line 90 "D:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 90 "D:\Projects\zetbox.net4\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 }
 	}
 
