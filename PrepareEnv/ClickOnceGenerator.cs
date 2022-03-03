@@ -12,32 +12,31 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+using Mono.Security;
+using Mono.Security.X509;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
-using System.Text;
 using System.Xml;
-using Mono.Security;
-using Mono.Security.X509;
 
 namespace PrepareEnv
 {
-    static class ClickOnceGenerator
+    internal static class ClickOnceGenerator
     {
-        static readonly string ASMv1_NS = "urn:schemas-microsoft-com:asm.v1";
-        static readonly string ASMv2_NS = "urn:schemas-microsoft-com:asm.v2";
-        static readonly string XMLDSIG_NS = "http://www.w3.org/2000/09/xmldsig#";
-        static readonly string XMLDSIG_IDENTITY = "urn:schemas-microsoft-com:HashTransforms.Identity";
-        static readonly string XMLDSIG_SHA1 = "http://www.w3.org/2000/09/xmldsig#sha1";
-        static readonly string MS_RELDATA_NS = "http://schemas.microsoft.com/windows/rel/2005/reldata";
-        static readonly string R_NS = "urn:mpeg:mpeg21:2003:01-REL-R-NS";
-        static readonly string AUTHENTICODE_NS = "http://schemas.microsoft.com/windows/pki/2005/Authenticode";
-        static readonly string CLICKONCE_V2_NS = "urn:schemas-microsoft-com:clickonce.v2";
+        private static readonly string ASMv1_NS = "urn:schemas-microsoft-com:asm.v1";
+        private static readonly string ASMv2_NS = "urn:schemas-microsoft-com:asm.v2";
+        private static readonly string XMLDSIG_NS = "http://www.w3.org/2000/09/xmldsig#";
+        private static readonly string XMLDSIG_IDENTITY = "urn:schemas-microsoft-com:HashTransforms.Identity";
+        private static readonly string XMLDSIG_SHA1 = "http://www.w3.org/2000/09/xmldsig#sha1";
+        private static readonly string MS_RELDATA_NS = "http://schemas.microsoft.com/windows/rel/2005/reldata";
+        private static readonly string R_NS = "urn:mpeg:mpeg21:2003:01-REL-R-NS";
+        private static readonly string AUTHENTICODE_NS = "http://schemas.microsoft.com/windows/pki/2005/Authenticode";
+        private static readonly string CLICKONCE_V2_NS = "urn:schemas-microsoft-com:clickonce.v2";
 
         private static readonly HashAlgorithm _sha1 = HashAlgorithm.Create("SHA1");
         private static string _passphrase;
@@ -184,11 +183,27 @@ namespace PrepareEnv
                 }
             }
 
-            if (file.EndsWith(".dll") || file.EndsWith(".dll.deploy") || file.EndsWith(".exe") || file.EndsWith(".exe.deploy"))
+            bool isAssembly = file.EndsWith(".dll") || file.EndsWith(".dll.deploy") || file.EndsWith(".exe") || file.EndsWith(".exe.deploy");
+            if (isAssembly && file.Contains("Fallback"))
             {
-                // TODO: do not deploy fallback to client and remove this.
-                if (file.Contains("Fallback")) return;
+                return;
+            }
 
+            Assembly assembly = null;
+            if (isAssembly)
+            {
+                try
+                {
+                    assembly = Assembly.ReflectionOnlyLoadFrom(file);
+                }
+                catch (BadImageFormatException)
+                {
+                    // not an assembly
+                }
+            }
+
+            if (isAssembly && assembly != null)
+            {
                 var dependency = doc.CreateNode(XmlNodeType.Element, "dependency", ASMv2_NS);
                 var dependentAssembly = doc.CreateNode(XmlNodeType.Element, "dependentAssembly", ASMv2_NS);
                 SetOrReplaceAttribute(dependentAssembly, "dependencyType", null, "install");
@@ -198,7 +213,7 @@ namespace PrepareEnv
 
                 var assemblyIdentity = doc.CreateNode(XmlNodeType.Element, "assemblyIdentity", ASMv2_NS);
 
-                FillClickOnceAssemblyId(System.Reflection.Assembly.ReflectionOnlyLoadFrom(file), assemblyIdentity);
+                FillClickOnceAssemblyId(assembly, assemblyIdentity);
                 dependentAssembly.AppendChild(assemblyIdentity);
 
                 var hash = CreateHashNode(file, nsmgr, doc);
@@ -290,9 +305,11 @@ namespace PrepareEnv
                 case PlatformID.Unix:
                     SignXmlSec1(envConfig, templateName, outputName, appId);
                     break;
+
                 case PlatformID.Win32NT:
                     SignMage(envConfig, templateName, outputName);
                     break;
+
                 default:
                     throw new NotSupportedException(string.Format("Signing on platform '{0}' is not supported", Environment.OSVersion.Platform));
             }
@@ -328,7 +345,7 @@ namespace PrepareEnv
             // ==================================
             // The Fusion XML engine is always preserving whitespace, therefore we need to
             // use a specially configured XmlDocument to normalize and sign the Manifest.
-            // 
+            //
             byte[] hash;
             {
                 var fusionDoc = new XmlDocument();
@@ -544,7 +561,7 @@ namespace PrepareEnv
             node.Attributes.SetNamedItem(attr);
         }
 
-        #endregion
+        #endregion XML Utilities
 
         #region Other Utilities
 
@@ -665,6 +682,7 @@ namespace PrepareEnv
                 return "0000000000000000";
             return string.Join(string.Empty, data.Select(i => i.ToString("x2")));
         }
-        #endregion
+
+        #endregion Other Utilities
     }
 }
