@@ -20,6 +20,7 @@ namespace Zetbox.API.Server
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Autofac;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server.PerfCounter;
@@ -68,6 +69,7 @@ namespace Zetbox.API.Server
                 {
                     var config = scope.Resolve<ZetboxConfig>();
                     config.Force = true;
+                    return Task.CompletedTask;
                 });
 
 
@@ -77,6 +79,7 @@ namespace Zetbox.API.Server
                 {
                     Logging.Server.Warn("Option deploy with arguments is depricated, migrate to new deployment strategy");
                     scope.Resolve<IServer>().Deploy(arg);
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -85,6 +88,7 @@ namespace Zetbox.API.Server
                 {
                     var srv = scope.Resolve<IServer>();
                     srv.Deploy(Directory.GetFiles(arg ?? "Modules", "*.xml", SearchOption.TopDirectoryOnly));
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -92,6 +96,7 @@ namespace Zetbox.API.Server
                 (scope, arg) =>
                 {
                     scope.Resolve<IServer>().Deploy();
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -99,6 +104,7 @@ namespace Zetbox.API.Server
                 (scope, arg) =>
                 {
                     scope.Resolve<IServer>().Import(arg);
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -113,6 +119,7 @@ namespace Zetbox.API.Server
                         arg,
                         schemaModulesArray,
                         ownerModulesArray);
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -126,6 +133,7 @@ namespace Zetbox.API.Server
                     scope.Resolve<IServer>().Publish(
                         arg,
                         ownerModulesArray);
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -134,6 +142,7 @@ namespace Zetbox.API.Server
                 {
                     var config = scope.Resolve<ZetboxConfig>();
                     scope.Resolve<IServer>().DeleteModule(arg);
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -141,6 +150,7 @@ namespace Zetbox.API.Server
                 scope =>
                 {
                     scope.Resolve<IServer>().CheckSchema(false);
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -159,13 +169,14 @@ namespace Zetbox.API.Server
                     {
                         Logging.Server.Error("the command checkschema requieres a valid argument ('meta' or a xml file)");
                     }
+                    return Task.CompletedTask;
                 });
 
             builder
                 .RegisterCmdLineAction("repairschema", "checks the schema against the deployed schema and tries to correct deviations",
-                scope =>
+                async scope =>
                 {
-                    scope.Resolve<IServer>().CheckSchema(true);
+                    await scope.Resolve<IServer>().CheckSchema(true);
                 });
 
             builder
@@ -173,6 +184,7 @@ namespace Zetbox.API.Server
                 scope =>
                 {
                     scope.Resolve<IServer>().UpdateSchema();
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -180,6 +192,7 @@ namespace Zetbox.API.Server
                (scope, args) =>
                {
                    scope.Resolve<IServer>().UpdateSchema(args);
+                    return Task.CompletedTask;
                });
 
             builder
@@ -187,6 +200,7 @@ namespace Zetbox.API.Server
                 (scope, args) =>
                 {
                     scope.Resolve<IServer>().SyncIdentities(args);
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -194,6 +208,7 @@ namespace Zetbox.API.Server
                 (scope, arg) =>
                 {
                     scope.Resolve<IServer>().AnalyzeDatabase(arg, File.CreateText(string.Format("{0} Report.txt", arg)));
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -201,6 +216,7 @@ namespace Zetbox.API.Server
                 scope =>
                 {
                     scope.Resolve<IPerfCounter>().Install();
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -208,6 +224,7 @@ namespace Zetbox.API.Server
                 scope =>
                 {
                     scope.Resolve<IPerfCounter>().Uninstall();
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -215,6 +232,7 @@ namespace Zetbox.API.Server
                 scope =>
                 {
                     scope.Resolve<IServer>().RunBenchmarks();
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -222,6 +240,7 @@ namespace Zetbox.API.Server
                 scope =>
                 {
                     scope.Resolve<IServer>().RunFixes();
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -229,12 +248,14 @@ namespace Zetbox.API.Server
                 scope =>
                 {
                     scope.Resolve<IServer>().WipeDatabase();
+                    return Task.CompletedTask;
                 });
             builder
                 .RegisterCmdLineAction("wait-for-database", "Waits until the database is online. This is useful in a Docker scenario.",
                 scope =>
                 {
                     scope.Resolve<IServer>().WaitForDatabase();
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -252,6 +273,7 @@ namespace Zetbox.API.Server
                          var properties = ParseProperties(args, ctx);
                          scope.Resolve<IServer>().RecalculateProperties(properties.ToArray());
                      }
+                    return Task.CompletedTask;
                  });
 
             builder
@@ -259,6 +281,7 @@ namespace Zetbox.API.Server
                 scope =>
                 {
                     scope.Resolve<IServer>().RefreshRights();
+                    return Task.CompletedTask;
                 });
         }
 

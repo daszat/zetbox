@@ -21,6 +21,7 @@ namespace Zetbox.Cli
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Autofac;
     using Autofac.Configuration;
     using Zetbox.API;
@@ -34,7 +35,7 @@ namespace Zetbox.Cli
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(Program));
 
-        public static int Main(string[] arguments)
+        public static async Task<int> Main(string[] arguments)
         {
             Logging.Configure();
 
@@ -79,7 +80,7 @@ namespace Zetbox.Cli
                         {
                             using (var innerContainer = container.BeginLifetimeScope())
                             {
-                                action(innerContainer);
+                                await action(innerContainer);
                             }
                         }
                     }

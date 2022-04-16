@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Autofac;
 using Zetbox.API.Configuration;
 using Zetbox.API.Utils;
@@ -82,45 +83,48 @@ namespace Zetbox.API
         /// <summary>
         /// This method is called to execute the action.
         /// </summary>
-        protected abstract void InvokeCore(Autofac.ILifetimeScope unitOfWork, string[] args);
+        protected abstract Task InvokeCore(Autofac.ILifetimeScope unitOfWork, string[] args);
     }
 
     public sealed class SimpleCmdLineAction : CmdLineAction
     {
-        public SimpleCmdLineAction(ZetboxConfig config, string prototype, string description, Action<ILifetimeScope> action)
+        public SimpleCmdLineAction(ZetboxConfig config, string prototype, string description, Func<ILifetimeScope, Task> action)
             : base(config, prototype, description, 0)
         {
-            _listAction = (scope, args) => { action(scope); };
+            _listAction = async (scope, args) => { await action(scope); };
         }
 
-        public SimpleCmdLineAction(ZetboxConfig config, string prototype, string description, Action<ILifetimeScope, string> action)
+        public SimpleCmdLineAction(ZetboxConfig config, string prototype, string description, Func<ILifetimeScope, string, Task> action)
             : base(config, prototype, description, 1)
         {
-            _listAction = (scope, args) =>
+            _listAction = async (scope, args) =>
             {
                 if (args.Length == 0)
                 {
-                    action(scope, null);
+                    await action(scope, null);
                 }
                 else
                 {
-                    args.ForEach(arg => action(scope, arg));
+                    foreach(var arg in args)
+                    {
+                        await action(scope, arg);
+                    }
                 }
             };
         }
 
-        public SimpleCmdLineAction(ZetboxConfig config, string prototype, string description, Action<ILifetimeScope, string[]> listAction)
+        public SimpleCmdLineAction(ZetboxConfig config, string prototype, string description, Func<ILifetimeScope, string[], Task> listAction)
             : base(config, prototype, description, 1)
         {
             _listAction = listAction;
         }
 
-        private readonly Action<ILifetimeScope, string[]> _listAction;
-        public Action<ILifetimeScope, string[]> ListAction { get { return _listAction; } }
+        private readonly Func<ILifetimeScope, string[], Task> _listAction;
+        public Func<ILifetimeScope, string[], Task> ListAction { get { return _listAction; } }
 
-        protected override void InvokeCore(ILifetimeScope unitOfWork, string[] args)
+        protected override async Task InvokeCore(ILifetimeScope unitOfWork, string[] args)
         {
-            _listAction(unitOfWork, args);
+            await _listAction(unitOfWork, args);
         }
     }
 
@@ -131,11 +135,12 @@ namespace Zetbox.API
     public class WaitAction : CmdLineAction
     {
         public WaitAction(ZetboxConfig config) : base(config, "wait", "let the process wait for user input before exiting", 0) { }
-        protected override void InvokeCore(Autofac.ILifetimeScope unitOfWork, string[] args)
+        protected override Task InvokeCore(Autofac.ILifetimeScope unitOfWork, string[] args)
         {
             Logging.Log.Info("Waiting for console input to shutdown");
             Console.WriteLine("Hit the anykey to exit");
             Console.ReadKey();
+            return Task.CompletedTask;
         }
     }
 
@@ -151,6 +156,9 @@ namespace Zetbox.API
             c.OptionSet.WriteOptionDescriptions(Console.Out);
             Environment.Exit(1);
         }
-        protected override void InvokeCore(Autofac.ILifetimeScope unitOfWork, string[] args) { }
+        protected override Task InvokeCore(Autofac.ILifetimeScope unitOfWork, string[] args)
+        { 
+            return Task.CompletedTask;
+        }
     }
 }

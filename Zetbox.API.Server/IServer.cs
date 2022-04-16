@@ -16,12 +16,13 @@ namespace Zetbox.API.Server
 {
     using System;
     using System.IO;
+    using System.Threading.Tasks;
     using Zetbox.App.Base;
 
     public interface IServer
     {
         void AnalyzeDatabase(string connectionName, TextWriter output);
-        void CheckSchema(bool withRepair);
+        Task CheckSchema(bool withRepair);
         void CheckSchema(string[] files, bool withRepair);
         void CheckSchemaFromCurrentMetaData(bool withRepair);
         void Deploy();

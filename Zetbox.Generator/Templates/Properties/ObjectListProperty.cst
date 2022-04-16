@@ -60,7 +60,9 @@
             {
                 if (<%= wrapperName %> == null)
                 {
-                    TriggerFetch<%= name %>Async().Wait();
+                    var task = TriggerFetch<%= name %>Async();
+                    task.RunSynchronously();
+                    task.Wait();
                 }
                 return <%= wrapperName %>;
             }

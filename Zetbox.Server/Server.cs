@@ -22,6 +22,7 @@ namespace Zetbox.Server
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Configuration;
@@ -164,7 +165,7 @@ namespace Zetbox.Server
             }
         }
 
-        public void CheckSchema(bool withRepair)
+        public Task CheckSchema(bool withRepair)
         {
             using (Log.InfoTraceMethodCallFormat("CheckSchema", "withRepair=[{0}]", withRepair))
             using (var subContainer = container.BeginLifetimeScope())
@@ -178,6 +179,8 @@ namespace Zetbox.Server
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                 mgr.CheckSchema(withRepair);
+
+                return Task.CompletedTask;
             }
         }
 

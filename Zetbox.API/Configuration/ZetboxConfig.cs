@@ -22,6 +22,7 @@ namespace Zetbox.API.Configuration
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Xml;
     using System.Xml.Serialization;
     using Zetbox.API.Utils;
@@ -61,7 +62,7 @@ namespace Zetbox.API.Configuration
         public ZetboxConfig()
         {
             this.AdditionalCommandlineOptions = new Dictionary<object, List<string>>();
-            this.AdditionalCommandlineActions = new List<Action<Autofac.ILifetimeScope>>();
+            this.AdditionalCommandlineActions = new List<Func<Autofac.ILifetimeScope, Task>>();
             this.EnableShadowCopy = true;
         }
 
@@ -116,7 +117,7 @@ namespace Zetbox.API.Configuration
         /// These additional command line actions are filled while parsing the command line
         /// </summary>
         [XmlIgnore]
-        public List<Action<Autofac.ILifetimeScope>> AdditionalCommandlineActions { get; set; }
+        public List<Func<Autofac.ILifetimeScope, Task>> AdditionalCommandlineActions { get; set; }
 
         [XmlIgnore]
         [DefaultValue(false)]

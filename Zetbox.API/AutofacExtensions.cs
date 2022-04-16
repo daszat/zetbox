@@ -20,6 +20,7 @@ namespace Zetbox.API
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using System.Threading.Tasks;
     using Autofac;
     using Autofac.Builder;
     using Zetbox.API.Configuration;
@@ -109,7 +110,7 @@ namespace Zetbox.API
                .SingleInstance();
         }
 
-        public static void RegisterCmdLineAction(this ContainerBuilder builder, string prototype, string description, Action<ILifetimeScope> action)
+        public static void RegisterCmdLineAction(this ContainerBuilder builder, string prototype, string description, Func<ILifetimeScope, Task> action)
         {
             builder
                .Register<CmdLineAction>(c => new SimpleCmdLineAction(c.Resolve<ZetboxConfig>(), prototype, description, action))
@@ -118,7 +119,7 @@ namespace Zetbox.API
                .SingleInstance();
         }
 
-        public static void RegisterCmdLineAction(this ContainerBuilder builder, string prototype, string description, Action<ILifetimeScope, string> action)
+        public static void RegisterCmdLineAction(this ContainerBuilder builder, string prototype, string description, Func<ILifetimeScope, string, Task> action)
         {
             builder
                .Register<CmdLineAction>(c => new SimpleCmdLineAction(c.Resolve<ZetboxConfig>(), prototype, description, action))
@@ -127,7 +128,7 @@ namespace Zetbox.API
                .SingleInstance();
         }
 
-        public static void RegisterCmdLineListAction(this ContainerBuilder builder, string prototype, string description, Action<ILifetimeScope, string[]> listAction)
+        public static void RegisterCmdLineListAction(this ContainerBuilder builder, string prototype, string description, Func<ILifetimeScope, string[], Task> listAction)
         {
             builder
                .Register<CmdLineAction>(c => new SimpleCmdLineAction(c.Resolve<ZetboxConfig>(), prototype, description, listAction))

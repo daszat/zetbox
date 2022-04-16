@@ -128,7 +128,10 @@
         {
             get
             {
-                return (<%= referencedImplementation %>)TriggerFetch<%= name %>Async().Result;
+                var task = TriggerFetch<%= name %>Async();
+                task.RunSynchronously();
+                task.Wait();
+                return (<%= referencedImplementation %>)task.Result;
             }
             set
             {

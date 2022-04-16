@@ -25,6 +25,7 @@ namespace Zetbox.Generator
     using System.ComponentModel;
     using Zetbox.Generator.ResourceGenerator;
     using Zetbox.API.Server;
+    using System.Threading.Tasks;
 
     [Feature]
     [Description("Basic generator infrastructure using MS Build")]
@@ -38,6 +39,7 @@ namespace Zetbox.Generator
                 scope =>
                 {
                     scope.Resolve<Compiler>().GenerateCode();
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -45,6 +47,7 @@ namespace Zetbox.Generator
                 scope =>
                 {
                     scope.Resolve<Compiler>().GenerateFallback();
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -52,6 +55,7 @@ namespace Zetbox.Generator
                 scope =>
                 {
                     scope.Resolve<Compiler>().CompileCode();
+                    return Task.CompletedTask;
                 });
 
             builder
@@ -60,6 +64,7 @@ namespace Zetbox.Generator
                 {
                     if (arg == null || arg.Length == 0) arg = new string[] { "*" };
                     scope.Resolve<ResourceCmdLineHandler>().Generate(arg);
+                    return Task.CompletedTask;
                 });
 
             builder

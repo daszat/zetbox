@@ -22,6 +22,7 @@ namespace Zetbox.API.Server.Fulltext
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Autofac;
     using Lucene.Net.Analysis;
     using Lucene.Net.Analysis.De;
@@ -140,6 +141,8 @@ namespace Zetbox.API.Server.Fulltext
                     {
                         rebuilder.Rebuild();
                     }
+
+                    return Task.CompletedTask;
                 });
         }
     }

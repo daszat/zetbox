@@ -53,6 +53,7 @@ namespace Zetbox.App.Projekte.Server
 
                         ctx.SubmitChanges();
                     }
+                    return System.Threading.Tasks.Task.CompletedTask;
                 });
 
             moduleBuilder
