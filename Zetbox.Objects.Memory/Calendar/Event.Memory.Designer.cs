@@ -146,15 +146,15 @@ namespace Zetbox.App.Calendar
 
         private Guid? _fk_guid_Calendar = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> _triggerFetchCalendarTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> TriggerFetchCalendarAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> _triggerFetchCalendarTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> TriggerFetchCalendarAsync()
         {
             if (_triggerFetchCalendarTask != null) return _triggerFetchCalendarTask;
 
             if (_fk_Calendar.HasValue)
                 _triggerFetchCalendarTask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value);
             else
-                _triggerFetchCalendarTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchCalendarTask = new System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook>(() => null);
 
             _triggerFetchCalendarTask.OnResult(t =>
             {
@@ -162,7 +162,7 @@ namespace Zetbox.App.Calendar
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Calendar.CalendarBook>(t.Result);
                     OnCalendar_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -270,15 +270,15 @@ namespace Zetbox.App.Calendar
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -286,7 +286,7 @@ namespace Zetbox.App.Calendar
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnChangedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -467,15 +467,15 @@ namespace Zetbox.App.Calendar
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -483,7 +483,7 @@ namespace Zetbox.App.Calendar
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnCreatedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -1342,7 +1342,7 @@ namespace Zetbox.App.Calendar
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

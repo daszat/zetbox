@@ -203,9 +203,9 @@ namespace Zetbox.App.Base
 		// ignored, but required for Serialization
         private bool Groups_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
+        public System.Threading.Tasks.Task TriggerFetchGroupsAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Group>>(this.Groups);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Base.Group>>(this.Groups);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroups_PostSetter;
@@ -828,7 +828,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

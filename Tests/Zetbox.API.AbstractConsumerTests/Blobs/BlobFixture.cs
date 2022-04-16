@@ -19,6 +19,7 @@ using System.Text;
 using NUnit.Framework;
 using System.IO;
 using Zetbox.App.Base;
+using System.Threading.Tasks;
 
 namespace Zetbox.API.AbstractConsumerTests.Blobs
 {
@@ -33,10 +34,10 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
         protected static readonly string filename2 = "hello2.txt";
 
         [SetUp]
-        public void InitTestObjects()
+        public async Task InitTestObjects()
         {
             DeleteTestData();
-            CreateTestData();
+            await CreateTestData();
 
             ctx = GetContext();
         }
@@ -53,7 +54,7 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
             }
         }
 
-        protected virtual void CreateTestData()
+        protected virtual async Task CreateTestData()
         {
             data = new MemoryStream();
             var sw = new StreamWriter(data);
@@ -62,8 +63,8 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
 
             using (IZetboxContext ctx = GetContext())
             {
-                var blob = ctx.Find<Blob>(ctx.CreateBlob(data, filename, mimetype));
-                ctx.SubmitChanges();
+                var blob = ctx.Find<Blob>(await ctx.CreateBlob(data, filename, mimetype));
+                await ctx.SubmitChanges();
                 blob_id = blob.ID;
             }
         }

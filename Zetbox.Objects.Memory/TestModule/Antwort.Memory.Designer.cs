@@ -141,15 +141,15 @@ namespace Zetbox.App.Test
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> _triggerFetchFragebogenTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> TriggerFetchFragebogenAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Test.Fragebogen> _triggerFetchFragebogenTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Test.Fragebogen> TriggerFetchFragebogenAsync()
         {
             if (_triggerFetchFragebogenTask != null) return _triggerFetchFragebogenTask;
 
             if (_fk_Fragebogen.HasValue)
                 _triggerFetchFragebogenTask = Context.FindAsync<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
             else
-                _triggerFetchFragebogenTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchFragebogenTask = new System.Threading.Tasks.Task<Zetbox.App.Test.Fragebogen>(() => null);
 
             _triggerFetchFragebogenTask.OnResult(t =>
             {
@@ -157,7 +157,7 @@ namespace Zetbox.App.Test
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Test.Fragebogen>(t.Result);
                     OnFragebogen_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -442,7 +442,7 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

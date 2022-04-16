@@ -116,8 +116,8 @@ namespace Zetbox.App.Test
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchNSideTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchNSideAsync()
+        System.Threading.Tasks.Task _triggerFetchNSideTask;
+        public System.Threading.Tasks.Task TriggerFetchNSideAsync()
         {
             if (_triggerFetchNSideTask != null) return _triggerFetchNSideTask;
 
@@ -132,7 +132,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchNSideTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchNSideTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.Test.One_to_N_relations_N>();
                 });
@@ -183,8 +183,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchOrderedNSideTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchOrderedNSideAsync()
+        System.Threading.Tasks.Task _triggerFetchOrderedNSideTask;
+        public System.Threading.Tasks.Task TriggerFetchOrderedNSideAsync()
         {
             if (_triggerFetchOrderedNSideTask != null) return _triggerFetchOrderedNSideTask;
 
@@ -199,7 +199,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             }
             else
             {
-                _triggerFetchOrderedNSideTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchOrderedNSideTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.Test.One_to_N_relations_OrderedN>();
                 });
@@ -276,7 +276,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

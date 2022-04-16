@@ -204,7 +204,7 @@ namespace Zetbox.API
         }
 
         /// <summary>Not implemented.</summary>
-        ZbTask<List<T>> IReadOnlyZetboxContext.GetListOfAsync<T>(IDataObject obj, string propertyName)
+        Task<List<T>> IReadOnlyZetboxContext.GetListOfAsync<T>(IDataObject obj, string propertyName)
         {
             throw new NotImplementedException();
         }
@@ -217,21 +217,18 @@ namespace Zetbox.API
         }
 
         /// <summary>Only implemented for the parent==null case.</summary>
-        ZbTask<IList<T>> IReadOnlyZetboxContext.FetchRelationAsync<T>(Guid relId, RelationEndRole role, IDataObject parent)
+        Task<IList<T>> IReadOnlyZetboxContext.FetchRelationAsync<T>(Guid relId, RelationEndRole role, IDataObject parent)
         {
-            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
+            if (parent == null)
             {
-                if (parent == null)
-                {
-                    CheckDisposed();
-                    //CheckInterfaceAssembly("T", typeof(T));
-                    return GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>().ToList();
-                }
-                else
-                {
-                    throw new NotImplementedException();
-                }
-            });
+                CheckDisposed();
+                //CheckInterfaceAssembly("T", typeof(T));
+                return Task.FromResult((IList<T>)GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>().ToList());
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         /// <inheritdoc />
@@ -254,7 +251,7 @@ namespace Zetbox.API
         }
 
         /// <inheritdoc />
-        public abstract int SubmitChanges();
+        public abstract Task<int> SubmitChanges();
 
         /// <inheritdoc />
         public bool IsDisposed { get; private set; }
@@ -393,14 +390,11 @@ namespace Zetbox.API
         }
 
         /// <inheritdoc />
-        public ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        public Task<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             CheckDisposed();
 
-            return new ZbTask<IDataObject>(ZbTask.Synchron, () =>
-            {
-                return (IDataObject)objects.Lookup(ifType, ID);
-            });
+            return Task.FromResult((IDataObject)objects.Lookup(ifType, ID));
         }
 
         /// <inheritdoc />
@@ -419,15 +413,12 @@ namespace Zetbox.API
             }
         }
 
-        public ZbTask<T> FindAsync<T>(int ID)
+        public Task<T> FindAsync<T>(int ID)
             where T : class, IDataObject
         {
             CheckDisposed();
 
-            return new ZbTask<T>(ZbTask.Synchron, () =>
-            {
-                return (T)Find(_iftFactory(typeof(T)), ID);
-            });
+            return Task.FromResult((T)Find(_iftFactory(typeof(T)), ID));
         }
 
         /// <inheritdoc />
@@ -561,13 +552,13 @@ namespace Zetbox.API
         }
 
         /// <summary>Not implemented.</summary>
-        int IZetboxContext.CreateBlob(System.IO.Stream s, string filename, string mimetype)
+        Task<int> IZetboxContext.CreateBlob(System.IO.Stream s, string filename, string mimetype)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>Not implemented.</summary>
-        int IZetboxContext.CreateBlob(System.IO.FileInfo fi, string mimetype)
+        Task<int> IZetboxContext.CreateBlob(System.IO.FileInfo fi, string mimetype)
         {
             throw new NotSupportedException();
         }
@@ -585,13 +576,13 @@ namespace Zetbox.API
         }
 
         /// <summary>Not implemented.</summary>
-        ZbTask<System.IO.Stream> IReadOnlyZetboxContext.GetStreamAsync(int ID)
+        Task<System.IO.Stream> IReadOnlyZetboxContext.GetStreamAsync(int ID)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>Not implemented.</summary>
-        ZbTask<System.IO.FileInfo> IReadOnlyZetboxContext.GetFileInfoAsync(int ID)
+        Task<System.IO.FileInfo> IReadOnlyZetboxContext.GetFileInfoAsync(int ID)
         {
             throw new NotSupportedException();
         }

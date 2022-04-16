@@ -25,6 +25,7 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
     using Zetbox.App.Test;
     using NUnit.Framework;
     using Zetbox.API.Client;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class ZetboxContextTests : Zetbox.API.AbstractConsumerTests.AbstractTestFixture
@@ -392,7 +393,7 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
         }
 
         [Test]
-        public void SubmitChanges()
+        public async Task SubmitChanges()
         {
             int testId = 1;
             string testString = "Test";
@@ -402,7 +403,7 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
             Assert.That(obj.ID, Is.EqualTo(testId));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
 
-            int result = ctx.SubmitChanges();
+            int result = await ctx.SubmitChanges();
             Assert.That(result, Is.EqualTo(1));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(obj.Context, Is.EqualTo(ctx));
@@ -410,39 +411,39 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
         }
 
         [Test]
-        public void SubmitChanges_New()
+        public async Task SubmitChanges_New()
         {
             TestObjClass obj = ctx.Create<TestObjClass>();
             obj.StringProp = "Test";
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
 
-            int result = ctx.SubmitChanges();
+            int result = await ctx.SubmitChanges();
             Assert.That(result, Is.EqualTo(1));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(obj.Context, Is.EqualTo(ctx));
         }
 
         [Test]
-        public void SubmitChanges_Nothing()
+        public async Task SubmitChanges_Nothing()
         {
             TestObjClass obj = ctx.Find<TestObjClass>(1);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
 
-            int result = ctx.SubmitChanges();
+            int result = await ctx.SubmitChanges();
             Assert.That(result, Is.EqualTo(0));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(obj.Context, Is.EqualTo(ctx));
         }
 
         [Test]
-        public void SubmitChanges_Delete()
+        public async Task SubmitChanges_Delete()
         {
             TestObjClass obj = ctx.Find<TestObjClass>(1);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             ctx.Delete(obj);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Deleted));
 
-            int result = ctx.SubmitChanges();
+            int result = await ctx.SubmitChanges();
             Assert.That(result, Is.EqualTo(1));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Deleted));
             Assert.That(obj.Context, Is.Null);

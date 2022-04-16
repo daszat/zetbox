@@ -19,6 +19,7 @@ namespace at.dasz.DocumentManagement
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
 
@@ -31,40 +32,40 @@ namespace at.dasz.DocumentManagement
             obj.IsFileReadonly = true;
         }
 
-        private static void MakeInternal(IZetboxContext ctx, ImportedFile obj, File doc)
+        private static async Task MakeInternal(IZetboxContext ctx, ImportedFile obj, File doc)
         {
             // Clone blob, so it could be deleted
-            doc.Blob = ctx.Find<Blob>(ctx.CreateBlob(ctx.GetFileInfo(obj.Blob.ID), obj.Blob.MimeType));
+            doc.Blob = ctx.Find<Blob>(await ctx.CreateBlob(ctx.GetFileInfo(obj.Blob.ID), obj.Blob.MimeType));
             doc.Name = obj.Name;
             ctx.Delete(obj);
         }
 
         [Invocation]
-        public static void MakeFile(ImportedFile obj, MethodReturnEventArgs<File> e)
+        public static async Task MakeFile(ImportedFile obj, MethodReturnEventArgs<File> e)
         {
             var ctx = obj.Context;
             var doc = ctx.Create<File>();
-            MakeInternal(ctx, obj, doc);
+            await MakeInternal(ctx, obj, doc);
             e.Result = doc;
         }
 
         [Invocation]
-        public static void MakeReadonlyFile(ImportedFile obj, MethodReturnEventArgs<File> e)
+        public static async Task MakeReadonlyFile(ImportedFile obj, MethodReturnEventArgs<File> e)
         {
             var ctx = obj.Context;
             var doc = ctx.Create<File>();
-            MakeInternal(ctx, obj, doc);
+            await MakeInternal(ctx, obj, doc);
             doc.IsFileReadonly = true;
             e.Result = doc;
         }
 
         // Deprecated
         [Invocation]
-        public static void MakeStaticFile(ImportedFile obj, MethodReturnEventArgs<StaticFile> e)
+        public static async Task MakeStaticFile(ImportedFile obj, MethodReturnEventArgs<StaticFile> e)
         {
             var ctx = obj.Context;
             var doc = ctx.Create<StaticFile>();
-            MakeInternal(ctx, obj, doc);
+            await MakeInternal(ctx, obj, doc);
             e.Result = doc;
         }
     }

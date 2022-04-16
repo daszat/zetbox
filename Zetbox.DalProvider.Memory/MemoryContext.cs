@@ -24,6 +24,7 @@ namespace Zetbox.DalProvider.Memory
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.API.Async;
+    using System.Threading.Tasks;
 
     public interface IMemoryActionsManager : ICustomActionsManager { }
 
@@ -43,7 +44,7 @@ namespace Zetbox.DalProvider.Memory
             _implTypeFactory = t => _implTypeFactoryCache.Invoke(t);
         }
 
-        public override int SubmitChanges()
+        public override Task<int> SubmitChanges()
         {
             int count = 0;
             var added = new List<IDataObject>();
@@ -82,7 +83,7 @@ namespace Zetbox.DalProvider.Memory
 
             ZetboxContextEventListenerHelper.OnSubmitted(eventListeners, this, added, modified, deleted.OfType<IDataObject>());
 
-            return count;
+            return Task.FromResult(count);
         }
 
         protected override object CreateUnattachedInstance(InterfaceType ifType)
@@ -129,9 +130,9 @@ namespace Zetbox.DalProvider.Memory
         }
 
         /// <summary>Only implemented for the parent==null case.</summary>
-        ZbTask<IList<T>> IReadOnlyZetboxContext.FetchRelationAsync<T>(Guid relId, RelationEndRole endRole, IDataObject parent)
+        System.Threading.Tasks.Task<IList<T>> IReadOnlyZetboxContext.FetchRelationAsync<T>(Guid relId, RelationEndRole endRole, IDataObject parent)
         {
-            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
+            return new System.Threading.Tasks.Task<IList<T>>(() =>
             {
                 if (parent == null)
                 {

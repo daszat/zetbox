@@ -83,15 +83,15 @@ namespace Zetbox.App.Test
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Event> _triggerFetchEventTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Event> TriggerFetchEventAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Calendar.Event> _triggerFetchEventTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.Event> TriggerFetchEventAsync()
         {
             if (_triggerFetchEventTask != null) return _triggerFetchEventTask;
 
             if (_fk_Event.HasValue)
                 _triggerFetchEventTask = Context.FindAsync<Zetbox.App.Calendar.Event>(_fk_Event.Value);
             else
-                _triggerFetchEventTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Event>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchEventTask = new System.Threading.Tasks.Task<Zetbox.App.Calendar.Event>(() => null);
 
             _triggerFetchEventTask.OnResult(t =>
             {
@@ -99,7 +99,7 @@ namespace Zetbox.App.Test
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Calendar.Event>(t.Result);
                     OnEvent_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -274,7 +274,7 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

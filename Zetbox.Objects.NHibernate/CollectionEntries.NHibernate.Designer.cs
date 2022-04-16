@@ -174,9 +174,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_A>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.N_to_M_relations_A>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -281,9 +281,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_B>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.N_to_M_relations_B>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -641,9 +641,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.CalculatedObjectReferenceProperty>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.CalculatedObjectReferenceProperty>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -727,9 +727,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -1120,9 +1120,9 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -1206,9 +1206,9 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Group>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -1562,9 +1562,9 @@ namespace Zetbox.App.Calendar
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -1646,9 +1646,9 @@ namespace Zetbox.App.Calendar
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -2003,9 +2003,9 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -2089,9 +2089,9 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Group>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -2445,9 +2445,9 @@ namespace Zetbox.App.Calendar
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -2529,9 +2529,9 @@ namespace Zetbox.App.Calendar
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -2886,9 +2886,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DataType>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -2972,9 +2972,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Interface>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Interface>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -3365,9 +3365,9 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File>(this.A);
+        return System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(this.A);
     }
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -3481,9 +3481,9 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Blob>(this.B);
     }
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -3907,9 +3907,9 @@ namespace Zetbox.App.Base
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -4014,9 +4014,9 @@ namespace Zetbox.App.Base
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Group>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -4337,9 +4337,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Muhblah>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -4444,9 +4444,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.TestCustomObject>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -4804,9 +4804,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.NavigationEntry>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.NavigationEntry>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -4890,9 +4890,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Group>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -5283,9 +5283,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectReferenceProperty>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectReferenceProperty>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -5392,9 +5392,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Method>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -5788,9 +5788,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -5874,9 +5874,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -6267,9 +6267,9 @@ namespace Zetbox.App.Projekte
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Projekt>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Projekt>(this.A);
     }
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -6406,9 +6406,9 @@ namespace Zetbox.App.Projekte
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Mitarbeiter>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Mitarbeiter>(this.B);
     }
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -6872,9 +6872,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RoleMembership>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.RoleMembership>(this.A);
     }
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -6988,9 +6988,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Relation>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Relation>(this.B);
     }
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -7451,9 +7451,9 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.SchemaMigration.SourceColumn>(this.A);
     }
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -7567,9 +7567,9 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(this.B);
     }
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -7993,9 +7993,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestStudent>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.TestStudent>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -8100,9 +8100,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Fragebogen>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -8460,9 +8460,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    public System.Threading.Tasks.Task TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.IndexConstraint>(this.A);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.IndexConstraint>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -8546,9 +8546,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    public System.Threading.Tasks.Task TriggerFetchBAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.B);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(this.B);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -8872,9 +8872,9 @@ namespace Zetbox.App.Projekte
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+    public System.Threading.Tasks.Task TriggerFetchParentAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde>(this.Parent);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Kunde>(this.Parent);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
@@ -9205,9 +9205,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+    public System.Threading.Tasks.Task TriggerFetchParentAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah>(this.Parent);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Muhblah>(this.Parent);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
@@ -9529,9 +9529,9 @@ namespace Zetbox.App.Projekte
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+    public System.Threading.Tasks.Task TriggerFetchParentAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Projekt>(this.Parent);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Projekt>(this.Parent);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
@@ -9892,9 +9892,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+    public System.Threading.Tasks.Task TriggerFetchParentAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCompany>(this.Parent);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.TestCompany>(this.Parent);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
@@ -10254,9 +10254,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+    public System.Threading.Tasks.Task TriggerFetchParentAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject>(this.Parent);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.TestCustomObject>(this.Parent);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent

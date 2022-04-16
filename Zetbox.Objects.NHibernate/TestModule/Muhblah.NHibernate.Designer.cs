@@ -182,9 +182,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
     
         private OneNRelationList<Zetbox.App.Test.TestCustomObject> _TestCustomObjects_List_Nav;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_List_NavAsync()
+        public System.Threading.Tasks.Task TriggerFetchTestCustomObjects_List_NavAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.TestCustomObject>>(this.TestCustomObjects_List_Nav);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Test.TestCustomObject>>(this.TestCustomObjects_List_Nav);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCustomObjects_List_Nav_PostSetter;
@@ -220,9 +220,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 		// ignored, but required for Serialization
         private bool TestCustomObjects_ManyList_Nav_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_ManyList_NavAsync()
+        public System.Threading.Tasks.Task TriggerFetchTestCustomObjects_ManyList_NavAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.TestCustomObject>>(this.TestCustomObjects_ManyList_Nav);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Test.TestCustomObject>>(this.TestCustomObjects_ManyList_Nav);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCustomObjects_ManyList_Nav_PostSetter;
@@ -347,9 +347,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_NavAsync()
+    public System.Threading.Tasks.Task TriggerFetchTestCustomObjects_NavAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject>(this.TestCustomObjects_Nav);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.TestCustomObject>(this.TestCustomObjects_Nav);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_Nav
@@ -470,9 +470,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_One_NavAsync()
+    public System.Threading.Tasks.Task TriggerFetchTestCustomObjects_One_NavAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject>(this.TestCustomObjects_One_Nav);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.TestCustomObject>(this.TestCustomObjects_One_Nav);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_One_Nav
@@ -740,7 +740,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

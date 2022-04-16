@@ -20,6 +20,7 @@ namespace Zetbox.API.Server
     using System.Data;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.App.Base;
 
     /// <summary>
@@ -45,7 +46,7 @@ namespace Zetbox.API.Server
         /// <para>Only IDataObjects are counted.</para>
         /// </remarks>
         /// <returns>Number of affected Objects</returns>
-        int SubmitRestore();
+        Task<int> SubmitRestore();
 
         /// <summary>
         /// Creates a native DbCommand object. This can be used to communicated with the database directly.

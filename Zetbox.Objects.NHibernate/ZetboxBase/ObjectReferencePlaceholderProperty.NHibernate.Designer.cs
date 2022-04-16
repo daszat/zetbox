@@ -377,9 +377,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for ReferencedObjectClass's guid, used on import only</summary>
         private Guid? _fk_guid_ReferencedObjectClass = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchReferencedObjectClassAsync()
+    public System.Threading.Tasks.Task TriggerFetchReferencedObjectClassAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.ReferencedObjectClass);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(this.ReferencedObjectClass);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedObjectClass
@@ -888,7 +888,7 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

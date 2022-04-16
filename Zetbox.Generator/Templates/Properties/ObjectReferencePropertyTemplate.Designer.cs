@@ -139,15 +139,15 @@ this.WriteObjects("        private Guid? ",  fkGuidBackingName , " = null;\r\n")
 } 
 #line 99 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("        Zetbox.API.Async.ZbTask<",  referencedInterface , "> ",  taskName , ";\r\n");
-this.WriteObjects("        public Zetbox.API.Async.ZbTask<",  referencedInterface , "> TriggerFetch",  name , "Async()\r\n");
+this.WriteObjects("        System.Threading.Tasks.Task<",  referencedInterface , "> ",  taskName , ";\r\n");
+this.WriteObjects("        public System.Threading.Tasks.Task<",  referencedInterface , "> TriggerFetch",  name , "Async()\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            if (",  taskName , " != null) return ",  taskName , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            if (",  fkBackingName , ".HasValue)\r\n");
 this.WriteObjects("                ",  taskName , " = Context.FindAsync<",  referencedInterface , ">(",  fkBackingName , ".Value);\r\n");
 this.WriteObjects("            else\r\n");
-this.WriteObjects("                ",  taskName , " = new Zetbox.API.Async.ZbTask<",  referencedInterface , ">(Zetbox.API.Async.ZbTask.Synchron, () => null);\r\n");
+this.WriteObjects("                ",  taskName , " = new System.Threading.Tasks.Task<",  referencedInterface , ">(() => null);\r\n");
 this.WriteObjects("\r\n");
 #line 110 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (callGetterSetterEvents) {                                                                    
@@ -158,7 +158,7 @@ this.WriteObjects("                if (",  eventName , "_Getter != null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyGetterEventArgs<",  referencedInterface , ">(t.Result);\r\n");
 this.WriteObjects("                    ",  eventName , "_Getter(this, e);\r\n");
-this.WriteObjects("                    t.Result = e.Result;\r\n");
+this.WriteObjects("                    // TODO: t.Result = e.Result;\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            });\r\n");
 this.WriteObjects("\r\n");

@@ -147,9 +147,9 @@ namespace Zetbox.App.GUI
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchChangedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.ChangedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -332,9 +332,9 @@ namespace Zetbox.App.GUI
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchCreatedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.CreatedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -655,9 +655,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    public System.Threading.Tasks.Task TriggerFetchModuleAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(this.Module);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -842,9 +842,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for RequestedKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedKind = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchRequestedKindAsync()
+    public System.Threading.Tasks.Task TriggerFetchRequestedKindAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.RequestedKind);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(this.RequestedKind);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
@@ -1009,9 +1009,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for ViewModelDescriptor's guid, used on import only</summary>
         private Guid? _fk_guid_ViewModelDescriptor = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchViewModelDescriptorAsync()
+    public System.Threading.Tasks.Task TriggerFetchViewModelDescriptorAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.ViewModelDescriptor);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(this.ViewModelDescriptor);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelDescriptor
@@ -1258,7 +1258,7 @@ namespace Zetbox.App.GUI
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

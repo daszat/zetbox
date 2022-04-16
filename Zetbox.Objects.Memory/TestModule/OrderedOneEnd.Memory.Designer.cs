@@ -58,8 +58,8 @@ namespace Zetbox.App.Test
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchNEndsTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchNEndsAsync()
+        System.Threading.Tasks.Task _triggerFetchNEndsTask;
+        public System.Threading.Tasks.Task TriggerFetchNEndsAsync()
         {
             if (_triggerFetchNEndsTask != null) return _triggerFetchNEndsTask;
 
@@ -74,7 +74,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchNEndsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchNEndsTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.Test.OrderedNEnd>();
                 });
@@ -208,7 +208,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

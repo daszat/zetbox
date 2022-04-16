@@ -84,15 +84,15 @@ namespace Zetbox.App.GUI
 
         private Guid? _fk_guid_DefaultDisplayKind = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultDisplayKindTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultDisplayKindAsync()
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultDisplayKindTask;
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultDisplayKindAsync()
         {
             if (_triggerFetchDefaultDisplayKindTask != null) return _triggerFetchDefaultDisplayKindTask;
 
             if (_fk_DefaultDisplayKind.HasValue)
                 _triggerFetchDefaultDisplayKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultDisplayKind.Value);
             else
-                _triggerFetchDefaultDisplayKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchDefaultDisplayKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
 
             _triggerFetchDefaultDisplayKindTask.OnResult(t =>
             {
@@ -100,7 +100,7 @@ namespace Zetbox.App.GUI
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
                     OnDefaultDisplayKind_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -209,15 +209,15 @@ namespace Zetbox.App.GUI
 
         private Guid? _fk_guid_DefaultEditorKind = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultEditorKindTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultEditorKindAsync()
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultEditorKindTask;
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultEditorKindAsync()
         {
             if (_triggerFetchDefaultEditorKindTask != null) return _triggerFetchDefaultEditorKindTask;
 
             if (_fk_DefaultEditorKind.HasValue)
                 _triggerFetchDefaultEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultEditorKind.Value);
             else
-                _triggerFetchDefaultEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchDefaultEditorKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
 
             _triggerFetchDefaultEditorKindTask.OnResult(t =>
             {
@@ -225,7 +225,7 @@ namespace Zetbox.App.GUI
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
                     OnDefaultEditorKind_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -334,15 +334,15 @@ namespace Zetbox.App.GUI
 
         private Guid? _fk_guid_DefaultGridCellDisplayKind = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultGridCellDisplayKindTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultGridCellDisplayKindAsync()
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultGridCellDisplayKindTask;
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultGridCellDisplayKindAsync()
         {
             if (_triggerFetchDefaultGridCellDisplayKindTask != null) return _triggerFetchDefaultGridCellDisplayKindTask;
 
             if (_fk_DefaultGridCellDisplayKind.HasValue)
                 _triggerFetchDefaultGridCellDisplayKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellDisplayKind.Value);
             else
-                _triggerFetchDefaultGridCellDisplayKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchDefaultGridCellDisplayKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
 
             _triggerFetchDefaultGridCellDisplayKindTask.OnResult(t =>
             {
@@ -350,7 +350,7 @@ namespace Zetbox.App.GUI
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
                     OnDefaultGridCellDisplayKind_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -459,15 +459,15 @@ namespace Zetbox.App.GUI
 
         private Guid? _fk_guid_DefaultGridCellEditorKind = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultGridCellEditorKindTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultGridCellEditorKindAsync()
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultGridCellEditorKindTask;
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultGridCellEditorKindAsync()
         {
             if (_triggerFetchDefaultGridCellEditorKindTask != null) return _triggerFetchDefaultGridCellEditorKindTask;
 
             if (_fk_DefaultGridCellEditorKind.HasValue)
                 _triggerFetchDefaultGridCellEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellEditorKind.Value);
             else
-                _triggerFetchDefaultGridCellEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchDefaultGridCellEditorKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
 
             _triggerFetchDefaultGridCellEditorKindTask.OnResult(t =>
             {
@@ -475,7 +475,7 @@ namespace Zetbox.App.GUI
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
                     OnDefaultGridCellEditorKind_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -584,15 +584,15 @@ namespace Zetbox.App.GUI
 
         private Guid? _fk_guid_DefaultGridCellPreEditorKind = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultGridCellPreEditorKindTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultGridCellPreEditorKindAsync()
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultGridCellPreEditorKindTask;
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultGridCellPreEditorKindAsync()
         {
             if (_triggerFetchDefaultGridCellPreEditorKindTask != null) return _triggerFetchDefaultGridCellPreEditorKindTask;
 
             if (_fk_DefaultGridCellPreEditorKind.HasValue)
                 _triggerFetchDefaultGridCellPreEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellPreEditorKind.Value);
             else
-                _triggerFetchDefaultGridCellPreEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchDefaultGridCellPreEditorKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
 
             _triggerFetchDefaultGridCellPreEditorKindTask.OnResult(t =>
             {
@@ -600,7 +600,7 @@ namespace Zetbox.App.GUI
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
                     OnDefaultGridCellPreEditorKind_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -909,15 +909,15 @@ namespace Zetbox.App.GUI
 
         private Guid? _fk_guid_Module = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Module> _triggerFetchModuleTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {
@@ -925,7 +925,7 @@ namespace Zetbox.App.GUI
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Module>(t.Result);
                     OnModule_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -1004,8 +1004,8 @@ namespace Zetbox.App.GUI
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchSecondaryControlKindsTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchSecondaryControlKindsAsync()
+        System.Threading.Tasks.Task _triggerFetchSecondaryControlKindsTask;
+        public System.Threading.Tasks.Task TriggerFetchSecondaryControlKindsAsync()
         {
             if (_triggerFetchSecondaryControlKindsTask != null) return _triggerFetchSecondaryControlKindsTask;
             _triggerFetchSecondaryControlKindsTask = Context.FetchRelationAsync<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl>(new Guid("5404456a-4527-4e40-a660-b4a5e96e4a47"), RelationEndRole.A, this);
@@ -1282,7 +1282,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

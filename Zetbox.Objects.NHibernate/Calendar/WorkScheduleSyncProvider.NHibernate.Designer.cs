@@ -143,9 +143,9 @@ namespace Zetbox.App.Calendar
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchCalendarAsync()
+    public System.Threading.Tasks.Task TriggerFetchCalendarAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(this.Calendar);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(this.Calendar);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
@@ -250,9 +250,9 @@ namespace Zetbox.App.Calendar
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchWorkScheduleAsync()
+    public System.Threading.Tasks.Task TriggerFetchWorkScheduleAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.WorkSchedule>(this.WorkSchedule);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.WorkSchedule>(this.WorkSchedule);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
@@ -450,7 +450,7 @@ namespace Zetbox.App.Calendar
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

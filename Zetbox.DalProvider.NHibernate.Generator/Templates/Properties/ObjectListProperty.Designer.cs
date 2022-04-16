@@ -105,9 +105,9 @@ this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\
 } 
 #line 74 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("        public Zetbox.API.Async.ZbTask TriggerFetch",  name , "Async()\r\n");
+this.WriteObjects("        public System.Threading.Tasks.Task TriggerFetch",  name , "Async()\r\n");
 this.WriteObjects("        {\r\n");
-this.WriteObjects("            return new Zetbox.API.Async.ZbTask<",  exposedListType , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
+this.WriteObjects("            return System.Threading.Tasks.Task.FromResult<",  exposedListType , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 #line 80 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"

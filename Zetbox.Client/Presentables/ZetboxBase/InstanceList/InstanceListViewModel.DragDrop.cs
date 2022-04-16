@@ -18,6 +18,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.FilterViewModels;
@@ -33,9 +34,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public virtual bool OnDrop(object data)
+        public virtual Task<bool> OnDrop(object data)
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         public virtual object DoDragDrop()

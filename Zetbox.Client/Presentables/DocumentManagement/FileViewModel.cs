@@ -18,6 +18,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using at.dasz.DocumentManagement;
     using Zetbox.API;
     using Zetbox.API.Configuration;
@@ -74,12 +75,12 @@ namespace Zetbox.Client.Presentables.DocumentManagement
             }
         }
 
-        public void Upload(string path)
+        public async Task Upload(string path)
         {
             if (!string.IsNullOrEmpty(path) && CanUpload)
             {
                 var fi = new System.IO.FileInfo(path);
-                int id = DataContext.CreateBlob(fi, fi.GetMimeType());
+                int id = await DataContext.CreateBlob(fi, fi.GetMimeType());
 
                 File.Blob = DataContext.Find<Zetbox.App.Base.Blob>(id);
                 File.Name = File.Blob.OriginalName;

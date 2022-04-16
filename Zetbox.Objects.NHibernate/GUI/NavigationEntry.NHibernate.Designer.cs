@@ -146,9 +146,9 @@ namespace Zetbox.App.GUI
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchChangedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.ChangedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -269,9 +269,9 @@ namespace Zetbox.App.GUI
     
         private OneNRelationList<Zetbox.App.GUI.NavigationEntry> _Children;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        public System.Threading.Tasks.Task TriggerFetchChildrenAsync()
         {
-            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.GUI.NavigationEntry>>(this.Children);
+            return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.GUI.NavigationEntry>>(this.Children);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> OnChildren_PostSetter;
@@ -431,9 +431,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchCreatedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.CreatedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -628,9 +628,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 		// ignored, but required for Serialization
         private bool Groups_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
+        public System.Threading.Tasks.Task TriggerFetchGroupsAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Group>>(this.Groups);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Base.Group>>(this.Groups);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> OnGroups_PostSetter;
@@ -734,9 +734,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    public System.Threading.Tasks.Task TriggerFetchModuleAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(this.Module);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -866,9 +866,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>Backing store for Parent's guid, used on import only</summary>
         private Guid? _fk_guid_Parent = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+    public System.Threading.Tasks.Task TriggerFetchParentAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.NavigationEntry>(this.Parent);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.NavigationEntry>(this.Parent);
     }
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -1005,9 +1005,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>Backing store for RequestedKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedKind = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchRequestedKindAsync()
+    public System.Threading.Tasks.Task TriggerFetchRequestedKindAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.RequestedKind);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(this.RequestedKind);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
@@ -1172,9 +1172,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>Backing store for ViewModelDescriptor's guid, used on import only</summary>
         private Guid? _fk_guid_ViewModelDescriptor = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchViewModelDescriptorAsync()
+    public System.Threading.Tasks.Task TriggerFetchViewModelDescriptorAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.ViewModelDescriptor);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(this.ViewModelDescriptor);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelDescriptor
@@ -1379,7 +1379,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

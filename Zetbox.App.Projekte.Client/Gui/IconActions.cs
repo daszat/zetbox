@@ -18,6 +18,7 @@ namespace Zetbox.App.GUI
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.Client.Presentables;
 
@@ -35,7 +36,7 @@ namespace Zetbox.App.GUI
         }
 
         [Invocation]
-        public static void Upload(Zetbox.App.GUI.Icon obj)
+        public static async Task Upload(Zetbox.App.GUI.Icon obj)
         {
             // UI Code in Custom Actions!
             // ASP.NET would have a big Problem with that function
@@ -43,7 +44,7 @@ namespace Zetbox.App.GUI
             if (!string.IsNullOrEmpty(path))
             {
                 var fi = new System.IO.FileInfo(path);
-                int id = obj.Context.CreateBlob(fi, fi.GetMimeType());
+                int id = await obj.Context.CreateBlob(fi, fi.GetMimeType());
                 obj.Blob = obj.Context.Find<Zetbox.App.Base.Blob>(id);
                 if (string.IsNullOrWhiteSpace(obj.IconFile))
                 {

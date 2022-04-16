@@ -23,6 +23,7 @@ namespace Zetbox.API.Client
     using System.Linq.Expressions;
     using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using Zetbox.API.Utils;
 
     /// <summary>
@@ -53,14 +54,14 @@ namespace Zetbox.API.Client
             _implementor = implementor;
         }
 
-        public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
+        public Task<Tuple<IEnumerable<IDataObject>, List<IStreamable>>> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetObjects", "Type=[{0}]", ifType.ToString()))
             {
                 CheckUiThread();
                 try
                 {
-                    return _implementor.GetObjects(requestingCtx, ifType, query, out auxObjects);
+                    return _implementor.GetObjects(requestingCtx, ifType, query);
                 }
                 catch (Exception ex)
                 {
@@ -70,14 +71,14 @@ namespace Zetbox.API.Client
             }
         }
 
-        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
+        public Task<Tuple<IEnumerable<IDataObject>, List<IStreamable>>> GetListOf(InterfaceType ifType, int ID, string property)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetListOf", "{0} [{1}].{2}", ifType, ID, property))
             {
                 CheckUiThread();
                 try
                 {
-                    return _implementor.GetListOf(ifType, ID, property, out  auxObjects);
+                    return _implementor.GetListOf(ifType, ID, property);
                 }
                 catch (Exception ex)
                 {
@@ -87,7 +88,7 @@ namespace Zetbox.API.Client
             }
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public Task<IEnumerable<IPersistenceObject>> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             using (Logging.Facade.InfoTraceMethodCall("SetObjects"))
             {
@@ -104,14 +105,14 @@ namespace Zetbox.API.Client
             }
         }
 
-        public object InvokeServerMethod(InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
+        public Task<Tuple<object, IEnumerable<IPersistenceObject>, List<IStreamable>>> InvokeServerMethod(InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("InvokeServerMethod", "ID=[{0}]", ID))
             {
                 CheckUiThread();
                 try
                 {
-                    return _implementor.InvokeServerMethod(ifType, ID, method, retValType, parameterTypes, parameter, objects, notificationRequests, out changedObjects, out auxObjects);
+                    return _implementor.InvokeServerMethod(ifType, ID, method, retValType, parameterTypes, parameter, objects, notificationRequests);
                 }
                 catch (Exception ex)
                 {
@@ -121,14 +122,14 @@ namespace Zetbox.API.Client
             }
         }
 
-        public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, int parentId, InterfaceType parentIfType, out List<IStreamable> auxObjects) where T : class, IRelationEntry
+        public Task<Tuple<IEnumerable<T>, List<IStreamable>>> FetchRelation<T>(Guid relationId, RelationEndRole role, int parentId, InterfaceType parentIfType) where T : class, IRelationEntry
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("FetchRelation", "Fetching relation: ID=[{0}],role=[{1}],parentId=[{2}]", relationId, role, parentId))
             {
                 CheckUiThread();
                 try
                 {
-                    return _implementor.FetchRelation<T>(relationId, role, parentId, parentIfType, out auxObjects);
+                    return _implementor.FetchRelation<T>(relationId, role, parentId, parentIfType);
                 }
                 catch (Exception ex)
                 {
@@ -138,7 +139,7 @@ namespace Zetbox.API.Client
             }
         }
 
-        public Stream GetBlobStream(int ID)
+        public Task<Stream> GetBlobStream(int ID)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetBlobStream", "ID=[{0}]", ID))
             {
@@ -155,7 +156,7 @@ namespace Zetbox.API.Client
             }
         }
 
-        public App.Base.Blob SetBlobStream(Stream stream, string filename, string mimetype)
+        public Task<App.Base.Blob> SetBlobStream(Stream stream, string filename, string mimetype)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("SetBlobStream", "filename=[{0}]", filename))
             {

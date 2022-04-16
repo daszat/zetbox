@@ -26,6 +26,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Linq.Dynamic;
     using System.Reflection;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Client;
@@ -71,7 +72,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             IFileOpener fileOpener,
             ITempFileService tmpService,
             Lazy<IUIExceptionReporter> errorReporter,
-            IZetboxContext dataCtx, 
+            IZetboxContext dataCtx,
             ViewModel parent,
             ObjectClass type,
             Func<IQueryable> qry)
@@ -201,8 +202,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 },
                 createTask: () =>
                 {
-                    return new ZbTask<ReadOnlyCollection<DataObjectViewModel>>(LoadInstancesCore())
-                        .OnResult(t => t.Result = _filteredInstances.AsReadOnly());
+                    return Task.Run(async () =>
+                    {
+                        await LoadInstancesCore();
+                        return _filteredInstances.AsReadOnly();
+                    });
                 },
                 set: null);
         }
@@ -825,37 +829,41 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             if (_loadInstancesCoreTask != null)
             {
-                ClearBusy(); // TODO: Workaround! Cancel should call Finally?
-                _loadInstancesCoreTask.Cancel();
+                // ClearBusy(); // TODO: Workaround! Cancel should call Finally?
+                // TODO: _loadInstancesCoreTask.Cancel();
             }
             _loadInstancesCoreTask = null;
 
             LoadInstancesCore();
         }
 
-        ZbTask _loadInstancesCoreTask;
-        private ZbTask LoadInstancesCore()
+        System.Threading.Tasks.Task _loadInstancesCoreTask;
+        private System.Threading.Tasks.Task LoadInstancesCore()
         {
             if (_loadInstancesCoreTask != null || FilterList.IsFilterValid == false || IsInInit) return _loadInstancesCoreTask;
 
             SetBusy();
-            var execQueryTask = GetQuery().ToListAsync(); // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
-            _loadInstancesCoreTask = new ZbTask(execQueryTask);
-            _loadInstancesCoreTask
-                .Finally(ClearBusy)
-                .OnError(ex =>
+            _loadInstancesCoreTask = Task.Run(async () =>
+            {
+                try
                 {
-                    errorReporter.Value.Show(ex);
-                });
-            _loadInstancesCoreTask.OnResult(t =>
-                {
-                    _instancesFromServer = execQueryTask.Result.Cast<IDataObject>()
-                        .Where(obj => obj.ObjectState != DataObjectState.Deleted) // Not interested in deleted objects TODO: Discuss if a query should return deleted objects
-                        .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj))
-                        .ToList();
+                    // No order by - may be set from outside in LinqQuery!
+                    var execQuery = await GetQuery().ToListAsync();
+
+                    _instancesFromServer = execQuery.Cast<IDataObject>()
+                            .Where(obj => obj.ObjectState != DataObjectState.Deleted) // Not interested in deleted objects TODO: Discuss if a query should return deleted objects
+                            .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj))
+                            .ToList();
 
                     UpdateFilteredInstances();
-                });
+                }
+                catch (Exception ex)
+                {
+                    errorReporter.Value.Show(ex);
+
+                }
+            });
+
             return _loadInstancesCoreTask;
         }
 

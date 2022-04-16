@@ -147,9 +147,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for DefaultDisplayKind's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultDisplayKind = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchDefaultDisplayKindAsync()
+    public System.Threading.Tasks.Task TriggerFetchDefaultDisplayKindAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultDisplayKind);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(this.DefaultDisplayKind);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultDisplayKind
@@ -256,9 +256,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for DefaultEditorKind's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultEditorKind = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchDefaultEditorKindAsync()
+    public System.Threading.Tasks.Task TriggerFetchDefaultEditorKindAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultEditorKind);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(this.DefaultEditorKind);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultEditorKind
@@ -365,9 +365,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for DefaultGridCellDisplayKind's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultGridCellDisplayKind = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchDefaultGridCellDisplayKindAsync()
+    public System.Threading.Tasks.Task TriggerFetchDefaultGridCellDisplayKindAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultGridCellDisplayKind);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(this.DefaultGridCellDisplayKind);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellDisplayKind
@@ -474,9 +474,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for DefaultGridCellEditorKind's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultGridCellEditorKind = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchDefaultGridCellEditorKindAsync()
+    public System.Threading.Tasks.Task TriggerFetchDefaultGridCellEditorKindAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultGridCellEditorKind);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(this.DefaultGridCellEditorKind);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellEditorKind
@@ -583,9 +583,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for DefaultGridCellPreEditorKind's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultGridCellPreEditorKind = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchDefaultGridCellPreEditorKindAsync()
+    public System.Threading.Tasks.Task TriggerFetchDefaultGridCellPreEditorKindAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultGridCellPreEditorKind);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(this.DefaultGridCellPreEditorKind);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellPreEditorKind
@@ -906,9 +906,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    public System.Threading.Tasks.Task TriggerFetchModuleAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(this.Module);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -947,9 +947,9 @@ namespace Zetbox.App.GUI
 		// ignored, but required for Serialization
         private bool SecondaryControlKinds_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchSecondaryControlKindsAsync()
+        public System.Threading.Tasks.Task TriggerFetchSecondaryControlKindsAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.ControlKind>>(this.SecondaryControlKinds);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.GUI.ControlKind>>(this.SecondaryControlKinds);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_PostSetter;
@@ -1205,7 +1205,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

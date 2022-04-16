@@ -58,8 +58,8 @@ namespace Zetbox.App.GUI
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchChildControlKindsTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchChildControlKindsAsync()
+        System.Threading.Tasks.Task _triggerFetchChildControlKindsTask;
+        public System.Threading.Tasks.Task TriggerFetchChildControlKindsAsync()
         {
             if (_triggerFetchChildControlKindsTask != null) return _triggerFetchChildControlKindsTask;
 
@@ -74,7 +74,7 @@ namespace Zetbox.App.GUI
             }
             else
             {
-                _triggerFetchChildControlKindsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchChildControlKindsTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.GUI.ControlKind>();
                 });
@@ -222,15 +222,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
 
         private Guid? _fk_guid_Module = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Module> _triggerFetchModuleTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {
@@ -238,7 +238,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Module>(t.Result);
                     OnModule_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -405,15 +405,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
 
         private Guid? _fk_guid_Parent = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchParentTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchParentAsync()
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> _triggerFetchParentTask;
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> TriggerFetchParentAsync()
         {
             if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
 
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_Parent.Value);
             else
-                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchParentTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
 
             _triggerFetchParentTask.OnResult(t =>
             {
@@ -421,7 +421,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
                     OnParent_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -642,7 +642,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

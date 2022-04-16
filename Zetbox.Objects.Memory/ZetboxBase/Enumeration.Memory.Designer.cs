@@ -116,8 +116,8 @@ namespace Zetbox.App.Base
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchEnumerationEntriesTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchEnumerationEntriesAsync()
+        System.Threading.Tasks.Task _triggerFetchEnumerationEntriesTask;
+        public System.Threading.Tasks.Task TriggerFetchEnumerationEntriesAsync()
         {
             if (_triggerFetchEnumerationEntriesTask != null) return _triggerFetchEnumerationEntriesTask;
 
@@ -132,7 +132,7 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchEnumerationEntriesTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchEnumerationEntriesTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.Base.EnumerationEntry>();
                 });
@@ -779,7 +779,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

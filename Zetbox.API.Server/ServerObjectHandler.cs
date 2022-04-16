@@ -21,6 +21,7 @@ namespace Zetbox.API.Server
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Threading.Tasks;
     using Lucene.Net.Index;
     using Lucene.Net.QueryParsers;
     using Lucene.Net.Search;
@@ -43,7 +44,7 @@ namespace Zetbox.API.Server
         /// <param name="ctx">The context to query.</param>
         /// <param name="query">a Linq query to execute</param>
         /// <returns>the filtered and ordered list of objects</returns>
-        IEnumerable<IStreamable> GetObjects(Guid version, IReadOnlyZetboxContext ctx, Expression query);
+        Task<IEnumerable<IStreamable>> GetObjects(Guid version, IReadOnlyZetboxContext ctx, Expression query);
 
         /// <summary>
         /// Return the list of objects referenced by the specified property.
@@ -53,9 +54,9 @@ namespace Zetbox.API.Server
         /// <param name="ID">the ID of the referencing object</param>
         /// <param name="property">the name of the referencing property</param>
         /// <returns>the list of objects</returns>
-        IEnumerable<IStreamable> GetListOf(Guid version, IReadOnlyZetboxContext ctx, int ID, string property);
+        Task<IEnumerable<IStreamable>> GetListOf(Guid version, IReadOnlyZetboxContext ctx, int ID, string property);
 
-        object InvokeServerMethod(Guid version, IZetboxContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects);
+        Task<Tuple<object, IEnumerable<IPersistenceObject>>> InvokeServerMethod(Guid version, IZetboxContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
     }
 
     public interface IServerObjectSetHandler
@@ -63,18 +64,18 @@ namespace Zetbox.API.Server
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
-        IEnumerable<IPersistenceObject> SetObjects(Guid version, IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
+        Task<IEnumerable<IPersistenceObject>> SetObjects(Guid version, IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
     }
 
     public interface IServerCollectionHandler
     {
-        IEnumerable<IRelationEntry> GetCollectionEntries(Guid version, IReadOnlyZetboxContext ctx, Guid relId, RelationEndRole endRole, int parentId);
+        Task<IEnumerable<IRelationEntry>> GetCollectionEntries(Guid version, IReadOnlyZetboxContext ctx, Guid relId, RelationEndRole endRole, int parentId);
     }
 
     public interface IServerDocumentHandler
     {
-        Stream GetBlobStream(Guid version, IReadOnlyZetboxContext ctx, int ID);
-        Zetbox.App.Base.Blob SetBlobStream(Guid version, IZetboxContext ctx, Stream blob, string filename, string mimetype);
+        Task<Stream> GetBlobStream(Guid version, IReadOnlyZetboxContext ctx, int ID);
+        Task<App.Base.Blob> SetBlobStream(Guid version, IZetboxContext ctx, Stream blob, string filename, string mimetype);
     }
 
     /// <summary>
@@ -97,7 +98,7 @@ namespace Zetbox.API.Server
             _searchDependencies = searchDependencies;
         }
 
-        public IEnumerable<IStreamable> GetObjects(Guid version, IReadOnlyZetboxContext ctx, Expression query)
+        public Task<IEnumerable<IStreamable>> GetObjects(Guid version, IReadOnlyZetboxContext ctx, Expression query)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (query == null) { throw new ArgumentNullException("query"); }
@@ -110,15 +111,15 @@ namespace Zetbox.API.Server
 
             if (ftDetector.IsFulltext)
             {
-                return FulltextSearch(ctx, ftDetector.Filter);
+                return Task.FromResult(FulltextSearch(ctx, ftDetector.Filter));
             }
             else if (isExecute)
             {
-                return Execute(ctx, query);
+                return Task.FromResult(Execute(ctx, query));
             }
             else
             {
-                return Query(ctx, query);
+                return Task.FromResult(Query(ctx, query));
             }
         }
 
@@ -242,7 +243,7 @@ namespace Zetbox.API.Server
         /// <code>property</code> of the object with the <code>ID</code>
         /// </summary>
         /// <returns>the list of values in the property</returns>
-        public IEnumerable<IStreamable> GetListOf(Guid version, IReadOnlyZetboxContext ctx, int ID, string property)
+        public Task<IEnumerable<IStreamable>> GetListOf(Guid version, IReadOnlyZetboxContext ctx, int ID, string property)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (ID <= API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
@@ -252,10 +253,10 @@ namespace Zetbox.API.Server
             if (obj == null) throw new ArgumentOutOfRangeException("ID", "Object not found");
 
             IEnumerable list = (IEnumerable)obj.GetPropertyValue<IEnumerable>(property);
-            return list.Cast<IStreamable>();
+            return Task.FromResult(list.Cast<IStreamable>());
         }
 
-        public object InvokeServerMethod(Guid version, IZetboxContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
+        public Task<Tuple<object, IEnumerable<IPersistenceObject>>> InvokeServerMethod(Guid version, IZetboxContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (objects == null) { throw new ArgumentNullException("objects"); }
@@ -277,9 +278,9 @@ namespace Zetbox.API.Server
             object result = mi.Invoke(obj, parameter.ToArray());
 
             var requestedObjects = BaseServerObjectSetHandler.GetRequestedObjects(ctx, notificationRequests, entityObjects);
-            changedObjects = entityObjects.Values.Concat(requestedObjects);
+            IEnumerable<IPersistenceObject> changedObjects = entityObjects.Values.Concat(requestedObjects);
 
-            return result;
+            return Task.FromResult(Tuple.Create(result, changedObjects));
         }
     }
 
@@ -289,7 +290,7 @@ namespace Zetbox.API.Server
         /// <summary>
         /// Implements the SetObject command
         /// </summary>
-        public virtual IEnumerable<IPersistenceObject> SetObjects(
+        public virtual async Task<IEnumerable<IPersistenceObject>> SetObjects(
             Guid version,
             IZetboxContext ctx,
             IEnumerable<IPersistenceObject> objList,
@@ -305,7 +306,7 @@ namespace Zetbox.API.Server
 
             ApplyObjectChanges(ctx, notificationRequests, objects, entityObjects);
 
-            ctx.SubmitChanges();
+            await ctx.SubmitChanges();
 
             var requestedObjects = GetRequestedObjects(ctx, notificationRequests, entityObjects);
             return entityObjects.Values.Concat(requestedObjects);
@@ -354,7 +355,7 @@ namespace Zetbox.API.Server
             {
                 var ifType = ctx.GetInterfaceType(obj);
                 var ctxObj = ctx.FindPersistenceObject(ifType, obj.ID);
-                if(ctxObj == null)
+                if (ctxObj == null)
                 {
                     string objStr = GetObjectString(obj, ifType);
                     concurrencyFailed.Add(new ConcurrencyExceptionDetail(
@@ -452,22 +453,22 @@ namespace Zetbox.API.Server
 
     public class ServerDocumentHandler : IServerDocumentHandler
     {
-        public Stream GetBlobStream(Guid version, IReadOnlyZetboxContext ctx, int ID)
+        public async Task<Stream> GetBlobStream(Guid version, IReadOnlyZetboxContext ctx, int ID)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             ZetboxGeneratedVersionAttribute.Check(version);
-            return ctx.GetStream(ID);
+            return await ctx.GetStreamAsync(ID);
         }
 
-        public Zetbox.App.Base.Blob SetBlobStream(Guid version, IZetboxContext ctx, Stream blob, string filename, string mimetype)
+        public async Task<Zetbox.App.Base.Blob> SetBlobStream(Guid version, IZetboxContext ctx, Stream blob, string filename, string mimetype)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (blob == null) { throw new ArgumentNullException("blob"); }
             ZetboxGeneratedVersionAttribute.Check(version);
 
-            var id = ctx.CreateBlob(blob, filename, mimetype);
+            var id = await ctx.CreateBlob(blob, filename, mimetype);
             var obj = ctx.Find<Zetbox.App.Base.Blob>(id);
-            ctx.SubmitChanges();
+            await ctx.SubmitChanges();
             return obj;
         }
     }

@@ -95,7 +95,7 @@ namespace Zetbox.Client.Models
     public interface IValueModel<TValue> : IValueModel
     {
         TValue Value { get; set; }
-        ZbTask<TValue> GetValueAsync();
+        System.Threading.Tasks.Task<TValue> GetValueAsync();
     }
 
     public interface IEnumerationValueModel : IValueModel<int?>

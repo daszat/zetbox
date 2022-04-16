@@ -24,6 +24,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
     using Zetbox.Client.Models;
     using at.dasz.DocumentManagement;
     using Zetbox.App.Extensions;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class FilePropertyViewModel : ObjectReferenceViewModel
@@ -38,14 +39,14 @@ namespace Zetbox.Client.Presentables.DocumentManagement
         }
 
         #region DragDrop
-        public override bool OnDrop(object data)
+        public override async Task<bool> OnDrop(object data)
         {
             if (data is string)
             {
                 var str = (string)data;
                 if (System.IO.File.Exists(str))
                 {
-                    UploadFile(str);
+                    await UploadFile(str);
                     return true;
                 }
             }
@@ -54,17 +55,17 @@ namespace Zetbox.Client.Presentables.DocumentManagement
                 var str = ((string[])data).FirstOrDefault();
                 if (str != null && System.IO.File.Exists(str))
                 {
-                    UploadFile(str);
+                    await UploadFile(str);
                     return true;
                 }
             }
-            return base.OnDrop(data);
+            return await base.OnDrop(data);
         }
 
-        public void UploadFile(string path)
+        public async Task UploadFile(string path)
         {
             var vmdl = (FileViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this.GetWorkspace(), DataContext.Create<File>());
-            vmdl.Upload(path);
+            await vmdl.Upload(path);
             Value = vmdl;
         }
         #endregion

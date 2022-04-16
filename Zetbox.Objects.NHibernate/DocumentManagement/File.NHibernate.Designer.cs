@@ -207,9 +207,9 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for Blob's guid, used on import only</summary>
         private Guid? _fk_guid_Blob = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBlobAsync()
+    public System.Threading.Tasks.Task TriggerFetchBlobAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob>(this.Blob);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Blob>(this.Blob);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
@@ -314,9 +314,9 @@ namespace at.dasz.DocumentManagement
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchChangedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.ChangedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -499,9 +499,9 @@ namespace at.dasz.DocumentManagement
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchCreatedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.CreatedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -700,9 +700,9 @@ namespace at.dasz.DocumentManagement
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchExcerptAsync()
+    public System.Threading.Tasks.Task TriggerFetchExcerptAsync()
     {
-        return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.Excerpt>(this.Excerpt);
+        return System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.Excerpt>(this.Excerpt);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Excerpt
@@ -1033,9 +1033,9 @@ namespace at.dasz.DocumentManagement
 		// ignored, but required for Serialization
         private bool Revisions_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
+        public System.Threading.Tasks.Task TriggerFetchRevisionsAsync()
         {
-            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Blob>>(this.Revisions);
+            return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Base.Blob>>(this.Revisions);
         }
 
 public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> OnRevisions_PostSetter;
@@ -1464,7 +1464,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

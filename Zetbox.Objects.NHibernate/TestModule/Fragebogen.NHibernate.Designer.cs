@@ -83,9 +83,9 @@ namespace Zetbox.App.Test
         private List<int> AntwortenIds;
         private bool Antworten_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchAntwortenAsync()
+        public System.Threading.Tasks.Task TriggerFetchAntwortenAsync()
         {
-            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Test.Antwort>>(this.Antworten);
+            return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Test.Antwort>>(this.Antworten);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAntworten_PostSetter;
@@ -179,9 +179,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
 		// ignored, but required for Serialization
         private bool Student_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchStudentAsync()
+        public System.Threading.Tasks.Task TriggerFetchStudentAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.TestStudent>>(this.Student);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Test.TestStudent>>(this.Student);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStudent_PostSetter;
@@ -235,7 +235,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStu
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

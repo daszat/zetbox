@@ -20,6 +20,7 @@ namespace Zetbox.API
     using System.Linq;
     using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using Zetbox.API.Utils;
 
     /// <summary>
@@ -113,7 +114,7 @@ namespace Zetbox.API
         /// <summary>This method is called on a separate thread to process a single item.</summary>
         /// <remarks>Exceptions thrown from this method are logged and ignored. If the item is not yet ready or can temporarily not be processed, the method should use Defer(item) to put the item back into the queue.</remarks>
         /// <param name="item">the item to process</param>
-        protected abstract void ProcessItem(T item);
+        protected abstract Task ProcessItem(T item);
 
         #region IService Members
 
@@ -130,7 +131,7 @@ namespace Zetbox.API
             OnStart();
 
             // start background thread
-            _processingThread = new Thread(ProcessItems);
+            _processingThread = new Thread(async () => await ProcessItems());
             _processingThread.Priority = ThreadPriority.BelowNormal;
             _processingThread.IsBackground = _shutdownTimeout.HasValue;
             _processingThread.Start();
@@ -190,7 +191,7 @@ namespace Zetbox.API
 
         #endregion
 
-        private void ProcessItems()
+        private async Task ProcessItems()
         {
             // run until signalled, no waiting, fall through to _itemsEvent
             while (!_shutdownEvent.WaitOne(0))
@@ -202,7 +203,7 @@ namespace Zetbox.API
                     // process all queued files
                     while (TryDequeue(out item))
                     {
-                        ProcessItem(item);
+                        await ProcessItem(item);
                     }
                 }
             }

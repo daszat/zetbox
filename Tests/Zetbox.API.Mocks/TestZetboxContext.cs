@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Zetbox.API.Async;
 
@@ -95,12 +96,12 @@ namespace Zetbox.API.Mocks
             throw new NotImplementedException();
         }
 
-        public ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
+        public Task<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             throw new NotImplementedException();
         }
 
-        public ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationEntry
+        public Task<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationEntry
         {
             throw new NotImplementedException();
         }
@@ -115,7 +116,7 @@ namespace Zetbox.API.Mocks
             get { throw new NotImplementedException(); }
         }
 
-        public int SubmitChanges()
+        public Task<int> SubmitChanges()
         {
             throw new NotImplementedException();
         }
@@ -181,7 +182,7 @@ namespace Zetbox.API.Mocks
             throw new NotImplementedException();
         }
 
-        public ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        public Task<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             throw new NotImplementedException();
         }
@@ -221,7 +222,7 @@ namespace Zetbox.API.Mocks
             throw new NotImplementedException();
         }
 
-        public ZbTask<T> FindAsync<T>(int ID) where T : class, IDataObject
+        public Task<T> FindAsync<T>(int ID) where T : class, IDataObject
         {
             throw new NotImplementedException();
         }
@@ -280,12 +281,12 @@ namespace Zetbox.API.Mocks
         #region IZetboxContext Members
 
 
-        public int CreateBlob(System.IO.Stream s, string filename, string mimetype)
+        public Task<int> CreateBlob(System.IO.Stream s, string filename, string mimetype)
         {
             throw new NotImplementedException();
         }
 
-        public int CreateBlob(System.IO.FileInfo fi, string mimetype)
+        public Task<int> CreateBlob(System.IO.FileInfo fi, string mimetype)
         {
             throw new NotImplementedException();
         }
@@ -304,12 +305,12 @@ namespace Zetbox.API.Mocks
             throw new NotImplementedException();
         }
 
-        public ZbTask<System.IO.Stream> GetStreamAsync(int ID)
+        public Task<System.IO.Stream> GetStreamAsync(int ID)
         {
             throw new NotSupportedException();
         }
 
-        public ZbTask<System.IO.FileInfo> GetFileInfoAsync(int ID)
+        public Task<System.IO.FileInfo> GetFileInfoAsync(int ID)
         {
             throw new NotSupportedException();
         }

@@ -139,9 +139,9 @@ namespace Zetbox.App.Base
     
         private OneNRelationList<Zetbox.App.Base.EnumerationEntry> _EnumerationEntries;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchEnumerationEntriesAsync()
+        public System.Threading.Tasks.Task TriggerFetchEnumerationEntriesAsync()
         {
-            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.EnumerationEntry>>(this.EnumerationEntries);
+            return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Base.EnumerationEntry>>(this.EnumerationEntries);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEnumerationEntries_PostSetter;
@@ -765,7 +765,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

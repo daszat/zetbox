@@ -77,9 +77,9 @@ namespace Zetbox.App.Base
 		// ignored, but required for Serialization
         private bool Inputs_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchInputsAsync()
+        public System.Threading.Tasks.Task TriggerFetchInputsAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Property>>(this.Inputs);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Base.Property>>(this.Inputs);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectReferenceProperty> OnInputs_PostSetter;
@@ -183,9 +183,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         /// <summary>Backing store for ReferencedClass's guid, used on import only</summary>
         private Guid? _fk_guid_ReferencedClass = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchReferencedClassAsync()
+    public System.Threading.Tasks.Task TriggerFetchReferencedClassAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.ReferencedClass);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(this.ReferencedClass);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedClass
@@ -637,7 +637,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

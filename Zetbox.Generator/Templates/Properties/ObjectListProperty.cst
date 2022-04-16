@@ -66,8 +66,8 @@
             }
         }
 
-        Zetbox.API.Async.ZbTask <%= taskName %>;
-        public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+        System.Threading.Tasks.Task <%= taskName %>;
+        public System.Threading.Tasks.Task TriggerFetch<%= name %>Async()
         {
             if (<%= taskName %> != null) return <%= taskName %>;
 
@@ -77,7 +77,7 @@
 <% if (eagerLoading) { %>
                 if (<%= idsListName %> != null)
                 {
-                    <%= taskName %> = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                    <%= taskName %> = new System.Threading.Tasks.Task(() =>
                     {
                         serverList = <%= idsListName %>.Select(id => Context.Find<<%= referencedInterface %>>(id)).ToList();
                         <%= idsListName %> = null; // allow id list to be garbage collected
@@ -101,7 +101,7 @@
             }
             else
             {
-                <%= taskName %> = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                <%= taskName %> = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<<%= referencedInterface %>>();
                 });

@@ -24,6 +24,7 @@ namespace Zetbox.API.Server
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Xml.Serialization;
     using Zetbox.API.Async;
     using Zetbox.API.Common;
@@ -321,15 +322,12 @@ namespace Zetbox.API.Server
         /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
         /// <returns>A List of Objects</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public virtual ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
+        public virtual Task<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             CheckDisposed();
-            return new ZbTask<List<T>>(ZbTask.Synchron, () =>
-            {
-                if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (obj == null) { throw new ArgumentNullException("obj"); }
 
-                return obj.GetPropertyValue<IEnumerable>(propertyName).Cast<T>().ToList();
-            });
+            return Task.FromResult(obj.GetPropertyValue<IEnumerable>(propertyName).Cast<T>().ToList());
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -339,7 +337,7 @@ namespace Zetbox.API.Server
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public abstract ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent) where T : class, IRelationEntry;
+        public abstract Task<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent) where T : class, IRelationEntry;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
@@ -364,7 +362,7 @@ namespace Zetbox.API.Server
         /// Submits the changes and returns the number of affected Objects. Note: only IDataObjects are counted.
         /// </summary>
         /// <returns>Number of affected Objects</returns>
-        public abstract int SubmitChanges();
+        public abstract Task<int> SubmitChanges();
 
         /// <summary>
         /// Submits the changes and returns the number of affected Objects.
@@ -375,7 +373,7 @@ namespace Zetbox.API.Server
         /// Only IDataObjects are counded.
         /// </remarks>
         /// <returns>Number of affected Objects</returns>
-        public abstract int SubmitRestore();
+        public abstract Task<int> SubmitRestore();
 
         Identity localIdentity = null;
 
@@ -632,7 +630,7 @@ namespace Zetbox.API.Server
         /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public abstract ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID);
+        public abstract Task<IDataObject> FindAsync(InterfaceType ifType, int ID);
 
         /// <summary>
         /// Find the Object of the given type by ID
@@ -687,7 +685,7 @@ namespace Zetbox.API.Server
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public abstract ZbTask<T> FindAsync<T>(int ID) where T : class, IDataObject;
+        public abstract Task<T> FindAsync<T>(int ID) where T : class, IDataObject;
 
         /// <summary>
         /// Find the Persistence Object of the given type by ID
@@ -745,7 +743,7 @@ namespace Zetbox.API.Server
         /// </summary>
         /// <remarks>In contrast to the client's implementation, this does not submit the blob immediately. This may cause orphaned files in the document store. A separate task will re-link those files.</remarks>        
         /// <returns>the (transient) ID of the created Blob</returns>
-        public int CreateBlob(Stream s, string filename, string mimetype)
+        public Task<int> CreateBlob(Stream s, string filename, string mimetype)
         {
             CheckDisposed();
             if (s == null)
@@ -762,7 +760,7 @@ namespace Zetbox.API.Server
                 .StoreBlobStream(s, blob.ExportGuid, DateTime.Today /* but should be blob.CreatedOn. Around midnight the path may differ */, filename)
                 .ToUniversalPath();
 
-            return blob.ID;
+            return Task.FromResult(blob.ID);
         }
 
         string IZetboxContextInternals.StoreBlobStream(Stream s, Guid exportGuid, DateTime timestamp, string filename)
@@ -796,7 +794,7 @@ namespace Zetbox.API.Server
             return storagePath;
         }
 
-        public int CreateBlob(FileInfo fi, string mimetype)
+        public Task<int> CreateBlob(FileInfo fi, string mimetype)
         {
             CheckDisposed();
             if (fi == null)
@@ -822,14 +820,14 @@ namespace Zetbox.API.Server
             return new FileInfo(path);
         }
 
-        public ZbTask<Stream> GetStreamAsync(int ID)
+        public Task<Stream> GetStreamAsync(int ID)
         {
-            return new ZbTask<Stream>(GetStream(ID));
+            return Task.FromResult(GetStream(ID));
         }
 
-        public ZbTask<FileInfo> GetFileInfoAsync(int ID)
+        public Task<FileInfo> GetFileInfoAsync(int ID)
         {
-            return new ZbTask<FileInfo>(GetFileInfo(ID));
+            return Task.FromResult(GetFileInfo(ID));
         }
 
         /// <inheritdoc />

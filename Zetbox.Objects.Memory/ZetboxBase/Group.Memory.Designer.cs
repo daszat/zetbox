@@ -125,8 +125,8 @@ namespace Zetbox.App.Base
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchMemberTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchMemberAsync()
+        System.Threading.Tasks.Task _triggerFetchMemberTask;
+        public System.Threading.Tasks.Task TriggerFetchMemberAsync()
         {
             if (_triggerFetchMemberTask != null) return _triggerFetchMemberTask;
             _triggerFetchMemberTask = Context.FetchRelationAsync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.B, this);
@@ -201,15 +201,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
 
         private Guid? _fk_guid_Module = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Module> _triggerFetchModuleTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {
@@ -217,7 +217,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Module>(t.Result);
                     OnModule_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -469,7 +469,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

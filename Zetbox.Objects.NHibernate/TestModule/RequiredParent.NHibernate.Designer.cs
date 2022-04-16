@@ -81,9 +81,9 @@ namespace Zetbox.App.Test
     
         private OneNRelationList<Zetbox.App.Test.RequiredParentChild> _Children;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        public System.Threading.Tasks.Task TriggerFetchChildrenAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.RequiredParentChild>>(this.Children);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Test.RequiredParentChild>>(this.Children);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.RequiredParent> OnChildren_PostSetter;
@@ -194,7 +194,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.RequiredParent> O
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

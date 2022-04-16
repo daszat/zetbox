@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Zetbox.API.Async;
 using Zetbox.API.Common;
 using Zetbox.API.Configuration;
@@ -90,12 +91,12 @@ namespace Zetbox.API.Server.Mocks
             get { throw new NotImplementedException(); }
         }
 
-        public override int SubmitChanges()
+        public override Task<int> SubmitChanges()
         {
             throw new NotImplementedException();
         }
 
-        public override int SubmitRestore()
+        public override Task<int> SubmitRestore()
         {
             throw new NotImplementedException();
         }
@@ -187,17 +188,17 @@ namespace Zetbox.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
+        public override System.Threading.Tasks.Task<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
         {
             throw new NotImplementedException();
         }
 
-        public override ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        public override System.Threading.Tasks.Task<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             throw new NotImplementedException();
         }
 
-        public override ZbTask<T> FindAsync<T>(int ID)
+        public override System.Threading.Tasks.Task<T> FindAsync<T>(int ID)
         {
             throw new NotImplementedException();
         }

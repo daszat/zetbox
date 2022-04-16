@@ -84,15 +84,15 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_Constrained = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType> _triggerFetchConstrainedTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType> TriggerFetchConstrainedAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.DataType> _triggerFetchConstrainedTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.DataType> TriggerFetchConstrainedAsync()
         {
             if (_triggerFetchConstrainedTask != null) return _triggerFetchConstrainedTask;
 
             if (_fk_Constrained.HasValue)
                 _triggerFetchConstrainedTask = Context.FindAsync<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
             else
-                _triggerFetchConstrainedTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchConstrainedTask = new System.Threading.Tasks.Task<Zetbox.App.Base.DataType>(() => null);
 
             _triggerFetchConstrainedTask.OnResult(t =>
             {
@@ -100,7 +100,7 @@ namespace Zetbox.App.Base
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.DataType>(t.Result);
                     OnConstrained_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -492,7 +492,7 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

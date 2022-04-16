@@ -63,7 +63,7 @@ namespace Zetbox.DalProvider.NHibernate
             return aStr.CompareTo(bStr);
         }
 
-        public virtual ZbTask TriggerFetch(string propName)
+        public virtual System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             throw new NotSupportedException("Fetching properties async is not supported on a server yet.");
         }

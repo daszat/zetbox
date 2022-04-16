@@ -24,6 +24,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Linq;
     using System.Linq.Dynamic;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Utils;
@@ -445,33 +446,27 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel> _valueCache;
         SortFilterWrapper<ICompoundObject> _wrapper;
-        private ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>> _fetchValueTask;
-        protected override ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>> GetValueFromModelAsync()
+        private Task<IReadOnlyObservableList<CompoundObjectViewModel>> _fetchValueTask;
+        protected override Task<IReadOnlyObservableList<CompoundObjectViewModel>> GetValueFromModelAsync()
         {
             if (_fetchValueTask == null)
             {
                 SetBusy();
-                _fetchValueTask = new ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>>(ObjectCollectionModel.GetValueAsync())
-                    .OnResult(t =>
-                    {
-                        _wrapper = new SortFilterWrapper<ICompoundObject>(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
-                        _valueCache = new ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel>(
-                            _wrapper,
-                            obj => CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
-                            mdl => mdl.Object);
-                        _valueCache.CollectionChanged += ValueListChanged;
-                        t.Result = _valueCache;
-                    });
-                // TODO: Split here to avoid a stackoverflow exception!
-                // -> OnPropertyChanged("ValueProxiesAsync") triggers ValueProxiesAsync.get
-                // -> ValueProxiesAsync.get is calling GetValueFromModel()
-                // -> _fetchValueTask has not been assigned yet!
-                _fetchValueTask.OnResult(t =>
+                _fetchValueTask = Task.Run(async () =>
                 {
+                    await ObjectCollectionModel.GetValueAsync();
+                    _wrapper = new SortFilterWrapper<ICompoundObject>(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
+                    _valueCache = new ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel>(
+                        _wrapper,
+                        obj => CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
+                        mdl => mdl.Object);
+                    _valueCache.CollectionChanged += ValueListChanged;
+
                     OnPropertyChanged("Value");
                     OnPropertyChanged("ValueAsync");
                     OnPropertyChanged("ValueProxiesAsync");
                     ClearBusy();
+                    return (IReadOnlyObservableList<CompoundObjectViewModel>)_valueCache;
                 });
             };
             return _fetchValueTask;
@@ -595,7 +590,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         //private IDelayedTask _proxyLoader;
-        //private ZbTask _proxyLoader;
+        //private System.Threading.Tasks.Task _proxyLoader;
         private CompoundListViewModelProxyList _proxyInstances = null;
         private bool _proxyInstancesLoading = false;
         /// <summary>

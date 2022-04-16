@@ -5,6 +5,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.Linq;
     using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Async;
@@ -109,28 +110,22 @@ namespace Zetbox.Client.Presentables.Calendar
                 },
                 createTask: () =>
                 {
-                    var now = DateTime.Now;
-                    var tomorrow = now.Date.AddDays(2).AddSeconds(-1); // I know.... :-(
+                    return Task.Run(async () =>
+                    {
+                        var now = DateTime.Now;
+                        var tomorrow = now.Date.AddDays(2).AddSeconds(-1); // I know.... :-(
 
-                    var fetchCalendar = FetchCalendar();
-                    var fetchTaskFactory = new ZbTask<ZbTask<IEnumerable<EventViewModel>>>(fetchCalendar)
-                        .OnResult(t =>
-                        {
-                            _fetchCache.SetCalendars(fetchCalendar.Result);
-                            t.Result = _fetchCache.FetchEventsAsync(now, tomorrow);
-                        });
-                    return new ZbFutureTask<IEnumerable<EventViewModel>, IEnumerable<CalendarItemViewModel>>(fetchTaskFactory)
-                        .OnResult(t =>
-                        {
-                            t.Result = fetchTaskFactory
-                                .Result
-                                .Result
-                                .SelectMany(e => e.CreateCalendarItemViewModels(now, tomorrow))
-                                .OrderBy(i => i.From.Date)
-                                .ThenByDescending(i => i.IsAllDay)
-                                .ThenBy(i => i.From.TimeOfDay)
-                                .ToList();
-                        });
+                        var fetchCalendar = await FetchCalendar();
+                        _fetchCache.SetCalendars(fetchCalendar);
+                        var fetchTaskFactory = await _fetchCache.FetchEventsAsync(now, tomorrow);
+
+                        return (IEnumerable<CalendarItemViewModel>)fetchTaskFactory
+                            .SelectMany(e => e.CreateCalendarItemViewModels(now, tomorrow))
+                            .OrderBy(i => i.From.Date)
+                            .ThenByDescending(i => i.IsAllDay)
+                            .ThenBy(i => i.From.TimeOfDay)
+                            .ToList();
+                    });
                 },
                 set: (IEnumerable<CalendarItemViewModel> value) =>
                 {
@@ -138,52 +133,43 @@ namespace Zetbox.Client.Presentables.Calendar
                 });
         }
 
-        private ZbTask<List<int>> FetchCalendar()
+        private async System.Threading.Tasks.Task<List<int>> FetchCalendar()
         {
-            var myCalendarsTask = DataContext
+            var myCalendars = await DataContext
                 .GetQuery<CalendarBook>().Where(i => i.Owner.ID == CurrentPrincipal.ID)
                 .ToListAsync();
-            var configTask = GetSavedConfigAsync();
-            return new ZbTask<List<int>>(new ZbTask[] { myCalendarsTask, configTask })
-                .OnResult(t =>
-                {
-                    t.Result = myCalendarsTask.Result
+            var config = await GetSavedConfigAsync();
+            return myCalendars
                         .Select(i => i.ID)
                         .ToList()
-                        .Union(configTask.Result.Configs
+                        .Union(config.Configs
                         .Select(c => c.Calendar))
                         .ToList();
-                });
         }
 
-        protected ZbTask<CalendarConfigurationList> GetSavedConfigAsync()
+        protected async System.Threading.Tasks.Task<CalendarConfigurationList> GetSavedConfigAsync()
         {
-            if (CurrentPrincipal == null) return new ZbTask<CalendarConfigurationList>(new CalendarConfigurationList());
+            if (CurrentPrincipal == null) return new CalendarConfigurationList();
             var ctx = ViewModelFactory.CreateNewContext();
-            var idenityTask = ctx.FindAsync<Identity>(CurrentPrincipal.ID);
-            return new ZbTask<CalendarConfigurationList>(idenityTask)
-                .OnResult(t =>
+            var identity = await ctx.FindAsync<Identity>(CurrentPrincipal.ID);
+            try
+            {
+                CalendarConfigurationList obj;
+                try
                 {
-                    try
-                    {
-                        CalendarConfigurationList obj;
-                        var identity = idenityTask.Result;
-                        try
-                        {
-                            obj = !string.IsNullOrEmpty(identity.CalendarConfiguration) ? identity.CalendarConfiguration.FromXmlString<CalendarConfigurationList>() : new CalendarConfigurationList();
-                        }
-                        catch (Exception ex)
-                        {
-                            Logging.Client.Warn("Error during deserializing CalendarConfigurationList, creating a new one", ex);
-                            obj = new CalendarConfigurationList();
-                        }
-                        t.Result = obj;
-                    }
-                    finally
-                    {
-                        ctx.Dispose();
-                    }
-                });
+                    obj = !string.IsNullOrEmpty(identity.CalendarConfiguration) ? identity.CalendarConfiguration.FromXmlString<CalendarConfigurationList>() : new CalendarConfigurationList();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Client.Warn("Error during deserializing CalendarConfigurationList, creating a new one", ex);
+                    obj = new CalendarConfigurationList();
+                }
+                return obj;
+            }
+            finally
+            {
+                ctx.Dispose();
+            }
         }
 
         public IEnumerable<CalendarItemViewModel> NextEvents

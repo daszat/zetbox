@@ -86,8 +86,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchAuftraegeTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchAuftraegeAsync()
+        System.Threading.Tasks.Task _triggerFetchAuftraegeTask;
+        public System.Threading.Tasks.Task TriggerFetchAuftraegeAsync()
         {
             if (_triggerFetchAuftraegeTask != null) return _triggerFetchAuftraegeTask;
 
@@ -102,7 +102,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             }
             else
             {
-                _triggerFetchAuftraegeTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchAuftraegeTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.Projekte.Auftrag>();
                 });
@@ -283,15 +283,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -299,7 +299,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnChangedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -480,15 +480,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -496,7 +496,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnCreatedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -897,8 +897,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchMitarbeiterTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchMitarbeiterAsync()
+        System.Threading.Tasks.Task _triggerFetchMitarbeiterTask;
+        public System.Threading.Tasks.Task TriggerFetchMitarbeiterAsync()
         {
             if (_triggerFetchMitarbeiterTask != null) return _triggerFetchMitarbeiterTask;
             _triggerFetchMitarbeiterTask = Context.FetchRelationAsync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.A, this);
@@ -1005,8 +1005,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchTasksTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchTasksAsync()
+        System.Threading.Tasks.Task _triggerFetchTasksTask;
+        public System.Threading.Tasks.Task TriggerFetchTasksAsync()
         {
             if (_triggerFetchTasksTask != null) return _triggerFetchTasksTask;
 
@@ -1021,7 +1021,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
             }
             else
             {
-                _triggerFetchTasksTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchTasksTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.Projekte.Task>();
                 });
@@ -1351,7 +1351,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

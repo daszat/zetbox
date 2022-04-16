@@ -262,9 +262,9 @@ namespace Zetbox.App.Projekte
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchChangedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.ChangedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -447,9 +447,9 @@ namespace Zetbox.App.Projekte
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchCreatedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.CreatedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -712,9 +712,9 @@ namespace Zetbox.App.Projekte
         /// <summary>Backing store for Kunde's guid, used on import only</summary>
         private Guid? _fk_guid_Kunde = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchKundeAsync()
+    public System.Threading.Tasks.Task TriggerFetchKundeAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde>(this.Kunde);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Kunde>(this.Kunde);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Kunde
@@ -821,9 +821,9 @@ namespace Zetbox.App.Projekte
         /// <summary>Backing store for Mitarbeiter's guid, used on import only</summary>
         private Guid? _fk_guid_Mitarbeiter = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchMitarbeiterAsync()
+    public System.Threading.Tasks.Task TriggerFetchMitarbeiterAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Mitarbeiter>(this.Mitarbeiter);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Mitarbeiter>(this.Mitarbeiter);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Mitarbeiter
@@ -953,9 +953,9 @@ namespace Zetbox.App.Projekte
         /// <summary>Backing store for Projekt's guid, used on import only</summary>
         private Guid? _fk_guid_Projekt = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchProjektAsync()
+    public System.Threading.Tasks.Task TriggerFetchProjektAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Projekt>(this.Projekt);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Projekt>(this.Projekt);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Projekt
@@ -1135,7 +1135,7 @@ namespace Zetbox.App.Projekte
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

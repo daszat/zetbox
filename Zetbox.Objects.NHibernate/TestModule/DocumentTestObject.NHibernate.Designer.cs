@@ -143,9 +143,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAnotherFileAsync()
+    public System.Threading.Tasks.Task TriggerFetchAnotherFileAsync()
     {
-        return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File>(this.AnotherFile);
+        return System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(this.AnotherFile);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AnotherFile
@@ -250,9 +250,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchAnyFileAsync()
+    public System.Threading.Tasks.Task TriggerFetchAnyFileAsync()
     {
-        return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File>(this.AnyFile);
+        return System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(this.AnyFile);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AnyFile
@@ -386,7 +386,7 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

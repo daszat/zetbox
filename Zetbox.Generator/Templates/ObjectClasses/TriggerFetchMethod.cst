@@ -28,7 +28,7 @@
 <%@ Import Namespace="Zetbox.Generator.Extensions" %>
 <%@ Parameter Name="propertyNames" Type="List<string>" %>
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

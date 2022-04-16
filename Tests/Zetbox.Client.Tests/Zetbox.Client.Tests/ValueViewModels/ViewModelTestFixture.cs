@@ -91,9 +91,9 @@ namespace Zetbox.Client.Tests.ValueViewModels
                 return State;
             }
 
-            protected override ZbTask<object> GetValueFromModelAsync()
+            protected override System.Threading.Tasks.Task<object> GetValueFromModelAsync()
             {
-                return new ZbTask<object>(ZbTask.Synchron, () => ValueModel.Value);
+                return new System.Threading.Tasks.Task<object>(() => ValueModel.Value);
             }
 
             protected override void SetValueToModel(object value)

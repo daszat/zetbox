@@ -224,9 +224,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchOneSideAsync()
+    public System.Threading.Tasks.Task TriggerFetchOneSideAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One>(this.OneSide);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.One_to_N_relations_One>(this.OneSide);
     }
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -322,7 +322,7 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

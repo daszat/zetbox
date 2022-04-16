@@ -21,6 +21,7 @@ namespace Zetbox.API.Server.Fulltext
     using System.Linq;
     using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using Lucene.Net.Documents;
     using Lucene.Net.Index;
     using Lucene.Net.Search;
@@ -59,7 +60,7 @@ namespace Zetbox.API.Server.Fulltext
 
         #endregion
 
-        protected override void ProcessItem(IndexUpdate item)
+        protected override Task ProcessItem(IndexUpdate item)
         {
             using (var idxWriter = _indexWriterFactory())
             {
@@ -89,6 +90,8 @@ namespace Zetbox.API.Server.Fulltext
 
                 idxWriter.Commit();
             }
+
+            return Task.CompletedTask;
         }
     }
 }

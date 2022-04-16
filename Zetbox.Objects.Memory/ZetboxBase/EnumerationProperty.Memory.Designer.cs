@@ -84,15 +84,15 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_Enumeration = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration> _triggerFetchEnumerationTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration> TriggerFetchEnumerationAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Enumeration> _triggerFetchEnumerationTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Enumeration> TriggerFetchEnumerationAsync()
         {
             if (_triggerFetchEnumerationTask != null) return _triggerFetchEnumerationTask;
 
             if (_fk_Enumeration.HasValue)
                 _triggerFetchEnumerationTask = Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
             else
-                _triggerFetchEnumerationTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchEnumerationTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Enumeration>(() => null);
 
             _triggerFetchEnumerationTask.OnResult(t =>
             {
@@ -100,7 +100,7 @@ namespace Zetbox.App.Base
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Enumeration>(t.Result);
                     OnEnumeration_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -593,7 +593,7 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

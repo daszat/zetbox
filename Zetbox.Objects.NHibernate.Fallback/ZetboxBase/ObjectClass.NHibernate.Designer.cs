@@ -85,9 +85,9 @@ namespace Zetbox.App.Base
     
         private OneNRelationList<Zetbox.App.Base.AccessControl> _AccessControlList;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchAccessControlListAsync()
+        public System.Threading.Tasks.Task TriggerFetchAccessControlListAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.AccessControl>>(this.AccessControlList);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Base.AccessControl>>(this.AccessControlList);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAccessControlList_PostSetter;
@@ -214,9 +214,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         /// <summary>Backing store for BaseObjectClass's guid, used on import only</summary>
         private Guid? _fk_guid_BaseObjectClass = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchBaseObjectClassAsync()
+    public System.Threading.Tasks.Task TriggerFetchBaseObjectClassAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.BaseObjectClass);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(this.BaseObjectClass);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseObjectClass
@@ -376,9 +376,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         /// <summary>Backing store for DefaultViewModelDescriptor's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchDefaultViewModelDescriptorAsync()
+    public System.Threading.Tasks.Task TriggerFetchDefaultViewModelDescriptorAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.DefaultViewModelDescriptor);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(this.DefaultViewModelDescriptor);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
@@ -421,9 +421,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
     
         private OneNRelationList<Zetbox.App.GUI.ObjectClassFilterConfiguration> _FilterConfigurations;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchFilterConfigurationsAsync()
+        public System.Threading.Tasks.Task TriggerFetchFilterConfigurationsAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration>>(this.FilterConfigurations);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration>>(this.FilterConfigurations);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFilterConfigurations_PostSetter;
@@ -775,9 +775,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
     
         private OneNRelationList<Zetbox.App.Base.ObjectClass> _SubClasses;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchSubClassesAsync()
+        public System.Threading.Tasks.Task TriggerFetchSubClassesAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.ObjectClass>>(this.SubClasses);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Base.ObjectClass>>(this.SubClasses);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSubClasses_PostSetter;
@@ -1574,7 +1574,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

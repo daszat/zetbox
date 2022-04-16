@@ -34,7 +34,7 @@ namespace Zetbox.Generator.Templates.ObjectClasses
         {
 #line 30 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\TriggerFetchMethod.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)\r\n");
+this.WriteObjects("        public override System.Threading.Tasks.Task TriggerFetch(string propName)\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            switch(propName)\r\n");
 this.WriteObjects("            {\r\n");

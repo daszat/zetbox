@@ -152,7 +152,7 @@ namespace Zetbox.API
         /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
         /// <returns>A List of Objects</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject;
+        Task<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject;
 
         /// <summary>
         /// Fetches all collection entries of a given Relation (specified by <paramref name="relationId"/>)
@@ -180,7 +180,7 @@ namespace Zetbox.API
         /// <param name="container">The container of the requested collection</param>
         /// <returns></returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry;
+        Task<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
@@ -214,7 +214,7 @@ namespace Zetbox.API
         /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID);
+        Task<IDataObject> FindAsync(InterfaceType ifType, int ID);
         /// <summary>
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
@@ -233,7 +233,7 @@ namespace Zetbox.API
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        ZbTask<T> FindAsync<T>(int ID) where T : class, IDataObject;
+        Task<T> FindAsync<T>(int ID) where T : class, IDataObject;
 
         /// <summary>
         /// Find the Persistence Object of the given type by ID
@@ -294,8 +294,8 @@ namespace Zetbox.API
 
         System.IO.Stream GetStream(int ID);
         System.IO.FileInfo GetFileInfo(int ID);
-        ZbTask<System.IO.Stream> GetStreamAsync(int ID);
-        ZbTask<System.IO.FileInfo> GetFileInfoAsync(int ID);
+        Task<System.IO.Stream> GetStreamAsync(int ID);
+        Task<System.IO.FileInfo> GetFileInfoAsync(int ID);
 
         /// <summary>
         /// IsDisposed can be used to detect whether this IZetboxContext was aborted with Dispose()
@@ -353,7 +353,7 @@ namespace Zetbox.API
         /// Only IDataObjects are counded.
         /// </remarks>
         /// <returns>Number of affected Objects</returns>
-        int SubmitChanges();
+        Task<int> SubmitChanges();
 
         bool IsReadonly { get; }
 
@@ -383,8 +383,8 @@ namespace Zetbox.API
         /// <returns>A new CompoundObject</returns>
         T CreateCompoundObject<T>() where T : ICompoundObject;
 
-        int CreateBlob(System.IO.Stream s, string filename, string mimetype);
-        int CreateBlob(System.IO.FileInfo fi, string mimetype);
+        Task<int> CreateBlob(System.IO.Stream s, string filename, string mimetype);
+        Task<int> CreateBlob(System.IO.FileInfo fi, string mimetype);
 
         /// <summary>
         /// Is fired when an object is created in this Context.

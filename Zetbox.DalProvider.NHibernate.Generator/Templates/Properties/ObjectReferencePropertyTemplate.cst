@@ -195,9 +195,9 @@
         private Guid? <%= fkGuidBackingName %> = null;
 <% } %>
 
-    public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+    public System.Threading.Tasks.Task TriggerFetch<%= name %>Async()
     {
-        return new Zetbox.API.Async.ZbTask<<%= referencedInterface %>>(this.<%= name %>);
+        return System.Threading.Tasks.Task.FromResult<<%= referencedInterface %>>(this.<%= name %>);
     }
 
 <%

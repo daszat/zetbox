@@ -26,6 +26,7 @@ namespace Zetbox.API.Client
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Security.Authentication;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.API.Client.ZetboxService;
     using Zetbox.API.Utils;
@@ -38,18 +39,18 @@ namespace Zetbox.API.Client
     public interface IProxy
         : IDisposable
     {
-        IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects);
-        IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
+        Task<Tuple<IEnumerable<IDataObject>, List<IStreamable>>> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query);
+        Task<Tuple<IEnumerable<IDataObject>, List<IStreamable>>> GetListOf(InterfaceType ifType, int ID, string property);
 
-        IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
+        Task<IEnumerable<IPersistenceObject>> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
 
-        object InvokeServerMethod(InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects);
+        Task<Tuple<object, IEnumerable<IPersistenceObject>, List<IStreamable>>> InvokeServerMethod(InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
 
-        IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, int parentId, InterfaceType parentIfType, out List<IStreamable> auxObjects)
+        Task<Tuple<IEnumerable<T>, List<IStreamable>>> FetchRelation<T>(Guid relationId, RelationEndRole role, int parentId, InterfaceType parentIfType)
             where T : class, IRelationEntry;
 
-        Stream GetBlobStream(int ID);
-        Zetbox.App.Base.Blob SetBlobStream(Stream stream, string filename, string mimetype);
+        Task<Stream> GetBlobStream(int ID);
+        Task<Zetbox.App.Base.Blob> SetBlobStream(Stream stream, string filename, string mimetype);
     }
 
     #region ZetboxServerIOException
@@ -104,53 +105,7 @@ namespace Zetbox.API.Client
             _typeMaps = typeMaps;
         }
 
-        private void MakeRequest(Action request, bool retry = true)
-        {
-            Exception fault = null;
-            int retryCount = retry ? MAX_RETRY_COUNT : 1;
-            for (int i = 0; i < retryCount; i++)
-            {
-                fault = null;
-                try
-                {
-                    request();
-                    break;
-                }
-                catch (ConcurrencyException)
-                {
-                    throw;
-                }
-                catch (ZetboxValidationException)
-                {
-                    throw;
-                }
-                catch (FKViolationException)
-                {
-                    throw;
-                }
-                catch (UniqueConstraintViolationException)
-                {
-                    throw;
-                }
-                catch (InvalidZetboxGeneratedVersionException)
-                {
-                    throw;
-                }
-                catch (AuthenticationException)
-                {
-                    throw;
-                }
-                catch (Exception ex)
-                {
-                    // Retry
-                    fault = ex;
-                }
-            }
-
-            if (fault != null) throw new ZetboxServerIOException("Error when accessing server: " + fault.Message, fault);
-        }
-
-        public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
+        public async Task<Tuple<IEnumerable<IDataObject>, List<IStreamable>>> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query)
         {
             int resultCount = 0;
             List<IStreamable> tmpAuxObjects = null;
@@ -159,9 +114,9 @@ namespace Zetbox.API.Client
             {
                 byte[] bytes = null;
 
-                MakeRequest(() =>
+                await MakeRequest(async () =>
                 {
-                    bytes = _service.GetObjects(
+                    bytes = await _service.GetObjects(
                         ZetboxGeneratedVersionAttribute.Current,
                         SerializableExpression.FromExpression(query, requestingCtx, _iftFactory, _implTypeChecker, _typeMaps));
                 });
@@ -174,8 +129,7 @@ namespace Zetbox.API.Client
                     result = ReceiveObjects(sr, out tmpAuxObjects).Cast<IDataObject>();
                 }
                 resultCount = result.Count();
-                auxObjects = tmpAuxObjects;
-                return result;
+                return Tuple.Create(result, tmpAuxObjects);
             }
             finally
             {
@@ -183,7 +137,7 @@ namespace Zetbox.API.Client
             }
         }
 
-        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
+        public async Task<Tuple<IEnumerable<IDataObject>, List<IStreamable>>> GetListOf(InterfaceType ifType, int ID, string property)
         {
             List<IStreamable> tmpAuxObjects = null;
             int resultCount = 0;
@@ -193,9 +147,9 @@ namespace Zetbox.API.Client
             {
                 byte[] bytes = null;
 
-                MakeRequest(() =>
+                await MakeRequest(async () =>
                 {
-                    bytes = _service.GetListOf(ZetboxGeneratedVersionAttribute.Current, _ifType, ID, property);
+                    bytes = await _service.GetListOf(ZetboxGeneratedVersionAttribute.Current, _ifType, ID, property);
                 });
 
                 IEnumerable<IDataObject> result = null;
@@ -205,8 +159,7 @@ namespace Zetbox.API.Client
                 }
                 resultCount = result.Count();
 
-                auxObjects = tmpAuxObjects;
-                return result;
+                return Tuple.Create(result, tmpAuxObjects);
             }
             finally
             {
@@ -214,7 +167,7 @@ namespace Zetbox.API.Client
             }
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
+        public async Task<IEnumerable<IPersistenceObject>> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
         {
             var ticks = _perfCounter.IncrementSetObjects();
             try
@@ -229,9 +182,9 @@ namespace Zetbox.API.Client
                     var _ms = ms.ToArray();
                     var _nReq = notficationRequests.ToArray();
 
-                    MakeRequest(() =>
+                    await MakeRequest(async () =>
                     {
-                        bytes = _service.SetObjects(ZetboxGeneratedVersionAttribute.Current, _ms, _nReq);
+                        bytes = await _service.SetObjects(ZetboxGeneratedVersionAttribute.Current, _ms, _nReq);
                     }, retry: false);
 
                     using (var sr = _readerFactory.Invoke(new BinaryReader(new MemoryStream(bytes))))
@@ -251,50 +204,9 @@ namespace Zetbox.API.Client
             }
         }
 
-        private static void SendObjects(IEnumerable<IPersistenceObject> objects, ZetboxStreamWriter sw)
-        {
-            foreach (var obj in objects)
-            {
-                sw.Write(true);
-                obj.ToStream(sw, new HashSet<IStreamable>(), false);
-            }
-            sw.Write(false);
-            sw.Flush();
-        }
 
-        private IEnumerable<IStreamable> ReceiveObjects(ZetboxStreamReader sr, out List<IStreamable> auxObjects)
-        {
-            var result = ReceiveObjectList(sr);
-            auxObjects = ReceiveObjectList(sr);
-            Logging.Facade.DebugFormat("retrieved: {0} objects; {1} auxObjects", result.Count, auxObjects.Count);
-            return result;
-        }
 
-        private List<IStreamable> ReceiveObjectList(ZetboxStreamReader sr)
-        {
-            List<IStreamable> result = new List<IStreamable>();
-            bool cont = sr.ReadBoolean();
-            long dbgByteCounter = 0;
-            long dbgObjTypeByteCounter = 0;
-            while (cont)
-            {
-                long dbgCurrentPos = sr.BaseStream.Position;
-                var objType = sr.ReadSerializableType();
-                dbgObjTypeByteCounter += sr.BaseStream.Position - dbgCurrentPos;
-
-                IStreamable obj = (IStreamable)_unattachedObjectFactory(_iftFactory(objType.GetSystemType()));
-                obj.FromStream(sr);
-                result.Add((IStreamable)obj);
-
-                cont = sr.ReadBoolean();
-                long dbgSize = sr.BaseStream.Position - dbgCurrentPos;
-                dbgByteCounter += dbgSize;
-            }
-            Logging.Facade.DebugFormat("ReceiveObjectList: {0:n0} objects; {1:n0} bytes total size; {2:n0} bytes avg. size / object; Total ObjType size: {3:n0}; {4:n2}% of total", result.Count, dbgByteCounter, (double)dbgByteCounter / (double)result.Count, dbgObjTypeByteCounter, (double)dbgObjTypeByteCounter / (double)dbgByteCounter * 100.0);
-            return result;
-        }
-
-        public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, int parentId, InterfaceType parentIfType, out List<IStreamable> auxObjects)
+        public async Task<Tuple<IEnumerable<T>, List<IStreamable>>> FetchRelation<T>(Guid relationId, RelationEndRole role, int parentId, InterfaceType parentIfType)
             where T : class, IRelationEntry
         {
             var ifType = parentIfType;
@@ -305,17 +217,16 @@ namespace Zetbox.API.Client
                 // TODO: could be implemented in generated properties
                 if (parentId <= Helper.INVALIDID)
                 {
-                    auxObjects = new List<IStreamable>();
-                    return new List<T>();
+                    return Tuple.Create(Enumerable.Empty<T>(), new List<IStreamable>());
                 }
 
                 IEnumerable<T> result = null;
                 List<IStreamable> tmpAuxObjects = null;
                 byte[] bytes = null;
 
-                MakeRequest(() =>
+                await MakeRequest(async () =>
                 {
-                    bytes = _service.FetchRelation(ZetboxGeneratedVersionAttribute.Current, relationId, (int)role, parentId);
+                    bytes = await _service.FetchRelation(ZetboxGeneratedVersionAttribute.Current, relationId, (int)role, parentId);
                 });
                 using (MemoryStream s = new MemoryStream(bytes))
                 using (var sr = _readerFactory.Invoke(new BinaryReader(s)))
@@ -324,8 +235,7 @@ namespace Zetbox.API.Client
                 }
                 resultCount = result.Count();
 
-                auxObjects = tmpAuxObjects;
-                return result;
+                return Tuple.Create(result, tmpAuxObjects);
             }
             finally
             {
@@ -333,28 +243,28 @@ namespace Zetbox.API.Client
             }
         }
 
-        public Stream GetBlobStream(int ID)
+        public async Task<Stream> GetBlobStream(int ID)
         {
             Stream result = null;
-            MakeRequest(() =>
+            await MakeRequest(async () =>
             {
-                result = _service.GetBlobStream(ZetboxGeneratedVersionAttribute.Current, ID);
+                result = await _service.GetBlobStream(ZetboxGeneratedVersionAttribute.Current, ID);
             });
             return result;
         }
 
-        public Zetbox.App.Base.Blob SetBlobStream(Stream stream, string filename, string mimetype)
+        public async Task<Zetbox.App.Base.Blob> SetBlobStream(Stream stream, string filename, string mimetype)
         {
             Zetbox.App.Base.Blob result = null;
             BlobResponse response = null;
             BlobMessage msg = new BlobMessage() { Version = ZetboxGeneratedVersionAttribute.Current, FileName = filename, MimeType = mimetype, Stream = stream };
 
-            MakeRequest(() =>
+            await MakeRequest(async () =>
             {
                 // Rewind stream to ensure complete files, e.g. after a fault
                 if (msg.Stream.Position != 0)
                     msg.Stream.Seek(0, SeekOrigin.Begin);
-                response = _service.SetBlobStream(msg);
+                response = await _service.SetBlobStream(msg);
             }, retry: false);
 
             using (var sr = _readerFactory.Invoke(new BinaryReader(response.BlobInstance)))
@@ -365,12 +275,12 @@ namespace Zetbox.API.Client
             return result;
         }
 
-        public object InvokeServerMethod(InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
+        public async Task<Tuple<object, IEnumerable<IPersistenceObject>, List<IStreamable>>> InvokeServerMethod(InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             _perfCounter.IncrementServerMethodInvocation();
 
             object result = null;
-            auxObjects = null;
+            List<IStreamable> auxObjects = null;
 
             byte[] retChangedObjectsArray = null;
             byte[] bytes = null;
@@ -394,10 +304,9 @@ namespace Zetbox.API.Client
                     var _changedObjStream = changedObjectsStream.ToArray();
                     var _nReq = notificationRequests.ToArray();
 
-                    MakeRequest(() =>
+                    await MakeRequest(async () =>
                     {
-                        bytes = _service.InvokeServerMethod(
-                             out retChangedObjectsArray,
+                        var result = await _service.InvokeServerMethod(
                              ZetboxGeneratedVersionAttribute.Current,
                              _ifType,
                              ID,
@@ -406,6 +315,8 @@ namespace Zetbox.API.Client
                              _parameterStream,
                              _changedObjStream,
                              _nReq);
+                        bytes = result.Item1;
+                        retChangedObjectsArray = result.Item2;
                     }, retry: false);
                 }
             }
@@ -451,13 +362,101 @@ namespace Zetbox.API.Client
                     result = null;
                 }
 
-                changedObjects = tmpChangedObjects;
-                return result;
+                return Tuple.Create(result, tmpChangedObjects, auxObjects);
             }
         }
 
         public void Dispose()
         {
+        }
+
+        private static void SendObjects(IEnumerable<IPersistenceObject> objects, ZetboxStreamWriter sw)
+        {
+            foreach (var obj in objects)
+            {
+                sw.Write(true);
+                obj.ToStream(sw, new HashSet<IStreamable>(), false);
+            }
+            sw.Write(false);
+            sw.Flush();
+        }
+
+        private IEnumerable<IStreamable> ReceiveObjects(ZetboxStreamReader sr, out List<IStreamable> auxObjects)
+        {
+            var result = ReceiveObjectList(sr);
+            auxObjects = ReceiveObjectList(sr);
+            Logging.Facade.DebugFormat("retrieved: {0} objects; {1} auxObjects", result.Count, auxObjects.Count);
+            return result;
+        }
+
+        private List<IStreamable> ReceiveObjectList(ZetboxStreamReader sr)
+        {
+            List<IStreamable> result = new List<IStreamable>();
+            bool cont = sr.ReadBoolean();
+            long dbgByteCounter = 0;
+            long dbgObjTypeByteCounter = 0;
+            while (cont)
+            {
+                long dbgCurrentPos = sr.BaseStream.Position;
+                var objType = sr.ReadSerializableType();
+                dbgObjTypeByteCounter += sr.BaseStream.Position - dbgCurrentPos;
+
+                IStreamable obj = (IStreamable)_unattachedObjectFactory(_iftFactory(objType.GetSystemType()));
+                obj.FromStream(sr);
+                result.Add((IStreamable)obj);
+
+                cont = sr.ReadBoolean();
+                long dbgSize = sr.BaseStream.Position - dbgCurrentPos;
+                dbgByteCounter += dbgSize;
+            }
+            Logging.Facade.DebugFormat("ReceiveObjectList: {0:n0} objects; {1:n0} bytes total size; {2:n0} bytes avg. size / object; Total ObjType size: {3:n0}; {4:n2}% of total", result.Count, dbgByteCounter, (double)dbgByteCounter / (double)result.Count, dbgObjTypeByteCounter, (double)dbgObjTypeByteCounter / (double)dbgByteCounter * 100.0);
+            return result;
+        }
+
+        private async Task MakeRequest(Func<Task> request, bool retry = true)
+        {
+            Exception fault = null;
+            int retryCount = retry ? MAX_RETRY_COUNT : 1;
+            for (int i = 0; i < retryCount; i++)
+            {
+                fault = null;
+                try
+                {
+                    await request();
+                    break;
+                }
+                catch (ConcurrencyException)
+                {
+                    throw;
+                }
+                catch (ZetboxValidationException)
+                {
+                    throw;
+                }
+                catch (FKViolationException)
+                {
+                    throw;
+                }
+                catch (UniqueConstraintViolationException)
+                {
+                    throw;
+                }
+                catch (InvalidZetboxGeneratedVersionException)
+                {
+                    throw;
+                }
+                catch (AuthenticationException)
+                {
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    // Retry
+                    fault = ex;
+                }
+            }
+
+            if (fault != null) throw new ZetboxServerIOException("Error when accessing server: " + fault.Message, fault);
         }
     }
 }

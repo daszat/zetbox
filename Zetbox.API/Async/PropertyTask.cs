@@ -10,13 +10,13 @@ namespace Zetbox.API.Async
     public class PropertyTask<T>
     {
         private readonly Action _notifier;
-        private readonly Func<ZbTask<T>> _createTask;
+        private readonly Func<System.Threading.Tasks.Task<T>> _createTask;
         private readonly Action<T> _set;
 
-        private ZbTask<T> _task;
+        private System.Threading.Tasks.Task<T> _task;
         private T _result;
 
-        public ZbTask<T> Task { get { EnsureTask(); return _task; } }
+        public System.Threading.Tasks.Task<T> Task { get { EnsureTask(); return _task; } }
 
         /// <summary>
         /// Initialize a new instance of the PropertyTask. This struct encapsulates a caching asynchronous access pattern for properties and similar things.
@@ -27,7 +27,7 @@ namespace Zetbox.API.Async
         /// <param name="notifier">This is called when the cached value changes. If it is null, nothing is done.</param>
         /// <param name="createTask">This Func should create a fresh task to fetch the underlying value</param>
         /// <param name="set">This action should set the underlying value immediately. If it is null, Set() will throw a ReadOnlyObjectException</param>
-        public PropertyTask(Action notifier, Func<ZbTask<T>> createTask, Action<T> set)
+        public PropertyTask(Action notifier, Func<System.Threading.Tasks.Task<T>> createTask, Action<T> set)
         {
             if (createTask == null) throw new ArgumentNullException("createTask");
 

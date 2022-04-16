@@ -58,8 +58,8 @@ namespace Zetbox.App.Test
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchAntwortenTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchAntwortenAsync()
+        System.Threading.Tasks.Task _triggerFetchAntwortenTask;
+        public System.Threading.Tasks.Task TriggerFetchAntwortenAsync()
         {
             if (_triggerFetchAntwortenTask != null) return _triggerFetchAntwortenTask;
 
@@ -68,7 +68,7 @@ namespace Zetbox.App.Test
             {
                 if (AntwortenIds != null)
                 {
-                    _triggerFetchAntwortenTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                    _triggerFetchAntwortenTask = new System.Threading.Tasks.Task(() =>
                     {
                         serverList = AntwortenIds.Select(id => Context.Find<Zetbox.App.Test.Antwort>(id)).ToList();
                         AntwortenIds = null; // allow id list to be garbage collected
@@ -85,7 +85,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchAntwortenTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchAntwortenTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.Test.Antwort>();
                 });
@@ -192,8 +192,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchStudentTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchStudentAsync()
+        System.Threading.Tasks.Task _triggerFetchStudentTask;
+        public System.Threading.Tasks.Task TriggerFetchStudentAsync()
         {
             if (_triggerFetchStudentTask != null) return _triggerFetchStudentTask;
             _triggerFetchStudentTask = Context.FetchRelationAsync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
@@ -268,7 +268,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStu
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

@@ -141,15 +141,15 @@ namespace Zetbox.App.Test
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent> _triggerFetchParentTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent> TriggerFetchParentAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Test.RequiredParent> _triggerFetchParentTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Test.RequiredParent> TriggerFetchParentAsync()
         {
             if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
 
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value);
             else
-                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchParentTask = new System.Threading.Tasks.Task<Zetbox.App.Test.RequiredParent>(() => null);
 
             _triggerFetchParentTask.OnResult(t =>
             {
@@ -157,7 +157,7 @@ namespace Zetbox.App.Test
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Test.RequiredParent>(t.Result);
                     OnParent_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -290,7 +290,7 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

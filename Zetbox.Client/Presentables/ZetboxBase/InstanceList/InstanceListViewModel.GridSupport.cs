@@ -18,6 +18,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Zetbox.API.Async;
     using Zetbox.API.Utils;
     using Zetbox.Client.Presentables.ValueViewModels;
@@ -83,15 +84,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 },
                 createTask: () =>
                 {
-                    return new ZbTask<ProxyList>(LoadInstancesCore())
-                        .OnResult(t =>
-                        {
-                            t.Result = new ProxyList(
-                                _filteredInstances,
-                                (vm) => GetProxy(vm),
-                                (p) => GetObjectFromProxy(p));
-                        });
-
+                    return Task.Run(async () =>
+                    {
+                        await LoadInstancesCore();
+                        return new ProxyList(
+                            _filteredInstances,
+                            (vm) => GetProxy(vm),
+                            (p) => GetObjectFromProxy(p));
+                    });
                 },
                 set: null);
         }

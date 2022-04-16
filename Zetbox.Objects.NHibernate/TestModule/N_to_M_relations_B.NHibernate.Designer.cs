@@ -77,9 +77,9 @@ namespace Zetbox.App.Test
 		// ignored, but required for Serialization
         private bool ASide_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchASideAsync()
+        public System.Threading.Tasks.Task TriggerFetchASideAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.N_to_M_relations_A>>(this.ASide);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Test.N_to_M_relations_A>>(this.ASide);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_B> OnASide_PostSetter;
@@ -190,7 +190,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

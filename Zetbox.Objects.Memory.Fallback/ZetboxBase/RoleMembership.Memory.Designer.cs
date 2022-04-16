@@ -54,8 +54,8 @@ namespace Zetbox.App.Base
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchRelationsTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchRelationsAsync()
+        System.Threading.Tasks.Task _triggerFetchRelationsTask;
+        public System.Threading.Tasks.Task TriggerFetchRelationsAsync()
         {
             if (_triggerFetchRelationsTask != null) return _triggerFetchRelationsTask;
             _triggerFetchRelationsTask = Context.FetchRelationAsync<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryMemoryImpl>(new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80"), RelationEndRole.A, this);
@@ -116,7 +116,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.RoleMembership> O
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

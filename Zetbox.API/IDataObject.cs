@@ -364,7 +364,7 @@ namespace Zetbox.API
         /// </summary>
         /// <param name="propName">Name of the property to fetch</param>
         /// <returns></returns>
-        ZbTask TriggerFetch(string propName);
+        System.Threading.Tasks.Task TriggerFetch(string propName);
 
         /// <summary>
         /// Validates the Object. Checks, if the Object Level Constraint is valid. Properties are not validated.

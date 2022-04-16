@@ -83,15 +83,15 @@ namespace at.dasz.DocumentManagement
 		}
 
 
-        Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> _triggerFetchFileTask;
-        public Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> TriggerFetchFileAsync()
+        System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> _triggerFetchFileTask;
+        public System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> TriggerFetchFileAsync()
         {
             if (_triggerFetchFileTask != null) return _triggerFetchFileTask;
 
             if (_fk_File.HasValue)
                 _triggerFetchFileTask = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_File.Value);
             else
-                _triggerFetchFileTask = new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchFileTask = new System.Threading.Tasks.Task<at.dasz.DocumentManagement.File>(() => null);
 
             _triggerFetchFileTask.OnResult(t =>
             {
@@ -99,7 +99,7 @@ namespace at.dasz.DocumentManagement
                 {
                     var e = new PropertyGetterEventArgs<at.dasz.DocumentManagement.File>(t.Result);
                     OnFile_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -290,7 +290,7 @@ namespace at.dasz.DocumentManagement
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

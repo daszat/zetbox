@@ -23,6 +23,7 @@ namespace Zetbox.Client.WPF.Toolkit
     using System.Runtime.InteropServices;
     using System.Runtime.InteropServices.ComTypes;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -34,7 +35,7 @@ namespace Zetbox.Client.WPF.Toolkit
     {
         bool CanDrop { get; }
         string[] AcceptableDataFormats { get; }
-        bool OnDrop(string format, object data);
+        Task<bool> OnDrop(string format, object data);
     }
 
     public interface IDragDropSource
@@ -115,7 +116,7 @@ namespace Zetbox.Client.WPF.Toolkit
                 _uiTargetElement.PreviewDragEnter += OnDragEnter;
                 _uiTargetElement.PreviewDragLeave += OnDragLeave;
                 _uiTargetElement.PreviewDragOver += OnDragOver;
-                _uiTargetElement.PreviewDrop += OnDrop;
+                _uiTargetElement.PreviewDrop += async (s, e) => await OnDrop(s, e);
             }
             if (_source != null)
             {
@@ -210,7 +211,7 @@ namespace Zetbox.Client.WPF.Toolkit
             }
         }
 
-        private void OnDrop(object sender, DragEventArgs e)
+        private async Task OnDrop(object sender, DragEventArgs e)
         {
             ResetBackground(sender);
 
@@ -223,7 +224,7 @@ namespace Zetbox.Client.WPF.Toolkit
                         if (format == ZetboxDragSourceDataFormat) continue;
 
                         var data = format == ZetboxObjectDataFormat ? _currentData : e.Data.GetData(format);
-                        if (_target.OnDrop(format, data))
+                        if (await _target.OnDrop(format, data))
                             break;
                     }
                 }

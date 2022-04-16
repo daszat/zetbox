@@ -60,7 +60,7 @@ namespace Zetbox.DalProvider.Base
             return aStr.CompareTo(bStr);
         }
 
-        public virtual ZbTask TriggerFetch(string propName)
+        public virtual System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             throw new ArgumentOutOfRangeException("propName", string.Format("Given property '{0}' cannot be fetched async.", propName));
         }

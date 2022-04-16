@@ -413,7 +413,7 @@ namespace Zetbox.Client.Models
 
         public abstract TValue Value { get; set; }
 
-        public abstract ZbTask<TValue> GetValueAsync();
+        public abstract System.Threading.Tasks.Task<TValue> GetValueAsync();
 
         #endregion
 
@@ -476,9 +476,9 @@ namespace Zetbox.Client.Models
             }
         }
 
-        public sealed override ZbTask<TValue?> GetValueAsync()
+        public sealed override System.Threading.Tasks.Task<TValue?> GetValueAsync()
         {
-            return new ZbTask<TValue?>(Value);
+            return System.Threading.Tasks.Task<TValue?>.FromResult(Value);
         }
 
         #endregion
@@ -542,7 +542,7 @@ namespace Zetbox.Client.Models
 
         #region IValueModel<TValue> Members
 
-        protected ZbTask<TValue> getValueTask = null;
+        protected System.Threading.Tasks.Task<TValue> getValueTask = null;
 
         /// <summary>
         /// Gets or sets the value of the property presented by this model
@@ -572,9 +572,9 @@ namespace Zetbox.Client.Models
             }
         }
 
-        public override ZbTask<TValue> GetValueAsync()
+        public override System.Threading.Tasks.Task<TValue> GetValueAsync()
         {
-            return new ZbTask<TValue>(Object.GetPropertyValue<TValue>(Property.Name));
+            return System.Threading.Tasks.Task.FromResult<TValue>(Object.GetPropertyValue<TValue>(Property.Name));
         }
 
         protected override void InvalidateValueCache()
@@ -583,10 +583,10 @@ namespace Zetbox.Client.Models
         }
 
         /// <summary>
-        /// Get the ZbTask from TriggerFetch*Async for the presented Property.
+        /// Get the System.Threading.Tasks.Task from TriggerFetch*Async for the presented Property.
         /// </summary>
-        /// <returns>The ZbTask from TriggerFetch</returns>
-        protected ZbTask GetTriggerFetchTask()
+        /// <returns>The System.Threading.Tasks.Task from TriggerFetch</returns>
+        protected System.Threading.Tasks.Task GetTriggerFetchTask()
         {
             if (Object is IDataObject)
             {
@@ -624,10 +624,10 @@ namespace Zetbox.Client.Models
 
         #region IValueModel<TValue> Members
 
-        public override ZbTask<IDataObject> GetValueAsync()
+        public override async System.Threading.Tasks.Task<IDataObject> GetValueAsync()
         {
-            return new ZbTask<IDataObject>(GetTriggerFetchTask())
-                .OnResult(t => t.Result = Object.GetPropertyValue<IDataObject>(Property.Name));
+            await GetTriggerFetchTask();
+            return Object.GetPropertyValue<IDataObject>(Property.Name);
         }
 
         #endregion
@@ -760,14 +760,14 @@ namespace Zetbox.Client.Models
         {
         }
 
-        private ZbTask<ICollection<ICompoundObject>> _getValueTask;
-        public override ZbTask<ICollection<ICompoundObject>> GetValueAsync()
+        private System.Threading.Tasks.Task<ICollection<ICompoundObject>> _getValueTask;
+        public override System.Threading.Tasks.Task<ICollection<ICompoundObject>> GetValueAsync()
         {
             if (_getValueTask == null)
             {
                 var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
                 notifier.CollectionChanged += ValueCollectionChanged;
-                _getValueTask = new ZbTask<ICollection<ICompoundObject>>(MagicCollectionFactory.WrapAsCollection<ICompoundObject>(notifier));
+                _getValueTask = new System.Threading.Tasks.Task<ICollection<ICompoundObject>>(() => MagicCollectionFactory.WrapAsCollection<ICompoundObject>(notifier));
             }
             return _getValueTask;
         }
@@ -786,14 +786,14 @@ namespace Zetbox.Client.Models
         {
         }
 
-        private ZbTask<IList<ICompoundObject>> _getValueTask;
-        public override ZbTask<IList<ICompoundObject>> GetValueAsync()
+        private System.Threading.Tasks.Task<IList<ICompoundObject>> _getValueTask;
+        public override System.Threading.Tasks.Task<IList<ICompoundObject>> GetValueAsync()
         {
             if (_getValueTask == null)
             {
                 var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
                 notifier.CollectionChanged += ValueCollectionChanged;
-                _getValueTask = new ZbTask<IList<ICompoundObject>>(MagicCollectionFactory.WrapAsList<ICompoundObject>(notifier));
+                _getValueTask = new System.Threading.Tasks.Task<IList<ICompoundObject>>(() => MagicCollectionFactory.WrapAsList<ICompoundObject>(notifier));
             }
             return _getValueTask;
         }
@@ -888,18 +888,17 @@ namespace Zetbox.Client.Models
         {
         }
 
-        private ZbTask<ICollection<IDataObject>> _getValueTask;
-        public override ZbTask<ICollection<IDataObject>> GetValueAsync()
+        private System.Threading.Tasks.Task<ICollection<IDataObject>> _getValueTask;
+        public override System.Threading.Tasks.Task<ICollection<IDataObject>> GetValueAsync()
         {
             if (_getValueTask == null)
             {
-                _getValueTask = new ZbTask<ICollection<IDataObject>>(GetTriggerFetchTask())
-                    .OnResult(t =>
-                    {
-                        var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                        notifier.CollectionChanged += ValueCollectionChanged;
-                        t.Result = MagicCollectionFactory.WrapAsCollection<IDataObject>(notifier);
-                    });
+                _getValueTask = GetTriggerFetchTask().ContinueWith(t =>
+                {
+                    var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                    notifier.CollectionChanged += ValueCollectionChanged;
+                    return MagicCollectionFactory.WrapAsCollection<IDataObject>(notifier);
+                });
             }
             return _getValueTask;
         }
@@ -918,17 +917,17 @@ namespace Zetbox.Client.Models
         {
         }
 
-        private ZbTask<IList<IDataObject>> _getValueTask;
-        public override ZbTask<IList<IDataObject>> GetValueAsync()
+        private System.Threading.Tasks.Task<IList<IDataObject>> _getValueTask;
+        public override System.Threading.Tasks.Task<IList<IDataObject>> GetValueAsync()
         {
             if (_getValueTask == null)
             {
-                _getValueTask = new ZbTask<IList<IDataObject>>(GetTriggerFetchTask())
-                    .OnResult(t =>
+                _getValueTask = GetTriggerFetchTask()
+                    .ContinueWith(t =>
                     {
                         var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
                         notifier.CollectionChanged += ValueCollectionChanged;
-                        t.Result = MagicCollectionFactory.WrapAsList<IDataObject>(notifier);
+                        return MagicCollectionFactory.WrapAsList<IDataObject>(notifier);
                     });
             }
             return _getValueTask;
@@ -1048,9 +1047,9 @@ namespace Zetbox.Client.Models
             }
         }
 
-        ZbTask<TimeSpan?> IValueModel<TimeSpan?>.GetValueAsync()
+        System.Threading.Tasks.Task<TimeSpan?> IValueModel<TimeSpan?>.GetValueAsync()
         {
-            return new ZbTask<TimeSpan?>(ZbTask.Synchron, () => ((IValueModel<TimeSpan?>)this).Value);
+            return new System.Threading.Tasks.Task<TimeSpan?>(() => ((IValueModel<TimeSpan?>)this).Value);
         }
     }
 

@@ -18,6 +18,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using Zetbox.API;
 using Zetbox.API.Client;
 using Zetbox.App.Test;
@@ -34,11 +35,10 @@ namespace Zetbox.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
+        public Task<Tuple<IEnumerable<IDataObject>, List<IStreamable>>> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query)
         {
-            auxObjects = new List<IStreamable>();
             // good enough for testing
-            return (IEnumerable<IDataObject>)Expression.Lambda(query).Compile().DynamicInvoke();
+            return Task.FromResult(Tuple.Create((IEnumerable<IDataObject>)Expression.Lambda(query).Compile().DynamicInvoke(), new List<IStreamable>()));
         }
 
         private static IEnumerable<IDataObject> GetList_TestObjClass()
@@ -58,10 +58,10 @@ namespace Zetbox.Client.Mocks
             return result.Cast<IDataObject>();
         }
 
-        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
+        public Task<Tuple<IEnumerable<IDataObject>, List<IStreamable>>> GetListOf(InterfaceType ifType, int ID, string property)
         {
             if (ifType != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
-            auxObjects = new List<IStreamable>();
+            var auxObjects = new List<IStreamable>();
 
             List<TestObjClass> result = new List<TestObjClass>();
             if (ID == 1)
@@ -72,7 +72,7 @@ namespace Zetbox.Client.Mocks
                 result[1].SetPrivatePropertyValue<int>("ID", 3);
             }
 
-            return result.Cast<IDataObject>();
+            return Task.FromResult(Tuple.Create(result.Cast<IDataObject>(), auxObjects));
         }
 
         public string HelloWorld(string name)
@@ -80,7 +80,7 @@ namespace Zetbox.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public Task<IEnumerable<IPersistenceObject>> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             var result = new List<IPersistenceObject>();
             foreach (var obj in objects)
@@ -104,7 +104,7 @@ namespace Zetbox.Client.Mocks
                 }
             }
 
-            return result;
+            return Task.FromResult((IEnumerable<IPersistenceObject>)result);
         }
 
         /// <summary>
@@ -129,27 +129,26 @@ namespace Zetbox.Client.Mocks
             fi.SetValue(obj, val);
         }
 
-        public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, int parentId, InterfaceType parentIfType, out List<IStreamable> auxObjects) where T : class, IRelationEntry
+        public Task<Tuple<IEnumerable<T>, List<IStreamable>>> FetchRelation<T>(Guid relationId, RelationEndRole role, int parentId, InterfaceType parentIfType) where T : class, IRelationEntry
         {
-            auxObjects = new List<IStreamable>();
-            return new List<T>();
+            return Task.FromResult(Tuple.Create(Enumerable.Empty<T>(), new List<IStreamable>()));
         }
 
         public void Dispose()
         {
         }
 
-        public System.IO.Stream GetBlobStream(int ID)
+        public Task<System.IO.Stream> GetBlobStream(int ID)
         {
             throw new NotImplementedException();
         }
 
-        public Zetbox.App.Base.Blob SetBlobStream(System.IO.Stream stream, string filename, string mimetype)
+        public Task<Zetbox.App.Base.Blob> SetBlobStream(System.IO.Stream stream, string filename, string mimetype)
         {
             throw new NotImplementedException();
         }
 
-        public object InvokeServerMethod(InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
+        public Task<Tuple<object, IEnumerable<IPersistenceObject>, List<IStreamable>>> InvokeServerMethod(InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             throw new NotImplementedException();
         }

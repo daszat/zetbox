@@ -22,6 +22,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Linq;
     using System.Linq.Dynamic;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.App.Extensions;
@@ -125,14 +126,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _ExportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         InstanceListViewModelResources.ExportCSVCommand,
                         InstanceListViewModelResources.ExportCSVCommand_Tooltip,
-                        Export, null, null);
+                        async () => await Export(), null, null);
                     _ExportCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.document_export_png.Find(FrozenContext));
                 }
                 return _ExportCommand;
             }
         }
 
-        public void Export()
+        public async Task Export()
         {
             SetBusy(string.Format(InstanceListViewModelResources.ExportBusyMessageFormat, 1));
 
@@ -153,10 +154,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             var unpagedQuery = GetUnpagedQuery();
 
-            GetPagedQuery(0, Helper.MAXLISTCOUNT, unpagedQuery)
-                .OnError(ex => OnExportPageError(sw, ex))
-                .OnResult(OnExportPageResultFactory(sw, cols, 0, Helper.MAXLISTCOUNT, unpagedQuery, tmpFile));
-
+            try
+            {
+                await GetPagedQuery(0, Helper.MAXLISTCOUNT, unpagedQuery)
+                    .ContinueWith(OnExportPageResultFactory(sw, cols, 0, Helper.MAXLISTCOUNT, unpagedQuery, tmpFile));
+            }
+            catch (Exception ex)
+            {
+                OnExportPageError(sw, ex);
+            }
         }
 
         private ICommandViewModel _ExportXMLCommand = null;
@@ -169,7 +175,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _ExportXMLCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         InstanceListViewModelResources.ExportXmlCommand,
                         InstanceListViewModelResources.ExportXmlommand_Tooltip,
-                        ExportXML,
+                        async () => await ExportXML(),
                         CanExportXML,
                         null);
                     _ExportXMLCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.document_export_png.Find(FrozenContext));
@@ -188,7 +194,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return _canExportXML.Value;
         }
 
-        public void ExportXML()
+        public async Task ExportXML()
         {
             var fileName = ViewModelFactory.GetDestinationFileNameFromUser("Zetbox.xml", "XML|*.xml");
             if (!string.IsNullOrWhiteSpace(fileName))
@@ -196,14 +202,20 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 SetBusy(string.Format(InstanceListViewModelResources.ExportBusyMessageFormat, 1));
                 var unpagedQuery = GetUnpagedQuery();
 
-                var objects = new List<IDataObject>();
-                GetPagedQuery(0, Helper.MAXLISTCOUNT, unpagedQuery)
-                    .OnError(ex => OnExportPageError(ex))
-                    .OnResult(OnExportPageResultFactory(objects, 0, Helper.MAXLISTCOUNT, unpagedQuery, fileName));
+                try
+                {
+                    var objects = new List<IDataObject>();
+                    await GetPagedQuery(0, Helper.MAXLISTCOUNT, unpagedQuery)
+                        .ContinueWith(OnExportPageResultFactory(objects, 0, Helper.MAXLISTCOUNT, unpagedQuery, fileName));
+                }
+                catch (Exception ex)
+                {
+                    OnExportPageError(ex);
+                }
             }
         }
 
-        private Action<ZbTask<IEnumerable>> OnExportPageResultFactory(List<IDataObject> objects, int page, int pageSize, IQueryable unpagedQuery, string fileName)
+        private Action<System.Threading.Tasks.Task<IEnumerable>> OnExportPageResultFactory(List<IDataObject> objects, int page, int pageSize, IQueryable unpagedQuery, string fileName)
         {
             return t =>
             {
@@ -214,9 +226,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 if (queryAgain)
                 {
                     CurrentBusyMessage = string.Format(InstanceListViewModelResources.ExportBusyMessageFormat, page + 1);
-                    GetPagedQuery(page + 1, pageSize, unpagedQuery)
-                        .OnError(ex => OnExportPageError(ex))
-                        .OnResult(OnExportPageResultFactory(objects, page + 1, pageSize, unpagedQuery, fileName));
+                    try
+                    {
+                        GetPagedQuery(page + 1, pageSize, unpagedQuery)
+                            .ContinueWith(OnExportPageResultFactory(objects, page + 1, pageSize, unpagedQuery, fileName));
+                    }
+                    catch (Exception ex)
+                    {
+                        OnExportPageError(ex);
+                    }
                 }
                 else
                 {
@@ -227,7 +245,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             };
         }
 
-        private Action<ZbTask<IEnumerable>> OnExportPageResultFactory(StreamWriter sw, List<ColumnDisplayModel> cols, int page, int pageSize, IQueryable unpagedQuery, string tmpFile)
+        private Action<System.Threading.Tasks.Task<IEnumerable>> OnExportPageResultFactory(StreamWriter sw, List<ColumnDisplayModel> cols, int page, int pageSize, IQueryable unpagedQuery, string tmpFile)
         {
             return t =>
             {
@@ -236,9 +254,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 if (queryAgain)
                 {
                     CurrentBusyMessage = string.Format(InstanceListViewModelResources.ExportBusyMessageFormat, page + 1);
-                    GetPagedQuery(page + 1, pageSize, unpagedQuery)
-                        .OnError(ex => OnExportPageError(sw, ex))
-                        .OnResult(OnExportPageResultFactory(sw, cols, page + 1, pageSize, unpagedQuery, tmpFile));
+                    try
+                    {
+                        GetPagedQuery(page + 1, pageSize, unpagedQuery)
+                            .ContinueWith(OnExportPageResultFactory(sw, cols, page + 1, pageSize, unpagedQuery, tmpFile));
+                    }
+                    catch (Exception ex)
+                    {
+                        OnExportPageError(ex);
+                    }
                 }
                 else
                 {
@@ -256,7 +280,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         private void OnExportPageError(IDisposable d, Exception ex)
         {
-            if(d != null) d.Dispose();
+            if (d != null) d.Dispose();
 
             ClearBusy();
             errorReporter.Value.Show(ex);
@@ -313,13 +337,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private static ZbTask<System.Collections.IEnumerable> GetPagedQuery(int page, int pageSize, IQueryable unpagedQuery)
+        private static System.Threading.Tasks.Task<System.Collections.IEnumerable> GetPagedQuery(int page, int pageSize, IQueryable unpagedQuery)
         {
-            var qryTask = unpagedQuery
+            return unpagedQuery
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
-            return qryTask;
         }
 
         private ICommandViewModel _ExportContainerCommand = null;

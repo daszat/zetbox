@@ -25,6 +25,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ZetboxBase;
     using Zetbox.API.Client;
     using Zetbox.App.GUI;
+    using System.Threading.Tasks;
 
     public class TreeItemIconInstanceListViewModel : TreeItemInstanceListViewModel
     {
@@ -59,10 +60,10 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             }
         }
 
-        public override bool OnDrop(object data)
+        public override async Task<bool> OnDrop(object data)
         {
             var files = data as string[];
-            if (files == null) return base.OnDrop(data);
+            if (files == null) return await base.OnDrop(data);
 
             var newScope = ViewModelFactory.CreateNewScope();
             var newCtx = newScope.ViewModelFactory.CreateNewContext();
@@ -84,7 +85,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         case ".ico":
                             var obj = newCtx.Create<Icon>();
                             var fi = new System.IO.FileInfo(file);
-                            int id = newCtx.CreateBlob(fi, fi.GetMimeType());
+                            int id = await newCtx.CreateBlob(fi, fi.GetMimeType());
                             obj.Blob = newCtx.Find<Zetbox.App.Base.Blob>(id);
                             obj.IconFile = obj.Blob.OriginalName;
                             obj.Module = module;

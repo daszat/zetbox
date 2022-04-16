@@ -58,8 +58,8 @@ namespace Zetbox.App.Test
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchChildrenTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        System.Threading.Tasks.Task _triggerFetchChildrenTask;
+        public System.Threading.Tasks.Task TriggerFetchChildrenAsync()
         {
             if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
 
@@ -74,7 +74,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchChildrenTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchChildrenTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.Test.MethodTest>();
                 });
@@ -150,15 +150,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest> _triggerFetchParentTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest> TriggerFetchParentAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Test.MethodTest> _triggerFetchParentTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Test.MethodTest> TriggerFetchParentAsync()
         {
             if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
 
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.MethodTest>(_fk_Parent.Value);
             else
-                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchParentTask = new System.Threading.Tasks.Task<Zetbox.App.Test.MethodTest>(() => null);
 
             _triggerFetchParentTask.OnResult(t =>
             {
@@ -166,7 +166,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Test.MethodTest>(t.Result);
                     OnParent_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -1000,7 +1000,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

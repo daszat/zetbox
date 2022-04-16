@@ -30,9 +30,9 @@ namespace Zetbox.Client.Presentables.Calendar
     [ViewModelDescriptor]
     public class WeekCalendarViewModel : Zetbox.Client.Presentables.ViewModel, ICalendarDisplayViewModel
     {
-        public new delegate WeekCalendarViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, ZbTask<IEnumerable<EventViewModel>>> source);
+        public new delegate WeekCalendarViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, System.Threading.Tasks.Task<IEnumerable<EventViewModel>>> source);
 
-        public WeekCalendarViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, ZbTask<IEnumerable<EventViewModel>>> source)
+        public WeekCalendarViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, System.Threading.Tasks.Task<IEnumerable<EventViewModel>>> source)
             : base(dependencies, dataCtx, parent)
         {
             if (source == null) throw new ArgumentNullException("source");
@@ -264,7 +264,7 @@ namespace Zetbox.Client.Presentables.Calendar
             get { return WeekCalendar.WeekCalendarViewModelResources.Name; }
         }
 
-        private readonly Func<DateTime, DateTime, ZbTask<IEnumerable<EventViewModel>>> _Source = null;
+        private readonly Func<DateTime, DateTime, System.Threading.Tasks.Task<IEnumerable<EventViewModel>>> _Source = null;
 
         private EventViewModel _selectedItem;
         public EventViewModel SelectedItem

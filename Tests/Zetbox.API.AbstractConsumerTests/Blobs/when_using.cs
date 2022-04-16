@@ -21,7 +21,7 @@ using doc = at.dasz.DocumentManagement;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using Zetbox.App.Base;
-
+using System.Threading.Tasks;
 
 namespace Zetbox.API.AbstractConsumerTests.Blobs
 {
@@ -47,9 +47,9 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
         }
 
         [Test]
-        public void should_be_created_and_retreived()
+        public async Task should_be_created_and_retreived()
         {
-            var id = ctx.CreateBlob(data, filename2, mimetype);
+            var id = await ctx.CreateBlob(data, filename2, mimetype);
             Assert.That(id, CreateBlobIdConstraint());
             var blob = ctx.Find<Blob>(id);
             Assert.That(blob, Is.Not.Null);

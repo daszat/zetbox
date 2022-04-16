@@ -21,6 +21,7 @@ namespace Zetbox.DalProvider.NHibernate
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using global::NHibernate;
     using global::NHibernate.Linq;
     using Zetbox.API;
@@ -191,9 +192,9 @@ namespace Zetbox.DalProvider.NHibernate
             return PrepareQueryable(ifType).Cast<Tinterface>();
         }
 
-        public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent)
+        public override System.Threading.Tasks.Task<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent)
         {
-            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
+            return new System.Threading.Tasks.Task<IList<T>>(() =>
             {
                 CheckDisposed();
                 if (parent == null)
@@ -256,7 +257,7 @@ namespace Zetbox.DalProvider.NHibernate
             }
         }
 
-        public override int SubmitChanges()
+        public override Task<int> SubmitChanges()
         {
             CheckDisposed();
             DebugTraceChangedObjects();
@@ -276,10 +277,10 @@ namespace Zetbox.DalProvider.NHibernate
 
             OnSubmitted();
 
-            return objects.Count;
+            return Task.FromResult(objects.Count);
         }
 
-        public override int SubmitRestore()
+        public override Task<int> SubmitRestore()
         {
             CheckDisposed();
 
@@ -289,7 +290,7 @@ namespace Zetbox.DalProvider.NHibernate
 
             UpdateObjectState();
 
-            return objects.Count;
+            return Task.FromResult(objects.Count);
         }
 
         private void DebugTraceChangedObjects()
@@ -492,10 +493,10 @@ namespace Zetbox.DalProvider.NHibernate
             nhObj.Delete();
         }
 
-        public override ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        public override System.Threading.Tasks.Task<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             CheckDisposed();
-            return new ZbTask<IDataObject>(ZbTask.Synchron, () =>
+            return new System.Threading.Tasks.Task<IDataObject>(() =>
             {
                 try
                 {
@@ -513,11 +514,11 @@ namespace Zetbox.DalProvider.NHibernate
             });
         }
 
-        public override ZbTask<T> FindAsync<T>(int ID)
+        public override System.Threading.Tasks.Task<T> FindAsync<T>(int ID)
         {
             CheckDisposed();
 
-            return new ZbTask<T>(ZbTask.Synchron, () =>
+            return new System.Threading.Tasks.Task<T>(() =>
             {
                 var result = FindPersistenceObject<T>(ID);
                 if (result == null) { throw new ZetboxObjectNotFoundException(typeof(T), ID); }

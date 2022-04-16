@@ -22,6 +22,7 @@ namespace Zetbox.DalProvider.Client
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Client;
@@ -85,29 +86,22 @@ namespace Zetbox.DalProvider.Client
         }
         #endregion
 
-        ZbTask<IEnumerator> IAsyncQueryable.GetEnumeratorAsync()
+        async Task<IEnumerator> IAsyncQueryable.GetEnumeratorAsync()
         {
-            var getTask = _provider.GetListCallAsync<T>(this._expression);
-            return new ZbTask<IEnumerator>(getTask).OnResult(t =>
-            {
-                if (getTask.Result == null)
-                    t.Result = Enumerable.Empty<T>().GetEnumerator();
-                else
-                    t.Result = ((IEnumerable)getTask.Result).GetEnumerator();
-
-            });
+            var getTask = await _provider.GetListCallAsync<T>(this._expression);
+            if (getTask == null)
+                return Enumerable.Empty<T>().GetEnumerator();
+            else
+                return ((IEnumerable)getTask).GetEnumerator();
         }
 
-        ZbTask<IEnumerator<T>> IAsyncQueryable<T>.GetEnumeratorAsync()
+        async Task<IEnumerator<T>> IAsyncQueryable<T>.GetEnumeratorAsync()
         {
-            var getTask = _provider.GetListCallAsync<T>(this._expression);
-            return new ZbTask<IEnumerator<T>>(getTask).OnResult(t =>
-            {
-                if (getTask.Result == null)
-                    t.Result = Enumerable.Empty<T>().GetEnumerator();
-                else
-                    t.Result = ((IEnumerable<T>)getTask.Result).GetEnumerator();
-            });
+            var getTask = await _provider.GetListCallAsync<T>(this._expression);
+            if (getTask == null)
+                return Enumerable.Empty<T>().GetEnumerator();
+            else
+                return ((IEnumerable<T>)getTask).GetEnumerator();
         }
     }
 }

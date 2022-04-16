@@ -22,12 +22,14 @@ namespace Zetbox.API.Client
     using System.IO;
     using System.Linq;
     using System.Net;
+    using System.Net.Http;
     using System.Security.Authentication;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API.Configuration;
 
     public sealed class HttpServiceClient
-        : Zetbox.API.Client.ZetboxService.IZetboxService
+        : ZetboxService.IZetboxService
     {
         private const int MAX_RETRY_COUNT = 2;
 
@@ -66,87 +68,75 @@ namespace Zetbox.API.Client
             _writerFactory = writerFactory;
         }
 
-        private byte[] MakeRequest(Uri destination, Action<ZetboxStreamWriter> sendRequest)
+        private async Task<byte[]> MakeRequest(Uri destination, Action<ZetboxStreamWriter> sendRequest)
         {
-            var req = InitializeRequest(destination);
+            using var req = InitializeRequest();
+            HttpResponseMessage response = null;
 
-            using (var reqStream = req.GetRequestStream())
+            using (var reqStream = new MemoryStream())
             using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
             {
                 sendRequest(reqWriter);
+                response = await req.PostAsync(destination, new StreamContent(reqStream));
             }
             try
             {
-                using (var response = req.GetResponse())
-                using (var input = _readerFactory.Invoke(new BinaryReader(response.GetResponseStream())))
+                using (var input = _readerFactory.Invoke(new BinaryReader(response.Content.ReadAsStream())))
                 {
                     return input.ReadByteArray();
                 }
             }
-            catch (WebException ex)
+            catch (HttpRequestException ex)
             {
-                var errorMsg = String.Format("Error when accessing server({0}): {1}", destination, ex.Status);
+                var errorMsg = String.Format("Error when accessing server({0}): {1}", destination, ex.StatusCode);
                 Log.Error(errorMsg);
-                var httpResponse = ex.Response as HttpWebResponse;
-                if (httpResponse != null)
-                {
-                    Log.ErrorFormat("HTTP Error: {0}: {1}", httpResponse.StatusCode, httpResponse.StatusDescription);
-                    foreach (var header in ex.Response.Headers)
-                    {
-                        var headerString = header.ToString();
-                        Log.ErrorFormat("{0}: {1}", headerString, ex.Response.Headers[headerString]);
-                    }
 
-                    switch (httpResponse.StatusCode)
-                    {
-                        case HttpStatusCode.Unauthorized:
-                            _credentialsResolver.InvalidCredentials();
-                            throw new AuthenticationException("Authentication failed", ex);
-                        case HttpStatusCode.Conflict:
-                            var exToThrow = httpResponse
-                                .GetResponseStream()
-                                .FromXmlStream<ZetboxContextExceptionMessage>()
-                                .Exception
-                                .ToException();
-                            Log.Debug("Received an exception", exToThrow);
-                            throw exToThrow;
-                        case HttpStatusCode.PreconditionFailed:
-                            throw new InvalidZetboxGeneratedVersionException();
-                        case HttpStatusCode.InternalServerError:
-                            throw new WebException(ex.Message, ex);
-                    }
-                }
-                else
+                switch (ex.StatusCode)
                 {
-                    Log.Error("No headers");
+                    case HttpStatusCode.Unauthorized:
+                        _credentialsResolver.InvalidCredentials();
+                        throw new AuthenticationException("Authentication failed", ex);
+                    case HttpStatusCode.Conflict:
+                        var exToThrow = response
+                            .Content.ReadAsStream()
+                            .FromXmlStream<ZetboxContextExceptionMessage>()
+                            .Exception
+                            .ToException();
+                        Log.Debug("Received an exception", exToThrow);
+                        throw exToThrow;
+                    case HttpStatusCode.PreconditionFailed:
+                        throw new InvalidZetboxGeneratedVersionException();
+                    case HttpStatusCode.InternalServerError:
+                        throw new WebException(ex.Message, ex);
                 }
                 throw new ZetboxServerIOException(errorMsg, ex);
             }
         }
 
-        private WebRequest InitializeRequest(Uri destination)
+        private HttpClient InitializeRequest()
         {
-            var req = WebRequest.Create(destination);
+            var req = new HttpClient();
+            // req.BaseAddress = destination;
 
-            req.Method = WebRequestMethods.Http.Post;
-            req.ContentType = "application/octet-stream";
-            req.PreAuthenticate = true;
-            var httpWebRequest = req as HttpWebRequest;
-            if (httpWebRequest != null)
-            {
-                // must not be set for apache/mono server!
-                //httpWebRequest.SendChunked = true;
-                httpWebRequest.Pipelined = false;
-                httpWebRequest.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-            }
+            //req.Method = WebRequestMethods.Http.Post;
+            //req.ContentType = "application/octet-stream";
+            //req.PreAuthenticate = true;
+            //var httpWebRequest = req as HttpWebRequest;
+            //if (httpWebRequest != null)
+            //{
+            //    // must not be set for apache/mono server!
+            //    //httpWebRequest.SendChunked = true;
+            //    httpWebRequest.Pipelined = false;
+            //    httpWebRequest.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+            //}
 
             _credentialsResolver.SetCredentialsTo(req);
             return req;
         }
 
-        public byte[] SetObjects(Guid version, byte[] msg, ObjectNotificationRequest[] notificationRequests)
+        public async Task<byte[]> SetObjects(Guid version, byte[] msg, ObjectNotificationRequest[] notificationRequests)
         {
-            return MakeRequest(SetObjectsUri,
+            return await MakeRequest(SetObjectsUri,
                 reqStream =>
                 {
                     reqStream.Write(version);
@@ -155,9 +145,9 @@ namespace Zetbox.API.Client
                 });
         }
 
-        public byte[] GetObjects(Guid version, SerializableExpression query)
+        public async Task<byte[]> GetObjects(Guid version, SerializableExpression query)
         {
-            return MakeRequest(GetObjectsUri,
+            return await MakeRequest(GetObjectsUri,
               reqStream =>
               {
                   reqStream.Write(version);
@@ -166,12 +156,12 @@ namespace Zetbox.API.Client
               });
         }
 
-        public byte[] GetListOf(Guid version, SerializableType type, int ID, string property)
+        public async Task<byte[]> GetListOf(Guid version, SerializableType type, int ID, string property)
         {
             if (type == null) throw new ArgumentNullException("type");
             if (String.IsNullOrEmpty(property)) throw new ArgumentNullException("property");
 
-            return MakeRequest(GetListOfUri,
+            return await MakeRequest(GetListOfUri,
                 reqStream =>
                 {
                     reqStream.Write(version);
@@ -182,9 +172,9 @@ namespace Zetbox.API.Client
                 });
         }
 
-        public byte[] FetchRelation(Guid version, Guid relId, int role, int ID)
+        public async Task<byte[]> FetchRelation(Guid version, Guid relId, int role, int ID)
         {
-            return MakeRequest(FetchRelationUri,
+            return await MakeRequest(FetchRelationUri,
                 reqStream =>
                 {
                     reqStream.Write(version);
@@ -195,38 +185,42 @@ namespace Zetbox.API.Client
                 });
         }
 
-        public Stream GetBlobStream(Guid version, int ID)
+        public async Task<Stream> GetBlobStream(Guid version, int ID)
         {
-            var req = InitializeRequest(new Uri(String.Format("{0}?id={1}", GetBlobStreamUri.AbsoluteUri, ID)));
+            using var req = InitializeRequest();
             try
             {
-                using (var reqStream = req.GetRequestStream())
+                HttpResponseMessage response;
+
+                using (var reqStream = new MemoryStream())
                 using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
                 {
                     reqWriter.Write(version);
+                    response = await req.PostAsync(new Uri(String.Format("{0}?id={1}", GetBlobStreamUri.AbsoluteUri, ID)), new StreamContent(reqStream));
                 }
-                using (var response = req.GetResponse())
-                using (var stream = response.GetResponseStream())
+                using (var stream = response.Content.ReadAsStream())
                 {
                     var result = new MemoryStream();
                     stream.CopyAllTo(result);
                     return result;
                 }
             }
-            catch (WebException ex)
+            catch (HttpRequestException ex)
             {
-                var errorMsg = String.Format("Error when accessing server({0}): {1}: {2}", GetBlobStreamUri, ex.Status, ex.Response);
+                var errorMsg = String.Format("Error when accessing server({0}): {1}", GetBlobStreamUri, ex.StatusCode);
                 Log.Error(errorMsg);
                 throw new InvalidOperationException(errorMsg, ex);
             }
         }
 
-        public ZetboxService.BlobResponse SetBlobStream(ZetboxService.BlobMessage request)
+        public async Task<ZetboxService.BlobResponse> SetBlobStream(ZetboxService.BlobMessage request)
         {
             if (request == null) throw new ArgumentNullException("request");
 
-            var req = InitializeRequest(SetBlobStreamUri);
-            using (var reqStream = req.GetRequestStream())
+            using var req = InitializeRequest();
+            HttpResponseMessage response;
+
+            using (var reqStream = new MemoryStream())
             using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
             using (var upload = new MemoryStream())
             {
@@ -236,11 +230,12 @@ namespace Zetbox.API.Client
                 request.Stream.CopyAllTo(upload);
                 reqWriter.Write(upload.ToArray());
                 reqWriter.WriteRaw(Encoding.ASCII.GetBytes("\n"));// required for basic.authenticated POST to apache
+
+                response = await req.PostAsync(SetBlobStreamUri, new StreamContent(reqStream));
             }
             try
             {
-                using (var response = req.GetResponse())
-                using (var input = response.GetResponseStream())
+                using (var input = response.Content.ReadAsStream())
                 using (var reader = _readerFactory.Invoke(new BinaryReader(input)))
                 {
                     int id;
@@ -256,20 +251,22 @@ namespace Zetbox.API.Client
                     };
                 }
             }
-            catch (WebException ex)
+            catch (HttpRequestException ex)
             {
-                var errorMsg = String.Format("Error when accessing server({0}): {1}: {2}", SetBlobStreamUri, ex.Status, ex.Response);
+                var errorMsg = String.Format("Error when accessing server({0}): {1}", SetBlobStreamUri, ex.StatusCode);
                 Log.Error(errorMsg);
                 throw new ApplicationException(errorMsg, ex);
             }
         }
 
-        public byte[] InvokeServerMethod(out byte[] retChangedObjects, Guid version, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests)
+        public async Task<Tuple<byte[], byte[]>> InvokeServerMethod(Guid version, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests)
         {
             if (type == null) throw new ArgumentNullException("type");
 
-            var req = InitializeRequest(InvokeServerMethodUri);
-            using (var reqStream = req.GetRequestStream())
+            using var req = InitializeRequest();
+            HttpResponseMessage response;
+
+            using (var reqStream = new MemoryStream())
             using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
             {
                 reqWriter.Write(version);
@@ -280,20 +277,22 @@ namespace Zetbox.API.Client
                 reqWriter.Write(parameter);
                 reqWriter.Write(changedObjects);
                 reqWriter.Write(notificationRequests);
+
+                response = await req.PostAsync(InvokeServerMethodUri, new StreamContent(reqStream));
             }
             try
             {
-                using (var response = req.GetResponse())
-                using (var input = response.GetResponseStream())
+                using (var input = response.Content.ReadAsStream())
                 using (var reader = _readerFactory.Invoke(new BinaryReader(input)))
                 {
+                    byte[] retChangedObjects;
                     reader.Read(out retChangedObjects);
-                    return reader.ReadByteArray();
+                    return new Tuple<byte[], byte[]>(reader.ReadByteArray(), retChangedObjects);
                 }
             }
-            catch (WebException ex)
+            catch (HttpRequestException ex)
             {
-                var errorMsg = String.Format("Error when accessing server({0}): {1}: {2}", InvokeServerMethodUri, ex.Status, ex.Response);
+                var errorMsg = String.Format("Error when accessing server({0}): {1}", InvokeServerMethodUri, ex.StatusCode);
                 Log.Error(errorMsg);
                 throw new ApplicationException(errorMsg, ex);
             }

@@ -5,6 +5,7 @@ namespace Zetbox.API.AbstractConsumerTests
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
+    using System.Net.Http;
     using System.Text;
     using Zetbox.API.Client;
 
@@ -17,10 +18,9 @@ namespace Zetbox.API.AbstractConsumerTests
         {
         }
 
-        public void SetCredentialsTo(WebRequest req)
+        public void SetCredentialsTo(HttpClient req)
         {
-            req.PreAuthenticate = true; // always send credentials, reduces startup and testing overhead
-            req.Credentials = new NetworkCredential("jenkins", "jenkins");
+            req.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes("jenkins:jenkins")));
         }
 
         public void InvalidCredentials()

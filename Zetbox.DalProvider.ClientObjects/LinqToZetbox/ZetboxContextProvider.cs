@@ -23,6 +23,7 @@ namespace Zetbox.DalProvider.Client
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Client;
@@ -66,32 +67,23 @@ namespace Zetbox.DalProvider.Client
 
         #region Operations GetListOf/GetList/GetObject/InvokeServerMethod
 
-        internal ZbTask<List<IDataObject>> GetListOfCallAsync(int ID, string propertyName)
+        internal async Task<List<IDataObject>> GetListOfCallAsync(int ID, string propertyName)
         {
             // ResetState();
-            var serviceTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
+            var serviceTask = await _proxy.GetListOf(_type, ID, propertyName);
+
+            if (_context.IsDisposed) return new List<IDataObject>();
+
+            _context.RecordNotifications();
+            try
             {
-                List<IStreamable> auxObjects;
-                var result = _proxy.GetListOf(_type, ID, propertyName, out auxObjects).ToList();
-                return new Tuple<List<IDataObject>, List<IStreamable>>(result, auxObjects);
-            });
-
-            return new ZbTask<List<IDataObject>>(serviceTask)
-                .OnResult(t =>
-                {
-                    if (_context.IsDisposed) return;
-
-                    _context.RecordNotifications();
-                    try
-                    {
-                        serviceTask.Result.Item2.Cast<IPersistenceObject>().ForEach(obj => _context.AttachRespectingIsolationLevel(obj));
-                        t.Result = serviceTask.Result.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
-                    }
-                    finally
-                    {
-                        _context.PlaybackNotifications();
-                    }
-                });
+                serviceTask.Item2.Cast<IPersistenceObject>().ForEach(obj => _context.AttachRespectingIsolationLevel(obj));
+                return serviceTask.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
+            }
+            finally
+            {
+                _context.PlaybackNotifications();
+            }
         }
 
         /// <summary>
@@ -99,60 +91,49 @@ namespace Zetbox.DalProvider.Client
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        internal ZbTask<List<T>> GetListCallAsync<T>(Expression query)
+        internal async Task<List<T>> GetListCallAsync<T>(Expression query)
         {
             if (!typeof(T).IsIPersistenceObject()) throw new NotSupportedException("Server-side projections are not supported. Use a server-side method or a client-side projection");
 
             int objectCount = 0;
             var ticks = perfCounter.IncrementQuery(_type);
-
-            if (Logging.Linq.IsInfoEnabled)
+            try
             {
-                Logging.Linq.Info(query.ToString());
+                if (Logging.Linq.IsInfoEnabled)
+                {
+                    Logging.Linq.Info(query.ToString());
+                }
+
+                query = TransformExpression(query);
+
+                ValidateServerExpression.CheckValid(query);
+
+                var ftDetector = new FulltextDetector();
+                ftDetector.Visit(query);
+
+                var getListTask = await _proxy.GetObjects(_context, _type, query);
+
+                if (_context.IsDisposed) return new List<T>();
+
+                _context.RecordNotifications();
+
+                // prepare caches
+                getListTask.Item2.Cast<IPersistenceObject>().ForEach(obj => _context.AttachRespectingIsolationLevel(obj));
+                var serviceResult = getListTask.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
+                objectCount = serviceResult.Count;
+
+                // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
+                var result = _context.IsModified && !ftDetector.IsFulltext
+                           ? QueryFromLocalObjectsHack(_type, query).Cast<IDataObject>().ToList()
+                           : serviceResult;
+
+                return result.Cast<T>().ToList();
             }
-
-            query = TransformExpression(query);
-
-            ValidateServerExpression.CheckValid(query);
-
-            var ftDetector = new FulltextDetector();
-            ftDetector.Visit(query);
-
-            var getListTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
-                {
-                    List<IStreamable> auxObjectsObjects;
-                    var objects = _proxy.GetObjects(_context, _type, query, out auxObjectsObjects).ToList();
-                    return new Tuple<List<IDataObject>, List<IStreamable>>(objects, auxObjectsObjects);
-                });
-
-            return new ZbTask<List<T>>(getListTask)
-                .OnResult(t =>
-                {
-                    if (_context.IsDisposed) return;
-
-                    _context.RecordNotifications();
-
-                    try
-                    {
-                        // prepare caches
-                        getListTask.Result.Item2.Cast<IPersistenceObject>().ForEach(obj => _context.AttachRespectingIsolationLevel(obj));
-                        var serviceResult = getListTask.Result.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
-                        objectCount = serviceResult.Count;
-
-                        // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
-                        var result = _context.IsModified && !ftDetector.IsFulltext
-                                   ? QueryFromLocalObjectsHack(_type, query).Cast<IDataObject>().ToList()
-                                   : serviceResult;
-
-                        t.Result = result.Cast<T>().ToList();
-                    }
-                    finally
-                    {
-                        _context.PlaybackNotifications();
-                        perfCounter.DecrementQuery(_type, objectCount, ticks);
-                    }
-                });
-
+            finally
+            {
+                _context.PlaybackNotifications();
+                perfCounter.DecrementQuery(_type, objectCount, ticks);
+            }
         }
 
         /// <summary>
@@ -160,80 +141,64 @@ namespace Zetbox.DalProvider.Client
         /// </summary>
         /// <param name="query"></param>
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
-        private ZbTask<T> GetObjectCallAsync<T>(Expression query)
+        private async Task<T> GetObjectCallAsync<T>(Expression query)
         {
             if (!typeof(T).IsIPersistenceObject()) throw new NotSupportedException("Server-side aggregations are not supported. Use a server-side method or a client-side aggregation");
 
             var ticks = perfCounter.IncrementQuery(_type);
-
-            if (Logging.Linq.IsInfoEnabled)
+            T result = default(T);
+            try
             {
-                Logging.Linq.Info(query.ToString());
-            }
-
-            // Visit
-            query = TransformExpression(query);
-
-            ValidateServerExpression.CheckValid(query);
-
-            // Try to find a local object first
-            var result = ExecuteFromLocalObjects<T>(query);
-
-            ZbTask<T> task;
-            // If nothing found local -> goto Server
-            if (result == null)
-            {
-                ZbTask<Tuple<List<IDataObject>, List<IStreamable>>> getObjectTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
+                if (Logging.Linq.IsInfoEnabled)
                 {
-                    List<IStreamable> auxObjects;
-                    List<IDataObject> serviceResult = _proxy.GetObjects(_context, _type, query, out auxObjects).ToList();
-                    return new Tuple<List<IDataObject>, List<IStreamable>>(serviceResult, auxObjects);
-                })
-                .OnResult(t =>
+                    Logging.Linq.Info(query.ToString());
+                }
+
+                // Visit
+                query = TransformExpression(query);
+
+                ValidateServerExpression.CheckValid(query);
+
+                // Try to find a local object first
+                result = ExecuteFromLocalObjects<T>(query);
+
+                // If nothing found local -> goto Server
+                if (result == null)
                 {
-                    if (_context.IsDisposed) return;
+                    var serviceResult = await _proxy.GetObjects(_context, _type, query);
+                    if (_context.IsDisposed) return default(T);
 
                     _context.RecordNotifications();
                     try
                     {
-                        t.Result.Item2.Cast<IPersistenceObject>().ForEach(obj => _context.AttachRespectingIsolationLevel(obj));
-                        var serviceResult = t.Result.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
-                        result = (T)serviceResult.FirstOrDefault();
+                        serviceResult.Item2.Cast<IPersistenceObject>().ForEach(obj => _context.AttachRespectingIsolationLevel(obj));
+                        result = (T)serviceResult.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList().FirstOrDefault();
                     }
                     finally
                     {
                         _context.PlaybackNotifications();
                     }
-                });
-                task = new ZbTask<T>(getObjectTask);
-            }
-            else
-            {
-                task = new ZbTask<T>(ZbTask.Synchron, () => default(T));
-            }
-
-            return task.OnResult(t =>
-            {
-                if (_context.IsDisposed) return;
-
-                try
-                {
-                    if (result == null
-                        && (query.IsMethodCallExpression("First")
-                            || query.IsMethodCallExpression("Single")))
-                    {
-                        throw new InvalidOperationException("No element found");
-                    }
-                    else
-                    {
-                        t.Result = result;
-                    }
                 }
-                finally
+                else
                 {
-                    perfCounter.DecrementQuery(_type, result == null ? 0 : 1, ticks);
+                    result = default(T);
                 }
-            });
+
+                if (result == null
+                    && (query.IsMethodCallExpression("First")
+                        || query.IsMethodCallExpression("Single")))
+                {
+                    throw new InvalidOperationException("No element found");
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            finally
+            {
+                perfCounter.DecrementQuery(_type, result == null ? 0 : 1, ticks);
+            }
         }
 
         #region Local Object handling
@@ -326,13 +291,12 @@ namespace Zetbox.DalProvider.Client
             return this.ExecuteAsync(expression).Result;
         }
 
-        public ZbTask<object> ExecuteAsync(Expression expression)
+        public async Task<object> ExecuteAsync(Expression expression)
         {
-            var task = GetObjectCallAsync<IDataObject>(expression);
-            return new ZbTask<object>(task).OnResult(t => t.Result = task.Result);
+            return await GetObjectCallAsync<IDataObject>(expression);
         }
 
-        public ZbTask<TResult> ExecuteAsync<TResult>(Expression expression)
+        public Task<TResult> ExecuteAsync<TResult>(Expression expression)
         {
             return GetObjectCallAsync<TResult>(expression);
         }

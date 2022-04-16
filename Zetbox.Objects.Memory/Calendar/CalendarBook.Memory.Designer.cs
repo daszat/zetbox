@@ -83,15 +83,15 @@ namespace Zetbox.App.Calendar
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -99,7 +99,7 @@ namespace Zetbox.App.Calendar
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnChangedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -280,15 +280,15 @@ namespace Zetbox.App.Calendar
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -296,7 +296,7 @@ namespace Zetbox.App.Calendar
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnCreatedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -519,8 +519,8 @@ namespace Zetbox.App.Calendar
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchGroupReadersTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchGroupReadersAsync()
+        System.Threading.Tasks.Task _triggerFetchGroupReadersTask;
+        public System.Threading.Tasks.Task TriggerFetchGroupReadersAsync()
         {
             if (_triggerFetchGroupReadersTask != null) return _triggerFetchGroupReadersTask;
             _triggerFetchGroupReadersTask = Context.FetchRelationAsync<Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryMemoryImpl>(new Guid("775789a3-032e-478e-a01e-ec9f51580c5d"), RelationEndRole.A, this);
@@ -565,8 +565,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchGroupWritersTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchGroupWritersAsync()
+        System.Threading.Tasks.Task _triggerFetchGroupWritersTask;
+        public System.Threading.Tasks.Task TriggerFetchGroupWritersAsync()
         {
             if (_triggerFetchGroupWritersTask != null) return _triggerFetchGroupWritersTask;
             _triggerFetchGroupWritersTask = Context.FetchRelationAsync<Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryMemoryImpl>(new Guid("93f20ca2-6935-41bc-8f80-7a441b3cf69d"), RelationEndRole.A, this);
@@ -769,15 +769,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchOwnerTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchOwnerAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchOwnerTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchOwnerAsync()
         {
             if (_triggerFetchOwnerTask != null) return _triggerFetchOwnerTask;
 
             if (_fk_Owner.HasValue)
                 _triggerFetchOwnerTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Owner.Value);
             else
-                _triggerFetchOwnerTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchOwnerTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchOwnerTask.OnResult(t =>
             {
@@ -785,7 +785,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnOwner_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -864,8 +864,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchReadersTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchReadersAsync()
+        System.Threading.Tasks.Task _triggerFetchReadersTask;
+        public System.Threading.Tasks.Task TriggerFetchReadersAsync()
         {
             if (_triggerFetchReadersTask != null) return _triggerFetchReadersTask;
             _triggerFetchReadersTask = Context.FetchRelationAsync<Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryMemoryImpl>(new Guid("385c829b-02d6-48d0-8184-b3b5df6c25be"), RelationEndRole.A, this);
@@ -910,8 +910,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchWritersTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchWritersAsync()
+        System.Threading.Tasks.Task _triggerFetchWritersTask;
+        public System.Threading.Tasks.Task TriggerFetchWritersAsync()
         {
             if (_triggerFetchWritersTask != null) return _triggerFetchWritersTask;
             _triggerFetchWritersTask = Context.FetchRelationAsync<Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryMemoryImpl>(new Guid("af8843f9-0085-47ec-bcb6-f0f8a22a2c03"), RelationEndRole.A, this);
@@ -1101,7 +1101,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

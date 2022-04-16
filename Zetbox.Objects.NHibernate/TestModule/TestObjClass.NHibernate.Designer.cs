@@ -255,9 +255,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchObjectPropAsync()
+    public System.Threading.Tasks.Task TriggerFetchObjectPropAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde>(this.ObjectProp);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Kunde>(this.ObjectProp);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
@@ -600,7 +600,7 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

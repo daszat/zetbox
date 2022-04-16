@@ -141,15 +141,15 @@ namespace Zetbox.App.Test
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One> _triggerFetchOneSideTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One> TriggerFetchOneSideAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Test.One_to_N_relations_One> _triggerFetchOneSideTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Test.One_to_N_relations_One> TriggerFetchOneSideAsync()
         {
             if (_triggerFetchOneSideTask != null) return _triggerFetchOneSideTask;
 
             if (_fk_OneSide.HasValue)
                 _triggerFetchOneSideTask = Context.FindAsync<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
             else
-                _triggerFetchOneSideTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchOneSideTask = new System.Threading.Tasks.Task<Zetbox.App.Test.One_to_N_relations_One>(() => null);
 
             _triggerFetchOneSideTask.OnResult(t =>
             {
@@ -157,7 +157,7 @@ namespace Zetbox.App.Test
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Test.One_to_N_relations_One>(t.Result);
                     OnOneSide_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -322,7 +322,7 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

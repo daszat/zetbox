@@ -58,8 +58,8 @@ namespace Zetbox.App.Base
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchAccessControlListTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchAccessControlListAsync()
+        System.Threading.Tasks.Task _triggerFetchAccessControlListTask;
+        public System.Threading.Tasks.Task TriggerFetchAccessControlListAsync()
         {
             if (_triggerFetchAccessControlListTask != null) return _triggerFetchAccessControlListTask;
 
@@ -74,7 +74,7 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchAccessControlListTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchAccessControlListTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.Base.AccessControl>();
                 });
@@ -151,15 +151,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
         private Guid? _fk_guid_BaseObjectClass = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchBaseObjectClassTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> TriggerFetchBaseObjectClassAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> _triggerFetchBaseObjectClassTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> TriggerFetchBaseObjectClassAsync()
         {
             if (_triggerFetchBaseObjectClassTask != null) return _triggerFetchBaseObjectClassTask;
 
             if (_fk_BaseObjectClass.HasValue)
                 _triggerFetchBaseObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
             else
-                _triggerFetchBaseObjectClassTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchBaseObjectClassTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
 
             _triggerFetchBaseObjectClassTask.OnResult(t =>
             {
@@ -167,7 +167,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(t.Result);
                     OnBaseObjectClass_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -337,15 +337,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> _triggerFetchDefaultViewModelDescriptorTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> TriggerFetchDefaultViewModelDescriptorAsync()
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> _triggerFetchDefaultViewModelDescriptorTask;
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> TriggerFetchDefaultViewModelDescriptorAsync()
         {
             if (_triggerFetchDefaultViewModelDescriptorTask != null) return _triggerFetchDefaultViewModelDescriptorTask;
 
             if (_fk_DefaultViewModelDescriptor.HasValue)
                 _triggerFetchDefaultViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
             else
-                _triggerFetchDefaultViewModelDescriptorTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchDefaultViewModelDescriptorTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor>(() => null);
 
             _triggerFetchDefaultViewModelDescriptorTask.OnResult(t =>
             {
@@ -353,7 +353,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(t.Result);
                     OnDefaultViewModelDescriptor_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -436,8 +436,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchFilterConfigurationsTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchFilterConfigurationsAsync()
+        System.Threading.Tasks.Task _triggerFetchFilterConfigurationsTask;
+        public System.Threading.Tasks.Task TriggerFetchFilterConfigurationsAsync()
         {
             if (_triggerFetchFilterConfigurationsTask != null) return _triggerFetchFilterConfigurationsTask;
 
@@ -452,7 +452,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             }
             else
             {
-                _triggerFetchFilterConfigurationsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchFilterConfigurationsTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.GUI.ObjectClassFilterConfiguration>();
                 });
@@ -787,8 +787,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchSubClassesTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchSubClassesAsync()
+        System.Threading.Tasks.Task _triggerFetchSubClassesTask;
+        public System.Threading.Tasks.Task TriggerFetchSubClassesAsync()
         {
             if (_triggerFetchSubClassesTask != null) return _triggerFetchSubClassesTask;
 
@@ -803,7 +803,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             }
             else
             {
-                _triggerFetchSubClassesTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchSubClassesTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.Base.ObjectClass>();
                 });
@@ -1624,7 +1624,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

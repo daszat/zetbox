@@ -112,8 +112,8 @@ namespace Zetbox.App.Test
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchTestbogenTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchTestbogenAsync()
+        System.Threading.Tasks.Task _triggerFetchTestbogenTask;
+        public System.Threading.Tasks.Task TriggerFetchTestbogenAsync()
         {
             if (_triggerFetchTestbogenTask != null) return _triggerFetchTestbogenTask;
             _triggerFetchTestbogenTask = Context.FetchRelationAsync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.A, this);
@@ -187,7 +187,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestStudent> OnTe
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

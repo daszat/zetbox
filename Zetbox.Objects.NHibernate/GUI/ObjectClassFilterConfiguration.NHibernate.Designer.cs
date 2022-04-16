@@ -168,9 +168,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for ObjectClass's guid, used on import only</summary>
         private Guid? _fk_guid_ObjectClass = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchObjectClassAsync()
+    public System.Threading.Tasks.Task TriggerFetchObjectClassAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.ObjectClass);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(this.ObjectClass);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
@@ -359,7 +359,7 @@ namespace Zetbox.App.GUI
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

@@ -84,15 +84,15 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_CompoundObjectDefinition = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject> _triggerFetchCompoundObjectDefinitionTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject> TriggerFetchCompoundObjectDefinitionAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.CompoundObject> _triggerFetchCompoundObjectDefinitionTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.CompoundObject> TriggerFetchCompoundObjectDefinitionAsync()
         {
             if (_triggerFetchCompoundObjectDefinitionTask != null) return _triggerFetchCompoundObjectDefinitionTask;
 
             if (_fk_CompoundObjectDefinition.HasValue)
                 _triggerFetchCompoundObjectDefinitionTask = Context.FindAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value);
             else
-                _triggerFetchCompoundObjectDefinitionTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchCompoundObjectDefinitionTask = new System.Threading.Tasks.Task<Zetbox.App.Base.CompoundObject>(() => null);
 
             _triggerFetchCompoundObjectDefinitionTask.OnResult(t =>
             {
@@ -100,7 +100,7 @@ namespace Zetbox.App.Base
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.CompoundObject>(t.Result);
                     OnCompoundObjectDefinition_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -713,7 +713,7 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

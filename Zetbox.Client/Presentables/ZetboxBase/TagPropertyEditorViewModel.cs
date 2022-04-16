@@ -24,6 +24,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Net.Mail;
     using System.Text;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Utils;
@@ -55,7 +56,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private ZbTask<ReadOnlyObservableCollection<TagEntryViewModel>> _getPossibleValuesROTask;
+        private System.Threading.Tasks.Task<ReadOnlyObservableCollection<TagEntryViewModel>> _getPossibleValuesROTask;
         private ReadOnlyObservableCollection<TagEntryViewModel> _possibleValuesRO;
         private ObservableCollection<TagEntryViewModel> _possibleValues;
         public ReadOnlyObservableCollection<TagEntryViewModel> PossibleValues
@@ -102,33 +103,33 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (_getPossibleValuesROTask == null)
             {
-                var task = GetPossibleValuesAsync();
-                _getPossibleValuesROTask = new ZbTask<ReadOnlyObservableCollection<TagEntryViewModel>>(task);
-                _getPossibleValuesROTask.OnResult(t =>
+                _getPossibleValuesROTask = Task.Run(async () =>
                 {
-                    _possibleValues = new ObservableCollection<TagEntryViewModel>(task.Result);
+                    var task = await GetPossibleValuesAsync();
+
+                    _possibleValues = new ObservableCollection<TagEntryViewModel>(task);
                     _possibleValuesRO = new ReadOnlyObservableCollection<TagEntryViewModel>(_possibleValues);
                     EnsureValuePossible(Value);
                     OnPropertyChanged("PossibleValuesAsync");
                     OnPropertyChanged("FilteredPossibleValuesAsync");
+
+                    return _possibleValuesRO;
                 });
             }
         }
 
-        protected virtual ZbTask<List<TagEntryViewModel>> GetPossibleValuesAsync()
+        protected virtual System.Threading.Tasks.Task<List<TagEntryViewModel>> GetPossibleValuesAsync()
         {
-            var fetchTask = DataContext
-                                .GetQuery<TagCache>()
-                                .OrderBy(t => t.Name)
-                                .ToListAsync();
-            return new ZbTask<List<TagEntryViewModel>>(fetchTask)
-                .OnResult(t =>
-                {
-                    t.Result = fetchTask
-                        .Result
-                        .Select(tag => new TagEntryViewModel(tag, this, false)) // using the very basic & simple view model
-                        .ToList();
-                });
+            return Task.Run(async () =>
+            {
+                var fetchTask = await DataContext
+                                    .GetQuery<TagCache>()
+                                    .OrderBy(t => t.Name)
+                                    .ToListAsync();
+                return fetchTask
+                    .Select(tag => new TagEntryViewModel(tag, this, false)) // using the very basic & simple view model
+                    .ToList();
+            });
         }
 
         public void ResetPossibleValues()
@@ -172,7 +173,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         newTag.Name = item;
                         _possibleValues.Add(new TagEntryViewModel(newTag, this, true));
                     }
-                    else if(tagItem != null)
+                    else if (tagItem != null)
                     {
                         tagItem.IsChecked = true;
                     }

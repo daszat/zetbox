@@ -81,9 +81,9 @@ namespace Zetbox.App.Test
     
         private OneNRelationList<Zetbox.App.Test.OrderedNEnd> _NEnds;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchNEndsAsync()
+        public System.Threading.Tasks.Task TriggerFetchNEndsAsync()
         {
-            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Test.OrderedNEnd>>(this.NEnds);
+            return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Test.OrderedNEnd>>(this.NEnds);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> OnNEnds_PostSetter;
@@ -194,7 +194,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

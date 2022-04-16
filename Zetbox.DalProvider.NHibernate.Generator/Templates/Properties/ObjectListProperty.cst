@@ -72,9 +72,9 @@
         private bool <%= name %>_was_eagerLoaded = false;
 <% } %>
 
-        public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+        public System.Threading.Tasks.Task TriggerFetch<%= name %>Async()
         {
-            return new Zetbox.API.Async.ZbTask<<%= exposedListType %><<%= referencedInterface %>>>(this.<%= name %>);
+            return System.Threading.Tasks.Task.FromResult<<%= exposedListType %><<%= referencedInterface %>>>(this.<%= name %>);
         }
 
 <% AddSerialization(serializationList, name, eagerLoading); %>

@@ -247,7 +247,7 @@ namespace Zetbox.API.Server.Mocks
         {
             throw new NotImplementedException();
         }
-        public ZbTask TriggerFetch(string propName)
+        public System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             throw new NotImplementedException();
         }

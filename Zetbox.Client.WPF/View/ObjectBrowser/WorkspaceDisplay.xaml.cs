@@ -20,6 +20,7 @@ namespace Zetbox.Client.WPF.View.ObjectBrowser
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
@@ -82,7 +83,7 @@ namespace Zetbox.Client.WPF.View.ObjectBrowser
             get { return new[] { "FileDrop" }; }
         }
 
-        public bool OnDrop(string format, object data)
+        public Task<bool> OnDrop(string format, object data)
         {
             return ViewModel.OnDrop(data);
         }

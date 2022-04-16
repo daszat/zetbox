@@ -147,9 +147,9 @@ namespace Zetbox.App.Calendar
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchChangedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.ChangedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -332,9 +332,9 @@ namespace Zetbox.App.Calendar
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchCreatedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.CreatedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -675,9 +675,9 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    public System.Threading.Tasks.Task TriggerFetchModuleAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(this.Module);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -1039,9 +1039,9 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for WorkSchedule's guid, used on import only</summary>
         private Guid? _fk_guid_WorkSchedule = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchWorkScheduleAsync()
+    public System.Threading.Tasks.Task TriggerFetchWorkScheduleAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.WorkSchedule>(this.WorkSchedule);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.WorkSchedule>(this.WorkSchedule);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
@@ -1217,7 +1217,7 @@ namespace Zetbox.App.Calendar
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

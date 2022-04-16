@@ -283,9 +283,9 @@ namespace Zetbox.App.Base
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchChangedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.ChangedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -461,9 +461,9 @@ namespace Zetbox.App.Base
         private List<int> ConstraintsIds;
         private bool Constraints_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchConstraintsAsync()
+        public System.Threading.Tasks.Task TriggerFetchConstraintsAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Constraint>>(this.Constraints);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Base.Constraint>>(this.Constraints);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConstraints_PostSetter;
@@ -565,9 +565,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchCreatedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.CreatedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -826,9 +826,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>Backing store for DefaultValue's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultValue = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchDefaultValueAsync()
+    public System.Threading.Tasks.Task TriggerFetchDefaultValueAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DefaultPropertyValue>(this.DefaultValue);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DefaultPropertyValue>(this.DefaultValue);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultValue
@@ -1145,9 +1145,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>Backing store for FilterConfiguration's guid, used on import only</summary>
         private Guid? _fk_guid_FilterConfiguration = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchFilterConfigurationAsync()
+    public System.Threading.Tasks.Task TriggerFetchFilterConfigurationAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.PropertyFilterConfiguration>(this.FilterConfiguration);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.PropertyFilterConfiguration>(this.FilterConfiguration);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FilterConfiguration
@@ -1370,9 +1370,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    public System.Threading.Tasks.Task TriggerFetchModuleAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(this.Module);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -1560,9 +1560,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>Backing store for ObjectClass's guid, used on import only</summary>
         private Guid? _fk_guid_ObjectClass = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchObjectClassAsync()
+    public System.Threading.Tasks.Task TriggerFetchObjectClassAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType>(this.ObjectClass);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DataType>(this.ObjectClass);
     }
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -1699,9 +1699,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>Backing store for RequestedKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedKind = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchRequestedKindAsync()
+    public System.Threading.Tasks.Task TriggerFetchRequestedKindAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.RequestedKind);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(this.RequestedKind);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
@@ -1866,9 +1866,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>Backing store for ValueModelDescriptor's guid, used on import only</summary>
         private Guid? _fk_guid_ValueModelDescriptor = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchValueModelDescriptorAsync()
+    public System.Threading.Tasks.Task TriggerFetchValueModelDescriptorAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.ValueModelDescriptor);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(this.ValueModelDescriptor);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ValueModelDescriptor
@@ -2427,7 +2427,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

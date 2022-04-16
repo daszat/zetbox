@@ -84,15 +84,15 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_Group = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group> _triggerFetchGroupTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group> TriggerFetchGroupAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Group> _triggerFetchGroupTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> TriggerFetchGroupAsync()
         {
             if (_triggerFetchGroupTask != null) return _triggerFetchGroupTask;
 
             if (_fk_Group.HasValue)
                 _triggerFetchGroupTask = Context.FindAsync<Zetbox.App.Base.Group>(_fk_Group.Value);
             else
-                _triggerFetchGroupTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchGroupTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Group>(() => null);
 
             _triggerFetchGroupTask.OnResult(t =>
             {
@@ -100,7 +100,7 @@ namespace Zetbox.App.Base
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Group>(t.Result);
                     OnGroup_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -215,7 +215,7 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

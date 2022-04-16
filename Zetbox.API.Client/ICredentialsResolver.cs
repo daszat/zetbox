@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
+using System.Net.Http;
 
 namespace Zetbox.API.Client
 {
@@ -31,7 +32,7 @@ namespace Zetbox.API.Client
         /// Initializes the given WebRequest
         /// </summary>
         /// <param name="req">WebRequest to initialize</param>
-        void SetCredentialsTo(WebRequest req);
+        void SetCredentialsTo(HttpClient req);
 
         /// <summary>
         /// Called by the using class to report invalid credentials.

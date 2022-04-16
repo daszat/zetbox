@@ -156,9 +156,9 @@ namespace Zetbox.App.Base
 		// ignored, but required for Serialization
         private bool Properties_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
+        public System.Threading.Tasks.Task TriggerFetchPropertiesAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Property>>(this.Properties);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Base.Property>>(this.Properties);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> OnProperties_PostSetter;
@@ -337,7 +337,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> 
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

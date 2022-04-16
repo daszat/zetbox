@@ -83,15 +83,15 @@ namespace Zetbox.App.Test
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> _triggerFetchOneEndTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> TriggerFetchOneEndAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Test.OrderedOneEnd> _triggerFetchOneEndTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Test.OrderedOneEnd> TriggerFetchOneEndAsync()
         {
             if (_triggerFetchOneEndTask != null) return _triggerFetchOneEndTask;
 
             if (_fk_OneEnd.HasValue)
                 _triggerFetchOneEndTask = Context.FindAsync<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
             else
-                _triggerFetchOneEndTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchOneEndTask = new System.Threading.Tasks.Task<Zetbox.App.Test.OrderedOneEnd>(() => null);
 
             _triggerFetchOneEndTask.OnResult(t =>
             {
@@ -99,7 +99,7 @@ namespace Zetbox.App.Test
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Test.OrderedOneEnd>(t.Result);
                     OnOneEnd_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -322,7 +322,7 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

@@ -19,6 +19,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.Client.Models;
@@ -204,7 +205,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public virtual bool OnDrop(object data)
+        public virtual Task<bool> OnDrop(object data)
         {
             if (data is IDataObject[])
             {
@@ -212,13 +213,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 var obj = lst.First();
                 if (obj.Context != DataContext)
                 {
-                    if (obj.ObjectState == DataObjectState.New) return false;
+                    if (obj.ObjectState == DataObjectState.New) return Task.FromResult(false);
                     obj = DataContext.Find(DataContext.GetInterfaceType(obj), obj.ID);
                 }
                 Object.SetObject(obj);
                 NotifyValueChanged();
             }
-            return false;
+            return Task.FromResult(false);
         }
 
         public virtual object DoDragDrop()

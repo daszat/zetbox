@@ -52,7 +52,7 @@ namespace Zetbox.Server.HttpService.Controllers
         }
 
         [HttpPost]
-        public void SetObjects()
+        public async Task SetObjects()
         {
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
@@ -62,13 +62,13 @@ namespace Zetbox.Server.HttpService.Controllers
                 ObjectNotificationRequest[] notificationRequests;
                 reader.Read(out notificationRequests);
                 Log.DebugFormat("SetObjects(byte[{0}], ObjectNotificationRequest[{1}])", msg.Length, notificationRequests.Length);
-                var result = service.SetObjects(version, msg, notificationRequests);
+                var result = await service.SetObjects(version, msg, notificationRequests);
 
                 SendByteArray(Response, result, writerFactory);
             }
         }
         [HttpPost]
-        public void GetObjects()
+        public async Task GetObjects()
         {
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
@@ -80,13 +80,13 @@ namespace Zetbox.Server.HttpService.Controllers
                 reader.Read(out query, iftFactory);
 
                 Log.DebugFormat("GetObjects(query=[{0}])", query);
-                var result = service.GetObjects(version, query);
+                var result = await service.GetObjects(version, query);
 
                 SendByteArray(Response, result, writerFactory);
             }
         }
         [HttpPost]
-        public void GetListOf()
+        public async Task GetListOf()
         {
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
@@ -97,13 +97,13 @@ namespace Zetbox.Server.HttpService.Controllers
                 string property = reader.ReadString();
 
                 Log.DebugFormat("GetListOf(type=[{0}], ID={1}, property=[{2}])", type, ID, property);
-                var result = service.GetListOf(version, type, ID, property);
+                var result = await service.GetListOf(version, type, ID, property);
 
                 SendByteArray(Response, result, writerFactory);
             }
         }
         [HttpPost]
-        public void FetchRelation()
+        public async Task FetchRelation()
         {
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
@@ -114,26 +114,26 @@ namespace Zetbox.Server.HttpService.Controllers
                 int ID = reader.ReadInt32();
 
                 Log.DebugFormat("FetchRelation(relId=[{0}], role={1}, ID=[{2}])", relId, role, ID);
-                var result = service.FetchRelation(version, relId, role, ID);
+                var result = await service.FetchRelation(version, relId, role, ID);
                 SendByteArray(Response, result, writerFactory);
             }
         }
         [HttpPost]
-        public void GetBlobStream(int id)
+        public async Task GetBlobStream(int id)
         {
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
                 var version = reader.ReadGuid();
 
                 Log.DebugFormat("GetBlobStream(ID={0})", id);
-                var result = service.GetBlobStream(version, id);
+                var result = await service.GetBlobStream(version, id);
                 Response.StatusCode = 200;
                 Response.ContentType = "application/octet-stream";
                 result.CopyAllTo(Response.Body);
             }
         }
         [HttpPost]
-        public void SetBlobStream()
+        public async Task SetBlobStream()
         {
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
@@ -144,7 +144,7 @@ namespace Zetbox.Server.HttpService.Controllers
                 byte[] data = reader.ReadByteArray();
 
                 Log.DebugFormat("SetBlobStream(fileName=[{0}], mimeType=[{1}], Stream of {2} bytes)", fileName, mimeType, data.Length);
-                var result = service.SetBlobStream(new BlobMessage()
+                var result = await service.SetBlobStream(new BlobMessage()
                 {
                     Version = version,
                     FileName = fileName,
@@ -164,7 +164,7 @@ namespace Zetbox.Server.HttpService.Controllers
             }
         }
         [HttpPost]
-        public void InvokeServerMethod()
+        public async Task InvokeServerMethod()
         {
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
@@ -189,8 +189,10 @@ namespace Zetbox.Server.HttpService.Controllers
                     parameter.Length,
                     changedObjects.Length,
                     notificationRequests.Length);
-                byte[] retChangedObjects;
-                var result = service.InvokeServerMethod(version, type, ID, method, parameterTypes, parameter, changedObjects, notificationRequests, out retChangedObjects);
+                var response = await service.InvokeServerMethod(version, type, ID, method, parameterTypes, parameter, changedObjects, notificationRequests);
+                var result = response.Item1;
+                var retChangedObjects = response.Item2;
+
                 Log.DebugFormat("InvokeServerMethod received {0}B retChangedObjects", retChangedObjects.Length);
 
                 Response.StatusCode = 200;

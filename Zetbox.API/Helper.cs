@@ -194,7 +194,7 @@ namespace Zetbox.API
             return path.Replace('\\', Path.DirectorySeparatorChar);
         }
 
-        public static ZbTask TriggerFetch<TObject, TProperty>(this TObject obj, Expression<Func<TObject, TProperty>> property)
+        public static System.Threading.Tasks.Task TriggerFetch<TObject, TProperty>(this TObject obj, Expression<Func<TObject, TProperty>> property)
             where TObject : IDataObject
         {
             if (obj == null) throw new ArgumentNullException("obj");

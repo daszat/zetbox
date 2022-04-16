@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables.GUI
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Common.GUI;
@@ -78,28 +79,33 @@ namespace Zetbox.Client.Presentables.GUI
                 },
                 createTask: () =>
                 {
-                    var ctx = ViewModelFactory.CreateNewContext();
-                    var qryTask = ctx.GetQuery<SavedListConfiguration>()
-                            .Where(i => i.Type.ExportGuid == Parent.DataType.ExportGuid) // Parent.DataType might be from FrozenContext
-                            .Where(i => i.Owner == null || i.Owner.ID == this.CurrentPrincipal.ID)
-                            .ToListAsync();
-
-                    var result = new ZbTask<ReadOnlyCollectionShortcut<SavedListConfigViewModel>>(qryTask);
-                    result
-                        .OnResult(t =>
+                    return Task.Run(async () =>
+                    {
+                        var ctx = ViewModelFactory.CreateNewContext();
+                        try
                         {
-                            t.Result = new ReadOnlyCollectionShortcut<SavedListConfigViewModel>();
-                            foreach (var cfg in qryTask.Result)
+                            var qry = await ctx.GetQuery<SavedListConfiguration>()
+                                .Where(i => i.Type.ExportGuid == Parent.DataType.ExportGuid) // Parent.DataType might be from FrozenContext
+                                .Where(i => i.Owner == null || i.Owner.ID == this.CurrentPrincipal.ID)
+                                .ToListAsync();
+
+                            var result = new ReadOnlyCollectionShortcut<SavedListConfigViewModel>();
+                            foreach (var cfg in qry)
                             {
                                 var obj = cfg.Configuration.FromXmlString<SavedListConfigurationList>();
                                 foreach (var item in obj.Configs)
                                 {
-                                    t.Result.Rw.Add(ViewModelFactory.CreateViewModel<SavedListConfigViewModel.Factory>().Invoke(DataContext, this, item, cfg.Owner != null));
+                                    result.Rw.Add(ViewModelFactory.CreateViewModel<SavedListConfigViewModel.Factory>().Invoke(DataContext, this, item, cfg.Owner != null));
                                 }
                             }
-                        })
-                        .Finally(() => ctx.Dispose());
-                    return result;
+
+                            return result;
+                        }
+                        finally
+                        {
+                            ctx.Dispose();
+                        }
+                    });
                 },
                 set: null);
         }

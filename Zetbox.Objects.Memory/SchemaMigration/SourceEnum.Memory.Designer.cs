@@ -83,15 +83,15 @@ namespace Zetbox.App.SchemaMigration
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -99,7 +99,7 @@ namespace Zetbox.App.SchemaMigration
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnChangedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -280,15 +280,15 @@ namespace Zetbox.App.SchemaMigration
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -296,7 +296,7 @@ namespace Zetbox.App.SchemaMigration
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnCreatedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -478,15 +478,15 @@ namespace Zetbox.App.SchemaMigration
 
         private Guid? _fk_guid_DestinationValue = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry> _triggerFetchDestinationValueTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry> TriggerFetchDestinationValueAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.EnumerationEntry> _triggerFetchDestinationValueTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.EnumerationEntry> TriggerFetchDestinationValueAsync()
         {
             if (_triggerFetchDestinationValueTask != null) return _triggerFetchDestinationValueTask;
 
             if (_fk_DestinationValue.HasValue)
                 _triggerFetchDestinationValueTask = Context.FindAsync<Zetbox.App.Base.EnumerationEntry>(_fk_DestinationValue.Value);
             else
-                _triggerFetchDestinationValueTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchDestinationValueTask = new System.Threading.Tasks.Task<Zetbox.App.Base.EnumerationEntry>(() => null);
 
             _triggerFetchDestinationValueTask.OnResult(t =>
             {
@@ -494,7 +494,7 @@ namespace Zetbox.App.SchemaMigration
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.EnumerationEntry>(t.Result);
                     OnDestinationValue_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -674,15 +674,15 @@ namespace Zetbox.App.SchemaMigration
 
         private Guid? _fk_guid_SourceColumn = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn> _triggerFetchSourceColumnTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn> TriggerFetchSourceColumnAsync()
+        System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn> _triggerFetchSourceColumnTask;
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn> TriggerFetchSourceColumnAsync()
         {
             if (_triggerFetchSourceColumnTask != null) return _triggerFetchSourceColumnTask;
 
             if (_fk_SourceColumn.HasValue)
                 _triggerFetchSourceColumnTask = Context.FindAsync<Zetbox.App.SchemaMigration.SourceColumn>(_fk_SourceColumn.Value);
             else
-                _triggerFetchSourceColumnTask = new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchSourceColumnTask = new System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn>(() => null);
 
             _triggerFetchSourceColumnTask.OnResult(t =>
             {
@@ -690,7 +690,7 @@ namespace Zetbox.App.SchemaMigration
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.SchemaMigration.SourceColumn>(t.Result);
                     OnSourceColumn_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -920,7 +920,7 @@ namespace Zetbox.App.SchemaMigration
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

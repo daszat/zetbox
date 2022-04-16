@@ -19,6 +19,7 @@ namespace Zetbox.DalProvider.NHibernate
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Server;
 
@@ -26,7 +27,7 @@ namespace Zetbox.DalProvider.NHibernate
         : BaseServerObjectSetHandler
     {
         /// <inheritdoc/>
-        public override IEnumerable<IPersistenceObject> SetObjects(Guid version, IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public override Task<IEnumerable<IPersistenceObject>> SetObjects(Guid version, IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             return base.SetObjects(version, ctx, objects, notificationRequests);
         }

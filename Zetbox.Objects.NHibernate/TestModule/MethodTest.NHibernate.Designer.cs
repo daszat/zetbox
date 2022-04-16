@@ -81,9 +81,9 @@ namespace Zetbox.App.Test
     
         private OneNRelationList<Zetbox.App.Test.MethodTest> _Children;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        public System.Threading.Tasks.Task TriggerFetchChildrenAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.MethodTest>>(this.Children);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Test.MethodTest>>(this.Children);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChildren_PostSetter;
@@ -208,9 +208,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+    public System.Threading.Tasks.Task TriggerFetchParentAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest>(this.Parent);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.MethodTest>(this.Parent);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
@@ -976,7 +976,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

@@ -22,6 +22,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
@@ -576,7 +577,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        public virtual bool OnDrop(object data)
+        public virtual Task<bool> OnDrop(object data)
         {
             if (data is IDataObject[])
             {
@@ -586,7 +587,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                     ShowObject(obj);
                 }
 
-                return true;
+                return Task.FromResult(true);
             }
             if (data is string[])
             {
@@ -622,9 +623,9 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                         this.SelectedItem = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, objects.First());
                     }).Trigger();
                 }
-                return true;
+                return Task.FromResult(true);
             }
-            return false;
+            return Task.FromResult(false);
         }
 
         public virtual object DoDragDrop()

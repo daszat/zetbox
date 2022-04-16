@@ -19,6 +19,7 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
@@ -169,14 +170,14 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
             }
         }
 
-        bool IDragDropTarget.OnDrop(string format, object data)
+        async Task<bool> IDragDropTarget.OnDrop(string format, object data)
         {
             if (ViewModel == null) return false;
             switch (format)
             {
                 case "FileDrop":
                     var files = (string[])data;
-                    ViewModel.Upload(files.First());
+                    await ViewModel.Upload(files.First());
                     return true;
             }
             return false;

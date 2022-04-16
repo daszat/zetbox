@@ -159,9 +159,9 @@ namespace at.dasz.DocumentManagement
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchFileAsync()
+    public System.Threading.Tasks.Task TriggerFetchFileAsync()
     {
-        return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File>(this.File);
+        return System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(this.File);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for File
@@ -284,7 +284,7 @@ namespace at.dasz.DocumentManagement
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

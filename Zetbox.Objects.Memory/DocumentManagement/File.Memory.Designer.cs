@@ -138,15 +138,15 @@ namespace at.dasz.DocumentManagement
 
         private Guid? _fk_guid_Blob = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob> _triggerFetchBlobTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob> TriggerFetchBlobAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Blob> _triggerFetchBlobTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Blob> TriggerFetchBlobAsync()
         {
             if (_triggerFetchBlobTask != null) return _triggerFetchBlobTask;
 
             if (_fk_Blob.HasValue)
                 _triggerFetchBlobTask = Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value);
             else
-                _triggerFetchBlobTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchBlobTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Blob>(() => null);
 
             _triggerFetchBlobTask.OnResult(t =>
             {
@@ -154,7 +154,7 @@ namespace at.dasz.DocumentManagement
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Blob>(t.Result);
                     OnBlob_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -262,15 +262,15 @@ namespace at.dasz.DocumentManagement
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -278,7 +278,7 @@ namespace at.dasz.DocumentManagement
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnChangedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -459,15 +459,15 @@ namespace at.dasz.DocumentManagement
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -475,7 +475,7 @@ namespace at.dasz.DocumentManagement
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnCreatedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -656,15 +656,15 @@ namespace at.dasz.DocumentManagement
 		}
 
 
-        Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.Excerpt> _triggerFetchExcerptTask;
-        public Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.Excerpt> TriggerFetchExcerptAsync()
+        System.Threading.Tasks.Task<at.dasz.DocumentManagement.Excerpt> _triggerFetchExcerptTask;
+        public System.Threading.Tasks.Task<at.dasz.DocumentManagement.Excerpt> TriggerFetchExcerptAsync()
         {
             if (_triggerFetchExcerptTask != null) return _triggerFetchExcerptTask;
 
             if (_fk_Excerpt.HasValue)
                 _triggerFetchExcerptTask = Context.FindAsync<at.dasz.DocumentManagement.Excerpt>(_fk_Excerpt.Value);
             else
-                _triggerFetchExcerptTask = new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.Excerpt>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchExcerptTask = new System.Threading.Tasks.Task<at.dasz.DocumentManagement.Excerpt>(() => null);
 
             _triggerFetchExcerptTask.OnResult(t =>
             {
@@ -672,7 +672,7 @@ namespace at.dasz.DocumentManagement
                 {
                     var e = new PropertyGetterEventArgs<at.dasz.DocumentManagement.Excerpt>(t.Result);
                     OnExcerpt_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -1038,8 +1038,8 @@ namespace at.dasz.DocumentManagement
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchRevisionsTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
+        System.Threading.Tasks.Task _triggerFetchRevisionsTask;
+        public System.Threading.Tasks.Task TriggerFetchRevisionsAsync()
         {
             if (_triggerFetchRevisionsTask != null) return _triggerFetchRevisionsTask;
             _triggerFetchRevisionsTask = Context.FetchRelationAsync<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
@@ -1489,7 +1489,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

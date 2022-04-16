@@ -169,9 +169,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for Constrained's guid, used on import only</summary>
         private Guid? _fk_guid_Constrained = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchConstrainedAsync()
+    public System.Threading.Tasks.Task TriggerFetchConstrainedAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType>(this.Constrained);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DataType>(this.Constrained);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
@@ -502,7 +502,7 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

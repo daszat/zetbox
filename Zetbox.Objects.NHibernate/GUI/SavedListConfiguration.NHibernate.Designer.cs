@@ -280,9 +280,9 @@ namespace Zetbox.App.GUI
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchOwnerAsync()
+    public System.Threading.Tasks.Task TriggerFetchOwnerAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.Owner);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.Owner);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Owner
@@ -389,9 +389,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for Type's guid, used on import only</summary>
         private Guid? _fk_guid_Type = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchTypeAsync()
+    public System.Threading.Tasks.Task TriggerFetchTypeAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.Type);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(this.Type);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
@@ -469,7 +469,7 @@ namespace Zetbox.App.GUI
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

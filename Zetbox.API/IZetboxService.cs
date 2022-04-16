@@ -25,6 +25,7 @@ namespace Zetbox.API
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Xml;
     using System.Xml.Serialization;
 
@@ -42,7 +43,7 @@ namespace Zetbox.API
         /// <param name="msg">a streamable list of <see cref="IPersistenceObject"/>s</param>
         /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
-        byte[] SetObjects(Guid version, byte[] msg, ObjectNotificationRequest[] notificationRequests);
+        Task<byte[]> SetObjects(Guid version, byte[] msg, ObjectNotificationRequest[] notificationRequests);
 
         /// <summary>
         /// Returns a list of objects from the datastore, as requested by the query.
@@ -50,7 +51,7 @@ namespace Zetbox.API
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="query">A full LINQ query returning zero, one or more objects (FirstOrDefault, Single, Where, Skip, Take, etc.)</param>
         /// <returns>the found objects</returns>
-        byte[] GetObjects(Guid version, SerializableExpression query);
+        Task<byte[]> GetObjects(Guid version, SerializableExpression query);
 
         /// <summary>
         /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetObjects() instead.
@@ -60,7 +61,7 @@ namespace Zetbox.API
         /// <param name="ID">Object id</param>
         /// <param name="property">Property</param>
         /// <returns>the referenced objects</returns>
-        byte[] GetListOf(Guid version, SerializableType type, int ID, string property);
+        Task<byte[]> GetListOf(Guid version, SerializableType type, int ID, string property);
 
         /// <summary>
         /// Fetches a list of CollectionEntry objects of the Relation 
@@ -72,7 +73,7 @@ namespace Zetbox.API
         /// <param name="role">the parent role (1 == A, 2 == B)</param>
         /// <param name="ID">the ID of the parent object</param>
         /// <returns>the requested collection entries</returns>
-        byte[] FetchRelation(Guid version, Guid relId, int role, int ID);
+        Task<byte[]> FetchRelation(Guid version, Guid relId, int role, int ID);
 
         /// <summary>
         /// Gets the content stream of the given Blob instance ID
@@ -80,14 +81,14 @@ namespace Zetbox.API
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="ID">ID of an valid Blob instance</param>
         /// <returns>Stream containing the Blob content</returns>
-        Stream GetBlobStream(Guid version, int ID);
+        Task<Stream> GetBlobStream(Guid version, int ID);
 
         /// <summary>
         /// Sets the content stream and creates a new Blob instance
         /// </summary>
         /// <param name="blob">Information about the given blob</param>
         /// <returns>the newly created Blob instance</returns>
-        BlobResponse SetBlobStream(BlobMessage blob);
+        Task<BlobResponse> SetBlobStream(BlobMessage blob);
 
 
         /// <summary>
@@ -101,9 +102,8 @@ namespace Zetbox.API
         /// <param name="parameter">Array of method parameters</param>
         /// <param name="changedObjects">Array of changed objects to restore context</param>
         /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
-        /// <param name="retChangedObjects">Array of changed objects on the server side</param>
         /// <returns></returns>
-        byte[] InvokeServerMethod(Guid version, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects);
+        Task<Tuple<byte[], byte[]>> InvokeServerMethod(Guid version, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests);
     }
 
     public class BlobMessage

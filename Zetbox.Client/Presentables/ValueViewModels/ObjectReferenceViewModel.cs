@@ -23,6 +23,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Linq.Dynamic;
     using System.Linq.Expressions;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.App.Base;
@@ -358,36 +359,31 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             base.OnPropertyChanged(propertyName);
         }
 
-        private ZbTask<DataObjectViewModel> _fetchValueTask;
-        protected override ZbTask<DataObjectViewModel> GetValueFromModelAsync()
+        private System.Threading.Tasks.Task<DataObjectViewModel> _fetchValueTask;
+        protected override async System.Threading.Tasks.Task<DataObjectViewModel> GetValueFromModelAsync()
         {
             // Prevent clearing this state variable during clearing. Some notifications (Error, Value, etc.) are setting this to null
             // to signal a refresh. Task: Reduce this behaviour
-            var result = _fetchValueTask;
-            if (result == null)
+            if (_fetchValueTask == null)
             {
                 SetBusy();
-                _fetchValueTask = result = new ZbTask<DataObjectViewModel>(ValueModel.GetValueAsync());
-                result.Finally(ClearBusy);
+                await ValueModel.GetValueAsync();
                 // Avoid stackoverflow
-                result.OnResult(t =>
+                if (!_valueCacheInititalized)
                 {
-                    if (!_valueCacheInititalized)
+                    var obj = ValueModel.Value;
+                    if (obj != null)
                     {
-                        var obj = ValueModel.Value;
-                        if (obj != null)
-                        {
-                            _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), ValueModel.Value);
-                            EnsureValuePossible(_valueCache);
-                        }
-                        _valueCacheInititalized = true;
-                        OnPropertyChanged("ValueAsync");
+                        _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), ValueModel.Value);
+                        EnsureValuePossible(_valueCache);
                     }
-                    t.Result = _valueCache;
-                });
+                    _valueCacheInititalized = true;
+                    OnPropertyChanged("ValueAsync");
+                }
+                ClearBusy();
             }
 
-            return result;
+            return _valueCache;
         }
 
         protected override void SetValueToModel(DataObjectViewModel value)
@@ -419,8 +415,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             if (_fetchValueTask != null)
             {
-                ClearBusy(); // TODO: Workaround! Cancel should call Finally?
-                _fetchValueTask.Cancel();
+                //ClearBusy(); // TODO: Workaround! Cancel should call Finally?
+                //TODO: _fetchValueTask.Cancel();
             }
             _fetchValueTask = null;
         }
@@ -435,8 +431,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_fetchValueTask != null)
                 {
-                    ClearBusy(); // TODO: Workaround! Cancel should call Finally?
-                    _fetchValueTask.Cancel();
+                    //ClearBusy(); // TODO: Workaround! Cancel should call Finally?
+                    //TODO: _fetchValueTask.Cancel();
                 }
 
                 _fetchValueTask = null;
@@ -449,7 +445,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                GetValueFromModelAsync();
+                _ = GetValueFromModelAsync();
                 return _valueCache;
             }
             set
@@ -470,7 +466,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
             set
             {
-                if(value != null && value != Helper.INVALIDID)
+                if (value != null && value != Helper.INVALIDID)
                 {
                     var obj = DataContext.Find(ReferencedClass.GetDescribedInterfaceType(), value.Value);
                     this.Value = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj);
@@ -503,7 +499,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        private ZbTask<ReadOnlyObservableCollection<ViewModel>> _getPossibleValuesROTask;
+        private System.Threading.Tasks.Task<ReadOnlyObservableCollection<ViewModel>> _getPossibleValuesROTask;
         private ReadOnlyObservableCollection<ViewModel> _possibleValuesRO;
         private ObservableCollection<ViewModel> _possibleValues;
         public ReadOnlyObservableCollection<ViewModel> PossibleValues
@@ -529,11 +525,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             if (_getPossibleValuesROTask == null)
             {
-                var task = GetPossibleValuesAsync();
-                _getPossibleValuesROTask = new ZbTask<ReadOnlyObservableCollection<ViewModel>>(task);
-                _getPossibleValuesROTask.OnResult(t =>
+                _getPossibleValuesROTask = Task<ReadOnlyObservableCollection<ViewModel>>.Run(async () =>
                 {
-                    if (task.Result.Item2)
+                    var task = await GetPossibleValuesAsync();
+                    if (task.Item2)
                     {
                         var cmdMdl = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                             DataContext,
@@ -544,12 +539,14 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                             null,
                             null);
                         cmdMdl.RequestedKind = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_CommandLinkKind.Find(FrozenContext);
-                        task.Result.Item1.Add(cmdMdl);
+                        task.Item1.Add(cmdMdl);
                     }
-                    _possibleValues = new ObservableCollection<ViewModel>(task.Result.Item1);
+                    _possibleValues = new ObservableCollection<ViewModel>(task.Item1);
                     _possibleValuesRO = new ReadOnlyObservableCollection<ViewModel>(_possibleValues);
                     EnsureValuePossible(Value);
                     OnPropertyChanged("PossibleValuesAsync");
+
+                    return _possibleValuesRO;
                 });
             }
         }
@@ -566,12 +563,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             return (IQueryable)mi.Invoke(this, new object[0]);
         }
 
-        protected virtual ZbTask<Tuple<List<ViewModel>, bool>> GetPossibleValuesAsync()
+        protected virtual async Task<Tuple<List<ViewModel>, bool>> GetPossibleValuesAsync()
         {
             // No selection allowed -> no inline search allowed
             if (!AllowSelectValue)
             {
-                return new ZbTask<Tuple<List<ViewModel>, bool>>(new Tuple<List<ViewModel>, bool>(new List<ViewModel>(), false));
+                return Tuple.Create(new List<ViewModel>(), false);
             }
 
             var qry = GetUntypedQuery(ReferencedClass);
@@ -579,32 +576,26 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             // Abort query of null was returned
             if (qry == null)
             {
-                return new ZbTask<Tuple<List<ViewModel>, bool>>(new Tuple<List<ViewModel>, bool>(new List<ViewModel>(), false));
+                return Tuple.Create(new List<ViewModel>(), false);
             }
 
-            var fetchTask = qry.Take(PossibleValuesLimit + 1).ToListAsync();
+            var fetch = await qry.Take(PossibleValuesLimit + 1).ToListAsync();
+            var mdlList = fetch
+                        .OfType<IDataObject>()
+                        .Take(PossibleValuesLimit)
+                        .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), i))
+                        .Cast<ViewModel>()
+                        .OrderBy(v => v.Name)
+                        .ToList();
 
-            var lstTask = new ZbTask<Tuple<List<ViewModel>, bool>>(fetchTask)
-                .OnResult(t =>
-                {
-                    var mdlList = fetchTask.Result
-                                .OfType<IDataObject>()
-                                .Take(PossibleValuesLimit)
-                                .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), i))
-                                .Cast<ViewModel>()
-                                .OrderBy(v => v.Name)
-                                .ToList();
 
-                    t.Result = new Tuple<List<ViewModel>, bool>(mdlList, mdlList.Count > PossibleValuesLimit);
+            // Add current value if not already present
+            if (Value != null && !mdlList.Contains(Value))
+            {
+                mdlList.Add(Value);
+            }
 
-                    // Add current value if not already present
-                    if (Value != null && !mdlList.Contains(Value))
-                    {
-                        mdlList.Add(Value);
-                    }
-                });
-
-            return lstTask;
+            return new Tuple<List<ViewModel>, bool>(mdlList, mdlList.Count > PossibleValuesLimit);
         }
 
         /// <summary>
@@ -745,7 +736,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         protected override void DoValidate()
         {
             base.DoValidate();
-            if(!ValueModel.ReportErrors) return;
+            if (!ValueModel.ReportErrors) return;
             if (!NeedsValidation) return;
 
             if (IsValid && !string.IsNullOrEmpty(SearchString) && Value == null)
@@ -788,11 +779,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 },
                 createTask: () =>
                 {
-                    var result = new ZbTask<Highlight>(GetValueFromModelAsync());
-                    // This must be done on the UI-Thread
-                    // Accessing any property might trigger accesses to the zetbox context
-                    result.OnResult(t => t.Result = Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight);
-                    return result;
+                    return Task.Run(async () =>
+                    {
+                        var result = await GetValueFromModelAsync();
+                        // This must be done on the UI-Thread
+                        // Accessing any property might trigger accesses to the zetbox context
+                        return Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight;
+                    });
                 },
                 set: (Highlight value) =>
                 {
@@ -821,26 +814,28 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public virtual bool OnDrop(object data)
+        public virtual Task<bool> OnDrop(object data)
         {
             if (data is IDataObject[])
             {
                 var lst = (IDataObject[])data;
                 if (lst.Length != 1)
-                    return false;
+                    return Task.FromResult(false);
 
                 var obj = lst.Single();
                 if (!ReferencedClass.GetDescribedInterfaceType().Type.IsAssignableFrom(obj.Context.GetInterfaceType(obj).Type))
-                    return false;
+                    return Task.FromResult(false);
 
                 if (obj.Context != DataContext)
                 {
-                    if (obj.ObjectState == DataObjectState.New) return false;
+                    if (obj.ObjectState == DataObjectState.New)
+                        return Task.FromResult(false);
+
                     obj = DataContext.Find(DataContext.GetInterfaceType(obj), obj.ID);
                 }
                 Value = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj);
             }
-            return false;
+            return Task.FromResult(false);
         }
 
         public virtual object DoDragDrop()

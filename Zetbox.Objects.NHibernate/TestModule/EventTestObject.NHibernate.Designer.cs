@@ -143,9 +143,9 @@ namespace Zetbox.App.Test
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchEventAsync()
+    public System.Threading.Tasks.Task TriggerFetchEventAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Event>(this.Event);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.Event>(this.Event);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Event
@@ -268,7 +268,7 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

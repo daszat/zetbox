@@ -19,6 +19,7 @@ namespace Zetbox.Client
     using System.ComponentModel;
     using System.Linq;
     using System.Net;
+    using System.Net.Http;
     using System.Security.Authentication;
     using System.Security.Principal;
     using System.Text;
@@ -57,11 +58,11 @@ namespace Zetbox.Client
             // Using Windows Credentials, they are already set by the operating system
         }
 
-        public void SetCredentialsTo(WebRequest req)
+        public void SetCredentialsTo(HttpClient req)
         {
             if (req == null) throw new ArgumentNullException("req");
 
-            req.Credentials = CredentialCache.DefaultCredentials;
+            // req.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue( CredentialCache.DefaultCredentials;
         }
 
         public void InvalidCredentials()
@@ -162,13 +163,12 @@ namespace Zetbox.Client
             }
         }
 
-        public void SetCredentialsTo(WebRequest req)
+        public void SetCredentialsTo(HttpClient req)
         {
             if (req == null) throw new ArgumentNullException("req");
 
             EnsureCredentials();
-            req.PreAuthenticate = true; // always send credentials, reduces startup and testing overhead
-            req.Credentials = new NetworkCredential(UserName, Password);
+            req.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(UserName + ":" + Password)));
         }
 
         public void InvalidCredentials()

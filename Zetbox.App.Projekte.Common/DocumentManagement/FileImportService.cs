@@ -27,7 +27,6 @@ namespace Zetbox.App.Projekte.DocumentManagement
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
-    using Zetbox.App.Base;
 
     public class FileImportService : ThreadedQueueService<string>
     {
@@ -164,7 +163,7 @@ namespace Zetbox.App.Projekte.DocumentManagement
             return !string.IsNullOrWhiteSpace(item);
         }
 
-        protected override void ProcessItem(string file)
+        protected override async System.Threading.Tasks.Task ProcessItem(string file)
         {
             try
             {
@@ -180,11 +179,11 @@ namespace Zetbox.App.Projekte.DocumentManagement
                             using (var scope = _scopeFactory.BeginLifetimeScope())
                             using (var ctx = scope.Resolve<IZetboxContext>())
                             {
-                                var blobID = ctx.CreateBlob(s, Path.GetFileName(file), new System.IO.FileInfo(file).GetMimeType());
+                                var blobID = await ctx.CreateBlob(s, Path.GetFileName(file), new System.IO.FileInfo(file).GetMimeType());
                                 var importedFile = ctx.Create<ImportedFile>();
-                                importedFile.Blob = ctx.Find<Blob>(blobID);
+                                importedFile.Blob = ctx.Find<Base.Blob>(blobID);
                                 importedFile.Name = importedFile.Blob.OriginalName;
-                                ctx.SubmitChanges();
+                                await ctx.SubmitChanges();
                             }
 
                             // Success -> delete file

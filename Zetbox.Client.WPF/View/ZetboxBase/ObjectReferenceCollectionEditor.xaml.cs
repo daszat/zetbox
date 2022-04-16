@@ -20,6 +20,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
@@ -142,9 +143,9 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             }
         }
 
-        bool IDragDropTarget.OnDrop(string format, object data)
+        Task<bool> IDragDropTarget.OnDrop(string format, object data)
         {
-            if (ViewModel == null) return false;
+            if (ViewModel == null) return Task.FromResult(false);
             return ViewModel.OnDrop(data);
         }
         object IDragDropSource.GetData()

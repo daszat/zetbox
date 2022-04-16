@@ -92,11 +92,22 @@ namespace Zetbox.API.Utils
                 logfile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "log4net.config");
             }
 
-            var zetboxLogRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
-            log4net.Config.XmlConfigurator.Configure(zetboxLogRepository, new FileInfo(logfile));
+            if (File.Exists(logfile))
+            {
+                var zetboxLogRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+                log4net.Config.XmlConfigurator.Configure(zetboxLogRepository, new FileInfo(logfile));
 
-            var logRepository = LogManager.CreateRepository("Zetbox");
-            log4net.Config.XmlConfigurator.Configure(logRepository, new FileInfo(logfile));
+                var logRepository = LogManager.CreateRepository("Zetbox");
+                log4net.Config.XmlConfigurator.Configure(logRepository, new FileInfo(logfile));
+            }
+            else
+            {
+                var zetboxLogRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+                log4net.Config.BasicConfigurator.Configure(zetboxLogRepository);
+
+                var logRepository = LogManager.CreateRepository("Zetbox");
+                log4net.Config.BasicConfigurator.Configure(logRepository);
+            }
 
             _logger = LogManager.GetLogger("Zetbox", "Zetbox");
             _client = LogManager.GetLogger("Zetbox", "Zetbox.Client");

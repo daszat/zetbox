@@ -23,6 +23,7 @@ namespace Zetbox.DalProvider.Client.Mocks
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.API.Server;
@@ -74,13 +75,13 @@ namespace Zetbox.DalProvider.Client.Mocks
             _backingStore.SubmitChanges();
         }
 
-        public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
+        public async Task<Tuple<IEnumerable<IDataObject>, List<IStreamable>>> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query)
         {
             List<IStreamable> tmpAuxObjects = null;
             IEnumerable<IDataObject> result = null;
 
             var handler = _memoryFactory.GetServerObjectHandler(ifType);
-            var objects = handler.GetObjects(
+            var objects = await handler.GetObjects(
                 ZetboxGeneratedVersionAttribute.Current,
                 requestingCtx,
                 query);
@@ -90,17 +91,16 @@ namespace Zetbox.DalProvider.Client.Mocks
             {
                 result = ReceiveObjects(sr, out tmpAuxObjects).Cast<IDataObject>();
             }
-            auxObjects = tmpAuxObjects;
-            return result;
+            return Tuple.Create(result, tmpAuxObjects);
         }
 
-        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
+        public async Task<Tuple<IEnumerable<IDataObject>, List<IStreamable>>> GetListOf(InterfaceType ifType, int ID, string property)
         {
             List<IStreamable> tmpAuxObjects = null;
             IEnumerable<IDataObject> result = null;
 
             var handler = _memoryFactory.GetServerObjectHandler(ifType);
-            var objects = handler.GetListOf(ZetboxGeneratedVersionAttribute.Current, _backingStore, ID, property);
+            var objects = await handler.GetListOf(ZetboxGeneratedVersionAttribute.Current, _backingStore, ID, property);
             var bytes = SendObjects(objects, true).ToArray();
 
             using (var sr = new ZetboxStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
@@ -108,11 +108,10 @@ namespace Zetbox.DalProvider.Client.Mocks
                 result = ReceiveObjects(sr, out tmpAuxObjects).Cast<IDataObject>();
             }
 
-            auxObjects = tmpAuxObjects;
-            return result;
+            return Tuple.Create(result, tmpAuxObjects);
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
+        public async Task<IEnumerable<IPersistenceObject>> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
         {
             IEnumerable<IPersistenceObject> result = null;
 
@@ -123,8 +122,8 @@ namespace Zetbox.DalProvider.Client.Mocks
                 SendObjects(objects, sw);
 
                 var handler = _memoryFactory.GetServerObjectSetHandler();
-                var changedObjects = handler
-                    .SetObjects(ZetboxGeneratedVersionAttribute.Current, _backingStore, objects, notficationRequests ?? new ObjectNotificationRequest[0])
+                var changedObjects = (await handler
+                    .SetObjects(ZetboxGeneratedVersionAttribute.Current, _backingStore, objects, notficationRequests ?? new ObjectNotificationRequest[0]))
                     .Cast<IStreamable>();
                 var bytes = SendObjects(changedObjects, true).ToArray();
 
@@ -140,14 +139,13 @@ namespace Zetbox.DalProvider.Client.Mocks
             return result;
         }
 
-        public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, int parentId, InterfaceType parentIfType, out List<IStreamable> auxObjects)
+        public async Task<Tuple<IEnumerable<T>, List<IStreamable>>> FetchRelation<T>(Guid relationId, RelationEndRole role, int parentId, InterfaceType parentIfType)
             where T : class, IRelationEntry
         {
             // TODO: could be implemented in generated properties
             if (parentId <= Helper.INVALIDID)
             {
-                auxObjects = new List<IStreamable>();
-                return new List<T>();
+                return Tuple.Create(Enumerable.Empty<T>(), new List<IStreamable>());
             }
 
             Relation rel = _frozenCtx.FindPersistenceObject<Relation>(relationId);
@@ -161,8 +159,8 @@ namespace Zetbox.DalProvider.Client.Mocks
                     _iftFactory(rel.A.Type.GetDataType()),
                     _iftFactory(rel.B.Type.GetDataType()),
                     role);
-            var objects = handler
-                .GetCollectionEntries(ZetboxGeneratedVersionAttribute.Current, _backingStore, relationId, role, parentId)
+            var objects = (await handler
+                .GetCollectionEntries(ZetboxGeneratedVersionAttribute.Current, _backingStore, relationId, role, parentId))
                 .Cast<IStreamable>();
             var bytes = SendObjects(objects, true).ToArray();
 
@@ -172,23 +170,20 @@ namespace Zetbox.DalProvider.Client.Mocks
                 result = ReceiveObjects(sr, out tmpAuxObjects).Cast<T>();
             }
 
-            auxObjects = tmpAuxObjects;
-            return result;
+            return Tuple.Create(result, tmpAuxObjects);
         }
 
-        public Stream GetBlobStream(int ID)
+        public Task<Stream> GetBlobStream(int ID)
         {
-            Stream result = null;
             var handler = _memoryFactory.GetServerDocumentHandler();
-            result = handler.GetBlobStream(ZetboxGeneratedVersionAttribute.Current, _backingStore, ID);
-            return result;
+            return handler.GetBlobStream(ZetboxGeneratedVersionAttribute.Current, _backingStore, ID);
         }
 
-        public Zetbox.App.Base.Blob SetBlobStream(Stream stream, string filename, string mimetype)
+        public async Task<Zetbox.App.Base.Blob> SetBlobStream(Stream stream, string filename, string mimetype)
         {
             Zetbox.App.Base.Blob result = null;
             var handler = _memoryFactory.GetServerDocumentHandler();
-            var serverBlob = handler.SetBlobStream(ZetboxGeneratedVersionAttribute.Current, _backingStore, stream, filename, mimetype);
+            var serverBlob = await handler.SetBlobStream(ZetboxGeneratedVersionAttribute.Current, _backingStore, stream, filename, mimetype);
 
             BlobResponse resp = new BlobResponse();
             resp.ID = serverBlob.ID;
@@ -201,7 +196,7 @@ namespace Zetbox.DalProvider.Client.Mocks
             return result;
         }
 
-        public object InvokeServerMethod(InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
+        public Task<Tuple<object, IEnumerable<IPersistenceObject>, List<IStreamable>>> InvokeServerMethod(InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             throw new NotImplementedException();
         }

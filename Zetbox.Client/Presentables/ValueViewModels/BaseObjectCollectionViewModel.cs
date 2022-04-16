@@ -23,6 +23,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Utils;
@@ -587,36 +588,31 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         private bool _valueCacheInititalized = false;
         ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
         SortFilterWrapper<IDataObject> _wrapper;
-        private ZbTask<IReadOnlyObservableList<DataObjectViewModel>> _fetchValueTask;
-        protected override ZbTask<IReadOnlyObservableList<DataObjectViewModel>> GetValueFromModelAsync()
+        private System.Threading.Tasks.Task<IReadOnlyObservableList<DataObjectViewModel>> _fetchValueTask;
+        protected override System.Threading.Tasks.Task<IReadOnlyObservableList<DataObjectViewModel>> GetValueFromModelAsync()
         {
             if (_fetchValueTask == null)
             {
                 SetBusy();
-                _fetchValueTask = new ZbTask<IReadOnlyObservableList<DataObjectViewModel>>(ObjectCollectionModel.GetValueAsync())
-                    .OnResult(t =>
-                    {
-                        _wrapper = new SortFilterWrapper<IDataObject>(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
-                        _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
-                            _wrapper,
-                            obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj),
-                            mdl => mdl.Object);
-                        _valueCache.CollectionChanged += ValueListChanged;
-                        _valueCacheInititalized = true;
-                        t.Result = _valueCache;
-                    });
-                // TODO: Split here to avoid a stackoverflow exception!
-                // -> OnPropertyChanged("ValueProxiesAsync") triggers ValueProxiesAsync.get
-                // -> ValueProxiesAsync.get is calling GetValueFromModel()
-                // -> _fetchValueTask has not been assigned yet!
-                _fetchValueTask.OnResult(t =>
+                _fetchValueTask = Task.Run(async () =>
                 {
+                    await ObjectCollectionModel.GetValueAsync();
+                    _wrapper = new SortFilterWrapper<IDataObject>(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
+                    _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
+                        _wrapper,
+                        obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj),
+                        mdl => mdl.Object);
+                    _valueCache.CollectionChanged += ValueListChanged;
+                    _valueCacheInititalized = true;
+
                     OnPropertyChanged("Value");
                     OnPropertyChanged("ValueAsync");
                     OnPropertyChanged("ValueProxiesAsync");
                     ClearBusy();
+
+                    return (IReadOnlyObservableList<DataObjectViewModel>)_valueCache;
                 });
-            };
+            }
             return _fetchValueTask;
         }
 
@@ -738,7 +734,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         //private IDelayedTask _proxyLoader;
-        //private ZbTask _proxyLoader;
+        //private System.Threading.Tasks.Task _proxyLoader;
         private BaseObjectCollectionViewModelProxyList _proxyInstances = null;
         private bool _proxyInstancesLoading = false;
         /// <summary>
@@ -828,7 +824,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
             set
             {
-                if(_allowFilter != value)
+                if (_allowFilter != value)
                 {
                     _allowFilter = value;
                     OnPropertyChanged("AllowFilter");
@@ -843,7 +839,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                if(_filterText == null)
+                if (_filterText == null)
                 {
                     _filterTextMdl = new ClassValueModel<string>(
                         BaseObjectCollectionViewModelResources.TextFilter,
@@ -910,7 +906,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public virtual bool OnDrop(object data)
+        public virtual Task<bool> OnDrop(object data)
         {
             if (data is IDataObject[])
             {
@@ -926,7 +922,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     }
                 }
             }
-            return false;
+            return Task.FromResult(false);
         }
 
         public virtual object DoDragDrop()

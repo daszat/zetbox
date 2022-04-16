@@ -84,15 +84,15 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_AParent = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Relation> _triggerFetchAParentTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Relation> TriggerFetchAParentAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Relation> _triggerFetchAParentTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Relation> TriggerFetchAParentAsync()
         {
             if (_triggerFetchAParentTask != null) return _triggerFetchAParentTask;
 
             if (_fk_AParent.HasValue)
                 _triggerFetchAParentTask = Context.FindAsync<Zetbox.App.Base.Relation>(_fk_AParent.Value);
             else
-                _triggerFetchAParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Relation>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchAParentTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Relation>(() => null);
 
             _triggerFetchAParentTask.OnResult(t =>
             {
@@ -100,7 +100,7 @@ namespace Zetbox.App.Base
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Relation>(t.Result);
                     OnAParent_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -225,15 +225,15 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_BParent = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Relation> _triggerFetchBParentTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Relation> TriggerFetchBParentAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Relation> _triggerFetchBParentTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Relation> TriggerFetchBParentAsync()
         {
             if (_triggerFetchBParentTask != null) return _triggerFetchBParentTask;
 
             if (_fk_BParent.HasValue)
                 _triggerFetchBParentTask = Context.FindAsync<Zetbox.App.Base.Relation>(_fk_BParent.Value);
             else
-                _triggerFetchBParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Relation>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchBParentTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Relation>(() => null);
 
             _triggerFetchBParentTask.OnResult(t =>
             {
@@ -241,7 +241,7 @@ namespace Zetbox.App.Base
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Relation>(t.Result);
                     OnBParent_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -365,15 +365,15 @@ namespace Zetbox.App.Base
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -381,7 +381,7 @@ namespace Zetbox.App.Base
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnChangedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -562,15 +562,15 @@ namespace Zetbox.App.Base
 		}
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -578,7 +578,7 @@ namespace Zetbox.App.Base
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
                     OnCreatedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -960,15 +960,15 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_Navigator = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectReferenceProperty> _triggerFetchNavigatorTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectReferenceProperty> TriggerFetchNavigatorAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectReferenceProperty> _triggerFetchNavigatorTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectReferenceProperty> TriggerFetchNavigatorAsync()
         {
             if (_triggerFetchNavigatorTask != null) return _triggerFetchNavigatorTask;
 
             if (_fk_Navigator.HasValue)
                 _triggerFetchNavigatorTask = Context.FindAsync<Zetbox.App.Base.ObjectReferenceProperty>(_fk_Navigator.Value);
             else
-                _triggerFetchNavigatorTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectReferenceProperty>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchNavigatorTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectReferenceProperty>(() => null);
 
             _triggerFetchNavigatorTask.OnResult(t =>
             {
@@ -976,7 +976,7 @@ namespace Zetbox.App.Base
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectReferenceProperty>(t.Result);
                     OnNavigator_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -1187,15 +1187,15 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_Type = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchTypeTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> TriggerFetchTypeAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> _triggerFetchTypeTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> TriggerFetchTypeAsync()
         {
             if (_triggerFetchTypeTask != null) return _triggerFetchTypeTask;
 
             if (_fk_Type.HasValue)
                 _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
             else
-                _triggerFetchTypeTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchTypeTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
 
             _triggerFetchTypeTask.OnResult(t =>
             {
@@ -1203,7 +1203,7 @@ namespace Zetbox.App.Base
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(t.Result);
                     OnType_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -1450,7 +1450,7 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

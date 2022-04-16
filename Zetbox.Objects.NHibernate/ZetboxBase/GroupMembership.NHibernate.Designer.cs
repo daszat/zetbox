@@ -145,9 +145,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for Group's guid, used on import only</summary>
         private Guid? _fk_guid_Group = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchGroupAsync()
+    public System.Threading.Tasks.Task TriggerFetchGroupAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(this.Group);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Group>(this.Group);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
@@ -210,7 +210,7 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

@@ -172,8 +172,8 @@ namespace Zetbox.App.Base
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchGroupsTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
+        System.Threading.Tasks.Task _triggerFetchGroupsTask;
+        public System.Threading.Tasks.Task TriggerFetchGroupsAsync()
         {
             if (_triggerFetchGroupsTask != null) return _triggerFetchGroupsTask;
             _triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.A, this);
@@ -814,7 +814,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

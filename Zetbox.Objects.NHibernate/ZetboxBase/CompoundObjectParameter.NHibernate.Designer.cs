@@ -145,9 +145,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for CompoundObject's guid, used on import only</summary>
         private Guid? _fk_guid_CompoundObject = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchCompoundObjectAsync()
+    public System.Threading.Tasks.Task TriggerFetchCompoundObjectAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject>(this.CompoundObject);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.CompoundObject>(this.CompoundObject);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObject
@@ -399,7 +399,7 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

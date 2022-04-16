@@ -55,8 +55,8 @@
             }
         }
 
-        Zetbox.API.Async.ZbTask <%= taskName %>;
-        public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+        System.Threading.Tasks.Task <%= taskName %>;
+        public System.Threading.Tasks.Task TriggerFetch<%= name %>Async()
         {
             if (<%= taskName %> != null) return <%= taskName %>;
 <%
@@ -71,7 +71,7 @@
     {
 %>
             if (!<%= name %>_was_eagerLoaded) <%= taskName %> = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
-            else <%= taskName %> = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
+            else <%= taskName %> = System.Threading.Tasks.Task.FromResult(null);
 <%
     }
 %>

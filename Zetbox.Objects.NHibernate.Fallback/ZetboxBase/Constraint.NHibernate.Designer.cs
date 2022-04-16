@@ -146,9 +146,9 @@ namespace Zetbox.App.Base
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchChangedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.ChangedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -356,9 +356,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for ConstrainedProperty's guid, used on import only</summary>
         private Guid? _fk_guid_ConstrainedProperty = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchConstrainedPropertyAsync()
+    public System.Threading.Tasks.Task TriggerFetchConstrainedPropertyAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.ConstrainedProperty);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(this.ConstrainedProperty);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ConstrainedProperty
@@ -463,9 +463,9 @@ namespace Zetbox.App.Base
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchCreatedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.CreatedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -900,7 +900,7 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

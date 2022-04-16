@@ -81,8 +81,8 @@ this.WriteObjects("                return ",  wrapperName , ";\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        Zetbox.API.Async.ZbTask ",  taskName , ";\r\n");
-this.WriteObjects("        public Zetbox.API.Async.ZbTask TriggerFetch",  name , "Async()\r\n");
+this.WriteObjects("        System.Threading.Tasks.Task ",  taskName , ";\r\n");
+this.WriteObjects("        public System.Threading.Tasks.Task TriggerFetch",  name , "Async()\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            if (",  taskName , " != null) return ",  taskName , ";\r\n");
 this.WriteObjects("\r\n");
@@ -94,7 +94,7 @@ if (eagerLoading) {
 #line 78 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("                if (",  idsListName , " != null)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    ",  taskName , " = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>\r\n");
+this.WriteObjects("                    ",  taskName , " = new System.Threading.Tasks.Task(() =>\r\n");
 this.WriteObjects("                    {\r\n");
 this.WriteObjects("                        serverList = ",  idsListName , ".Select(id => Context.Find<",  referencedInterface , ">(id)).ToList();\r\n");
 this.WriteObjects("                        ",  idsListName , " = null; // allow id list to be garbage collected\r\n");
@@ -122,7 +122,7 @@ this.WriteObjects("                    });\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            else\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                ",  taskName , " = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>\r\n");
+this.WriteObjects("                ",  taskName , " = new System.Threading.Tasks.Task(() =>\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    serverList = new List<",  referencedInterface , ">();\r\n");
 this.WriteObjects("                });\r\n");

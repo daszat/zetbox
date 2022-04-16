@@ -18,6 +18,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Zetbox.API;
 using Zetbox.API.Client;
 using Zetbox.API.Configuration;
@@ -298,10 +299,10 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         #region DragDrop
         public bool CanDrop { get { return true; } }
 
-        public bool OnDrop(object data)
+        public Task<bool> OnDrop(object data)
         {
             var files = data as string[];
-            if (files == null) return false;
+            if (files == null) return Task.FromResult(false);
 
             var newScope = ViewModelFactory.CreateNewScope();
             var newCtx = newScope.ViewModelFactory.CreateNewContext();
@@ -344,7 +345,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 newScope.Dispose();
             }
-            return true;
+            return Task.FromResult(true);
         }
         #endregion
     }

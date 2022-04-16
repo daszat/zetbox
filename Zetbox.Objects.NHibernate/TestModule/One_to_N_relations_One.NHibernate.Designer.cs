@@ -139,9 +139,9 @@ namespace Zetbox.App.Test
     
         private OneNRelationList<Zetbox.App.Test.One_to_N_relations_N> _NSide;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchNSideAsync()
+        public System.Threading.Tasks.Task TriggerFetchNSideAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.One_to_N_relations_N>>(this.NSide);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Test.One_to_N_relations_N>>(this.NSide);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relations_One> OnNSide_PostSetter;
@@ -181,9 +181,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
     
         private OneNRelationList<Zetbox.App.Test.One_to_N_relations_OrderedN> _OrderedNSide;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchOrderedNSideAsync()
+        public System.Threading.Tasks.Task TriggerFetchOrderedNSideAsync()
         {
-            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Test.One_to_N_relations_OrderedN>>(this.OrderedNSide);
+            return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Test.One_to_N_relations_OrderedN>>(this.OrderedNSide);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relations_One> OnOrderedNSide_PostSetter;
@@ -237,7 +237,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

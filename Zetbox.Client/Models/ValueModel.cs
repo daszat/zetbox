@@ -237,7 +237,7 @@ namespace Zetbox.Client.Models
         #region IValueModel<TValue> Members
 
         public abstract TValue Value { get; set; }
-        public abstract ZbTask<TValue> GetValueAsync();
+        public abstract System.Threading.Tasks.Task<TValue> GetValueAsync();
 
         #endregion
 
@@ -292,9 +292,9 @@ namespace Zetbox.Client.Models
             }
         }
 
-        public override ZbTask<TValue?> GetValueAsync()
+        public override System.Threading.Tasks.Task<TValue?> GetValueAsync()
         {
-            return new ZbTask<TValue?>(ZbTask.Synchron, () => Value);
+            return new System.Threading.Tasks.Task<TValue?>(() => Value);
         }
 
         public override void ClearValue()
@@ -364,9 +364,9 @@ namespace Zetbox.Client.Models
             }
         }
 
-        ZbTask<TimeSpan?> IValueModel<TimeSpan?>.GetValueAsync()
+        System.Threading.Tasks.Task<TimeSpan?> IValueModel<TimeSpan?>.GetValueAsync()
         {
-            return new ZbTask<TimeSpan?>(ZbTask.Synchron, () => ((IValueModel<TimeSpan?>)this).Value);
+            return new System.Threading.Tasks.Task<TimeSpan?>(() => ((IValueModel<TimeSpan?>)this).Value);
         }
     }
 
@@ -454,9 +454,9 @@ namespace Zetbox.Client.Models
             }
         }
 
-        public override ZbTask<TValue> GetValueAsync()
+        public override System.Threading.Tasks.Task<TValue> GetValueAsync()
         {
-            return new ZbTask<TValue>(ZbTask.Synchron, () => Value);
+            return new System.Threading.Tasks.Task<TValue>(() => Value);
         }
 
         public override void ClearValue()

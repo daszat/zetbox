@@ -125,8 +125,8 @@ namespace Zetbox.App.Base
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchPropertiesTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
+        System.Threading.Tasks.Task _triggerFetchPropertiesTask;
+        public System.Threading.Tasks.Task TriggerFetchPropertiesAsync()
         {
             if (_triggerFetchPropertiesTask != null) return _triggerFetchPropertiesTask;
             _triggerFetchPropertiesTask = Context.FetchRelationAsync<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
@@ -326,7 +326,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> 
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

@@ -77,9 +77,9 @@ namespace Zetbox.App.Base
 		// ignored, but required for Serialization
         private bool Relations_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchRelationsAsync()
+        public System.Threading.Tasks.Task TriggerFetchRelationsAsync()
         {
-            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Relation>>(this.Relations);
+            return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Base.Relation>>(this.Relations);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.RoleMembership> OnRelations_PostSetter;
@@ -119,7 +119,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.RoleMembership> O
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

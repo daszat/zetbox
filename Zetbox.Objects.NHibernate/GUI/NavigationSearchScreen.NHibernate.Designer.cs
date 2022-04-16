@@ -783,9 +783,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for RequestedEditorKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedEditorKind = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchRequestedEditorKindAsync()
+    public System.Threading.Tasks.Task TriggerFetchRequestedEditorKindAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.RequestedEditorKind);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(this.RequestedEditorKind);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedEditorKind
@@ -892,9 +892,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for RequestedWorkspaceKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedWorkspaceKind = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchRequestedWorkspaceKindAsync()
+    public System.Threading.Tasks.Task TriggerFetchRequestedWorkspaceKindAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.RequestedWorkspaceKind);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(this.RequestedWorkspaceKind);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedWorkspaceKind
@@ -1233,9 +1233,9 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for Type's guid, used on import only</summary>
         private Guid? _fk_guid_Type = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchTypeAsync()
+    public System.Threading.Tasks.Task TriggerFetchTypeAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.Type);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(this.Type);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
@@ -1473,7 +1473,7 @@ namespace Zetbox.App.GUI
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

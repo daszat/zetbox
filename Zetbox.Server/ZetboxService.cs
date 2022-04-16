@@ -21,6 +21,7 @@ namespace Zetbox.Server
     using System.IO;
     using System.Linq;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Server;
     using Zetbox.API.Server.PerfCounter;
@@ -67,7 +68,7 @@ namespace Zetbox.Server
         /// <param name="msgArray">a streamable list of <see cref="IPersistenceObject"/>s</param>
         /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
-        public byte[] SetObjects(Guid version, byte[] msgArray, ObjectNotificationRequest[] notificationRequests)
+        public async Task<byte[]> SetObjects(Guid version, byte[] msgArray, ObjectNotificationRequest[] notificationRequests)
         {
             using (Logging.Facade.DebugTraceMethodCall("SetObjects"))
             {
@@ -86,9 +87,9 @@ namespace Zetbox.Server
                         var objects = ReadObjects(msg, ctx);
 
                         // Set Operation
-                        var changedObjects = _sohFactory
+                        var changedObjects = (await _sohFactory
                             .GetServerObjectSetHandler()
-                            .SetObjects(version, ctx, objects, notificationRequests ?? new ObjectNotificationRequest[0])
+                            .SetObjects(version, ctx, objects, notificationRequests ?? new ObjectNotificationRequest[0]))
                             .Cast<IStreamable>();
                         resultCount = objects.Count;
                         return SendObjects(changedObjects, true).ToArray();
@@ -108,7 +109,7 @@ namespace Zetbox.Server
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="query">A full LINQ query returning zero, one or more objects (FirstOrDefault, Single, Where, Skip, Take, etc.)</param>
         /// <returns>the found objects</returns>
-        public byte[] GetObjects(Guid version, SerializableExpression query)
+        public async Task<byte[]> GetObjects(Guid version, SerializableExpression query)
         {
             if (query == null) { throw new ArgumentNullException("query"); }
             using (Logging.Facade.DebugTraceMethodCallFormat("GetObjects", "query={0}", query))
@@ -126,7 +127,7 @@ namespace Zetbox.Server
                 {
                     using (IZetboxContext ctx = _ctxFactory())
                     {
-                        IEnumerable<IStreamable> lst = _sohFactory
+                        IEnumerable<IStreamable> lst = await _sohFactory
                             .GetServerObjectHandler(ifType)
                             .GetObjects(version, ctx, SerializableExpression.ToExpression(ctx, query, _iftFactory));
                         resultCount = lst.Count();
@@ -232,7 +233,7 @@ namespace Zetbox.Server
         /// <param name="property">Property</param>
         /// <returns>the referenced objects</returns>
         [Obsolete]
-        public byte[] GetListOf(Guid version, SerializableType type, int ID, string property)
+        public async Task<byte[]> GetListOf(Guid version, SerializableType type, int ID, string property)
         {
             using (Logging.Facade.DebugTraceMethodCallFormat("GetListOf", "type={0}", type))
             {
@@ -246,7 +247,7 @@ namespace Zetbox.Server
                     var ticks = _perfCounter.IncrementGetListOf(ifType);
                     try
                     {
-                        IEnumerable<IStreamable> lst = _sohFactory
+                        IEnumerable<IStreamable> lst = await _sohFactory
                             .GetServerObjectHandler(ifType)
                             .GetListOf(version, ctx, ID, property);
                         resultCount = lst.Count();
@@ -270,7 +271,7 @@ namespace Zetbox.Server
         /// <param name="serializableRole">the parent role (1 == A, 2 == B)</param>
         /// <param name="parentObjID">the ID of the parent object</param>
         /// <returns>the requested collection entries</returns>
-        public byte[] FetchRelation(Guid version, Guid relId, int serializableRole, int parentObjID)
+        public async Task<byte[]> FetchRelation(Guid version, Guid relId, int serializableRole, int parentObjID)
         {
             using (Logging.Facade.DebugTraceMethodCallFormat("FetchRelation", "relId = [{0}], role = [{1}], parentObjID = [{2}]", relId, serializableRole, parentObjID))
             {
@@ -288,7 +289,7 @@ namespace Zetbox.Server
                     var ticks = _perfCounter.IncrementFetchRelation(ifType);
                     try
                     {
-                        var lst = _sohFactory
+                        var lst = await _sohFactory
                             .GetServerCollectionHandler(
                                 ctx,
                                 ifTypeA,
@@ -312,7 +313,7 @@ namespace Zetbox.Server
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="ID">ID of an valid Document instance</param>
         /// <returns>Stream containing the Document content</returns>
-        public Stream GetBlobStream(Guid version, int ID)
+        public async Task<Stream> GetBlobStream(Guid version, int ID)
         {
             using (Logging.Facade.DebugTraceMethodCallFormat("GetBlobStream", "ID={0}", ID))
             {
@@ -320,7 +321,7 @@ namespace Zetbox.Server
 
                 using (IZetboxContext ctx = _ctxFactory())
                 {
-                    var result = _sohFactory
+                    var result = await _sohFactory
                         .GetServerDocumentHandler()
                         .GetBlobStream(version, ctx, ID);
 
@@ -342,7 +343,7 @@ namespace Zetbox.Server
         /// </summary>
         /// <param name="blob">Information about the given blob</param>
         /// <returns>the newly created Blob instance</returns>
-        public BlobResponse SetBlobStream(BlobMessage blob)
+        public async Task<BlobResponse> SetBlobStream(BlobMessage blob)
         {
             using (Logging.Facade.DebugTraceMethodCall("SetBlobStream"))
             {
@@ -373,7 +374,7 @@ namespace Zetbox.Server
 
                 using (IZetboxContext ctx = _ctxFactory())
                 {
-                    var result = _sohFactory
+                    var result = await _sohFactory
                         .GetServerDocumentHandler()
                         .SetBlobStream(blob.Version, ctx, blob.Stream, blob.FileName, blob.MimeType);
 
@@ -391,7 +392,7 @@ namespace Zetbox.Server
             }
         }
 
-        public byte[] InvokeServerMethod(Guid version, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameterArray, byte[] changedObjectsArray, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects)
+        public async Task<Tuple<byte[], byte[]>> InvokeServerMethod(Guid version, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameterArray, byte[] changedObjectsArray, ObjectNotificationRequest[] notificationRequests)
         {
             using (Logging.Facade.DebugTraceMethodCallFormat("InvokeServerMethod:" + method, "method={0}, ID={1}", method, ID))
             {
@@ -407,7 +408,7 @@ namespace Zetbox.Server
                     throw new ArgumentNullException("changedObjectsArray");
 
                 _perfCounter.IncrementServerMethodInvocation();
-                retChangedObjects = null;
+                byte[] retChangedObjects = null;
 
                 DebugLogIdentity();
 
@@ -445,15 +446,16 @@ namespace Zetbox.Server
                         }
                     }
 
-                    IEnumerable<IPersistenceObject> changedObjectsList;
-                    var result = _sohFactory
+                    var response = await _sohFactory
                         .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
                         .InvokeServerMethod(version, ctx, ID, method,
                             parameterTypes.Select(t => t.GetSystemType()),
                             parameterList,
                             readObjects,
-                            notificationRequests ?? new ObjectNotificationRequest[0],
-                            out changedObjectsList);
+                            notificationRequests ?? new ObjectNotificationRequest[0]);
+
+                    var result = response.Item1;
+                    var changedObjectsList = response.Item2;
 
                     retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true).ToArray();
 
@@ -476,13 +478,13 @@ namespace Zetbox.Server
                     {
                         Logging.Facade.Debug("Serializing method result as IStreamable");
                         IStreamable resultObj = (IStreamable)result;
-                        return SendObjects(new IStreamable[] { resultObj }, true).ToArray();
+                        return Tuple.Create(SendObjects(new IStreamable[] { resultObj }, true).ToArray(), retChangedObjects);
                     }
                     else if (result != null && result.GetType().IsIEnumerable() && result.GetType().FindElementTypes().Any(t => t.IsIStreamable()))
                     {
                         Logging.Facade.Debug("Serializing method result as IEnumerable<IStreamable>");
                         var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Zetbox.API.Helper.MAXLISTCOUNT);
-                        return SendObjects(lst, true).ToArray();
+                        return Tuple.Create(SendObjects(lst, true).ToArray(), retChangedObjects);
                     }
                     else if (result != null)
                     {
@@ -495,7 +497,7 @@ namespace Zetbox.Server
                     else
                     {
                         Logging.Facade.Debug("Serializing empty method");
-                        return new byte[] { };
+                        return Tuple.Create(new byte[] { }, retChangedObjects);
                     }
                 }
             }

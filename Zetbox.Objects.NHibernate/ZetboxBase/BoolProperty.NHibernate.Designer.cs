@@ -145,9 +145,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for FalseIcon's guid, used on import only</summary>
         private Guid? _fk_guid_FalseIcon = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchFalseIconAsync()
+    public System.Threading.Tasks.Task TriggerFetchFalseIconAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.FalseIcon);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(this.FalseIcon);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
@@ -312,9 +312,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for NullIcon's guid, used on import only</summary>
         private Guid? _fk_guid_NullIcon = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchNullIconAsync()
+    public System.Threading.Tasks.Task TriggerFetchNullIconAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.NullIcon);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(this.NullIcon);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
@@ -479,9 +479,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for TrueIcon's guid, used on import only</summary>
         private Guid? _fk_guid_TrueIcon = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchTrueIconAsync()
+    public System.Threading.Tasks.Task TriggerFetchTrueIconAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.TrueIcon);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(this.TrueIcon);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon
@@ -1008,7 +1008,7 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

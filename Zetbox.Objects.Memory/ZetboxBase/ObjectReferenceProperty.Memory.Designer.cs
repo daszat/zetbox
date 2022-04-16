@@ -183,8 +183,8 @@ namespace Zetbox.App.Base
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchMethodsTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchMethodsAsync()
+        System.Threading.Tasks.Task _triggerFetchMethodsTask;
+        public System.Threading.Tasks.Task TriggerFetchMethodsAsync()
         {
             if (_triggerFetchMethodsTask != null) return _triggerFetchMethodsTask;
             _triggerFetchMethodsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
@@ -259,15 +259,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
 
         private Guid? _fk_guid_RelationEnd = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd> _triggerFetchRelationEndTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd> TriggerFetchRelationEndAsync()
+        System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> _triggerFetchRelationEndTask;
+        public System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> TriggerFetchRelationEndAsync()
         {
             if (_triggerFetchRelationEndTask != null) return _triggerFetchRelationEndTask;
 
             if (_fk_RelationEnd.HasValue)
                 _triggerFetchRelationEndTask = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
             else
-                _triggerFetchRelationEndTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchRelationEndTask = new System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd>(() => null);
 
             _triggerFetchRelationEndTask.OnResult(t =>
             {
@@ -275,7 +275,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
                 {
                     var e = new PropertyGetterEventArgs<Zetbox.App.Base.RelationEnd>(t.Result);
                     OnRelationEnd_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
@@ -863,7 +863,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

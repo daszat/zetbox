@@ -147,9 +147,9 @@ namespace Zetbox.App.SchemaMigration
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchChangedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.ChangedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -468,9 +468,9 @@ namespace Zetbox.App.SchemaMigration
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchCreatedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.CreatedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -703,9 +703,9 @@ namespace Zetbox.App.SchemaMigration
 		// ignored, but required for Serialization
         private bool DestinationProperty_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchDestinationPropertyAsync()
+        public System.Threading.Tasks.Task TriggerFetchDestinationPropertyAsync()
         {
-            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Property>>(this.DestinationProperty);
+            return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Base.Property>>(this.DestinationProperty);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_PostSetter;
@@ -745,9 +745,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
     
         private OneNRelationList<Zetbox.App.SchemaMigration.SourceEnum> _EnumEntries;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchEnumEntriesAsync()
+        public System.Threading.Tasks.Task TriggerFetchEnumEntriesAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.SchemaMigration.SourceEnum>>(this.EnumEntries);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.SchemaMigration.SourceEnum>>(this.EnumEntries);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnEnumEntries_PostSetter;
@@ -1068,9 +1068,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         /// <summary>Backing store for References's guid, used on import only</summary>
         private Guid? _fk_guid_References = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchReferencesAsync()
+    public System.Threading.Tasks.Task TriggerFetchReferencesAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn>(this.References);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.SchemaMigration.SourceColumn>(this.References);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for References
@@ -1113,9 +1113,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
     
         private OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn> _Referers;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchReferersAsync()
+        public System.Threading.Tasks.Task TriggerFetchReferersAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.SchemaMigration.SourceColumn>>(this.Referers);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.SchemaMigration.SourceColumn>>(this.Referers);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnReferers_PostSetter;
@@ -1300,9 +1300,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         /// <summary>Backing store for SourceTable's guid, used on import only</summary>
         private Guid? _fk_guid_SourceTable = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchSourceTableAsync()
+    public System.Threading.Tasks.Task TriggerFetchSourceTableAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceTable>(this.SourceTable);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.SchemaMigration.SourceTable>(this.SourceTable);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for SourceTable
@@ -1554,7 +1554,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

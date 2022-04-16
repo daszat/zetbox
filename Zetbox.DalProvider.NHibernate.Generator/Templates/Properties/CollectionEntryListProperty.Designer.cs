@@ -91,9 +91,9 @@ this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",
 this.WriteObjects("		// ignored, but required for Serialization\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        public Zetbox.API.Async.ZbTask TriggerFetch",  name , "Async()\r\n");
+this.WriteObjects("        public System.Threading.Tasks.Task TriggerFetch",  name , "Async()\r\n");
 this.WriteObjects("        {\r\n");
-this.WriteObjects("            return new Zetbox.API.Async.ZbTask<",  exposedCollectionInterface , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
+this.WriteObjects("            return System.Threading.Tasks.Task.FromResult<",  exposedCollectionInterface , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 #line 77 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"

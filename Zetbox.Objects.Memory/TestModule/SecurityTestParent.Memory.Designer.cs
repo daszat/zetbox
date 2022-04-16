@@ -58,8 +58,8 @@ namespace Zetbox.App.Test
             }
         }
 
-        Zetbox.API.Async.ZbTask _triggerFetchChildrenTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        System.Threading.Tasks.Task _triggerFetchChildrenTask;
+        public System.Threading.Tasks.Task TriggerFetchChildrenAsync()
         {
             if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
 
@@ -74,7 +74,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchChildrenTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                _triggerFetchChildrenTask = new System.Threading.Tasks.Task(() =>
                 {
                     serverList = new List<Zetbox.App.Test.SecurityTestChild>();
                 });
@@ -208,7 +208,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParen
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

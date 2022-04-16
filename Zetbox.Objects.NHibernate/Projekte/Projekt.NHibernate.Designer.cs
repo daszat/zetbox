@@ -127,9 +127,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
     
         private OneNRelationList<Zetbox.App.Projekte.Auftrag> _Auftraege;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchAuftraegeAsync()
+        public System.Threading.Tasks.Task TriggerFetchAuftraegeAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Projekte.Auftrag>>(this.Auftraege);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Projekte.Auftrag>>(this.Auftraege);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuftraege_PostSetter;
@@ -342,9 +342,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchChangedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.ChangedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -527,9 +527,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchCreatedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.CreatedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -898,9 +898,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 		// ignored, but required for Serialization
         private bool Mitarbeiter_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchMitarbeiterAsync()
+        public System.Threading.Tasks.Task TriggerFetchMitarbeiterAsync()
         {
-            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Projekte.Mitarbeiter>>(this.Mitarbeiter);
+            return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Projekte.Mitarbeiter>>(this.Mitarbeiter);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMitarbeiter_PostSetter;
@@ -998,9 +998,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
     
         private OneNRelationList<Zetbox.App.Projekte.Task> _Tasks;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchTasksAsync()
+        public System.Threading.Tasks.Task TriggerFetchTasksAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Projekte.Task>>(this.Tasks);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Projekte.Task>>(this.Tasks);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTasks_PostSetter;
@@ -1303,7 +1303,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

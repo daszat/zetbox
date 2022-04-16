@@ -402,7 +402,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region IValueViewModel<TValue> Members
 
-        protected abstract ZbTask<TValue> GetValueFromModelAsync();
+        protected abstract System.Threading.Tasks.Task<TValue> GetValueFromModelAsync();
 
         /// <summary>
         /// Writes the specified value to the model, circumventing the state machine.
@@ -869,9 +869,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override ZbTask<TValue?> GetValueFromModelAsync()
+        protected override System.Threading.Tasks.Task<TValue?> GetValueFromModelAsync()
         {
-            return new ZbTask<TValue?>(ZbTask.Synchron, () =>
+            return new System.Threading.Tasks.Task<TValue?>(() =>
             {
                 return _illegalNullInput ? null : ValueModel.Value;
             });
@@ -943,9 +943,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override ZbTask<TValue> GetValueFromModelAsync()
+        protected override System.Threading.Tasks.Task<TValue> GetValueFromModelAsync()
         {
-            return new ZbTask<TValue>(ZbTask.Synchron, () => ValueModel.Value);
+            return new System.Threading.Tasks.Task<TValue>(() => ValueModel.Value);
         }
 
         protected override void SetValueToModel(TValue value)
@@ -1061,10 +1061,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override ZbTask<int?> GetValueFromModelAsync()
+        protected override async System.Threading.Tasks.Task<int?> GetValueFromModelAsync()
         {
-            return base.GetValueFromModelAsync()
-                .OnResult(i => EnsureValuePossible(i.Result));
+            var result = await base.GetValueFromModelAsync();
+            EnsureValuePossible(result);
+            return result;
         }
 
         protected override void SetValueToModel(int? value)
@@ -1401,9 +1402,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return result;
             }
 
-            protected override ZbTask<TimeSpan?> GetValueFromModelAsync()
+            protected override System.Threading.Tasks.Task<TimeSpan?> GetValueFromModelAsync()
             {
-                return new ZbTask<TimeSpan?>(ZbTask.Synchron, () =>
+                return new System.Threading.Tasks.Task<TimeSpan?>(() =>
                 {
                     var val = Parent.GetValueFromModelAsync().Result;
                     if (val == null) return null;
@@ -1495,9 +1496,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return value == null ? String.Empty : value.Value.ToShortDateString();
             }
 
-            protected override ZbTask<DateTime?> GetValueFromModelAsync()
+            protected override System.Threading.Tasks.Task<DateTime?> GetValueFromModelAsync()
             {
-                return new ZbTask<DateTime?>(ZbTask.Synchron, () =>
+                return new System.Threading.Tasks.Task<DateTime?>(() =>
                 {
                     var t = Parent.GetValueFromModelAsync();
                     var modelValue = t.Result;
@@ -1813,7 +1814,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     if (!usingDefinedPresentation)
                     {
-                        _possibleValues = new[] { 
+                        _possibleValues = new[] {
                             new KeyValuePair<bool?, string>(null, ValueViewModelResources.Null),
                             new KeyValuePair<bool?, string>(true, ValueViewModelResources.True),
                             new KeyValuePair<bool?, string>(false, ValueViewModelResources.False)
@@ -1821,7 +1822,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     }
                     else
                     {
-                        _possibleValues = new[] { 
+                        _possibleValues = new[] {
                             new KeyValuePair<bool?, string>(null, BoolModel.NullLabel),
                             new KeyValuePair<bool?, string>(true, BoolModel.TrueLabel),
                             new KeyValuePair<bool?, string>(false, BoolModel.FalseLabel)

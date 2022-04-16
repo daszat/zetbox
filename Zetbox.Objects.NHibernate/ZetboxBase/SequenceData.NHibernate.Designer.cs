@@ -217,9 +217,9 @@ namespace Zetbox.App.Base
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchSequenceAsync()
+    public System.Threading.Tasks.Task TriggerFetchSequenceAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence>(this.Sequence);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Sequence>(this.Sequence);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence
@@ -284,7 +284,7 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

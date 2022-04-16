@@ -20,6 +20,7 @@ namespace Zetbox.DalProvider.Client.Mocks
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Server;
     using Zetbox.API.Server.Fulltext;
@@ -35,7 +36,7 @@ namespace Zetbox.DalProvider.Client.Mocks
         where TChild : BasePersistenceObject
     {
 
-        public IEnumerable<IRelationEntry> GetCollectionEntries(
+        public async Task<IEnumerable<IRelationEntry>> GetCollectionEntries(
             Guid version,
             IReadOnlyZetboxContext ctx,
             Guid relId, RelationEndRole endRole,
@@ -47,7 +48,7 @@ namespace Zetbox.DalProvider.Client.Mocks
             var rel = ctx.FindPersistenceObject<Relation>(relId);
             //var relEnd = rel.GetEndFromRole(endRole);
             //var relOtherEnd = rel.GetOtherEnd(relEnd);
-            var parent = ctx.Find(ctx.GetImplementationType(typeof(TParent)).ToInterfaceType(), parentId);
+            var parent = await ctx.FindAsync(ctx.GetImplementationType(typeof(TParent)).ToInterfaceType(), parentId);
             var ceType = ctx.ToImplementationType(rel.GetEntryInterfaceType()).Type;
 
             var method = this.GetType().GetMethod("GetCollectionEntriesInternal", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
@@ -57,10 +58,10 @@ namespace Zetbox.DalProvider.Client.Mocks
         }
 
         //// Helper method which is only called by reflection from GetCollectionEntries
-        private IEnumerable<IRelationEntry> GetCollectionEntriesInternal<IMPL>(TParent parent, Relation rel, RelationEndRole endRole)
+        private Task<IEnumerable<IRelationEntry>> GetCollectionEntriesInternal<IMPL>(TParent parent, Relation rel, RelationEndRole endRole)
             where IMPL : BaseMemoryPersistenceObject
         {
-            return MagicCollectionFactory.WrapAsCollection<IRelationEntry>(parent.GetPrivatePropertyValue<object>(rel.GetEndFromRole(endRole).Navigator.Name)).ToList();
+            return Task.FromResult((IEnumerable<IRelationEntry>)MagicCollectionFactory.WrapAsCollection<IRelationEntry>(parent.GetPrivatePropertyValue<object>(rel.GetEndFromRole(endRole).Navigator.Name)).ToList());
         }
     }
 
@@ -68,7 +69,7 @@ namespace Zetbox.DalProvider.Client.Mocks
         : BaseServerObjectSetHandler
     {
         /// <inheritdoc/>
-        public override IEnumerable<IPersistenceObject> SetObjects(Guid version, IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public override Task<IEnumerable<IPersistenceObject>> SetObjects(Guid version, IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             return base.SetObjects(version, ctx, objects, notificationRequests);
         }

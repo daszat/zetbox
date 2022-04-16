@@ -127,7 +127,7 @@ namespace Zetbox.API.Client.Mocks.OneNLists
             throw new NotImplementedException();
         }
 
-        public ZbTask TriggerFetch(string propName)
+        public System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             throw new NotImplementedException();
         }

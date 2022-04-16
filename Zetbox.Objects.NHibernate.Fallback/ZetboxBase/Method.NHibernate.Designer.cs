@@ -204,9 +204,9 @@ namespace Zetbox.App.Base
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchChangedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.ChangedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -442,9 +442,9 @@ namespace Zetbox.App.Base
 		}
 
 
-    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    public System.Threading.Tasks.Task TriggerFetchCreatedByAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(this.CreatedBy);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -823,9 +823,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for Icon's guid, used on import only</summary>
         private Guid? _fk_guid_Icon = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchIconAsync()
+    public System.Threading.Tasks.Task TriggerFetchIconAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.Icon);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(this.Icon);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Icon
@@ -1106,9 +1106,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    public System.Threading.Tasks.Task TriggerFetchModuleAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(this.Module);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -1296,9 +1296,9 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for ObjectClass's guid, used on import only</summary>
         private Guid? _fk_guid_ObjectClass = null;
 
-    public Zetbox.API.Async.ZbTask TriggerFetchObjectClassAsync()
+    public System.Threading.Tasks.Task TriggerFetchObjectClassAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType>(this.ObjectClass);
+        return System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DataType>(this.ObjectClass);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
@@ -1341,9 +1341,9 @@ namespace Zetbox.App.Base
     
         private OneNRelationList<Zetbox.App.Base.BaseParameter> _Parameter;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchParameterAsync()
+        public System.Threading.Tasks.Task TriggerFetchParameterAsync()
         {
-            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.BaseParameter>>(this.Parameter);
+            return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Base.BaseParameter>>(this.Parameter);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParameter_PostSetter;
@@ -1379,9 +1379,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
 		// ignored, but required for Serialization
         private bool ShowByProperties_was_eagerLoaded = false;
 
-        public Zetbox.API.Async.ZbTask TriggerFetchShowByPropertiesAsync()
+        public System.Threading.Tasks.Task TriggerFetchShowByPropertiesAsync()
         {
-            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.ObjectReferenceProperty>>(this.ShowByProperties);
+            return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Base.ObjectReferenceProperty>>(this.ShowByProperties);
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByProperties_PostSetter;
@@ -1724,7 +1724,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
             switch(propName)
             {

@@ -97,15 +97,15 @@
         private Guid? <%= fkGuidBackingName %> = null;
 <% } %>
 
-        Zetbox.API.Async.ZbTask<<%= referencedInterface %>> <%= taskName %>;
-        public Zetbox.API.Async.ZbTask<<%= referencedInterface %>> TriggerFetch<%= name %>Async()
+        System.Threading.Tasks.Task<<%= referencedInterface %>> <%= taskName %>;
+        public System.Threading.Tasks.Task<<%= referencedInterface %>> TriggerFetch<%= name %>Async()
         {
             if (<%= taskName %> != null) return <%= taskName %>;
 
             if (<%= fkBackingName %>.HasValue)
                 <%= taskName %> = Context.FindAsync<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
             else
-                <%= taskName %> = new Zetbox.API.Async.ZbTask<<%= referencedInterface %>>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                <%= taskName %> = new System.Threading.Tasks.Task<<%= referencedInterface %>>(() => null);
 
 <% if (callGetterSetterEvents) {                                                                    %>
             <%= taskName %>.OnResult(t =>
@@ -114,7 +114,7 @@
                 {
                     var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(t.Result);
                     <%= eventName %>_Getter(this, e);
-                    t.Result = e.Result;
+                    // TODO: t.Result = e.Result;
                 }
             });
 
