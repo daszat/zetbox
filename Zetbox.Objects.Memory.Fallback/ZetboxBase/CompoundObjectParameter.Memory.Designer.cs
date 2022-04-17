@@ -113,7 +113,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.CompoundObjectMemoryImpl)TriggerFetchCompoundObjectAsync().Result;
+                TriggerFetchCompoundObjectAsync().TryRunSynchronously(); return (Zetbox.App.Base.CompoundObjectMemoryImpl)TriggerFetchCompoundObjectAsync().Result;
             }
             set
             {

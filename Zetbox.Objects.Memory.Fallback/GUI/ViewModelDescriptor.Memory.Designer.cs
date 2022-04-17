@@ -113,7 +113,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultDisplayKindAsync().Result;
+                TriggerFetchDefaultDisplayKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultDisplayKindAsync().Result;
             }
             set
             {
@@ -238,7 +238,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultEditorKindAsync().Result;
+                TriggerFetchDefaultEditorKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultEditorKindAsync().Result;
             }
             set
             {
@@ -363,7 +363,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellDisplayKindAsync().Result;
+                TriggerFetchDefaultGridCellDisplayKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellDisplayKindAsync().Result;
             }
             set
             {
@@ -488,7 +488,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellEditorKindAsync().Result;
+                TriggerFetchDefaultGridCellEditorKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellEditorKindAsync().Result;
             }
             set
             {
@@ -613,7 +613,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellPreEditorKindAsync().Result;
+                TriggerFetchDefaultGridCellPreEditorKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellPreEditorKindAsync().Result;
             }
             set
             {
@@ -938,7 +938,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                TriggerFetchModuleAsync().TryRunSynchronously(); return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {
@@ -998,7 +998,7 @@ namespace Zetbox.App.GUI
             {
                 if (_SecondaryControlKinds == null)
                 {
-                    TriggerFetchSecondaryControlKindsAsync().Wait();
+                    TriggerFetchSecondaryControlKindsAsync().TryRunSynchronously(); TriggerFetchSecondaryControlKindsAsync().Wait();
                 }
                 return (ICollection<Zetbox.App.GUI.ControlKind>)_SecondaryControlKinds;
             }

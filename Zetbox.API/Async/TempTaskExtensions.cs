@@ -10,12 +10,22 @@ namespace Zetbox.API
     {
         public static Task OnResult(this Task task, Action<Task> action)
         { 
-            return task.ContinueWith(action);
+            task.ConfigureAwait(true);
+            return task.ContinueWith(action, TaskContinuationOptions.ExecuteSynchronously);
         }
 
         public static Task OnResult<T>(this Task<T> task, Action<Task<T>> action)
         {
-            return task.ContinueWith(action);
+            task.ConfigureAwait(true);
+            return task.ContinueWith(action, TaskContinuationOptions.ExecuteSynchronously);
+        }
+
+        public static void TryRunSynchronously(this Task task)
+        {
+            if(!task.IsCompleted)
+            {
+                task.RunSynchronously();
+            }
         }
     }
 }

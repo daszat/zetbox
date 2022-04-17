@@ -170,7 +170,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                TriggerFetchChangedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
@@ -412,7 +412,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                TriggerFetchCreatedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
@@ -797,7 +797,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchIconAsync().Result;
+                TriggerFetchIconAsync().TryRunSynchronously(); return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchIconAsync().Result;
             }
             set
             {
@@ -1096,7 +1096,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                TriggerFetchModuleAsync().TryRunSynchronously(); return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {
@@ -1279,7 +1279,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.DataTypeMemoryImpl)TriggerFetchObjectClassAsync().Result;
+                TriggerFetchObjectClassAsync().TryRunSynchronously(); return (Zetbox.App.Base.DataTypeMemoryImpl)TriggerFetchObjectClassAsync().Result;
             }
             set
             {
@@ -1359,7 +1359,7 @@ namespace Zetbox.App.Base
             {
                 if (_Parameter == null)
                 {
-                    TriggerFetchParameterAsync().Wait();
+                    TriggerFetchParameterAsync().TryRunSynchronously(); TriggerFetchParameterAsync().Wait();
                 }
                 return _Parameter;
             }
@@ -1422,7 +1422,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
             {
                 if (_ShowByProperties == null)
                 {
-                    TriggerFetchShowByPropertiesAsync().Wait();
+                    TriggerFetchShowByPropertiesAsync().TryRunSynchronously(); TriggerFetchShowByPropertiesAsync().Wait();
                 }
                 return (ICollection<Zetbox.App.Base.ObjectReferenceProperty>)_ShowByProperties;
             }

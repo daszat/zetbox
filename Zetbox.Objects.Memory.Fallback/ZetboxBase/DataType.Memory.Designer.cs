@@ -113,7 +113,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                TriggerFetchChangedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
@@ -254,7 +254,7 @@ namespace Zetbox.App.Base
             {
                 if (_Constraints == null)
                 {
-                    TriggerFetchConstraintsAsync().Wait();
+                    TriggerFetchConstraintsAsync().TryRunSynchronously(); TriggerFetchConstraintsAsync().Wait();
                 }
                 return _Constraints;
             }
@@ -395,7 +395,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                TriggerFetchCreatedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
@@ -599,7 +599,7 @@ namespace Zetbox.App.Base
             get
             {
                 var task = TriggerFetchDefaultIconAsync();
-                task.RunSynchronously();
+                task.TryRunSynchronously();
                 task.Wait();
                 return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
@@ -852,7 +852,7 @@ namespace Zetbox.App.Base
             {
                 if (_ImplementsInterfaces == null)
                 {
-                    TriggerFetchImplementsInterfacesAsync().Wait();
+                    TriggerFetchImplementsInterfacesAsync().TryRunSynchronously(); TriggerFetchImplementsInterfacesAsync().Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Interface>)_ImplementsInterfaces;
             }
@@ -902,7 +902,7 @@ namespace Zetbox.App.Base
             {
                 if (_Methods == null)
                 {
-                    TriggerFetchMethodsAsync().Wait();
+                    TriggerFetchMethodsAsync().TryRunSynchronously(); TriggerFetchMethodsAsync().Wait();
                 }
                 return _Methods;
             }
@@ -1044,8 +1044,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchModuleAsync().RunSynchronously();
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                TriggerFetchModuleAsync().TryRunSynchronously(); return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {
@@ -1167,7 +1166,7 @@ namespace Zetbox.App.Base
             {
                 if (_Properties == null)
                 {
-                    TriggerFetchPropertiesAsync().Wait();
+                    TriggerFetchPropertiesAsync().TryRunSynchronously(); TriggerFetchPropertiesAsync().Wait();
                 }
                 return _Properties;
             }
@@ -1309,7 +1308,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedKindAsync().Result;
+                TriggerFetchRequestedKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedKindAsync().Result;
             }
             set
             {

@@ -751,7 +751,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedEditorKindAsync().Result;
+                TriggerFetchRequestedEditorKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedEditorKindAsync().Result;
             }
             set
             {
@@ -876,7 +876,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedWorkspaceKindAsync().Result;
+                TriggerFetchRequestedWorkspaceKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedWorkspaceKindAsync().Result;
             }
             set
             {
@@ -1233,7 +1233,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchTypeAsync().Result;
+                TriggerFetchTypeAsync().TryRunSynchronously(); return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchTypeAsync().Result;
             }
             set
             {

@@ -119,7 +119,7 @@ namespace Zetbox.App.Base
             {
                 if (_Member == null)
                 {
-                    TriggerFetchMemberAsync().Wait();
+                    TriggerFetchMemberAsync().TryRunSynchronously(); TriggerFetchMemberAsync().Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Identity>)_Member;
             }
@@ -230,7 +230,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                TriggerFetchModuleAsync().TryRunSynchronously(); return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {

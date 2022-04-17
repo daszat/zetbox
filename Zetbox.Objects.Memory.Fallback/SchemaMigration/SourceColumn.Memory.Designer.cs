@@ -112,7 +112,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                TriggerFetchChangedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
@@ -438,7 +438,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                TriggerFetchCreatedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
@@ -687,7 +687,7 @@ namespace Zetbox.App.SchemaMigration
             {
                 if (_DestinationProperty == null)
                 {
-                    TriggerFetchDestinationPropertyAsync().Wait();
+                    TriggerFetchDestinationPropertyAsync().TryRunSynchronously(); TriggerFetchDestinationPropertyAsync().Wait();
                 }
                 return (IList<Zetbox.App.Base.Property>)_DestinationProperty;
             }
@@ -739,7 +739,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             {
                 if (_EnumEntries == null)
                 {
-                    TriggerFetchEnumEntriesAsync().Wait();
+                    TriggerFetchEnumEntriesAsync().TryRunSynchronously(); TriggerFetchEnumEntriesAsync().Wait();
                 }
                 return _EnumEntries;
             }
@@ -1054,7 +1054,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)TriggerFetchReferencesAsync().Result;
+                TriggerFetchReferencesAsync().TryRunSynchronously(); return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)TriggerFetchReferencesAsync().Result;
             }
             set
             {
@@ -1134,7 +1134,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             {
                 if (_Referers == null)
                 {
-                    TriggerFetchReferersAsync().Wait();
+                    TriggerFetchReferersAsync().TryRunSynchronously(); TriggerFetchReferersAsync().Wait();
                 }
                 return _Referers;
             }
@@ -1320,7 +1320,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                return (Zetbox.App.SchemaMigration.SourceTableMemoryImpl)TriggerFetchSourceTableAsync().Result;
+                TriggerFetchSourceTableAsync().TryRunSynchronously(); return (Zetbox.App.SchemaMigration.SourceTableMemoryImpl)TriggerFetchSourceTableAsync().Result;
             }
             set
             {

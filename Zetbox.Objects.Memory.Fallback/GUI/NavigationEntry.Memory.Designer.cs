@@ -112,7 +112,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                TriggerFetchChangedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
@@ -249,7 +249,7 @@ namespace Zetbox.App.GUI
             {
                 if (_Children == null)
                 {
-                    TriggerFetchChildrenAsync().Wait();
+                    TriggerFetchChildrenAsync().TryRunSynchronously(); TriggerFetchChildrenAsync().Wait();
                 }
                 return _Children;
             }
@@ -434,7 +434,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                TriggerFetchCreatedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
@@ -638,7 +638,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             {
                 if (_Groups == null)
                 {
-                    TriggerFetchGroupsAsync().Wait();
+                    TriggerFetchGroupsAsync().TryRunSynchronously(); TriggerFetchGroupsAsync().Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Group>)_Groups;
             }
@@ -751,7 +751,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                TriggerFetchModuleAsync().TryRunSynchronously(); return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {
@@ -876,7 +876,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                return (Zetbox.App.GUI.NavigationEntryMemoryImpl)TriggerFetchParentAsync().Result;
+                TriggerFetchParentAsync().TryRunSynchronously(); return (Zetbox.App.GUI.NavigationEntryMemoryImpl)TriggerFetchParentAsync().Result;
             }
             set
             {
@@ -1048,7 +1048,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedKindAsync().Result;
+                TriggerFetchRequestedKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedKindAsync().Result;
             }
             set
             {
@@ -1231,7 +1231,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchViewModelDescriptorAsync().Result;
+                TriggerFetchViewModelDescriptorAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchViewModelDescriptorAsync().Result;
             }
             set
             {

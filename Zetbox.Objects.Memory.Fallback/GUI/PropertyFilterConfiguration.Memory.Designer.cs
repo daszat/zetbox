@@ -113,7 +113,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchPropertyAsync().Result;
+                TriggerFetchPropertyAsync().TryRunSynchronously(); return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchPropertyAsync().Result;
             }
             set
             {

@@ -113,7 +113,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchFalseIconAsync().Result;
+                TriggerFetchFalseIconAsync().TryRunSynchronously(); return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchFalseIconAsync().Result;
             }
             set
             {
@@ -296,7 +296,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchNullIconAsync().Result;
+                TriggerFetchNullIconAsync().TryRunSynchronously(); return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchNullIconAsync().Result;
             }
             set
             {
@@ -479,7 +479,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchTrueIconAsync().Result;
+                TriggerFetchTrueIconAsync().TryRunSynchronously(); return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchTrueIconAsync().Result;
             }
             set
             {

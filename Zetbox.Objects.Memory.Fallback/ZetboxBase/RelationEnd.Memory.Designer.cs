@@ -113,7 +113,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.RelationMemoryImpl)TriggerFetchAParentAsync().Result;
+                TriggerFetchAParentAsync().TryRunSynchronously(); return (Zetbox.App.Base.RelationMemoryImpl)TriggerFetchAParentAsync().Result;
             }
             set
             {
@@ -254,7 +254,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.RelationMemoryImpl)TriggerFetchBParentAsync().Result;
+                TriggerFetchBParentAsync().TryRunSynchronously(); return (Zetbox.App.Base.RelationMemoryImpl)TriggerFetchBParentAsync().Result;
             }
             set
             {
@@ -394,7 +394,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                TriggerFetchChangedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
@@ -591,7 +591,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                TriggerFetchCreatedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
@@ -989,7 +989,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)TriggerFetchNavigatorAsync().Result;
+                TriggerFetchNavigatorAsync().TryRunSynchronously(); return (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)TriggerFetchNavigatorAsync().Result;
             }
             set
             {
@@ -1216,7 +1216,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchTypeAsync().Result;
+                TriggerFetchTypeAsync().TryRunSynchronously(); return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchTypeAsync().Result;
             }
             set
             {

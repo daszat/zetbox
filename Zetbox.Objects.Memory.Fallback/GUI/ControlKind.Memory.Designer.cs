@@ -52,7 +52,7 @@ namespace Zetbox.App.GUI
             {
                 if (_ChildControlKinds == null)
                 {
-                    TriggerFetchChildControlKindsAsync().Wait();
+                    TriggerFetchChildControlKindsAsync().TryRunSynchronously(); TriggerFetchChildControlKindsAsync().Wait();
                 }
                 return _ChildControlKinds;
             }
@@ -251,7 +251,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                TriggerFetchModuleAsync().TryRunSynchronously(); return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {
@@ -434,7 +434,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchParentAsync().Result;
+                TriggerFetchParentAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchParentAsync().Result;
             }
             set
             {

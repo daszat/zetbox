@@ -48,7 +48,7 @@ namespace Zetbox.App.Base
             {
                 if (_Inputs == null)
                 {
-                    TriggerFetchInputsAsync().Wait();
+                    TriggerFetchInputsAsync().TryRunSynchronously(); TriggerFetchInputsAsync().Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Property>)_Inputs;
             }
@@ -161,7 +161,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         {
             get
             {
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchReferencedClassAsync().Result;
+                TriggerFetchReferencedClassAsync().TryRunSynchronously(); return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchReferencedClassAsync().Result;
             }
             set
             {

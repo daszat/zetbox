@@ -113,7 +113,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.DataTypeMemoryImpl)TriggerFetchConstrainedAsync().Result;
+                TriggerFetchConstrainedAsync().TryRunSynchronously(); return (Zetbox.App.Base.DataTypeMemoryImpl)TriggerFetchConstrainedAsync().Result;
             }
             set
             {

@@ -112,7 +112,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                TriggerFetchChangedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
@@ -309,7 +309,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                TriggerFetchCreatedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
@@ -507,7 +507,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.EnumerationEntryMemoryImpl)TriggerFetchDestinationValueAsync().Result;
+                TriggerFetchDestinationValueAsync().TryRunSynchronously(); return (Zetbox.App.Base.EnumerationEntryMemoryImpl)TriggerFetchDestinationValueAsync().Result;
             }
             set
             {
@@ -703,7 +703,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)TriggerFetchSourceColumnAsync().Result;
+                TriggerFetchSourceColumnAsync().TryRunSynchronously(); return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)TriggerFetchSourceColumnAsync().Result;
             }
             set
             {

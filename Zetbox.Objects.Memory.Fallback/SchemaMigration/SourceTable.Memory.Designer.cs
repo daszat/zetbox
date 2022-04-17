@@ -112,7 +112,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                TriggerFetchChangedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
@@ -367,7 +367,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                TriggerFetchCreatedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
@@ -623,7 +623,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchDestinationObjectClassAsync().Result;
+                TriggerFetchDestinationObjectClassAsync().TryRunSynchronously(); return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchDestinationObjectClassAsync().Result;
             }
             set
             {
@@ -816,7 +816,7 @@ namespace Zetbox.App.SchemaMigration
             {
                 if (_SourceColumn == null)
                 {
-                    TriggerFetchSourceColumnAsync().Wait();
+                    TriggerFetchSourceColumnAsync().TryRunSynchronously(); TriggerFetchSourceColumnAsync().Wait();
                 }
                 return _SourceColumn;
             }
@@ -944,7 +944,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                return (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)TriggerFetchStagingDatabaseAsync().Result;
+                TriggerFetchStagingDatabaseAsync().TryRunSynchronously(); return (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)TriggerFetchStagingDatabaseAsync().Result;
             }
             set
             {

@@ -110,7 +110,7 @@ namespace Zetbox.App.Base
             {
                 if (_EnumerationEntries == null)
                 {
-                    TriggerFetchEnumerationEntriesAsync().Wait();
+                    TriggerFetchEnumerationEntriesAsync().TryRunSynchronously(); TriggerFetchEnumerationEntriesAsync().Wait();
                 }
                 return _EnumerationEntries;
             }

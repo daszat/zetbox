@@ -170,7 +170,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.SequenceMemoryImpl)TriggerFetchSequenceAsync().Result;
+                TriggerFetchSequenceAsync().TryRunSynchronously(); return (Zetbox.App.Base.SequenceMemoryImpl)TriggerFetchSequenceAsync().Result;
             }
             set
             {

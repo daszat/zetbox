@@ -119,7 +119,7 @@ namespace Zetbox.App.Base
             {
                 if (_Properties == null)
                 {
-                    TriggerFetchPropertiesAsync().Wait();
+                    TriggerFetchPropertiesAsync().TryRunSynchronously(); TriggerFetchPropertiesAsync().Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Property>)_Properties;
             }

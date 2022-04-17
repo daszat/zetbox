@@ -113,7 +113,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.GroupMemoryImpl)TriggerFetchGroupAsync().Result;
+                TriggerFetchGroupAsync().TryRunSynchronously(); return (Zetbox.App.Base.GroupMemoryImpl)TriggerFetchGroupAsync().Result;
             }
             set
             {

@@ -113,7 +113,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.RelationEndMemoryImpl)TriggerFetchAAsync().Result;
+                TriggerFetchAAsync().TryRunSynchronously(); return (Zetbox.App.Base.RelationEndMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -254,7 +254,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.RelationEndMemoryImpl)TriggerFetchBAsync().Result;
+                TriggerFetchBAsync().TryRunSynchronously(); return (Zetbox.App.Base.RelationEndMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -394,7 +394,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                TriggerFetchChangedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
@@ -662,7 +662,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                TriggerFetchCreatedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
@@ -989,7 +989,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                TriggerFetchModuleAsync().TryRunSynchronously(); return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {

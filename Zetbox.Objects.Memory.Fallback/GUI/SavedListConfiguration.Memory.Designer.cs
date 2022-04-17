@@ -241,7 +241,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchOwnerAsync().Result;
+                TriggerFetchOwnerAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchOwnerAsync().Result;
             }
             set
             {
@@ -366,7 +366,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchTypeAsync().Result;
+                TriggerFetchTypeAsync().TryRunSynchronously(); return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchTypeAsync().Result;
             }
             set
             {

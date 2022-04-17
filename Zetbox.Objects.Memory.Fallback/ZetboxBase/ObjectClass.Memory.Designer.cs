@@ -52,7 +52,7 @@ namespace Zetbox.App.Base
             {
                 if (_AccessControlList == null)
                 {
-                    TriggerFetchAccessControlListAsync().Wait();
+                    TriggerFetchAccessControlListAsync().TryRunSynchronously(); TriggerFetchAccessControlListAsync().Wait();
                 }
                 return _AccessControlList;
             }
@@ -180,7 +180,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchBaseObjectClassAsync().Result;
+                TriggerFetchBaseObjectClassAsync().TryRunSynchronously(); return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchBaseObjectClassAsync().Result;
             }
             set
             {
@@ -366,7 +366,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchDefaultViewModelDescriptorAsync().Result;
+                TriggerFetchDefaultViewModelDescriptorAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchDefaultViewModelDescriptorAsync().Result;
             }
             set
             {
@@ -430,7 +430,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             {
                 if (_FilterConfigurations == null)
                 {
-                    TriggerFetchFilterConfigurationsAsync().Wait();
+                    TriggerFetchFilterConfigurationsAsync().TryRunSynchronously(); TriggerFetchFilterConfigurationsAsync().Wait();
                 }
                 return _FilterConfigurations;
             }
@@ -781,7 +781,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             {
                 if (_SubClasses == null)
                 {
-                    TriggerFetchSubClassesAsync().Wait();
+                    TriggerFetchSubClassesAsync().TryRunSynchronously(); TriggerFetchSubClassesAsync().Wait();
                 }
                 return _SubClasses;
             }
