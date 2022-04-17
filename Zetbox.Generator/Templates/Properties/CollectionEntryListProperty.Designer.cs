@@ -69,7 +69,7 @@ this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (",  backingName , " == null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var task = TriggerFetch",  name , "Async();\r\n");
-this.WriteObjects("                    task.RunSynchronously();\r\n");
+this.WriteObjects("                    task.TryRunSynchronously();\r\n");
 this.WriteObjects("                    task.Wait();\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return (",  exposedCollectionInterface , "<",  referencedInterface , ">)",  backingName , ";\r\n");
@@ -94,7 +94,7 @@ this.WriteObjects("            ",  taskName , " = Context.FetchRelationAsync<", 
 
 #line 75 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("            if (!",  name , "_was_eagerLoaded) ",  taskName , " = Context.FetchRelationAsync<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
-this.WriteObjects("            else ",  taskName , " = System.Threading.Tasks.Task.FromResult(null);\r\n");
+this.WriteObjects("            else ",  taskName , " = System.Threading.Tasks.Task.FromResult<Guid?>(null);\r\n");
 #line 78 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
 

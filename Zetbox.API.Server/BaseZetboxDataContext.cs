@@ -311,7 +311,9 @@ namespace Zetbox.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public virtual List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
-            return GetListOfAsync<T>(obj, propertyName).Result;
+            var task = GetListOfAsync<T>(obj, propertyName);
+            task.TryRunSynchronously();
+            return task.Result;
         }
 
         /// <summary>
@@ -333,7 +335,9 @@ namespace Zetbox.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent) where T : class, IRelationEntry
         {
-            return FetchRelationAsync<T>(relationId, endRole, parent).Result;
+            var task = FetchRelationAsync<T>(relationId, endRole, parent);
+            task.TryRunSynchronously();
+            return task.Result;
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -646,6 +650,7 @@ namespace Zetbox.API.Server
             try
             {
                 var t = FindAsync(ifType, ID);
+                t.TryRunSynchronously();
                 return t.Result;
             }
             catch (System.Reflection.TargetInvocationException ex)
@@ -668,6 +673,7 @@ namespace Zetbox.API.Server
             try
             {
                 var t = FindAsync<T>(ID);
+                t.TryRunSynchronously();
                 return t.Result;
             }
             catch (System.Reflection.TargetInvocationException ex)

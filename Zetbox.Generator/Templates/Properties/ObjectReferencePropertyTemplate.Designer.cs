@@ -175,7 +175,7 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                var task = TriggerFetch",  name , "Async();\r\n");
-this.WriteObjects("                task.RunSynchronously();\r\n");
+this.WriteObjects("                task.TryRunSynchronously();\r\n");
 this.WriteObjects("                task.Wait();\r\n");
 this.WriteObjects("                return (",  referencedImplementation , ")task.Result;\r\n");
 this.WriteObjects("            }\r\n");

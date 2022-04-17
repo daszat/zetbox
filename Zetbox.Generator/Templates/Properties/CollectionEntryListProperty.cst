@@ -50,7 +50,7 @@
                 if (<%= backingName %> == null)
                 {
                     var task = TriggerFetch<%= name %>Async();
-                    task.RunSynchronously();
+                    task.TryRunSynchronously();
                     task.Wait();
                 }
                 return (<%= exposedCollectionInterface %><<%= referencedInterface %>>)<%= backingName %>;
@@ -73,7 +73,7 @@
     {
 %>
             if (!<%= name %>_was_eagerLoaded) <%= taskName %> = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
-            else <%= taskName %> = System.Threading.Tasks.Task.FromResult(null);
+            else <%= taskName %> = System.Threading.Tasks.Task.FromResult<Guid?>(null);
 <%
     }
 %>

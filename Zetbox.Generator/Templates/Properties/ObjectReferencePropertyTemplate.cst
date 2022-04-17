@@ -129,7 +129,7 @@
             get
             {
                 var task = TriggerFetch<%= name %>Async();
-                task.RunSynchronously();
+                task.TryRunSynchronously();
                 task.Wait();
                 return (<%= referencedImplementation %>)task.Result;
             }

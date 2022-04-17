@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zetbox.API
 {
-    public static class TempTaskExtensions
+    public static class TaskExtensions
     {
         public static Task OnResult(this Task task, Action<Task> action)
         { 
