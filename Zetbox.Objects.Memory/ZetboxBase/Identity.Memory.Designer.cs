@@ -179,7 +179,7 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchGroupsTask != null) return _triggerFetchGroupsTask;
             _triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.A, this);
-            _triggerFetchGroupsTask.OnResult(r =>
+            _triggerFetchGroupsTask = _triggerFetchGroupsTask.OnResult(r =>
             {
                 _Groups
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>>(

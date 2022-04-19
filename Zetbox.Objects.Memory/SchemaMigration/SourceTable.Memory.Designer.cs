@@ -855,7 +855,7 @@ namespace Zetbox.App.SchemaMigration
                 });
             }
 
-            _triggerFetchSourceColumnTask.OnResult(t =>
+            _triggerFetchSourceColumnTask = _triggerFetchSourceColumnTask.OnResult(t =>
             {
                 _SourceColumn = new OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn>(
                     "SourceTable",

@@ -93,7 +93,7 @@ namespace Zetbox.App.Test
                 });
             }
 
-            _triggerFetchAntwortenTask.OnResult(t =>
+            _triggerFetchAntwortenTask = _triggerFetchAntwortenTask.OnResult(t =>
             {
                 _Antworten = new OneNRelationList<Zetbox.App.Test.Antwort>(
                     "Fragebogen",
@@ -201,7 +201,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
         {
             if (_triggerFetchStudentTask != null) return _triggerFetchStudentTask;
             _triggerFetchStudentTask = Context.FetchRelationAsync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
-            _triggerFetchStudentTask.OnResult(r =>
+            _triggerFetchStudentTask = _triggerFetchStudentTask.OnResult(r =>
             {
                 _Student
                     = new ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>>(

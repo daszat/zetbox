@@ -110,7 +110,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 });
             }
 
-            _triggerFetchAuftraegeTask.OnResult(t =>
+            _triggerFetchAuftraegeTask = _triggerFetchAuftraegeTask.OnResult(t =>
             {
                 _Auftraege = new OneNRelationList<Zetbox.App.Projekte.Auftrag>(
                     "Projekt",
@@ -912,7 +912,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             if (_triggerFetchMitarbeiterTask != null) return _triggerFetchMitarbeiterTask;
             _triggerFetchMitarbeiterTask = Context.FetchRelationAsync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.A, this);
-            _triggerFetchMitarbeiterTask.OnResult(r =>
+            _triggerFetchMitarbeiterTask = _triggerFetchMitarbeiterTask.OnResult(r =>
             {
                 _Mitarbeiter
                     = new ObservableBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
@@ -1039,7 +1039,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
                 });
             }
 
-            _triggerFetchTasksTask.OnResult(t =>
+            _triggerFetchTasksTask = _triggerFetchTasksTask.OnResult(t =>
             {
                 _Tasks = new OneNRelationList<Zetbox.App.Projekte.Task>(
                     "Projekt",

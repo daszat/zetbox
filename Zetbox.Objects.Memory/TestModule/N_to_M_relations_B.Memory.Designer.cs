@@ -61,7 +61,7 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchASideTask != null) return _triggerFetchASideTask;
             _triggerFetchASideTask = Context.FetchRelationAsync<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl>(new Guid("3555da6e-0e9b-4f7c-903e-a51f3cce7cd9"), RelationEndRole.B, this);
-            _triggerFetchASideTask.OnResult(r =>
+            _triggerFetchASideTask = _triggerFetchASideTask.OnResult(r =>
             {
                 _ASide
                     = new ObservableASideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl>>(

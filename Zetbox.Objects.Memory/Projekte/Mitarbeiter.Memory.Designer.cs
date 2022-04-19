@@ -835,7 +835,7 @@ namespace Zetbox.App.Projekte
         {
             if (_triggerFetchProjekteTask != null) return _triggerFetchProjekteTask;
             _triggerFetchProjekteTask = Context.FetchRelationAsync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.B, this);
-            _triggerFetchProjekteTask.OnResult(r =>
+            _triggerFetchProjekteTask = _triggerFetchProjekteTask.OnResult(r =>
             {
                 _Projekte
                     = new ObservableASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>>(

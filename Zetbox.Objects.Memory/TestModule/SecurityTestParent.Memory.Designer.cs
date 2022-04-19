@@ -82,7 +82,7 @@ namespace Zetbox.App.Test
                 });
             }
 
-            _triggerFetchChildrenTask.OnResult(t =>
+            _triggerFetchChildrenTask = _triggerFetchChildrenTask.OnResult(t =>
             {
                 _Children = new OneNRelationList<Zetbox.App.Test.SecurityTestChild>(
                     "Parent",

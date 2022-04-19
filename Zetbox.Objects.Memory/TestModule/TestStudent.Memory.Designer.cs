@@ -119,7 +119,7 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchTestbogenTask != null) return _triggerFetchTestbogenTask;
             _triggerFetchTestbogenTask = Context.FetchRelationAsync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.A, this);
-            _triggerFetchTestbogenTask.OnResult(r =>
+            _triggerFetchTestbogenTask = _triggerFetchTestbogenTask.OnResult(r =>
             {
                 _Testbogen
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>>(

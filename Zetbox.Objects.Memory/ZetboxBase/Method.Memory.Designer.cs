@@ -1452,7 +1452,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
         {
             if (_triggerFetchShowByPropertiesTask != null) return _triggerFetchShowByPropertiesTask;
             _triggerFetchShowByPropertiesTask = Context.FetchRelationAsync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.B, this);
-            _triggerFetchShowByPropertiesTask.OnResult(r =>
+            _triggerFetchShowByPropertiesTask = _triggerFetchShowByPropertiesTask.OnResult(r =>
             {
                 _ShowByProperties
                     = new ObservableASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>>(

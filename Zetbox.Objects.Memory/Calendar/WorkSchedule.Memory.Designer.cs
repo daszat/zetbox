@@ -426,7 +426,7 @@ namespace Zetbox.App.Calendar
                 });
             }
 
-            _triggerFetchChildWorkScheduleTask.OnResult(t =>
+            _triggerFetchChildWorkScheduleTask = _triggerFetchChildWorkScheduleTask.OnResult(t =>
             {
                 _ChildWorkSchedule = new OneNRelationList<Zetbox.App.Calendar.WorkSchedule>(
                     "BaseWorkSchedule",
@@ -952,7 +952,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 });
             }
 
-            _triggerFetchWorkScheduleRulesTask.OnResult(t =>
+            _triggerFetchWorkScheduleRulesTask = _triggerFetchWorkScheduleRulesTask.OnResult(t =>
             {
                 _WorkScheduleRules = new OneNRelationList<Zetbox.App.Calendar.WorkScheduleRule>(
                     "WorkSchedule",

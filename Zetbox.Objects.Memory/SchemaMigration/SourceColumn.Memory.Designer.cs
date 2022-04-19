@@ -707,7 +707,7 @@ namespace Zetbox.App.SchemaMigration
             if (_triggerFetchDestinationPropertyTask != null) return _triggerFetchDestinationPropertyTask;
             if (!DestinationProperty_was_eagerLoaded) _triggerFetchDestinationPropertyTask = Context.FetchRelationAsync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27"), RelationEndRole.A, this);
             else _triggerFetchDestinationPropertyTask = System.Threading.Tasks.Task.FromResult<Guid?>(null);
-            _triggerFetchDestinationPropertyTask.OnResult(r =>
+            _triggerFetchDestinationPropertyTask = _triggerFetchDestinationPropertyTask.OnResult(r =>
             {
                 _DestinationProperty
                     = new ObservableBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>>(
@@ -777,7 +777,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 });
             }
 
-            _triggerFetchEnumEntriesTask.OnResult(t =>
+            _triggerFetchEnumEntriesTask = _triggerFetchEnumEntriesTask.OnResult(t =>
             {
                 _EnumEntries = new OneNRelationList<Zetbox.App.SchemaMigration.SourceEnum>(
                     "SourceColumn",
@@ -1177,7 +1177,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 });
             }
 
-            _triggerFetchReferersTask.OnResult(t =>
+            _triggerFetchReferersTask = _triggerFetchReferersTask.OnResult(t =>
             {
                 _Referers = new OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn>(
                     "References",

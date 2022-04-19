@@ -140,7 +140,7 @@ namespace Zetbox.App.Test
                 });
             }
 
-            _triggerFetchNSideTask.OnResult(t =>
+            _triggerFetchNSideTask = _triggerFetchNSideTask.OnResult(t =>
             {
                 _NSide = new OneNRelationList<Zetbox.App.Test.One_to_N_relations_N>(
                     "OneSide",
@@ -209,7 +209,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
                 });
             }
 
-            _triggerFetchOrderedNSideTask.OnResult(t =>
+            _triggerFetchOrderedNSideTask = _triggerFetchOrderedNSideTask.OnResult(t =>
             {
                 _OrderedNSide = new OneNRelationList<Zetbox.App.Test.One_to_N_relations_OrderedN>(
                     "OneSide",

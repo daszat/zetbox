@@ -82,7 +82,7 @@ namespace Zetbox.App.Test
                 });
             }
 
-            _triggerFetchNEndsTask.OnResult(t =>
+            _triggerFetchNEndsTask = _triggerFetchNEndsTask.OnResult(t =>
             {
                 _NEnds = new OneNRelationList<Zetbox.App.Test.OrderedNEnd>(
                     "OneEnd",

@@ -190,7 +190,7 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchMethodsTask != null) return _triggerFetchMethodsTask;
             _triggerFetchMethodsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
-            _triggerFetchMethodsTask.OnResult(r =>
+            _triggerFetchMethodsTask = _triggerFetchMethodsTask.OnResult(r =>
             {
                 _Methods
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>>(

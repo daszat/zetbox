@@ -660,7 +660,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             if (_triggerFetchGroupsTask != null) return _triggerFetchGroupsTask;
             if (!Groups_was_eagerLoaded) _triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl>(new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a"), RelationEndRole.A, this);
             else _triggerFetchGroupsTask = System.Threading.Tasks.Task.FromResult<Guid?>(null);
-            _triggerFetchGroupsTask.OnResult(r =>
+            _triggerFetchGroupsTask = _triggerFetchGroupsTask.OnResult(r =>
             {
                 _Groups
                     = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl>>(

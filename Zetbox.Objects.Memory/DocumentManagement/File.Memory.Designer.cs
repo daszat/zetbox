@@ -1057,7 +1057,7 @@ namespace at.dasz.DocumentManagement
         {
             if (_triggerFetchRevisionsTask != null) return _triggerFetchRevisionsTask;
             _triggerFetchRevisionsTask = Context.FetchRelationAsync<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
-            _triggerFetchRevisionsTask.OnResult(r =>
+            _triggerFetchRevisionsTask = _triggerFetchRevisionsTask.OnResult(r =>
             {
                 _Revisions
                     = new ObservableBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl>>(
