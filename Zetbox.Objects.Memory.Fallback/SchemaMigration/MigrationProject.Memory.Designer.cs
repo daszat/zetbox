@@ -728,7 +728,7 @@ namespace Zetbox.App.SchemaMigration
                 });
             }
 
-            _triggerFetchStagingDatabasesTask.OnResult(t =>
+            _triggerFetchStagingDatabasesTask = _triggerFetchStagingDatabasesTask.OnResult(t =>
             {
                 _StagingDatabases = new OneNRelationList<Zetbox.App.SchemaMigration.StagingDatabase>(
                     "MigrationProject",

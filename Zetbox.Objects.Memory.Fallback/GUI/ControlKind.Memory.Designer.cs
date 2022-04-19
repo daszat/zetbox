@@ -80,7 +80,7 @@ namespace Zetbox.App.GUI
                 });
             }
 
-            _triggerFetchChildControlKindsTask.OnResult(t =>
+            _triggerFetchChildControlKindsTask = _triggerFetchChildControlKindsTask.OnResult(t =>
             {
                 _ChildControlKinds = new OneNRelationList<Zetbox.App.GUI.ControlKind>(
                     "Parent",

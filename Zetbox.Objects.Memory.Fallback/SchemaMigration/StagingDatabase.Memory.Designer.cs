@@ -918,7 +918,7 @@ namespace Zetbox.App.SchemaMigration
                 });
             }
 
-            _triggerFetchSourceTablesTask.OnResult(t =>
+            _triggerFetchSourceTablesTask = _triggerFetchSourceTablesTask.OnResult(t =>
             {
                 _SourceTables = new OneNRelationList<Zetbox.App.SchemaMigration.SourceTable>(
                     "StagingDatabase",

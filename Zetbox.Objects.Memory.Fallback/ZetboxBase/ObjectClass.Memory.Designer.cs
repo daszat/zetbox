@@ -80,7 +80,7 @@ namespace Zetbox.App.Base
                 });
             }
 
-            _triggerFetchAccessControlListTask.OnResult(t =>
+            _triggerFetchAccessControlListTask = _triggerFetchAccessControlListTask.OnResult(t =>
             {
                 _AccessControlList = new OneNRelationList<Zetbox.App.Base.AccessControl>(
                     "ObjectClass",
@@ -458,7 +458,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 });
             }
 
-            _triggerFetchFilterConfigurationsTask.OnResult(t =>
+            _triggerFetchFilterConfigurationsTask = _triggerFetchFilterConfigurationsTask.OnResult(t =>
             {
                 _FilterConfigurations = new OneNRelationList<Zetbox.App.GUI.ObjectClassFilterConfiguration>(
                     "ObjectClass",
@@ -809,7 +809,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                 });
             }
 
-            _triggerFetchSubClassesTask.OnResult(t =>
+            _triggerFetchSubClassesTask = _triggerFetchSubClassesTask.OnResult(t =>
             {
                 _SubClasses = new OneNRelationList<Zetbox.App.Base.ObjectClass>(
                     "BaseObjectClass",

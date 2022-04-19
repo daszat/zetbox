@@ -462,7 +462,7 @@ namespace Zetbox.App.Base
                 });
             }
 
-            _triggerFetchConstraintsTask.OnResult(t =>
+            _triggerFetchConstraintsTask = _triggerFetchConstraintsTask.OnResult(t =>
             {
                 _Constraints = new OneNRelationList<Zetbox.App.Base.Constraint>(
                     "ConstrainedProperty",

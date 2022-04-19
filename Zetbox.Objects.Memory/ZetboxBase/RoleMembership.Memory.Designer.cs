@@ -61,7 +61,7 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchRelationsTask != null) return _triggerFetchRelationsTask;
             _triggerFetchRelationsTask = Context.FetchRelationAsync<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryMemoryImpl>(new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80"), RelationEndRole.A, this);
-            _triggerFetchRelationsTask.OnResult(r =>
+            _triggerFetchRelationsTask = _triggerFetchRelationsTask.OnResult(r =>
             {
                 _Relations
                     = new ObservableBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryMemoryImpl>>(

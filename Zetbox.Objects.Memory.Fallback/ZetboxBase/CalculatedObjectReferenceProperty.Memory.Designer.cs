@@ -60,7 +60,7 @@ namespace Zetbox.App.Base
             if (_triggerFetchInputsTask != null) return _triggerFetchInputsTask;
             if (!Inputs_was_eagerLoaded) _triggerFetchInputsTask = Context.FetchRelationAsync<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
             else _triggerFetchInputsTask = new System.Threading.Tasks.Task(null);
-            _triggerFetchInputsTask.OnResult(r =>
+            _triggerFetchInputsTask = _triggerFetchInputsTask.OnResult(r =>
             {
                 _Inputs
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl>>(

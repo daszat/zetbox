@@ -130,7 +130,7 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchPropertiesTask != null) return _triggerFetchPropertiesTask;
             _triggerFetchPropertiesTask = Context.FetchRelationAsync<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
-            _triggerFetchPropertiesTask.OnResult(r =>
+            _triggerFetchPropertiesTask = _triggerFetchPropertiesTask.OnResult(r =>
             {
                 _Properties
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>>(

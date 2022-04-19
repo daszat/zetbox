@@ -138,7 +138,7 @@ namespace Zetbox.App.Base
                 });
             }
 
-            _triggerFetchEnumerationEntriesTask.OnResult(t =>
+            _triggerFetchEnumerationEntriesTask = _triggerFetchEnumerationEntriesTask.OnResult(t =>
             {
                 _EnumerationEntries = new OneNRelationList<Zetbox.App.Base.EnumerationEntry>(
                     "Enumeration",

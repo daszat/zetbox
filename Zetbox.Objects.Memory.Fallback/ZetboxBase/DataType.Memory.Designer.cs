@@ -293,7 +293,7 @@ namespace Zetbox.App.Base
                 });
             }
 
-            _triggerFetchConstraintsTask.OnResult(t =>
+            _triggerFetchConstraintsTask = _triggerFetchConstraintsTask.OnResult(t =>
             {
                 _Constraints = new OneNRelationList<Zetbox.App.Base.InstanceConstraint>(
                     "Constrained",
@@ -863,7 +863,7 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchImplementsInterfacesTask != null) return _triggerFetchImplementsInterfacesTask;
             _triggerFetchImplementsInterfacesTask = Context.FetchRelationAsync<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl>(new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3"), RelationEndRole.A, this);
-            _triggerFetchImplementsInterfacesTask.OnResult(r =>
+            _triggerFetchImplementsInterfacesTask = _triggerFetchImplementsInterfacesTask.OnResult(r =>
             {
                 _ImplementsInterfaces
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl>>(
@@ -941,7 +941,7 @@ namespace Zetbox.App.Base
                 });
             }
 
-            _triggerFetchMethodsTask.OnResult(t =>
+            _triggerFetchMethodsTask = _triggerFetchMethodsTask.OnResult(t =>
             {
                 _Methods = new OneNRelationList<Zetbox.App.Base.Method>(
                     "ObjectClass",
@@ -1205,7 +1205,7 @@ namespace Zetbox.App.Base
                 });
             }
 
-            _triggerFetchPropertiesTask.OnResult(t =>
+            _triggerFetchPropertiesTask = _triggerFetchPropertiesTask.OnResult(t =>
             {
                 _Properties = new OneNRelationList<Zetbox.App.Base.Property>(
                     "ObjectClass",
