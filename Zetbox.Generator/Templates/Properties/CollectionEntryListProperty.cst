@@ -77,7 +77,7 @@
 <%
     }
 %>
-            <%= taskName %>.OnResult(r =>
+            <%= taskName %> = <%= taskName %>.OnResult(r =>
             {
                 <%= backingName %>
                     = new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>>(

@@ -99,7 +99,7 @@ this.WriteObjects("            else ",  taskName , " = System.Threading.Tasks.Ta
 }
 
 #line 80 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("            ",  taskName , ".OnResult(r =>\r\n");
+this.WriteObjects("            ",  taskName , " = ",  taskName , ".OnResult(r =>\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                ",  backingName , "\r\n");
 this.WriteObjects("                    = new ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ", ICollection<",  entryType , ">>(\r\n");
