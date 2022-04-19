@@ -159,7 +159,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)task.Result;
             }
             set
             {
@@ -271,7 +274,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)task.Result;
             }
             set
             {
@@ -601,7 +607,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)task.Result;
             }
             set
             {
@@ -714,7 +723,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set
             {
@@ -1062,7 +1074,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)task.Result;
             }
             set
             {
@@ -1175,7 +1190,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Base.GroupMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.GroupMemoryImpl)task.Result;
             }
             set
             {
@@ -1488,7 +1506,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)task.Result;
             }
             set
             {
@@ -1600,7 +1621,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -1914,7 +1938,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)task.Result;
             }
             set
             {
@@ -2027,7 +2054,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Base.GroupMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.GroupMemoryImpl)task.Result;
             }
             set
             {
@@ -2340,7 +2370,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)task.Result;
             }
             set
             {
@@ -2452,7 +2485,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -2766,7 +2802,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.DataTypeMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.DataTypeMemoryImpl)task.Result;
             }
             set
             {
@@ -2879,7 +2918,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.InterfaceMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.InterfaceMemoryImpl)task.Result;
             }
             set
             {
@@ -3227,7 +3269,10 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                return (at.dasz.DocumentManagement.FileMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (at.dasz.DocumentManagement.FileMemoryImpl)task.Result;
             }
             set
             {
@@ -3371,7 +3416,10 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                return (Zetbox.App.Base.BlobMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.BlobMemoryImpl)task.Result;
             }
             set
             {
@@ -3739,7 +3787,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -3851,7 +3902,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.GroupMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.GroupMemoryImpl)task.Result;
             }
             set
             {
@@ -4146,7 +4200,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (Zetbox.App.Test.MuhblahMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.MuhblahMemoryImpl)task.Result;
             }
             set
             {
@@ -4258,7 +4315,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)task.Result;
             }
             set
             {
@@ -4588,7 +4648,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.NavigationEntryMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.NavigationEntryMemoryImpl)task.Result;
             }
             set
             {
@@ -4701,7 +4764,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.GroupMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.GroupMemoryImpl)task.Result;
             }
             set
             {
@@ -5049,7 +5115,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)task.Result;
             }
             set
             {
@@ -5162,7 +5231,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.MethodMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.MethodMemoryImpl)task.Result;
             }
             set
             {
@@ -5526,7 +5598,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
             {
@@ -5639,7 +5714,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -5987,7 +6065,10 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                return (Zetbox.App.Projekte.ProjektMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Projekte.ProjektMemoryImpl)task.Result;
             }
             set
             {
@@ -6131,7 +6212,10 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                return (Zetbox.App.Projekte.MitarbeiterMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Projekte.MitarbeiterMemoryImpl)task.Result;
             }
             set
             {
@@ -6550,7 +6634,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.RoleMembershipMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.RoleMembershipMemoryImpl)task.Result;
             }
             set
             {
@@ -6694,7 +6781,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.RelationMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.RelationMemoryImpl)task.Result;
             }
             set
             {
@@ -7097,7 +7187,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)task.Result;
             }
             set
             {
@@ -7241,7 +7334,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set
             {
@@ -7609,7 +7705,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (Zetbox.App.Test.TestStudentMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.TestStudentMemoryImpl)task.Result;
             }
             set
             {
@@ -7721,7 +7820,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (Zetbox.App.Test.FragebogenMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.FragebogenMemoryImpl)task.Result;
             }
             set
             {
@@ -8051,7 +8153,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IndexConstraintMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IndexConstraintMemoryImpl)task.Result;
             }
             set
             {
@@ -8164,7 +8269,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set
             {

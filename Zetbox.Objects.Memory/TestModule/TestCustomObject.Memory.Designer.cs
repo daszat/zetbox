@@ -116,7 +116,9 @@ namespace Zetbox.App.Test
             {
                 if (_MubBlah_List_Nav == null)
                 {
-                    TriggerFetchMubBlah_List_NavAsync().Wait();
+                    var task = TriggerFetchMubBlah_List_NavAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _MubBlah_List_Nav;
             }
@@ -243,7 +245,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get
             {
-                return (Zetbox.App.Test.MuhblahMemoryImpl)TriggerFetchMubBlah_NavAsync().Result;
+                var task = TriggerFetchMubBlah_NavAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.MuhblahMemoryImpl)task.Result;
             }
             set
             {
@@ -319,7 +324,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             {
                 if (_MuhBlah_ManyList_Nav == null)
                 {
-                    TriggerFetchMuhBlah_ManyList_NavAsync().Wait();
+                    var task = TriggerFetchMuhBlah_ManyList_NavAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Test.Muhblah>)_MuhBlah_ManyList_Nav;
             }
@@ -429,7 +436,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get
             {
-                return (Zetbox.App.Test.MuhblahMemoryImpl)TriggerFetchMuhBlah_One_NavAsync().Result;
+                var task = TriggerFetchMuhBlah_One_NavAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.MuhblahMemoryImpl)task.Result;
             }
             set
             {

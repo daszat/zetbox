@@ -20,7 +20,9 @@ namespace Zetbox.API.Common
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Security.Principal;
+    using System.Threading.Tasks;
     using Autofac;
+    using Zetbox.API.Async;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
 
@@ -33,20 +35,20 @@ namespace Zetbox.API.Common
         /// Retrieves the zetbox identity of the current user. The Identity is member of it's own resolver data context
         /// </summary>
         /// <returns>a Identity or null if none was found.</returns>
-        ZetboxPrincipal GetCurrent();
+        Task<ZetboxPrincipal> GetCurrent();
 
         /// <summary>
         /// Retrieves the zetbox identity of the specified security principal.The Identity is member of it's own resolver data context
         /// </summary>
         /// <param name="identity">a security principal</param>
         /// <returns>a Identity or null if none was found.</returns>
-        ZetboxPrincipal Resolve(IIdentity identity);
+        Task<ZetboxPrincipal> Resolve(IIdentity identity);
 
         /// <summary>
         /// Clear the cache
         /// </summary>
         void ClearCache();
-    }    
+    }
 
     [Serializable]
     public class UnresolvablePrincipalException : Exception
@@ -104,15 +106,15 @@ namespace Zetbox.API.Common
             }
         }
 
-        public abstract ZetboxPrincipal GetCurrent();
+        public abstract Task<ZetboxPrincipal> GetCurrent();
 
-        public ZetboxPrincipal Resolve(IIdentity identity)
+        public async Task<ZetboxPrincipal> Resolve(IIdentity identity)
         {
             if (identity == null) throw new ArgumentNullException("identity");
-            return Resolve(identity.Name);
+            return await Resolve(identity.Name);
         }
 
-        protected ZetboxPrincipal Resolve(string name)
+        protected async Task<ZetboxPrincipal> Resolve(string name)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
             string id = name.ToLower();
@@ -125,32 +127,34 @@ namespace Zetbox.API.Common
 
                 if (_cache.ContainsKey(id))
                 {
-                    result = _cache[id];
+                    return _cache[id];
                 }
-                else
+            }
+
+            try
+            {
+                var identity = await _resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefaultAsync();
+                if (identity != null && identity.IsDeactivated == false)
                 {
-                    try
+                    result = new ZetboxPrincipal(id: identity.ID, userName: identity.UserName, displayName: identity.DisplayName, groups: identity.Groups.Select(g => new ZetboxPrincipalGroup(id: g.ID, name: g.Name, exportGuid: g.ExportGuid)));
+                    lock(_lock)
                     {
-                        var identity = _resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
-                        if (identity != null && identity.IsDeactivated == false)
-                        {
-                            result = _cache[id] = new ZetboxPrincipal(id: identity.ID, userName: identity.UserName, displayName: identity.DisplayName, groups: identity.Groups.Select(g => new ZetboxPrincipalGroup(id: g.ID, name: g.Name, exportGuid: g.ExportGuid)));
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        var inner = ex.StripTargetInvocationExceptions();
-                        if (inner is InvalidZetboxGeneratedVersionException || inner is System.IO.IOException)
-                        {
-                            throw inner;
-                        }
-                        Logging.Log.Warn("Exception while resolving Identity", ex);
-                    }
-                    if (result == null)
-                    {
-                        Logging.Log.WarnFormat("Unable to resolve Identity {0}", name);
+                        _cache[id] = result;
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                var inner = ex.StripTargetInvocationExceptions();
+                if (inner is InvalidZetboxGeneratedVersionException || inner is System.IO.IOException)
+                {
+                    throw inner;
+                }
+                Logging.Log.Warn("Exception while resolving Identity", ex);
+            }
+            if (result == null)
+            {
+                Logging.Log.WarnFormat("Unable to resolve Identity {0}", name);
             }
 
             return result;

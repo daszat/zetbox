@@ -48,7 +48,9 @@ namespace Zetbox.App.Base
             {
                 if (_Relations == null)
                 {
-                    TriggerFetchRelationsAsync().Wait();
+                    var task = TriggerFetchRelationsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (IList<Zetbox.App.Base.Relation>)_Relations;
             }

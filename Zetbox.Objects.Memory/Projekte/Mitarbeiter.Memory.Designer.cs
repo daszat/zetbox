@@ -112,7 +112,10 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -309,7 +312,10 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -695,7 +701,10 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchIdentityAsync().Result;
+                var task = TriggerFetchIdentityAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -813,7 +822,9 @@ namespace Zetbox.App.Projekte
             {
                 if (_Projekte == null)
                 {
-                    TriggerFetchProjekteAsync().Wait();
+                    var task = TriggerFetchProjekteAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (IList<Zetbox.App.Projekte.Projekt>)_Projekte;
             }

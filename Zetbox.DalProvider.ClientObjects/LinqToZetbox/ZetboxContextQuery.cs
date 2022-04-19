@@ -58,12 +58,16 @@ namespace Zetbox.DalProvider.Client
 
         public IEnumerator<T> GetEnumerator()
         {
-            return ((IEnumerable<T>)_provider.GetListCallAsync<T>(this._expression).Result).GetEnumerator();
+            var task = Task.Run(async () => await _provider.GetListCallAsync<T>(this._expression));
+            task.Wait();
+            return ((IEnumerable<T>)task.Result).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)_provider.GetListCallAsync<T>(this._expression).Result).GetEnumerator();
+            var task = Task.Run(async () => await _provider.GetListCallAsync<T>(this._expression));
+            task.Wait();
+            return ((IEnumerable)task.Result).GetEnumerator();
         }
 
         #endregion

@@ -345,7 +345,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchReferencedObjectClassAsync().Result;
+                var task = TriggerFetchReferencedObjectClassAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set
             {

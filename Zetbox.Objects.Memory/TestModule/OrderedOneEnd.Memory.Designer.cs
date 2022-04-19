@@ -52,7 +52,9 @@ namespace Zetbox.App.Test
             {
                 if (_NEnds == null)
                 {
-                    TriggerFetchNEndsAsync().Wait();
+                    var task = TriggerFetchNEndsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _NEnds;
             }

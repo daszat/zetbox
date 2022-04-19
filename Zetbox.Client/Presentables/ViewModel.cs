@@ -21,6 +21,7 @@ namespace Zetbox.Client.Presentables
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using log4net;
     using Zetbox.API;
     using Zetbox.API.Common;
@@ -156,7 +157,8 @@ namespace Zetbox.Client.Presentables
             {
                 if (_CurrentPrincipal == null)
                 {
-                    _CurrentPrincipal = _dependencies.PrincipalResolver.GetCurrent();
+                    var task = Task.Run(async () => _CurrentPrincipal = await _dependencies.PrincipalResolver.GetCurrent());
+                    task.TryRunSynchronously();
                 }
                 return _CurrentPrincipal;
             }

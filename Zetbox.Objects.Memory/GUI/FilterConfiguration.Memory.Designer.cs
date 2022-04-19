@@ -112,7 +112,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -309,7 +312,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -636,7 +642,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                var task = TriggerFetchModuleAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
             {
@@ -832,7 +841,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedKindAsync().Result;
+                var task = TriggerFetchRequestedKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -1015,7 +1027,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchViewModelDescriptorAsync().Result;
+                var task = TriggerFetchViewModelDescriptorAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
             {

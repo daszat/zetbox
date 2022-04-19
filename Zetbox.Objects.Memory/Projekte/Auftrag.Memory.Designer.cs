@@ -228,7 +228,10 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -425,7 +428,10 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -694,7 +700,10 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                return (Zetbox.App.Projekte.KundeMemoryImpl)TriggerFetchKundeAsync().Result;
+                var task = TriggerFetchKundeAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Projekte.KundeMemoryImpl)task.Result;
             }
             set
             {
@@ -819,7 +828,10 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                return (Zetbox.App.Projekte.MitarbeiterMemoryImpl)TriggerFetchMitarbeiterAsync().Result;
+                var task = TriggerFetchMitarbeiterAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Projekte.MitarbeiterMemoryImpl)task.Result;
             }
             set
             {
@@ -944,7 +956,10 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                return (Zetbox.App.Projekte.ProjektMemoryImpl)TriggerFetchProjektAsync().Result;
+                var task = TriggerFetchProjektAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Projekte.ProjektMemoryImpl)task.Result;
             }
             set
             {

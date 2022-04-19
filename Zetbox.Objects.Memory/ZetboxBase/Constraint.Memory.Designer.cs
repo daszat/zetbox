@@ -112,7 +112,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -310,7 +313,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchConstrainedPropertyAsync().Result;
+                var task = TriggerFetchConstrainedPropertyAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set
             {
@@ -450,7 +456,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {

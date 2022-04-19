@@ -170,7 +170,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -412,7 +415,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -797,7 +803,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchIconAsync().Result;
+                var task = TriggerFetchIconAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
             set
             {
@@ -1096,7 +1105,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                var task = TriggerFetchModuleAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
             {
@@ -1279,7 +1291,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.DataTypeMemoryImpl)TriggerFetchObjectClassAsync().Result;
+                var task = TriggerFetchObjectClassAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.DataTypeMemoryImpl)task.Result;
             }
             set
             {
@@ -1359,7 +1374,9 @@ namespace Zetbox.App.Base
             {
                 if (_Parameter == null)
                 {
-                    TriggerFetchParameterAsync().Wait();
+                    var task = TriggerFetchParameterAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _Parameter;
             }
@@ -1387,7 +1404,7 @@ namespace Zetbox.App.Base
                 });
             }
 
-            _triggerFetchParameterTask.OnResult(t =>
+            _triggerFetchParameterTask = _triggerFetchParameterTask.OnResult(t =>
             {
                 _Parameter = new OneNRelationList<Zetbox.App.Base.BaseParameter>(
                     "Method",
@@ -1422,7 +1439,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
             {
                 if (_ShowByProperties == null)
                 {
-                    TriggerFetchShowByPropertiesAsync().Wait();
+                    var task = TriggerFetchShowByPropertiesAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.ObjectReferenceProperty>)_ShowByProperties;
             }

@@ -112,7 +112,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -309,7 +312,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -636,7 +642,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchIconAsync().Result;
+                var task = TriggerFetchIconAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
             set
             {
@@ -761,7 +770,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                var task = TriggerFetchModuleAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
             {
@@ -944,7 +956,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.NavigationScreenMemoryImpl)TriggerFetchRootScreenAsync().Result;
+                var task = TriggerFetchRootScreenAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.NavigationScreenMemoryImpl)task.Result;
             }
             set
             {
@@ -1069,7 +1084,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchWorkspaceViewModelAsync().Result;
+                var task = TriggerFetchWorkspaceViewModelAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
             {

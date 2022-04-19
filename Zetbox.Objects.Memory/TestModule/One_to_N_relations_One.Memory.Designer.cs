@@ -110,7 +110,9 @@ namespace Zetbox.App.Test
             {
                 if (_NSide == null)
                 {
-                    TriggerFetchNSideAsync().Wait();
+                    var task = TriggerFetchNSideAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _NSide;
             }
@@ -177,7 +179,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             {
                 if (_OrderedNSide == null)
                 {
-                    TriggerFetchOrderedNSideAsync().Wait();
+                    var task = TriggerFetchOrderedNSideAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _OrderedNSide;
             }

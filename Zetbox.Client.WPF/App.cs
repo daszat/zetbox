@@ -22,6 +22,7 @@ namespace Zetbox.Client.WPF
     using System.Linq;
     using System.Reflection;
     using System.Security.Authentication;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
@@ -102,10 +103,12 @@ namespace Zetbox.Client.WPF
                 .InstancePerDependency();
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected async override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
+            var uiThread = System.Threading.Thread.CurrentThread;
+            await Task.Delay(1);
             try
             {
                 if (System.Configuration.ConfigurationManager.AppSettings["ShowDebugConsole"] == "true")
@@ -123,7 +126,7 @@ namespace Zetbox.Client.WPF
                     AssemblyLoader.Bootstrap(config);
 
                     InitCulture(config);
-                    InfoLoggingProxyDecorator.SetUiThread(System.Threading.Thread.CurrentThread);
+                    InfoLoggingProxyDecorator.SetUiThread(uiThread);
                     InitializeClient(args, config);
                 }
             }

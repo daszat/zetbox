@@ -52,7 +52,9 @@ namespace Zetbox.App.Test
             {
                 if (_Antworten == null)
                 {
-                    TriggerFetchAntwortenAsync().Wait();
+                    var task = TriggerFetchAntwortenAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _Antworten;
             }
@@ -186,7 +188,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
             {
                 if (_Student == null)
                 {
-                    TriggerFetchStudentAsync().Wait();
+                    var task = TriggerFetchStudentAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Test.TestStudent>)_Student;
             }

@@ -113,7 +113,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchDefaultPropertyViewModelDescriptorAsync().Result;
+                var task = TriggerFetchDefaultPropertyViewModelDescriptorAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
             {
@@ -238,7 +241,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchDefaultViewModelDescriptorAsync().Result;
+                var task = TriggerFetchDefaultViewModelDescriptorAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
             {

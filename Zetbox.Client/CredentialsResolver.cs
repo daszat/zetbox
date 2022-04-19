@@ -24,6 +24,7 @@ namespace Zetbox.Client
     using System.Security.Principal;
     using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
@@ -209,13 +210,13 @@ namespace Zetbox.Client
             _credentialResolver = credentialResolver;
         }
 
-        public override ZetboxPrincipal GetCurrent()
+        public async override Task<ZetboxPrincipal> GetCurrent()
         {
             ZetboxPrincipal result = null;
             while (result == null)
             {
                 var userName = _credentialResolver.GetUsername();
-                result = Resolve(userName);
+                result = await Resolve(userName);
                 if (result == null)
                 {
                     _credentialResolver.InvalidCredentials();

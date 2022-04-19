@@ -112,7 +112,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (Zetbox.App.Calendar.EventMemoryImpl)TriggerFetchEventAsync().Result;
+                var task = TriggerFetchEventAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Calendar.EventMemoryImpl)task.Result;
             }
             set
             {

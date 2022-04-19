@@ -113,7 +113,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.BlobMemoryImpl)TriggerFetchBlobAsync().Result;
+                var task = TriggerFetchBlobAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.BlobMemoryImpl)task.Result;
             }
             set
             {
@@ -367,7 +370,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                var task = TriggerFetchModuleAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
             {

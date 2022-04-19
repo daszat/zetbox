@@ -112,7 +112,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -309,7 +312,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -513,7 +519,9 @@ namespace Zetbox.App.Calendar
             {
                 if (_GroupReaders == null)
                 {
-                    TriggerFetchGroupReadersAsync().Wait();
+                    var task = TriggerFetchGroupReadersAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Group>)_GroupReaders;
             }
@@ -559,7 +567,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             {
                 if (_GroupWriters == null)
                 {
-                    TriggerFetchGroupWritersAsync().Wait();
+                    var task = TriggerFetchGroupWritersAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Group>)_GroupWriters;
             }
@@ -798,7 +808,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchOwnerAsync().Result;
+                var task = TriggerFetchOwnerAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -858,7 +871,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             {
                 if (_Readers == null)
                 {
-                    TriggerFetchReadersAsync().Wait();
+                    var task = TriggerFetchReadersAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Identity>)_Readers;
             }
@@ -904,7 +919,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             {
                 if (_Writers == null)
                 {
-                    TriggerFetchWritersAsync().Wait();
+                    var task = TriggerFetchWritersAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Identity>)_Writers;
             }

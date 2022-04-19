@@ -112,7 +112,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -438,7 +441,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -687,7 +693,9 @@ namespace Zetbox.App.SchemaMigration
             {
                 if (_DestinationProperty == null)
                 {
-                    TriggerFetchDestinationPropertyAsync().Wait();
+                    var task = TriggerFetchDestinationPropertyAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (IList<Zetbox.App.Base.Property>)_DestinationProperty;
             }
@@ -698,7 +706,7 @@ namespace Zetbox.App.SchemaMigration
         {
             if (_triggerFetchDestinationPropertyTask != null) return _triggerFetchDestinationPropertyTask;
             if (!DestinationProperty_was_eagerLoaded) _triggerFetchDestinationPropertyTask = Context.FetchRelationAsync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27"), RelationEndRole.A, this);
-            else _triggerFetchDestinationPropertyTask = new System.Threading.Tasks.Task(null);
+            else _triggerFetchDestinationPropertyTask = System.Threading.Tasks.Task.FromResult<Guid?>(null);
             _triggerFetchDestinationPropertyTask.OnResult(r =>
             {
                 _DestinationProperty
@@ -739,7 +747,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             {
                 if (_EnumEntries == null)
                 {
-                    TriggerFetchEnumEntriesAsync().Wait();
+                    var task = TriggerFetchEnumEntriesAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _EnumEntries;
             }
@@ -1054,7 +1064,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)TriggerFetchReferencesAsync().Result;
+                var task = TriggerFetchReferencesAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)task.Result;
             }
             set
             {
@@ -1134,7 +1147,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             {
                 if (_Referers == null)
                 {
-                    TriggerFetchReferersAsync().Wait();
+                    var task = TriggerFetchReferersAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _Referers;
             }
@@ -1320,7 +1335,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                return (Zetbox.App.SchemaMigration.SourceTableMemoryImpl)TriggerFetchSourceTableAsync().Result;
+                var task = TriggerFetchSourceTableAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.SchemaMigration.SourceTableMemoryImpl)task.Result;
             }
             set
             {

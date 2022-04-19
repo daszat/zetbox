@@ -20,20 +20,21 @@ namespace Zetbox.Client.Mocks
     using System.Linq;
     using System.Security.Principal;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Common;
     using Zetbox.App.Base;
 
     public sealed class NullIdentityResolver : IPrincipalResolver
     {
-        public ZetboxPrincipal GetCurrent()
+        public Task<ZetboxPrincipal> GetCurrent()
         {
-            return null;
+            return Task.FromResult<ZetboxPrincipal>(null);
         }
 
-        public ZetboxPrincipal Resolve(IIdentity identity)
+        public Task<ZetboxPrincipal> Resolve(IIdentity identity)
         {
-            return null;
+            return Task.FromResult<ZetboxPrincipal>(null);
         }
 
         void IPrincipalResolver.ClearCache()

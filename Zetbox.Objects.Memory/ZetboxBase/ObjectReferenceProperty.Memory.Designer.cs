@@ -177,7 +177,9 @@ namespace Zetbox.App.Base
             {
                 if (_Methods == null)
                 {
-                    TriggerFetchMethodsAsync().Wait();
+                    var task = TriggerFetchMethodsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Method>)_Methods;
             }
@@ -288,7 +290,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         {
             get
             {
-                return (Zetbox.App.Base.RelationEndMemoryImpl)TriggerFetchRelationEndAsync().Result;
+                var task = TriggerFetchRelationEndAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.RelationEndMemoryImpl)task.Result;
             }
             set
             {

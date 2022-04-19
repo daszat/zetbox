@@ -434,7 +434,12 @@ namespace Zetbox.App.Extensions
 
             // Reflected Properties
             // New style
-            foreach (Property prop in dt.Properties)
+            var props = dt.Properties;
+            if(props == null)
+            {
+                throw new InvalidOperationException("Cant be null");
+            }
+            foreach (Property prop in props)
             {
                 if (!prop.GetIsList())
                 {
@@ -498,7 +503,12 @@ namespace Zetbox.App.Extensions
                 {
                     result = GetAllMethods(((ObjectClass)dt).BaseObjectClass);
                 }
-                result.AddRange(dt.Methods);
+                var methods = dt.Methods;
+                if(methods == null)
+                {
+                    throw new InvalidOperationException("Datatype returns a null methods collection");
+                }
+                result.AddRange(methods);
                 return result;
             }
             return result;

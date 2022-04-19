@@ -52,7 +52,9 @@ namespace Zetbox.App.Test
             {
                 if (_Children == null)
                 {
-                    TriggerFetchChildrenAsync().Wait();
+                    var task = TriggerFetchChildrenAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _Children;
             }

@@ -70,14 +70,17 @@ namespace Zetbox.API.Client
 
         private async Task<byte[]> MakeRequest(Uri destination, Action<ZetboxStreamWriter> sendRequest)
         {
-            using var req = InitializeRequest();
+            using var httpClient = InitializeRequest();
             HttpResponseMessage response = null;
 
             using (var reqStream = new MemoryStream())
             using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
             {
                 sendRequest(reqWriter);
-                response = await req.PostAsync(destination, new StreamContent(reqStream));
+                reqStream.Seek(0, SeekOrigin.Begin);
+                var content = new StreamContent(reqStream);
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("x-application/stream");
+                response = await httpClient.PostAsync(destination, content);
             }
             try
             {

@@ -66,7 +66,7 @@ namespace Zetbox.DalProvider.NHibernate
                     var cfg = c.Resolve<ZetboxConfig>();
                     return new NHibernateContext(
                         c.Resolve<IMetaDataResolver>(),
-                        param != null ? (ZetboxPrincipal)param.Value : c.Resolve<IPrincipalResolver>().GetCurrent(),
+                        param != null ? (ZetboxPrincipal)param.Value : c.Resolve<IPrincipalResolver>().GetCurrent().Result,
                         cfg,
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),

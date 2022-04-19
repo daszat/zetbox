@@ -110,7 +110,9 @@ namespace Zetbox.App.Base
             {
                 if (_EnumerationEntries == null)
                 {
-                    TriggerFetchEnumerationEntriesAsync().Wait();
+                    var task = TriggerFetchEnumerationEntriesAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _EnumerationEntries;
             }
@@ -138,7 +140,7 @@ namespace Zetbox.App.Base
                 });
             }
 
-            _triggerFetchEnumerationEntriesTask.OnResult(t =>
+            _triggerFetchEnumerationEntriesTask = _triggerFetchEnumerationEntriesTask.OnResult(t =>
             {
                 _EnumerationEntries = new OneNRelationList<Zetbox.App.Base.EnumerationEntry>(
                     "Enumeration",

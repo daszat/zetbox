@@ -48,7 +48,9 @@ namespace Zetbox.App.Test
             {
                 if (_BSide == null)
                 {
-                    TriggerFetchBSideAsync().Wait();
+                    var task = TriggerFetchBSideAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Test.N_to_M_relations_B>)_BSide;
             }

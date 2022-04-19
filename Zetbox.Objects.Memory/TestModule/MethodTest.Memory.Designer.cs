@@ -52,7 +52,9 @@ namespace Zetbox.App.Test
             {
                 if (_Children == null)
                 {
-                    TriggerFetchChildrenAsync().Wait();
+                    var task = TriggerFetchChildrenAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _Children;
             }
@@ -179,7 +181,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         {
             get
             {
-                return (Zetbox.App.Test.MethodTestMemoryImpl)TriggerFetchParentAsync().Result;
+                var task = TriggerFetchParentAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.MethodTestMemoryImpl)task.Result;
             }
             set
             {

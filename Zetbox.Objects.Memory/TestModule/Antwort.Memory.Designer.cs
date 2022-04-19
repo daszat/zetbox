@@ -170,7 +170,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (Zetbox.App.Test.FragebogenMemoryImpl)TriggerFetchFragebogenAsync().Result;
+                var task = TriggerFetchFragebogenAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.FragebogenMemoryImpl)task.Result;
             }
             set
             {

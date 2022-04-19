@@ -29,9 +29,7 @@ namespace Zetbox.App.GUI
 		/// </summary>
 		WinForms = 3,
 
-		/// <summary>
-		/// Blazor Toolkit
-		/// </summary>
+		// TODO: setup in zetbox
 		Blazor = 4,
 
 	}

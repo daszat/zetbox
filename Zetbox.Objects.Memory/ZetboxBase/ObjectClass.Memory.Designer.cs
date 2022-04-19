@@ -52,7 +52,9 @@ namespace Zetbox.App.Base
             {
                 if (_AccessControlList == null)
                 {
-                    TriggerFetchAccessControlListAsync().Wait();
+                    var task = TriggerFetchAccessControlListAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _AccessControlList;
             }
@@ -80,7 +82,7 @@ namespace Zetbox.App.Base
                 });
             }
 
-            _triggerFetchAccessControlListTask.OnResult(t =>
+            _triggerFetchAccessControlListTask = _triggerFetchAccessControlListTask.OnResult(t =>
             {
                 _AccessControlList = new OneNRelationList<Zetbox.App.Base.AccessControl>(
                     "ObjectClass",
@@ -180,7 +182,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchBaseObjectClassAsync().Result;
+                var task = TriggerFetchBaseObjectClassAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set
             {
@@ -366,7 +371,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchDefaultViewModelDescriptorAsync().Result;
+                var task = TriggerFetchDefaultViewModelDescriptorAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
             {
@@ -430,7 +438,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             {
                 if (_FilterConfigurations == null)
                 {
-                    TriggerFetchFilterConfigurationsAsync().Wait();
+                    var task = TriggerFetchFilterConfigurationsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _FilterConfigurations;
             }
@@ -458,7 +468,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 });
             }
 
-            _triggerFetchFilterConfigurationsTask.OnResult(t =>
+            _triggerFetchFilterConfigurationsTask = _triggerFetchFilterConfigurationsTask.OnResult(t =>
             {
                 _FilterConfigurations = new OneNRelationList<Zetbox.App.GUI.ObjectClassFilterConfiguration>(
                     "ObjectClass",
@@ -781,7 +791,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             {
                 if (_SubClasses == null)
                 {
-                    TriggerFetchSubClassesAsync().Wait();
+                    var task = TriggerFetchSubClassesAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _SubClasses;
             }
@@ -809,7 +821,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                 });
             }
 
-            _triggerFetchSubClassesTask.OnResult(t =>
+            _triggerFetchSubClassesTask = _triggerFetchSubClassesTask.OnResult(t =>
             {
                 _SubClasses = new OneNRelationList<Zetbox.App.Base.ObjectClass>(
                     "BaseObjectClass",

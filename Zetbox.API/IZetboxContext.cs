@@ -497,7 +497,7 @@ namespace Zetbox.API
         /// Has no effect on the server because you have already the highest priviliges.
         /// </remarks>
         /// <param name="elevatedMode">true, to get highest priviliges</param>
-        void SetElevatedMode(bool elevatedMode);
+        Task SetElevatedMode(bool elevatedMode);
         /// <summary>
         /// Indicates if the context is in a elevated mode
         /// </summary>

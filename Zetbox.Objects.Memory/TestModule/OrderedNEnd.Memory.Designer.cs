@@ -112,7 +112,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (Zetbox.App.Test.OrderedOneEndMemoryImpl)TriggerFetchOneEndAsync().Result;
+                var task = TriggerFetchOneEndAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.OrderedOneEndMemoryImpl)task.Result;
             }
             set
             {

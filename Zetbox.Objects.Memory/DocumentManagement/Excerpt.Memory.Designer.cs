@@ -112,7 +112,10 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                return (at.dasz.DocumentManagement.FileMemoryImpl)TriggerFetchFileAsync().Result;
+                var task = TriggerFetchFileAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (at.dasz.DocumentManagement.FileMemoryImpl)task.Result;
             }
             set
             {

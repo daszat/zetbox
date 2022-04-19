@@ -1009,7 +1009,7 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchSecondaryControlKindsTask != null) return _triggerFetchSecondaryControlKindsTask;
             _triggerFetchSecondaryControlKindsTask = Context.FetchRelationAsync<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl>(new Guid("5404456a-4527-4e40-a660-b4a5e96e4a47"), RelationEndRole.A, this);
-            _triggerFetchSecondaryControlKindsTask.OnResult(r =>
+            _triggerFetchSecondaryControlKindsTask = _triggerFetchSecondaryControlKindsTask.OnResult(r =>
             {
                 _SecondaryControlKinds
                     = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl>>(

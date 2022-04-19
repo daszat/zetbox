@@ -130,7 +130,7 @@ this.WriteObjects("                    serverList = new List<",  referencedInter
 this.WriteObjects("                });\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("            ",  taskName , ".OnResult(t =>\r\n");
+this.WriteObjects("            ",  taskName , " = ",  taskName , ".OnResult(t =>\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ">(\r\n");
 this.WriteObjects("                    \"",  otherName , "\",\r\n");

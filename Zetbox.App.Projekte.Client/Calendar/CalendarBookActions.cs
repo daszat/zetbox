@@ -23,6 +23,7 @@ namespace Zetbox.App.Calendar
     using Zetbox.Client.Presentables.Calendar;
     using Zetbox.API.Common;
     using Zetbox.App.Base;
+    using System.Threading.Tasks;
 
     [Implementor]
     public class CalendarBookActions
@@ -34,11 +35,11 @@ namespace Zetbox.App.Calendar
         }
 
         [Invocation]
-        public static void NotifyCreated(CalendarBook obj)
+        public static async Task NotifyCreated(CalendarBook obj)
         {
             var ctx = obj.Context;
             // sets the current principal as the default owner
-            var principal = _principalResolver.GetCurrent();
+            var principal = await _principalResolver.GetCurrent();
             obj.Owner = principal != null ? ctx.Find<Identity>(principal.ID) : null;
         }
 

@@ -175,7 +175,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)TriggerFetchCalendarAsync().Result;
+                var task = TriggerFetchCalendarAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)task.Result;
             }
             set
             {
@@ -299,7 +302,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -496,7 +502,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {

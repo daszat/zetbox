@@ -9,23 +9,34 @@ namespace Zetbox.API
     public static class TaskExtensions
     {
         public static Task OnResult(this Task task, Action<Task> action)
-        { 
-            task.ConfigureAwait(true);
-            return task.ContinueWith(action, TaskContinuationOptions.ExecuteSynchronously);
+        {
+            if (task.Status == TaskStatus.Created)
+                task.Start();
+            return task.ContinueWith(action, TaskContinuationOptions.AttachedToParent | TaskContinuationOptions.ExecuteSynchronously);
         }
 
         public static Task OnResult<T>(this Task<T> task, Action<Task<T>> action)
         {
-            task.ConfigureAwait(true);
-            return task.ContinueWith(action, TaskContinuationOptions.ExecuteSynchronously);
+            if (task.Status == TaskStatus.Created)
+                task.Start();
+            return task.ContinueWith(action, TaskContinuationOptions.AttachedToParent | TaskContinuationOptions.ExecuteSynchronously);
         }
 
         public static void TryRunSynchronously(this Task task)
         {
-            if(!task.IsCompleted)
+            if (task.Status == TaskStatus.Created)
             {
-                task.RunSynchronously();
+                try
+                {
+                    task.RunSynchronously();
+                }
+                catch (InvalidOperationException)
+                {
+                    task.Wait();
+                }
             }
+            
+            task.Wait();
         }
     }
 }

@@ -109,7 +109,7 @@
                 });
             }
 
-            <%= taskName %>.OnResult(t =>
+            <%= taskName %> = <%= taskName %>.OnResult(t =>
             {
                 <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>>(
                     "<%= otherName %>",

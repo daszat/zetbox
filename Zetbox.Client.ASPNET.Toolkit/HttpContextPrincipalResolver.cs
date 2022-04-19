@@ -19,10 +19,10 @@ namespace Zetbox.Client.ASPNET.Toolkit
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public override ZetboxPrincipal GetCurrent()
+        public override async Task<ZetboxPrincipal> GetCurrent()
         {
             if (!string.IsNullOrEmpty(_httpContextAccessor.HttpContext?.User?.Identity?.Name))
-                return Resolve(_httpContextAccessor.HttpContext?.User?.Identity);
+                return await Resolve(_httpContextAccessor.HttpContext?.User?.Identity);
             else
                 return null;
         }

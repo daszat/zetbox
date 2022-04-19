@@ -27,6 +27,7 @@ namespace Zetbox.IntegrationTests.Security
     using NUnit.Framework;
     using Zetbox.API.Common;
     using Zetbox.Client.Presentables;
+    using System.Threading.Tasks;
 
     public abstract class AbstractSecurityTest : AbstractUITest
     {
@@ -38,14 +39,14 @@ namespace Zetbox.IntegrationTests.Security
         protected SecurityTestChild child1;
         protected SecurityTestChild child2;
 
-        public override void SetUp()
+        public async override void SetUp()
         {
             base.SetUp();
 
             ctx = GetContext();
             var principalResolver = scope.Resolve<IPrincipalResolver>();
 
-            var currentPrincipal = principalResolver.GetCurrent();
+            var currentPrincipal = await principalResolver.GetCurrent();
 
             Assert.That(currentPrincipal, Is.Not.Null, "No current identity found - try syncidentities or setup the current identity correctly");
 
@@ -65,7 +66,7 @@ namespace Zetbox.IntegrationTests.Security
             child2.Identity = identity2;
             child2.Parent = parent;
 
-            ctx.SubmitChanges();
+            await ctx.SubmitChanges();
         }
 
         protected virtual void Reload()

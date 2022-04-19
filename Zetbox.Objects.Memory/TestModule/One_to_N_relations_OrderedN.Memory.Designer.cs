@@ -170,7 +170,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)TriggerFetchOneSideAsync().Result;
+                var task = TriggerFetchOneSideAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)task.Result;
             }
             set
             {

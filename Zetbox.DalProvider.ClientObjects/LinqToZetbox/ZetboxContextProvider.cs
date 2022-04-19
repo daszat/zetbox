@@ -283,12 +283,16 @@ namespace Zetbox.DalProvider.Client
 
         public TResult Execute<TResult>(Expression expression)
         {
-            return this.ExecuteAsync<TResult>(expression).Result;
+            var task = Task.Run(async () => await this.ExecuteAsync<TResult>(expression));
+            task.Wait();
+            return task.Result;
         }
 
         public object Execute(Expression expression)
         {
-            return this.ExecuteAsync(expression).Result;
+            var task = Task.Run(async () => await this.ExecuteAsync(expression));
+            task.Wait();
+            return task.Result;
         }
 
         public async Task<object> ExecuteAsync(Expression expression)

@@ -113,7 +113,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Calendar.WorkScheduleMemoryImpl)TriggerFetchBaseWorkScheduleAsync().Result;
+                var task = TriggerFetchBaseWorkScheduleAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Calendar.WorkScheduleMemoryImpl)task.Result;
             }
             set
             {
@@ -253,7 +256,10 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -390,7 +396,9 @@ namespace Zetbox.App.Calendar
             {
                 if (_ChildWorkSchedule == null)
                 {
-                    TriggerFetchChildWorkScheduleAsync().Wait();
+                    var task = TriggerFetchChildWorkScheduleAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _ChildWorkSchedule;
             }
@@ -517,7 +525,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -786,7 +797,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                var task = TriggerFetchModuleAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
             {
@@ -908,7 +922,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
             {
                 if (_WorkScheduleRules == null)
                 {
-                    TriggerFetchWorkScheduleRulesAsync().Wait();
+                    var task = TriggerFetchWorkScheduleRulesAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _WorkScheduleRules;
             }

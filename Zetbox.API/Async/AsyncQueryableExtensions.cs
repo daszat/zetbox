@@ -22,6 +22,30 @@ namespace Zetbox.API.Async
             }
         }
 
+        public static Task<T> FirstOrDefaultAsync<T>(this IQueryable<T> qry, Expression<Func<T, bool>> predicate)
+        {
+            if (qry.Provider is IAsyncQueryProvider)
+            {
+                return ((IAsyncQueryProvider)qry.Provider).ExecuteAsync<T>(Expression.Call(typeof(Queryable), "FirstOrDefault", new Type[] { typeof(T) }, new Expression[] { qry.Expression, Expression.Quote(predicate) }));
+            }
+            else
+            {
+                return Task.FromResult(qry.FirstOrDefault(predicate));
+            }
+        }
+
+        public static Task<T> FirstOrDefaultAsync<T>(this IQueryable<T> qry)
+        {
+            if (qry.Provider is IAsyncQueryProvider)
+            {
+                return ((IAsyncQueryProvider)qry.Provider).ExecuteAsync<T>(Expression.Call(typeof(Queryable), "FirstOrDefault", new Type[] { typeof(T) }, new Expression[] { qry.Expression }));
+            }
+            else
+            {
+                return Task.FromResult(qry.FirstOrDefault());
+            }
+        }
+
         public static Task<T> SingleOrDefaultAsync<T>(this IQueryable<T> qry, Expression<Func<T, bool>> predicate)
         {
             if (qry.Provider is IAsyncQueryProvider)

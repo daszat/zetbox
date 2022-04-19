@@ -215,7 +215,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (Zetbox.App.Projekte.KundeMemoryImpl)TriggerFetchObjectPropAsync().Result;
+                var task = TriggerFetchObjectPropAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Projekte.KundeMemoryImpl)task.Result;
             }
             set
             {

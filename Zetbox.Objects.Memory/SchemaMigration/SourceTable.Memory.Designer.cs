@@ -112,7 +112,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -367,7 +370,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -623,7 +629,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchDestinationObjectClassAsync().Result;
+                var task = TriggerFetchDestinationObjectClassAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set
             {
@@ -816,7 +825,9 @@ namespace Zetbox.App.SchemaMigration
             {
                 if (_SourceColumn == null)
                 {
-                    TriggerFetchSourceColumnAsync().Wait();
+                    var task = TriggerFetchSourceColumnAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _SourceColumn;
             }
@@ -944,7 +955,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                return (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)TriggerFetchStagingDatabaseAsync().Result;
+                var task = TriggerFetchStagingDatabaseAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)task.Result;
             }
             set
             {

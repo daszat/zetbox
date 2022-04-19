@@ -1012,7 +1012,7 @@ namespace Zetbox.API.Server
         }
 
         private bool _elevatedMode = false;
-        public void SetElevatedMode(bool elevatedMode)
+        public Task SetElevatedMode(bool elevatedMode)
         {
             if (_elevatedMode != elevatedMode)
             {
@@ -1023,6 +1023,8 @@ namespace Zetbox.API.Server
                     temp(this, EventArgs.Empty);
                 }
             }
+
+            return Task.CompletedTask;
         }
         public bool IsElevatedMode { get { return _elevatedMode; } }
         public event EventHandler IsElevatedModeChanged;

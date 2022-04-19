@@ -48,7 +48,9 @@ namespace Zetbox.App.Base
             {
                 if (_Inputs == null)
                 {
-                    TriggerFetchInputsAsync().Wait();
+                    var task = TriggerFetchInputsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Property>)_Inputs;
             }
@@ -59,7 +61,7 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchInputsTask != null) return _triggerFetchInputsTask;
             if (!Inputs_was_eagerLoaded) _triggerFetchInputsTask = Context.FetchRelationAsync<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
-            else _triggerFetchInputsTask = new System.Threading.Tasks.Task(null);
+            else _triggerFetchInputsTask = System.Threading.Tasks.Task.FromResult<Guid?>(null);
             _triggerFetchInputsTask.OnResult(r =>
             {
                 _Inputs
@@ -161,7 +163,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         {
             get
             {
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchReferencedClassAsync().Result;
+                var task = TriggerFetchReferencedClassAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set
             {

@@ -52,7 +52,9 @@ namespace Zetbox.App.GUI
             {
                 if (_ChildControlKinds == null)
                 {
-                    TriggerFetchChildControlKindsAsync().Wait();
+                    var task = TriggerFetchChildControlKindsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _ChildControlKinds;
             }
@@ -80,7 +82,7 @@ namespace Zetbox.App.GUI
                 });
             }
 
-            _triggerFetchChildControlKindsTask.OnResult(t =>
+            _triggerFetchChildControlKindsTask = _triggerFetchChildControlKindsTask.OnResult(t =>
             {
                 _ChildControlKinds = new OneNRelationList<Zetbox.App.GUI.ControlKind>(
                     "Parent",
@@ -251,7 +253,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                var task = TriggerFetchModuleAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
             {
@@ -434,7 +439,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchParentAsync().Result;
+                var task = TriggerFetchParentAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {

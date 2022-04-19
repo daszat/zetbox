@@ -29,31 +29,12 @@ namespace Zetbox.Server.HttpService.Controllers
             this.writerFactory = scope.Resolve<ZetboxStreamWriter.Factory>();
 
             this.service = scope.Resolve<IZetboxService>();
-
-            string username;
-            try
-            {
-                var id = scope.Resolve<IPrincipalResolver>().GetCurrent();
-                if (id != null)
-                {
-                    username = id.DisplayName;
-                }
-                else
-                {
-                    Log.Error("Error while trying to resolve user - not found");
-                    username = "(unknown)";
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error while trying to resolve user", ex);
-                username = "(unknown)";
-            }
         }
 
         [HttpPost]
         public async Task SetObjects()
         {
+            await CheckUser();
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
                 var version = reader.ReadGuid();
@@ -70,6 +51,7 @@ namespace Zetbox.Server.HttpService.Controllers
         [HttpPost]
         public async Task GetObjects()
         {
+            await CheckUser();
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
                 var version = reader.ReadGuid();
@@ -88,6 +70,7 @@ namespace Zetbox.Server.HttpService.Controllers
         [HttpPost]
         public async Task GetListOf()
         {
+            await CheckUser();
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
                 var version = reader.ReadGuid();
@@ -105,6 +88,7 @@ namespace Zetbox.Server.HttpService.Controllers
         [HttpPost]
         public async Task FetchRelation()
         {
+            await CheckUser();
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
                 var version = reader.ReadGuid();
@@ -121,6 +105,7 @@ namespace Zetbox.Server.HttpService.Controllers
         [HttpPost]
         public async Task GetBlobStream(int id)
         {
+            await CheckUser();
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
                 var version = reader.ReadGuid();
@@ -135,6 +120,7 @@ namespace Zetbox.Server.HttpService.Controllers
         [HttpPost]
         public async Task SetBlobStream()
         {
+            await CheckUser();
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
                 var version = reader.ReadGuid();
@@ -166,6 +152,7 @@ namespace Zetbox.Server.HttpService.Controllers
         [HttpPost]
         public async Task InvokeServerMethod()
         {
+            await CheckUser();
             using (var reader = readerFactory.Invoke(new BinaryReader(Request.Body)))
             {
                 var version = reader.ReadGuid();
@@ -254,6 +241,29 @@ namespace Zetbox.Server.HttpService.Controllers
             {
                 writer.Write(result);
                 writer.Flush();
+            }
+        }
+
+        private async Task CheckUser()
+        {
+            string username;
+            try
+            {
+                var id = await scope.Resolve<IPrincipalResolver>().GetCurrent();
+                if (id != null)
+                {
+                    username = id.DisplayName;
+                }
+                else
+                {
+                    Log.Error("Error while trying to resolve user - not found");
+                    username = "(unknown)";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while trying to resolve user", ex);
+                username = "(unknown)";
             }
         }
         #endregion

@@ -167,7 +167,10 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                return (Zetbox.App.Base.BlobMemoryImpl)TriggerFetchBlobAsync().Result;
+                var task = TriggerFetchBlobAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.BlobMemoryImpl)task.Result;
             }
             set
             {
@@ -291,7 +294,10 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -488,7 +494,10 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -685,7 +694,10 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                return (at.dasz.DocumentManagement.ExcerptMemoryImpl)TriggerFetchExcerptAsync().Result;
+                var task = TriggerFetchExcerptAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (at.dasz.DocumentManagement.ExcerptMemoryImpl)task.Result;
             }
             set
             {
@@ -1032,7 +1044,9 @@ namespace at.dasz.DocumentManagement
             {
                 if (_Revisions == null)
                 {
-                    TriggerFetchRevisionsAsync().Wait();
+                    var task = TriggerFetchRevisionsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (IList<Zetbox.App.Base.Blob>)_Revisions;
             }

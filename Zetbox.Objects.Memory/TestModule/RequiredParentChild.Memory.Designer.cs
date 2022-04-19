@@ -170,7 +170,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (Zetbox.App.Test.RequiredParentMemoryImpl)TriggerFetchParentAsync().Result;
+                var task = TriggerFetchParentAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.RequiredParentMemoryImpl)task.Result;
             }
             set
             {

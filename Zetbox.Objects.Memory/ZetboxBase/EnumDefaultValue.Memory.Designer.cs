@@ -113,7 +113,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                return (Zetbox.App.Base.EnumerationEntryMemoryImpl)TriggerFetchEnumValueAsync().Result;
+                var task = TriggerFetchEnumValueAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.EnumerationEntryMemoryImpl)task.Result;
             }
             set
             {

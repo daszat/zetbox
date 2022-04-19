@@ -21,6 +21,7 @@ namespace Zetbox.API.Common
     using System.Security.Principal;
     using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using Autofac;
     using Zetbox.API;
     using Zetbox.App.Base;
@@ -33,7 +34,7 @@ namespace Zetbox.API.Common
         {
         }
 
-        public override ZetboxPrincipal GetCurrent()
+        public override Task<ZetboxPrincipal> GetCurrent()
         {
             if (!string.IsNullOrEmpty(Thread.CurrentPrincipal?.Identity?.Name))
                 return Resolve(Thread.CurrentPrincipal.Identity);

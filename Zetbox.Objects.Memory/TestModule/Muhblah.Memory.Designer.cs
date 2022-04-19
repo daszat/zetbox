@@ -138,7 +138,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
             {
                 if (_TestCustomObjects_List_Nav == null)
                 {
-                    TriggerFetchTestCustomObjects_List_NavAsync().Wait();
+                    var task = TriggerFetchTestCustomObjects_List_NavAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _TestCustomObjects_List_Nav;
             }
@@ -201,7 +203,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             {
                 if (_TestCustomObjects_ManyList_Nav == null)
                 {
-                    TriggerFetchTestCustomObjects_ManyList_NavAsync().Wait();
+                    var task = TriggerFetchTestCustomObjects_ManyList_NavAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Test.TestCustomObject>)_TestCustomObjects_ManyList_Nav;
             }
@@ -311,7 +315,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)TriggerFetchTestCustomObjects_NavAsync().Result;
+                var task = TriggerFetchTestCustomObjects_NavAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)task.Result;
             }
             set
             {
@@ -451,7 +458,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)TriggerFetchTestCustomObjects_One_NavAsync().Result;
+                var task = TriggerFetchTestCustomObjects_One_NavAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)task.Result;
             }
             set
             {

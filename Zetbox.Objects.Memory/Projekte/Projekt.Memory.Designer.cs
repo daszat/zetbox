@@ -80,7 +80,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             {
                 if (_Auftraege == null)
                 {
-                    TriggerFetchAuftraegeAsync().Wait();
+                    var task = TriggerFetchAuftraegeAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _Auftraege;
             }
@@ -312,7 +314,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -509,7 +514,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -891,7 +899,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             {
                 if (_Mitarbeiter == null)
                 {
-                    TriggerFetchMitarbeiterAsync().Wait();
+                    var task = TriggerFetchMitarbeiterAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (IList<Zetbox.App.Projekte.Mitarbeiter>)_Mitarbeiter;
             }
@@ -999,7 +1009,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
             {
                 if (_Tasks == null)
                 {
-                    TriggerFetchTasksAsync().Wait();
+                    var task = TriggerFetchTasksAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _Tasks;
             }

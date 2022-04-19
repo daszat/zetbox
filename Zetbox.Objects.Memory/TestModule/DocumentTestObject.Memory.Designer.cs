@@ -112,7 +112,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (at.dasz.DocumentManagement.FileMemoryImpl)TriggerFetchAnotherFileAsync().Result;
+                var task = TriggerFetchAnotherFileAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (at.dasz.DocumentManagement.FileMemoryImpl)task.Result;
             }
             set
             {
@@ -236,7 +239,10 @@ namespace Zetbox.App.Test
         {
             get
             {
-                return (at.dasz.DocumentManagement.FileMemoryImpl)TriggerFetchAnyFileAsync().Result;
+                var task = TriggerFetchAnyFileAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (at.dasz.DocumentManagement.FileMemoryImpl)task.Result;
             }
             set
             {

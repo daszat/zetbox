@@ -44,6 +44,11 @@ namespace Zetbox.Server.HttpService
             {
                 options.AllowSynchronousIO = true;
             });
+
+            services.AddCors(o => o.AddPolicy("AllAllowed", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
         }
 
         // ConfigureContainer is where you can register things directly
@@ -94,6 +99,8 @@ namespace Zetbox.Server.HttpService
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors("AllAllowed");
 
             app.UseEndpoints(endpoints =>
             {

@@ -113,7 +113,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultDisplayKindAsync().Result;
+                var task = TriggerFetchDefaultDisplayKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -238,7 +241,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultEditorKindAsync().Result;
+                var task = TriggerFetchDefaultEditorKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -363,7 +369,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellDisplayKindAsync().Result;
+                var task = TriggerFetchDefaultGridCellDisplayKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -488,7 +497,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellEditorKindAsync().Result;
+                var task = TriggerFetchDefaultGridCellEditorKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -613,7 +625,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellPreEditorKindAsync().Result;
+                var task = TriggerFetchDefaultGridCellPreEditorKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -938,7 +953,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                var task = TriggerFetchModuleAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
             {
@@ -998,7 +1016,9 @@ namespace Zetbox.App.GUI
             {
                 if (_SecondaryControlKinds == null)
                 {
-                    TriggerFetchSecondaryControlKindsAsync().Wait();
+                    var task = TriggerFetchSecondaryControlKindsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.GUI.ControlKind>)_SecondaryControlKinds;
             }
@@ -1009,7 +1029,7 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchSecondaryControlKindsTask != null) return _triggerFetchSecondaryControlKindsTask;
             _triggerFetchSecondaryControlKindsTask = Context.FetchRelationAsync<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl>(new Guid("5404456a-4527-4e40-a660-b4a5e96e4a47"), RelationEndRole.A, this);
-            _triggerFetchSecondaryControlKindsTask.OnResult(r =>
+            _triggerFetchSecondaryControlKindsTask = _triggerFetchSecondaryControlKindsTask.OnResult(r =>
             {
                 _SecondaryControlKinds
                     = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl>>(
