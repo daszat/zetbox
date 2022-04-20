@@ -1,0 +1,41 @@
+﻿@using Zetbox.App.Projekte
+@using Zetbox.Client.Presentables
+@using t = System.Threading.Tasks
+
+@page "/"
+@inject IZetboxContext DataContext
+@inject IViewModelFactory ViewModelFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@if(projekte != null)
+{
+	<table class="table table-bordered">
+	@foreach(var prj in projekte)
+	{
+		<tr>
+			<td>@prj.Name</td>
+			<td>
+				<LabeledView value="@prj.PropertyModelsByName["KickOffAm"]" />
+			</td>
+		</tr>
+	}
+	</table>
+}
+
+
+@code {
+	private IEnumerable<DataObjectViewModel> projekte;
+
+	protected async override t.Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+
+		var _projekte = await DataContext.GetQuery<Projekt>().ToListAsync();
+		projekte = _projekte.Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, null, i)).ToArray();
+	}
+}

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
+		<ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
+		<ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj" />
+		<ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj" >
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+	</ItemGroup>
+
+	<ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.4" />
+  </ItemGroup>
+
+</Project>

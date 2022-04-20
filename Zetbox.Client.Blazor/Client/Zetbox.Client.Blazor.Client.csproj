@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.2" PrivateAssets="all" />
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Zetbox.Client.Blazor.Toolkit\Zetbox.Client.Blazor.Toolkit.csproj" />
+		<ProjectReference Include="..\Shared\Zetbox.Client.Blazor.Shared.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj" />
+		<ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Assets\Zetbox.Assets.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.DalProvider.Memory\Zetbox.DalProvider.Memory.csproj" />
+		<ProjectReference Include="..\..\Zetbox.DalProvider.ClientObjects\Zetbox.DalProvider.ClientObjects.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- These projects needs to be referenced directly, as the assembly loader won't load them in a blazor project -->
+		<ProjectReference Include="..\..\Zetbox.App.Projekte.Client\Zetbox.App.Projekte.Client.csproj" />
+		<ProjectReference Include="..\..\Zetbox.App.Projekte.Common\Zetbox.App.Projekte.Common.csproj" />
+		<ProjectReference Include="..\..\Zetbox.Objects.Memory\Zetbox.Objects.Memory.csproj" />
+		<Reference Include="Zetbox.Objects.ClientImpl">
+			<HintPath>..\..\bin\CodeGen\bin\Debug\Client\Generated\Zetbox.Objects.ClientImpl.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+
+</Project>
