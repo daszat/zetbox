@@ -597,7 +597,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             {
                 var task = TriggerFetchDefaultIconAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
             set

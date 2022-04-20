@@ -15,6 +15,13 @@ namespace Zetbox.API
             return task.ContinueWith(action, TaskContinuationOptions.AttachedToParent | TaskContinuationOptions.ExecuteSynchronously);
         }
 
+        public static Task<T> OnResult<T>(this Task<T> task, Func<Task<T>, T> action)
+        {
+            if (task.Status == TaskStatus.Created)
+                task.Start();
+            return task.ContinueWith<T>(action, TaskContinuationOptions.AttachedToParent | TaskContinuationOptions.ExecuteSynchronously);
+        }
+
         public static Task OnResult<T>(this Task<T> task, Action<Task<T>> action)
         {
             if (task.Status == TaskStatus.Created)
@@ -22,8 +29,11 @@ namespace Zetbox.API
             return task.ContinueWith(action, TaskContinuationOptions.AttachedToParent | TaskContinuationOptions.ExecuteSynchronously);
         }
 
+        private static readonly bool isBrowser = OperatingSystem.IsBrowser();
+
         public static void TryRunSynchronously(this Task task)
         {
+            Console.WriteLine($"Task Status = {task.Status}");
             if (task.Status == TaskStatus.Created)
             {
                 try
@@ -32,11 +42,26 @@ namespace Zetbox.API
                 }
                 catch (InvalidOperationException)
                 {
+                    Console.WriteLine($"Task Status = {task.Status}");
                     task.Wait();
                 }
             }
-            
-            task.Wait();
+            //else if (isBrowser && (task.Status == TaskStatus.WaitingForActivation || task.Status == TaskStatus.WaitingForChildrenToComplete))
+            //{
+            //    try
+            //    {
+            //        task.RunSynchronously();
+            //    }
+            //    catch
+            //    {
+            //        Console.WriteLine($"Task Status = {task.Status}");
+            //        throw;
+            //    }
+            //}
+            else if (!isBrowser)
+            {
+                task.Wait();
+            }
         }
     }
 }

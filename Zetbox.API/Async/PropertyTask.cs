@@ -46,7 +46,7 @@ namespace Zetbox.API.Async
             var self = this;
             _task = _createTask();
 
-            _task.OnResult(t =>
+            _task.ContinueWith(t =>
                     {
                         self._result = t.Result;
                         if (self._notifier != null)
