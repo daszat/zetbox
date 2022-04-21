@@ -38,6 +38,8 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        [Zetbox.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\r\n");
 this.WriteObjects("        [System.Runtime.Serialization.IgnoreDataMember]\r\n");
 this.WriteObjects("        ",  GetPropertyTypeString() , " ",  GetPropertyName() , " { get; }\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("        System.Threading.Tasks.Task<",  GetPropertyTypeString() , "> GetProp_",  GetPropertyName() , "();\r\n");
 
         }
 

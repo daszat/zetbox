@@ -77,4 +77,10 @@
             return System.Threading.Tasks.Task.FromResult<<%= exposedListType %><<%= referencedInterface %>>>(this.<%= name %>);
         }
 
+        <%= GetModifiers() %> async System.Threading.Tasks.Task<<%= exposedListType %><<%= referencedInterface %>>> GetProp_<%= name %>()
+        {
+            await TriggerFetch<%= name %>Async();
+            return <%= wrapperName %>;
+        }
+
 <% AddSerialization(serializationList, name, eagerLoading); %>

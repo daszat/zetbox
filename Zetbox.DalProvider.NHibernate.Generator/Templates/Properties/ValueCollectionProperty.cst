@@ -79,6 +79,11 @@
             }
         }
 
+        <%= GetModifiers() %> System.Threading.Tasks.Task<<%= exposedCollectionInterface %><<%= referencedType %>>> GetProp_<%= name %>()
+        {
+            return System.Threading.Tasks.Task.FromResult(<%= name %>);
+        }
+
         private <%= backingCollectionType %> <%= backingName %>;
         private ProjectedCollection<<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntryImpl %>> <%= underlyingCollectionBackingName %>;
         // END <%= this.GetType() %>

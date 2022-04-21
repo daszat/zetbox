@@ -87,6 +87,12 @@ this.WriteObjects("				return (",  exposedCollectionInterface , "<",  referenced
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
+this.WriteObjects("        ",  GetModifiers() , " async System.Threading.Tasks.Task<",  exposedCollectionInterface , "<",  referencedInterface , ">> GetProp_",  name , "()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            await TriggerFetch",  name , "Async();\r\n");
+this.WriteObjects("            return ",  backingName , ";\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
 this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , "> ",  backingName , ";\r\n");
 this.WriteObjects("		// ignored, but required for Serialization\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
@@ -96,7 +102,7 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            return System.Threading.Tasks.Task.FromResult<",  exposedCollectionInterface , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-#line 77 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 83 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, name, eagerLoading); 
 
         }

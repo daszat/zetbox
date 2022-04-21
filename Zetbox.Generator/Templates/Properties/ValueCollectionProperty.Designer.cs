@@ -85,6 +85,11 @@ this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		private ",  backingCollectionType , "<",  thisInterface , ", ",  referencedType , ", ",  entryType , ", ",  entryTypeImpl , ", ",  providerCollectionType , "> ",  backingName , ";\r\n");
 this.WriteObjects("		private ",  providerCollectionType , " ",  underlyingCollectionName , " = new ",  providerCollectionType , "();\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("		",  GetModifiers() , " System.Threading.Tasks.Task<",  exposedCollectionInterface , "<",  referencedType , ">> GetProp_",  name , "()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            return System.Threading.Tasks.Task.FromResult(",  name , ");\r\n");
+this.WriteObjects("        }");
 
         }
 

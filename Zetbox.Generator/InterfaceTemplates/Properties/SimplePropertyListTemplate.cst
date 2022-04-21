@@ -30,3 +30,5 @@
         [Zetbox.API.DefinitionGuid("<%= prop.ExportGuid %>")]
         [System.Runtime.Serialization.IgnoreDataMember]
         <%= GetPropertyTypeString() %> <%= GetPropertyName() %> { get; }
+
+        System.Threading.Tasks.Task<<%= GetPropertyTypeString() %>> GetProp_<%= GetPropertyName() %>();

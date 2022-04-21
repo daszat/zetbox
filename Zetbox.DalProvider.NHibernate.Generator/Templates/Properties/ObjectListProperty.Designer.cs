@@ -110,7 +110,13 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            return System.Threading.Tasks.Task.FromResult<",  exposedListType , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-#line 80 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+this.WriteObjects("        ",  GetModifiers() , " async System.Threading.Tasks.Task<",  exposedListType , "<",  referencedInterface , ">> GetProp_",  name , "()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            await TriggerFetch",  name , "Async();\r\n");
+this.WriteObjects("            return ",  wrapperName , ";\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+#line 86 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 AddSerialization(serializationList, name, eagerLoading); 
 
         }

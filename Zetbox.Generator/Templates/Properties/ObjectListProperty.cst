@@ -68,6 +68,12 @@
             }
         }
 
+        <%= GetModifiers() %> async System.Threading.Tasks.Task<<%= exposedListType %><<%= referencedInterface %>>> GetProp_<%= name %>()
+        {
+            await TriggerFetch<%= name %>Async();
+            return <%= wrapperName %>;
+        }
+
         System.Threading.Tasks.Task <%= taskName %>;
         public System.Threading.Tasks.Task TriggerFetch<%= name %>Async()
         {
