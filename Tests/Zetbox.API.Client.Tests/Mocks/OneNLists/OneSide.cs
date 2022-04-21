@@ -20,6 +20,7 @@ namespace Zetbox.API.Client.Mocks.OneNLists
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Xml.Serialization;
     using Zetbox.API.Async;
     using Zetbox.DalProvider.Base.RelationWrappers;
@@ -327,6 +328,11 @@ namespace Zetbox.API.Client.Mocks.OneNLists
         }
 
         public void Recalculate(string propName)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IStreamable.ReloadReferences()
         {
             throw new NotImplementedException();
         }

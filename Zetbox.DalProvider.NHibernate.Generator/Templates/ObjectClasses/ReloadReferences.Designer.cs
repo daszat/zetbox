@@ -36,12 +36,12 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         {
 #line 31 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("        public override void ReloadReferences()\r\n");
+this.WriteObjects("        public override async System.Threading.Tasks.Task ReloadReferences()\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            // Do not reload references if the current object has been deleted.\r\n");
 this.WriteObjects("            // TODO: enable when MemoryContext uses MemoryDataObjects\r\n");
 this.WriteObjects("            //if (this.ObjectState == DataObjectState.Deleted) return;\r\n");
-this.WriteObjects("            base.ReloadReferences();\r\n");
+this.WriteObjects("            await await base.ReloadReferences();\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            // fix direct object references\r\n");
 #line 41 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst"

@@ -123,22 +123,24 @@ ApplyChangesFromBody();
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        public override void ReloadReferences()\r\n");
+this.WriteObjects("        public override async System.Threading.Tasks.Task ReloadReferences()\r\n");
 this.WriteObjects("        {\r\n");
+this.WriteObjects("            await await base.ReloadReferences();\r\n");
+this.WriteObjects("\r\n");
 this.WriteObjects("            // Do not reload references if the current object has been deleted.\r\n");
 this.WriteObjects("            // TODO: enable when MemoryContext uses MemoryDataObjects\r\n");
 this.WriteObjects("            //if (this.ObjectState == DataObjectState.Deleted) return;\r\n");
-#line 116 "C:\projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 118 "C:\projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyReloadReferenceBody();
 
-#line 118 "C:\projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 120 "C:\projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-#line 122 "C:\projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 124 "C:\projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyClassTailTemplate();
 
-#line 124 "C:\projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 126 "C:\projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("    }\r\n");
 this.WriteObjects("    // END ",  this.GetType().FullName , "\r\n");
 

@@ -18,6 +18,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using NUnit.Framework;
@@ -131,6 +132,11 @@ namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
             if (aStr == null && bStr == null) return 0;
             if (aStr == null) return -1;
             return aStr.CompareTo(bStr);
+        }
+
+        Task IStreamable.ReloadReferences()
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

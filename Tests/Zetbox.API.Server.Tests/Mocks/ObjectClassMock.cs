@@ -657,6 +657,11 @@ namespace Zetbox.API.Server.Mocks
         {
             throw new NotImplementedException();
         }
+
+        Task IStreamable.ReloadReferences()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         public App.Base.TableMapping? TableMapping

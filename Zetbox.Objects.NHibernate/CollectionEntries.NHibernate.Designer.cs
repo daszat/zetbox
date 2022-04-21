@@ -356,12 +356,12 @@ namespace Zetbox.App.Test
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_A.HasValue)
                 this.A = ((Zetbox.App.Test.N_to_M_relations_ANHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.N_to_M_relations_A>(_fk_A.Value));
             else
@@ -852,12 +852,12 @@ namespace Zetbox.App.Base
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_guid_A.HasValue)
                 this.A = ((Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.CalculatedObjectReferenceProperty>(_fk_guid_A.Value));
             else
@@ -1353,12 +1353,12 @@ namespace Zetbox.App.Calendar
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_guid_A.HasValue)
                 this.A = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_guid_A.Value));
             else
@@ -1787,12 +1787,12 @@ namespace Zetbox.App.Calendar
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_A.HasValue)
                 this.A = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value));
             else
@@ -2280,12 +2280,12 @@ namespace Zetbox.App.Calendar
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_guid_A.HasValue)
                 this.A = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_guid_A.Value));
             else
@@ -2714,12 +2714,12 @@ namespace Zetbox.App.Calendar
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_A.HasValue)
                 this.A = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value));
             else
@@ -3207,12 +3207,12 @@ namespace Zetbox.App.Base
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_guid_A.HasValue)
                 this.A = ((Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_guid_A.Value));
             else
@@ -3804,12 +3804,12 @@ namespace at.dasz.DocumentManagement
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_guid_A.HasValue)
                 this.A = ((at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.File>(_fk_guid_A.Value));
             else
@@ -4265,12 +4265,12 @@ namespace Zetbox.App.Base
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_A.HasValue)
                 this.A = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_A.Value));
             else
@@ -4717,12 +4717,12 @@ namespace Zetbox.App.Test
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_A.HasValue)
                 this.A = ((Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.Muhblah>(_fk_A.Value));
             else
@@ -5213,12 +5213,12 @@ namespace Zetbox.App.GUI
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_guid_A.HasValue)
                 this.A = ((Zetbox.App.GUI.NavigationEntryNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.NavigationEntry>(_fk_guid_A.Value));
             else
@@ -5737,12 +5737,12 @@ namespace Zetbox.App.GUI
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_guid_A.HasValue)
                 this.A = ((Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectReferenceProperty>(_fk_guid_A.Value));
             else
@@ -6241,12 +6241,12 @@ namespace Zetbox.App.GUI
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_guid_A.HasValue)
                 this.A = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_A.Value));
             else
@@ -6861,12 +6861,12 @@ namespace Zetbox.App.Projekte
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_guid_A.HasValue)
                 this.A = ((Zetbox.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Projekt>(_fk_guid_A.Value));
             else
@@ -7465,12 +7465,12 @@ namespace Zetbox.App.Base
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_guid_A.HasValue)
                 this.A = ((Zetbox.App.Base.RoleMembershipNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RoleMembership>(_fk_guid_A.Value));
             else
@@ -8066,12 +8066,12 @@ namespace Zetbox.App.SchemaMigration
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_guid_A.HasValue)
                 this.A = ((Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceColumn>(_fk_guid_A.Value));
             else
@@ -8527,12 +8527,12 @@ namespace Zetbox.App.Test
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_A.HasValue)
                 this.A = ((Zetbox.App.Test.TestStudentNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.TestStudent>(_fk_A.Value));
             else
@@ -9023,12 +9023,12 @@ namespace Zetbox.App.Base
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_guid_A.HasValue)
                 this.A = ((Zetbox.App.Base.IndexConstraintNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.IndexConstraint>(_fk_guid_A.Value));
             else
@@ -9398,12 +9398,12 @@ namespace Zetbox.App.Projekte
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_Parent.HasValue)
                 this.Parent = ((Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Kunde>(_fk_Parent.Value));
             else
@@ -9724,12 +9724,12 @@ namespace Zetbox.App.Test
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_Parent.HasValue)
                 this.Parent = ((Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.Muhblah>(_fk_Parent.Value));
             else
@@ -10098,12 +10098,12 @@ namespace Zetbox.App.Projekte
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_Parent.HasValue)
                 this.Parent = ((Zetbox.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Projekt>(_fk_Parent.Value));
             else
@@ -10469,12 +10469,12 @@ namespace Zetbox.App.Test
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_Parent.HasValue)
                 this.Parent = ((Zetbox.App.Test.TestCompanyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.TestCompany>(_fk_Parent.Value));
             else
@@ -10827,12 +10827,12 @@ namespace Zetbox.App.Test
         }
 
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-
+            await base.ReloadReferences();
             if (_fk_Parent.HasValue)
                 this.Parent = ((Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.TestCustomObject>(_fk_Parent.Value));
             else

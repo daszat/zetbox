@@ -21,6 +21,7 @@ namespace Zetbox.API.Mocks
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
 
     public class TestCollectionEntry
         : IRelationEntry
@@ -247,6 +248,11 @@ namespace Zetbox.API.Mocks
         }
 
         public object GetPropertyOwner(PropertyDescriptor pd)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IStreamable.ReloadReferences()
         {
             throw new NotImplementedException();
         }

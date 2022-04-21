@@ -21,6 +21,7 @@ namespace Zetbox.API
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Xml;
     using System.Xml.Serialization;
 
@@ -142,7 +143,7 @@ namespace Zetbox.API
         /// <summary>
         /// Empty implementation, since CompoundObject can't have ObjectReferences
         /// </summary>
-        public void ReloadReferences() { }
+        public Task ReloadReferences() => Task.CompletedTask;
 
         #endregion
 

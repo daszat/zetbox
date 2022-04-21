@@ -21,6 +21,7 @@ namespace Zetbox.API
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Xml;
     using System.Xml.Serialization;
     using Zetbox.API.Utils;
@@ -312,8 +313,9 @@ namespace Zetbox.API
         /// <summary>
         /// Reloads all references to other objects from the underlying storage. Providers may use this to update internal metadata after deserialisation.
         /// </summary>
-        public virtual void ReloadReferences()
+        public virtual Task ReloadReferences()
         {
+            return Task.CompletedTask;
         }
 
         #endregion

@@ -1533,12 +1533,12 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
             }
         }
 
-        public override void ReloadReferences()
+        public override async System.Threading.Tasks.Task ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            base.ReloadReferences();
+            await base.ReloadReferences();
 
             // fix direct object references
 

@@ -18,6 +18,7 @@ namespace Zetbox.API
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Xml;
     using Zetbox.API.Async;
 
@@ -242,7 +243,7 @@ namespace Zetbox.API
         /// Should be called after de-serializing and attaching an object graph 
         /// to notify the provider of all references within the graph.
         /// </summary>
-        void ReloadReferences();
+        Task ReloadReferences();
     }
 
     /// <summary>

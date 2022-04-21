@@ -21,6 +21,7 @@ namespace Zetbox.API.Mocks
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Xml.Serialization;
     using Zetbox.API.Async;
 
@@ -317,6 +318,11 @@ namespace Zetbox.API.Mocks
         public ObjectIsValidResult Validate()
         {
             return ObjectIsValidResult.Valid;
+        }
+
+        Task IStreamable.ReloadReferences()
+        {
+            throw new NotImplementedException();
         }
 
         #region TransientState
