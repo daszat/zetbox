@@ -22,6 +22,8 @@ namespace Zetbox.App.Test
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<string> StringCollection { get; }
 
+        System.Threading.Tasks.Task<ICollection<string>> GetProp_StringCollection();
+
         /// <summary>
         /// 
         /// </summary>
@@ -40,6 +42,8 @@ namespace Zetbox.App.Test
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.TestCustomObject> TestCustomObjects_List_Nav { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.TestCustomObject>> GetProp_TestCustomObjects_List_Nav();
+
         /// <summary>
         /// 
         /// </summary>
@@ -47,6 +51,8 @@ namespace Zetbox.App.Test
         [Zetbox.API.DefinitionGuid("a3ad7340-4dc1-488c-bc9a-29ac931b1f0d")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.TestCustomObject> TestCustomObjects_ManyList_Nav { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.TestCustomObject>> GetProp_TestCustomObjects_ManyList_Nav();
 
         /// <summary>
         /// 
@@ -65,6 +71,10 @@ namespace Zetbox.App.Test
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Test.TestCustomObject> GetProp_TestCustomObjects_Nav();
+
+        System.Threading.Tasks.Task SetProp_TestCustomObjects_Nav(Zetbox.App.Test.TestCustomObject newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -81,6 +91,10 @@ namespace Zetbox.App.Test
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Test.TestCustomObject> GetProp_TestCustomObjects_One_Nav();
+
+        System.Threading.Tasks.Task SetProp_TestCustomObjects_One_Nav(Zetbox.App.Test.TestCustomObject newValue);
 
         /// <summary>
         /// 

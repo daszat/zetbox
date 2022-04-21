@@ -86,6 +86,12 @@ namespace Zetbox.App.Test
             return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Test.OrderedNEnd>>(this.NEnds);
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Test.OrderedNEnd>> GetProp_NEnds()
+        {
+            await TriggerFetchNEndsAsync();
+            return _NEnds;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> OnNEnds_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.OrderedOneEnd> OnNEnds_IsValid;

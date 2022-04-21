@@ -22,6 +22,8 @@ namespace Zetbox.App.Projekte
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Projekte.Auftrag> Auftraege { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Projekte.Auftrag>> GetProp_Auftraege();
+
         /// <summary>
         /// 
         /// </summary>
@@ -79,6 +81,8 @@ namespace Zetbox.App.Projekte
         [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Projekte.Mitarbeiter> Mitarbeiter { get; }
 
+        System.Threading.Tasks.Task<IList<Zetbox.App.Projekte.Mitarbeiter>> GetProp_Mitarbeiter();
+
         /// <summary>
         /// Projektname
         /// </summary>
@@ -96,6 +100,8 @@ namespace Zetbox.App.Projekte
         [Zetbox.API.DefinitionGuid("f6ff71b0-ccaf-4c7d-8e2b-1210a9df4b0f")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Projekte.Task> Tasks { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Projekte.Task>> GetProp_Tasks();
 
         /// <summary>
         /// 

@@ -59,6 +59,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_Group()
+        {
+            return TriggerFetchGroupAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Group(Zetbox.App.Base.Group newValue)
+        {
+            await TriggerFetchGroupAsync();
+            GroupImpl = (Zetbox.App.Base.GroupMemoryImpl)newValue;
+        }
+
         private int? __fk_GroupCache;
 
         private int? _fk_Group {

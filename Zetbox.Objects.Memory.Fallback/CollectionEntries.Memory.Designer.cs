@@ -150,6 +150,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.CalculatedObjectReferenceProperty> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.CalculatedObjectReferenceProperty newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -194,7 +205,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchAAsync().TryRunSynchronously(); return (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)task.Result;
             }
             set
             {
@@ -263,6 +277,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Property newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.PropertyMemoryImpl)newValue;
+        }
+
         private int? __fk_BCache;
 
         private int? _fk_B {
@@ -296,7 +321,7 @@ namespace Zetbox.App.Base
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_B.Value);
             else
-                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(null);
+                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Property>(() => null);
 
             return _triggerFetchBTask;
         }
@@ -307,7 +332,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchBAsync().TryRunSynchronously(); return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set
             {
@@ -611,6 +639,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.DataType> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.DataType newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Base.DataTypeMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -655,8 +694,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchAAsync().TryRunSynchronously(); 
-                return (Zetbox.App.Base.DataTypeMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.DataTypeMemoryImpl)task.Result;
             }
             set
             {
@@ -725,6 +766,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Interface> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Interface newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.InterfaceMemoryImpl)newValue;
+        }
+
         private int? __fk_BCache;
 
         private int? _fk_B {
@@ -769,8 +821,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchBAsync().TryRunSynchronously(); 
-                return (Zetbox.App.Base.InterfaceMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.InterfaceMemoryImpl)task.Result;
             }
             set
             {
@@ -1040,6 +1094,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -1083,7 +1148,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchAAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -1152,6 +1220,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Group newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.GroupMemoryImpl)newValue;
+        }
+
         private int? __fk_BCache;
 
         private int? _fk_B {
@@ -1195,7 +1274,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchBAsync().TryRunSynchronously(); return (Zetbox.App.Base.GroupMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.GroupMemoryImpl)task.Result;
             }
             set
             {
@@ -1481,6 +1563,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.NavigationEntry> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.GUI.NavigationEntry newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.GUI.NavigationEntryMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -1525,7 +1618,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchAAsync().TryRunSynchronously(); return (Zetbox.App.GUI.NavigationEntryMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.NavigationEntryMemoryImpl)task.Result;
             }
             set
             {
@@ -1594,6 +1690,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Group newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.GroupMemoryImpl)newValue;
+        }
+
         private int? __fk_BCache;
 
         private int? _fk_B {
@@ -1638,7 +1745,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchBAsync().TryRunSynchronously(); return (Zetbox.App.Base.GroupMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.GroupMemoryImpl)task.Result;
             }
             set
             {
@@ -1942,6 +2052,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectReferenceProperty> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.ObjectReferenceProperty newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -1986,7 +2107,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchAAsync().TryRunSynchronously(); return (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)task.Result;
             }
             set
             {
@@ -2055,6 +2179,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Method> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Method newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.MethodMemoryImpl)newValue;
+        }
+
         private int? __fk_BCache;
 
         private int? _fk_B {
@@ -2099,7 +2234,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchBAsync().TryRunSynchronously(); return (Zetbox.App.Base.MethodMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.MethodMemoryImpl)task.Result;
             }
             set
             {
@@ -2419,6 +2557,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -2463,7 +2612,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchAAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
             {
@@ -2532,6 +2684,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
+
         private int? __fk_BCache;
 
         private int? _fk_B {
@@ -2576,7 +2739,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchBAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -2880,6 +3046,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.RoleMembership> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.RoleMembership newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Base.RoleMembershipMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -2924,7 +3101,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchAAsync().TryRunSynchronously(); return (Zetbox.App.Base.RoleMembershipMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.RoleMembershipMemoryImpl)task.Result;
             }
             set
             {
@@ -3024,6 +3204,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Relation> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Relation newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.RelationMemoryImpl)newValue;
+        }
+
         private int? __fk_BCache;
 
         private int? _fk_B {
@@ -3068,7 +3259,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchBAsync().TryRunSynchronously(); return (Zetbox.App.Base.RelationMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.RelationMemoryImpl)task.Result;
             }
             set
             {
@@ -3427,6 +3621,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.SchemaMigration.SourceColumn newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -3471,7 +3676,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                TriggerFetchAAsync().TryRunSynchronously(); return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)task.Result;
             }
             set
             {
@@ -3571,6 +3779,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Property newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.PropertyMemoryImpl)newValue;
+        }
+
         private int? __fk_BCache;
 
         private int? _fk_B {
@@ -3615,7 +3834,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                TriggerFetchBAsync().TryRunSynchronously(); return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set
             {
@@ -3974,6 +4196,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.IndexConstraint> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.IndexConstraint newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Base.IndexConstraintMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -4018,7 +4251,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchAAsync().TryRunSynchronously(); return (Zetbox.App.Base.IndexConstraintMemoryImpl)TriggerFetchAAsync().Result;
+                var task = TriggerFetchAAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IndexConstraintMemoryImpl)task.Result;
             }
             set
             {
@@ -4087,6 +4323,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Property newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.PropertyMemoryImpl)newValue;
+        }
+
         private int? __fk_BCache;
 
         private int? _fk_B {
@@ -4131,7 +4378,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchBAsync().TryRunSynchronously(); return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchBAsync().Result;
+                var task = TriggerFetchBAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set
             {

@@ -57,6 +57,17 @@ namespace Zetbox.App.Calendar
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> GetProp_Calendar()
+        {
+            return System.Threading.Tasks.Task.FromResult(Calendar);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Calendar(Zetbox.App.Calendar.CalendarBook newValue)
+        {
+            await TriggerFetchCalendarAsync();
+            Calendar = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -164,6 +175,17 @@ namespace Zetbox.App.Calendar
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.WorkSchedule> GetProp_WorkSchedule()
+        {
+            return System.Threading.Tasks.Task.FromResult(WorkSchedule);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_WorkSchedule(Zetbox.App.Calendar.WorkSchedule newValue)
+        {
+            await TriggerFetchWorkScheduleAsync();
+            WorkSchedule = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

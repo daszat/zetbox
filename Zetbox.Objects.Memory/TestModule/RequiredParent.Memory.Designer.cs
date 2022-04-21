@@ -60,6 +60,12 @@ namespace Zetbox.App.Test
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.RequiredParentChild>> GetProp_Children()
+        {
+            await TriggerFetchChildrenAsync();
+            return _Children;
+        }
+
         System.Threading.Tasks.Task _triggerFetchChildrenTask;
         public System.Threading.Tasks.Task TriggerFetchChildrenAsync()
         {

@@ -697,6 +697,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedEditorKind()
+        {
+            return TriggerFetchRequestedEditorKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RequestedEditorKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchRequestedEditorKindAsync();
+            RequestedEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
+
         private int? __fk_RequestedEditorKindCache;
 
         private int? _fk_RequestedEditorKind {
@@ -751,7 +762,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchRequestedEditorKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedEditorKindAsync().Result;
+                var task = TriggerFetchRequestedEditorKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -822,6 +836,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedWorkspaceKind()
+        {
+            return TriggerFetchRequestedWorkspaceKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RequestedWorkspaceKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchRequestedWorkspaceKindAsync();
+            RequestedWorkspaceKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
+
         private int? __fk_RequestedWorkspaceKindCache;
 
         private int? _fk_RequestedWorkspaceKind {
@@ -876,7 +901,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchRequestedWorkspaceKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedWorkspaceKindAsync().Result;
+                var task = TriggerFetchRequestedWorkspaceKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -1179,6 +1207,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_Type()
+        {
+            return TriggerFetchTypeAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Type(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchTypeAsync();
+            TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)newValue;
+        }
+
         private int? __fk_TypeCache;
 
         private int? _fk_Type {
@@ -1233,7 +1272,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchTypeAsync().TryRunSynchronously(); return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchTypeAsync().Result;
+                var task = TriggerFetchTypeAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set
             {

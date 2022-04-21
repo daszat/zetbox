@@ -22,6 +22,8 @@ namespace Zetbox.App.GUI
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.GUI.ControlKind> ChildControlKinds { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.GUI.ControlKind>> GetProp_ChildControlKinds();
+
         /// <summary>
         /// Name of this ControlKind
         /// </summary>
@@ -48,5 +50,9 @@ namespace Zetbox.App.GUI
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_Parent();
+
+        System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.GUI.ControlKind newValue);
     }
 }

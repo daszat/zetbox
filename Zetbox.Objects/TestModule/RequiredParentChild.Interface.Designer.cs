@@ -40,5 +40,9 @@ namespace Zetbox.App.Test
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Test.RequiredParent> GetProp_Parent();
+
+        System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.Test.RequiredParent newValue);
     }
 }

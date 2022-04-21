@@ -32,6 +32,8 @@ namespace Zetbox.App.Test
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.One_to_N_relations_N> NSide { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.One_to_N_relations_N>> GetProp_NSide();
+
         /// <summary>
         /// 
         /// </summary>
@@ -39,5 +41,7 @@ namespace Zetbox.App.Test
         [Zetbox.API.DefinitionGuid("084f914f-a4e6-4703-a01a-7fdda5f720d0")]
         [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Test.One_to_N_relations_OrderedN> OrderedNSide { get; }
+
+        System.Threading.Tasks.Task<IList<Zetbox.App.Test.One_to_N_relations_OrderedN>> GetProp_OrderedNSide();
     }
 }

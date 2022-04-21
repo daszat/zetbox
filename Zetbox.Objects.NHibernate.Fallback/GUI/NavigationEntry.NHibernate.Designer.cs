@@ -60,6 +60,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(ChangedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -274,6 +285,12 @@ namespace Zetbox.App.GUI
             return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.GUI.NavigationEntry>>(this.Children);
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.GUI.NavigationEntry>> GetProp_Children()
+        {
+            await TriggerFetchChildrenAsync();
+            return _Children;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnChildren_IsValid;
@@ -345,6 +362,17 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(CreatedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -624,6 +652,12 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 			}
 		}
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Group>> GetProp_Groups()
+        {
+            await TriggerFetchGroupsAsync();
+            return _Groups;
+        }
+
 		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl> _Groups;
 		// ignored, but required for Serialization
         private bool Groups_was_eagerLoaded = false;
@@ -646,6 +680,17 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return System.Threading.Tasks.Task.FromResult(Module);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            Module = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -755,6 +800,17 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         // inverse Navigator=Children; is list;
         // PositionStorage=Children_pos;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.NavigationEntry> GetProp_Parent()
+        {
+            return System.Threading.Tasks.Task.FromResult(Parent);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.GUI.NavigationEntry newValue)
+        {
+            await TriggerFetchParentAsync();
+            Parent = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -917,6 +973,17 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedKind()
+        {
+            return System.Threading.Tasks.Task.FromResult(RequestedKind);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RequestedKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchRequestedKindAsync();
+            RequestedKind = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -1084,6 +1151,17 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_ViewModelDescriptor()
+        {
+            return System.Threading.Tasks.Task.FromResult(ViewModelDescriptor);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchViewModelDescriptorAsync();
+            ViewModelDescriptor = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

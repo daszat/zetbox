@@ -141,6 +141,10 @@ namespace Zetbox.App.GUI
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedEditorKind();
+
+        System.Threading.Tasks.Task SetProp_RequestedEditorKind(Zetbox.App.GUI.ControlKind newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -157,6 +161,10 @@ namespace Zetbox.App.GUI
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedWorkspaceKind();
+
+        System.Threading.Tasks.Task SetProp_RequestedWorkspaceKind(Zetbox.App.GUI.ControlKind newValue);
 
         /// <summary>
         /// 
@@ -214,6 +222,10 @@ namespace Zetbox.App.GUI
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_Type();
+
+        System.Threading.Tasks.Task SetProp_Type(Zetbox.App.Base.ObjectClass newValue);
 
         /// <summary>
         /// 

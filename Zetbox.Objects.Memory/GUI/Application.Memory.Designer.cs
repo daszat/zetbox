@@ -59,6 +59,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -258,6 +269,17 @@ namespace Zetbox.App.GUI
             set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_CreatedByCache;
 
@@ -588,6 +610,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_Icon()
+        {
+            return TriggerFetchIconAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Icon(Zetbox.App.GUI.Icon newValue)
+        {
+            await TriggerFetchIconAsync();
+            IconImpl = (Zetbox.App.GUI.IconMemoryImpl)newValue;
+        }
+
         private int? __fk_IconCache;
 
         private int? _fk_Icon {
@@ -715,6 +748,17 @@ namespace Zetbox.App.GUI
             set { ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return TriggerFetchModuleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)newValue;
+        }
 
         private int? __fk_ModuleCache;
 
@@ -902,6 +946,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.NavigationScreen> GetProp_RootScreen()
+        {
+            return TriggerFetchRootScreenAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RootScreen(Zetbox.App.GUI.NavigationScreen newValue)
+        {
+            await TriggerFetchRootScreenAsync();
+            RootScreenImpl = (Zetbox.App.GUI.NavigationScreenMemoryImpl)newValue;
+        }
+
         private int? __fk_RootScreenCache;
 
         private int? _fk_RootScreen {
@@ -1029,6 +1084,17 @@ namespace Zetbox.App.GUI
             set { WorkspaceViewModelImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_WorkspaceViewModel()
+        {
+            return TriggerFetchWorkspaceViewModelAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_WorkspaceViewModel(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchWorkspaceViewModelAsync();
+            WorkspaceViewModelImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)newValue;
+        }
 
         private int? __fk_WorkspaceViewModelCache;
 

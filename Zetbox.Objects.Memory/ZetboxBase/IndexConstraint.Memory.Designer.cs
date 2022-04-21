@@ -127,6 +127,12 @@ namespace Zetbox.App.Base
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Property>> GetProp_Properties()
+        {
+            await TriggerFetchPropertiesAsync();
+            return _Properties;
+        }
+
         System.Threading.Tasks.Task _triggerFetchPropertiesTask;
         public System.Threading.Tasks.Task TriggerFetchPropertiesAsync()
         {

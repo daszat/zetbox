@@ -117,6 +117,17 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Test.One_to_N_relations_One> GetProp_OneSide()
+        {
+            return TriggerFetchOneSideAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_OneSide(Zetbox.App.Test.One_to_N_relations_One newValue)
+        {
+            await TriggerFetchOneSideAsync();
+            OneSideImpl = (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)newValue;
+        }
+
         private int? __fk_OneSideCache;
 
         private int? _fk_OneSide {

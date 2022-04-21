@@ -152,6 +152,12 @@ namespace Zetbox.App.Base
 			}
 		}
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Property>> GetProp_Properties()
+        {
+            await TriggerFetchPropertiesAsync();
+            return _Properties;
+        }
+
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl> _Properties;
 		// ignored, but required for Serialization
         private bool Properties_was_eagerLoaded = false;

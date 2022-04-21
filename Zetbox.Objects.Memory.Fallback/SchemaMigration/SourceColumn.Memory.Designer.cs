@@ -59,6 +59,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -112,7 +123,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                TriggerFetchChangedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -385,6 +399,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_CreatedByCache;
 
         private int? _fk_CreatedBy {
@@ -438,7 +463,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                TriggerFetchCreatedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -687,10 +715,18 @@ namespace Zetbox.App.SchemaMigration
             {
                 if (_DestinationProperty == null)
                 {
-                    TriggerFetchDestinationPropertyAsync().TryRunSynchronously(); TriggerFetchDestinationPropertyAsync().Wait();
+                    var task = TriggerFetchDestinationPropertyAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (IList<Zetbox.App.Base.Property>)_DestinationProperty;
             }
+        }
+
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.Property>> GetProp_DestinationProperty()
+        {
+            await TriggerFetchDestinationPropertyAsync();
+            return _DestinationProperty;
         }
 
         System.Threading.Tasks.Task _triggerFetchDestinationPropertyTask;
@@ -698,7 +734,7 @@ namespace Zetbox.App.SchemaMigration
         {
             if (_triggerFetchDestinationPropertyTask != null) return _triggerFetchDestinationPropertyTask;
             if (!DestinationProperty_was_eagerLoaded) _triggerFetchDestinationPropertyTask = Context.FetchRelationAsync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27"), RelationEndRole.A, this);
-            else _triggerFetchDestinationPropertyTask = new System.Threading.Tasks.Task(null);
+            else _triggerFetchDestinationPropertyTask = System.Threading.Tasks.Task.FromResult<Guid?>(null);
             _triggerFetchDestinationPropertyTask = _triggerFetchDestinationPropertyTask.OnResult(r =>
             {
                 _DestinationProperty
@@ -739,10 +775,18 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             {
                 if (_EnumEntries == null)
                 {
-                    TriggerFetchEnumEntriesAsync().TryRunSynchronously(); TriggerFetchEnumEntriesAsync().Wait();
+                    var task = TriggerFetchEnumEntriesAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _EnumEntries;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.SourceEnum>> GetProp_EnumEntries()
+        {
+            await TriggerFetchEnumEntriesAsync();
+            return _EnumEntries;
         }
 
         System.Threading.Tasks.Task _triggerFetchEnumEntriesTask;
@@ -1000,6 +1044,17 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn> GetProp_References()
+        {
+            return TriggerFetchReferencesAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_References(Zetbox.App.SchemaMigration.SourceColumn newValue)
+        {
+            await TriggerFetchReferencesAsync();
+            ReferencesImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)newValue;
+        }
+
         private int? __fk_ReferencesCache;
 
         private int? _fk_References {
@@ -1054,7 +1109,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                TriggerFetchReferencesAsync().TryRunSynchronously(); return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)TriggerFetchReferencesAsync().Result;
+                var task = TriggerFetchReferencesAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)task.Result;
             }
             set
             {
@@ -1134,10 +1192,18 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             {
                 if (_Referers == null)
                 {
-                    TriggerFetchReferersAsync().TryRunSynchronously(); TriggerFetchReferersAsync().Wait();
+                    var task = TriggerFetchReferersAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _Referers;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.SourceColumn>> GetProp_Referers()
+        {
+            await TriggerFetchReferersAsync();
+            return _Referers;
         }
 
         System.Threading.Tasks.Task _triggerFetchReferersTask;
@@ -1266,6 +1332,17 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceTable> GetProp_SourceTable()
+        {
+            return TriggerFetchSourceTableAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_SourceTable(Zetbox.App.SchemaMigration.SourceTable newValue)
+        {
+            await TriggerFetchSourceTableAsync();
+            SourceTableImpl = (Zetbox.App.SchemaMigration.SourceTableMemoryImpl)newValue;
+        }
+
         private int? __fk_SourceTableCache;
 
         private int? _fk_SourceTable {
@@ -1320,7 +1397,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                TriggerFetchSourceTableAsync().TryRunSynchronously(); return (Zetbox.App.SchemaMigration.SourceTableMemoryImpl)TriggerFetchSourceTableAsync().Result;
+                var task = TriggerFetchSourceTableAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.SchemaMigration.SourceTableMemoryImpl)task.Result;
             }
             set
             {

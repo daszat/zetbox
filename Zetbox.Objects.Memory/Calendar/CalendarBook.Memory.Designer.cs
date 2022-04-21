@@ -59,6 +59,17 @@ namespace Zetbox.App.Calendar
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -258,6 +269,17 @@ namespace Zetbox.App.Calendar
             set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_CreatedByCache;
 
@@ -527,6 +549,12 @@ namespace Zetbox.App.Calendar
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Group>> GetProp_GroupReaders()
+        {
+            await TriggerFetchGroupReadersAsync();
+            return _GroupReaders;
+        }
+
         System.Threading.Tasks.Task _triggerFetchGroupReadersTask;
         public System.Threading.Tasks.Task TriggerFetchGroupReadersAsync()
         {
@@ -573,6 +601,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                 }
                 return (ICollection<Zetbox.App.Base.Group>)_GroupWriters;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Group>> GetProp_GroupWriters()
+        {
+            await TriggerFetchGroupWritersAsync();
+            return _GroupWriters;
         }
 
         System.Threading.Tasks.Task _triggerFetchGroupWritersTask;
@@ -755,6 +789,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_Owner()
+        {
+            return TriggerFetchOwnerAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Owner(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchOwnerAsync();
+            OwnerImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_OwnerCache;
 
         private int? _fk_Owner {
@@ -879,6 +924,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Identity>> GetProp_Readers()
+        {
+            await TriggerFetchReadersAsync();
+            return _Readers;
+        }
+
         System.Threading.Tasks.Task _triggerFetchReadersTask;
         public System.Threading.Tasks.Task TriggerFetchReadersAsync()
         {
@@ -925,6 +976,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                 }
                 return (ICollection<Zetbox.App.Base.Identity>)_Writers;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Identity>> GetProp_Writers()
+        {
+            await TriggerFetchWritersAsync();
+            return _Writers;
         }
 
         System.Threading.Tasks.Task _triggerFetchWritersTask;

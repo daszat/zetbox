@@ -124,6 +124,12 @@ namespace Zetbox.App.Test
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.Muhblah>> GetProp_MubBlah_List_Nav()
+        {
+            await TriggerFetchMubBlah_List_NavAsync();
+            return _MubBlah_List_Nav;
+        }
+
         System.Threading.Tasks.Task _triggerFetchMubBlah_List_NavTask;
         public System.Threading.Tasks.Task TriggerFetchMubBlah_List_NavAsync()
         {
@@ -191,6 +197,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             set { MubBlah_NavImpl = (Zetbox.App.Test.MuhblahMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah> GetProp_MubBlah_Nav()
+        {
+            return TriggerFetchMubBlah_NavAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_MubBlah_Nav(Zetbox.App.Test.Muhblah newValue)
+        {
+            await TriggerFetchMubBlah_NavAsync();
+            MubBlah_NavImpl = (Zetbox.App.Test.MuhblahMemoryImpl)newValue;
+        }
 
         private int? __fk_MubBlah_NavCache;
 
@@ -332,6 +349,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.Muhblah>> GetProp_MuhBlah_ManyList_Nav()
+        {
+            await TriggerFetchMuhBlah_ManyList_NavAsync();
+            return _MuhBlah_ManyList_Nav;
+        }
+
         System.Threading.Tasks.Task _triggerFetchMuhBlah_ManyList_NavTask;
         public System.Threading.Tasks.Task TriggerFetchMuhBlah_ManyList_NavAsync()
         {
@@ -382,6 +405,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             set { MuhBlah_One_NavImpl = (Zetbox.App.Test.MuhblahMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah> GetProp_MuhBlah_One_Nav()
+        {
+            return TriggerFetchMuhBlah_One_NavAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_MuhBlah_One_Nav(Zetbox.App.Test.Muhblah newValue)
+        {
+            await TriggerFetchMuhBlah_One_NavAsync();
+            MuhBlah_One_NavImpl = (Zetbox.App.Test.MuhblahMemoryImpl)newValue;
+        }
 
         private int? __fk_MuhBlah_One_NavCache;
 
@@ -690,7 +724,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 
 		private ClientValueCollectionWrapper<TestCustomObject, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntry, Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl>> _PhoneNumbersOther;
 		private ObservableCollection<Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl> _PhoneNumbersOtherCollection = new ObservableCollection<Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl>();
-public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject> OnPhoneNumbersOther_PostSetter;
+
+		public System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.TestPhoneCompoundObject>> GetProp_PhoneNumbersOther()
+        {
+            return System.Threading.Tasks.Task.FromResult(PhoneNumbersOther);
+        }public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject> OnPhoneNumbersOther_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestCustomObject> OnPhoneNumbersOther_IsValid;
 

@@ -86,6 +86,12 @@ namespace Zetbox.App.Test
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Test.RequiredParentChild>>(this.Children);
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.RequiredParentChild>> GetProp_Children()
+        {
+            await TriggerFetchChildrenAsync();
+            return _Children;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.RequiredParent> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.RequiredParent> OnChildren_IsValid;

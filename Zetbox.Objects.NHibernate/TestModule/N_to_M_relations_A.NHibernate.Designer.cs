@@ -73,6 +73,12 @@ namespace Zetbox.App.Test
 			}
 		}
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.N_to_M_relations_B>> GetProp_BSide()
+        {
+            await TriggerFetchBSideAsync();
+            return _BSide;
+        }
+
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl> _BSide;
 		// ignored, but required for Serialization
         private bool BSide_was_eagerLoaded = false;

@@ -57,6 +57,17 @@ namespace Zetbox.App.GUI
         // inverse Navigator=FilterConfiguration; is reference;
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_Property()
+        {
+            return System.Threading.Tasks.Task.FromResult(Property);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Property(Zetbox.App.Base.Property newValue)
+        {
+            await TriggerFetchPropertyAsync();
+            Property = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

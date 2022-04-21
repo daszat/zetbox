@@ -31,6 +31,10 @@ namespace Zetbox.App.Test
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Projekte.Kunde> GetProp_ObjectProp();
+
+        System.Threading.Tasks.Task SetProp_ObjectProp(Zetbox.App.Projekte.Kunde newValue);
+
         /// <summary>
         /// String Property für das Testinterface
         /// </summary>

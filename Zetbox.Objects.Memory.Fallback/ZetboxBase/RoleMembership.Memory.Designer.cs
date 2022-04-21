@@ -48,10 +48,18 @@ namespace Zetbox.App.Base
             {
                 if (_Relations == null)
                 {
-                    TriggerFetchRelationsAsync().TryRunSynchronously(); TriggerFetchRelationsAsync().Wait();
+                    var task = TriggerFetchRelationsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (IList<Zetbox.App.Base.Relation>)_Relations;
             }
+        }
+
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.Relation>> GetProp_Relations()
+        {
+            await TriggerFetchRelationsAsync();
+            return _Relations;
         }
 
         System.Threading.Tasks.Task _triggerFetchRelationsTask;

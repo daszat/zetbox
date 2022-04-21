@@ -697,6 +697,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedEditorKind()
+        {
+            return TriggerFetchRequestedEditorKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RequestedEditorKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchRequestedEditorKindAsync();
+            RequestedEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
+
         private int? __fk_RequestedEditorKindCache;
 
         private int? _fk_RequestedEditorKind {
@@ -824,6 +835,17 @@ namespace Zetbox.App.GUI
             set { RequestedWorkspaceKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedWorkspaceKind()
+        {
+            return TriggerFetchRequestedWorkspaceKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RequestedWorkspaceKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchRequestedWorkspaceKindAsync();
+            RequestedWorkspaceKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
 
         private int? __fk_RequestedWorkspaceKindCache;
 
@@ -1184,6 +1206,17 @@ namespace Zetbox.App.GUI
             set { TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_Type()
+        {
+            return TriggerFetchTypeAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Type(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchTypeAsync();
+            TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)newValue;
+        }
 
         private int? __fk_TypeCache;
 

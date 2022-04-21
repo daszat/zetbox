@@ -127,6 +127,12 @@ namespace Zetbox.App.Base
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Identity>> GetProp_Member()
+        {
+            await TriggerFetchMemberAsync();
+            return _Member;
+        }
+
         System.Threading.Tasks.Task _triggerFetchMemberTask;
         public System.Threading.Tasks.Task TriggerFetchMemberAsync()
         {
@@ -177,6 +183,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
             set { ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return TriggerFetchModuleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)newValue;
+        }
 
         private int? __fk_ModuleCache;
 

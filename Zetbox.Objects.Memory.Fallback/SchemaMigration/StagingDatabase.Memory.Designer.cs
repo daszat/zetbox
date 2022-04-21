@@ -59,6 +59,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -112,7 +123,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                TriggerFetchChangedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -314,6 +328,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_CreatedByCache;
 
         private int? _fk_CreatedBy {
@@ -367,7 +392,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                TriggerFetchCreatedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -640,6 +668,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.MigrationProject> GetProp_MigrationProject()
+        {
+            return TriggerFetchMigrationProjectAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_MigrationProject(Zetbox.App.SchemaMigration.MigrationProject newValue)
+        {
+            await TriggerFetchMigrationProjectAsync();
+            MigrationProjectImpl = (Zetbox.App.SchemaMigration.MigrationProjectMemoryImpl)newValue;
+        }
+
         private int? __fk_MigrationProjectCache;
 
         private int? _fk_MigrationProject {
@@ -694,7 +733,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                TriggerFetchMigrationProjectAsync().TryRunSynchronously(); return (Zetbox.App.SchemaMigration.MigrationProjectMemoryImpl)TriggerFetchMigrationProjectAsync().Result;
+                var task = TriggerFetchMigrationProjectAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.SchemaMigration.MigrationProjectMemoryImpl)task.Result;
             }
             set
             {
@@ -890,10 +932,18 @@ namespace Zetbox.App.SchemaMigration
             {
                 if (_SourceTables == null)
                 {
-                    TriggerFetchSourceTablesAsync().TryRunSynchronously(); TriggerFetchSourceTablesAsync().Wait();
+                    var task = TriggerFetchSourceTablesAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _SourceTables;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.SourceTable>> GetProp_SourceTables()
+        {
+            await TriggerFetchSourceTablesAsync();
+            return _SourceTables;
         }
 
         System.Threading.Tasks.Task _triggerFetchSourceTablesTask;

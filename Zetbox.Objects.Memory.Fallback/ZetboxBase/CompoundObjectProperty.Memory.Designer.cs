@@ -59,6 +59,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.CompoundObject> GetProp_CompoundObjectDefinition()
+        {
+            return TriggerFetchCompoundObjectDefinitionAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CompoundObjectDefinition(Zetbox.App.Base.CompoundObject newValue)
+        {
+            await TriggerFetchCompoundObjectDefinitionAsync();
+            CompoundObjectDefinitionImpl = (Zetbox.App.Base.CompoundObjectMemoryImpl)newValue;
+        }
+
         private int? __fk_CompoundObjectDefinitionCache;
 
         private int? _fk_CompoundObjectDefinition {
@@ -113,7 +124,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchCompoundObjectDefinitionAsync().TryRunSynchronously(); return (Zetbox.App.Base.CompoundObjectMemoryImpl)TriggerFetchCompoundObjectDefinitionAsync().Result;
+                var task = TriggerFetchCompoundObjectDefinitionAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.CompoundObjectMemoryImpl)task.Result;
             }
             set
             {

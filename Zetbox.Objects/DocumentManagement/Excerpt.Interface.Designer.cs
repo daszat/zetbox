@@ -31,6 +31,10 @@ namespace at.dasz.DocumentManagement
 			set;
 		}
 
+        System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> GetProp_File();
+
+        System.Threading.Tasks.Task SetProp_File(at.dasz.DocumentManagement.File newValue);
+
         /// <summary>
         /// Text of the Excerpt
         /// </summary>

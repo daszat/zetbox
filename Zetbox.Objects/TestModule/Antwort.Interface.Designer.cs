@@ -41,6 +41,10 @@ namespace Zetbox.App.Test
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Test.Fragebogen> GetProp_Fragebogen();
+
+        System.Threading.Tasks.Task SetProp_Fragebogen(Zetbox.App.Test.Fragebogen newValue);
+
         /// <summary>
         /// 
         /// </summary>

@@ -57,6 +57,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.EnumerationEntry> GetProp_EnumValue()
+        {
+            return System.Threading.Tasks.Task.FromResult(EnumValue);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_EnumValue(Zetbox.App.Base.EnumerationEntry newValue)
+        {
+            await TriggerFetchEnumValueAsync();
+            EnumValue = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

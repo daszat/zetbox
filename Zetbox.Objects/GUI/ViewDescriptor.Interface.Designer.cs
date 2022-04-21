@@ -31,6 +31,10 @@ namespace Zetbox.App.GUI
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_ControlKind();
+
+        System.Threading.Tasks.Task SetProp_ControlKind(Zetbox.App.GUI.ControlKind newValue);
+
         /// <summary>
         /// The control implementing this View.
         /// </summary>

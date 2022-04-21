@@ -59,6 +59,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Relation> GetProp_AParent()
+        {
+            return TriggerFetchAParentAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_AParent(Zetbox.App.Base.Relation newValue)
+        {
+            await TriggerFetchAParentAsync();
+            AParentImpl = (Zetbox.App.Base.RelationMemoryImpl)newValue;
+        }
+
         private int? __fk_AParentCache;
 
         private int? _fk_AParent {
@@ -203,6 +214,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Relation> GetProp_BParent()
+        {
+            return TriggerFetchBParentAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_BParent(Zetbox.App.Base.Relation newValue)
+        {
+            await TriggerFetchBParentAsync();
+            BParentImpl = (Zetbox.App.Base.RelationMemoryImpl)newValue;
+        }
+
         private int? __fk_BParentCache;
 
         private int? _fk_BParent {
@@ -346,6 +368,17 @@ namespace Zetbox.App.Base
             set { ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_ChangedByCache;
 
@@ -546,6 +579,17 @@ namespace Zetbox.App.Base
             set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_CreatedByCache;
 
@@ -947,6 +991,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectReferenceProperty> GetProp_Navigator()
+        {
+            return TriggerFetchNavigatorAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Navigator(Zetbox.App.Base.ObjectReferenceProperty newValue)
+        {
+            await TriggerFetchNavigatorAsync();
+            NavigatorImpl = (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)newValue;
+        }
+
         private int? __fk_NavigatorCache;
 
         private int? _fk_Navigator {
@@ -1176,6 +1231,17 @@ namespace Zetbox.App.Base
             set { TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_Type()
+        {
+            return TriggerFetchTypeAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Type(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchTypeAsync();
+            TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)newValue;
+        }
 
         private int? __fk_TypeCache;
 

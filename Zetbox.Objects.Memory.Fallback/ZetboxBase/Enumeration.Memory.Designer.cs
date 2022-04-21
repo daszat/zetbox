@@ -110,10 +110,18 @@ namespace Zetbox.App.Base
             {
                 if (_EnumerationEntries == null)
                 {
-                    TriggerFetchEnumerationEntriesAsync().TryRunSynchronously(); TriggerFetchEnumerationEntriesAsync().Wait();
+                    var task = TriggerFetchEnumerationEntriesAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _EnumerationEntries;
             }
+        }
+
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.EnumerationEntry>> GetProp_EnumerationEntries()
+        {
+            await TriggerFetchEnumerationEntriesAsync();
+            return _EnumerationEntries;
         }
 
         System.Threading.Tasks.Task _triggerFetchEnumerationEntriesTask;

@@ -42,6 +42,8 @@ namespace Zetbox.App.Base
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Group> Groups { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Group>> GetProp_Groups();
+
         /// <summary>
         /// A token for simple login with a URL
         /// </summary>

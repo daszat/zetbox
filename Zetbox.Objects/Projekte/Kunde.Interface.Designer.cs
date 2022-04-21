@@ -32,6 +32,8 @@ namespace Zetbox.App.Projekte
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<string> EMails { get; }
 
+        System.Threading.Tasks.Task<ICollection<string>> GetProp_EMails();
+
         /// <summary>
         /// Name des Kunden
         /// </summary>

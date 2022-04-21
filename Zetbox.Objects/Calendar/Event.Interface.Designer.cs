@@ -41,6 +41,10 @@ namespace Zetbox.App.Calendar
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> GetProp_Calendar();
+
+        System.Threading.Tasks.Task SetProp_Calendar(Zetbox.App.Calendar.CalendarBook newValue);
+
         /// <summary>
         /// 
         /// </summary>

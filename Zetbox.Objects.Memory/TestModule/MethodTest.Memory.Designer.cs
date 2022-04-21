@@ -60,6 +60,12 @@ namespace Zetbox.App.Test
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.MethodTest>> GetProp_Children()
+        {
+            await TriggerFetchChildrenAsync();
+            return _Children;
+        }
+
         System.Threading.Tasks.Task _triggerFetchChildrenTask;
         public System.Threading.Tasks.Task TriggerFetchChildrenAsync()
         {
@@ -127,6 +133,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             set { ParentImpl = (Zetbox.App.Test.MethodTestMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Test.MethodTest> GetProp_Parent()
+        {
+            return TriggerFetchParentAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.Test.MethodTest newValue)
+        {
+            await TriggerFetchParentAsync();
+            ParentImpl = (Zetbox.App.Test.MethodTestMemoryImpl)newValue;
+        }
 
         private int? __fk_ParentCache;
 

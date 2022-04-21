@@ -117,6 +117,17 @@ namespace Zetbox.App.Projekte
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -316,6 +327,17 @@ namespace Zetbox.App.Projekte
             set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_CreatedByCache;
 
@@ -519,7 +541,11 @@ namespace Zetbox.App.Projekte
 
 		private ClientValueCollectionWrapper<Kunde, string, Zetbox.App.Projekte.Kunde_EMails_CollectionEntry, Zetbox.App.Projekte.Kunde_EMails_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryMemoryImpl>> _EMails;
 		private ObservableCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryMemoryImpl> _EMailsCollection = new ObservableCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryMemoryImpl>();
-public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMails_PostSetter;
+
+		public System.Threading.Tasks.Task<ICollection<string>> GetProp_EMails()
+        {
+            return System.Threading.Tasks.Task.FromResult(EMails);
+        }public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMails_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Kunde> OnEMails_IsValid;
 

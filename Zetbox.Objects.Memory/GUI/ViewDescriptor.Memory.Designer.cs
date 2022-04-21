@@ -59,6 +59,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_ControlKind()
+        {
+            return TriggerFetchControlKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ControlKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchControlKindAsync();
+            ControlKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
+
         private int? __fk_ControlKindCache;
 
         private int? _fk_ControlKind {
@@ -386,6 +397,17 @@ namespace Zetbox.App.GUI
             set { ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return TriggerFetchModuleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)newValue;
+        }
 
         private int? __fk_ModuleCache;
 

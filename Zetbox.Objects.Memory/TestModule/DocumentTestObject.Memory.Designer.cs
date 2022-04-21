@@ -59,6 +59,17 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> GetProp_AnotherFile()
+        {
+            return TriggerFetchAnotherFileAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_AnotherFile(at.dasz.DocumentManagement.File newValue)
+        {
+            await TriggerFetchAnotherFileAsync();
+            AnotherFileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)newValue;
+        }
+
         private int? __fk_AnotherFileCache;
 
         private int? _fk_AnotherFile {
@@ -185,6 +196,17 @@ namespace Zetbox.App.Test
             set { AnyFileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> GetProp_AnyFile()
+        {
+            return TriggerFetchAnyFileAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_AnyFile(at.dasz.DocumentManagement.File newValue)
+        {
+            await TriggerFetchAnyFileAsync();
+            AnyFileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)newValue;
+        }
 
         private int? __fk_AnyFileCache;
 

@@ -152,6 +152,12 @@ namespace Zetbox.App.Base
 			}
 		}
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Identity>> GetProp_Member()
+        {
+            await TriggerFetchMemberAsync();
+            return _Member;
+        }
+
 		private NHibernateASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl> _Member;
 		// ignored, but required for Serialization
         private bool Member_was_eagerLoaded = false;
@@ -174,6 +180,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return System.Threading.Tasks.Task.FromResult(Module);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            Module = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

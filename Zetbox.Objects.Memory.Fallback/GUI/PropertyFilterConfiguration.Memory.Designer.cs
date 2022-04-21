@@ -59,6 +59,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_Property()
+        {
+            return TriggerFetchPropertyAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Property(Zetbox.App.Base.Property newValue)
+        {
+            await TriggerFetchPropertyAsync();
+            PropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)newValue;
+        }
+
         private int? __fk_PropertyCache;
 
         private int? _fk_Property {
@@ -113,7 +124,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchPropertyAsync().TryRunSynchronously(); return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchPropertyAsync().Result;
+                var task = TriggerFetchPropertyAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set
             {

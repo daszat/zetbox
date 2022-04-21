@@ -60,6 +60,12 @@ namespace Zetbox.App.Test
             }
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Test.OrderedNEnd>> GetProp_NEnds()
+        {
+            await TriggerFetchNEndsAsync();
+            return _NEnds;
+        }
+
         System.Threading.Tasks.Task _triggerFetchNEndsTask;
         public System.Threading.Tasks.Task TriggerFetchNEndsAsync()
         {

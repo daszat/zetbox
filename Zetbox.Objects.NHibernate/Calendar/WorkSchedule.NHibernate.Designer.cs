@@ -60,6 +60,17 @@ namespace Zetbox.App.Calendar
         // inverse Navigator=ChildWorkSchedule; is list;
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.WorkSchedule> GetProp_BaseWorkSchedule()
+        {
+            return System.Threading.Tasks.Task.FromResult(BaseWorkSchedule);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_BaseWorkSchedule(Zetbox.App.Calendar.WorkSchedule newValue)
+        {
+            await TriggerFetchBaseWorkScheduleAsync();
+            BaseWorkSchedule = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -192,6 +203,17 @@ namespace Zetbox.App.Calendar
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(ChangedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -406,6 +428,12 @@ namespace Zetbox.App.Calendar
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Calendar.WorkSchedule>>(this.ChildWorkSchedule);
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Calendar.WorkSchedule>> GetProp_ChildWorkSchedule()
+        {
+            await TriggerFetchChildWorkScheduleAsync();
+            return _ChildWorkSchedule;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule> OnChildWorkSchedule_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkSchedule> OnChildWorkSchedule_IsValid;
@@ -419,6 +447,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(CreatedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -682,6 +721,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return System.Threading.Tasks.Task.FromResult(Module);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            Module = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -876,6 +926,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         public System.Threading.Tasks.Task TriggerFetchWorkScheduleRulesAsync()
         {
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Calendar.WorkScheduleRule>>(this.WorkScheduleRules);
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Calendar.WorkScheduleRule>> GetProp_WorkScheduleRules()
+        {
+            await TriggerFetchWorkScheduleRulesAsync();
+            return _WorkScheduleRules;
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule> OnWorkScheduleRules_PostSetter;

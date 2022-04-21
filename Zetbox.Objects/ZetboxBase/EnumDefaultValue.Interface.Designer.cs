@@ -30,5 +30,9 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.EnumerationEntry> GetProp_EnumValue();
+
+        System.Threading.Tasks.Task SetProp_EnumValue(Zetbox.App.Base.EnumerationEntry newValue);
     }
 }

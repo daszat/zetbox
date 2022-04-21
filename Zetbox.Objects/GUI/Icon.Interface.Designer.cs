@@ -31,6 +31,10 @@ namespace Zetbox.App.GUI
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Blob> GetProp_Blob();
+
+        System.Threading.Tasks.Task SetProp_Blob(Zetbox.App.Base.Blob newValue);
+
         /// <summary>
         /// Filename of the Icon
         /// </summary>

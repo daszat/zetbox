@@ -59,6 +59,17 @@ namespace Zetbox.App.Calendar
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> GetProp_Calendar()
+        {
+            return TriggerFetchCalendarAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Calendar(Zetbox.App.Calendar.CalendarBook newValue)
+        {
+            await TriggerFetchCalendarAsync();
+            CalendarImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)newValue;
+        }
+
         private int? __fk_CalendarCache;
 
         private int? _fk_Calendar {
@@ -185,6 +196,17 @@ namespace Zetbox.App.Calendar
             set { WorkScheduleImpl = (Zetbox.App.Calendar.WorkScheduleMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.WorkSchedule> GetProp_WorkSchedule()
+        {
+            return TriggerFetchWorkScheduleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_WorkSchedule(Zetbox.App.Calendar.WorkSchedule newValue)
+        {
+            await TriggerFetchWorkScheduleAsync();
+            WorkScheduleImpl = (Zetbox.App.Calendar.WorkScheduleMemoryImpl)newValue;
+        }
 
         private int? __fk_WorkScheduleCache;
 

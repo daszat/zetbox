@@ -51,6 +51,10 @@ namespace Zetbox.App.GUI
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedKind();
+
+        System.Threading.Tasks.Task SetProp_RequestedKind(Zetbox.App.GUI.ControlKind newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -77,6 +81,10 @@ namespace Zetbox.App.GUI
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_ViewModelDescriptor();
+
+        System.Threading.Tasks.Task SetProp_ViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue);
 
         /// <summary>
         /// 

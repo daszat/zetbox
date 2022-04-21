@@ -115,6 +115,17 @@ namespace Zetbox.App.Test
         // inverse Navigator=Children; is list;
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.RequiredParent> GetProp_Parent()
+        {
+            return System.Threading.Tasks.Task.FromResult(Parent);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.Test.RequiredParent newValue)
+        {
+            await TriggerFetchParentAsync();
+            Parent = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

@@ -30,5 +30,9 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_ObjectClass();
+
+        System.Threading.Tasks.Task SetProp_ObjectClass(Zetbox.App.Base.ObjectClass newValue);
     }
 }

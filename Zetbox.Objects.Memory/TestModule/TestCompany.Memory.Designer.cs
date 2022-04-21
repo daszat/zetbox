@@ -119,7 +119,11 @@ namespace Zetbox.App.Test
 
 		private ClientValueListWrapper<TestCompany, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestCompany_Phones_CollectionEntry, Zetbox.App.Test.TestCompany_Phones_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryMemoryImpl>> _Phones;
 		private ObservableCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryMemoryImpl> _PhonesCollection = new ObservableCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryMemoryImpl>();
-public static event PropertyListChangedHandler<Zetbox.App.Test.TestCompany> OnPhones_PostSetter;
+
+		public System.Threading.Tasks.Task<IList<Zetbox.App.Test.TestPhoneCompoundObject>> GetProp_Phones()
+        {
+            return System.Threading.Tasks.Task.FromResult(Phones);
+        }public static event PropertyListChangedHandler<Zetbox.App.Test.TestCompany> OnPhones_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestCompany> OnPhones_IsValid;
 

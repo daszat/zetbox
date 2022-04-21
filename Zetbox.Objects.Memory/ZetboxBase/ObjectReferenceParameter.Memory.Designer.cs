@@ -59,6 +59,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_ObjectClass()
+        {
+            return TriggerFetchObjectClassAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ObjectClass(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchObjectClassAsync();
+            ObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)newValue;
+        }
+
         private int? __fk_ObjectClassCache;
 
         private int? _fk_ObjectClass {

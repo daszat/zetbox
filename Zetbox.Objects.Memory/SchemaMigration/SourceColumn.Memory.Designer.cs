@@ -59,6 +59,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -388,6 +399,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_CreatedByCache;
 
         private int? _fk_CreatedBy {
@@ -701,6 +723,12 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.Property>> GetProp_DestinationProperty()
+        {
+            await TriggerFetchDestinationPropertyAsync();
+            return _DestinationProperty;
+        }
+
         System.Threading.Tasks.Task _triggerFetchDestinationPropertyTask;
         public System.Threading.Tasks.Task TriggerFetchDestinationPropertyAsync()
         {
@@ -753,6 +781,12 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 }
                 return _EnumEntries;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.SourceEnum>> GetProp_EnumEntries()
+        {
+            await TriggerFetchEnumEntriesAsync();
+            return _EnumEntries;
         }
 
         System.Threading.Tasks.Task _triggerFetchEnumEntriesTask;
@@ -1010,6 +1044,17 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn> GetProp_References()
+        {
+            return TriggerFetchReferencesAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_References(Zetbox.App.SchemaMigration.SourceColumn newValue)
+        {
+            await TriggerFetchReferencesAsync();
+            ReferencesImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)newValue;
+        }
+
         private int? __fk_ReferencesCache;
 
         private int? _fk_References {
@@ -1155,6 +1200,12 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.SourceColumn>> GetProp_Referers()
+        {
+            await TriggerFetchReferersAsync();
+            return _Referers;
+        }
+
         System.Threading.Tasks.Task _triggerFetchReferersTask;
         public System.Threading.Tasks.Task TriggerFetchReferersAsync()
         {
@@ -1280,6 +1331,17 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             set { SourceTableImpl = (Zetbox.App.SchemaMigration.SourceTableMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceTable> GetProp_SourceTable()
+        {
+            return TriggerFetchSourceTableAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_SourceTable(Zetbox.App.SchemaMigration.SourceTable newValue)
+        {
+            await TriggerFetchSourceTableAsync();
+            SourceTableImpl = (Zetbox.App.SchemaMigration.SourceTableMemoryImpl)newValue;
+        }
 
         private int? __fk_SourceTableCache;
 

@@ -31,6 +31,10 @@ namespace Zetbox.App.GUI
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultDisplayKind();
+
+        System.Threading.Tasks.Task SetProp_DefaultDisplayKind(Zetbox.App.GUI.ControlKind newValue);
+
         /// <summary>
         /// The default ControlKind to use for this Presentable.
         /// </summary>
@@ -47,6 +51,10 @@ namespace Zetbox.App.GUI
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultEditorKind();
+
+        System.Threading.Tasks.Task SetProp_DefaultEditorKind(Zetbox.App.GUI.ControlKind newValue);
 
         /// <summary>
         /// The default ControlKind to use for displaying this Presentable readonly in a GridCell. Defaults to DefaultDisplayKind.
@@ -65,6 +73,10 @@ namespace Zetbox.App.GUI
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultGridCellDisplayKind();
+
+        System.Threading.Tasks.Task SetProp_DefaultGridCellDisplayKind(Zetbox.App.GUI.ControlKind newValue);
+
         /// <summary>
         /// The default ControlKind for displaying this model in a GridCell in editing mode. Defaults to DefaultKind.
         /// </summary>
@@ -82,6 +94,10 @@ namespace Zetbox.App.GUI
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultGridCellEditorKind();
+
+        System.Threading.Tasks.Task SetProp_DefaultGridCellEditorKind(Zetbox.App.GUI.ControlKind newValue);
+
         /// <summary>
         /// .The default ControlKind for displaying this model in a GridCell befor editing starts. Defaults to DefaultGridCellDisplayKind.
         /// </summary>
@@ -98,6 +114,10 @@ namespace Zetbox.App.GUI
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultGridCellPreEditorKind();
+
+        System.Threading.Tasks.Task SetProp_DefaultGridCellPreEditorKind(Zetbox.App.GUI.ControlKind newValue);
 
         /// <summary>
         /// Indicates that the referenced viewmodel type is deleted. Descriptors with this flag set require action to finally delete them and handle their users.
@@ -126,6 +146,8 @@ namespace Zetbox.App.GUI
         [Zetbox.API.DefinitionGuid("5e2e007c-2e90-4ba6-9c9d-46e62b662ff9")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.GUI.ControlKind> SecondaryControlKinds { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.GUI.ControlKind>> GetProp_SecondaryControlKinds();
 
         /// <summary>
         /// The described CLR class&apos; Type

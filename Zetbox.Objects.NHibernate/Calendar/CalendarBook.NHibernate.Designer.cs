@@ -61,6 +61,17 @@ namespace Zetbox.App.Calendar
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(ChangedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -246,6 +257,17 @@ namespace Zetbox.App.Calendar
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(CreatedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -525,6 +547,12 @@ namespace Zetbox.App.Calendar
 			}
 		}
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Group>> GetProp_GroupReaders()
+        {
+            await TriggerFetchGroupReadersAsync();
+            return _GroupReaders;
+        }
+
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl> _GroupReaders;
 		// ignored, but required for Serialization
         private bool GroupReaders_was_eagerLoaded = false;
@@ -562,6 +590,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 				return (ICollection<Zetbox.App.Base.Group>)_GroupWriters;
 			}
 		}
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Group>> GetProp_GroupWriters()
+        {
+            await TriggerFetchGroupWritersAsync();
+            return _GroupWriters;
+        }
 
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl> _GroupWriters;
 		// ignored, but required for Serialization
@@ -721,6 +755,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_Owner()
+        {
+            return System.Threading.Tasks.Task.FromResult(Owner);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Owner(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchOwnerAsync();
+            Owner = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -844,6 +889,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 			}
 		}
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Identity>> GetProp_Readers()
+        {
+            await TriggerFetchReadersAsync();
+            return _Readers;
+        }
+
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl> _Readers;
 		// ignored, but required for Serialization
         private bool Readers_was_eagerLoaded = false;
@@ -881,6 +932,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 				return (ICollection<Zetbox.App.Base.Identity>)_Writers;
 			}
 		}
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Identity>> GetProp_Writers()
+        {
+            await TriggerFetchWritersAsync();
+            return _Writers;
+        }
 
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl> _Writers;
 		// ignored, but required for Serialization

@@ -59,6 +59,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultPropertyViewModelDescriptor()
+        {
+            return TriggerFetchDefaultPropertyViewModelDescriptorAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultPropertyViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchDefaultPropertyViewModelDescriptorAsync();
+            DefaultPropertyViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)newValue;
+        }
+
         private int? __fk_DefaultPropertyViewModelDescriptorCache;
 
         private int? _fk_DefaultPropertyViewModelDescriptor {
@@ -186,6 +197,17 @@ namespace Zetbox.App.Base
             set { DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultViewModelDescriptor()
+        {
+            return TriggerFetchDefaultViewModelDescriptorAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchDefaultViewModelDescriptorAsync();
+            DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)newValue;
+        }
 
         private int? __fk_DefaultViewModelDescriptorCache;
 

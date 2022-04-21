@@ -144,6 +144,12 @@ namespace Zetbox.App.Base
             return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Base.EnumerationEntry>>(this.EnumerationEntries);
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.EnumerationEntry>> GetProp_EnumerationEntries()
+        {
+            await TriggerFetchEnumerationEntriesAsync();
+            return _EnumerationEntries;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEnumerationEntries_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Enumeration> OnEnumerationEntries_IsValid;

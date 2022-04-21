@@ -22,6 +22,8 @@ namespace Zetbox.App.Base
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Identity> Member { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Identity>> GetProp_Member();
+
         /// <summary>
         /// 
         /// </summary>

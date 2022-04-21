@@ -21,6 +21,7 @@ namespace Zetbox.App.Test
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Xml.Serialization;
 
     using Zetbox.API;
@@ -85,6 +86,18 @@ namespace Zetbox.App.Test
         public static event PropertyPostSetterHandler<Zetbox.App.Test.TestObjClass, int?> OnMyIntProperty_PostSetter;
 
         public int? FK_ObjectProp { get; set; }
+
+        public System.Threading.Tasks.Task<Zetbox.App.Projekte.Kunde> GetProp_ObjectProp()
+        {
+            return Task.FromResult(ObjectProp);
+        }
+
+        public System.Threading.Tasks.Task SetProp_ObjectProp(Zetbox.App.Projekte.Kunde newValue)
+        {
+            ObjectProp = newValue;
+
+            return Task.CompletedTask;
+        }
 
         /// <summary>
         /// testtest

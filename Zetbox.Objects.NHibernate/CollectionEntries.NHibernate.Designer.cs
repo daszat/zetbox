@@ -83,6 +83,17 @@ namespace Zetbox.App.Test
         // will get inverse collection for notifications for BSide
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.N_to_M_relations_A> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Test.N_to_M_relations_A newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -190,6 +201,17 @@ namespace Zetbox.App.Test
         // will get inverse collection for notifications for ASide
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.N_to_M_relations_B> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Test.N_to_M_relations_B newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -548,6 +570,17 @@ namespace Zetbox.App.Base
         // will get inverse collection for notifications for Inputs
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.CalculatedObjectReferenceProperty> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.CalculatedObjectReferenceProperty newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -657,6 +690,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Property newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -1027,6 +1071,17 @@ namespace Zetbox.App.Calendar
         // will get inverse collection for notifications for GroupReaders
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Calendar.CalendarBook newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -1136,6 +1191,17 @@ namespace Zetbox.App.Calendar
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Group newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -1471,6 +1537,17 @@ namespace Zetbox.App.Calendar
         // will get inverse collection for notifications for Readers
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Calendar.CalendarBook newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -1578,6 +1655,17 @@ namespace Zetbox.App.Calendar
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -1910,6 +1998,17 @@ namespace Zetbox.App.Calendar
         // will get inverse collection for notifications for GroupWriters
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Calendar.CalendarBook newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -2019,6 +2118,17 @@ namespace Zetbox.App.Calendar
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Group newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -2354,6 +2464,17 @@ namespace Zetbox.App.Calendar
         // will get inverse collection for notifications for Writers
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Calendar.CalendarBook newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -2461,6 +2582,17 @@ namespace Zetbox.App.Calendar
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -2793,6 +2925,17 @@ namespace Zetbox.App.Base
         // will get inverse collection for notifications for ImplementsInterfaces
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.DataType> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.DataType newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -2902,6 +3045,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Interface> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Interface newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -3272,6 +3426,17 @@ namespace at.dasz.DocumentManagement
         // will get inverse collection for notifications for Revisions
         // PositionStorage=A_pos;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(at.dasz.DocumentManagement.File newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -3411,6 +3576,17 @@ namespace at.dasz.DocumentManagement
         // no inverse navigator handling
         // PositionStorage=B_pos;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Blob> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Blob newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -3816,6 +3992,17 @@ namespace Zetbox.App.Base
         // will get inverse collection for notifications for Groups
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -3923,6 +4110,17 @@ namespace Zetbox.App.Base
         // will get inverse collection for notifications for Member
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Group newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -4246,6 +4444,17 @@ namespace Zetbox.App.Test
         // will get inverse collection for notifications for TestCustomObjects_ManyList_Nav
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Test.Muhblah newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -4353,6 +4562,17 @@ namespace Zetbox.App.Test
         // will get inverse collection for notifications for MuhBlah_ManyList_Nav
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.TestCustomObject> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Test.TestCustomObject newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -4711,6 +4931,17 @@ namespace Zetbox.App.GUI
         // will get inverse collection for notifications for Groups
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.NavigationEntry> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.GUI.NavigationEntry newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -4820,6 +5051,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Group newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -5190,6 +5432,17 @@ namespace Zetbox.App.GUI
         // will get inverse collection for notifications for Methods
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectReferenceProperty> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.ObjectReferenceProperty newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -5299,6 +5552,17 @@ namespace Zetbox.App.GUI
         // will get inverse collection for notifications for ShowByProperties
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Method> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Method newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -5695,6 +5959,17 @@ namespace Zetbox.App.GUI
         // will get inverse collection for notifications for SecondaryControlKinds
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -5804,6 +6079,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -6174,6 +6460,17 @@ namespace Zetbox.App.Projekte
         // will get inverse collection for notifications for Mitarbeiter
         // PositionStorage=A_pos;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Projekte.Projekt> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Projekte.Projekt newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -6313,6 +6610,17 @@ namespace Zetbox.App.Projekte
         // will get inverse collection for notifications for Projekte
         // PositionStorage=B_pos;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Projekte.Mitarbeiter> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Projekte.Mitarbeiter newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -6779,6 +7087,17 @@ namespace Zetbox.App.Base
         // will get inverse collection for notifications for Relations
         // PositionStorage=A_pos;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.RoleMembership> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.RoleMembership newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -6918,6 +7237,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=B_pos;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Relation> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Relation newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -7358,6 +7688,17 @@ namespace Zetbox.App.SchemaMigration
         // will get inverse collection for notifications for DestinationProperty
         // PositionStorage=A_pos;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.SchemaMigration.SourceColumn newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -7497,6 +7838,17 @@ namespace Zetbox.App.SchemaMigration
         // no inverse navigator handling
         // PositionStorage=B_pos;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Property newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -7902,6 +8254,17 @@ namespace Zetbox.App.Test
         // will get inverse collection for notifications for Testbogen
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.TestStudent> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Test.TestStudent newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -8009,6 +8372,17 @@ namespace Zetbox.App.Test
         // will get inverse collection for notifications for Student
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.Fragebogen> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Test.Fragebogen newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -8367,6 +8741,17 @@ namespace Zetbox.App.Base
         // will get inverse collection for notifications for Properties
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.IndexConstraint> GetProp_A()
+        {
+            return System.Threading.Tasks.Task.FromResult(A);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.IndexConstraint newValue)
+        {
+            await TriggerFetchAAsync();
+            A = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -8476,6 +8861,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_B()
+        {
+            return System.Threading.Tasks.Task.FromResult(B);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Property newValue)
+        {
+            await TriggerFetchBAsync();
+            B = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -8781,6 +9177,17 @@ namespace Zetbox.App.Projekte
         // inverse Navigator=EMails; is list;
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Projekte.Kunde> GetProp_Parent()
+        {
+            return System.Threading.Tasks.Task.FromResult(Parent);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.Projekte.Kunde newValue)
+        {
+            await TriggerFetchParentAsync();
+            Parent = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -9114,6 +9521,17 @@ namespace Zetbox.App.Test
         // inverse Navigator=StringCollection; is list;
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah> GetProp_Parent()
+        {
+            return System.Threading.Tasks.Task.FromResult(Parent);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.Test.Muhblah newValue)
+        {
+            await TriggerFetchParentAsync();
+            Parent = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -9438,6 +9856,17 @@ namespace Zetbox.App.Projekte
         // inverse Navigator=AuditJournal; is list;
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Projekte.Projekt> GetProp_Parent()
+        {
+            return System.Threading.Tasks.Task.FromResult(Parent);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.Projekte.Projekt newValue)
+        {
+            await TriggerFetchParentAsync();
+            Parent = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -9801,6 +10230,17 @@ namespace Zetbox.App.Test
         // inverse Navigator=Phones; is list;
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.TestCompany> GetProp_Parent()
+        {
+            return System.Threading.Tasks.Task.FromResult(Parent);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.Test.TestCompany newValue)
+        {
+            await TriggerFetchParentAsync();
+            Parent = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -10163,6 +10603,17 @@ namespace Zetbox.App.Test
         // inverse Navigator=PhoneNumbersOther; is list;
         // PositionStorage=none;
         // Target not exportable; does not call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.TestCustomObject> GetProp_Parent()
+        {
+            return System.Threading.Tasks.Task.FromResult(Parent);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.Test.TestCustomObject newValue)
+        {
+            await TriggerFetchParentAsync();
+            Parent = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

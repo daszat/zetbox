@@ -59,6 +59,17 @@ namespace Zetbox.App.Calendar
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -258,6 +269,17 @@ namespace Zetbox.App.Calendar
             set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_CreatedByCache;
 
@@ -600,6 +622,17 @@ namespace Zetbox.App.Calendar
             set { ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return TriggerFetchModuleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)newValue;
+        }
 
         private int? __fk_ModuleCache;
 
@@ -964,6 +997,17 @@ namespace Zetbox.App.Calendar
             set { WorkScheduleImpl = (Zetbox.App.Calendar.WorkScheduleMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.WorkSchedule> GetProp_WorkSchedule()
+        {
+            return TriggerFetchWorkScheduleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_WorkSchedule(Zetbox.App.Calendar.WorkSchedule newValue)
+        {
+            await TriggerFetchWorkScheduleAsync();
+            WorkScheduleImpl = (Zetbox.App.Calendar.WorkScheduleMemoryImpl)newValue;
+        }
 
         private int? __fk_WorkScheduleCache;
 

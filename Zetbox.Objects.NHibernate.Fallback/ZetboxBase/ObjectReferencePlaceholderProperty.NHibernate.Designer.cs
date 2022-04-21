@@ -289,6 +289,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_ReferencedObjectClass()
+        {
+            return System.Threading.Tasks.Task.FromResult(ReferencedObjectClass);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ReferencedObjectClass(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchReferencedObjectClassAsync();
+            ReferencedObjectClass = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

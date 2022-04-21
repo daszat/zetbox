@@ -31,6 +31,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.DataType> GetProp_Constrained();
+
+        System.Threading.Tasks.Task SetProp_Constrained(Zetbox.App.Base.DataType newValue);
+
         /// <summary>
         /// The reason of this constraint
         /// </summary>

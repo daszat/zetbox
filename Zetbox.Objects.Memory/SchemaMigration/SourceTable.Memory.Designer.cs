@@ -59,6 +59,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -316,6 +327,17 @@ namespace Zetbox.App.SchemaMigration
             set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_CreatedByCache;
 
@@ -575,6 +597,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_DestinationObjectClass()
+        {
+            return TriggerFetchDestinationObjectClassAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DestinationObjectClass(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchDestinationObjectClassAsync();
+            DestinationObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)newValue;
+        }
+
         private int? __fk_DestinationObjectClassCache;
 
         private int? _fk_DestinationObjectClass {
@@ -833,6 +866,12 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.SourceColumn>> GetProp_SourceColumn()
+        {
+            await TriggerFetchSourceColumnAsync();
+            return _SourceColumn;
+        }
+
         System.Threading.Tasks.Task _triggerFetchSourceColumnTask;
         public System.Threading.Tasks.Task TriggerFetchSourceColumnAsync()
         {
@@ -900,6 +939,17 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             set { StagingDatabaseImpl = (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.StagingDatabase> GetProp_StagingDatabase()
+        {
+            return TriggerFetchStagingDatabaseAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_StagingDatabase(Zetbox.App.SchemaMigration.StagingDatabase newValue)
+        {
+            await TriggerFetchStagingDatabaseAsync();
+            StagingDatabaseImpl = (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)newValue;
+        }
 
         private int? __fk_StagingDatabaseCache;
 

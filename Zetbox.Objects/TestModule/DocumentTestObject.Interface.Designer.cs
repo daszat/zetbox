@@ -31,6 +31,10 @@ namespace Zetbox.App.Test
 			set;
 		}
 
+        System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> GetProp_AnotherFile();
+
+        System.Threading.Tasks.Task SetProp_AnotherFile(at.dasz.DocumentManagement.File newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -47,6 +51,10 @@ namespace Zetbox.App.Test
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> GetProp_AnyFile();
+
+        System.Threading.Tasks.Task SetProp_AnyFile(at.dasz.DocumentManagement.File newValue);
 
         /// <summary>
         /// 

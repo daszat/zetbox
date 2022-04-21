@@ -32,6 +32,8 @@ namespace Zetbox.App.Test
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.Muhblah> MubBlah_List_Nav { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.Muhblah>> GetProp_MubBlah_List_Nav();
+
         /// <summary>
         /// 
         /// </summary>
@@ -49,6 +51,10 @@ namespace Zetbox.App.Test
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah> GetProp_MubBlah_Nav();
+
+        System.Threading.Tasks.Task SetProp_MubBlah_Nav(Zetbox.App.Test.Muhblah newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -56,6 +62,8 @@ namespace Zetbox.App.Test
         [Zetbox.API.DefinitionGuid("9c4217f2-47d8-47b5-a324-7601ecabc7b0")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.Muhblah> MuhBlah_ManyList_Nav { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.Muhblah>> GetProp_MuhBlah_ManyList_Nav();
 
         /// <summary>
         /// 
@@ -73,6 +81,10 @@ namespace Zetbox.App.Test
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah> GetProp_MuhBlah_One_Nav();
+
+        System.Threading.Tasks.Task SetProp_MuhBlah_One_Nav(Zetbox.App.Test.Muhblah newValue);
 
         /// <summary>
         /// Person&amp;apos;s Name
@@ -111,5 +123,7 @@ namespace Zetbox.App.Test
         [Zetbox.API.DefinitionGuid("0c0c1101-118a-4ce2-806c-d30a03b19dde")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.TestPhoneCompoundObject> PhoneNumbersOther { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.TestPhoneCompoundObject>> GetProp_PhoneNumbersOther();
     }
 }

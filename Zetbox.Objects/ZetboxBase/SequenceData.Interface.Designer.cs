@@ -40,5 +40,9 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.Sequence> GetProp_Sequence();
+
+        System.Threading.Tasks.Task SetProp_Sequence(Zetbox.App.Base.Sequence newValue);
     }
 }

@@ -115,6 +115,17 @@ namespace Zetbox.App.Test
         // inverse Navigator=Antworten; is list;
         // PositionStorage=gute_Antworten_pos;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.Fragebogen> GetProp_Fragebogen()
+        {
+            return System.Threading.Tasks.Task.FromResult(Fragebogen);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Fragebogen(Zetbox.App.Test.Fragebogen newValue)
+        {
+            await TriggerFetchFragebogenAsync();
+            Fragebogen = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

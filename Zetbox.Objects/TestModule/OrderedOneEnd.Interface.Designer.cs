@@ -22,6 +22,8 @@ namespace Zetbox.App.Test
         [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Test.OrderedNEnd> NEnds { get; }
 
+        System.Threading.Tasks.Task<IList<Zetbox.App.Test.OrderedNEnd>> GetProp_NEnds();
+
         /// <summary>
         /// 
         /// </summary>

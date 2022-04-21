@@ -31,5 +31,7 @@ namespace Zetbox.App.Test
         [Zetbox.API.DefinitionGuid("f330d95b-372d-4302-b4d1-73afc5fa71de")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.Fragebogen> Testbogen { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.Fragebogen>> GetProp_Testbogen();
     }
 }

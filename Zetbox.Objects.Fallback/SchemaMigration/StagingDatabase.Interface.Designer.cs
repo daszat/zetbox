@@ -51,6 +51,10 @@ namespace Zetbox.App.SchemaMigration
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.MigrationProject> GetProp_MigrationProject();
+
+        System.Threading.Tasks.Task SetProp_MigrationProject(Zetbox.App.SchemaMigration.MigrationProject newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -78,5 +82,7 @@ namespace Zetbox.App.SchemaMigration
         [Zetbox.API.DefinitionGuid("e468c835-8c9c-4776-83ce-f54b1f4634a4")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.SchemaMigration.SourceTable> SourceTables { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.SourceTable>> GetProp_SourceTables();
     }
 }

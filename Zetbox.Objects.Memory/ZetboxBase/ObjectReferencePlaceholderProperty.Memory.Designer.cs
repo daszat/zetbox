@@ -291,6 +291,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_ReferencedObjectClass()
+        {
+            return TriggerFetchReferencedObjectClassAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ReferencedObjectClass(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchReferencedObjectClassAsync();
+            ReferencedObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)newValue;
+        }
+
         private int? __fk_ReferencedObjectClassCache;
 
         private int? _fk_ReferencedObjectClass {

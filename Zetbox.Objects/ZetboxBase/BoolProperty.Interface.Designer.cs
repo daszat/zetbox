@@ -31,6 +31,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_FalseIcon();
+
+        System.Threading.Tasks.Task SetProp_FalseIcon(Zetbox.App.GUI.Icon newValue);
+
         /// <summary>
         /// A string to describe the &quot;false&quot; value to the user.
         /// </summary>
@@ -58,6 +62,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_NullIcon();
+
+        System.Threading.Tasks.Task SetProp_NullIcon(Zetbox.App.GUI.Icon newValue);
+
         /// <summary>
         /// A string to describe the &quot;null&quot; value to the user.
         /// </summary>
@@ -84,6 +92,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_TrueIcon();
+
+        System.Threading.Tasks.Task SetProp_TrueIcon(Zetbox.App.GUI.Icon newValue);
 
         /// <summary>
         /// A string to describe the &quot;true&quot; value to the user.

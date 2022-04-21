@@ -115,6 +115,17 @@ namespace Zetbox.App.Base
         // inverse Navigator=Data; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Sequence> GetProp_Sequence()
+        {
+            return System.Threading.Tasks.Task.FromResult(Sequence);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Sequence(Zetbox.App.Base.Sequence newValue)
+        {
+            await TriggerFetchSequenceAsync();
+            Sequence = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

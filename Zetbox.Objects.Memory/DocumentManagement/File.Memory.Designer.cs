@@ -113,6 +113,17 @@ namespace at.dasz.DocumentManagement
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Blob> GetProp_Blob()
+        {
+            return TriggerFetchBlobAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Blob(Zetbox.App.Base.Blob newValue)
+        {
+            await TriggerFetchBlobAsync();
+            BlobImpl = (Zetbox.App.Base.BlobMemoryImpl)newValue;
+        }
+
         private int? __fk_BlobCache;
 
         private int? _fk_Blob {
@@ -240,6 +251,17 @@ namespace at.dasz.DocumentManagement
             set { ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_ChangedByCache;
 
@@ -441,6 +463,17 @@ namespace at.dasz.DocumentManagement
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_CreatedByCache;
 
         private int? _fk_CreatedBy {
@@ -640,6 +673,17 @@ namespace at.dasz.DocumentManagement
             set { ExcerptImpl = (at.dasz.DocumentManagement.ExcerptMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<at.dasz.DocumentManagement.Excerpt> GetProp_Excerpt()
+        {
+            return TriggerFetchExcerptAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Excerpt(at.dasz.DocumentManagement.Excerpt newValue)
+        {
+            await TriggerFetchExcerptAsync();
+            ExcerptImpl = (at.dasz.DocumentManagement.ExcerptMemoryImpl)newValue;
+        }
 
         private int? __fk_ExcerptCache;
 
@@ -1050,6 +1094,12 @@ namespace at.dasz.DocumentManagement
                 }
                 return (IList<Zetbox.App.Base.Blob>)_Revisions;
             }
+        }
+
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.Blob>> GetProp_Revisions()
+        {
+            await TriggerFetchRevisionsAsync();
+            return _Revisions;
         }
 
         System.Threading.Tasks.Task _triggerFetchRevisionsTask;

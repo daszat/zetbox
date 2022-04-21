@@ -41,6 +41,10 @@ namespace Zetbox.App.SchemaMigration
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_DestinationModule();
+
+        System.Threading.Tasks.Task SetProp_DestinationModule(Zetbox.App.Base.Module newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -48,6 +52,8 @@ namespace Zetbox.App.SchemaMigration
         [Zetbox.API.DefinitionGuid("3750005b-3850-4697-8b80-b5a7854fc344")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.SchemaMigration.StagingDatabase> StagingDatabases { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.StagingDatabase>> GetProp_StagingDatabases();
 
         /// <summary>
         /// Creates a mapping report

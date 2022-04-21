@@ -117,6 +117,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Sequence> GetProp_Sequence()
+        {
+            return TriggerFetchSequenceAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Sequence(Zetbox.App.Base.Sequence newValue)
+        {
+            await TriggerFetchSequenceAsync();
+            SequenceImpl = (Zetbox.App.Base.SequenceMemoryImpl)newValue;
+        }
+
         private int? __fk_SequenceCache;
 
         private int? _fk_Sequence {
@@ -170,7 +181,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchSequenceAsync().TryRunSynchronously(); return (Zetbox.App.Base.SequenceMemoryImpl)TriggerFetchSequenceAsync().Result;
+                var task = TriggerFetchSequenceAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.SequenceMemoryImpl)task.Result;
             }
             set
             {

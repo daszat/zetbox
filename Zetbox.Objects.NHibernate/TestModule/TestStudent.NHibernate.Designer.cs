@@ -131,6 +131,12 @@ namespace Zetbox.App.Test
 			}
 		}
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.Fragebogen>> GetProp_Testbogen()
+        {
+            await TriggerFetchTestbogenAsync();
+            return _Testbogen;
+        }
+
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl> _Testbogen;
 		// ignored, but required for Serialization
         private bool Testbogen_was_eagerLoaded = false;

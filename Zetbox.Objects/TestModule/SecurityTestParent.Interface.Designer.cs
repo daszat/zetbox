@@ -22,6 +22,8 @@ namespace Zetbox.App.Test
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.SecurityTestChild> Children { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.SecurityTestChild>> GetProp_Children();
+
         /// <summary>
         /// 
         /// </summary>

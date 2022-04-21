@@ -31,6 +31,10 @@ namespace Zetbox.App.Test
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_Identity();
+
+        System.Threading.Tasks.Task SetProp_Identity(Zetbox.App.Base.Identity newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -57,6 +61,10 @@ namespace Zetbox.App.Test
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Test.SecurityTestParent> GetProp_Parent();
+
+        System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.Test.SecurityTestParent newValue);
 
         /// <summary>
         /// 

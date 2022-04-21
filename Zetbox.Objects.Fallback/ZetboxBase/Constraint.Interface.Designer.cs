@@ -31,6 +31,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_ConstrainedProperty();
+
+        System.Threading.Tasks.Task SetProp_ConstrainedProperty(Zetbox.App.Base.Property newValue);
+
         /// <summary>
         /// The reason of this constraint
         /// </summary>

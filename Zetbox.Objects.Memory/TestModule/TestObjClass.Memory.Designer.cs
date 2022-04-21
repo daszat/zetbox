@@ -162,6 +162,17 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Projekte.Kunde> GetProp_ObjectProp()
+        {
+            return TriggerFetchObjectPropAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ObjectProp(Zetbox.App.Projekte.Kunde newValue)
+        {
+            await TriggerFetchObjectPropAsync();
+            ObjectPropImpl = (Zetbox.App.Projekte.KundeMemoryImpl)newValue;
+        }
+
         private int? __fk_ObjectPropCache;
 
         private int? _fk_ObjectProp {

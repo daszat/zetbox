@@ -56,6 +56,12 @@ namespace Zetbox.App.Base
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Property>> GetProp_Inputs()
+        {
+            await TriggerFetchInputsAsync();
+            return _Inputs;
+        }
+
         System.Threading.Tasks.Task _triggerFetchInputsTask;
         public System.Threading.Tasks.Task TriggerFetchInputsAsync()
         {
@@ -108,6 +114,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
             set { ReferencedClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_ReferencedClass()
+        {
+            return TriggerFetchReferencedClassAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ReferencedClass(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchReferencedClassAsync();
+            ReferencedClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)newValue;
+        }
 
         private int? __fk_ReferencedClassCache;
 

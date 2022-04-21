@@ -56,6 +56,12 @@ namespace Zetbox.App.Test
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.N_to_M_relations_A>> GetProp_ASide()
+        {
+            await TriggerFetchASideAsync();
+            return _ASide;
+        }
+
         System.Threading.Tasks.Task _triggerFetchASideTask;
         public System.Threading.Tasks.Task TriggerFetchASideAsync()
         {

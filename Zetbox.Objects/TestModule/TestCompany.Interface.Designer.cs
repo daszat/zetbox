@@ -31,5 +31,7 @@ namespace Zetbox.App.Test
         [Zetbox.API.DefinitionGuid("477dd46f-24d1-4db8-934b-131adea34f13")]
         [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Test.TestPhoneCompoundObject> Phones { get; }
+
+        System.Threading.Tasks.Task<IList<Zetbox.App.Test.TestPhoneCompoundObject>> GetProp_Phones();
     }
 }

@@ -87,6 +87,12 @@ namespace Zetbox.App.GUI
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.GUI.ControlKind>>(this.ChildControlKinds);
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.GUI.ControlKind>> GetProp_ChildControlKinds()
+        {
+            await TriggerFetchChildControlKindsAsync();
+            return _ChildControlKinds;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChildControlKinds_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ControlKind> OnChildControlKinds_IsValid;
@@ -178,6 +184,17 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return System.Threading.Tasks.Task.FromResult(Module);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            Module = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -345,6 +362,17 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         // inverse Navigator=ChildControlKinds; is list;
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_Parent()
+        {
+            return System.Threading.Tasks.Task.FromResult(Parent);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchParentAsync();
+            Parent = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

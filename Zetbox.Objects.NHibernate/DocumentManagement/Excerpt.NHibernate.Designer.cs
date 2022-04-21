@@ -57,6 +57,17 @@ namespace at.dasz.DocumentManagement
         // inverse Navigator=Excerpt; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> GetProp_File()
+        {
+            return System.Threading.Tasks.Task.FromResult(File);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_File(at.dasz.DocumentManagement.File newValue)
+        {
+            await TriggerFetchFileAsync();
+            File = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

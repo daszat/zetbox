@@ -31,6 +31,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy();
+
+        System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue);
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -57,6 +61,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy();
+
+        System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue);
 
         /// <summary>
         /// Date and time where this object was created

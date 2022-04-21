@@ -177,10 +177,18 @@ namespace Zetbox.App.Base
             {
                 if (_Methods == null)
                 {
-                    TriggerFetchMethodsAsync().TryRunSynchronously(); TriggerFetchMethodsAsync().Wait();
+                    var task = TriggerFetchMethodsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Method>)_Methods;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Method>> GetProp_Methods()
+        {
+            await TriggerFetchMethodsAsync();
+            return _Methods;
         }
 
         System.Threading.Tasks.Task _triggerFetchMethodsTask;
@@ -233,6 +241,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             set { RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetProp_RelationEnd()
+        {
+            return TriggerFetchRelationEndAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RelationEnd(Zetbox.App.Base.RelationEnd newValue)
+        {
+            await TriggerFetchRelationEndAsync();
+            RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)newValue;
+        }
 
         private int? __fk_RelationEndCache;
 
@@ -288,7 +307,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         {
             get
             {
-                TriggerFetchRelationEndAsync().TryRunSynchronously(); return (Zetbox.App.Base.RelationEndMemoryImpl)TriggerFetchRelationEndAsync().Result;
+                var task = TriggerFetchRelationEndAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.RelationEndMemoryImpl)task.Result;
             }
             set
             {

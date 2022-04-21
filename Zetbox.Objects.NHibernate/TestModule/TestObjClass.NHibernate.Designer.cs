@@ -169,6 +169,17 @@ namespace Zetbox.App.Test
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Projekte.Kunde> GetProp_ObjectProp()
+        {
+            return System.Threading.Tasks.Task.FromResult(ObjectProp);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ObjectProp(Zetbox.App.Projekte.Kunde newValue)
+        {
+            await TriggerFetchObjectPropAsync();
+            ObjectProp = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

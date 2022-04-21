@@ -3687,10 +3687,6 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.ObjectClass>("3a8d152e-b8d1-4439-bfe4-367731218ce9"); }
                             }
-                            public static TypedGuid<global::Zetbox.App.Base.ObjectClass> Company
-                            {
-                                get { return new TypedGuid<global::Zetbox.App.Base.ObjectClass>("352a4ade-1dca-4d28-9630-66bbcc1622ea"); }
-                            }
                             public static TypedGuid<global::Zetbox.App.Base.ObjectClass> DeactivatableTestObject
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.ObjectClass>("12e49195-6ff4-49cd-b3a9-37f7bc350a5e"); }
@@ -3803,6 +3799,10 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.ObjectClass>("779f8526-3f7f-41be-8186-f22062c302a2"); }
                             }
+                            public static TypedGuid<global::Zetbox.App.Base.ObjectClass> TestCompany
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.ObjectClass>("352a4ade-1dca-4d28-9630-66bbcc1622ea"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.ObjectClass> TestCustomObject
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.ObjectClass>("de155110-79cc-4dac-89d6-0916608be1fb"); }
@@ -3870,13 +3870,6 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.GuidProperty> ExportGuid
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.GuidProperty>("65839be9-d3b7-4910-9812-c2d44d008c41"); }
-                                }
-                            }
-                            public static class Company_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.StringProperty> Name
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("4a038e35-fffb-4ba7-8009-1954c317a799"); }
                                 }
                             }
                             public static class DeactivatableTestObject_Properties
@@ -4352,6 +4345,17 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.StringProperty> Name
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("0f8291ef-2a35-4d8e-bc17-761c0a1cfe88"); }
+                                }
+                            }
+                            public static class TestCompany_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.StringProperty> Name
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("4a038e35-fffb-4ba7-8009-1954c317a799"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.CompoundObjectProperty> Phones
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.CompoundObjectProperty>("477dd46f-24d1-4db8-934b-131adea34f13"); }
                                 }
                             }
                             public static class TestCustomObject_Properties

@@ -142,6 +142,11 @@ namespace Zetbox.App.Test
             }
         }
 
+        public System.Threading.Tasks.Task<IList<Zetbox.App.Test.TestPhoneCompoundObject>> GetProp_Phones()
+        {
+            return System.Threading.Tasks.Task.FromResult(Phones);
+        }
+
         private ClientValueListWrapper<TestCompany, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestCompany_Phones_CollectionEntry, Zetbox.App.Test.TestCompany_Phones_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryNHibernateImpl>> _Phones;
         private ProjectedCollection<Zetbox.App.Test.TestCompany_Phones_CollectionEntryNHibernateImpl.TestCompany_Phones_CollectionEntryProxy, Zetbox.App.Test.TestCompany_Phones_CollectionEntryNHibernateImpl> _PhonesCollection;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty

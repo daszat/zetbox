@@ -59,6 +59,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.DataType> GetProp_Constrained()
+        {
+            return TriggerFetchConstrainedAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Constrained(Zetbox.App.Base.DataType newValue)
+        {
+            await TriggerFetchConstrainedAsync();
+            ConstrainedImpl = (Zetbox.App.Base.DataTypeMemoryImpl)newValue;
+        }
+
         private int? __fk_ConstrainedCache;
 
         private int? _fk_Constrained {

@@ -60,6 +60,17 @@ namespace Zetbox.App.SchemaMigration
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(ChangedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -245,6 +256,17 @@ namespace Zetbox.App.SchemaMigration
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(CreatedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -488,6 +510,17 @@ namespace Zetbox.App.SchemaMigration
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_DestinationModule()
+        {
+            return System.Threading.Tasks.Task.FromResult(DestinationModule);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DestinationModule(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchDestinationModuleAsync();
+            DestinationModule = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -702,6 +735,12 @@ namespace Zetbox.App.SchemaMigration
         public System.Threading.Tasks.Task TriggerFetchStagingDatabasesAsync()
         {
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.SchemaMigration.StagingDatabase>>(this.StagingDatabases);
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.StagingDatabase>> GetProp_StagingDatabases()
+        {
+            await TriggerFetchStagingDatabasesAsync();
+            return _StagingDatabases;
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.MigrationProject> OnStagingDatabases_PostSetter;

@@ -31,6 +31,10 @@ namespace Zetbox.App.Calendar
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Calendar.WorkSchedule> GetProp_BaseWorkSchedule();
+
+        System.Threading.Tasks.Task SetProp_BaseWorkSchedule(Zetbox.App.Calendar.WorkSchedule newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -38,6 +42,8 @@ namespace Zetbox.App.Calendar
         [Zetbox.API.DefinitionGuid("c2fc6792-bc1f-42bb-b6c3-451ab99ddbef")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Calendar.WorkSchedule> ChildWorkSchedule { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Calendar.WorkSchedule>> GetProp_ChildWorkSchedule();
 
         /// <summary>
         /// 
@@ -56,6 +62,8 @@ namespace Zetbox.App.Calendar
         [Zetbox.API.DefinitionGuid("b16c20d8-ac72-45e8-883c-52c6f28571f2")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Calendar.WorkScheduleRule> WorkScheduleRules { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Calendar.WorkScheduleRule>> GetProp_WorkScheduleRules();
 
         /// <summary>
         /// Duplicates this work schedule

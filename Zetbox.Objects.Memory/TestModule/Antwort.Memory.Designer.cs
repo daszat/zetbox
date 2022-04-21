@@ -117,6 +117,17 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Test.Fragebogen> GetProp_Fragebogen()
+        {
+            return TriggerFetchFragebogenAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Fragebogen(Zetbox.App.Test.Fragebogen newValue)
+        {
+            await TriggerFetchFragebogenAsync();
+            FragebogenImpl = (Zetbox.App.Test.FragebogenMemoryImpl)newValue;
+        }
+
         private int? __fk_FragebogenCache;
 
         private int? _fk_Fragebogen {

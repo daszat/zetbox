@@ -59,6 +59,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.EnumerationEntry> GetProp_EnumValue()
+        {
+            return TriggerFetchEnumValueAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_EnumValue(Zetbox.App.Base.EnumerationEntry newValue)
+        {
+            await TriggerFetchEnumValueAsync();
+            EnumValueImpl = (Zetbox.App.Base.EnumerationEntryMemoryImpl)newValue;
+        }
+
         private int? __fk_EnumValueCache;
 
         private int? _fk_EnumValue {
@@ -113,7 +124,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchEnumValueAsync().TryRunSynchronously(); return (Zetbox.App.Base.EnumerationEntryMemoryImpl)TriggerFetchEnumValueAsync().Result;
+                var task = TriggerFetchEnumValueAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.EnumerationEntryMemoryImpl)task.Result;
             }
             set
             {

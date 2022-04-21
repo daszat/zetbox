@@ -31,6 +31,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.CompoundObject> GetProp_CompoundObjectDefinition();
+
+        System.Threading.Tasks.Task SetProp_CompoundObjectDefinition(Zetbox.App.Base.CompoundObject newValue);
+
         /// <summary>
         /// Whether or not the list has a persistent ordering of elements
         /// </summary>

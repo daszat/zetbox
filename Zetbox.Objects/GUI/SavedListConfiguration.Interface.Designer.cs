@@ -41,6 +41,10 @@ namespace Zetbox.App.GUI
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_Owner();
+
+        System.Threading.Tasks.Task SetProp_Owner(Zetbox.App.Base.Identity newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -57,5 +61,9 @@ namespace Zetbox.App.GUI
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_Type();
+
+        System.Threading.Tasks.Task SetProp_Type(Zetbox.App.Base.ObjectClass newValue);
     }
 }

@@ -162,6 +162,12 @@ namespace Zetbox.App.Test
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Test.Muhblah>>(this.MubBlah_List_Nav);
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.Muhblah>> GetProp_MubBlah_List_Nav()
+        {
+            await TriggerFetchMubBlah_List_NavAsync();
+            return _MubBlah_List_Nav;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject> OnMubBlah_List_Nav_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestCustomObject> OnMubBlah_List_Nav_IsValid;
@@ -175,6 +181,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         // inverse Navigator=TestCustomObjects_List_Nav; is list;
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah> GetProp_MubBlah_Nav()
+        {
+            return System.Threading.Tasks.Task.FromResult(MubBlah_Nav);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_MubBlah_Nav(Zetbox.App.Test.Muhblah newValue)
+        {
+            await TriggerFetchMubBlah_NavAsync();
+            MubBlah_Nav = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -321,6 +338,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 			}
 		}
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.Muhblah>> GetProp_MuhBlah_ManyList_Nav()
+        {
+            await TriggerFetchMuhBlah_ManyList_NavAsync();
+            return _MuhBlah_ManyList_Nav;
+        }
+
 		private NHibernateASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl> _MuhBlah_ManyList_Nav;
 		// ignored, but required for Serialization
         private bool MuhBlah_ManyList_Nav_was_eagerLoaded = false;
@@ -343,6 +366,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         // inverse Navigator=TestCustomObjects_One_Nav; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah> GetProp_MuhBlah_One_Nav()
+        {
+            return System.Threading.Tasks.Task.FromResult(MuhBlah_One_Nav);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_MuhBlah_One_Nav(Zetbox.App.Test.Muhblah newValue)
+        {
+            await TriggerFetchMuhBlah_One_NavAsync();
+            MuhBlah_One_Nav = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -645,6 +679,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 }
                 return _PhoneNumbersOtherCollection;
             }
+        }
+
+        public System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.TestPhoneCompoundObject>> GetProp_PhoneNumbersOther()
+        {
+            return System.Threading.Tasks.Task.FromResult(PhoneNumbersOther);
         }
 
         private ClientValueCollectionWrapper<TestCustomObject, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntry, Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl>> _PhoneNumbersOther;

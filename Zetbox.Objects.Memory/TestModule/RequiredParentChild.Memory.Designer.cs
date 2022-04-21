@@ -117,6 +117,17 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Test.RequiredParent> GetProp_Parent()
+        {
+            return TriggerFetchParentAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.Test.RequiredParent newValue)
+        {
+            await TriggerFetchParentAsync();
+            ParentImpl = (Zetbox.App.Test.RequiredParentMemoryImpl)newValue;
+        }
+
         private int? __fk_ParentCache;
 
         private int? _fk_Parent {

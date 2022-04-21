@@ -30,5 +30,9 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.CompoundObject> GetProp_CompoundObject();
+
+        System.Threading.Tasks.Task SetProp_CompoundObject(Zetbox.App.Base.CompoundObject newValue);
     }
 }

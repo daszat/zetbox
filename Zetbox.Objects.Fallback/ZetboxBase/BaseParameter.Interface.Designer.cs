@@ -91,6 +91,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Method> GetProp_Method();
+
+        System.Threading.Tasks.Task SetProp_Method(Zetbox.App.Base.Method newValue);
+
         /// <summary>
         /// Name des Parameter
         /// </summary>

@@ -30,5 +30,9 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_Group();
+
+        System.Threading.Tasks.Task SetProp_Group(Zetbox.App.Base.Group newValue);
     }
 }

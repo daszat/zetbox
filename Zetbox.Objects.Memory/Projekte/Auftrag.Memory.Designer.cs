@@ -175,6 +175,17 @@ namespace Zetbox.App.Projekte
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -374,6 +385,17 @@ namespace Zetbox.App.Projekte
             set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_CreatedByCache;
 
@@ -646,6 +668,17 @@ namespace Zetbox.App.Projekte
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Projekte.Kunde> GetProp_Kunde()
+        {
+            return TriggerFetchKundeAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Kunde(Zetbox.App.Projekte.Kunde newValue)
+        {
+            await TriggerFetchKundeAsync();
+            KundeImpl = (Zetbox.App.Projekte.KundeMemoryImpl)newValue;
+        }
+
         private int? __fk_KundeCache;
 
         private int? _fk_Kunde {
@@ -774,6 +807,17 @@ namespace Zetbox.App.Projekte
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Projekte.Mitarbeiter> GetProp_Mitarbeiter()
+        {
+            return TriggerFetchMitarbeiterAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Mitarbeiter(Zetbox.App.Projekte.Mitarbeiter newValue)
+        {
+            await TriggerFetchMitarbeiterAsync();
+            MitarbeiterImpl = (Zetbox.App.Projekte.MitarbeiterMemoryImpl)newValue;
+        }
+
         private int? __fk_MitarbeiterCache;
 
         private int? _fk_Mitarbeiter {
@@ -901,6 +945,17 @@ namespace Zetbox.App.Projekte
             set { ProjektImpl = (Zetbox.App.Projekte.ProjektMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Projekte.Projekt> GetProp_Projekt()
+        {
+            return TriggerFetchProjektAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Projekt(Zetbox.App.Projekte.Projekt newValue)
+        {
+            await TriggerFetchProjektAsync();
+            ProjektImpl = (Zetbox.App.Projekte.ProjektMemoryImpl)newValue;
+        }
 
         private int? __fk_ProjektCache;
 

@@ -59,6 +59,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_ControlKind()
+        {
+            return System.Threading.Tasks.Task.FromResult(ControlKind);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ControlKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchControlKindAsync();
+            ControlKind = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -382,6 +393,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return System.Threading.Tasks.Task.FromResult(Module);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            Module = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

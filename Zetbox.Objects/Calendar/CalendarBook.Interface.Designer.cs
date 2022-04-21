@@ -22,6 +22,8 @@ namespace Zetbox.App.Calendar
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Group> GroupReaders { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Group>> GetProp_GroupReaders();
+
         /// <summary>
         /// 
         /// </summary>
@@ -29,6 +31,8 @@ namespace Zetbox.App.Calendar
         [Zetbox.API.DefinitionGuid("d960ba8e-1605-4a70-b950-4e12c4c1ae75")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Group> GroupWriters { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Group>> GetProp_GroupWriters();
 
         /// <summary>
         /// 
@@ -57,6 +61,10 @@ namespace Zetbox.App.Calendar
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_Owner();
+
+        System.Threading.Tasks.Task SetProp_Owner(Zetbox.App.Base.Identity newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -65,6 +73,8 @@ namespace Zetbox.App.Calendar
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Identity> Readers { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Identity>> GetProp_Readers();
+
         /// <summary>
         /// 
         /// </summary>
@@ -72,6 +82,8 @@ namespace Zetbox.App.Calendar
         [Zetbox.API.DefinitionGuid("e52271a9-ca1a-486d-95c0-795a502af48e")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Identity> Writers { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Identity>> GetProp_Writers();
 
         /// <summary>
         /// Gets a list of ViewModels that can create a new event. Multiple implementations can support different kind of events

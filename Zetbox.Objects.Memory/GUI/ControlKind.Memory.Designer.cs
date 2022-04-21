@@ -60,6 +60,12 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.GUI.ControlKind>> GetProp_ChildControlKinds()
+        {
+            await TriggerFetchChildControlKindsAsync();
+            return _ChildControlKinds;
+        }
+
         System.Threading.Tasks.Task _triggerFetchChildControlKindsTask;
         public System.Threading.Tasks.Task TriggerFetchChildControlKindsAsync()
         {
@@ -198,6 +204,17 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             set { ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return TriggerFetchModuleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)newValue;
+        }
 
         private int? __fk_ModuleCache;
 
@@ -384,6 +401,17 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             set { ParentImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_Parent()
+        {
+            return TriggerFetchParentAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchParentAsync();
+            ParentImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
 
         private int? __fk_ParentCache;
 

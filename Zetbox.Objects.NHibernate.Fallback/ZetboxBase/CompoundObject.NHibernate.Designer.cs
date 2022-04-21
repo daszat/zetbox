@@ -57,6 +57,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultPropertyViewModelDescriptor()
+        {
+            return System.Threading.Tasks.Task.FromResult(DefaultPropertyViewModelDescriptor);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultPropertyViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchDefaultPropertyViewModelDescriptorAsync();
+            DefaultPropertyViewModelDescriptor = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -166,6 +177,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultViewModelDescriptor()
+        {
+            return System.Threading.Tasks.Task.FromResult(DefaultViewModelDescriptor);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchDefaultViewModelDescriptorAsync();
+            DefaultViewModelDescriptor = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

@@ -31,6 +31,10 @@ namespace Zetbox.App.SchemaMigration
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.EnumerationEntry> GetProp_DestinationValue();
+
+        System.Threading.Tasks.Task SetProp_DestinationValue(Zetbox.App.Base.EnumerationEntry newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -47,6 +51,10 @@ namespace Zetbox.App.SchemaMigration
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn> GetProp_SourceColumn();
+
+        System.Threading.Tasks.Task SetProp_SourceColumn(Zetbox.App.SchemaMigration.SourceColumn newValue);
 
         /// <summary>
         /// 

@@ -58,6 +58,17 @@ namespace Zetbox.App.Base
         // inverse Navigator=Constraints; is list;
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.DataType> GetProp_Constrained()
+        {
+            return System.Threading.Tasks.Task.FromResult(Constrained);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Constrained(Zetbox.App.Base.DataType newValue)
+        {
+            await TriggerFetchConstrainedAsync();
+            Constrained = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

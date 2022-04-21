@@ -61,7 +61,11 @@ namespace Zetbox.App.Projekte
 
 		private ClientValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl>> _AuditJournal;
 		private ObservableCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl> _AuditJournalCollection = new ObservableCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl>();
-public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_PostSetter;
+
+		public System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.AuditEntry>> GetProp_AuditJournal()
+        {
+            return System.Threading.Tasks.Task.FromResult(AuditJournal);
+        }public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_IsValid;
 
@@ -86,6 +90,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 }
                 return _Auftraege;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Projekte.Auftrag>> GetProp_Auftraege()
+        {
+            await TriggerFetchAuftraegeAsync();
+            return _Auftraege;
         }
 
         System.Threading.Tasks.Task _triggerFetchAuftraegeTask;
@@ -260,6 +270,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             set { ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_ChangedByCache;
 
@@ -460,6 +481,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_CreatedByCache;
 
@@ -907,6 +939,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             }
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Projekte.Mitarbeiter>> GetProp_Mitarbeiter()
+        {
+            await TriggerFetchMitarbeiterAsync();
+            return _Mitarbeiter;
+        }
+
         System.Threading.Tasks.Task _triggerFetchMitarbeiterTask;
         public System.Threading.Tasks.Task TriggerFetchMitarbeiterAsync()
         {
@@ -1015,6 +1053,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
                 }
                 return _Tasks;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Projekte.Task>> GetProp_Tasks()
+        {
+            await TriggerFetchTasksAsync();
+            return _Tasks;
         }
 
         System.Threading.Tasks.Task _triggerFetchTasksTask;

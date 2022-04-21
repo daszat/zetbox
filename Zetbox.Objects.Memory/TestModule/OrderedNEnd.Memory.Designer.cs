@@ -59,6 +59,17 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Test.OrderedOneEnd> GetProp_OneEnd()
+        {
+            return TriggerFetchOneEndAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_OneEnd(Zetbox.App.Test.OrderedOneEnd newValue)
+        {
+            await TriggerFetchOneEndAsync();
+            OneEndImpl = (Zetbox.App.Test.OrderedOneEndMemoryImpl)newValue;
+        }
+
         private int? __fk_OneEndCache;
 
         private int? _fk_OneEnd {

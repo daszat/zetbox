@@ -57,6 +57,17 @@ namespace Zetbox.App.Test
         // inverse Navigator=NEnds; is list;
         // PositionStorage=NEnds_pos;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.OrderedOneEnd> GetProp_OneEnd()
+        {
+            return System.Threading.Tasks.Task.FromResult(OneEnd);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_OneEnd(Zetbox.App.Test.OrderedOneEnd newValue)
+        {
+            await TriggerFetchOneEndAsync();
+            OneEnd = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

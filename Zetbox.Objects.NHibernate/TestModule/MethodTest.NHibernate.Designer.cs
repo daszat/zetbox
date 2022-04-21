@@ -86,6 +86,12 @@ namespace Zetbox.App.Test
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Test.MethodTest>>(this.Children);
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.MethodTest>> GetProp_Children()
+        {
+            await TriggerFetchChildrenAsync();
+            return _Children;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.MethodTest> OnChildren_IsValid;
@@ -99,6 +105,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         // inverse Navigator=Children; is list;
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.MethodTest> GetProp_Parent()
+        {
+            return System.Threading.Tasks.Task.FromResult(Parent);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.Test.MethodTest newValue)
+        {
+            await TriggerFetchParentAsync();
+            Parent = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

@@ -31,6 +31,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultPropertyViewModelDescriptor();
+
+        System.Threading.Tasks.Task SetProp_DefaultPropertyViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue);
+
         /// <summary>
         /// The default ViewModel to use for this Compound Object
         /// </summary>
@@ -47,5 +51,9 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultViewModelDescriptor();
+
+        System.Threading.Tasks.Task SetProp_DefaultViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue);
     }
 }

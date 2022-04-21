@@ -59,6 +59,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Blob> GetProp_Blob()
+        {
+            return TriggerFetchBlobAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Blob(Zetbox.App.Base.Blob newValue)
+        {
+            await TriggerFetchBlobAsync();
+            BlobImpl = (Zetbox.App.Base.BlobMemoryImpl)newValue;
+        }
+
         private int? __fk_BlobCache;
 
         private int? _fk_Blob {
@@ -113,7 +124,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchBlobAsync().TryRunSynchronously(); return (Zetbox.App.Base.BlobMemoryImpl)TriggerFetchBlobAsync().Result;
+                var task = TriggerFetchBlobAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.BlobMemoryImpl)task.Result;
             }
             set
             {
@@ -313,6 +327,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return TriggerFetchModuleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)newValue;
+        }
+
         private int? __fk_ModuleCache;
 
         private int? _fk_Module {
@@ -367,7 +392,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchModuleAsync().TryRunSynchronously(); return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                var task = TriggerFetchModuleAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
             {

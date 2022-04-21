@@ -59,6 +59,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Enumeration> GetProp_Enumeration()
+        {
+            return TriggerFetchEnumerationAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Enumeration(Zetbox.App.Base.Enumeration newValue)
+        {
+            await TriggerFetchEnumerationAsync();
+            EnumerationImpl = (Zetbox.App.Base.EnumerationMemoryImpl)newValue;
+        }
+
         private int? __fk_EnumerationCache;
 
         private int? _fk_Enumeration {

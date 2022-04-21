@@ -59,6 +59,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultDisplayKind()
+        {
+            return System.Threading.Tasks.Task.FromResult(DefaultDisplayKind);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultDisplayKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchDefaultDisplayKindAsync();
+            DefaultDisplayKind = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -168,6 +179,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultEditorKind()
+        {
+            return System.Threading.Tasks.Task.FromResult(DefaultEditorKind);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultEditorKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchDefaultEditorKindAsync();
+            DefaultEditorKind = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -277,6 +299,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultGridCellDisplayKind()
+        {
+            return System.Threading.Tasks.Task.FromResult(DefaultGridCellDisplayKind);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultGridCellDisplayKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchDefaultGridCellDisplayKindAsync();
+            DefaultGridCellDisplayKind = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -386,6 +419,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultGridCellEditorKind()
+        {
+            return System.Threading.Tasks.Task.FromResult(DefaultGridCellEditorKind);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultGridCellEditorKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchDefaultGridCellEditorKindAsync();
+            DefaultGridCellEditorKind = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -495,6 +539,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultGridCellPreEditorKind()
+        {
+            return System.Threading.Tasks.Task.FromResult(DefaultGridCellPreEditorKind);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultGridCellPreEditorKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchDefaultGridCellPreEditorKindAsync();
+            DefaultGridCellPreEditorKind = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -818,6 +873,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return System.Threading.Tasks.Task.FromResult(Module);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            Module = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -942,6 +1008,12 @@ namespace Zetbox.App.GUI
 				return (ICollection<Zetbox.App.GUI.ControlKind>)_SecondaryControlKinds;
 			}
 		}
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.GUI.ControlKind>> GetProp_SecondaryControlKinds()
+        {
+            await TriggerFetchSecondaryControlKindsAsync();
+            return _SecondaryControlKinds;
+        }
 
 		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl> _SecondaryControlKinds;
 		// ignored, but required for Serialization

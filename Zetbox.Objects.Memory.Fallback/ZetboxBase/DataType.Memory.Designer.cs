@@ -49,7 +49,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity ChangedBy
@@ -59,10 +59,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
-        private int? _fk_ChangedBy
-        {
+        private int? _fk_ChangedBy {
             get
             {
                 return __fk_ChangedByCache;
@@ -78,10 +88,10 @@ namespace Zetbox.App.Base
         /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public int? FK_ChangedBy
-        {
-            get { return _fk_ChangedBy; }
-            set { _fk_ChangedBy = value; }
-        }
+		{
+			get { return _fk_ChangedBy; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
         System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
@@ -113,7 +123,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchChangedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -146,7 +159,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
-                if (IsAttached) UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -156,9 +169,9 @@ namespace Zetbox.App.Base
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnChangedBy_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnChangedBy_IsValid;
 
@@ -174,18 +187,14 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
-                if (!_isChangedOnSet && ObjectState == DataObjectState.New)
-                {
+                if (!_isChangedOnSet && ObjectState == DataObjectState.New) {
                     var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("1bd4a5bc-ef42-4bc0-bf5e-162dea22d91e"));
-                    if (__p != null)
-                    {
+                    if (__p != null) {
                         _isChangedOnSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this._ChangedOn = (DateTime)__tmp_value;
-                    }
-                    else
-                    {
+                    } else {
                         Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'DataType.ChangedOn'");
                     }
                 }
@@ -216,7 +225,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
-                    if (IsAttached) UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -233,9 +242,9 @@ namespace Zetbox.App.Base
         private DateTime _ChangedOn;
         private bool _isChangedOnSet = false;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, DateTime> OnChangedOn_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, DateTime> OnChangedOn_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, DateTime> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, DateTime> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, DateTime> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, DateTime> OnChangedOn_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnChangedOn_IsValid;
 
@@ -246,7 +255,7 @@ namespace Zetbox.App.Base
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Base.InstanceConstraint> Constraints
         {
@@ -254,10 +263,18 @@ namespace Zetbox.App.Base
             {
                 if (_Constraints == null)
                 {
-                    TriggerFetchConstraintsAsync().TryRunSynchronously(); TriggerFetchConstraintsAsync().Wait();
+                    var task = TriggerFetchConstraintsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _Constraints;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.InstanceConstraint>> GetProp_Constraints()
+        {
+            await TriggerFetchConstraintsAsync();
+            return _Constraints;
         }
 
         System.Threading.Tasks.Task _triggerFetchConstraintsTask;
@@ -315,7 +332,7 @@ namespace Zetbox.App.Base
         private OneNRelationList<Zetbox.App.Base.InstanceConstraint> _Constraints;
         private List<int> ConstraintsIds;
         private bool Constraints_was_eagerLoaded = false;
-        public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConstraints_PostSetter;
+public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConstraints_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnConstraints_IsValid;
 
@@ -331,7 +348,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity CreatedBy
@@ -341,10 +358,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_CreatedByCache;
 
-        private int? _fk_CreatedBy
-        {
+        private int? _fk_CreatedBy {
             get
             {
                 return __fk_CreatedByCache;
@@ -360,10 +387,10 @@ namespace Zetbox.App.Base
         /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public int? FK_CreatedBy
-        {
-            get { return _fk_CreatedBy; }
-            set { _fk_CreatedBy = value; }
-        }
+		{
+			get { return _fk_CreatedBy; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         System.Threading.Tasks.Task<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
@@ -395,7 +422,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchCreatedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -428,7 +458,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
-                if (IsAttached) UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -438,9 +468,9 @@ namespace Zetbox.App.Base
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnCreatedBy_IsValid;
 
@@ -456,18 +486,14 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
-                if (!_isCreatedOnSet && ObjectState == DataObjectState.New)
-                {
+                if (!_isCreatedOnSet && ObjectState == DataObjectState.New) {
                     var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("6ab4d1f6-1989-489b-a733-1c449fad773d"));
-                    if (__p != null)
-                    {
+                    if (__p != null) {
                         _isCreatedOnSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this._CreatedOn = (DateTime)__tmp_value;
-                    }
-                    else
-                    {
+                    } else {
                         Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'DataType.CreatedOn'");
                     }
                 }
@@ -498,7 +524,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
-                    if (IsAttached) UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -515,9 +541,9 @@ namespace Zetbox.App.Base
         private DateTime _CreatedOn;
         private bool _isCreatedOnSet = false;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, DateTime> OnCreatedOn_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, DateTime> OnCreatedOn_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, DateTime> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, DateTime> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, DateTime> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, DateTime> OnCreatedOn_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnCreatedOn_IsValid;
 
@@ -533,7 +559,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.Icon DefaultIcon
@@ -543,10 +569,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_DefaultIcon()
+        {
+            return TriggerFetchDefaultIconAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultIcon(Zetbox.App.GUI.Icon newValue)
+        {
+            await TriggerFetchDefaultIconAsync();
+            DefaultIconImpl = (Zetbox.App.GUI.IconMemoryImpl)newValue;
+        }
+
         private int? __fk_DefaultIconCache;
 
-        private int? _fk_DefaultIcon
-        {
+        private int? _fk_DefaultIcon {
             get
             {
                 return __fk_DefaultIconCache;
@@ -562,10 +598,10 @@ namespace Zetbox.App.Base
         /// <summary>ForeignKey Property for DefaultIcon's id, used on APIs only</summary>
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public int? FK_DefaultIcon
-        {
-            get { return _fk_DefaultIcon; }
-            set { _fk_DefaultIcon = value; }
-        }
+		{
+			get { return _fk_DefaultIcon; }
+			set { _fk_DefaultIcon = value; }
+		}
 
         private Guid? _fk_guid_DefaultIcon = null;
 
@@ -634,7 +670,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultIcon", __oldValue, __newValue);
-                if (IsAttached) UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDefaultIcon_PostSetter != null && IsAttached)
                 {
@@ -644,9 +680,9 @@ namespace Zetbox.App.Base
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultIcon
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.Icon> OnDefaultIcon_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.Icon> OnDefaultIcon_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.Icon> OnDefaultIcon_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.Icon> OnDefaultIcon_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.Icon> OnDefaultIcon_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.Icon> OnDefaultIcon_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnDefaultIcon_IsValid;
 
@@ -686,7 +722,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
-                    if (IsAttached) UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -702,9 +738,9 @@ namespace Zetbox.App.Base
         }
         private string _Description;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, string> OnDescription_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, string> OnDescription_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, string> OnDescription_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, string> OnDescription_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, string> OnDescription_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, string> OnDescription_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnDescription_IsValid;
 
@@ -720,18 +756,14 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (!_isExportGuidSet && ObjectState == DataObjectState.New)
-                {
+                if (!_isExportGuidSet && ObjectState == DataObjectState.New) {
                     var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("1fdb011e-2098-4077-b5e9-dd2eeafa727c"));
-                    if (__p != null)
-                    {
+                    if (__p != null) {
                         _isExportGuidSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this._ExportGuid = (Guid)__tmp_value;
-                    }
-                    else
-                    {
+                    } else {
                         Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'DataType.ExportGuid'");
                     }
                 }
@@ -760,7 +792,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if (IsAttached) UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -777,9 +809,9 @@ namespace Zetbox.App.Base
         private Guid _ExportGuid;
         private bool _isExportGuidSet = false;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Guid> OnExportGuid_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, Guid> OnExportGuid_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, Guid> OnExportGuid_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnExportGuid_IsValid;
 
@@ -819,7 +851,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("HelpText", __oldValue, __newValue);
                     _HelpText = __newValue;
                     NotifyPropertyChanged("HelpText", __oldValue, __newValue);
-                    if (IsAttached) UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnHelpText_PostSetter != null && IsAttached)
                     {
@@ -835,9 +867,9 @@ namespace Zetbox.App.Base
         }
         private string _HelpText;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, string> OnHelpText_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, string> OnHelpText_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, string> OnHelpText_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, string> OnHelpText_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, string> OnHelpText_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, string> OnHelpText_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnHelpText_IsValid;
 
@@ -852,10 +884,18 @@ namespace Zetbox.App.Base
             {
                 if (_ImplementsInterfaces == null)
                 {
-                    TriggerFetchImplementsInterfacesAsync().TryRunSynchronously(); TriggerFetchImplementsInterfacesAsync().Wait();
+                    var task = TriggerFetchImplementsInterfacesAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Interface>)_ImplementsInterfaces;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Interface>> GetProp_ImplementsInterfaces()
+        {
+            await TriggerFetchImplementsInterfacesAsync();
+            return _ImplementsInterfaces;
         }
 
         System.Threading.Tasks.Task _triggerFetchImplementsInterfacesTask;
@@ -869,7 +909,7 @@ namespace Zetbox.App.Base
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl>(this.Context, this));
-                // _ImplementsInterfaces.CollectionChanged is managed by OnImplementsInterfacesCollectionChanged() and called from the RelationEntry
+                        // _ImplementsInterfaces.CollectionChanged is managed by OnImplementsInterfacesCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchImplementsInterfacesTask;
         }
@@ -883,7 +923,7 @@ namespace Zetbox.App.Base
 
         private ObservableBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl>> _ImplementsInterfaces;
         // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for ImplementsInterfaces
-        public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImplementsInterfaces_PostSetter;
+public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImplementsInterfaces_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnImplementsInterfaces_IsValid;
 
@@ -894,7 +934,7 @@ namespace Zetbox.App.Base
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Zetbox.App.Base.Method> Methods
         {
@@ -902,10 +942,18 @@ namespace Zetbox.App.Base
             {
                 if (_Methods == null)
                 {
-                    TriggerFetchMethodsAsync().TryRunSynchronously(); TriggerFetchMethodsAsync().Wait();
+                    var task = TriggerFetchMethodsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _Methods;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Method>> GetProp_Methods()
+        {
+            await TriggerFetchMethodsAsync();
+            return _Methods;
         }
 
         System.Threading.Tasks.Task _triggerFetchMethodsTask;
@@ -963,7 +1011,7 @@ namespace Zetbox.App.Base
         private OneNRelationList<Zetbox.App.Base.Method> _Methods;
         private List<int> MethodsIds;
         private bool Methods_was_eagerLoaded = false;
-        public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMethods_PostSetter;
+public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMethods_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnMethods_IsValid;
 
@@ -979,7 +1027,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Module Module
@@ -989,10 +1037,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return TriggerFetchModuleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)newValue;
+        }
+
         private int? __fk_ModuleCache;
 
-        private int? _fk_Module
-        {
+        private int? _fk_Module {
             get
             {
                 return __fk_ModuleCache;
@@ -1008,10 +1066,10 @@ namespace Zetbox.App.Base
         /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public int? FK_Module
-        {
-            get { return _fk_Module; }
-            set { _fk_Module = value; }
-        }
+		{
+			get { return _fk_Module; }
+			set { _fk_Module = value; }
+		}
 
         private Guid? _fk_guid_Module = null;
 
@@ -1025,7 +1083,7 @@ namespace Zetbox.App.Base
             else
                 _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
 
-            _triggerFetchModuleTask.ContinueWith(t =>
+            _triggerFetchModuleTask.OnResult(t =>
             {
                 if (OnModule_Getter != null)
                 {
@@ -1044,7 +1102,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchModuleAsync().TryRunSynchronously(); return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                var task = TriggerFetchModuleAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
             {
@@ -1077,7 +1138,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
-                if (IsAttached) UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnModule_PostSetter != null && IsAttached)
                 {
@@ -1087,9 +1148,9 @@ namespace Zetbox.App.Base
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Module> OnModule_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Module> OnModule_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Module> OnModule_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Module> OnModule_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Module> OnModule_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Module> OnModule_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnModule_IsValid;
 
@@ -1129,7 +1190,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    if (IsAttached) UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -1145,9 +1206,9 @@ namespace Zetbox.App.Base
         }
         private string _Name;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, string> OnName_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, string> OnName_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, string> OnName_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, string> OnName_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnName_IsValid;
 
@@ -1158,7 +1219,7 @@ namespace Zetbox.App.Base
         // Zetbox.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public IList<Zetbox.App.Base.Property> Properties
         {
@@ -1166,10 +1227,18 @@ namespace Zetbox.App.Base
             {
                 if (_Properties == null)
                 {
-                    TriggerFetchPropertiesAsync().TryRunSynchronously(); TriggerFetchPropertiesAsync().Wait();
+                    var task = TriggerFetchPropertiesAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return _Properties;
             }
+        }
+
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.Property>> GetProp_Properties()
+        {
+            await TriggerFetchPropertiesAsync();
+            return _Properties;
         }
 
         System.Threading.Tasks.Task _triggerFetchPropertiesTask;
@@ -1227,7 +1296,7 @@ namespace Zetbox.App.Base
         private OneNRelationList<Zetbox.App.Base.Property> _Properties;
         private List<int> PropertiesIds;
         private bool Properties_was_eagerLoaded = false;
-        public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnProperties_PostSetter;
+public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnProperties_IsValid;
 
@@ -1243,7 +1312,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ControlKind RequestedKind
@@ -1253,10 +1322,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedKind()
+        {
+            return TriggerFetchRequestedKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RequestedKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchRequestedKindAsync();
+            RequestedKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
+
         private int? __fk_RequestedKindCache;
 
-        private int? _fk_RequestedKind
-        {
+        private int? _fk_RequestedKind {
             get
             {
                 return __fk_RequestedKindCache;
@@ -1272,10 +1351,10 @@ namespace Zetbox.App.Base
         /// <summary>ForeignKey Property for RequestedKind's id, used on APIs only</summary>
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public int? FK_RequestedKind
-        {
-            get { return _fk_RequestedKind; }
-            set { _fk_RequestedKind = value; }
-        }
+		{
+			get { return _fk_RequestedKind; }
+			set { _fk_RequestedKind = value; }
+		}
 
         private Guid? _fk_guid_RequestedKind = null;
 
@@ -1308,7 +1387,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchRequestedKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedKindAsync().Result;
+                var task = TriggerFetchRequestedKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -1341,7 +1423,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("RequestedKind", __oldValue, __newValue);
-                if (IsAttached) UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnRequestedKind_PostSetter != null && IsAttached)
                 {
@@ -1351,9 +1433,9 @@ namespace Zetbox.App.Base
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.ControlKind> OnRequestedKind_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.ControlKind> OnRequestedKind_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.ControlKind> OnRequestedKind_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.ControlKind> OnRequestedKind_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.ControlKind> OnRequestedKind_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.ControlKind> OnRequestedKind_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnRequestedKind_IsValid;
 
@@ -1369,18 +1451,14 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowIconInLists;
-                if (!_isShowIconInListsSet && ObjectState == DataObjectState.New)
-                {
+                if (!_isShowIconInListsSet && ObjectState == DataObjectState.New) {
                     var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("d5b0ff20-10c1-40ce-b18e-9846dc5d0b60"));
-                    if (__p != null)
-                    {
+                    if (__p != null) {
                         _isShowIconInListsSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this._ShowIconInLists = (bool)__tmp_value;
-                    }
-                    else
-                    {
+                    } else {
                         Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'DataType.ShowIconInLists'");
                     }
                 }
@@ -1409,7 +1487,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ShowIconInLists", __oldValue, __newValue);
                     _ShowIconInLists = __newValue;
                     NotifyPropertyChanged("ShowIconInLists", __oldValue, __newValue);
-                    if (IsAttached) UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowIconInLists_PostSetter != null && IsAttached)
                     {
@@ -1426,9 +1504,9 @@ namespace Zetbox.App.Base
         private bool _ShowIconInLists;
         private bool _isShowIconInListsSet = false;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, bool> OnShowIconInLists_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, bool> OnShowIconInLists_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, bool> OnShowIconInLists_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, bool> OnShowIconInLists_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, bool> OnShowIconInLists_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, bool> OnShowIconInLists_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnShowIconInLists_IsValid;
 
@@ -1444,18 +1522,14 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowIdInLists;
-                if (!_isShowIdInListsSet && ObjectState == DataObjectState.New)
-                {
+                if (!_isShowIdInListsSet && ObjectState == DataObjectState.New) {
                     var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("220925a1-ed82-4b08-a3fa-af31bda7f40e"));
-                    if (__p != null)
-                    {
+                    if (__p != null) {
                         _isShowIdInListsSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this._ShowIdInLists = (bool)__tmp_value;
-                    }
-                    else
-                    {
+                    } else {
                         Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'DataType.ShowIdInLists'");
                     }
                 }
@@ -1484,7 +1558,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ShowIdInLists", __oldValue, __newValue);
                     _ShowIdInLists = __newValue;
                     NotifyPropertyChanged("ShowIdInLists", __oldValue, __newValue);
-                    if (IsAttached) UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowIdInLists_PostSetter != null && IsAttached)
                     {
@@ -1501,9 +1575,9 @@ namespace Zetbox.App.Base
         private bool _ShowIdInLists;
         private bool _isShowIdInListsSet = false;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, bool> OnShowIdInLists_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, bool> OnShowIdInLists_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, bool> OnShowIdInLists_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, bool> OnShowIdInLists_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, bool> OnShowIdInLists_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, bool> OnShowIdInLists_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnShowIdInLists_IsValid;
 
@@ -1519,18 +1593,14 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowNameInLists;
-                if (!_isShowNameInListsSet && ObjectState == DataObjectState.New)
-                {
+                if (!_isShowNameInListsSet && ObjectState == DataObjectState.New) {
                     var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("60e64ab1-830d-4c20-9d2e-17049738e9c4"));
-                    if (__p != null)
-                    {
+                    if (__p != null) {
                         _isShowNameInListsSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this._ShowNameInLists = (bool)__tmp_value;
-                    }
-                    else
-                    {
+                    } else {
                         Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'DataType.ShowNameInLists'");
                     }
                 }
@@ -1559,7 +1629,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ShowNameInLists", __oldValue, __newValue);
                     _ShowNameInLists = __newValue;
                     NotifyPropertyChanged("ShowNameInLists", __oldValue, __newValue);
-                    if (IsAttached) UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowNameInLists_PostSetter != null && IsAttached)
                     {
@@ -1576,9 +1646,9 @@ namespace Zetbox.App.Base
         private bool _ShowNameInLists;
         private bool _isShowNameInListsSet = false;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public static event PropertyGetterHandler<Zetbox.App.Base.DataType, bool> OnShowNameInLists_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, bool> OnShowNameInLists_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, bool> OnShowNameInLists_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, bool> OnShowNameInLists_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, bool> OnShowNameInLists_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, bool> OnShowNameInLists_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnShowNameInLists_IsValid;
 
@@ -1603,46 +1673,46 @@ namespace Zetbox.App.Base
         public delegate void AddProperty_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.Property> ret);
         public static event AddProperty_Handler<DataType> OnAddProperty_DataType;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-        // CanExec
-        public static event CanExecMethodEventHandler<DataType> OnAddProperty_DataType_CanExec;
+		// CanExec
+		public static event CanExecMethodEventHandler<DataType> OnAddProperty_DataType_CanExec;
 
         [EventBasedMethod("OnAddProperty_DataType_CanExec")]
         public virtual bool AddPropertyCanExec
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<bool>();
-                if (OnAddProperty_DataType_CanExec != null)
-                {
-                    OnAddProperty_DataType_CanExec(this, e);
-                }
-                else
-                {
-                    e.Result = true;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnAddProperty_DataType_CanExec != null)
+				{
+					OnAddProperty_DataType_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
         }
 
-        // CanExecReason
-        public static event CanExecReasonMethodEventHandler<DataType> OnAddProperty_DataType_CanExecReason;
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DataType> OnAddProperty_DataType_CanExecReason;
 
         [EventBasedMethod("OnAddProperty_DataType_CanExecReason")]
         public virtual string AddPropertyCanExecReason
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<string>();
-                if (OnAddProperty_DataType_CanExecReason != null)
-                {
-                    OnAddProperty_DataType_CanExecReason(this, e);
-                }
-                else
-                {
-                    e.Result = string.Empty;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnAddProperty_DataType_CanExecReason != null)
+				{
+					OnAddProperty_DataType_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
@@ -1667,46 +1737,46 @@ namespace Zetbox.App.Base
         public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
         public static event GetDataType_Handler<DataType> OnGetDataType_DataType;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-        // CanExec
-        public static event CanExecMethodEventHandler<DataType> OnGetDataType_DataType_CanExec;
+		// CanExec
+		public static event CanExecMethodEventHandler<DataType> OnGetDataType_DataType_CanExec;
 
         [EventBasedMethod("OnGetDataType_DataType_CanExec")]
         public virtual bool GetDataTypeCanExec
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<bool>();
-                if (OnGetDataType_DataType_CanExec != null)
-                {
-                    OnGetDataType_DataType_CanExec(this, e);
-                }
-                else
-                {
-                    e.Result = true;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataType_DataType_CanExec != null)
+				{
+					OnGetDataType_DataType_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
         }
 
-        // CanExecReason
-        public static event CanExecReasonMethodEventHandler<DataType> OnGetDataType_DataType_CanExecReason;
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DataType> OnGetDataType_DataType_CanExecReason;
 
         [EventBasedMethod("OnGetDataType_DataType_CanExecReason")]
         public virtual string GetDataTypeCanExecReason
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<string>();
-                if (OnGetDataType_DataType_CanExecReason != null)
-                {
-                    OnGetDataType_DataType_CanExecReason(this, e);
-                }
-                else
-                {
-                    e.Result = string.Empty;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataType_DataType_CanExecReason != null)
+				{
+					OnGetDataType_DataType_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
@@ -1731,46 +1801,46 @@ namespace Zetbox.App.Base
         public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-        // CanExec
-        public static event CanExecMethodEventHandler<DataType> OnGetDataTypeString_DataType_CanExec;
+		// CanExec
+		public static event CanExecMethodEventHandler<DataType> OnGetDataTypeString_DataType_CanExec;
 
         [EventBasedMethod("OnGetDataTypeString_DataType_CanExec")]
         public virtual bool GetDataTypeStringCanExec
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<bool>();
-                if (OnGetDataTypeString_DataType_CanExec != null)
-                {
-                    OnGetDataTypeString_DataType_CanExec(this, e);
-                }
-                else
-                {
-                    e.Result = true;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataTypeString_DataType_CanExec != null)
+				{
+					OnGetDataTypeString_DataType_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
         }
 
-        // CanExecReason
-        public static event CanExecReasonMethodEventHandler<DataType> OnGetDataTypeString_DataType_CanExecReason;
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DataType> OnGetDataTypeString_DataType_CanExecReason;
 
         [EventBasedMethod("OnGetDataTypeString_DataType_CanExecReason")]
         public virtual string GetDataTypeStringCanExecReason
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<string>();
-                if (OnGetDataTypeString_DataType_CanExecReason != null)
-                {
-                    OnGetDataTypeString_DataType_CanExecReason(this, e);
-                }
-                else
-                {
-                    e.Result = string.Empty;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataTypeString_DataType_CanExecReason != null)
+				{
+					OnGetDataTypeString_DataType_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
@@ -1794,46 +1864,46 @@ namespace Zetbox.App.Base
         public delegate void ImplementInterfaces_Handler<T>(T obj);
         public static event ImplementInterfaces_Handler<DataType> OnImplementInterfaces_DataType;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-        // CanExec
-        public static event CanExecMethodEventHandler<DataType> OnImplementInterfaces_DataType_CanExec;
+		// CanExec
+		public static event CanExecMethodEventHandler<DataType> OnImplementInterfaces_DataType_CanExec;
 
         [EventBasedMethod("OnImplementInterfaces_DataType_CanExec")]
         public virtual bool ImplementInterfacesCanExec
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<bool>();
-                if (OnImplementInterfaces_DataType_CanExec != null)
-                {
-                    OnImplementInterfaces_DataType_CanExec(this, e);
-                }
-                else
-                {
-                    e.Result = true;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnImplementInterfaces_DataType_CanExec != null)
+				{
+					OnImplementInterfaces_DataType_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
         }
 
-        // CanExecReason
-        public static event CanExecReasonMethodEventHandler<DataType> OnImplementInterfaces_DataType_CanExecReason;
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DataType> OnImplementInterfaces_DataType_CanExecReason;
 
         [EventBasedMethod("OnImplementInterfaces_DataType_CanExecReason")]
         public virtual string ImplementInterfacesCanExecReason
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<string>();
-                if (OnImplementInterfaces_DataType_CanExecReason != null)
-                {
-                    OnImplementInterfaces_DataType_CanExecReason(this, e);
-                }
-                else
-                {
-                    e.Result = string.Empty;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnImplementInterfaces_DataType_CanExecReason != null)
+				{
+					OnImplementInterfaces_DataType_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
@@ -1871,7 +1941,7 @@ namespace Zetbox.App.Base
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
-            switch (propertyName)
+            switch(propertyName)
             {
                 case "ChangedBy":
                     {
@@ -1968,28 +2038,28 @@ namespace Zetbox.App.Base
 
         public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
-            switch (propName)
+            switch(propName)
             {
-                case "ChangedBy":
-                    return TriggerFetchChangedByAsync();
-                case "Constraints":
-                    return TriggerFetchConstraintsAsync();
-                case "CreatedBy":
-                    return TriggerFetchCreatedByAsync();
-                case "DefaultIcon":
-                    return TriggerFetchDefaultIconAsync();
-                case "ImplementsInterfaces":
-                    return TriggerFetchImplementsInterfacesAsync();
-                case "Methods":
-                    return TriggerFetchMethodsAsync();
-                case "Module":
-                    return TriggerFetchModuleAsync();
-                case "Properties":
-                    return TriggerFetchPropertiesAsync();
-                case "RequestedKind":
-                    return TriggerFetchRequestedKindAsync();
-                default:
-                    return base.TriggerFetch(propName);
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "Constraints":
+                return TriggerFetchConstraintsAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "DefaultIcon":
+                return TriggerFetchDefaultIconAsync();
+            case "ImplementsInterfaces":
+                return TriggerFetchImplementsInterfacesAsync();
+            case "Methods":
+                return TriggerFetchMethodsAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "Properties":
+                return TriggerFetchPropertiesAsync();
+            case "RequestedKind":
+                return TriggerFetchRequestedKindAsync();
+            default:
+                return base.TriggerFetch(propName);
             }
         }
 
@@ -2058,7 +2128,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-                        obj => OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DataType, DateTime>(
                         lazyCtx,
@@ -2067,7 +2137,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-                        obj => OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<DataType, ICollection<Zetbox.App.Base.InstanceConstraint>>(
                         lazyCtx,
@@ -2085,7 +2155,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-                        obj => OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DataType, DateTime>(
                         lazyCtx,
@@ -2094,7 +2164,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-                        obj => OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DataType, Zetbox.App.GUI.Icon>(
                         lazyCtx,
@@ -2103,7 +2173,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.DefaultIcon,
                         (obj, val) => obj.DefaultIcon = val,
-                        obj => OnDefaultIcon_IsValid), 
+						obj => OnDefaultIcon_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DataType, string>(
                         lazyCtx,
@@ -2112,7 +2182,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.Description,
                         (obj, val) => obj.Description = val,
-                        obj => OnDescription_IsValid), 
+						obj => OnDescription_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DataType, Guid>(
                         lazyCtx,
@@ -2121,7 +2191,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-                        obj => OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DataType, string>(
                         lazyCtx,
@@ -2130,7 +2200,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.HelpText,
                         (obj, val) => obj.HelpText = val,
-                        obj => OnHelpText_IsValid), 
+						obj => OnHelpText_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<DataType, ICollection<Zetbox.App.Base.Interface>>(
                         lazyCtx,
@@ -2157,7 +2227,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.Module,
                         (obj, val) => obj.Module = val,
-                        obj => OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DataType, string>(
                         lazyCtx,
@@ -2166,7 +2236,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.Name,
                         (obj, val) => obj.Name = val,
-                        obj => OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<DataType, IList<Zetbox.App.Base.Property>>(
                         lazyCtx,
@@ -2184,7 +2254,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.RequestedKind,
                         (obj, val) => obj.RequestedKind = val,
-                        obj => OnRequestedKind_IsValid), 
+						obj => OnRequestedKind_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DataType, bool>(
                         lazyCtx,
@@ -2193,7 +2263,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.ShowIconInLists,
                         (obj, val) => obj.ShowIconInLists = val,
-                        obj => OnShowIconInLists_IsValid), 
+						obj => OnShowIconInLists_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DataType, bool>(
                         lazyCtx,
@@ -2202,7 +2272,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.ShowIdInLists,
                         (obj, val) => obj.ShowIdInLists = val,
-                        obj => OnShowIdInLists_IsValid), 
+						obj => OnShowIdInLists_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DataType, bool>(
                         lazyCtx,
@@ -2211,7 +2281,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.ShowNameInLists,
                         (obj, val) => obj.ShowNameInLists = val,
-                        obj => OnShowNameInLists_IsValid), 
+						obj => OnShowNameInLists_IsValid), 
                     // position columns
                 };
             }
@@ -2316,8 +2386,7 @@ namespace Zetbox.App.Base
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
             binStream.Write(this._isChangedOnSet);
-            if (this._isChangedOnSet)
-            {
+            if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
 
@@ -2326,7 +2395,7 @@ namespace Zetbox.App.Base
             {
                 binStream.Write(true);
                 binStream.Write(Constraints.Count);
-                foreach (var obj in Constraints)
+                foreach(var obj in Constraints)
                 {
                     auxObjects.Add(obj);
                     binStream.Write(obj.ID);
@@ -2338,15 +2407,13 @@ namespace Zetbox.App.Base
             }
             binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
             binStream.Write(this._isCreatedOnSet);
-            if (this._isCreatedOnSet)
-            {
+            if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
             }
             binStream.Write(DefaultIcon != null ? DefaultIcon.ID : (int?)null);
             binStream.Write(this._Description);
             binStream.Write(this._isExportGuidSet);
-            if (this._isExportGuidSet)
-            {
+            if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
             binStream.Write(this._HelpText);
@@ -2356,7 +2423,7 @@ namespace Zetbox.App.Base
             {
                 binStream.Write(true);
                 binStream.Write(Methods.Count);
-                foreach (var obj in Methods)
+                foreach(var obj in Methods)
                 {
                     auxObjects.Add(obj);
                     binStream.Write(obj.ID);
@@ -2374,7 +2441,7 @@ namespace Zetbox.App.Base
             {
                 binStream.Write(true);
                 binStream.Write(Properties.Count);
-                foreach (var obj in Properties)
+                foreach(var obj in Properties)
                 {
                     auxObjects.Add(obj);
                     binStream.Write(obj.ID);
@@ -2386,18 +2453,15 @@ namespace Zetbox.App.Base
             }
             binStream.Write(RequestedKind != null ? RequestedKind.ID : (int?)null);
             binStream.Write(this._isShowIconInListsSet);
-            if (this._isShowIconInListsSet)
-            {
+            if (this._isShowIconInListsSet) {
                 binStream.Write(this._ShowIconInLists);
             }
             binStream.Write(this._isShowIdInListsSet);
-            if (this._isShowIdInListsSet)
-            {
+            if (this._isShowIdInListsSet) {
                 binStream.Write(this._ShowIdInLists);
             }
             binStream.Write(this._isShowNameInListsSet);
-            if (this._isShowNameInListsSet)
-            {
+            if (this._isShowNameInListsSet) {
                 binStream.Write(this._ShowNameInLists);
             }
         }
@@ -2407,91 +2471,84 @@ namespace Zetbox.App.Base
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Zetbox.API.AccessRights.None)
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._fk_ChangedBy = binStream.ReadNullableInt32();
+            this._isChangedOnSet = binStream.ReadBoolean();
+            if (this._isChangedOnSet) {
+                this._ChangedOn = binStream.ReadDateTime();
+            }
+
+            Constraints_was_eagerLoaded = binStream.ReadBoolean();
             {
-                this._fk_ChangedBy = binStream.ReadNullableInt32();
-                this._isChangedOnSet = binStream.ReadBoolean();
-                if (this._isChangedOnSet)
+                bool containsList = binStream.ReadBoolean();
+                if (containsList)
                 {
-                    this._ChangedOn = binStream.ReadDateTime();
-                }
-
-                Constraints_was_eagerLoaded = binStream.ReadBoolean();
-                {
-                    bool containsList = binStream.ReadBoolean();
-                    if (containsList)
+                    int numElements = binStream.ReadInt32();
+                    ConstraintsIds = new List<int>(numElements);
+                    while (numElements-- > 0) 
                     {
-                        int numElements = binStream.ReadInt32();
-                        ConstraintsIds = new List<int>(numElements);
-                        while (numElements-- > 0)
-                        {
-                            int id = binStream.ReadInt32();
-                            ConstraintsIds.Add(id);
-                        }
+                        int id = binStream.ReadInt32();
+                        ConstraintsIds.Add(id);
                     }
                 }
-                this._fk_CreatedBy = binStream.ReadNullableInt32();
-                this._isCreatedOnSet = binStream.ReadBoolean();
-                if (this._isCreatedOnSet)
-                {
-                    this._CreatedOn = binStream.ReadDateTime();
-                }
-                this._fk_DefaultIcon = binStream.ReadNullableInt32();
-                this._Description = binStream.ReadString();
-                this._isExportGuidSet = binStream.ReadBoolean();
-                if (this._isExportGuidSet)
-                {
-                    this._ExportGuid = binStream.ReadGuid();
-                }
-                this._HelpText = binStream.ReadString();
+            }
+            this._fk_CreatedBy = binStream.ReadNullableInt32();
+            this._isCreatedOnSet = binStream.ReadBoolean();
+            if (this._isCreatedOnSet) {
+                this._CreatedOn = binStream.ReadDateTime();
+            }
+            this._fk_DefaultIcon = binStream.ReadNullableInt32();
+            this._Description = binStream.ReadString();
+            this._isExportGuidSet = binStream.ReadBoolean();
+            if (this._isExportGuidSet) {
+                this._ExportGuid = binStream.ReadGuid();
+            }
+            this._HelpText = binStream.ReadString();
 
-                Methods_was_eagerLoaded = binStream.ReadBoolean();
+            Methods_was_eagerLoaded = binStream.ReadBoolean();
+            {
+                bool containsList = binStream.ReadBoolean();
+                if (containsList)
                 {
-                    bool containsList = binStream.ReadBoolean();
-                    if (containsList)
+                    int numElements = binStream.ReadInt32();
+                    MethodsIds = new List<int>(numElements);
+                    while (numElements-- > 0) 
                     {
-                        int numElements = binStream.ReadInt32();
-                        MethodsIds = new List<int>(numElements);
-                        while (numElements-- > 0)
-                        {
-                            int id = binStream.ReadInt32();
-                            MethodsIds.Add(id);
-                        }
+                        int id = binStream.ReadInt32();
+                        MethodsIds.Add(id);
                     }
                 }
-                this._fk_Module = binStream.ReadNullableInt32();
-                this._Name = binStream.ReadString();
+            }
+            this._fk_Module = binStream.ReadNullableInt32();
+            this._Name = binStream.ReadString();
 
-                Properties_was_eagerLoaded = binStream.ReadBoolean();
+            Properties_was_eagerLoaded = binStream.ReadBoolean();
+            {
+                bool containsList = binStream.ReadBoolean();
+                if (containsList)
                 {
-                    bool containsList = binStream.ReadBoolean();
-                    if (containsList)
+                    int numElements = binStream.ReadInt32();
+                    PropertiesIds = new List<int>(numElements);
+                    while (numElements-- > 0) 
                     {
-                        int numElements = binStream.ReadInt32();
-                        PropertiesIds = new List<int>(numElements);
-                        while (numElements-- > 0)
-                        {
-                            int id = binStream.ReadInt32();
-                            PropertiesIds.Add(id);
-                        }
+                        int id = binStream.ReadInt32();
+                        PropertiesIds.Add(id);
                     }
                 }
-                this._fk_RequestedKind = binStream.ReadNullableInt32();
-                this._isShowIconInListsSet = binStream.ReadBoolean();
-                if (this._isShowIconInListsSet)
-                {
-                    this._ShowIconInLists = binStream.ReadBoolean();
-                }
-                this._isShowIdInListsSet = binStream.ReadBoolean();
-                if (this._isShowIdInListsSet)
-                {
-                    this._ShowIdInLists = binStream.ReadBoolean();
-                }
-                this._isShowNameInListsSet = binStream.ReadBoolean();
-                if (this._isShowNameInListsSet)
-                {
-                    this._ShowNameInLists = binStream.ReadBoolean();
-                }
+            }
+            this._fk_RequestedKind = binStream.ReadNullableInt32();
+            this._isShowIconInListsSet = binStream.ReadBoolean();
+            if (this._isShowIconInListsSet) {
+                this._ShowIconInLists = binStream.ReadBoolean();
+            }
+            this._isShowIdInListsSet = binStream.ReadBoolean();
+            if (this._isShowIdInListsSet) {
+                this._ShowIdInLists = binStream.ReadBoolean();
+            }
+            this._isShowNameInListsSet = binStream.ReadBoolean();
+            if (this._isShowNameInListsSet) {
+                this._ShowNameInLists = binStream.ReadBoolean();
+            }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -2522,56 +2579,55 @@ namespace Zetbox.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName)
-            {
-                case "Zetbox.App.Base|ChangedOn":
-                    // Import must have default value set
-                    this._ChangedOn = XmlStreamer.ReadDateTime(xml);
-                    this._isChangedOnSet = true;
-                    break;
-                case "Zetbox.App.Base|CreatedOn":
-                    // Import must have default value set
-                    this._CreatedOn = XmlStreamer.ReadDateTime(xml);
-                    this._isCreatedOnSet = true;
-                    break;
-                case "Zetbox.App.GUI|DefaultIcon":
-                    this._fk_guid_DefaultIcon = XmlStreamer.ReadNullableGuid(xml);
-                    break;
-                case "Zetbox.App.Base|Description":
-                    this._Description = XmlStreamer.ReadString(xml);
-                    break;
-                case "Zetbox.App.Base|ExportGuid":
-                    // Import must have default value set
-                    this._ExportGuid = XmlStreamer.ReadGuid(xml);
-                    this._isExportGuidSet = true;
-                    break;
-                case "Zetbox.App.Base|HelpText":
-                    this._HelpText = XmlStreamer.ReadString(xml);
-                    break;
-                case "Zetbox.App.Base|Module":
-                    this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
-                    break;
-                case "Zetbox.App.Base|Name":
-                    this._Name = XmlStreamer.ReadString(xml);
-                    break;
-                case "Zetbox.App.GUI|RequestedKind":
-                    this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);
-                    break;
-                case "Zetbox.App.GUI|ShowIconInLists":
-                    // Import must have default value set
-                    this._ShowIconInLists = XmlStreamer.ReadBoolean(xml);
-                    this._isShowIconInListsSet = true;
-                    break;
-                case "Zetbox.App.GUI|ShowIdInLists":
-                    // Import must have default value set
-                    this._ShowIdInLists = XmlStreamer.ReadBoolean(xml);
-                    this._isShowIdInListsSet = true;
-                    break;
-                case "Zetbox.App.GUI|ShowNameInLists":
-                    // Import must have default value set
-                    this._ShowNameInLists = XmlStreamer.ReadBoolean(xml);
-                    this._isShowNameInListsSet = true;
-                    break;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Base|ChangedOn":
+                // Import must have default value set
+                this._ChangedOn = XmlStreamer.ReadDateTime(xml);
+                this._isChangedOnSet = true;
+                break;
+            case "Zetbox.App.Base|CreatedOn":
+                // Import must have default value set
+                this._CreatedOn = XmlStreamer.ReadDateTime(xml);
+                this._isCreatedOnSet = true;
+                break;
+            case "Zetbox.App.GUI|DefaultIcon":
+                this._fk_guid_DefaultIcon = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.Base|Description":
+                this._Description = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|ExportGuid":
+                // Import must have default value set
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                this._isExportGuidSet = true;
+                break;
+            case "Zetbox.App.Base|HelpText":
+                this._HelpText = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|Module":
+                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.Base|Name":
+                this._Name = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.GUI|RequestedKind":
+                this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.GUI|ShowIconInLists":
+                // Import must have default value set
+                this._ShowIconInLists = XmlStreamer.ReadBoolean(xml);
+                this._isShowIconInListsSet = true;
+                break;
+            case "Zetbox.App.GUI|ShowIdInLists":
+                // Import must have default value set
+                this._ShowIdInLists = XmlStreamer.ReadBoolean(xml);
+                this._isShowIdInListsSet = true;
+                break;
+            case "Zetbox.App.GUI|ShowNameInLists":
+                // Import must have default value set
+                this._ShowNameInLists = XmlStreamer.ReadBoolean(xml);
+                this._isShowNameInListsSet = true;
+                break;
             }
         }
 

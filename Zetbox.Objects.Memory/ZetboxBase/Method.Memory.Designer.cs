@@ -117,6 +117,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -361,6 +372,17 @@ namespace Zetbox.App.Base
             set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_CreatedByCache;
 
@@ -749,6 +771,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_Icon()
+        {
+            return TriggerFetchIconAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Icon(Zetbox.App.GUI.Icon newValue)
+        {
+            await TriggerFetchIconAsync();
+            IconImpl = (Zetbox.App.GUI.IconMemoryImpl)newValue;
+        }
+
         private int? __fk_IconCache;
 
         private int? _fk_Icon {
@@ -1051,6 +1084,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return TriggerFetchModuleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)newValue;
+        }
+
         private int? __fk_ModuleCache;
 
         private int? _fk_Module {
@@ -1237,6 +1281,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.DataType> GetProp_ObjectClass()
+        {
+            return TriggerFetchObjectClassAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ObjectClass(Zetbox.App.Base.DataType newValue)
+        {
+            await TriggerFetchObjectClassAsync();
+            ObjectClassImpl = (Zetbox.App.Base.DataTypeMemoryImpl)newValue;
+        }
+
         private int? __fk_ObjectClassCache;
 
         private int? _fk_ObjectClass {
@@ -1382,6 +1437,12 @@ namespace Zetbox.App.Base
             }
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.BaseParameter>> GetProp_Parameter()
+        {
+            await TriggerFetchParameterAsync();
+            return _Parameter;
+        }
+
         System.Threading.Tasks.Task _triggerFetchParameterTask;
         public System.Threading.Tasks.Task TriggerFetchParameterAsync()
         {
@@ -1445,6 +1506,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
                 }
                 return (ICollection<Zetbox.App.Base.ObjectReferenceProperty>)_ShowByProperties;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.ObjectReferenceProperty>> GetProp_ShowByProperties()
+        {
+            await TriggerFetchShowByPropertiesAsync();
+            return _ShowByProperties;
         }
 
         System.Threading.Tasks.Task _triggerFetchShowByPropertiesTask;

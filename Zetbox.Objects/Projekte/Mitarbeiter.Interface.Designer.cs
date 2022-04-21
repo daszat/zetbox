@@ -51,6 +51,10 @@ namespace Zetbox.App.Projekte
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_Identity();
+
+        System.Threading.Tasks.Task SetProp_Identity(Zetbox.App.Base.Identity newValue);
+
         /// <summary>
         /// Vorname Nachname
         /// </summary>
@@ -68,6 +72,8 @@ namespace Zetbox.App.Projekte
         [Zetbox.API.DefinitionGuid("1abb5a1b-ba9f-4b75-b6ea-3d28be877b7c")]
         [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Projekte.Projekt> Projekte { get; }
+
+        System.Threading.Tasks.Task<IList<Zetbox.App.Projekte.Projekt>> GetProp_Projekte();
 
         /// <summary>
         /// NNNN TTMMYY

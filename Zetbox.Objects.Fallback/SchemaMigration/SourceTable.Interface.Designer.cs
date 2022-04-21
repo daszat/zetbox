@@ -51,6 +51,10 @@ namespace Zetbox.App.SchemaMigration
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_DestinationObjectClass();
+
+        System.Threading.Tasks.Task SetProp_DestinationObjectClass(Zetbox.App.Base.ObjectClass newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -69,6 +73,8 @@ namespace Zetbox.App.SchemaMigration
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.SchemaMigration.SourceColumn> SourceColumn { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.SourceColumn>> GetProp_SourceColumn();
+
         /// <summary>
         /// 
         /// </summary>
@@ -85,6 +91,10 @@ namespace Zetbox.App.SchemaMigration
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.StagingDatabase> GetProp_StagingDatabase();
+
+        System.Threading.Tasks.Task SetProp_StagingDatabase(Zetbox.App.SchemaMigration.StagingDatabase newValue);
 
         /// <summary>
         /// 

@@ -40,5 +40,9 @@ namespace Zetbox.App.Test
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Test.One_to_N_relations_One> GetProp_OneSide();
+
+        System.Threading.Tasks.Task SetProp_OneSide(Zetbox.App.Test.One_to_N_relations_One newValue);
     }
 }

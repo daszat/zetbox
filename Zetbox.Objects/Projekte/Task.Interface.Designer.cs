@@ -70,5 +70,9 @@ namespace Zetbox.App.Projekte
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Projekte.Projekt> GetProp_Projekt();
+
+        System.Threading.Tasks.Task SetProp_Projekt(Zetbox.App.Projekte.Projekt newValue);
     }
 }

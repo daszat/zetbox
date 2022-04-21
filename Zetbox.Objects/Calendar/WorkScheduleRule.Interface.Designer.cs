@@ -81,6 +81,10 @@ namespace Zetbox.App.Calendar
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Calendar.WorkSchedule> GetProp_WorkSchedule();
+
+        System.Threading.Tasks.Task SetProp_WorkSchedule(Zetbox.App.Calendar.WorkSchedule newValue);
+
         /// <summary>
         /// Checks if the Rule applies to the given date
         /// </summary>

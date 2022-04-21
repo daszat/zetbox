@@ -59,6 +59,17 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.Event> GetProp_Event()
+        {
+            return TriggerFetchEventAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Event(Zetbox.App.Calendar.Event newValue)
+        {
+            await TriggerFetchEventAsync();
+            EventImpl = (Zetbox.App.Calendar.EventMemoryImpl)newValue;
+        }
+
         private int? __fk_EventCache;
 
         private int? _fk_Event {

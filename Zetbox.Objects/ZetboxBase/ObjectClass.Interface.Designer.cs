@@ -22,6 +22,8 @@ namespace Zetbox.App.Base
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.AccessControl> AccessControlList { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.AccessControl>> GetProp_AccessControlList();
+
         /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
@@ -38,6 +40,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_BaseObjectClass();
+
+        System.Threading.Tasks.Task SetProp_BaseObjectClass(Zetbox.App.Base.ObjectClass newValue);
 
         /// <summary>
         /// Provides a code template for default methods
@@ -65,6 +71,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultViewModelDescriptor();
+
+        System.Threading.Tasks.Task SetProp_DefaultViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -72,6 +82,8 @@ namespace Zetbox.App.Base
         [Zetbox.API.DefinitionGuid("bd526c1f-a6ac-40b6-8f81-66aaf553129f")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration> FilterConfigurations { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration>> GetProp_FilterConfigurations();
 
         /// <summary>
         /// Class is abstract
@@ -120,6 +132,8 @@ namespace Zetbox.App.Base
         [Zetbox.API.DefinitionGuid("0914de6e-966c-46fc-9359-e4da6c3608b1")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.ObjectClass> SubClasses { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.ObjectClass>> GetProp_SubClasses();
 
         /// <summary>
         /// Kind of table mapping. Only valid on base classes. Default is TPT.

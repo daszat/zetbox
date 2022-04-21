@@ -31,6 +31,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetProp_A();
+
+        System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.RelationEnd newValue);
+
         /// <summary>
         /// The B-side of this Relation.
         /// </summary>
@@ -47,6 +51,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetProp_B();
+
+        System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.RelationEnd newValue);
 
         /// <summary>
         /// The ContainmentSpecification of this Relation.

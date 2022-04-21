@@ -59,6 +59,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_FalseIcon()
+        {
+            return TriggerFetchFalseIconAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_FalseIcon(Zetbox.App.GUI.Icon newValue)
+        {
+            await TriggerFetchFalseIconAsync();
+            FalseIconImpl = (Zetbox.App.GUI.IconMemoryImpl)newValue;
+        }
+
         private int? __fk_FalseIconCache;
 
         private int? _fk_FalseIcon {
@@ -245,6 +256,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_NullIcon()
+        {
+            return TriggerFetchNullIconAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_NullIcon(Zetbox.App.GUI.Icon newValue)
+        {
+            await TriggerFetchNullIconAsync();
+            NullIconImpl = (Zetbox.App.GUI.IconMemoryImpl)newValue;
+        }
+
         private int? __fk_NullIconCache;
 
         private int? _fk_NullIcon {
@@ -430,6 +452,17 @@ namespace Zetbox.App.Base
             set { TrueIconImpl = (Zetbox.App.GUI.IconMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_TrueIcon()
+        {
+            return TriggerFetchTrueIconAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_TrueIcon(Zetbox.App.GUI.Icon newValue)
+        {
+            await TriggerFetchTrueIconAsync();
+            TrueIconImpl = (Zetbox.App.GUI.IconMemoryImpl)newValue;
+        }
 
         private int? __fk_TrueIconCache;
 

@@ -174,6 +174,12 @@ namespace Zetbox.App.Base
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Group>> GetProp_Groups()
+        {
+            await TriggerFetchGroupsAsync();
+            return _Groups;
+        }
+
         System.Threading.Tasks.Task _triggerFetchGroupsTask;
         public System.Threading.Tasks.Task TriggerFetchGroupsAsync()
         {

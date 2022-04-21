@@ -695,6 +695,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedEditorKind()
+        {
+            return System.Threading.Tasks.Task.FromResult(RequestedEditorKind);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RequestedEditorKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchRequestedEditorKindAsync();
+            RequestedEditorKind = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -804,6 +815,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedWorkspaceKind()
+        {
+            return System.Threading.Tasks.Task.FromResult(RequestedWorkspaceKind);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RequestedWorkspaceKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchRequestedWorkspaceKindAsync();
+            RequestedWorkspaceKind = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -1145,6 +1167,17 @@ namespace Zetbox.App.GUI
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_Type()
+        {
+            return System.Threading.Tasks.Task.FromResult(Type);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Type(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchTypeAsync();
+            Type = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

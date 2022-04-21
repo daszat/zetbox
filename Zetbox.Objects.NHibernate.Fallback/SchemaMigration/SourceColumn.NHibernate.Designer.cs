@@ -61,6 +61,17 @@ namespace Zetbox.App.SchemaMigration
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(ChangedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -382,6 +393,17 @@ namespace Zetbox.App.SchemaMigration
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(CreatedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -699,6 +721,12 @@ namespace Zetbox.App.SchemaMigration
 			}
 		}
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.Property>> GetProp_DestinationProperty()
+        {
+            await TriggerFetchDestinationPropertyAsync();
+            return _DestinationProperty;
+        }
+
 		private NHibernateBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl> _DestinationProperty;
 		// ignored, but required for Serialization
         private bool DestinationProperty_was_eagerLoaded = false;
@@ -748,6 +776,12 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         public System.Threading.Tasks.Task TriggerFetchEnumEntriesAsync()
         {
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.SchemaMigration.SourceEnum>>(this.EnumEntries);
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.SourceEnum>> GetProp_EnumEntries()
+        {
+            await TriggerFetchEnumEntriesAsync();
+            return _EnumEntries;
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnEnumEntries_PostSetter;
@@ -957,6 +991,17 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         // inverse Navigator=Referers; is list;
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn> GetProp_References()
+        {
+            return System.Threading.Tasks.Task.FromResult(References);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_References(Zetbox.App.SchemaMigration.SourceColumn newValue)
+        {
+            await TriggerFetchReferencesAsync();
+            References = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -1118,6 +1163,12 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.SchemaMigration.SourceColumn>>(this.Referers);
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.SourceColumn>> GetProp_Referers()
+        {
+            await TriggerFetchReferersAsync();
+            return _Referers;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnReferers_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.SourceColumn> OnReferers_IsValid;
@@ -1189,6 +1240,17 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         // inverse Navigator=SourceColumn; is list;
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceTable> GetProp_SourceTable()
+        {
+            return System.Threading.Tasks.Task.FromResult(SourceTable);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_SourceTable(Zetbox.App.SchemaMigration.SourceTable newValue)
+        {
+            await TriggerFetchSourceTableAsync();
+            SourceTable = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

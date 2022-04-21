@@ -118,6 +118,12 @@ namespace Zetbox.App.Base
             }
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.EnumerationEntry>> GetProp_EnumerationEntries()
+        {
+            await TriggerFetchEnumerationEntriesAsync();
+            return _EnumerationEntries;
+        }
+
         System.Threading.Tasks.Task _triggerFetchEnumerationEntriesTask;
         public System.Threading.Tasks.Task TriggerFetchEnumerationEntriesAsync()
         {

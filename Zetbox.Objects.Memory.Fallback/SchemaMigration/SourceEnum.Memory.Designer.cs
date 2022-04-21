@@ -59,6 +59,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -112,7 +123,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                TriggerFetchChangedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                var task = TriggerFetchChangedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -256,6 +270,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_CreatedByCache;
 
         private int? _fk_CreatedBy {
@@ -309,7 +334,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                TriggerFetchCreatedByAsync().TryRunSynchronously(); return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                var task = TriggerFetchCreatedByAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
             {
@@ -453,6 +481,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.EnumerationEntry> GetProp_DestinationValue()
+        {
+            return TriggerFetchDestinationValueAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DestinationValue(Zetbox.App.Base.EnumerationEntry newValue)
+        {
+            await TriggerFetchDestinationValueAsync();
+            DestinationValueImpl = (Zetbox.App.Base.EnumerationEntryMemoryImpl)newValue;
+        }
+
         private int? __fk_DestinationValueCache;
 
         private int? _fk_DestinationValue {
@@ -507,7 +546,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                TriggerFetchDestinationValueAsync().TryRunSynchronously(); return (Zetbox.App.Base.EnumerationEntryMemoryImpl)TriggerFetchDestinationValueAsync().Result;
+                var task = TriggerFetchDestinationValueAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.EnumerationEntryMemoryImpl)task.Result;
             }
             set
             {
@@ -649,6 +691,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn> GetProp_SourceColumn()
+        {
+            return TriggerFetchSourceColumnAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_SourceColumn(Zetbox.App.SchemaMigration.SourceColumn newValue)
+        {
+            await TriggerFetchSourceColumnAsync();
+            SourceColumnImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)newValue;
+        }
+
         private int? __fk_SourceColumnCache;
 
         private int? _fk_SourceColumn {
@@ -703,7 +756,10 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                TriggerFetchSourceColumnAsync().TryRunSynchronously(); return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)TriggerFetchSourceColumnAsync().Result;
+                var task = TriggerFetchSourceColumnAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)task.Result;
             }
             set
             {

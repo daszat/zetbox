@@ -71,6 +71,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_ReferencedObjectClass();
+
+        System.Threading.Tasks.Task SetProp_ReferencedObjectClass(Zetbox.App.Base.ObjectClass newValue);
+
         /// <summary>
         /// Suggested verb for the new relation
         /// </summary>

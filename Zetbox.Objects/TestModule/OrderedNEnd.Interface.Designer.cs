@@ -31,6 +31,10 @@ namespace Zetbox.App.Test
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Test.OrderedOneEnd> GetProp_OneEnd();
+
+        System.Threading.Tasks.Task SetProp_OneEnd(Zetbox.App.Test.OrderedOneEnd newValue);
+
         /// <summary>
         /// 
         /// </summary>

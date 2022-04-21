@@ -31,6 +31,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.SequenceData> GetProp_Data();
+
+        System.Threading.Tasks.Task SetProp_Data(Zetbox.App.Base.SequenceData newValue);
+
         /// <summary>
         /// 
         /// </summary>

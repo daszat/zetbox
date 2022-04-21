@@ -73,6 +73,12 @@ namespace Zetbox.App.Base
 			}
 		}
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.Relation>> GetProp_Relations()
+        {
+            await TriggerFetchRelationsAsync();
+            return _Relations;
+        }
+
 		private NHibernateBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl> _Relations;
 		// ignored, but required for Serialization
         private bool Relations_was_eagerLoaded = false;

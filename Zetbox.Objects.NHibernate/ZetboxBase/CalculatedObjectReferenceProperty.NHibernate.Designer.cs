@@ -73,6 +73,12 @@ namespace Zetbox.App.Base
 			}
 		}
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Property>> GetProp_Inputs()
+        {
+            await TriggerFetchInputsAsync();
+            return _Inputs;
+        }
+
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl> _Inputs;
 		// ignored, but required for Serialization
         private bool Inputs_was_eagerLoaded = false;
@@ -95,6 +101,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_ReferencedClass()
+        {
+            return System.Threading.Tasks.Task.FromResult(ReferencedClass);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ReferencedClass(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchReferencedClassAsync();
+            ReferencedClass = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

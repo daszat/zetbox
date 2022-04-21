@@ -31,6 +31,10 @@ namespace Zetbox.App.Test
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Calendar.Event> GetProp_Event();
+
+        System.Threading.Tasks.Task SetProp_Event(Zetbox.App.Calendar.Event newValue);
+
         /// <summary>
         /// 
         /// </summary>

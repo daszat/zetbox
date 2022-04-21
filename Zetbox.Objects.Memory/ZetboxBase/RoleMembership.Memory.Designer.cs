@@ -56,6 +56,12 @@ namespace Zetbox.App.Base
             }
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.Relation>> GetProp_Relations()
+        {
+            await TriggerFetchRelationsAsync();
+            return _Relations;
+        }
+
         System.Threading.Tasks.Task _triggerFetchRelationsTask;
         public System.Threading.Tasks.Task TriggerFetchRelationsAsync()
         {

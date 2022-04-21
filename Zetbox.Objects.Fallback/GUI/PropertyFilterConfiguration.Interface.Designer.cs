@@ -30,5 +30,9 @@ namespace Zetbox.App.GUI
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_Property();
+
+        System.Threading.Tasks.Task SetProp_Property(Zetbox.App.Base.Property newValue);
     }
 }

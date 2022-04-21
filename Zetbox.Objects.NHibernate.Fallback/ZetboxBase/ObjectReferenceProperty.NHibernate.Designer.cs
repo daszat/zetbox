@@ -210,6 +210,12 @@ namespace Zetbox.App.Base
 			}
 		}
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Method>> GetProp_Methods()
+        {
+            await TriggerFetchMethodsAsync();
+            return _Methods;
+        }
+
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl> _Methods;
 		// ignored, but required for Serialization
         private bool Methods_was_eagerLoaded = false;
@@ -232,6 +238,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         // inverse Navigator=Navigator; is reference;
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetProp_RelationEnd()
+        {
+            return System.Threading.Tasks.Task.FromResult(RelationEnd);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RelationEnd(Zetbox.App.Base.RelationEnd newValue)
+        {
+            await TriggerFetchRelationEndAsync();
+            RelationEnd = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

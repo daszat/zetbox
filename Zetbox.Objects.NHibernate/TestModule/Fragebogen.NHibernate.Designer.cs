@@ -88,6 +88,12 @@ namespace Zetbox.App.Test
             return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Test.Antwort>>(this.Antworten);
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Test.Antwort>> GetProp_Antworten()
+        {
+            await TriggerFetchAntwortenAsync();
+            return _Antworten;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAntworten_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.Fragebogen> OnAntworten_IsValid;
@@ -174,6 +180,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
 				return (ICollection<Zetbox.App.Test.TestStudent>)_Student;
 			}
 		}
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.TestStudent>> GetProp_Student()
+        {
+            await TriggerFetchStudentAsync();
+            return _Student;
+        }
 
 		private NHibernateASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl> _Student;
 		// ignored, but required for Serialization

@@ -119,6 +119,17 @@ namespace at.dasz.DocumentManagement
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Blob> GetProp_Blob()
+        {
+            return System.Threading.Tasks.Task.FromResult(Blob);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Blob(Zetbox.App.Base.Blob newValue)
+        {
+            await TriggerFetchBlobAsync();
+            Blob = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -228,6 +239,17 @@ namespace at.dasz.DocumentManagement
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(ChangedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -413,6 +435,17 @@ namespace at.dasz.DocumentManagement
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(CreatedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -598,6 +631,17 @@ namespace at.dasz.DocumentManagement
         // inverse Navigator=File; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<at.dasz.DocumentManagement.Excerpt> GetProp_Excerpt()
+        {
+            return System.Threading.Tasks.Task.FromResult(Excerpt);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Excerpt(at.dasz.DocumentManagement.Excerpt newValue)
+        {
+            await TriggerFetchExcerptAsync();
+            Excerpt = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -1028,6 +1072,12 @@ namespace at.dasz.DocumentManagement
 				return (IList<Zetbox.App.Base.Blob>)_Revisions;
 			}
 		}
+
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.Blob>> GetProp_Revisions()
+        {
+            await TriggerFetchRevisionsAsync();
+            return _Revisions;
+        }
 
 		private NHibernateBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl> _Revisions;
 		// ignored, but required for Serialization

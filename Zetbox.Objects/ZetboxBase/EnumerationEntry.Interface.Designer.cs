@@ -41,6 +41,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Enumeration> GetProp_Enumeration();
+
+        System.Threading.Tasks.Task SetProp_Enumeration(Zetbox.App.Base.Enumeration newValue);
+
         /// <summary>
         /// 
         /// </summary>

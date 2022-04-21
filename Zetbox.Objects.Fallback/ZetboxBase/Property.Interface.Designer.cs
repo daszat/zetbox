@@ -51,6 +51,8 @@ namespace Zetbox.App.Base
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Constraint> Constraints { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Constraint>> GetProp_Constraints();
+
         /// <summary>
         /// Properties that have a priority set are used to order instance lists. Smaller values are sorted first.
         /// </summary>
@@ -77,6 +79,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.DefaultPropertyValue> GetProp_DefaultValue();
+
+        System.Threading.Tasks.Task SetProp_DefaultValue(Zetbox.App.Base.DefaultPropertyValue newValue);
 
         /// <summary>
         /// Description of this Property
@@ -114,6 +120,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.PropertyFilterConfiguration> GetProp_FilterConfiguration();
+
+        System.Threading.Tasks.Task SetProp_FilterConfiguration(Zetbox.App.GUI.PropertyFilterConfiguration newValue);
 
         /// <summary>
         /// A HTML string with a help text
@@ -162,6 +172,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.DataType> GetProp_ObjectClass();
+
+        System.Threading.Tasks.Task SetProp_ObjectClass(Zetbox.App.Base.DataType newValue);
+
         /// <summary>
         /// Optional requested ControlKind
         /// </summary>
@@ -178,6 +192,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedKind();
+
+        System.Threading.Tasks.Task SetProp_RequestedKind(Zetbox.App.GUI.ControlKind newValue);
 
         /// <summary>
         /// 
@@ -205,6 +223,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_ValueModelDescriptor();
+
+        System.Threading.Tasks.Task SetProp_ValueModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue);
 
         /// <summary>
         /// Returns the translated description

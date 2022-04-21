@@ -185,6 +185,12 @@ namespace Zetbox.App.Base
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Method>> GetProp_Methods()
+        {
+            await TriggerFetchMethodsAsync();
+            return _Methods;
+        }
+
         System.Threading.Tasks.Task _triggerFetchMethodsTask;
         public System.Threading.Tasks.Task TriggerFetchMethodsAsync()
         {
@@ -235,6 +241,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             set { RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetProp_RelationEnd()
+        {
+            return TriggerFetchRelationEndAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RelationEnd(Zetbox.App.Base.RelationEnd newValue)
+        {
+            await TriggerFetchRelationEndAsync();
+            RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)newValue;
+        }
 
         private int? __fk_RelationEndCache;
 

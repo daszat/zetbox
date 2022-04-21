@@ -166,10 +166,18 @@ namespace Zetbox.App.Base
             {
                 if (_Groups == null)
                 {
-                    TriggerFetchGroupsAsync().TryRunSynchronously(); TriggerFetchGroupsAsync().Wait();
+                    var task = TriggerFetchGroupsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Group>)_Groups;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Group>> GetProp_Groups()
+        {
+            await TriggerFetchGroupsAsync();
+            return _Groups;
         }
 
         System.Threading.Tasks.Task _triggerFetchGroupsTask;

@@ -114,6 +114,12 @@ namespace Zetbox.App.Test
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.Fragebogen>> GetProp_Testbogen()
+        {
+            await TriggerFetchTestbogenAsync();
+            return _Testbogen;
+        }
+
         System.Threading.Tasks.Task _triggerFetchTestbogenTask;
         public System.Threading.Tasks.Task TriggerFetchTestbogenAsync()
         {

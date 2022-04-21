@@ -60,6 +60,12 @@ namespace Zetbox.App.Base
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.AccessControl>> GetProp_AccessControlList()
+        {
+            await TriggerFetchAccessControlListAsync();
+            return _AccessControlList;
+        }
+
         System.Threading.Tasks.Task _triggerFetchAccessControlListTask;
         public System.Threading.Tasks.Task TriggerFetchAccessControlListAsync()
         {
@@ -127,6 +133,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             set { BaseObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_BaseObjectClass()
+        {
+            return TriggerFetchBaseObjectClassAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_BaseObjectClass(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchBaseObjectClassAsync();
+            BaseObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)newValue;
+        }
 
         private int? __fk_BaseObjectClassCache;
 
@@ -317,6 +334,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultViewModelDescriptor()
+        {
+            return TriggerFetchDefaultViewModelDescriptorAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchDefaultViewModelDescriptorAsync();
+            DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)newValue;
+        }
+
         private int? __fk_DefaultViewModelDescriptorCache;
 
         private int? _fk_DefaultViewModelDescriptor {
@@ -444,6 +472,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 }
                 return _FilterConfigurations;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration>> GetProp_FilterConfigurations()
+        {
+            await TriggerFetchFilterConfigurationsAsync();
+            return _FilterConfigurations;
         }
 
         System.Threading.Tasks.Task _triggerFetchFilterConfigurationsTask;
@@ -797,6 +831,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                 }
                 return _SubClasses;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.ObjectClass>> GetProp_SubClasses()
+        {
+            await TriggerFetchSubClassesAsync();
+            return _SubClasses;
         }
 
         System.Threading.Tasks.Task _triggerFetchSubClassesTask;

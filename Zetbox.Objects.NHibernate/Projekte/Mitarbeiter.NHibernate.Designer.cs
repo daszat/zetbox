@@ -60,6 +60,17 @@ namespace Zetbox.App.Projekte
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(ChangedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -245,6 +256,17 @@ namespace Zetbox.App.Projekte
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(CreatedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -624,6 +646,17 @@ namespace Zetbox.App.Projekte
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_Identity()
+        {
+            return System.Threading.Tasks.Task.FromResult(Identity);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Identity(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchIdentityAsync();
+            Identity = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -804,6 +837,12 @@ namespace Zetbox.App.Projekte
 				return (IList<Zetbox.App.Projekte.Projekt>)_Projekte;
 			}
 		}
+
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Projekte.Projekt>> GetProp_Projekte()
+        {
+            await TriggerFetchProjekteAsync();
+            return _Projekte;
+        }
 
 		private NHibernateASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl> _Projekte;
 		// ignored, but required for Serialization

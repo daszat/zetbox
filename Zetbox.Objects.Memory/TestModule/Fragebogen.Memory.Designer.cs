@@ -60,6 +60,12 @@ namespace Zetbox.App.Test
             }
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Test.Antwort>> GetProp_Antworten()
+        {
+            await TriggerFetchAntwortenAsync();
+            return _Antworten;
+        }
+
         System.Threading.Tasks.Task _triggerFetchAntwortenTask;
         public System.Threading.Tasks.Task TriggerFetchAntwortenAsync()
         {
@@ -194,6 +200,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                 }
                 return (ICollection<Zetbox.App.Test.TestStudent>)_Student;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.TestStudent>> GetProp_Student()
+        {
+            await TriggerFetchStudentAsync();
+            return _Student;
         }
 
         System.Threading.Tasks.Task _triggerFetchStudentTask;

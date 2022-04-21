@@ -22,6 +22,8 @@ namespace Zetbox.App.Test
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.N_to_M_relations_A> ASide { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.N_to_M_relations_A>> GetProp_ASide();
+
         /// <summary>
         /// 
         /// </summary>

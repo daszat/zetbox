@@ -22,6 +22,8 @@ namespace Zetbox.App.GUI
         [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.GUI.NavigationEntry> Children { get; }
 
+        System.Threading.Tasks.Task<IList<Zetbox.App.GUI.NavigationEntry>> GetProp_Children();
+
         /// <summary>
         /// Color of the ViewScreen or default color if empty
         /// </summary>
@@ -40,6 +42,8 @@ namespace Zetbox.App.GUI
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Group> Groups { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Group>> GetProp_Groups();
+
         /// <summary>
         /// 
         /// </summary>
@@ -57,6 +61,10 @@ namespace Zetbox.App.GUI
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.NavigationEntry> GetProp_Parent();
+
+        System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.GUI.NavigationEntry newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -73,6 +81,10 @@ namespace Zetbox.App.GUI
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedKind();
+
+        System.Threading.Tasks.Task SetProp_RequestedKind(Zetbox.App.GUI.ControlKind newValue);
 
         /// <summary>
         /// The title of this screen
@@ -100,6 +112,10 @@ namespace Zetbox.App.GUI
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_ViewModelDescriptor();
+
+        System.Threading.Tasks.Task SetProp_ViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue);
 
         /// <summary>
         /// 

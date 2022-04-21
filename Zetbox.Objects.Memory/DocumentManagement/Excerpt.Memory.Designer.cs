@@ -59,6 +59,17 @@ namespace at.dasz.DocumentManagement
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> GetProp_File()
+        {
+            return TriggerFetchFileAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_File(at.dasz.DocumentManagement.File newValue)
+        {
+            await TriggerFetchFileAsync();
+            FileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)newValue;
+        }
+
         private int? __fk_FileCache;
 
         private int? _fk_File {

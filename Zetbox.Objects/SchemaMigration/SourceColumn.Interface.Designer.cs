@@ -62,6 +62,8 @@ namespace Zetbox.App.SchemaMigration
         [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Base.Property> DestinationProperty { get; }
 
+        System.Threading.Tasks.Task<IList<Zetbox.App.Base.Property>> GetProp_DestinationProperty();
+
         /// <summary>
         /// 
         /// </summary>
@@ -69,6 +71,8 @@ namespace Zetbox.App.SchemaMigration
         [Zetbox.API.DefinitionGuid("a040ea6b-c105-4815-815b-e36f0778e4cb")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.SchemaMigration.SourceEnum> EnumEntries { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.SourceEnum>> GetProp_EnumEntries();
 
         /// <summary>
         /// 
@@ -107,6 +111,10 @@ namespace Zetbox.App.SchemaMigration
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn> GetProp_References();
+
+        System.Threading.Tasks.Task SetProp_References(Zetbox.App.SchemaMigration.SourceColumn newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -114,6 +122,8 @@ namespace Zetbox.App.SchemaMigration
         [Zetbox.API.DefinitionGuid("71bed80f-57ec-4038-a9a4-9aabc0c2f60d")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.SchemaMigration.SourceColumn> Referers { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.SourceColumn>> GetProp_Referers();
 
         /// <summary>
         /// 
@@ -141,6 +151,10 @@ namespace Zetbox.App.SchemaMigration
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceTable> GetProp_SourceTable();
+
+        System.Threading.Tasks.Task SetProp_SourceTable(Zetbox.App.SchemaMigration.SourceTable newValue);
 
         /// <summary>
         /// 

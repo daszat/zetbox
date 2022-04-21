@@ -59,6 +59,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultDisplayKind()
+        {
+            return TriggerFetchDefaultDisplayKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultDisplayKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchDefaultDisplayKindAsync();
+            DefaultDisplayKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
+
         private int? __fk_DefaultDisplayKindCache;
 
         private int? _fk_DefaultDisplayKind {
@@ -113,7 +124,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchDefaultDisplayKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultDisplayKindAsync().Result;
+                var task = TriggerFetchDefaultDisplayKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -184,6 +198,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultEditorKind()
+        {
+            return TriggerFetchDefaultEditorKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultEditorKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchDefaultEditorKindAsync();
+            DefaultEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
+
         private int? __fk_DefaultEditorKindCache;
 
         private int? _fk_DefaultEditorKind {
@@ -238,7 +263,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchDefaultEditorKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultEditorKindAsync().Result;
+                var task = TriggerFetchDefaultEditorKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -309,6 +337,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultGridCellDisplayKind()
+        {
+            return TriggerFetchDefaultGridCellDisplayKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultGridCellDisplayKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchDefaultGridCellDisplayKindAsync();
+            DefaultGridCellDisplayKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
+
         private int? __fk_DefaultGridCellDisplayKindCache;
 
         private int? _fk_DefaultGridCellDisplayKind {
@@ -363,7 +402,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchDefaultGridCellDisplayKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellDisplayKindAsync().Result;
+                var task = TriggerFetchDefaultGridCellDisplayKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -434,6 +476,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultGridCellEditorKind()
+        {
+            return TriggerFetchDefaultGridCellEditorKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultGridCellEditorKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchDefaultGridCellEditorKindAsync();
+            DefaultGridCellEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
+
         private int? __fk_DefaultGridCellEditorKindCache;
 
         private int? _fk_DefaultGridCellEditorKind {
@@ -488,7 +541,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchDefaultGridCellEditorKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellEditorKindAsync().Result;
+                var task = TriggerFetchDefaultGridCellEditorKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -559,6 +615,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_DefaultGridCellPreEditorKind()
+        {
+            return TriggerFetchDefaultGridCellPreEditorKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultGridCellPreEditorKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchDefaultGridCellPreEditorKindAsync();
+            DefaultGridCellPreEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
+
         private int? __fk_DefaultGridCellPreEditorKindCache;
 
         private int? _fk_DefaultGridCellPreEditorKind {
@@ -613,7 +680,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchDefaultGridCellPreEditorKindAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellPreEditorKindAsync().Result;
+                var task = TriggerFetchDefaultGridCellPreEditorKindAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
             {
@@ -884,6 +954,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return TriggerFetchModuleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)newValue;
+        }
+
         private int? __fk_ModuleCache;
 
         private int? _fk_Module {
@@ -938,7 +1019,10 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                TriggerFetchModuleAsync().TryRunSynchronously(); return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
+                var task = TriggerFetchModuleAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
             {
@@ -998,10 +1082,18 @@ namespace Zetbox.App.GUI
             {
                 if (_SecondaryControlKinds == null)
                 {
-                    TriggerFetchSecondaryControlKindsAsync().TryRunSynchronously(); TriggerFetchSecondaryControlKindsAsync().Wait();
+                    var task = TriggerFetchSecondaryControlKindsAsync();
+                    task.TryRunSynchronously();
+                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.GUI.ControlKind>)_SecondaryControlKinds;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.GUI.ControlKind>> GetProp_SecondaryControlKinds()
+        {
+            await TriggerFetchSecondaryControlKindsAsync();
+            return _SecondaryControlKinds;
         }
 
         System.Threading.Tasks.Task _triggerFetchSecondaryControlKindsTask;

@@ -31,6 +31,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Relation> GetProp_AParent();
+
+        System.Threading.Tasks.Task SetProp_AParent(Zetbox.App.Base.Relation newValue);
+
         /// <summary>
         /// The Relation using this RelationEnd as B
         /// </summary>
@@ -47,6 +51,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.Relation> GetProp_BParent();
+
+        System.Threading.Tasks.Task SetProp_BParent(Zetbox.App.Base.Relation newValue);
 
         /// <summary>
         /// Is true, if this RelationEnd persists the order of its elements
@@ -85,6 +93,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectReferenceProperty> GetProp_Navigator();
+
+        System.Threading.Tasks.Task SetProp_Navigator(Zetbox.App.Base.ObjectReferenceProperty newValue);
+
         /// <summary>
         /// the parent relation
         /// </summary>
@@ -120,6 +132,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_Type();
+
+        System.Threading.Tasks.Task SetProp_Type(Zetbox.App.Base.ObjectClass newValue);
 
         /// <summary>
         /// 

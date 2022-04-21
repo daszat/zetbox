@@ -31,6 +31,10 @@ namespace at.dasz.DocumentManagement
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_Identity();
+
+        System.Threading.Tasks.Task SetProp_Identity(Zetbox.App.Base.Identity newValue);
+
         /// <summary>
         /// Restricts this configuration to a specific machine
         /// </summary>

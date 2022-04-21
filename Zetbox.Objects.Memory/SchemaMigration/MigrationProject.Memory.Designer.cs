@@ -59,6 +59,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -258,6 +269,17 @@ namespace Zetbox.App.SchemaMigration
             set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_CreatedByCache;
 
@@ -517,6 +539,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_DestinationModule()
+        {
+            return TriggerFetchDestinationModuleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DestinationModule(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchDestinationModuleAsync();
+            DestinationModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)newValue;
+        }
+
         private int? __fk_DestinationModuleCache;
 
         private int? _fk_DestinationModule {
@@ -715,6 +748,12 @@ namespace Zetbox.App.SchemaMigration
                 }
                 return _StagingDatabases;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.SchemaMigration.StagingDatabase>> GetProp_StagingDatabases()
+        {
+            await TriggerFetchStagingDatabasesAsync();
+            return _StagingDatabases;
         }
 
         System.Threading.Tasks.Task _triggerFetchStagingDatabasesTask;

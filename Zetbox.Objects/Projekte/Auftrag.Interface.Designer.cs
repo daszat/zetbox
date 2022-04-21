@@ -51,6 +51,10 @@ namespace Zetbox.App.Projekte
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Projekte.Kunde> GetProp_Kunde();
+
+        System.Threading.Tasks.Task SetProp_Kunde(Zetbox.App.Projekte.Kunde newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -68,6 +72,10 @@ namespace Zetbox.App.Projekte
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Projekte.Mitarbeiter> GetProp_Mitarbeiter();
+
+        System.Threading.Tasks.Task SetProp_Mitarbeiter(Zetbox.App.Projekte.Mitarbeiter newValue);
+
         /// <summary>
         /// Projekt zum Auftrag
         /// </summary>
@@ -84,6 +92,10 @@ namespace Zetbox.App.Projekte
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Projekte.Projekt> GetProp_Projekt();
+
+        System.Threading.Tasks.Task SetProp_Projekt(Zetbox.App.Projekte.Projekt newValue);
 
         /// <summary>
         /// Testmethode zum Erstellen von Rechnungen mit Word

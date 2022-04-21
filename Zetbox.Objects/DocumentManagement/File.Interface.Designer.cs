@@ -41,6 +41,10 @@ namespace at.dasz.DocumentManagement
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.Blob> GetProp_Blob();
+
+        System.Threading.Tasks.Task SetProp_Blob(Zetbox.App.Base.Blob newValue);
+
         /// <summary>
         /// A searchable excerpt
         /// </summary>
@@ -57,6 +61,10 @@ namespace at.dasz.DocumentManagement
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<at.dasz.DocumentManagement.Excerpt> GetProp_Excerpt();
+
+        System.Threading.Tasks.Task SetProp_Excerpt(at.dasz.DocumentManagement.Excerpt newValue);
 
         /// <summary>
         /// This file cannot be changed when the flas is set
@@ -95,6 +103,8 @@ namespace at.dasz.DocumentManagement
         [Zetbox.API.DefinitionGuid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5")]
         [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Base.Blob> Revisions { get; }
+
+        System.Threading.Tasks.Task<IList<Zetbox.App.Base.Blob>> GetProp_Revisions();
 
         /// <summary>
         /// Tags describing this file

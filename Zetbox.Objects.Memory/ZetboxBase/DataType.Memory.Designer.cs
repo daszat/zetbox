@@ -59,6 +59,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -260,6 +271,12 @@ namespace Zetbox.App.Base
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.InstanceConstraint>> GetProp_Constraints()
+        {
+            await TriggerFetchConstraintsAsync();
+            return _Constraints;
+        }
+
         System.Threading.Tasks.Task _triggerFetchConstraintsTask;
         public System.Threading.Tasks.Task TriggerFetchConstraintsAsync()
         {
@@ -340,6 +357,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_CreatedByCache;
 
@@ -541,6 +569,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_DefaultIcon()
+        {
+            return TriggerFetchDefaultIconAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultIcon(Zetbox.App.GUI.Icon newValue)
+        {
+            await TriggerFetchDefaultIconAsync();
+            DefaultIconImpl = (Zetbox.App.GUI.IconMemoryImpl)newValue;
+        }
+
         private int? __fk_DefaultIconCache;
 
         private int? _fk_DefaultIcon {
@@ -597,6 +636,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             {
                 var task = TriggerFetchDefaultIconAsync();
                 task.TryRunSynchronously();
+                task.Wait();
                 return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
             set
@@ -852,6 +892,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Interface>> GetProp_ImplementsInterfaces()
+        {
+            await TriggerFetchImplementsInterfacesAsync();
+            return _ImplementsInterfaces;
+        }
+
         System.Threading.Tasks.Task _triggerFetchImplementsInterfacesTask;
         public System.Threading.Tasks.Task TriggerFetchImplementsInterfacesAsync()
         {
@@ -902,6 +948,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImple
                 }
                 return _Methods;
             }
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Method>> GetProp_Methods()
+        {
+            await TriggerFetchMethodsAsync();
+            return _Methods;
         }
 
         System.Threading.Tasks.Task _triggerFetchMethodsTask;
@@ -984,6 +1036,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             set { ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return TriggerFetchModuleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)newValue;
+        }
 
         private int? __fk_ModuleCache;
 
@@ -1172,6 +1235,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             }
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.Property>> GetProp_Properties()
+        {
+            await TriggerFetchPropertiesAsync();
+            return _Properties;
+        }
+
         System.Threading.Tasks.Task _triggerFetchPropertiesTask;
         public System.Threading.Tasks.Task TriggerFetchPropertiesAsync()
         {
@@ -1252,6 +1321,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             set { RequestedKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedKind()
+        {
+            return TriggerFetchRequestedKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RequestedKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchRequestedKindAsync();
+            RequestedKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
 
         private int? __fk_RequestedKindCache;
 

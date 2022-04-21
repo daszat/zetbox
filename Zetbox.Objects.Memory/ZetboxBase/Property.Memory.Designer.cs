@@ -188,6 +188,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return TriggerFetchChangedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ChangedByCache;
 
         private int? _fk_ChangedBy {
@@ -434,6 +445,12 @@ namespace Zetbox.App.Base
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Constraint>> GetProp_Constraints()
+        {
+            await TriggerFetchConstraintsAsync();
+            return _Constraints;
+        }
+
         System.Threading.Tasks.Task _triggerFetchConstraintsTask;
         public System.Threading.Tasks.Task TriggerFetchConstraintsAsync()
         {
@@ -514,6 +531,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return TriggerFetchCreatedByAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_CreatedByCache;
 
@@ -772,6 +800,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             set { DefaultValueImpl = (Zetbox.App.Base.DefaultPropertyValueMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.DefaultPropertyValue> GetProp_DefaultValue()
+        {
+            return TriggerFetchDefaultValueAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultValue(Zetbox.App.Base.DefaultPropertyValue newValue)
+        {
+            await TriggerFetchDefaultValueAsync();
+            DefaultValueImpl = (Zetbox.App.Base.DefaultPropertyValueMemoryImpl)newValue;
+        }
 
         private int? __fk_DefaultValueCache;
 
@@ -1104,6 +1143,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.PropertyFilterConfiguration> GetProp_FilterConfiguration()
+        {
+            return TriggerFetchFilterConfigurationAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_FilterConfiguration(Zetbox.App.GUI.PropertyFilterConfiguration newValue)
+        {
+            await TriggerFetchFilterConfigurationAsync();
+            FilterConfigurationImpl = (Zetbox.App.GUI.PropertyFilterConfigurationMemoryImpl)newValue;
+        }
+
         private int? __fk_FilterConfigurationCache;
 
         private int? _fk_FilterConfiguration {
@@ -1364,6 +1414,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return TriggerFetchModuleAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)newValue;
+        }
+
         private int? __fk_ModuleCache;
 
         private int? _fk_Module {
@@ -1550,6 +1611,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.DataType> GetProp_ObjectClass()
+        {
+            return TriggerFetchObjectClassAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ObjectClass(Zetbox.App.Base.DataType newValue)
+        {
+            await TriggerFetchObjectClassAsync();
+            ObjectClassImpl = (Zetbox.App.Base.DataTypeMemoryImpl)newValue;
+        }
+
         private int? __fk_ObjectClassCache;
 
         private int? _fk_ObjectClass {
@@ -1724,6 +1796,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             set { RequestedKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedKind()
+        {
+            return TriggerFetchRequestedKindAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RequestedKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchRequestedKindAsync();
+            RequestedKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
 
         private int? __fk_RequestedKindCache;
 
@@ -1910,6 +1993,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             set { ValueModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_ValueModelDescriptor()
+        {
+            return TriggerFetchValueModelDescriptorAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ValueModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchValueModelDescriptorAsync();
+            ValueModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)newValue;
+        }
 
         private int? __fk_ValueModelDescriptorCache;
 

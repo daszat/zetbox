@@ -116,6 +116,17 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Test.N_to_M_relations_A> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Test.N_to_M_relations_A newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -230,6 +241,17 @@ namespace Zetbox.App.Test
             set { BImpl = (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Test.N_to_M_relations_B> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Test.N_to_M_relations_B newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -563,6 +585,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.CalculatedObjectReferenceProperty> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.CalculatedObjectReferenceProperty newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -678,6 +711,17 @@ namespace Zetbox.App.Base
             set { BImpl = (Zetbox.App.Base.PropertyMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Property newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.PropertyMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -1030,6 +1074,17 @@ namespace Zetbox.App.Calendar
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Calendar.CalendarBook newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -1145,6 +1200,17 @@ namespace Zetbox.App.Calendar
             set { BImpl = (Zetbox.App.Base.GroupMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Group newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.GroupMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -1463,6 +1529,17 @@ namespace Zetbox.App.Calendar
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Calendar.CalendarBook newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -1577,6 +1654,17 @@ namespace Zetbox.App.Calendar
             set { BImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -1894,6 +1982,17 @@ namespace Zetbox.App.Calendar
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Calendar.CalendarBook newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -2009,6 +2108,17 @@ namespace Zetbox.App.Calendar
             set { BImpl = (Zetbox.App.Base.GroupMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Group newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.GroupMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -2327,6 +2437,17 @@ namespace Zetbox.App.Calendar
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Calendar.CalendarBook newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -2441,6 +2562,17 @@ namespace Zetbox.App.Calendar
             set { BImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -2758,6 +2890,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.DataType> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.DataType newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Base.DataTypeMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -2873,6 +3016,17 @@ namespace Zetbox.App.Base
             set { BImpl = (Zetbox.App.Base.InterfaceMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Interface> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Interface newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.InterfaceMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -3225,6 +3379,17 @@ namespace at.dasz.DocumentManagement
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(at.dasz.DocumentManagement.File newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (at.dasz.DocumentManagement.FileMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -3371,6 +3536,17 @@ namespace at.dasz.DocumentManagement
             set { BImpl = (Zetbox.App.Base.BlobMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Blob> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Blob newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.BlobMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -3744,6 +3920,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -3858,6 +4045,17 @@ namespace Zetbox.App.Base
             set { BImpl = (Zetbox.App.Base.GroupMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Group newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.GroupMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -4157,6 +4355,17 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Test.Muhblah newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Test.MuhblahMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -4271,6 +4480,17 @@ namespace Zetbox.App.Test
             set { BImpl = (Zetbox.App.Test.TestCustomObjectMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Test.TestCustomObject> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Test.TestCustomObject newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Test.TestCustomObjectMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -4604,6 +4824,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.NavigationEntry> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.GUI.NavigationEntry newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.GUI.NavigationEntryMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -4719,6 +4950,17 @@ namespace Zetbox.App.GUI
             set { BImpl = (Zetbox.App.Base.GroupMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Group newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.GroupMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -5071,6 +5313,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectReferenceProperty> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.ObjectReferenceProperty newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -5186,6 +5439,17 @@ namespace Zetbox.App.GUI
             set { BImpl = (Zetbox.App.Base.MethodMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Method> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Method newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.MethodMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -5554,6 +5818,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -5669,6 +5944,17 @@ namespace Zetbox.App.GUI
             set { BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -6021,6 +6307,17 @@ namespace Zetbox.App.Projekte
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Projekte.Projekt> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Projekte.Projekt newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Projekte.ProjektMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -6167,6 +6464,17 @@ namespace Zetbox.App.Projekte
             set { BImpl = (Zetbox.App.Projekte.MitarbeiterMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Projekte.Mitarbeiter> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Projekte.Mitarbeiter newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Projekte.MitarbeiterMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -6590,6 +6898,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.RoleMembership> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.RoleMembership newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Base.RoleMembershipMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -6736,6 +7055,17 @@ namespace Zetbox.App.Base
             set { BImpl = (Zetbox.App.Base.RelationMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Relation> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Relation newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.RelationMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -7143,6 +7473,17 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.SchemaMigration.SourceColumn newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -7289,6 +7630,17 @@ namespace Zetbox.App.SchemaMigration
             set { BImpl = (Zetbox.App.Base.PropertyMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Property newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.PropertyMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -7662,6 +8014,17 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Test.TestStudent> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Test.TestStudent newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Test.TestStudentMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -7776,6 +8139,17 @@ namespace Zetbox.App.Test
             set { BImpl = (Zetbox.App.Test.FragebogenMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Test.Fragebogen> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Test.Fragebogen newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Test.FragebogenMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 
@@ -8109,6 +8483,17 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.IndexConstraint> GetProp_A()
+        {
+            return TriggerFetchAAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_A(Zetbox.App.Base.IndexConstraint newValue)
+        {
+            await TriggerFetchAAsync();
+            AImpl = (Zetbox.App.Base.IndexConstraintMemoryImpl)newValue;
+        }
+
         private int? __fk_ACache;
 
         private int? _fk_A {
@@ -8224,6 +8609,17 @@ namespace Zetbox.App.Base
             set { BImpl = (Zetbox.App.Base.PropertyMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Property> GetProp_B()
+        {
+            return TriggerFetchBAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_B(Zetbox.App.Base.Property newValue)
+        {
+            await TriggerFetchBAsync();
+            BImpl = (Zetbox.App.Base.PropertyMemoryImpl)newValue;
+        }
 
         private int? __fk_BCache;
 

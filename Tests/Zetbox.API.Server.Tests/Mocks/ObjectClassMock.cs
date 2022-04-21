@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Zetbox.API.Async;
 using Zetbox.App.GUI;
@@ -550,6 +551,111 @@ namespace Zetbox.API.Server.Mocks
             if (aStr == null && bStr == null) return 0;
             if (aStr == null) return -1;
             return aStr.CompareTo(bStr);
+        }
+
+        public Task<ICollection<App.Base.AccessControl>> GetProp_AccessControlList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<App.Base.ObjectClass> GetProp_BaseObjectClass()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetProp_BaseObjectClass(App.Base.ObjectClass newValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ViewModelDescriptor> GetProp_DefaultViewModelDescriptor()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetProp_DefaultViewModelDescriptor(ViewModelDescriptor newValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICollection<ObjectClassFilterConfiguration>> GetProp_FilterConfigurations()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICollection<App.Base.ObjectClass>> GetProp_SubClasses()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICollection<App.Base.InstanceConstraint>> GetProp_Constraints()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Icon> GetProp_DefaultIcon()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetProp_DefaultIcon(Icon newValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICollection<App.Base.Interface>> GetProp_ImplementsInterfaces()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICollection<App.Base.Method>> GetProp_Methods()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<App.Base.Property>> GetProp_Properties()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ControlKind> GetProp_RequestedKind()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetProp_RequestedKind(ControlKind newValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<App.Base.Identity> GetProp_ChangedBy()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetProp_ChangedBy(App.Base.Identity newValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<App.Base.Identity> GetProp_CreatedBy()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetProp_CreatedBy(App.Base.Identity newValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<App.Base.Module> GetProp_Module()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetProp_Module(App.Base.Module newValue)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

@@ -42,6 +42,8 @@ namespace Zetbox.App.Base
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Method> Methods { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Method>> GetProp_Methods();
+
         /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
@@ -58,6 +60,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetProp_RelationEnd();
+
+        System.Threading.Tasks.Task SetProp_RelationEnd(Zetbox.App.Base.RelationEnd newValue);
 
         /// <summary>
         /// 

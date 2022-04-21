@@ -30,5 +30,9 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module();
+
+        System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue);
     }
 }

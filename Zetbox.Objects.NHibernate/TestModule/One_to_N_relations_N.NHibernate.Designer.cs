@@ -115,6 +115,17 @@ namespace Zetbox.App.Test
         // inverse Navigator=NSide; is list;
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.One_to_N_relations_One> GetProp_OneSide()
+        {
+            return System.Threading.Tasks.Task.FromResult(OneSide);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_OneSide(Zetbox.App.Test.One_to_N_relations_One newValue)
+        {
+            await TriggerFetchOneSideAsync();
+            OneSide = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

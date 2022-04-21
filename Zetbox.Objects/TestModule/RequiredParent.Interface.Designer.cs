@@ -22,6 +22,8 @@ namespace Zetbox.App.Test
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.RequiredParentChild> Children { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.RequiredParentChild>> GetProp_Children();
+
         /// <summary>
         /// dummy property
         /// </summary>

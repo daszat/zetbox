@@ -22,6 +22,8 @@ namespace Zetbox.App.Base
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Property> Inputs { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Property>> GetProp_Inputs();
+
         /// <summary>
         /// the referenced class of objects
         /// </summary>
@@ -38,5 +40,9 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_ReferencedClass();
+
+        System.Threading.Tasks.Task SetProp_ReferencedClass(Zetbox.App.Base.ObjectClass newValue);
     }
 }

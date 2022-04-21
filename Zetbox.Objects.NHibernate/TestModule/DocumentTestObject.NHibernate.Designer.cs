@@ -57,6 +57,17 @@ namespace Zetbox.App.Test
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> GetProp_AnotherFile()
+        {
+            return System.Threading.Tasks.Task.FromResult(AnotherFile);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_AnotherFile(at.dasz.DocumentManagement.File newValue)
+        {
+            await TriggerFetchAnotherFileAsync();
+            AnotherFile = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -164,6 +175,17 @@ namespace Zetbox.App.Test
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> GetProp_AnyFile()
+        {
+            return System.Threading.Tasks.Task.FromResult(AnyFile);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_AnyFile(at.dasz.DocumentManagement.File newValue)
+        {
+            await TriggerFetchAnyFileAsync();
+            AnyFile = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

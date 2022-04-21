@@ -57,6 +57,17 @@ namespace Zetbox.App.Test
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Calendar.Event> GetProp_Event()
+        {
+            return System.Threading.Tasks.Task.FromResult(Event);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Event(Zetbox.App.Calendar.Event newValue)
+        {
+            await TriggerFetchEventAsync();
+            Event = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

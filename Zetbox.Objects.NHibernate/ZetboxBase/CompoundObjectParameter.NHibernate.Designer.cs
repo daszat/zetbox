@@ -57,6 +57,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.CompoundObject> GetProp_CompoundObject()
+        {
+            return System.Threading.Tasks.Task.FromResult(CompoundObject);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CompoundObject(Zetbox.App.Base.CompoundObject newValue)
+        {
+            await TriggerFetchCompoundObjectAsync();
+            CompoundObject = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

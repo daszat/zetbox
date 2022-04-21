@@ -90,6 +90,12 @@ namespace Zetbox.App.Base
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Base.AccessControl>>(this.AccessControlList);
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.AccessControl>> GetProp_AccessControlList()
+        {
+            await TriggerFetchAccessControlListAsync();
+            return _AccessControlList;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAccessControlList_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnAccessControlList_IsValid;
@@ -103,6 +109,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         // inverse Navigator=SubClasses; is list;
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_BaseObjectClass()
+        {
+            return System.Threading.Tasks.Task.FromResult(BaseObjectClass);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_BaseObjectClass(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchBaseObjectClassAsync();
+            BaseObjectClass = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -288,6 +305,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultViewModelDescriptor()
+        {
+            return System.Threading.Tasks.Task.FromResult(DefaultViewModelDescriptor);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchDefaultViewModelDescriptorAsync();
+            DefaultViewModelDescriptor = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -424,6 +452,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         public System.Threading.Tasks.Task TriggerFetchFilterConfigurationsAsync()
         {
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration>>(this.FilterConfigurations);
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration>> GetProp_FilterConfigurations()
+        {
+            await TriggerFetchFilterConfigurationsAsync();
+            return _FilterConfigurations;
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFilterConfigurations_PostSetter;
@@ -778,6 +812,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         public System.Threading.Tasks.Task TriggerFetchSubClassesAsync()
         {
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Base.ObjectClass>>(this.SubClasses);
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.ObjectClass>> GetProp_SubClasses()
+        {
+            await TriggerFetchSubClassesAsync();
+            return _SubClasses;
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSubClasses_PostSetter;

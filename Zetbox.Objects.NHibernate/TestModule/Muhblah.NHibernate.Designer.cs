@@ -84,6 +84,11 @@ namespace Zetbox.App.Test
             }
         }
 
+        public System.Threading.Tasks.Task<ICollection<string>> GetProp_StringCollection()
+        {
+            return System.Threading.Tasks.Task.FromResult(StringCollection);
+        }
+
         private ClientValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntry, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl>> _StringCollection;
         private ProjectedCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl.Muhblah_StringCollection_CollectionEntryProxy, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl> _StringCollectionCollection;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
@@ -187,6 +192,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Test.TestCustomObject>>(this.TestCustomObjects_List_Nav);
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.TestCustomObject>> GetProp_TestCustomObjects_List_Nav()
+        {
+            await TriggerFetchTestCustomObjects_List_NavAsync();
+            return _TestCustomObjects_List_Nav;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCustomObjects_List_Nav_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.Muhblah> OnTestCustomObjects_List_Nav_IsValid;
@@ -216,6 +227,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 			}
 		}
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.TestCustomObject>> GetProp_TestCustomObjects_ManyList_Nav()
+        {
+            await TriggerFetchTestCustomObjects_ManyList_NavAsync();
+            return _TestCustomObjects_ManyList_Nav;
+        }
+
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl> _TestCustomObjects_ManyList_Nav;
 		// ignored, but required for Serialization
         private bool TestCustomObjects_ManyList_Nav_was_eagerLoaded = false;
@@ -238,6 +255,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         // inverse Navigator=MubBlah_List_Nav; is list;
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.TestCustomObject> GetProp_TestCustomObjects_Nav()
+        {
+            return System.Threading.Tasks.Task.FromResult(TestCustomObjects_Nav);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_TestCustomObjects_Nav(Zetbox.App.Test.TestCustomObject newValue)
+        {
+            await TriggerFetchTestCustomObjects_NavAsync();
+            TestCustomObjects_Nav = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -368,6 +396,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         // inverse Navigator=MuhBlah_One_Nav; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Test.TestCustomObject> GetProp_TestCustomObjects_One_Nav()
+        {
+            return System.Threading.Tasks.Task.FromResult(TestCustomObjects_One_Nav);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_TestCustomObjects_One_Nav(Zetbox.App.Test.TestCustomObject newValue)
+        {
+            await TriggerFetchTestCustomObjects_One_NavAsync();
+            TestCustomObjects_One_Nav = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

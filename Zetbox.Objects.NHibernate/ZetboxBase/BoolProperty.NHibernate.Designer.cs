@@ -57,6 +57,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_FalseIcon()
+        {
+            return System.Threading.Tasks.Task.FromResult(FalseIcon);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_FalseIcon(Zetbox.App.GUI.Icon newValue)
+        {
+            await TriggerFetchFalseIconAsync();
+            FalseIcon = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -224,6 +235,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_NullIcon()
+        {
+            return System.Threading.Tasks.Task.FromResult(NullIcon);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_NullIcon(Zetbox.App.GUI.Icon newValue)
+        {
+            await TriggerFetchNullIconAsync();
+            NullIcon = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -391,6 +413,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_TrueIcon()
+        {
+            return System.Threading.Tasks.Task.FromResult(TrueIcon);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_TrueIcon(Zetbox.App.GUI.Icon newValue)
+        {
+            await TriggerFetchTrueIconAsync();
+            TrueIcon = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

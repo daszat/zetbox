@@ -63,6 +63,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(ChangedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -279,6 +290,12 @@ namespace Zetbox.App.Base
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Base.InstanceConstraint>>(this.Constraints);
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.InstanceConstraint>> GetProp_Constraints()
+        {
+            await TriggerFetchConstraintsAsync();
+            return _Constraints;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConstraints_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnConstraints_IsValid;
@@ -292,6 +309,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(CreatedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -477,6 +505,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_DefaultIcon()
+        {
+            return System.Threading.Tasks.Task.FromResult(DefaultIcon);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultIcon(Zetbox.App.GUI.Icon newValue)
+        {
+            await TriggerFetchDefaultIconAsync();
+            DefaultIcon = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -796,6 +835,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 			}
 		}
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Interface>> GetProp_ImplementsInterfaces()
+        {
+            await TriggerFetchImplementsInterfacesAsync();
+            return _ImplementsInterfaces;
+        }
+
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl> _ImplementsInterfaces;
 		// ignored, but required for Serialization
         private bool ImplementsInterfaces_was_eagerLoaded = false;
@@ -849,6 +894,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImple
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Base.Method>>(this.Methods);
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Method>> GetProp_Methods()
+        {
+            await TriggerFetchMethodsAsync();
+            return _Methods;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMethods_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnMethods_IsValid;
@@ -862,6 +913,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Module> GetProp_Module()
+        {
+            return System.Threading.Tasks.Task.FromResult(Module);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Module(Zetbox.App.Base.Module newValue)
+        {
+            await TriggerFetchModuleAsync();
+            Module = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -1060,6 +1122,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             return System.Threading.Tasks.Task.FromResult<IList<Zetbox.App.Base.Property>>(this.Properties);
         }
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Base.Property>> GetProp_Properties()
+        {
+            await TriggerFetchPropertiesAsync();
+            return _Properties;
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnProperties_IsValid;
@@ -1073,6 +1141,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedKind()
+        {
+            return System.Threading.Tasks.Task.FromResult(RequestedKind);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_RequestedKind(Zetbox.App.GUI.ControlKind newValue)
+        {
+            await TriggerFetchRequestedKindAsync();
+            RequestedKind = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

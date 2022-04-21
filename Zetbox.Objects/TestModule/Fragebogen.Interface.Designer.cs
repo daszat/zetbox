@@ -22,6 +22,8 @@ namespace Zetbox.App.Test
         [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Test.Antwort> Antworten { get; }
 
+        System.Threading.Tasks.Task<IList<Zetbox.App.Test.Antwort>> GetProp_Antworten();
+
         /// <summary>
         /// 
         /// </summary>
@@ -39,5 +41,7 @@ namespace Zetbox.App.Test
         [Zetbox.API.DefinitionGuid("3a91e745-0dd2-4f31-864e-eaf657ddb577")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.TestStudent> Student { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.TestStudent>> GetProp_Student();
     }
 }

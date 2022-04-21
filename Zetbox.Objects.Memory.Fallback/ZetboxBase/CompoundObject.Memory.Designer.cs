@@ -49,7 +49,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ViewModelDescriptor DefaultPropertyViewModelDescriptor
@@ -59,10 +59,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultPropertyViewModelDescriptor()
+        {
+            return TriggerFetchDefaultPropertyViewModelDescriptorAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultPropertyViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchDefaultPropertyViewModelDescriptorAsync();
+            DefaultPropertyViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)newValue;
+        }
+
         private int? __fk_DefaultPropertyViewModelDescriptorCache;
 
-        private int? _fk_DefaultPropertyViewModelDescriptor
-        {
+        private int? _fk_DefaultPropertyViewModelDescriptor {
             get
             {
                 return __fk_DefaultPropertyViewModelDescriptorCache;
@@ -78,10 +88,10 @@ namespace Zetbox.App.Base
         /// <summary>ForeignKey Property for DefaultPropertyViewModelDescriptor's id, used on APIs only</summary>
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public int? FK_DefaultPropertyViewModelDescriptor
-        {
-            get { return _fk_DefaultPropertyViewModelDescriptor; }
-            set { _fk_DefaultPropertyViewModelDescriptor = value; }
-        }
+		{
+			get { return _fk_DefaultPropertyViewModelDescriptor; }
+			set { _fk_DefaultPropertyViewModelDescriptor = value; }
+		}
 
         private Guid? _fk_guid_DefaultPropertyViewModelDescriptor = null;
 
@@ -96,14 +106,14 @@ namespace Zetbox.App.Base
                 _triggerFetchDefaultPropertyViewModelDescriptorTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor>(() => null);
 
             _triggerFetchDefaultPropertyViewModelDescriptorTask.OnResult(t =>
-             {
-                 if (OnDefaultPropertyViewModelDescriptor_Getter != null)
-                 {
-                     var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(t.Result);
-                     OnDefaultPropertyViewModelDescriptor_Getter(this, e);
-                     // TODO: t.Result = e.Result;
-                 }
-             });
+            {
+                if (OnDefaultPropertyViewModelDescriptor_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(t.Result);
+                    OnDefaultPropertyViewModelDescriptor_Getter(this, e);
+                    // TODO: t.Result = e.Result;
+                }
+            });
 
             return _triggerFetchDefaultPropertyViewModelDescriptorTask;
         }
@@ -114,7 +124,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchDefaultPropertyViewModelDescriptorAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchDefaultPropertyViewModelDescriptorAsync().Result;
+                var task = TriggerFetchDefaultPropertyViewModelDescriptorAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
             {
@@ -147,7 +160,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
-                if (IsAttached) UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDefaultPropertyViewModelDescriptor_PostSetter != null && IsAttached)
                 {
@@ -157,9 +170,9 @@ namespace Zetbox.App.Base
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultPropertyViewModelDescriptor
-        public static event PropertyGetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.CompoundObject> OnDefaultPropertyViewModelDescriptor_IsValid;
 
@@ -175,7 +188,7 @@ namespace Zetbox.App.Base
 
         // implement the user-visible interface
         [XmlIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember]
+		[System.Runtime.Serialization.IgnoreDataMember]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
@@ -185,10 +198,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultViewModelDescriptor()
+        {
+            return TriggerFetchDefaultViewModelDescriptorAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_DefaultViewModelDescriptor(Zetbox.App.GUI.ViewModelDescriptor newValue)
+        {
+            await TriggerFetchDefaultViewModelDescriptorAsync();
+            DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)newValue;
+        }
+
         private int? __fk_DefaultViewModelDescriptorCache;
 
-        private int? _fk_DefaultViewModelDescriptor
-        {
+        private int? _fk_DefaultViewModelDescriptor {
             get
             {
                 return __fk_DefaultViewModelDescriptorCache;
@@ -204,10 +227,10 @@ namespace Zetbox.App.Base
         /// <summary>ForeignKey Property for DefaultViewModelDescriptor's id, used on APIs only</summary>
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public int? FK_DefaultViewModelDescriptor
-        {
-            get { return _fk_DefaultViewModelDescriptor; }
-            set { _fk_DefaultViewModelDescriptor = value; }
-        }
+		{
+			get { return _fk_DefaultViewModelDescriptor; }
+			set { _fk_DefaultViewModelDescriptor = value; }
+		}
 
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 
@@ -240,7 +263,10 @@ namespace Zetbox.App.Base
         {
             get
             {
-                TriggerFetchDefaultViewModelDescriptorAsync().TryRunSynchronously(); return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchDefaultViewModelDescriptorAsync().Result;
+                var task = TriggerFetchDefaultViewModelDescriptorAsync();
+                task.TryRunSynchronously();
+                task.Wait();
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
             {
@@ -273,7 +299,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultViewModelDescriptor", __oldValue, __newValue);
-                if (IsAttached) UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDefaultViewModelDescriptor_PostSetter != null && IsAttached)
                 {
@@ -283,9 +309,9 @@ namespace Zetbox.App.Base
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
-        public static event PropertyGetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_Getter;
-        public static event PropertyPreSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PreSetter;
-        public static event PropertyPostSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.CompoundObject> OnDefaultViewModelDescriptor_IsValid;
 
@@ -309,46 +335,46 @@ namespace Zetbox.App.Base
         }
         public static event AddProperty_Handler<CompoundObject> OnAddProperty_CompoundObject;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-        // CanExec
-        public static event CanExecMethodEventHandler<CompoundObject> OnAddProperty_CompoundObject_CanExec;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObject> OnAddProperty_CompoundObject_CanExec;
 
         [EventBasedMethod("OnAddProperty_CompoundObject_CanExec")]
         public override bool AddPropertyCanExec
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<bool>();
-                if (OnAddProperty_CompoundObject_CanExec != null)
-                {
-                    OnAddProperty_CompoundObject_CanExec(this, e);
-                }
-                else
-                {
-                    e.Result = base.AddPropertyCanExec;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnAddProperty_CompoundObject_CanExec != null)
+				{
+					OnAddProperty_CompoundObject_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.AddPropertyCanExec;
+				}
+				return e.Result;
+			}
         }
 
-        // CanExecReason
-        public static event CanExecReasonMethodEventHandler<CompoundObject> OnAddProperty_CompoundObject_CanExecReason;
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObject> OnAddProperty_CompoundObject_CanExecReason;
 
         [EventBasedMethod("OnAddProperty_CompoundObject_CanExecReason")]
         public override string AddPropertyCanExecReason
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<string>();
-                if (OnAddProperty_CompoundObject_CanExecReason != null)
-                {
-                    OnAddProperty_CompoundObject_CanExecReason(this, e);
-                }
-                else
-                {
-                    e.Result = base.AddPropertyCanExecReason;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnAddProperty_CompoundObject_CanExecReason != null)
+				{
+					OnAddProperty_CompoundObject_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.AddPropertyCanExecReason;
+				}
+				return e.Result;
+			}
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
@@ -372,46 +398,46 @@ namespace Zetbox.App.Base
         }
         public static event GetDataType_Handler<CompoundObject> OnGetDataType_CompoundObject;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-        // CanExec
-        public static event CanExecMethodEventHandler<CompoundObject> OnGetDataType_CompoundObject_CanExec;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObject> OnGetDataType_CompoundObject_CanExec;
 
         [EventBasedMethod("OnGetDataType_CompoundObject_CanExec")]
         public override bool GetDataTypeCanExec
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<bool>();
-                if (OnGetDataType_CompoundObject_CanExec != null)
-                {
-                    OnGetDataType_CompoundObject_CanExec(this, e);
-                }
-                else
-                {
-                    e.Result = base.GetDataTypeCanExec;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataType_CompoundObject_CanExec != null)
+				{
+					OnGetDataType_CompoundObject_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeCanExec;
+				}
+				return e.Result;
+			}
         }
 
-        // CanExecReason
-        public static event CanExecReasonMethodEventHandler<CompoundObject> OnGetDataType_CompoundObject_CanExecReason;
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObject> OnGetDataType_CompoundObject_CanExecReason;
 
         [EventBasedMethod("OnGetDataType_CompoundObject_CanExecReason")]
         public override string GetDataTypeCanExecReason
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<string>();
-                if (OnGetDataType_CompoundObject_CanExecReason != null)
-                {
-                    OnGetDataType_CompoundObject_CanExecReason(this, e);
-                }
-                else
-                {
-                    e.Result = base.GetDataTypeCanExecReason;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataType_CompoundObject_CanExecReason != null)
+				{
+					OnGetDataType_CompoundObject_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeCanExecReason;
+				}
+				return e.Result;
+			}
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
@@ -435,46 +461,46 @@ namespace Zetbox.App.Base
         }
         public static event GetDataTypeString_Handler<CompoundObject> OnGetDataTypeString_CompoundObject;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-        // CanExec
-        public static event CanExecMethodEventHandler<CompoundObject> OnGetDataTypeString_CompoundObject_CanExec;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObject> OnGetDataTypeString_CompoundObject_CanExec;
 
         [EventBasedMethod("OnGetDataTypeString_CompoundObject_CanExec")]
         public override bool GetDataTypeStringCanExec
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<bool>();
-                if (OnGetDataTypeString_CompoundObject_CanExec != null)
-                {
-                    OnGetDataTypeString_CompoundObject_CanExec(this, e);
-                }
-                else
-                {
-                    e.Result = base.GetDataTypeStringCanExec;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataTypeString_CompoundObject_CanExec != null)
+				{
+					OnGetDataTypeString_CompoundObject_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeStringCanExec;
+				}
+				return e.Result;
+			}
         }
 
-        // CanExecReason
-        public static event CanExecReasonMethodEventHandler<CompoundObject> OnGetDataTypeString_CompoundObject_CanExecReason;
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObject> OnGetDataTypeString_CompoundObject_CanExecReason;
 
         [EventBasedMethod("OnGetDataTypeString_CompoundObject_CanExecReason")]
         public override string GetDataTypeStringCanExecReason
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<string>();
-                if (OnGetDataTypeString_CompoundObject_CanExecReason != null)
-                {
-                    OnGetDataTypeString_CompoundObject_CanExecReason(this, e);
-                }
-                else
-                {
-                    e.Result = base.GetDataTypeStringCanExecReason;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataTypeString_CompoundObject_CanExecReason != null)
+				{
+					OnGetDataTypeString_CompoundObject_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
@@ -499,46 +525,46 @@ namespace Zetbox.App.Base
         public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<CompoundObject> OnGetName_CompoundObject;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-        // CanExec
-        public static event CanExecMethodEventHandler<CompoundObject> OnGetName_CompoundObject_CanExec;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObject> OnGetName_CompoundObject_CanExec;
 
         [EventBasedMethod("OnGetName_CompoundObject_CanExec")]
         public virtual bool GetNameCanExec
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<bool>();
-                if (OnGetName_CompoundObject_CanExec != null)
-                {
-                    OnGetName_CompoundObject_CanExec(this, e);
-                }
-                else
-                {
-                    e.Result = true;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetName_CompoundObject_CanExec != null)
+				{
+					OnGetName_CompoundObject_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
         }
 
-        // CanExecReason
-        public static event CanExecReasonMethodEventHandler<CompoundObject> OnGetName_CompoundObject_CanExecReason;
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObject> OnGetName_CompoundObject_CanExecReason;
 
         [EventBasedMethod("OnGetName_CompoundObject_CanExecReason")]
         public virtual string GetNameCanExecReason
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<string>();
-                if (OnGetName_CompoundObject_CanExecReason != null)
-                {
-                    OnGetName_CompoundObject_CanExecReason(this, e);
-                }
-                else
-                {
-                    e.Result = string.Empty;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetName_CompoundObject_CanExecReason != null)
+				{
+					OnGetName_CompoundObject_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
@@ -561,46 +587,46 @@ namespace Zetbox.App.Base
         }
         public static event ImplementInterfaces_Handler<CompoundObject> OnImplementInterfaces_CompoundObject;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-        // CanExec
-        public static event CanExecMethodEventHandler<CompoundObject> OnImplementInterfaces_CompoundObject_CanExec;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObject> OnImplementInterfaces_CompoundObject_CanExec;
 
         [EventBasedMethod("OnImplementInterfaces_CompoundObject_CanExec")]
         public override bool ImplementInterfacesCanExec
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<bool>();
-                if (OnImplementInterfaces_CompoundObject_CanExec != null)
-                {
-                    OnImplementInterfaces_CompoundObject_CanExec(this, e);
-                }
-                else
-                {
-                    e.Result = base.ImplementInterfacesCanExec;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnImplementInterfaces_CompoundObject_CanExec != null)
+				{
+					OnImplementInterfaces_CompoundObject_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.ImplementInterfacesCanExec;
+				}
+				return e.Result;
+			}
         }
 
-        // CanExecReason
-        public static event CanExecReasonMethodEventHandler<CompoundObject> OnImplementInterfaces_CompoundObject_CanExecReason;
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObject> OnImplementInterfaces_CompoundObject_CanExecReason;
 
         [EventBasedMethod("OnImplementInterfaces_CompoundObject_CanExecReason")]
         public override string ImplementInterfacesCanExecReason
         {
-            get
-            {
-                var e = new MethodReturnEventArgs<string>();
-                if (OnImplementInterfaces_CompoundObject_CanExecReason != null)
-                {
-                    OnImplementInterfaces_CompoundObject_CanExecReason(this, e);
-                }
-                else
-                {
-                    e.Result = base.ImplementInterfacesCanExecReason;
-                }
-                return e.Result;
-            }
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnImplementInterfaces_CompoundObject_CanExecReason != null)
+				{
+					OnImplementInterfaces_CompoundObject_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.ImplementInterfacesCanExecReason;
+				}
+				return e.Result;
+			}
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
@@ -626,7 +652,7 @@ namespace Zetbox.App.Base
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
-            switch (propertyName)
+            switch(propertyName)
             {
                 case "DefaultPropertyViewModelDescriptor":
                     {
@@ -670,14 +696,14 @@ namespace Zetbox.App.Base
 
         public override System.Threading.Tasks.Task TriggerFetch(string propName)
         {
-            switch (propName)
+            switch(propName)
             {
-                case "DefaultPropertyViewModelDescriptor":
-                    return TriggerFetchDefaultPropertyViewModelDescriptorAsync();
-                case "DefaultViewModelDescriptor":
-                    return TriggerFetchDefaultViewModelDescriptorAsync();
-                default:
-                    return base.TriggerFetch(propName);
+            case "DefaultPropertyViewModelDescriptor":
+                return TriggerFetchDefaultPropertyViewModelDescriptorAsync();
+            case "DefaultViewModelDescriptor":
+                return TriggerFetchDefaultViewModelDescriptorAsync();
+            default:
+                return base.TriggerFetch(propName);
             }
         }
 
@@ -728,7 +754,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.DefaultPropertyViewModelDescriptor,
                         (obj, val) => obj.DefaultPropertyViewModelDescriptor = val,
-                        obj => OnDefaultPropertyViewModelDescriptor_IsValid), 
+						obj => OnDefaultPropertyViewModelDescriptor_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<CompoundObject, Zetbox.App.GUI.ViewModelDescriptor>(
                         lazyCtx,
@@ -737,7 +763,7 @@ namespace Zetbox.App.Base
                         null,
                         obj => obj.DefaultViewModelDescriptor,
                         (obj, val) => obj.DefaultViewModelDescriptor = val,
-                        obj => OnDefaultViewModelDescriptor_IsValid), 
+						obj => OnDefaultViewModelDescriptor_IsValid), 
                     // position columns
                 };
             }
@@ -836,10 +862,9 @@ namespace Zetbox.App.Base
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Zetbox.API.AccessRights.None)
-            {
-                this._fk_DefaultPropertyViewModelDescriptor = binStream.ReadNullableInt32();
-                this._fk_DefaultViewModelDescriptor = binStream.ReadNullableInt32();
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._fk_DefaultPropertyViewModelDescriptor = binStream.ReadNullableInt32();
+            this._fk_DefaultViewModelDescriptor = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -862,14 +887,13 @@ namespace Zetbox.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName)
-            {
-                case "Zetbox.App.Base|DefaultPropertyViewModelDescriptor":
-                    this._fk_guid_DefaultPropertyViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
-                    break;
-                case "Zetbox.App.Base|DefaultViewModelDescriptor":
-                    this._fk_guid_DefaultViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
-                    break;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Base|DefaultPropertyViewModelDescriptor":
+                this._fk_guid_DefaultPropertyViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.Base|DefaultViewModelDescriptor":
+                this._fk_guid_DefaultViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
+                break;
             }
         }
 

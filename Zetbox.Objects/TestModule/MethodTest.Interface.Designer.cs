@@ -22,6 +22,8 @@ namespace Zetbox.App.Test
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.MethodTest> Children { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.MethodTest>> GetProp_Children();
+
         /// <summary>
         /// 
         /// </summary>
@@ -38,6 +40,10 @@ namespace Zetbox.App.Test
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.Test.MethodTest> GetProp_Parent();
+
+        System.Threading.Tasks.Task SetProp_Parent(Zetbox.App.Test.MethodTest newValue);
 
         /// <summary>
         /// 

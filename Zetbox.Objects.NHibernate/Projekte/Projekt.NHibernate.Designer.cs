@@ -87,6 +87,11 @@ namespace Zetbox.App.Projekte
             }
         }
 
+        public System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.AuditEntry>> GetProp_AuditJournal()
+        {
+            return System.Threading.Tasks.Task.FromResult(AuditJournal);
+        }
+
         private ClientValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl>> _AuditJournal;
         private ProjectedCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl> _AuditJournalCollection;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
@@ -130,6 +135,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         public System.Threading.Tasks.Task TriggerFetchAuftraegeAsync()
         {
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Projekte.Auftrag>>(this.Auftraege);
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Projekte.Auftrag>> GetProp_Auftraege()
+        {
+            await TriggerFetchAuftraegeAsync();
+            return _Auftraege;
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuftraege_PostSetter;
@@ -256,6 +267,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_ChangedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(ChangedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_ChangedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchChangedByAsync();
+            ChangedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -441,6 +463,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_CreatedBy()
+        {
+            return System.Threading.Tasks.Task.FromResult(CreatedBy);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_CreatedBy(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchCreatedByAsync();
+            CreatedBy = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]
@@ -894,6 +927,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 			}
 		}
 
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Projekte.Mitarbeiter>> GetProp_Mitarbeiter()
+        {
+            await TriggerFetchMitarbeiterAsync();
+            return _Mitarbeiter;
+        }
+
 		private NHibernateBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl> _Mitarbeiter;
 		// ignored, but required for Serialization
         private bool Mitarbeiter_was_eagerLoaded = false;
@@ -1001,6 +1040,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
         public System.Threading.Tasks.Task TriggerFetchTasksAsync()
         {
             return System.Threading.Tasks.Task.FromResult<ICollection<Zetbox.App.Projekte.Task>>(this.Tasks);
+        }
+
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Projekte.Task>> GetProp_Tasks()
+        {
+            await TriggerFetchTasksAsync();
+            return _Tasks;
         }
 
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTasks_PostSetter;

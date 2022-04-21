@@ -32,6 +32,8 @@ namespace Zetbox.App.Base
         [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Base.EnumerationEntry> EnumerationEntries { get; }
 
+        System.Threading.Tasks.Task<IList<Zetbox.App.Base.EnumerationEntry>> GetProp_EnumerationEntries();
+
         /// <summary>
         /// 
         /// </summary>

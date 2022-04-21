@@ -41,6 +41,10 @@ namespace Zetbox.App.GUI
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_Icon();
+
+        System.Threading.Tasks.Task SetProp_Icon(Zetbox.App.GUI.Icon newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -68,6 +72,10 @@ namespace Zetbox.App.GUI
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.NavigationScreen> GetProp_RootScreen();
+
+        System.Threading.Tasks.Task SetProp_RootScreen(Zetbox.App.GUI.NavigationScreen newValue);
+
         /// <summary>
         /// 
         /// </summary>
@@ -84,5 +92,9 @@ namespace Zetbox.App.GUI
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_WorkspaceViewModel();
+
+        System.Threading.Tasks.Task SetProp_WorkspaceViewModel(Zetbox.App.GUI.ViewModelDescriptor newValue);
     }
 }

@@ -22,6 +22,8 @@ namespace Zetbox.App.Base
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.InstanceConstraint> Constraints { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.InstanceConstraint>> GetProp_Constraints();
+
         /// <summary>
         /// Standard Icon wenn IIcon nicht implementiert ist
         /// </summary>
@@ -38,6 +40,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_DefaultIcon();
+
+        System.Threading.Tasks.Task SetProp_DefaultIcon(Zetbox.App.GUI.Icon newValue);
 
         /// <summary>
         /// Description of this DataType
@@ -67,6 +73,8 @@ namespace Zetbox.App.Base
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Interface> ImplementsInterfaces { get; }
 
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Interface>> GetProp_ImplementsInterfaces();
+
         /// <summary>
         /// Liste aller Methoden der Objektklasse.
         /// </summary>
@@ -74,6 +82,8 @@ namespace Zetbox.App.Base
         [Zetbox.API.DefinitionGuid("e9f8a1f1-a5ed-44a6-bbf3-9b040766f19f")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Method> Methods { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.Method>> GetProp_Methods();
 
         /// <summary>
         /// Der Name der Objektklasse
@@ -93,6 +103,8 @@ namespace Zetbox.App.Base
         [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Base.Property> Properties { get; }
 
+        System.Threading.Tasks.Task<IList<Zetbox.App.Base.Property>> GetProp_Properties();
+
         /// <summary>
         /// Optional requested ControlKind
         /// </summary>
@@ -109,6 +121,10 @@ namespace Zetbox.App.Base
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> GetProp_RequestedKind();
+
+        System.Threading.Tasks.Task SetProp_RequestedKind(Zetbox.App.GUI.ControlKind newValue);
 
         /// <summary>
         /// 

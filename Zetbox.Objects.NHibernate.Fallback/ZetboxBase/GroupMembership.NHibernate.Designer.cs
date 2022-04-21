@@ -57,6 +57,17 @@ namespace Zetbox.App.Base
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
+        
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Group> GetProp_Group()
+        {
+            return System.Threading.Tasks.Task.FromResult(Group);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Group(Zetbox.App.Base.Group newValue)
+        {
+            await TriggerFetchGroupAsync();
+            Group = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

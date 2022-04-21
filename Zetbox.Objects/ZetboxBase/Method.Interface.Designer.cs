@@ -70,6 +70,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> GetProp_Icon();
+
+        System.Threading.Tasks.Task SetProp_Icon(Zetbox.App.GUI.Icon newValue);
+
         /// <summary>
         /// Method will be invoked on server if true
         /// </summary>
@@ -127,6 +131,10 @@ namespace Zetbox.App.Base
 			set;
 		}
 
+        System.Threading.Tasks.Task<Zetbox.App.Base.DataType> GetProp_ObjectClass();
+
+        System.Threading.Tasks.Task SetProp_ObjectClass(Zetbox.App.Base.DataType newValue);
+
         /// <summary>
         /// Parameter der Methode
         /// </summary>
@@ -135,6 +143,8 @@ namespace Zetbox.App.Base
         [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Base.BaseParameter> Parameter { get; }
 
+        System.Threading.Tasks.Task<IList<Zetbox.App.Base.BaseParameter>> GetProp_Parameter();
+
         /// <summary>
         /// This method is show by these properties
         /// </summary>
@@ -142,6 +152,8 @@ namespace Zetbox.App.Base
         [Zetbox.API.DefinitionGuid("f062792d-757f-4c39-bdb1-1cc81d063595")]
         [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.ObjectReferenceProperty> ShowByProperties { get; }
+
+        System.Threading.Tasks.Task<ICollection<Zetbox.App.Base.ObjectReferenceProperty>> GetProp_ShowByProperties();
 
         /// <summary>
         /// 

@@ -118,6 +118,12 @@ namespace Zetbox.App.Test
             }
         }
 
+        public async System.Threading.Tasks.Task<ICollection<Zetbox.App.Test.One_to_N_relations_N>> GetProp_NSide()
+        {
+            await TriggerFetchNSideAsync();
+            return _NSide;
+        }
+
         System.Threading.Tasks.Task _triggerFetchNSideTask;
         public System.Threading.Tasks.Task TriggerFetchNSideAsync()
         {
@@ -185,6 +191,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
                 }
                 return _OrderedNSide;
             }
+        }
+
+        public async System.Threading.Tasks.Task<IList<Zetbox.App.Test.One_to_N_relations_OrderedN>> GetProp_OrderedNSide()
+        {
+            await TriggerFetchOrderedNSideAsync();
+            return _OrderedNSide;
         }
 
         System.Threading.Tasks.Task _triggerFetchOrderedNSideTask;

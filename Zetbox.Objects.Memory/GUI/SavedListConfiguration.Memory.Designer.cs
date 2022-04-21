@@ -188,6 +188,17 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
+        public System.Threading.Tasks.Task<Zetbox.App.Base.Identity> GetProp_Owner()
+        {
+            return TriggerFetchOwnerAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Owner(Zetbox.App.Base.Identity newValue)
+        {
+            await TriggerFetchOwnerAsync();
+            OwnerImpl = (Zetbox.App.Base.IdentityMemoryImpl)newValue;
+        }
+
         private int? __fk_OwnerCache;
 
         private int? _fk_Owner {
@@ -314,6 +325,17 @@ namespace Zetbox.App.GUI
             set { TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        public System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> GetProp_Type()
+        {
+            return TriggerFetchTypeAsync();
+        }
+
+        public async System.Threading.Tasks.Task SetProp_Type(Zetbox.App.Base.ObjectClass newValue)
+        {
+            await TriggerFetchTypeAsync();
+            TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)newValue;
+        }
 
         private int? __fk_TypeCache;
 
