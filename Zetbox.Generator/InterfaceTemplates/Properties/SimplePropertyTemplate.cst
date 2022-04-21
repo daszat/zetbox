@@ -54,4 +54,8 @@
 			get; 
 			set;
 		}
+
+        System.Threading.Tasks.Task<<%= type %>> GetProp_<%= name %>();
+
+        System.Threading.Tasks.Task SetProp_<%= name %>(<%= type %> newValue);
 <% } %>

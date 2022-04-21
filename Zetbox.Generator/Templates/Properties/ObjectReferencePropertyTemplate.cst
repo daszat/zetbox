@@ -70,15 +70,15 @@
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 <% DelegatingProperty.Call(Host, ctx, name, referencedInterface, implName, referencedImplementation); %>
 
-        public System.Threading.Tasks.Task<<%= referencedInterface %>> Get<%= name %>()
+        public System.Threading.Tasks.Task<<%= referencedInterface %>> GetProp_<%= name %>()
         {
             return TriggerFetch<%= name %>Async();
         }
 
-        public async System.Threading.Tasks.Task<<%= referencedInterface %>> Set<%= name %>(<%= referencedInterface %> newValue)
+        public async System.Threading.Tasks.Task SetProp_<%= name %>(<%= referencedInterface %> newValue)
         {
             await TriggerFetch<%= name %>Async();
-            <%= implName %> = newValue;
+            <%= implName %> = (<%= referencedImplementation %>)newValue;
         }
 
         private int? _<%= fkBackingName %>Cache;

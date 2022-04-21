@@ -60,6 +60,17 @@
 <% } %>
         // PositionStorage=<%= String.IsNullOrEmpty(positionPropertyName) ? "none" : positionPropertyName %>;
         // Target <%= relDataTypeExportable ? String.Empty : "not " %>exportable; does <%= callGetterSetterEvents ? String.Empty : "not " %>call events
+        
+        public System.Threading.Tasks.Task<<%= referencedInterface %>> GetProp_<%= name %>()
+        {
+            return System.Threading.Tasks.Task.FromResult(<%= name %>);
+        }
+
+        public async System.Threading.Tasks.Task SetProp_<%= name %>(<%= referencedInterface %> newValue)
+        {
+            await TriggerFetch<%= name %>Async();
+            <%= name %> = newValue;
+        }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 		[System.Runtime.Serialization.IgnoreDataMember]

@@ -33,7 +33,6 @@ namespace Zetbox.API
 
         public static void TryRunSynchronously(this Task task)
         {
-            Console.WriteLine($"Task Status = {task.Status}");
             if (task.Status == TaskStatus.Created)
             {
                 try
@@ -42,7 +41,6 @@ namespace Zetbox.API
                 }
                 catch (InvalidOperationException)
                 {
-                    Console.WriteLine($"Task Status = {task.Status}");
                     task.Wait();
                 }
             }

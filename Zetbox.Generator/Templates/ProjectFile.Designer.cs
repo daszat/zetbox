@@ -4,7 +4,7 @@ using Zetbox.API.Server;
 
 namespace Zetbox.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst")]
     public partial class ProjectFile : Zetbox.Generator.ResourceTemplate
     {
 		protected Zetbox.API.IZetboxContext ctx;
@@ -32,7 +32,7 @@ namespace Zetbox.Generator.Templates
 
         public override void Generate()
         {
-#line 27 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 27 "C:\projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("<Project Sdk=\"Microsoft.NET.Sdk\">\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
 this.WriteObjects("    <TargetFramework>net5.0</TargetFramework>\r\n");
@@ -67,9 +67,9 @@ this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' !=
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
-#line 61 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 61 "C:\projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalProperties(); 
-#line 62 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 62 "C:\projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <PackageReference Include=\"log4net\" Version=\"2.0.10\" />\r\n");
@@ -79,16 +79,16 @@ this.WriteObjects("      <SpecificVersion>False</SpecificVersion>\r\n");
 this.WriteObjects("      <HintPath>$(ZetboxAPIPath)\\Common\\Zetbox.API.dll</HintPath>\r\n");
 this.WriteObjects("      <Private>False</Private>\r\n");
 this.WriteObjects("    </Reference>  \r\n");
-#line 71 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 71 "C:\projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalReferences(); 
-#line 72 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 72 "C:\projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <None Include=\"Zetbox.Objects.snk\" />\r\n");
 this.WriteObjects("  </ItemGroup>\r\n");
-#line 76 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 76 "C:\projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalItemGroups(); 
-#line 77 "D:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 77 "C:\projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("</Project>");
 
         }
