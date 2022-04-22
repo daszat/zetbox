@@ -292,6 +292,64 @@ namespace Zetbox.API
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
 
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by ID
+        /// TODO: Move to IZetboxContextInternals interface
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, int ID);
+        /// <summary>
+        /// Find the Persistence Object of the given type by ID
+        /// TODO: Move to IZetboxContextInternals interface
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Task<T> FindPersistenceObjectAsync<T>(int ID) where T : class, IPersistenceObject;
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by an ExportGuid
+        /// TODO: Move to IZetboxContextInternals interface
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <returns>IPersistenceObject or null if the Object was not found.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, Guid exportGuid);
+        /// <summary>
+        /// Find the Persistence Object of the given type by an ExportGuid
+        /// TODO: Move to IZetboxContextInternals interface
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <returns>IPersistenceObject or null if the Object was not found.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Task<T> FindPersistenceObjectAsync<T>(Guid exportGuid) where T : class, IPersistenceObject;
+
+        /// <summary>
+        /// Find Persistence Objects of the given type by ExportGuids
+        /// TODO: Move to IZetboxContextInternals interface
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
+        /// <returns>A List of IPersistenceObject.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Task<IEnumerable<IPersistenceObject>> FindPersistenceObjectsAsync(InterfaceType ifType, IEnumerable<Guid> exportGuids);
+        /// <summary>
+        /// Find Persistence Objects of the given type by ExportGuids
+        /// TODO: Move to IZetboxContextInternals interface
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
+        /// <returns>A List of IPersistenceObject.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Task<IEnumerable<T>> FindPersistenceObjectsAsync<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
+
         System.IO.Stream GetStream(int ID);
         System.IO.FileInfo GetFileInfo(int ID);
         Task<System.IO.Stream> GetStreamAsync(int ID);

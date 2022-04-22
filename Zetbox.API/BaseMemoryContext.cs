@@ -431,12 +431,30 @@ namespace Zetbox.API
         }
 
         /// <inheritdoc />
+        public Task<T> FindPersistenceObjectAsync<T>(int ID) where T : class, IPersistenceObject
+        {
+            CheckDisposed();
+            //CheckInterfaceAssembly("T", typeof(T));
+
+            return Task.FromResult((T)FindPersistenceObject(_iftFactory(typeof(T)), ID));
+        }
+
+        /// <inheritdoc />
         public IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
         {
             CheckDisposed();
             //CheckInterfaceAssembly("ifType", ifType.Type);
 
             return objects.Lookup(ifType, ID);
+        }
+
+        /// <inheritdoc />
+        public Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, int ID)
+        {
+            CheckDisposed();
+            //CheckInterfaceAssembly("ifType", ifType.Type);
+
+            return Task.FromResult(objects.Lookup(ifType, ID));
         }
 
         /// <inheritdoc />
@@ -449,12 +467,30 @@ namespace Zetbox.API
         }
 
         /// <inheritdoc />
+        public Task<T> FindPersistenceObjectAsync<T>(Guid exportGuid) where T : class, IPersistenceObject
+        {
+            CheckDisposed();
+            //CheckInterfaceAssembly("T", typeof(T));
+
+            return Task.FromResult((T)objects.Lookup(exportGuid));
+        }
+
+        /// <inheritdoc />
         public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
         {
             CheckDisposed();
             //CheckInterfaceAssembly("ifType", ifType.Type);
 
             return objects.Lookup(exportGuid);
+        }
+
+        /// <inheritdoc />
+        public Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, Guid exportGuid)
+        {
+            CheckDisposed();
+            //CheckInterfaceAssembly("ifType", ifType.Type);
+
+            return Task.FromResult(objects.Lookup(exportGuid));
         }
 
         /// <inheritdoc />
@@ -471,6 +507,19 @@ namespace Zetbox.API
         }
 
         /// <inheritdoc />
+        public Task<IEnumerable<IPersistenceObject>> FindPersistenceObjectsAsync(InterfaceType ifType, IEnumerable<Guid> exportGuids)
+        {
+            CheckDisposed();
+            //CheckInterfaceAssembly("ifType", ifType.Type);
+            if (exportGuids == null) { throw new ArgumentNullException("exportGuids"); }
+
+            var query = objects[ifType];
+            if (query == null)
+                return Task.FromResult(new List<IPersistenceObject>().AsEnumerable());
+            return Task.FromResult(query.Cast<IExportableInternal>().Where(o => exportGuids.Contains(o.ExportGuid)).Cast<IPersistenceObject>().AsEnumerable());
+        }
+
+        /// <inheritdoc />
         public IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
         {
             CheckDisposed();
@@ -478,6 +527,16 @@ namespace Zetbox.API
             if (exportGuids == null) { throw new ArgumentNullException("exportGuids"); }
 
             return FindPersistenceObjects(_iftFactory(typeof(T)), exportGuids).Cast<T>();
+        }
+
+        /// <inheritdoc />
+        public Task<IEnumerable<T>> FindPersistenceObjectsAsync<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
+        {
+            CheckDisposed();
+            //CheckInterfaceAssembly("T", typeof(T));
+            if (exportGuids == null) { throw new ArgumentNullException("exportGuids"); }
+
+            return Task.FromResult(FindPersistenceObjects(_iftFactory(typeof(T)), exportGuids).Cast<T>());
         }
 
         /// <inheritdoc />

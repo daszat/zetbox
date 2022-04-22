@@ -1046,6 +1046,121 @@ namespace Zetbox.DalProvider.Client
                 .Where(o => exportGuids.Contains(((Zetbox.App.Base.IExportable)o).ExportGuid));
         }
 
+
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by ID
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, int ID)
+        {
+            CheckDisposed();
+
+            // TODO: should be able to pass "type" unmodified, like this
+            // See Case 552
+            //return GetQuery(type).Single(o => o.ID == ID);
+
+            return Task.FromResult((IPersistenceObject)this.GetType().FindGenericMethod("FindPersistenceObject",
+                new Type[] { ifType.Type },
+                new Type[] { typeof(int) })
+                .Invoke(this, new object[] { ID }));
+        }
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by ID.
+        /// Note: This method is not supported on the client
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public Task<T> FindPersistenceObjectAsync<T>(int ID) where T : class, IPersistenceObject
+        {
+            CheckDisposed();
+            IPersistenceObject cacheHit = _objects.Lookup(_iftFactory(typeof(T)), ID);
+            if (cacheHit != null)
+            {
+                return Task.FromResult((T)cacheHit);
+            }
+            else
+            {
+                return Task.FromResult(GetPersistenceObjectQuery<T>()
+                    .WithDeactivated()
+                    .SingleOrDefault(o => o.ID == ID)
+                    ?? MakeAccessDeniedProxy<T>(ID));
+            }
+        }
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by an ExportGuid
+        /// Note: This method is not supported on the client yet
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <returns>IPersistenceObject or null if the Object was not found.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, Guid exportGuid)
+        {
+            // TODO: should be able to pass "type" unmodified, like this
+            // See Case 552
+            //return GetQuery(type).Single(o => o.ID == ID);
+
+            return Task.FromResult((IPersistenceObject)this.GetType().FindGenericMethod("FindPersistenceObject",
+                new Type[] { ifType.Type },
+                new Type[] { typeof(Guid) })
+                .Invoke(this, new object[] { exportGuid }));
+        }
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by an ExportGuid
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <returns>IPersistenceObject or null if the Object was not found.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public Task<T> FindPersistenceObjectAsync<T>(Guid exportGuid) where T : class, IPersistenceObject
+        {
+            return Task.FromResult(GetPersistenceObjectQuery<T>()
+                .WithDeactivated()
+                .SingleOrDefault(o => ((Zetbox.App.Base.IExportable)o).ExportGuid == exportGuid)
+                ?? MakeAccessDeniedProxy<T>(exportGuid));
+        }
+
+        /// <summary>
+        /// Find Persistence Objects of the given type by ExportGuids
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
+        /// <returns>A List of IPersistenceObject.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public Task<IEnumerable<IPersistenceObject>> FindPersistenceObjectsAsync(InterfaceType ifType, IEnumerable<Guid> exportGuids)
+        {
+            // TODO: should be able to pass "type" unmodified, like this
+            // See Case 552
+            //return GetQuery(type).Single(o => o.ID == ID);
+
+            return Task.FromResult((IEnumerable<IPersistenceObject>)this.GetType().FindGenericMethod("FindPersistenceObjects",
+                new Type[] { ifType.Type },
+                new Type[] { typeof(IEnumerable<Guid>) })
+                .Invoke(this, new object[] { exportGuids }));
+        }
+        /// <summary>
+        /// Find Persistence Objects of the given type by ExportGuids
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
+        /// <returns>A List of IPersistenceObject.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public Task<IEnumerable<T>> FindPersistenceObjectsAsync<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
+        {
+            return Task.FromResult(GetPersistenceObjectQuery<T>()
+                .WithDeactivated()
+                .Where(o => exportGuids.Contains(((Zetbox.App.Base.IExportable)o).ExportGuid)) as IEnumerable<T>);
+        }
+
         /// <inheritdoc />
         public event GenericEventHandler<IZetboxContext> Changed;
         protected virtual void OnChanged()

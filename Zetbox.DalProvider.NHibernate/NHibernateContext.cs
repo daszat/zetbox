@@ -622,6 +622,91 @@ namespace Zetbox.DalProvider.NHibernate
             }
         }
 
+
+        public override Task<T> FindPersistenceObjectAsync<T>(int ID)
+        {
+            CheckDisposed();
+
+            var ifType = GetInterfaceType(typeof(T));
+
+            var result = _attachedObjects.Lookup(ifType, ID);
+
+            if (result != null)
+                return Task.FromResult((T)result);
+
+            var implType = ToImplementationType(ifType);
+
+            var q = NhFindById(implType, ID);
+            return Task.FromResult((T)AttachAndWrap((IProxyObject)q));
+        }
+
+        public override Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, Guid exportGuid)
+        {
+            CheckDisposed();
+            return Task.FromResult((IPersistenceObject)this.GetType().FindGenericMethod("FindPersistenceObject", new Type[] { ifType.Type }, new Type[] { typeof(Guid) }).Invoke(this, new object[] { exportGuid }));
+        }
+
+        public override Task<T> FindPersistenceObjectAsync<T>(Guid exportGuid)
+        {
+            CheckDisposed();
+
+            var result = _attachedObjects.Lookup(exportGuid);
+
+            if (result != null)
+                return Task.FromResult((T)result);
+
+            var implType = ToImplementationType(GetInterfaceType(typeof(T)));
+            var q = NhFindByExportGuid(implType, exportGuid);
+            return Task.FromResult((T)AttachAndWrap((IProxyObject)q));
+        }
+
+        public override Task<IEnumerable<IPersistenceObject>> FindPersistenceObjectsAsync(InterfaceType ifType, IEnumerable<Guid> exportGuids)
+        {
+            CheckDisposed();
+            return Task.FromResult(((System.Collections.IEnumerable)this.GetType()
+                .FindGenericMethod("FindPersistenceObjects",
+                    new Type[] { ifType.Type },
+                    new Type[] { typeof(IEnumerable<Guid>) })
+                .Invoke(this, new object[] { exportGuids }))
+                .Cast<IPersistenceObject>());
+        }
+
+        public override Task<IEnumerable<T>> FindPersistenceObjectsAsync<T>(IEnumerable<Guid> exportGuids)
+        {
+            CheckDisposed();
+            // TODO: do batching here
+
+            var list = new List<T>();
+            
+            foreach (var guid in exportGuids)
+            {
+                var result = FindPersistenceObject<T>(guid);
+                if (result != null)
+                    list.Add(result);
+            }
+
+            return Task.FromResult(list as IEnumerable<T>);
+        }
+
+        public override Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, int ID)
+        {
+            CheckDisposed();
+            try
+            {
+                return Task.FromResult((IPersistenceObject)this.GetType()
+                    .FindGenericMethod("FindPersistenceObject",
+                        new Type[] { ifType.Type },
+                        new Type[] { typeof(int) })
+                    .Invoke(this, new object[] { ID }));
+            }
+            catch (System.Reflection.TargetInvocationException ex)
+            {
+                // unwrap "business" exception
+                throw ex.StripTargetInvocationExceptions();
+            }
+        }
+
+
         public override ImplementationType GetImplementationType(Type t)
         {
             CheckDisposed();

@@ -203,6 +203,36 @@ namespace Zetbox.API.Server.Mocks
             throw new NotImplementedException();
         }
 
+        public override Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<T> FindPersistenceObjectAsync<T>(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, Guid exportGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<T> FindPersistenceObjectAsync<T>(Guid exportGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<IEnumerable<IPersistenceObject>> FindPersistenceObjectsAsync(InterfaceType ifType, IEnumerable<Guid> exportGuids)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<IEnumerable<T>> FindPersistenceObjectsAsync<T>(IEnumerable<Guid> exportGuids)
+        {
+            throw new NotImplementedException();
+        }
+
         public override ContextIsolationLevel IsolationLevel
         {
             get { return ContextIsolationLevel.PreferContextCache; }

@@ -470,6 +470,37 @@ namespace Zetbox.API.Mocks
 
             return Task.CompletedTask;
         }
+
+        public Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<T> IReadOnlyZetboxContext.FindPersistenceObjectAsync<T>(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, Guid exportGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<T> IReadOnlyZetboxContext.FindPersistenceObjectAsync<T>(Guid exportGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IPersistenceObject>> FindPersistenceObjectsAsync(InterfaceType ifType, IEnumerable<Guid> exportGuids)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IEnumerable<T>> IReadOnlyZetboxContext.FindPersistenceObjectsAsync<T>(IEnumerable<Guid> exportGuids)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool IsElevatedMode { get { return _elevatedMode; } }
         public event EventHandler IsElevatedModeChanged;
     }

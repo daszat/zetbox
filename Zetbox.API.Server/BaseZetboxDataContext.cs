@@ -745,6 +745,57 @@ namespace Zetbox.API.Server
         public abstract IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
 
         /// <summary>
+        /// Find the Persistence Object of the given type by ID
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public abstract Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, int ID);
+        /// <summary>
+        /// Find the Persistence Object of the given type by ID
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public abstract Task<T> FindPersistenceObjectAsync<T>(int ID) where T : class, IPersistenceObject;
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by an ExportGuid
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <returns>IPersistenceObject or null if the Object was not found.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public abstract Task<IPersistenceObject> FindPersistenceObjectAsync(InterfaceType ifType, Guid exportGuid);
+        /// <summary>
+        /// Find the Persistence Object of the given type by an ExportGuid
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <returns>IPersistenceObject or null if the Object was not found.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public abstract Task<T> FindPersistenceObjectAsync<T>(Guid exportGuid) where T : class, IPersistenceObject;
+
+        /// <summary>
+        /// Find Persistence Objects of the given type by ExportGuids
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
+        /// <returns>A List of IPersistenceObject.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public abstract Task<IEnumerable<IPersistenceObject>> FindPersistenceObjectsAsync(InterfaceType ifType, IEnumerable<Guid> exportGuids);
+        /// <summary>
+        /// Find Persistence Objects of the given type by ExportGuids
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
+        /// <returns>A List of IPersistenceObject.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public abstract Task<IEnumerable<T>> FindPersistenceObjectsAsync<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
+
+        /// <summary>
         /// Create and store a Blob.
         /// </summary>
         /// <remarks>In contrast to the client's implementation, this does not submit the blob immediately. This may cause orphaned files in the document store. A separate task will re-link those files.</remarks>        
