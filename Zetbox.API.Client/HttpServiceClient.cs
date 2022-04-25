@@ -79,7 +79,7 @@ namespace Zetbox.API.Client
                 sendRequest(reqWriter);
                 reqStream.Seek(0, SeekOrigin.Begin);
                 var content = new StreamContent(reqStream);
-                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("x-application/stream");
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
                 response = await httpClient.PostAsync(destination, content);
             }
             try

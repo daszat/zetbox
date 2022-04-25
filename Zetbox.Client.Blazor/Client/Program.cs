@@ -30,7 +30,7 @@ void ConfigureContainer(ContainerBuilder builder)
         ConfigName = "Blazor Client",
         Client = new ZetboxConfig.ClientConfig()
         {
-            ServiceUri = "http://localhost:35201"
+            ServiceUri = "http://localhost:35201/ZetboxService"
         },
     };
 
