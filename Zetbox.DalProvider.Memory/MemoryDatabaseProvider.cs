@@ -59,14 +59,14 @@ namespace Zetbox.DalProvider.Memory
                 })
                 .As<IReadOnlyZetboxContext>()
                 .As<IZetboxContext>()
-                .OnActivated(args =>
+                .OnActivated(async args =>
                 {
                     var config = args.Context.Resolve<ZetboxConfig>();
                     var connectionString = config.Server.GetConnectionString(Helper.ZetboxConnectionStringKey);
                     Importer.LoadFromXml(args.Instance, connectionString.ConnectionString);
 
                     var manager = args.Context.Resolve<IMemoryActionsManager>();
-                    manager.Init(args.Instance);
+                    await manager.Init(args.Instance);
                 })
                 .InstancePerDependency();
         }

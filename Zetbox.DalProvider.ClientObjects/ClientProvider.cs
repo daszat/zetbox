@@ -60,10 +60,10 @@ namespace Zetbox.DalProvider.Client
                 .AsSelf()
                 .As<IZetboxContext>()
                 .As<IReadOnlyZetboxContext>()
-                .OnActivated(args =>
+                .OnActivated(async args =>
                 {
                     var manager = args.Context.Resolve<IClientActionsManager>();
-                    manager.Init(args.Context.Resolve<IFrozenContext>());
+                    await manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
                 .InstancePerDependency();
 

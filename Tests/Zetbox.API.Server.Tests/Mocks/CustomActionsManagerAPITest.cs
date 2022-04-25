@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Zetbox.API;
 
 namespace Zetbox.API.Server.Mocks
@@ -27,9 +27,11 @@ namespace Zetbox.API.Server.Mocks
         {
         }
 
-        public void Init(IReadOnlyZetboxContext ctx)
+        public Task Init(IReadOnlyZetboxContext ctx)
         {
             Reset();
+
+            return Task.CompletedTask;
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Zetbox.App.Extensions
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using System.Threading.Tasks;
     using Autofac;
     using Autofac.Core.Registration;
     using Zetbox.API;
@@ -117,12 +118,13 @@ namespace Zetbox.App.Extensions
         /// Initializes this CustomActionsManager. This method is thread-safe and won't do
         /// anything if the ActionsManager is already initialized.
         /// </summary>
-        public virtual void Init(IReadOnlyZetboxContext ctx)
+        public virtual async Task Init(IReadOnlyZetboxContext ctx)
         {
-            lock (SyncRoot)
+            // TODO: lock (SyncRoot)
             {
-                var implType = this.GetType();
                 if (IsInitialised) return;
+
+                var implType = this.GetType();
                 try
                 {
                     using (Log.InfoTraceMethodCallFormat("Init", "Initializing Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name))
@@ -130,7 +132,7 @@ namespace Zetbox.App.Extensions
                         Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
 
                         ReflectMethodsAndAssets(ctx);
-                        CreateInvokeInfosForDataTypes(ctx);
+                        await CreateInvokeInfosForDataTypes(ctx);
 
                         foreach (var key in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).Select(i => i.Key))
                         {
@@ -236,7 +238,7 @@ namespace Zetbox.App.Extensions
         /// Initializes caches for the provider of the given Context
         /// </summary>
         /// <param name="metaCtx">the context used to access the meta data</param>
-        private void CreateInvokeInfosForDataTypes(IReadOnlyZetboxContext metaCtx)
+        private async Task CreateInvokeInfosForDataTypes(IReadOnlyZetboxContext metaCtx)
         {
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 
@@ -244,7 +246,7 @@ namespace Zetbox.App.Extensions
             {
                 try
                 {
-                    CreateInvokeInfosForAssembly(objClass);
+                    await CreateInvokeInfosForAssembly(objClass);
                 }
                 catch (Exception ex)
                 {
@@ -258,7 +260,7 @@ namespace Zetbox.App.Extensions
             {
                 try
                 {
-                    CreateInvokeInfosForAssembly(objClass);
+                    await CreateInvokeInfosForAssembly(objClass);
                 }
                 catch (Exception ex)
                 {
@@ -284,11 +286,11 @@ namespace Zetbox.App.Extensions
 
         #region Walk through objectclass and create InvocationInfos
 
-        private void CreateInvokeInfosForAssembly(DataType objClass)
+        private async Task CreateInvokeInfosForAssembly(DataType objClass)
         {
             // baseObjClass.GetDataType(); is not possible here, because this
             // Method is currently attaching
-            var implTypeName = objClass.Module.Namespace
+            var implTypeName = (await objClass.GetProp_Module()).Namespace
                 + "."
                 + objClass.Name
                 + ExtraSuffix
@@ -296,7 +298,7 @@ namespace Zetbox.App.Extensions
             var implType = Type.GetType(implTypeName);
             if (implType != null)
             {
-                CreateInvokeInfos(objClass, implType);
+                await CreateInvokeInfos(objClass, implType);
             }
             else
             {
@@ -307,9 +309,9 @@ namespace Zetbox.App.Extensions
             }
         }
 
-        private EventBasedMethodAttribute FindEventBasedMethodAttribute(Method method, Type implType)
+        private async Task<EventBasedMethodAttribute> FindEventBasedMethodAttribute(Method method, Type implType)
         {
-            Type[] paramTypes = method.Parameter
+            Type[] paramTypes = (await method.GetProp_Parameter())
                     .Where(p => !p.IsReturnParameter)
                     .Select(p => p.GuessParameterType())
                     .ToArray();
@@ -354,7 +356,7 @@ namespace Zetbox.App.Extensions
             }
         }
 
-        private void CreateInvokeInfos(DataType dt, Type implType)
+        private async Task CreateInvokeInfos(DataType dt, Type implType)
         {
             if (implType == null) throw new ArgumentNullException("implType");
             if (dt == null) throw new ArgumentNullException("dt");
@@ -365,7 +367,7 @@ namespace Zetbox.App.Extensions
             // New style
             foreach (var method in GetAllMethods(dt))
             {
-                var returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
+                var returnParam = (await method.GetProp_Parameter()).SingleOrDefault(p => p.IsReturnParameter);
                 var infrastructureParameters = returnParam == null
                     ? new Type[] { dtType }
                     : new Type[] { dtType, typeof(MethodReturnEventArgs<>).MakeGenericType(returnParam.GuessParameterType()) };
@@ -383,7 +385,7 @@ namespace Zetbox.App.Extensions
 
                     // May be null on Methods without events like server side invocations or "embedded" methods
                     // or null if not found
-                    var attr = FindEventBasedMethodAttribute(method, implType); // The Method
+                    var attr = await FindEventBasedMethodAttribute(method, implType); // The Method
                     if (attr != null)
                     {
                         foreach (var mi in methodInfos)
@@ -434,7 +436,7 @@ namespace Zetbox.App.Extensions
 
             // Reflected Properties
             // New style
-            var props = dt.Properties;
+            var props = await dt.GetProp_Properties();
             if(props == null)
             {
                 throw new InvalidOperationException("Cant be null");

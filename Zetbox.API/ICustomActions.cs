@@ -19,6 +19,7 @@ namespace Zetbox.API
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Interface for a Custom Action Manager. Every Client and Server host must provide a Custom Action Manager.
@@ -29,7 +30,7 @@ namespace Zetbox.API
         /// Should load Metadata, create an Instance and cache Metadata for future use.
         /// </summary>
         /// <param name="ctx">the context to use for looking up MethodInvocations</param>
-        void Init(IReadOnlyZetboxContext ctx);
+        Task Init(IReadOnlyZetboxContext ctx);
     }
 
     public interface IDeploymentRestrictor

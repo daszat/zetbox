@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Zetbox.API;
 
 namespace Zetbox.Client.Mocks
@@ -25,9 +25,10 @@ namespace Zetbox.Client.Mocks
     {
         #region ICustomActionsManager Members
 
-        public void Init(IReadOnlyZetboxContext ctx)
+        public Task Init(IReadOnlyZetboxContext ctx)
         {
             // ignore
+            return Task.CompletedTask;
         }
 
         #endregion

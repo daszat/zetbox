@@ -52,10 +52,10 @@ namespace Zetbox.DalProvider.Memory
             moduleBuilder
                 .RegisterType<MemoryContext>()
                 .As<BaseMemoryContext>()
-                .OnActivated(args =>
+                .OnActivated(async args =>
                 {
                     var manager = args.Context.Resolve<IMemoryActionsManager>();
-                    manager.Init(args.Context.Resolve<IFrozenContext>());
+                    await manager.Init(args.Context.Resolve<IFrozenContext>());
 
                     ZetboxContextEventListenerHelper.OnCreated(args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>(), args.Instance);
                 })
@@ -81,12 +81,13 @@ namespace Zetbox.DalProvider.Memory
                         return memCtx;
                     })
                     .As<IFrozenContext>()
-                    .OnActivated(args =>
+                    .OnActivated(async args =>
                     {
                         var manager = args.Context.Resolve<IMemoryActionsManager>();
-                        manager.Init(args.Context.Resolve<IFrozenContext>());
+                        var listener = args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>();
+                        await manager.Init(args.Context.Resolve<IFrozenContext>());
 
-                        ZetboxContextEventListenerHelper.OnCreated(args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>(), args.Instance);
+                        ZetboxContextEventListenerHelper.OnCreated(listener, args.Instance);
                     })
                     .SingleInstance();
 

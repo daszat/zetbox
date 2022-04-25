@@ -11,7 +11,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CompoundObjects
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst")]
     public partial class Constructors : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -41,7 +41,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CompoundObjects
 
         public override void Generate()
         {
-#line 35 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 35 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 this.WriteObjects("        // used by NHibernate\r\n");
 this.WriteObjects("        public ",  className , "()\r\n");
 this.WriteObjects("            : this(null, null, null, null)\r\n");
@@ -56,35 +56,35 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>Create a instance, wrapping the specified proxy</summary>\r\n");
 this.WriteObjects("        public ",  className , "(IPersistenceObject parent, string property, Func<IFrozenContext> lazyCtx, ",  interfaceName , "Proxy proxy)\r\n");
-#line 49 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 49 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 if (String.IsNullOrEmpty(baseClassName)) { 
-#line 50 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 50 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 this.WriteObjects("            : base(lazyCtx) // do not pass proxy to base data object\r\n");
-#line 51 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 51 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 } else { 
-#line 52 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 52 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 this.WriteObjects("            : base(lazyCtx, proxy) // pass proxy to base nhibernate object\r\n");
-#line 53 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 53 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 } 
-#line 54 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 54 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            this.Proxy = proxy;\r\n");
 this.WriteObjects("            AttachToObject(parent, property);\r\n");
-#line 57 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 57 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers("lazyCtx"); 
-#line 58 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 58 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>the NHibernate proxy of the represented entity</summary>\r\n");
-#line 61 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 61 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 if (String.IsNullOrEmpty(baseClassName)) { 
-#line 62 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 62 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 this.WriteObjects("        internal readonly ",  interfaceName , "Proxy Proxy;\r\n");
-#line 63 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 63 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 } else { 
-#line 64 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 64 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 this.WriteObjects("        internal new readonly ",  interfaceName , "Proxy Proxy;\r\n");
-#line 65 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
+#line 65 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 } 
 
         }

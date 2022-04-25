@@ -79,10 +79,10 @@ namespace Zetbox.DalProvider.NHibernate
                         );
                 })
                 .As<IZetboxContext>()
-                .OnActivated(args =>
+                .OnActivated(async args =>
                 {
                     var manager = args.Context.Resolve<INHibernateActionsManager>();
-                    manager.Init(args.Context.Resolve<IFrozenContext>());
+                    await manager.Init(args.Context.Resolve<IFrozenContext>());
                     if (!_initQueryDone)
                     {
                         lock (_initLock)
@@ -122,28 +122,30 @@ namespace Zetbox.DalProvider.NHibernate
             return moduleBuilder
                 .Register(c =>
                 {
-                    var cfg = c.Resolve<ZetboxConfig>();
+                    var cc = c.Resolve<IComponentContext>();
+                    var cfg = cc.Resolve<ZetboxConfig>();
                     return new NHibernateContext(
-                        c.Resolve<IMetaDataResolver>(),
+                        cc.Resolve<IMetaDataResolver>(),
                         null,
                         cfg,
-                        c.Resolve<Func<IFrozenContext>>(),
-                        c.Resolve<InterfaceType.Factory>(),
-                        c.Resolve<NHibernateImplementationType.Factory>(),
-                        c.Resolve<global::NHibernate.ISessionFactory>(),
-                        c.Resolve<INHibernateImplementationTypeChecker>(),
-                        c.Resolve<IPerfCounter>(),
-                        c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider),
-                        c.Resolve<IEnumerable<IZetboxContextEventListener>>()
+                        cc.Resolve<Func<IFrozenContext>>(),
+                        cc.Resolve<InterfaceType.Factory>(),
+                        cc.Resolve<NHibernateImplementationType.Factory>(),
+                        cc.Resolve<global::NHibernate.ISessionFactory>(),
+                        cc.Resolve<INHibernateImplementationTypeChecker>(),
+                        cc.Resolve<IPerfCounter>(),
+                        cc.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider),
+                        cc.Resolve<IEnumerable<IZetboxContextEventListener>>()
                         );
                 })
                 .As<TInterface>()
-                .OnActivated(args =>
+                .OnActivated(async args =>
                 {
+                    var listener = args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>();
                     var manager = args.Context.Resolve<INHibernateActionsManager>();
-                    manager.Init(args.Context.Resolve<IFrozenContext>());
+                    await manager.Init(args.Context.Resolve<IFrozenContext>());
 
-                    ZetboxContextEventListenerHelper.OnCreated(args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>(), args.Instance);
+                    ZetboxContextEventListenerHelper.OnCreated(listener, args.Instance);
                 });
         }
     }

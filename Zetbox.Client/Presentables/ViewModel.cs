@@ -157,8 +157,9 @@ namespace Zetbox.Client.Presentables
             {
                 if (_CurrentPrincipal == null)
                 {
-                    var task = Task.Run(async () => _CurrentPrincipal = await _dependencies.PrincipalResolver.GetCurrent());
-                    task.TryRunSynchronously();
+                    var task = new Task(async () => _CurrentPrincipal = await _dependencies.PrincipalResolver.GetCurrent());
+                    task.Start();
+                    task.Wait();
                 }
                 return _CurrentPrincipal;
             }
