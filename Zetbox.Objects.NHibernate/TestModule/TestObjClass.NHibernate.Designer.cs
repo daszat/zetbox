@@ -632,7 +632,7 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_ObjectProp.HasValue)
-                this.ObjectProp = ((Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value));
+                this.ObjectProp = ((Zetbox.App.Projekte.KundeNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value)));
             else
                 this.ObjectProp = null;
         }

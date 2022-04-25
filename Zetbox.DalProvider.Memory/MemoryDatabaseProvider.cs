@@ -63,9 +63,9 @@ namespace Zetbox.DalProvider.Memory
                 {
                     var config = args.Context.Resolve<ZetboxConfig>();
                     var connectionString = config.Server.GetConnectionString(Helper.ZetboxConnectionStringKey);
-                    Importer.LoadFromXml(args.Instance, connectionString.ConnectionString);
-
                     var manager = args.Context.Resolve<IMemoryActionsManager>();
+
+                    await Importer.LoadFromXml(args.Instance, connectionString.ConnectionString);
                     await manager.Init(args.Instance);
                 })
                 .InstancePerDependency();

@@ -534,10 +534,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_Constrained.HasValue)
-                this.Constrained = ((Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_guid_Constrained.Value));
+                this.Constrained = ((Zetbox.App.Base.DataTypeNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.DataType>(_fk_guid_Constrained.Value)));
             else
             if (_fk_Constrained.HasValue)
-                this.Constrained = ((Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_Constrained.Value));
+                this.Constrained = ((Zetbox.App.Base.DataTypeNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.DataType>(_fk_Constrained.Value)));
             else
                 this.Constrained = null;
         }

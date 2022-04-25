@@ -1543,25 +1543,25 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
             // fix direct object references
 
             if (_fk_guid_Blob.HasValue)
-                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_guid_Blob.Value));
+                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Blob>(_fk_guid_Blob.Value)));
             else
             if (_fk_Blob.HasValue)
-                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_Blob.Value));
+                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value)));
             else
                 this.Blob = null;
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_Excerpt.HasValue)
-                this.Excerpt = ((at.dasz.DocumentManagement.ExcerptNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.Excerpt>(_fk_Excerpt.Value));
+                this.Excerpt = ((at.dasz.DocumentManagement.ExcerptNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<at.dasz.DocumentManagement.Excerpt>(_fk_Excerpt.Value)));
             else
                 this.Excerpt = null;
         }

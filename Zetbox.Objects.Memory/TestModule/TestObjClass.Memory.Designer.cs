@@ -626,7 +626,7 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_ObjectProp.HasValue)
-                ObjectPropImpl = (Zetbox.App.Projekte.KundeMemoryImpl)Context.Find<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value);
+                ObjectPropImpl = (Zetbox.App.Projekte.KundeMemoryImpl)(await Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value));
             else
                 ObjectPropImpl = null;
             // fix cached lists references

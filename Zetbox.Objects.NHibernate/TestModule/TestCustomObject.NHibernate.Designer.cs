@@ -808,12 +808,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             // fix direct object references
 
             if (_fk_MubBlah_Nav.HasValue)
-                this.MubBlah_Nav = ((Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.Muhblah>(_fk_MubBlah_Nav.Value));
+                this.MubBlah_Nav = ((Zetbox.App.Test.MuhblahNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Test.Muhblah>(_fk_MubBlah_Nav.Value)));
             else
                 this.MubBlah_Nav = null;
 
             if (_fk_MuhBlah_One_Nav.HasValue)
-                this.MuhBlah_One_Nav = ((Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value));
+                this.MuhBlah_One_Nav = ((Zetbox.App.Test.MuhblahNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value)));
             else
                 this.MuhBlah_One_Nav = null;
         }

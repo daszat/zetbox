@@ -848,12 +848,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             // fix direct object references
 
             if (_fk_MubBlah_Nav.HasValue)
-                MubBlah_NavImpl = (Zetbox.App.Test.MuhblahMemoryImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
+                MubBlah_NavImpl = (Zetbox.App.Test.MuhblahMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MubBlah_Nav.Value));
             else
                 MubBlah_NavImpl = null;
 
             if (_fk_MuhBlah_One_Nav.HasValue)
-                MuhBlah_One_NavImpl = (Zetbox.App.Test.MuhblahMemoryImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
+                MuhBlah_One_NavImpl = (Zetbox.App.Test.MuhblahMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value));
             else
                 MuhBlah_One_NavImpl = null;
             // fix cached lists references

@@ -431,12 +431,12 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_AnotherFile.HasValue)
-                this.AnotherFile = ((at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.File>(_fk_AnotherFile.Value));
+                this.AnotherFile = ((at.dasz.DocumentManagement.FileNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<at.dasz.DocumentManagement.File>(_fk_AnotherFile.Value)));
             else
                 this.AnotherFile = null;
 
             if (_fk_AnyFile.HasValue)
-                this.AnyFile = ((at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.File>(_fk_AnyFile.Value));
+                this.AnyFile = ((at.dasz.DocumentManagement.FileNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<at.dasz.DocumentManagement.File>(_fk_AnyFile.Value)));
             else
                 this.AnyFile = null;
         }

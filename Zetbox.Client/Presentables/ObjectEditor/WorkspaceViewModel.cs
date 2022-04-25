@@ -577,7 +577,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        public virtual Task<bool> OnDrop(object data)
+        public virtual async Task<bool> OnDrop(object data)
         {
             if (data is IDataObject[])
             {
@@ -587,7 +587,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                     ShowObject(obj);
                 }
 
-                return Task.FromResult(true);
+                return true;
             }
             if (data is string[])
             {
@@ -601,7 +601,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                         xml.Load(file);
                         if (xml.DocumentElement.LocalName == "ZetboxPackaging")
                         {
-                            objects.AddRange(Zetbox.App.Packaging.Importer.LoadFromXml(DataContext, file).OfType<IDataObject>());
+                            objects.AddRange((await Zetbox.App.Packaging.Importer.LoadFromXml(DataContext, file)).OfType<IDataObject>());
                         }
                     }
                     catch (Exception ex)
@@ -623,9 +623,9 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                         this.SelectedItem = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, objects.First());
                     }).Trigger();
                 }
-                return Task.FromResult(true);
+                return true;
             }
-            return Task.FromResult(false);
+            return false;
         }
 
         public virtual object DoDragDrop()

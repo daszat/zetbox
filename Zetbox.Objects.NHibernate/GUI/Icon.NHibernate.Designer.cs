@@ -706,18 +706,18 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_guid_Blob.HasValue)
-                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_guid_Blob.Value));
+                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Blob>(_fk_guid_Blob.Value)));
             else
             if (_fk_Blob.HasValue)
-                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_Blob.Value));
+                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value)));
             else
                 this.Blob = null;
 
             if (_fk_guid_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value)));
             else
             if (_fk_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_Module.Value)));
             else
                 this.Module = null;
         }

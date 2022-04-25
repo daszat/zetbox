@@ -431,10 +431,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_CompoundObject.HasValue)
-                this.CompoundObject = ((Zetbox.App.Base.CompoundObjectNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.CompoundObject>(_fk_guid_CompoundObject.Value));
+                this.CompoundObject = ((Zetbox.App.Base.CompoundObjectNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.CompoundObject>(_fk_guid_CompoundObject.Value)));
             else
             if (_fk_CompoundObject.HasValue)
-                this.CompoundObject = ((Zetbox.App.Base.CompoundObjectNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value));
+                this.CompoundObject = ((Zetbox.App.Base.CompoundObjectNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value)));
             else
                 this.CompoundObject = null;
         }

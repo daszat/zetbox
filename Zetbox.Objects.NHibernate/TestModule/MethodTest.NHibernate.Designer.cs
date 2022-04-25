@@ -1016,7 +1016,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             // fix direct object references
 
             if (_fk_Parent.HasValue)
-                this.Parent = ((Zetbox.App.Test.MethodTestNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.MethodTest>(_fk_Parent.Value));
+                this.Parent = ((Zetbox.App.Test.MethodTestNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Test.MethodTest>(_fk_Parent.Value)));
             else
                 this.Parent = null;
         }

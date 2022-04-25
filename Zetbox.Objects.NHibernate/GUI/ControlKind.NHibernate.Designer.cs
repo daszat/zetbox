@@ -664,18 +664,18 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             // fix direct object references
 
             if (_fk_guid_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value)));
             else
             if (_fk_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_Module.Value)));
             else
                 this.Module = null;
 
             if (_fk_guid_Parent.HasValue)
-                this.Parent = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_Parent.Value));
+                this.Parent = ((Zetbox.App.GUI.ControlKindNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_Parent.Value)));
             else
             if (_fk_Parent.HasValue)
-                this.Parent = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_Parent.Value));
+                this.Parent = ((Zetbox.App.GUI.ControlKindNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_Parent.Value)));
             else
                 this.Parent = null;
         }

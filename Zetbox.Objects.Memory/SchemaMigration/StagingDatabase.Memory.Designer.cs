@@ -1119,20 +1119,20 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Stagin
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 ChangedByImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 CreatedByImpl = null;
 
             if (_fk_guid_MigrationProject.HasValue)
-                MigrationProjectImpl = (Zetbox.App.SchemaMigration.MigrationProjectMemoryImpl)Context.FindPersistenceObject<Zetbox.App.SchemaMigration.MigrationProject>(_fk_guid_MigrationProject.Value);
+                MigrationProjectImpl = (Zetbox.App.SchemaMigration.MigrationProjectMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.SchemaMigration.MigrationProject>(_fk_guid_MigrationProject.Value));
             else
             if (_fk_MigrationProject.HasValue)
-                MigrationProjectImpl = (Zetbox.App.SchemaMigration.MigrationProjectMemoryImpl)Context.Find<Zetbox.App.SchemaMigration.MigrationProject>(_fk_MigrationProject.Value);
+                MigrationProjectImpl = (Zetbox.App.SchemaMigration.MigrationProjectMemoryImpl)(await Context.FindAsync<Zetbox.App.SchemaMigration.MigrationProject>(_fk_MigrationProject.Value));
             else
                 MigrationProjectImpl = null;
             // fix cached lists references

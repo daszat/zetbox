@@ -697,10 +697,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
             // fix direct object references
 
             if (_fk_guid_ReferencedClass.HasValue)
-                ReferencedClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_ReferencedClass.Value);
+                ReferencedClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_ReferencedClass.Value));
             else
             if (_fk_ReferencedClass.HasValue)
-                ReferencedClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);
+                ReferencedClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value));
             else
                 ReferencedClassImpl = null;
             // fix cached lists references

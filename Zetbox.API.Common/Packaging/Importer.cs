@@ -22,6 +22,7 @@ namespace Zetbox.App.Packaging
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Xml;
     using System.Xml.XPath;
     using Zetbox.API;
@@ -259,7 +260,7 @@ namespace Zetbox.App.Packaging
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="filenames"></param>
-        public static IEnumerable<IPersistenceObject> LoadFromXml(IZetboxContext ctx, params string[] filenames)
+        public static Task<IEnumerable<IPersistenceObject>> LoadFromXml(IZetboxContext ctx, params string[] filenames)
         {
             var packages = new List<FileSystemPackageProvider>();
             try
@@ -279,7 +280,7 @@ namespace Zetbox.App.Packaging
             }
         }
 
-        public static IEnumerable<IPersistenceObject> LoadFromXml(IZetboxContext ctx, Stream stream, string streamDescription)
+        public static Task<IEnumerable<IPersistenceObject>> LoadFromXml(IZetboxContext ctx, Stream stream, string streamDescription)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Read, streamDescription))
             {
@@ -292,7 +293,7 @@ namespace Zetbox.App.Packaging
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="providers">a stream containing a database.xml</param>
-        public static IEnumerable<IPersistenceObject> LoadFromXml(IZetboxContext ctx, params IPackageProvider[] providers)
+        public static async Task<IEnumerable<IPersistenceObject>> LoadFromXml(IZetboxContext ctx, params IPackageProvider[] providers)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (providers == null) { throw new ArgumentNullException("providers"); }
@@ -345,7 +346,7 @@ namespace Zetbox.App.Packaging
                 {
                     foreach (var obj in importedObjects.Values)
                     {
-                        obj.ReloadReferences();
+                        await obj.ReloadReferences();
                     }
                 }
 

@@ -946,22 +946,22 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_Identity.HasValue)
-                this.Identity = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_Identity.Value));
+                this.Identity = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_Identity.Value)));
             else
                 this.Identity = null;
 
             if (_fk_Parent.HasValue)
-                this.Parent = ((Zetbox.App.Test.SecurityTestParentNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.SecurityTestParent>(_fk_Parent.Value));
+                this.Parent = ((Zetbox.App.Test.SecurityTestParentNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Test.SecurityTestParent>(_fk_Parent.Value)));
             else
                 this.Parent = null;
         }

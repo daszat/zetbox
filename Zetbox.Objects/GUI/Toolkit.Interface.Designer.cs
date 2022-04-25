@@ -29,7 +29,6 @@ namespace Zetbox.App.GUI
 		/// </summary>
 		WinForms = 3,
 
-		Blazor = 4,
-
+		Blazor = 4,		
 	}
 }

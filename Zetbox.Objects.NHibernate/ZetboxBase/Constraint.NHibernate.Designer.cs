@@ -958,20 +958,20 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_guid_ConstrainedProperty.HasValue)
-                this.ConstrainedProperty = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_ConstrainedProperty.Value));
+                this.ConstrainedProperty = ((Zetbox.App.Base.PropertyNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_guid_ConstrainedProperty.Value)));
             else
             if (_fk_ConstrainedProperty.HasValue)
-                this.ConstrainedProperty = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_ConstrainedProperty.Value));
+                this.ConstrainedProperty = ((Zetbox.App.Base.PropertyNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_ConstrainedProperty.Value)));
             else
                 this.ConstrainedProperty = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
         }

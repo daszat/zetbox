@@ -524,12 +524,12 @@ namespace Zetbox.App.Calendar
             // fix direct object references
 
             if (_fk_Calendar.HasValue)
-                CalendarImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.Find<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value);
+                CalendarImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)(await Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value));
             else
                 CalendarImpl = null;
 
             if (_fk_WorkSchedule.HasValue)
-                WorkScheduleImpl = (Zetbox.App.Calendar.WorkScheduleMemoryImpl)Context.Find<Zetbox.App.Calendar.WorkSchedule>(_fk_WorkSchedule.Value);
+                WorkScheduleImpl = (Zetbox.App.Calendar.WorkScheduleMemoryImpl)(await Context.FindAsync<Zetbox.App.Calendar.WorkSchedule>(_fk_WorkSchedule.Value));
             else
                 WorkScheduleImpl = null;
             // fix cached lists references

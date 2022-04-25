@@ -1753,36 +1753,36 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Zetbox.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.Base.RelationEndNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_guid_A.Value)));
             else
             if (_fk_A.HasValue)
-                this.A = ((Zetbox.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_A.Value));
+                this.A = ((Zetbox.App.Base.RelationEndNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_A.Value)));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Zetbox.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Base.RelationEndNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_guid_B.Value)));
             else
             if (_fk_B.HasValue)
-                this.B = ((Zetbox.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.RelationEndNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_B.Value)));
             else
                 this.B = null;
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value)));
             else
             if (_fk_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_Module.Value)));
             else
                 this.Module = null;
         }

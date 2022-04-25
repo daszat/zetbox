@@ -250,10 +250,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_Group.HasValue)
-                GroupImpl = (Zetbox.App.Base.GroupMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Group>(_fk_guid_Group.Value);
+                GroupImpl = (Zetbox.App.Base.GroupMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Group>(_fk_guid_Group.Value));
             else
             if (_fk_Group.HasValue)
-                GroupImpl = (Zetbox.App.Base.GroupMemoryImpl)Context.Find<Zetbox.App.Base.Group>(_fk_Group.Value);
+                GroupImpl = (Zetbox.App.Base.GroupMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Group>(_fk_Group.Value));
             else
                 GroupImpl = null;
             // fix cached lists references

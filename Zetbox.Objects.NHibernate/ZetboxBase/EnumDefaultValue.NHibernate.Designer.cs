@@ -305,10 +305,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_EnumValue.HasValue)
-                this.EnumValue = ((Zetbox.App.Base.EnumerationEntryNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.EnumerationEntry>(_fk_guid_EnumValue.Value));
+                this.EnumValue = ((Zetbox.App.Base.EnumerationEntryNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.EnumerationEntry>(_fk_guid_EnumValue.Value)));
             else
             if (_fk_EnumValue.HasValue)
-                this.EnumValue = ((Zetbox.App.Base.EnumerationEntryNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value));
+                this.EnumValue = ((Zetbox.App.Base.EnumerationEntryNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value)));
             else
                 this.EnumValue = null;
         }

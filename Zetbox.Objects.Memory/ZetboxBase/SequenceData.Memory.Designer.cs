@@ -325,7 +325,7 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_Sequence.HasValue)
-                SequenceImpl = (Zetbox.App.Base.SequenceMemoryImpl)Context.Find<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
+                SequenceImpl = (Zetbox.App.Base.SequenceMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Sequence>(_fk_Sequence.Value));
             else
                 SequenceImpl = null;
             // fix cached lists references

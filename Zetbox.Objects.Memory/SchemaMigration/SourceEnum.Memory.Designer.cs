@@ -1003,28 +1003,28 @@ namespace Zetbox.App.SchemaMigration
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 ChangedByImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 CreatedByImpl = null;
 
             if (_fk_guid_DestinationValue.HasValue)
-                DestinationValueImpl = (Zetbox.App.Base.EnumerationEntryMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.EnumerationEntry>(_fk_guid_DestinationValue.Value);
+                DestinationValueImpl = (Zetbox.App.Base.EnumerationEntryMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.EnumerationEntry>(_fk_guid_DestinationValue.Value));
             else
             if (_fk_DestinationValue.HasValue)
-                DestinationValueImpl = (Zetbox.App.Base.EnumerationEntryMemoryImpl)Context.Find<Zetbox.App.Base.EnumerationEntry>(_fk_DestinationValue.Value);
+                DestinationValueImpl = (Zetbox.App.Base.EnumerationEntryMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.EnumerationEntry>(_fk_DestinationValue.Value));
             else
                 DestinationValueImpl = null;
 
             if (_fk_guid_SourceColumn.HasValue)
-                SourceColumnImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)Context.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceColumn>(_fk_guid_SourceColumn.Value);
+                SourceColumnImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.SchemaMigration.SourceColumn>(_fk_guid_SourceColumn.Value));
             else
             if (_fk_SourceColumn.HasValue)
-                SourceColumnImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)Context.Find<Zetbox.App.SchemaMigration.SourceColumn>(_fk_SourceColumn.Value);
+                SourceColumnImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)(await Context.FindAsync<Zetbox.App.SchemaMigration.SourceColumn>(_fk_SourceColumn.Value));
             else
                 SourceColumnImpl = null;
             // fix cached lists references

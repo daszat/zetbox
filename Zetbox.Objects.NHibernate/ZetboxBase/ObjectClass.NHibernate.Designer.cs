@@ -1643,18 +1643,18 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             // fix direct object references
 
             if (_fk_guid_BaseObjectClass.HasValue)
-                this.BaseObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value));
+                this.BaseObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value)));
             else
             if (_fk_BaseObjectClass.HasValue)
-                this.BaseObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_BaseObjectClass.Value));
+                this.BaseObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_BaseObjectClass.Value)));
             else
                 this.BaseObjectClass = null;
 
             if (_fk_guid_DefaultViewModelDescriptor.HasValue)
-                this.DefaultViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value));
+                this.DefaultViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value)));
             else
             if (_fk_DefaultViewModelDescriptor.HasValue)
-                this.DefaultViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value));
+                this.DefaultViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value)));
             else
                 this.DefaultViewModelDescriptor = null;
         }

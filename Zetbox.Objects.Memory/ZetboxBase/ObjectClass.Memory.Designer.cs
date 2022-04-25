@@ -336,6 +336,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
         public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultViewModelDescriptor()
         {
+            Console.WriteLine($"GetProp_DefaultViewModelDescriptor()");
+            Console.WriteLine($"_fk_guid_DefaultViewModelDescriptor = {_fk_guid_DefaultViewModelDescriptor}");
+            Console.WriteLine($"_fk_DefaultViewModelDescriptor = {_fk_DefaultViewModelDescriptor}");
             return TriggerFetchDefaultViewModelDescriptorAsync();
         }
 
@@ -1701,22 +1704,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
             await base.ReloadReferences();
+            Console.WriteLine("ObjectClass.Memory.ReloadReferences()");
+            Console.WriteLine($"_fk_guid_DefaultViewModelDescriptor = {_fk_guid_DefaultViewModelDescriptor}");
+            Console.WriteLine($"_fk_DefaultViewModelDescriptor = {_fk_DefaultViewModelDescriptor}");
 
             // fix direct object references
 
             if (_fk_guid_BaseObjectClass.HasValue)
-                BaseObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value);
+                BaseObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value));
             else
             if (_fk_BaseObjectClass.HasValue)
-                BaseObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
+                BaseObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_BaseObjectClass.Value));
             else
                 BaseObjectClassImpl = null;
 
             if (_fk_guid_DefaultViewModelDescriptor.HasValue)
-                DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value);
+                DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value));
             else
             if (_fk_DefaultViewModelDescriptor.HasValue)
-                DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
+                DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value));
             else
                 DefaultViewModelDescriptorImpl = null;
             // fix cached lists references

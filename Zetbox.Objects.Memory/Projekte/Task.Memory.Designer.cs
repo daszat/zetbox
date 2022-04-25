@@ -1161,20 +1161,20 @@ namespace Zetbox.App.Projekte
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 ChangedByImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 CreatedByImpl = null;
 
             if (_fk_guid_Projekt.HasValue)
-                ProjektImpl = (Zetbox.App.Projekte.ProjektMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Projekte.Projekt>(_fk_guid_Projekt.Value);
+                ProjektImpl = (Zetbox.App.Projekte.ProjektMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Projekte.Projekt>(_fk_guid_Projekt.Value));
             else
             if (_fk_Projekt.HasValue)
-                ProjektImpl = (Zetbox.App.Projekte.ProjektMemoryImpl)Context.Find<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value);
+                ProjektImpl = (Zetbox.App.Projekte.ProjektMemoryImpl)(await Context.FindAsync<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value));
             else
                 ProjektImpl = null;
             // fix cached lists references

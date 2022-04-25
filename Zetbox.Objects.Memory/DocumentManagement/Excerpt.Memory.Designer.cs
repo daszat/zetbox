@@ -325,7 +325,7 @@ namespace at.dasz.DocumentManagement
             // fix direct object references
 
             if (_fk_File.HasValue)
-                FileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)Context.Find<at.dasz.DocumentManagement.File>(_fk_File.Value);
+                FileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)(await Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_File.Value));
             else
                 FileImpl = null;
             // fix cached lists references

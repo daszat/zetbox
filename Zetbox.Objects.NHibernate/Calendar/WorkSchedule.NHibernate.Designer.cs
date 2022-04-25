@@ -1395,28 +1395,28 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
             // fix direct object references
 
             if (_fk_guid_BaseWorkSchedule.HasValue)
-                this.BaseWorkSchedule = ((Zetbox.App.Calendar.WorkScheduleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.WorkSchedule>(_fk_guid_BaseWorkSchedule.Value));
+                this.BaseWorkSchedule = ((Zetbox.App.Calendar.WorkScheduleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Calendar.WorkSchedule>(_fk_guid_BaseWorkSchedule.Value)));
             else
             if (_fk_BaseWorkSchedule.HasValue)
-                this.BaseWorkSchedule = ((Zetbox.App.Calendar.WorkScheduleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.WorkSchedule>(_fk_BaseWorkSchedule.Value));
+                this.BaseWorkSchedule = ((Zetbox.App.Calendar.WorkScheduleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Calendar.WorkSchedule>(_fk_BaseWorkSchedule.Value)));
             else
                 this.BaseWorkSchedule = null;
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value)));
             else
             if (_fk_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_Module.Value)));
             else
                 this.Module = null;
         }

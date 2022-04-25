@@ -384,10 +384,10 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_guid_Property.HasValue)
-                this.Property = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_Property.Value));
+                this.Property = ((Zetbox.App.Base.PropertyNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_guid_Property.Value)));
             else
             if (_fk_Property.HasValue)
-                this.Property = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_Property.Value));
+                this.Property = ((Zetbox.App.Base.PropertyNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_Property.Value)));
             else
                 this.Property = null;
         }

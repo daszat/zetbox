@@ -394,17 +394,19 @@ namespace Zetbox.App.Test
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)Context.Find<Zetbox.App.Test.N_to_M_relations_A>(_fk_A.Value);
+                AImpl = (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.N_to_M_relations_A>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)Context.Find<Zetbox.App.Test.N_to_M_relations_B>(_fk_B.Value);
+                BImpl = (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.N_to_M_relations_B>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -877,23 +879,25 @@ namespace Zetbox.App.Base
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.CalculatedObjectReferenceProperty>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.CalculatedObjectReferenceProperty>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)Context.Find<Zetbox.App.Base.CalculatedObjectReferenceProperty>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.CalculatedObjectReferenceProperty>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Property>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -1366,23 +1370,25 @@ namespace Zetbox.App.Calendar
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Calendar.CalendarBook>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.Find<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
+                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)(await Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.GroupMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Group>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.GroupMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Group>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.GroupMemoryImpl)Context.Find<Zetbox.App.Base.Group>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.GroupMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Group>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -1791,17 +1797,19 @@ namespace Zetbox.App.Calendar
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.Find<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
+                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)(await Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -2274,23 +2282,25 @@ namespace Zetbox.App.Calendar
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Calendar.CalendarBook>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.Find<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
+                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)(await Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.GroupMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Group>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.GroupMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Group>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.GroupMemoryImpl)Context.Find<Zetbox.App.Base.Group>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.GroupMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Group>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -2699,17 +2709,19 @@ namespace Zetbox.App.Calendar
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.Find<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
+                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)(await Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -3182,23 +3194,25 @@ namespace Zetbox.App.Base
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Base.DataTypeMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.DataTypeMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.DataType>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Base.DataTypeMemoryImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.DataTypeMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.DataType>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.InterfaceMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Interface>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.InterfaceMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Interface>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.InterfaceMemoryImpl)Context.Find<Zetbox.App.Base.Interface>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.InterfaceMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Interface>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -3757,23 +3771,25 @@ namespace at.dasz.DocumentManagement
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_guid_A.HasValue)
-                AImpl = (at.dasz.DocumentManagement.FileMemoryImpl)Context.FindPersistenceObject<at.dasz.DocumentManagement.File>(_fk_guid_A.Value);
+                AImpl = (at.dasz.DocumentManagement.FileMemoryImpl)(await Context.FindPersistenceObjectAsync<at.dasz.DocumentManagement.File>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (at.dasz.DocumentManagement.FileMemoryImpl)Context.Find<at.dasz.DocumentManagement.File>(_fk_A.Value);
+                AImpl = (at.dasz.DocumentManagement.FileMemoryImpl)(await Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.BlobMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.BlobMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Blob>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.BlobMemoryImpl)Context.Find<Zetbox.App.Base.Blob>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.BlobMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Blob>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -4198,17 +4214,19 @@ namespace Zetbox.App.Base
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.GroupMemoryImpl)Context.Find<Zetbox.App.Base.Group>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.GroupMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Group>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -4633,17 +4651,19 @@ namespace Zetbox.App.Test
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Test.MuhblahMemoryImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_A.Value);
+                AImpl = (Zetbox.App.Test.MuhblahMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Test.TestCustomObjectMemoryImpl)Context.Find<Zetbox.App.Test.TestCustomObject>(_fk_B.Value);
+                BImpl = (Zetbox.App.Test.TestCustomObjectMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.TestCustomObject>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -5116,23 +5136,25 @@ namespace Zetbox.App.GUI
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.GUI.NavigationEntryMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.NavigationEntry>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.GUI.NavigationEntryMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.NavigationEntry>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.GUI.NavigationEntryMemoryImpl)Context.Find<Zetbox.App.GUI.NavigationEntry>(_fk_A.Value);
+                AImpl = (Zetbox.App.GUI.NavigationEntryMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.NavigationEntry>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.GroupMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Group>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.GroupMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Group>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.GroupMemoryImpl)Context.Find<Zetbox.App.Base.Group>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.GroupMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Group>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -5621,23 +5643,25 @@ namespace Zetbox.App.GUI
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.ObjectReferenceProperty>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectReferenceProperty>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)Context.Find<Zetbox.App.Base.ObjectReferenceProperty>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.ObjectReferenceProperty>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.MethodMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Method>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.MethodMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Method>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.MethodMemoryImpl)Context.Find<Zetbox.App.Base.Method>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.MethodMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Method>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -6110,23 +6134,25 @@ namespace Zetbox.App.GUI
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_A.Value);
+                AImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_B.Value);
+                BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -6701,23 +6727,25 @@ namespace Zetbox.App.Projekte
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Projekte.ProjektMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Projekte.Projekt>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Projekte.ProjektMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Projekte.Projekt>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Projekte.ProjektMemoryImpl)Context.Find<Zetbox.App.Projekte.Projekt>(_fk_A.Value);
+                AImpl = (Zetbox.App.Projekte.ProjektMemoryImpl)(await Context.FindAsync<Zetbox.App.Projekte.Projekt>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Projekte.MitarbeiterMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Projekte.Mitarbeiter>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Projekte.MitarbeiterMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Projekte.Mitarbeiter>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Projekte.MitarbeiterMemoryImpl)Context.Find<Zetbox.App.Projekte.Mitarbeiter>(_fk_B.Value);
+                BImpl = (Zetbox.App.Projekte.MitarbeiterMemoryImpl)(await Context.FindAsync<Zetbox.App.Projekte.Mitarbeiter>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -7276,23 +7304,25 @@ namespace Zetbox.App.Base
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Base.RoleMembershipMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.RoleMembership>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.RoleMembershipMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.RoleMembership>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Base.RoleMembershipMemoryImpl)Context.Find<Zetbox.App.Base.RoleMembership>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.RoleMembershipMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.RoleMembership>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.RelationMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Relation>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.RelationMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Relation>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.RelationMemoryImpl)Context.Find<Zetbox.App.Base.Relation>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.RelationMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Relation>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -7851,23 +7881,25 @@ namespace Zetbox.App.SchemaMigration
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)Context.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceColumn>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.SchemaMigration.SourceColumn>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)Context.Find<Zetbox.App.SchemaMigration.SourceColumn>(_fk_A.Value);
+                AImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)(await Context.FindAsync<Zetbox.App.SchemaMigration.SourceColumn>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Property>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -8292,17 +8324,19 @@ namespace Zetbox.App.Test
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Test.TestStudentMemoryImpl)Context.Find<Zetbox.App.Test.TestStudent>(_fk_A.Value);
+                AImpl = (Zetbox.App.Test.TestStudentMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.TestStudent>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Test.FragebogenMemoryImpl)Context.Find<Zetbox.App.Test.Fragebogen>(_fk_B.Value);
+                BImpl = (Zetbox.App.Test.FragebogenMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.Fragebogen>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -8775,23 +8809,25 @@ namespace Zetbox.App.Base
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Base.IndexConstraintMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.IndexConstraint>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.IndexConstraintMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.IndexConstraint>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Base.IndexConstraintMemoryImpl)Context.Find<Zetbox.App.Base.IndexConstraint>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.IndexConstraintMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.IndexConstraint>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Property>(_fk_B.Value));
             else
                 BImpl = null;
 
@@ -9059,12 +9095,14 @@ namespace Zetbox.App.Projekte
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_Parent.HasValue)
-                Parent = (Zetbox.App.Projekte.KundeMemoryImpl)Context.Find<Zetbox.App.Projekte.Kunde>(_fk_Parent.Value);
+                Parent = (Zetbox.App.Projekte.KundeMemoryImpl)(await Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_Parent.Value));
             else
                 Parent = null;
 
@@ -9295,12 +9333,14 @@ namespace Zetbox.App.Test
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_Parent.HasValue)
-                Parent = (Zetbox.App.Test.MuhblahMemoryImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_Parent.Value);
+                Parent = (Zetbox.App.Test.MuhblahMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_Parent.Value));
             else
                 Parent = null;
 
@@ -9579,12 +9619,14 @@ namespace Zetbox.App.Projekte
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_Parent.HasValue)
-                Parent = (Zetbox.App.Projekte.ProjektMemoryImpl)Context.Find<Zetbox.App.Projekte.Projekt>(_fk_Parent.Value);
+                Parent = (Zetbox.App.Projekte.ProjektMemoryImpl)(await Context.FindAsync<Zetbox.App.Projekte.Projekt>(_fk_Parent.Value));
             else
                 Parent = null;
 
@@ -9882,12 +9924,14 @@ namespace Zetbox.App.Test
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_Parent.HasValue)
-                Parent = (Zetbox.App.Test.TestCompanyMemoryImpl)Context.Find<Zetbox.App.Test.TestCompany>(_fk_Parent.Value);
+                Parent = (Zetbox.App.Test.TestCompanyMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.TestCompany>(_fk_Parent.Value));
             else
                 Parent = null;
 
@@ -10144,12 +10188,14 @@ namespace Zetbox.App.Test
 
         public override async System.Threading.Tasks.Task ReloadReferences()
         {
+            await base.ReloadReferences();
+
             // Do not reload references if the current object has been deleted.
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
-            await base.ReloadReferences();
+
             if (_fk_Parent.HasValue)
-                Parent = (Zetbox.App.Test.TestCustomObjectMemoryImpl)Context.Find<Zetbox.App.Test.TestCustomObject>(_fk_Parent.Value);
+                Parent = (Zetbox.App.Test.TestCustomObjectMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.TestCustomObject>(_fk_Parent.Value));
             else
                 Parent = null;
 

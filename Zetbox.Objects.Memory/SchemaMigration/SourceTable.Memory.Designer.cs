@@ -1397,28 +1397,28 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 ChangedByImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 CreatedByImpl = null;
 
             if (_fk_guid_DestinationObjectClass.HasValue)
-                DestinationObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_DestinationObjectClass.Value);
+                DestinationObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_DestinationObjectClass.Value));
             else
             if (_fk_DestinationObjectClass.HasValue)
-                DestinationObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_DestinationObjectClass.Value);
+                DestinationObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_DestinationObjectClass.Value));
             else
                 DestinationObjectClassImpl = null;
 
             if (_fk_guid_StagingDatabase.HasValue)
-                StagingDatabaseImpl = (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)Context.FindPersistenceObject<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_guid_StagingDatabase.Value);
+                StagingDatabaseImpl = (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_guid_StagingDatabase.Value));
             else
             if (_fk_StagingDatabase.HasValue)
-                StagingDatabaseImpl = (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)Context.Find<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_StagingDatabase.Value);
+                StagingDatabaseImpl = (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)(await Context.FindAsync<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_StagingDatabase.Value));
             else
                 StagingDatabaseImpl = null;
             // fix cached lists references

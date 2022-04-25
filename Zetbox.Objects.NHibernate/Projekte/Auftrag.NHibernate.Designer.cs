@@ -1219,36 +1219,36 @@ namespace Zetbox.App.Projekte
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_Kunde.HasValue)
-                this.Kunde = ((Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Kunde>(_fk_guid_Kunde.Value));
+                this.Kunde = ((Zetbox.App.Projekte.KundeNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Projekte.Kunde>(_fk_guid_Kunde.Value)));
             else
             if (_fk_Kunde.HasValue)
-                this.Kunde = ((Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Kunde>(_fk_Kunde.Value));
+                this.Kunde = ((Zetbox.App.Projekte.KundeNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Projekte.Kunde>(_fk_Kunde.Value)));
             else
                 this.Kunde = null;
 
             if (_fk_guid_Mitarbeiter.HasValue)
-                this.Mitarbeiter = ((Zetbox.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Mitarbeiter>(_fk_guid_Mitarbeiter.Value));
+                this.Mitarbeiter = ((Zetbox.App.Projekte.MitarbeiterNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Projekte.Mitarbeiter>(_fk_guid_Mitarbeiter.Value)));
             else
             if (_fk_Mitarbeiter.HasValue)
-                this.Mitarbeiter = ((Zetbox.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value));
+                this.Mitarbeiter = ((Zetbox.App.Projekte.MitarbeiterNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value)));
             else
                 this.Mitarbeiter = null;
 
             if (_fk_guid_Projekt.HasValue)
-                this.Projekt = ((Zetbox.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Projekt>(_fk_guid_Projekt.Value));
+                this.Projekt = ((Zetbox.App.Projekte.ProjektNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Projekte.Projekt>(_fk_guid_Projekt.Value)));
             else
             if (_fk_Projekt.HasValue)
-                this.Projekt = ((Zetbox.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value));
+                this.Projekt = ((Zetbox.App.Projekte.ProjektNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value)));
             else
                 this.Projekt = null;
         }

@@ -2698,60 +2698,60 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 ChangedByImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 CreatedByImpl = null;
 
             if (_fk_guid_DefaultValue.HasValue)
-                DefaultValueImpl = (Zetbox.App.Base.DefaultPropertyValueMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.DefaultPropertyValue>(_fk_guid_DefaultValue.Value);
+                DefaultValueImpl = (Zetbox.App.Base.DefaultPropertyValueMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.DefaultPropertyValue>(_fk_guid_DefaultValue.Value));
             else
             if (_fk_DefaultValue.HasValue)
-                DefaultValueImpl = (Zetbox.App.Base.DefaultPropertyValueMemoryImpl)Context.Find<Zetbox.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value);
+                DefaultValueImpl = (Zetbox.App.Base.DefaultPropertyValueMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value));
             else
                 DefaultValueImpl = null;
 
             if (_fk_guid_FilterConfiguration.HasValue)
-                FilterConfigurationImpl = (Zetbox.App.GUI.PropertyFilterConfigurationMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_guid_FilterConfiguration.Value);
+                FilterConfigurationImpl = (Zetbox.App.GUI.PropertyFilterConfigurationMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_guid_FilterConfiguration.Value));
             else
             if (_fk_FilterConfiguration.HasValue)
-                FilterConfigurationImpl = (Zetbox.App.GUI.PropertyFilterConfigurationMemoryImpl)Context.Find<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_FilterConfiguration.Value);
+                FilterConfigurationImpl = (Zetbox.App.GUI.PropertyFilterConfigurationMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_FilterConfiguration.Value));
             else
                 FilterConfigurationImpl = null;
 
             if (_fk_guid_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
             else
             if (_fk_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value));
             else
                 ModuleImpl = null;
 
             if (_fk_guid_ObjectClass.HasValue)
-                ObjectClassImpl = (Zetbox.App.Base.DataTypeMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_guid_ObjectClass.Value);
+                ObjectClassImpl = (Zetbox.App.Base.DataTypeMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.DataType>(_fk_guid_ObjectClass.Value));
             else
             if (_fk_ObjectClass.HasValue)
-                ObjectClassImpl = (Zetbox.App.Base.DataTypeMemoryImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_ObjectClass.Value);
+                ObjectClassImpl = (Zetbox.App.Base.DataTypeMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.DataType>(_fk_ObjectClass.Value));
             else
                 ObjectClassImpl = null;
 
             if (_fk_guid_RequestedKind.HasValue)
-                RequestedKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value);
+                RequestedKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value));
             else
             if (_fk_RequestedKind.HasValue)
-                RequestedKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);
+                RequestedKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value));
             else
                 RequestedKindImpl = null;
 
             if (_fk_guid_ValueModelDescriptor.HasValue)
-                ValueModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_ValueModelDescriptor.Value);
+                ValueModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_ValueModelDescriptor.Value));
             else
             if (_fk_ValueModelDescriptor.HasValue)
-                ValueModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value);
+                ValueModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value));
             else
                 ValueModelDescriptorImpl = null;
             // fix cached lists references

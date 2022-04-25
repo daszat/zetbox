@@ -1071,20 +1071,20 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Stagin
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_MigrationProject.HasValue)
-                this.MigrationProject = ((Zetbox.App.SchemaMigration.MigrationProjectNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.MigrationProject>(_fk_guid_MigrationProject.Value));
+                this.MigrationProject = ((Zetbox.App.SchemaMigration.MigrationProjectNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.SchemaMigration.MigrationProject>(_fk_guid_MigrationProject.Value)));
             else
             if (_fk_MigrationProject.HasValue)
-                this.MigrationProject = ((Zetbox.App.SchemaMigration.MigrationProjectNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.MigrationProject>(_fk_MigrationProject.Value));
+                this.MigrationProject = ((Zetbox.App.SchemaMigration.MigrationProjectNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.SchemaMigration.MigrationProject>(_fk_MigrationProject.Value)));
             else
                 this.MigrationProject = null;
         }

@@ -908,10 +908,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             // fix direct object references
 
             if (_fk_guid_RelationEnd.HasValue)
-                RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value);
+                RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value));
             else
             if (_fk_RelationEnd.HasValue)
-                RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.Find<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
+                RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value));
             else
                 RelationEndImpl = null;
             // fix cached lists references

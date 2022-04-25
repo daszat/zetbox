@@ -154,8 +154,7 @@ namespace Zetbox.Client.Presentables
         {
             if (obj == null) throw new ArgumentNullException("obj");
 
-            var desc = obj.GetObjectClass(FrozenContext)
-                .DefaultViewModelDescriptor;
+            var desc = obj.GetObjectClass(FrozenContext).GetProp_DefaultViewModelDescriptor().Result;
             if (desc != null)
             {
                 return CreateViewModel<TModelFactory>(desc);
@@ -170,7 +169,7 @@ namespace Zetbox.Client.Presentables
         {
             if (obj == null) throw new ArgumentNullException("obj");
 
-            var desc = obj.GetCompoundObjectDefinition(FrozenContext).DefaultViewModelDescriptor;
+            var desc = obj.GetCompoundObjectDefinition(FrozenContext).GetProp_DefaultViewModelDescriptor().Result;
             var t = desc != null
                 ? Type.GetType(desc.ViewModelTypeRef, true)
                 : typeof(CompoundObjectViewModel);

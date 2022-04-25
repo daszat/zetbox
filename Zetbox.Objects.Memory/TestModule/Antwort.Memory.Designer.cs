@@ -477,7 +477,7 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_Fragebogen.HasValue)
-                FragebogenImpl = (Zetbox.App.Test.FragebogenMemoryImpl)Context.Find<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
+                FragebogenImpl = (Zetbox.App.Test.FragebogenMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value));
             else
                 FragebogenImpl = null;
             // fix cached lists references

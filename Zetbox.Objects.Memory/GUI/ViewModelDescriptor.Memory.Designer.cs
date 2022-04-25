@@ -1407,50 +1407,50 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             // fix direct object references
 
             if (_fk_guid_DefaultDisplayKind.HasValue)
-                DefaultDisplayKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_DefaultDisplayKind.Value);
+                DefaultDisplayKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_DefaultDisplayKind.Value));
             else
             if (_fk_DefaultDisplayKind.HasValue)
-                DefaultDisplayKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultDisplayKind.Value);
+                DefaultDisplayKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultDisplayKind.Value));
             else
                 DefaultDisplayKindImpl = null;
 
             if (_fk_guid_DefaultEditorKind.HasValue)
-                DefaultEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_DefaultEditorKind.Value);
+                DefaultEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_DefaultEditorKind.Value));
             else
             if (_fk_DefaultEditorKind.HasValue)
-                DefaultEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultEditorKind.Value);
+                DefaultEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultEditorKind.Value));
             else
                 DefaultEditorKindImpl = null;
 
             if (_fk_guid_DefaultGridCellDisplayKind.HasValue)
-                DefaultGridCellDisplayKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_DefaultGridCellDisplayKind.Value);
+                DefaultGridCellDisplayKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_DefaultGridCellDisplayKind.Value));
             else
             if (_fk_DefaultGridCellDisplayKind.HasValue)
-                DefaultGridCellDisplayKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellDisplayKind.Value);
+                DefaultGridCellDisplayKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellDisplayKind.Value));
             else
                 DefaultGridCellDisplayKindImpl = null;
 
             if (_fk_guid_DefaultGridCellEditorKind.HasValue)
-                DefaultGridCellEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_DefaultGridCellEditorKind.Value);
+                DefaultGridCellEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_DefaultGridCellEditorKind.Value));
             else
             if (_fk_DefaultGridCellEditorKind.HasValue)
-                DefaultGridCellEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellEditorKind.Value);
+                DefaultGridCellEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellEditorKind.Value));
             else
                 DefaultGridCellEditorKindImpl = null;
 
             if (_fk_guid_DefaultGridCellPreEditorKind.HasValue)
-                DefaultGridCellPreEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_DefaultGridCellPreEditorKind.Value);
+                DefaultGridCellPreEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_DefaultGridCellPreEditorKind.Value));
             else
             if (_fk_DefaultGridCellPreEditorKind.HasValue)
-                DefaultGridCellPreEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellPreEditorKind.Value);
+                DefaultGridCellPreEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellPreEditorKind.Value));
             else
                 DefaultGridCellPreEditorKindImpl = null;
 
             if (_fk_guid_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
             else
             if (_fk_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value));
             else
                 ModuleImpl = null;
             // fix cached lists references

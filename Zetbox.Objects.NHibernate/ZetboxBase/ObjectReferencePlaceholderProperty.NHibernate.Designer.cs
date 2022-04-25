@@ -920,10 +920,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_ReferencedObjectClass.HasValue)
-                this.ReferencedObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_ReferencedObjectClass.Value));
+                this.ReferencedObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_ReferencedObjectClass.Value)));
             else
             if (_fk_ReferencedObjectClass.HasValue)
-                this.ReferencedObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value));
+                this.ReferencedObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value)));
             else
                 this.ReferencedObjectClass = null;
         }

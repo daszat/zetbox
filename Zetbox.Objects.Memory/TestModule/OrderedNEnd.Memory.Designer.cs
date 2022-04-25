@@ -357,7 +357,7 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_OneEnd.HasValue)
-                OneEndImpl = (Zetbox.App.Test.OrderedOneEndMemoryImpl)Context.Find<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
+                OneEndImpl = (Zetbox.App.Test.OrderedOneEndMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value));
             else
                 OneEndImpl = null;
             // fix cached lists references

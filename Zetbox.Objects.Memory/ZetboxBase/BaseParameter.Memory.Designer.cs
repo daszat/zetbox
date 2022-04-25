@@ -1448,20 +1448,20 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 ChangedByImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 CreatedByImpl = null;
 
             if (_fk_guid_Method.HasValue)
-                MethodImpl = (Zetbox.App.Base.MethodMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Method>(_fk_guid_Method.Value);
+                MethodImpl = (Zetbox.App.Base.MethodMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Method>(_fk_guid_Method.Value));
             else
             if (_fk_Method.HasValue)
-                MethodImpl = (Zetbox.App.Base.MethodMemoryImpl)Context.Find<Zetbox.App.Base.Method>(_fk_Method.Value);
+                MethodImpl = (Zetbox.App.Base.MethodMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Method>(_fk_Method.Value));
             else
                 MethodImpl = null;
             // fix cached lists references

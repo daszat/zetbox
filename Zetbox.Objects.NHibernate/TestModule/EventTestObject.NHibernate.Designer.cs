@@ -300,7 +300,7 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_Event.HasValue)
-                this.Event = ((Zetbox.App.Calendar.EventNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.Event>(_fk_Event.Value));
+                this.Event = ((Zetbox.App.Calendar.EventNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Calendar.Event>(_fk_Event.Value)));
             else
                 this.Event = null;
         }

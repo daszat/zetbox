@@ -354,7 +354,7 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_OneSide.HasValue)
-                this.OneSide = ((Zetbox.App.Test.One_to_N_relations_OneNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value));
+                this.OneSide = ((Zetbox.App.Test.One_to_N_relations_OneNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value)));
             else
                 this.OneSide = null;
         }

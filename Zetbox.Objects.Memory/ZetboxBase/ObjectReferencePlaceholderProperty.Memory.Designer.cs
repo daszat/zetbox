@@ -928,10 +928,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_ReferencedObjectClass.HasValue)
-                ReferencedObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_ReferencedObjectClass.Value);
+                ReferencedObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_ReferencedObjectClass.Value));
             else
             if (_fk_ReferencedObjectClass.HasValue)
-                ReferencedObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value);
+                ReferencedObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value));
             else
                 ReferencedObjectClassImpl = null;
             // fix cached lists references

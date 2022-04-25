@@ -474,7 +474,7 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_Fragebogen.HasValue)
-                this.Fragebogen = ((Zetbox.App.Test.FragebogenNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value));
+                this.Fragebogen = ((Zetbox.App.Test.FragebogenNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value)));
             else
                 this.Fragebogen = null;
         }

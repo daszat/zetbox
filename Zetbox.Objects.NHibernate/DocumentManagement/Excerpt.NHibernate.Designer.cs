@@ -316,7 +316,7 @@ namespace at.dasz.DocumentManagement
             // fix direct object references
 
             if (_fk_File.HasValue)
-                this.File = ((at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.File>(_fk_File.Value));
+                this.File = ((at.dasz.DocumentManagement.FileNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<at.dasz.DocumentManagement.File>(_fk_File.Value)));
             else
                 this.File = null;
         }

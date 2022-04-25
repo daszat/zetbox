@@ -1409,20 +1409,20 @@ namespace Zetbox.App.Calendar
             // fix direct object references
 
             if (_fk_guid_Calendar.HasValue)
-                CalendarImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_guid_Calendar.Value);
+                CalendarImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Calendar.CalendarBook>(_fk_guid_Calendar.Value));
             else
             if (_fk_Calendar.HasValue)
-                CalendarImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.Find<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value);
+                CalendarImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)(await Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value));
             else
                 CalendarImpl = null;
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 ChangedByImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 CreatedByImpl = null;
             // fix cached lists references

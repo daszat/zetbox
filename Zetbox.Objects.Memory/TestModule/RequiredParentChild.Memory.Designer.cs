@@ -325,7 +325,7 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_Parent.HasValue)
-                ParentImpl = (Zetbox.App.Test.RequiredParentMemoryImpl)Context.Find<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value);
+                ParentImpl = (Zetbox.App.Test.RequiredParentMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value));
             else
                 ParentImpl = null;
             // fix cached lists references

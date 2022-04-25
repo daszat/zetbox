@@ -392,10 +392,10 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_guid_Property.HasValue)
-                PropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_Property.Value);
+                PropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_guid_Property.Value));
             else
             if (_fk_Property.HasValue)
-                PropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_Property.Value);
+                PropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value));
             else
                 PropertyImpl = null;
             // fix cached lists references

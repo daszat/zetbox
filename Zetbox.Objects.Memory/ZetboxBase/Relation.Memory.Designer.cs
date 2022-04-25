@@ -1811,36 +1811,36 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.RelationEndMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.Find<Zetbox.App.Base.RelationEnd>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.RelationEndMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.RelationEndMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.Find<Zetbox.App.Base.RelationEnd>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.RelationEndMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_B.Value));
             else
                 BImpl = null;
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 ChangedByImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 CreatedByImpl = null;
 
             if (_fk_guid_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
             else
             if (_fk_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value));
             else
                 ModuleImpl = null;
             // fix cached lists references

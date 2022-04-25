@@ -1330,28 +1330,28 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_DestinationObjectClass.HasValue)
-                this.DestinationObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_DestinationObjectClass.Value));
+                this.DestinationObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_DestinationObjectClass.Value)));
             else
             if (_fk_DestinationObjectClass.HasValue)
-                this.DestinationObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_DestinationObjectClass.Value));
+                this.DestinationObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_DestinationObjectClass.Value)));
             else
                 this.DestinationObjectClass = null;
 
             if (_fk_guid_StagingDatabase.HasValue)
-                this.StagingDatabase = ((Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_guid_StagingDatabase.Value));
+                this.StagingDatabase = ((Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_guid_StagingDatabase.Value)));
             else
             if (_fk_StagingDatabase.HasValue)
-                this.StagingDatabase = ((Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_StagingDatabase.Value));
+                this.StagingDatabase = ((Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_StagingDatabase.Value)));
             else
                 this.StagingDatabase = null;
         }

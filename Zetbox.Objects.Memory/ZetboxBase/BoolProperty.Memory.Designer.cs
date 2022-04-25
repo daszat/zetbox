@@ -1112,26 +1112,26 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_FalseIcon.HasValue)
-                FalseIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_FalseIcon.Value);
+                FalseIconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_FalseIcon.Value));
             else
             if (_fk_FalseIcon.HasValue)
-                FalseIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
+                FalseIconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value));
             else
                 FalseIconImpl = null;
 
             if (_fk_guid_NullIcon.HasValue)
-                NullIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_NullIcon.Value);
+                NullIconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_NullIcon.Value));
             else
             if (_fk_NullIcon.HasValue)
-                NullIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
+                NullIconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value));
             else
                 NullIconImpl = null;
 
             if (_fk_guid_TrueIcon.HasValue)
-                TrueIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_TrueIcon.Value);
+                TrueIconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_TrueIcon.Value));
             else
             if (_fk_TrueIcon.HasValue)
-                TrueIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
+                TrueIconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value));
             else
                 TrueIconImpl = null;
             // fix cached lists references

@@ -1351,44 +1351,44 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 ChangedByImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 CreatedByImpl = null;
 
             if (_fk_guid_Icon.HasValue)
-                IconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_Icon.Value);
+                IconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_Icon.Value));
             else
             if (_fk_Icon.HasValue)
-                IconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_Icon.Value);
+                IconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_Icon.Value));
             else
                 IconImpl = null;
 
             if (_fk_guid_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
             else
             if (_fk_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value));
             else
                 ModuleImpl = null;
 
             if (_fk_guid_RootScreen.HasValue)
-                RootScreenImpl = (Zetbox.App.GUI.NavigationScreenMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.NavigationScreen>(_fk_guid_RootScreen.Value);
+                RootScreenImpl = (Zetbox.App.GUI.NavigationScreenMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.NavigationScreen>(_fk_guid_RootScreen.Value));
             else
             if (_fk_RootScreen.HasValue)
-                RootScreenImpl = (Zetbox.App.GUI.NavigationScreenMemoryImpl)Context.Find<Zetbox.App.GUI.NavigationScreen>(_fk_RootScreen.Value);
+                RootScreenImpl = (Zetbox.App.GUI.NavigationScreenMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.NavigationScreen>(_fk_RootScreen.Value));
             else
                 RootScreenImpl = null;
 
             if (_fk_guid_WorkspaceViewModel.HasValue)
-                WorkspaceViewModelImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_WorkspaceViewModel.Value);
+                WorkspaceViewModelImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_WorkspaceViewModel.Value));
             else
             if (_fk_WorkspaceViewModel.HasValue)
-                WorkspaceViewModelImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_WorkspaceViewModel.Value);
+                WorkspaceViewModelImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_WorkspaceViewModel.Value));
             else
                 WorkspaceViewModelImpl = null;
             // fix cached lists references

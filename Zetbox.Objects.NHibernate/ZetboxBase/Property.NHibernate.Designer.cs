@@ -2558,60 +2558,60 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_DefaultValue.HasValue)
-                this.DefaultValue = ((Zetbox.App.Base.DefaultPropertyValueNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DefaultPropertyValue>(_fk_guid_DefaultValue.Value));
+                this.DefaultValue = ((Zetbox.App.Base.DefaultPropertyValueNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.DefaultPropertyValue>(_fk_guid_DefaultValue.Value)));
             else
             if (_fk_DefaultValue.HasValue)
-                this.DefaultValue = ((Zetbox.App.Base.DefaultPropertyValueNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value));
+                this.DefaultValue = ((Zetbox.App.Base.DefaultPropertyValueNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value)));
             else
                 this.DefaultValue = null;
 
             if (_fk_guid_FilterConfiguration.HasValue)
-                this.FilterConfiguration = ((Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_guid_FilterConfiguration.Value));
+                this.FilterConfiguration = ((Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_guid_FilterConfiguration.Value)));
             else
             if (_fk_FilterConfiguration.HasValue)
-                this.FilterConfiguration = ((Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_FilterConfiguration.Value));
+                this.FilterConfiguration = ((Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_FilterConfiguration.Value)));
             else
                 this.FilterConfiguration = null;
 
             if (_fk_guid_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value)));
             else
             if (_fk_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_Module.Value)));
             else
                 this.Module = null;
 
             if (_fk_guid_ObjectClass.HasValue)
-                this.ObjectClass = ((Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_guid_ObjectClass.Value));
+                this.ObjectClass = ((Zetbox.App.Base.DataTypeNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.DataType>(_fk_guid_ObjectClass.Value)));
             else
             if (_fk_ObjectClass.HasValue)
-                this.ObjectClass = ((Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_ObjectClass.Value));
+                this.ObjectClass = ((Zetbox.App.Base.DataTypeNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.DataType>(_fk_ObjectClass.Value)));
             else
                 this.ObjectClass = null;
 
             if (_fk_guid_RequestedKind.HasValue)
-                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value));
+                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value)));
             else
             if (_fk_RequestedKind.HasValue)
-                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value));
+                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value)));
             else
                 this.RequestedKind = null;
 
             if (_fk_guid_ValueModelDescriptor.HasValue)
-                this.ValueModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_ValueModelDescriptor.Value));
+                this.ValueModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_ValueModelDescriptor.Value)));
             else
             if (_fk_ValueModelDescriptor.HasValue)
-                this.ValueModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value));
+                this.ValueModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value)));
             else
                 this.ValueModelDescriptor = null;
         }

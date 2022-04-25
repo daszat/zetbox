@@ -898,10 +898,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             // fix direct object references
 
             if (_fk_guid_RelationEnd.HasValue)
-                this.RelationEnd = ((Zetbox.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value));
+                this.RelationEnd = ((Zetbox.App.Base.RelationEndNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value)));
             else
             if (_fk_RelationEnd.HasValue)
-                this.RelationEnd = ((Zetbox.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value));
+                this.RelationEnd = ((Zetbox.App.Base.RelationEndNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value)));
             else
                 this.RelationEnd = null;
         }

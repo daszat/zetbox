@@ -1066,26 +1066,26 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_FalseIcon.HasValue)
-                this.FalseIcon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_FalseIcon.Value));
+                this.FalseIcon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_FalseIcon.Value)));
             else
             if (_fk_FalseIcon.HasValue)
-                this.FalseIcon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value));
+                this.FalseIcon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value)));
             else
                 this.FalseIcon = null;
 
             if (_fk_guid_NullIcon.HasValue)
-                this.NullIcon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_NullIcon.Value));
+                this.NullIcon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_NullIcon.Value)));
             else
             if (_fk_NullIcon.HasValue)
-                this.NullIcon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value));
+                this.NullIcon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value)));
             else
                 this.NullIcon = null;
 
             if (_fk_guid_TrueIcon.HasValue)
-                this.TrueIcon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_TrueIcon.Value));
+                this.TrueIcon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_TrueIcon.Value)));
             else
             if (_fk_TrueIcon.HasValue)
-                this.TrueIcon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value));
+                this.TrueIcon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value)));
             else
                 this.TrueIcon = null;
         }

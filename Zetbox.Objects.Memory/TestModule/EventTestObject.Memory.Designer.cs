@@ -309,7 +309,7 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_Event.HasValue)
-                EventImpl = (Zetbox.App.Calendar.EventMemoryImpl)Context.Find<Zetbox.App.Calendar.Event>(_fk_Event.Value);
+                EventImpl = (Zetbox.App.Calendar.EventMemoryImpl)(await Context.FindAsync<Zetbox.App.Calendar.Event>(_fk_Event.Value));
             else
                 EventImpl = null;
             // fix cached lists references

@@ -1399,20 +1399,20 @@ namespace Zetbox.App.Calendar
             // fix direct object references
 
             if (_fk_guid_Calendar.HasValue)
-                this.Calendar = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_guid_Calendar.Value));
+                this.Calendar = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Calendar.CalendarBook>(_fk_guid_Calendar.Value)));
             else
             if (_fk_Calendar.HasValue)
-                this.Calendar = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value));
+                this.Calendar = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value)));
             else
                 this.Calendar = null;
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
         }

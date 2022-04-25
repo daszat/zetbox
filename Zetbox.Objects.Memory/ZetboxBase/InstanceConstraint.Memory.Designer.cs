@@ -527,10 +527,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_Constrained.HasValue)
-                ConstrainedImpl = (Zetbox.App.Base.DataTypeMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_guid_Constrained.Value);
+                ConstrainedImpl = (Zetbox.App.Base.DataTypeMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.DataType>(_fk_guid_Constrained.Value));
             else
             if (_fk_Constrained.HasValue)
-                ConstrainedImpl = (Zetbox.App.Base.DataTypeMemoryImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
+                ConstrainedImpl = (Zetbox.App.Base.DataTypeMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.DataType>(_fk_Constrained.Value));
             else
                 ConstrainedImpl = null;
             // fix cached lists references

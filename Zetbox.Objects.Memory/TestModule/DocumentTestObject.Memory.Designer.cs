@@ -460,12 +460,12 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_AnotherFile.HasValue)
-                AnotherFileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)Context.Find<at.dasz.DocumentManagement.File>(_fk_AnotherFile.Value);
+                AnotherFileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)(await Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_AnotherFile.Value));
             else
                 AnotherFileImpl = null;
 
             if (_fk_AnyFile.HasValue)
-                AnyFileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)Context.Find<at.dasz.DocumentManagement.File>(_fk_AnyFile.Value);
+                AnyFileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)(await Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_AnyFile.Value));
             else
                 AnyFileImpl = null;
             // fix cached lists references

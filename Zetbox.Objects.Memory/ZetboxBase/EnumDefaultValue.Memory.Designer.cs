@@ -313,10 +313,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_EnumValue.HasValue)
-                EnumValueImpl = (Zetbox.App.Base.EnumerationEntryMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.EnumerationEntry>(_fk_guid_EnumValue.Value);
+                EnumValueImpl = (Zetbox.App.Base.EnumerationEntryMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.EnumerationEntry>(_fk_guid_EnumValue.Value));
             else
             if (_fk_EnumValue.HasValue)
-                EnumValueImpl = (Zetbox.App.Base.EnumerationEntryMemoryImpl)Context.Find<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value);
+                EnumValueImpl = (Zetbox.App.Base.EnumerationEntryMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value));
             else
                 EnumValueImpl = null;
             // fix cached lists references

@@ -979,20 +979,20 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 ChangedByImpl = null;
 
             if (_fk_guid_ConstrainedProperty.HasValue)
-                ConstrainedPropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_ConstrainedProperty.Value);
+                ConstrainedPropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_guid_ConstrainedProperty.Value));
             else
             if (_fk_ConstrainedProperty.HasValue)
-                ConstrainedPropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_ConstrainedProperty.Value);
+                ConstrainedPropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Property>(_fk_ConstrainedProperty.Value));
             else
                 ConstrainedPropertyImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 CreatedByImpl = null;
             // fix cached lists references

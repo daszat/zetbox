@@ -748,10 +748,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_CompoundObjectDefinition.HasValue)
-                CompoundObjectDefinitionImpl = (Zetbox.App.Base.CompoundObjectMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.CompoundObject>(_fk_guid_CompoundObjectDefinition.Value);
+                CompoundObjectDefinitionImpl = (Zetbox.App.Base.CompoundObjectMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.CompoundObject>(_fk_guid_CompoundObjectDefinition.Value));
             else
             if (_fk_CompoundObjectDefinition.HasValue)
-                CompoundObjectDefinitionImpl = (Zetbox.App.Base.CompoundObjectMemoryImpl)Context.Find<Zetbox.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value);
+                CompoundObjectDefinitionImpl = (Zetbox.App.Base.CompoundObjectMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value));
             else
                 CompoundObjectDefinitionImpl = null;
             // fix cached lists references

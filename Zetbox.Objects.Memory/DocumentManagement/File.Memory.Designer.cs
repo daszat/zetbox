@@ -1582,25 +1582,25 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
             // fix direct object references
 
             if (_fk_guid_Blob.HasValue)
-                BlobImpl = (Zetbox.App.Base.BlobMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_guid_Blob.Value);
+                BlobImpl = (Zetbox.App.Base.BlobMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Blob>(_fk_guid_Blob.Value));
             else
             if (_fk_Blob.HasValue)
-                BlobImpl = (Zetbox.App.Base.BlobMemoryImpl)Context.Find<Zetbox.App.Base.Blob>(_fk_Blob.Value);
+                BlobImpl = (Zetbox.App.Base.BlobMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value));
             else
                 BlobImpl = null;
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 ChangedByImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 CreatedByImpl = null;
 
             if (_fk_Excerpt.HasValue)
-                ExcerptImpl = (at.dasz.DocumentManagement.ExcerptMemoryImpl)Context.Find<at.dasz.DocumentManagement.Excerpt>(_fk_Excerpt.Value);
+                ExcerptImpl = (at.dasz.DocumentManagement.ExcerptMemoryImpl)(await Context.FindAsync<at.dasz.DocumentManagement.Excerpt>(_fk_Excerpt.Value));
             else
                 ExcerptImpl = null;
             // fix cached lists references

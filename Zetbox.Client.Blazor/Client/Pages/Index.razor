@@ -4,6 +4,7 @@
 
 @page "/"
 @inject IZetboxContext DataContext
+@inject IFrozenContext FrozenContext
 @inject IViewModelFactory ViewModelFactory
 
 <PageTitle>Index</PageTitle>
@@ -12,18 +13,18 @@
 
 Welcome to your new app.
 
-@if(projekte != null)
+@if (projekte != null)
 {
 	<table class="table table-bordered">
-	@foreach(var prj in projekte)
-	{
-		<tr>
-			<td>@prj.Name</td>
-			<td>
-				<LabeledView value="@prj.PropertyModelsByName["KickOffAm"]" />
-			</td>
-		</tr>
-	}
+		@foreach (var prj in projekte)
+		{
+			<tr>
+				<td>@prj.Name</td>
+				<td>
+					<LabeledView value="@prj.PropertyModelsByName["KickOffAm"]" />
+				</td>
+			</tr>
+		}
 	</table>
 }
 
@@ -34,6 +35,8 @@ Welcome to your new app.
 	protected async override t.Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
+
+		var classes = FrozenContext.GetQuery<Zetbox.App.Base.ObjectClass>().Take(10).ToList();
 
 		var _projekte = await DataContext.GetQuery<Projekt>().ToListAsync();
 		projekte = _projekte.Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, null, i)).ToArray();

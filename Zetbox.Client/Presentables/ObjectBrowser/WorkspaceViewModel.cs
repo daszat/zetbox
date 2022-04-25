@@ -165,7 +165,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 if (_ImportCommand == null)
                 {
-                    _ImportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Import", "Import zetbox objects", Import, CanImport, CanImportReason);
+                    _ImportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Import", "Import zetbox objects", async () => await Import(), CanImport, CanImportReason);
                 }
                 return _ImportCommand;
             }
@@ -181,7 +181,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             return "";
         }
 
-        public void Import()
+        public async Task Import()
         {
             if (!CanImport()) return;
             var filename = ViewModelFactory.GetSourceFileNameFromUser("XML|*.xml", "All files|*.*");
@@ -193,7 +193,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
                 try
                 {
-                    objects.AddRange(Zetbox.App.Packaging.Importer.LoadFromXml(newCtx, filename).OfType<IDataObject>());
+                    objects.AddRange((await Zetbox.App.Packaging.Importer.LoadFromXml(newCtx, filename)).OfType<IDataObject>());
                 }
                 catch (Exception ex)
                 {
@@ -299,10 +299,10 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         #region DragDrop
         public bool CanDrop { get { return true; } }
 
-        public Task<bool> OnDrop(object data)
+        public async Task<bool> OnDrop(object data)
         {
             var files = data as string[];
-            if (files == null) return Task.FromResult(false);
+            if (files == null) return false;
 
             var newScope = ViewModelFactory.CreateNewScope();
             var newCtx = newScope.ViewModelFactory.CreateNewContext();
@@ -316,7 +316,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
                     xml.Load(file);
                     if (xml.DocumentElement.LocalName == "ZetboxPackaging")
                     {
-                        objects.AddRange(Zetbox.App.Packaging.Importer.LoadFromXml(newCtx, file).OfType<IDataObject>());
+                        objects.AddRange((await Zetbox.App.Packaging.Importer.LoadFromXml(newCtx, file)).OfType<IDataObject>());
                     }
                 }
                 catch (Exception ex)
@@ -345,7 +345,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 newScope.Dispose();
             }
-            return Task.FromResult(true);
+            return true;
         }
         #endregion
     }

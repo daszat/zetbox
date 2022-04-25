@@ -323,7 +323,7 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_Parent.HasValue)
-                this.Parent = ((Zetbox.App.Test.RequiredParentNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value));
+                this.Parent = ((Zetbox.App.Test.RequiredParentNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value)));
             else
                 this.Parent = null;
         }

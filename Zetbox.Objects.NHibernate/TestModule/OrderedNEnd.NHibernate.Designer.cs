@@ -354,7 +354,7 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_OneEnd.HasValue)
-                this.OneEnd = ((Zetbox.App.Test.OrderedOneEndNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value));
+                this.OneEnd = ((Zetbox.App.Test.OrderedOneEndNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value)));
             else
                 this.OneEnd = null;
         }

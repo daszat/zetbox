@@ -325,7 +325,7 @@ namespace Zetbox.App.Test
             // fix direct object references
 
             if (_fk_OneSide.HasValue)
-                OneSideImpl = (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)Context.Find<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
+                OneSideImpl = (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value));
             else
                 OneSideImpl = null;
             // fix cached lists references

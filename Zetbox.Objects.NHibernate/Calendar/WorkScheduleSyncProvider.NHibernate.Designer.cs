@@ -495,12 +495,12 @@ namespace Zetbox.App.Calendar
             // fix direct object references
 
             if (_fk_Calendar.HasValue)
-                this.Calendar = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value));
+                this.Calendar = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value)));
             else
                 this.Calendar = null;
 
             if (_fk_WorkSchedule.HasValue)
-                this.WorkSchedule = ((Zetbox.App.Calendar.WorkScheduleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.WorkSchedule>(_fk_WorkSchedule.Value));
+                this.WorkSchedule = ((Zetbox.App.Calendar.WorkScheduleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Calendar.WorkSchedule>(_fk_WorkSchedule.Value)));
             else
                 this.WorkSchedule = null;
         }

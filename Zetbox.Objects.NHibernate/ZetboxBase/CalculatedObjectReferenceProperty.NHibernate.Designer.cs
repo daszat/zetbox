@@ -677,10 +677,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
             // fix direct object references
 
             if (_fk_guid_ReferencedClass.HasValue)
-                this.ReferencedClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_ReferencedClass.Value));
+                this.ReferencedClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_ReferencedClass.Value)));
             else
             if (_fk_ReferencedClass.HasValue)
-                this.ReferencedClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value));
+                this.ReferencedClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value)));
             else
                 this.ReferencedClass = null;
         }

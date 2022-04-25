@@ -76,13 +76,15 @@ namespace Zetbox.DalProvider.Memory
                             () => memCtx,
                             c.Resolve<MemoryImplementationType.MemoryFactory>(),
                             c.Resolve<IEnumerable<IZetboxContextEventListener>>());
-                        Importer.LoadFromXml(memCtx, generatedAssembly.GetManifestResourceStream("Zetbox.Objects.MemoryImpl.FrozenObjects.xml"), "FrozenContext XML from Assembly");
-                        memCtx.Seal();
+
                         return memCtx;
                     })
                     .As<IFrozenContext>()
                     .OnActivated(async args =>
                     {
+                        await Importer.LoadFromXml(args.Instance, generatedAssembly.GetManifestResourceStream("Zetbox.Objects.MemoryImpl.FrozenObjects.xml"), "FrozenContext XML from Assembly");
+                        args.Instance.Seal();
+
                         var manager = args.Context.Resolve<IMemoryActionsManager>();
                         var listener = args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>();
                         await manager.Init(args.Context.Resolve<IFrozenContext>());

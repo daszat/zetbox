@@ -1045,7 +1045,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             // fix direct object references
 
             if (_fk_Parent.HasValue)
-                ParentImpl = (Zetbox.App.Test.MethodTestMemoryImpl)Context.Find<Zetbox.App.Test.MethodTest>(_fk_Parent.Value);
+                ParentImpl = (Zetbox.App.Test.MethodTestMemoryImpl)(await Context.FindAsync<Zetbox.App.Test.MethodTest>(_fk_Parent.Value));
             else
                 ParentImpl = null;
             // fix cached lists references
