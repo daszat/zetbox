@@ -52,13 +52,13 @@ this.WriteObjects("\r\n");
 if (isExportable) { 
 #line 39 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 this.WriteObjects("            if (",  fkGuidBackingName , ".HasValue)\r\n");
-this.WriteObjects("                ",  implName , " = (",  referencedImplementation , ")Context.FindPersistenceObject<",  referencedInterface , ">(",  fkGuidBackingName , ".Value);\r\n");
+this.WriteObjects("                ",  implName , " = (",  referencedImplementation , ")(await Context.FindPersistenceObjectAsync<",  referencedInterface , ">(",  fkGuidBackingName , ".Value));\r\n");
 this.WriteObjects("            else\r\n");
 #line 42 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 } 
 #line 43 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 this.WriteObjects("            if (",  fkBackingName , ".HasValue)\r\n");
-this.WriteObjects("                ",  implName , " = (",  referencedImplementation , ")Context.Find<",  referencedInterface , ">(",  fkBackingName , ".Value);\r\n");
+this.WriteObjects("                ",  implName , " = (",  referencedImplementation , ")(await Context.FindAsync<",  referencedInterface , ">(",  fkBackingName , ".Value));\r\n");
 this.WriteObjects("            else\r\n");
 this.WriteObjects("                ",  implName , " = null;\r\n");
 

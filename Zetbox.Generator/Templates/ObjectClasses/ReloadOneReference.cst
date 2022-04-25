@@ -37,10 +37,10 @@
 
 <% if (isExportable) { %>
             if (<%= fkGuidBackingName %>.HasValue)
-                <%= implName %> = (<%= referencedImplementation %>)Context.FindPersistenceObject<<%= referencedInterface %>>(<%= fkGuidBackingName %>.Value);
+                <%= implName %> = (<%= referencedImplementation %>)(await Context.FindPersistenceObjectAsync<<%= referencedInterface %>>(<%= fkGuidBackingName %>.Value));
             else
 <% } %>
             if (<%= fkBackingName %>.HasValue)
-                <%= implName %> = (<%= referencedImplementation %>)Context.Find<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
+                <%= implName %> = (<%= referencedImplementation %>)(await Context.FindAsync<<%= referencedInterface %>>(<%= fkBackingName %>.Value));
             else
                 <%= implName %> = null;

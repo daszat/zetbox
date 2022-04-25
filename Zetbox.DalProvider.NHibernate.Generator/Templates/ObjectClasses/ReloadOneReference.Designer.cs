@@ -52,13 +52,13 @@ this.WriteObjects("\r\n");
 if (isExportable) { 
 #line 39 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 this.WriteObjects("            if (",  fkGuidBackingName , ".HasValue)\r\n");
-this.WriteObjects("                this.",  name , " = ((",  referencedImplementation , ")OurContext.FindPersistenceObject<",  referencedInterface , ">(",  fkGuidBackingName , ".Value));\r\n");
+this.WriteObjects("                this.",  name , " = ((",  referencedImplementation , ")(await OurContext.FindPersistenceObjectAsync<",  referencedInterface , ">(",  fkGuidBackingName , ".Value)));\r\n");
 this.WriteObjects("            else\r\n");
 #line 42 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 } 
 #line 43 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 this.WriteObjects("            if (",  fkBackingName , ".HasValue)\r\n");
-this.WriteObjects("                this.",  name , " = ((",  referencedImplementation , ")OurContext.FindPersistenceObject<",  referencedInterface , ">(",  fkBackingName , ".Value));\r\n");
+this.WriteObjects("                this.",  name , " = ((",  referencedImplementation , ")(await OurContext.FindPersistenceObjectAsync<",  referencedInterface , ">(",  fkBackingName , ".Value)));\r\n");
 this.WriteObjects("            else\r\n");
 this.WriteObjects("                this.",  name , " = null;\r\n");
 
