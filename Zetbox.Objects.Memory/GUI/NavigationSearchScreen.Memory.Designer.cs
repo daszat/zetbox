@@ -741,7 +741,7 @@ namespace Zetbox.App.GUI
             if (_fk_RequestedEditorKind.HasValue)
                 _triggerFetchRequestedEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value);
             else
-                _triggerFetchRequestedEditorKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+                _triggerFetchRequestedEditorKindTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
 
             _triggerFetchRequestedEditorKindTask.OnResult(t =>
             {
@@ -764,7 +764,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchRequestedEditorKindAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
@@ -880,7 +879,7 @@ namespace Zetbox.App.GUI
             if (_fk_RequestedWorkspaceKind.HasValue)
                 _triggerFetchRequestedWorkspaceKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value);
             else
-                _triggerFetchRequestedWorkspaceKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+                _triggerFetchRequestedWorkspaceKindTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
 
             _triggerFetchRequestedWorkspaceKindTask.OnResult(t =>
             {
@@ -903,7 +902,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchRequestedWorkspaceKindAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
@@ -1251,7 +1249,7 @@ namespace Zetbox.App.GUI
             if (_fk_Type.HasValue)
                 _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
             else
-                _triggerFetchTypeTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
+                _triggerFetchTypeTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
 
             _triggerFetchTypeTask.OnResult(t =>
             {
@@ -1274,7 +1272,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchTypeAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set

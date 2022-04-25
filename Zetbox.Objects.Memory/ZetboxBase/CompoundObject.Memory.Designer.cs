@@ -103,7 +103,7 @@ namespace Zetbox.App.Base
             if (_fk_DefaultPropertyViewModelDescriptor.HasValue)
                 _triggerFetchDefaultPropertyViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value);
             else
-                _triggerFetchDefaultPropertyViewModelDescriptorTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor>(() => null);
+                _triggerFetchDefaultPropertyViewModelDescriptorTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(null);
 
             _triggerFetchDefaultPropertyViewModelDescriptorTask.OnResult(t =>
             {
@@ -126,7 +126,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchDefaultPropertyViewModelDescriptorAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
@@ -242,7 +241,7 @@ namespace Zetbox.App.Base
             if (_fk_DefaultViewModelDescriptor.HasValue)
                 _triggerFetchDefaultViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
             else
-                _triggerFetchDefaultViewModelDescriptorTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor>(() => null);
+                _triggerFetchDefaultViewModelDescriptorTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(null);
 
             _triggerFetchDefaultViewModelDescriptorTask.OnResult(t =>
             {
@@ -265,7 +264,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchDefaultViewModelDescriptorAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set

@@ -118,7 +118,6 @@ namespace Zetbox.App.Test
                 {
                     var task = TriggerFetchMubBlah_List_NavAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _MubBlah_List_Nav;
             }
@@ -146,9 +145,9 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchMubBlah_List_NavTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchMubBlah_List_NavTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.Muhblah>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.Test.Muhblah>();
+                    serverList = t.Result;
                 });
             }
 
@@ -241,7 +240,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             if (_fk_MubBlah_Nav.HasValue)
                 _triggerFetchMubBlah_NavTask = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
             else
-                _triggerFetchMubBlah_NavTask = new System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah>(() => null);
+                _triggerFetchMubBlah_NavTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Muhblah>(null);
 
             _triggerFetchMubBlah_NavTask.OnResult(t =>
             {
@@ -264,7 +263,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             {
                 var task = TriggerFetchMubBlah_NavAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.MuhblahMemoryImpl)task.Result;
             }
             set
@@ -304,13 +302,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.TestCustomObjects_List_Nav as IRelationListSync<Zetbox.App.Test.TestCustomObject>).RemoveWithoutClearParent(this);
+                    (__oldValue.TestCustomObjects_List_Nav as IRelationListSync<Zetbox.App.Test.TestCustomObject>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.TestCustomObjects_List_Nav as IRelationListSync<Zetbox.App.Test.TestCustomObject>).AddWithoutSetParent(this);
+                    (__newValue.TestCustomObjects_List_Nav as IRelationListSync<Zetbox.App.Test.TestCustomObject>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("MubBlah_Nav", __oldValue, __newValue);
@@ -343,7 +341,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 {
                     var task = TriggerFetchMuhBlah_ManyList_NavAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Test.Muhblah>)_MuhBlah_ManyList_Nav;
             }
@@ -449,7 +446,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             if (_fk_MuhBlah_One_Nav.HasValue)
                 _triggerFetchMuhBlah_One_NavTask = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
             else
-                _triggerFetchMuhBlah_One_NavTask = new System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah>(() => null);
+                _triggerFetchMuhBlah_One_NavTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Muhblah>(null);
 
             _triggerFetchMuhBlah_One_NavTask.OnResult(t =>
             {
@@ -472,7 +469,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             {
                 var task = TriggerFetchMuhBlah_One_NavAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.MuhblahMemoryImpl)task.Result;
             }
             set

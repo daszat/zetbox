@@ -103,7 +103,7 @@ namespace Zetbox.App.GUI
             if (_fk_Property.HasValue)
                 _triggerFetchPropertyTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value);
             else
-                _triggerFetchPropertyTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Property>(() => null);
+                _triggerFetchPropertyTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(null);
 
             _triggerFetchPropertyTask.OnResult(t =>
             {
@@ -126,7 +126,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchPropertyAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set

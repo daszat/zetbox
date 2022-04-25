@@ -146,13 +146,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Constraints as IRelationListSync<Zetbox.App.Base.InstanceConstraint>).RemoveWithoutClearParent(this);
+                    (__oldValue.Constraints as IRelationListSync<Zetbox.App.Base.InstanceConstraint>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Constraints as IRelationListSync<Zetbox.App.Base.InstanceConstraint>).AddWithoutSetParent(this);
+                    (__newValue.Constraints as IRelationListSync<Zetbox.App.Base.InstanceConstraint>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Constrained", __oldValue, __newValue);

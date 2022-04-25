@@ -157,7 +157,7 @@ namespace at.dasz.DocumentManagement
             if (_fk_Blob.HasValue)
                 _triggerFetchBlobTask = Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value);
             else
-                _triggerFetchBlobTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Blob>(() => null);
+                _triggerFetchBlobTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Blob>(null);
 
             _triggerFetchBlobTask.OnResult(t =>
             {
@@ -180,7 +180,6 @@ namespace at.dasz.DocumentManagement
             {
                 var task = TriggerFetchBlobAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.BlobMemoryImpl)task.Result;
             }
             set
@@ -295,7 +294,7 @@ namespace at.dasz.DocumentManagement
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -318,7 +317,6 @@ namespace at.dasz.DocumentManagement
             {
                 var task = TriggerFetchChangedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -506,7 +504,7 @@ namespace at.dasz.DocumentManagement
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -529,7 +527,6 @@ namespace at.dasz.DocumentManagement
             {
                 var task = TriggerFetchCreatedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -717,7 +714,7 @@ namespace at.dasz.DocumentManagement
             if (_fk_Excerpt.HasValue)
                 _triggerFetchExcerptTask = Context.FindAsync<at.dasz.DocumentManagement.Excerpt>(_fk_Excerpt.Value);
             else
-                _triggerFetchExcerptTask = new System.Threading.Tasks.Task<at.dasz.DocumentManagement.Excerpt>(() => null);
+                _triggerFetchExcerptTask = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.Excerpt>(null);
 
             _triggerFetchExcerptTask.OnResult(t =>
             {
@@ -740,7 +737,6 @@ namespace at.dasz.DocumentManagement
             {
                 var task = TriggerFetchExcerptAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (at.dasz.DocumentManagement.ExcerptMemoryImpl)task.Result;
             }
             set
@@ -1090,7 +1086,6 @@ namespace at.dasz.DocumentManagement
                 {
                     var task = TriggerFetchRevisionsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (IList<Zetbox.App.Base.Blob>)_Revisions;
             }

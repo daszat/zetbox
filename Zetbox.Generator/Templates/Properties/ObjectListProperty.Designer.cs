@@ -77,7 +77,6 @@ this.WriteObjects("                if (",  wrapperName , " == null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var task = TriggerFetch",  name , "Async();\r\n");
 this.WriteObjects("                    task.TryRunSynchronously();\r\n");
-this.WriteObjects("                    task.Wait();\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return ",  wrapperName , ";\r\n");
 this.WriteObjects("            }\r\n");
@@ -97,9 +96,9 @@ this.WriteObjects("\r\n");
 this.WriteObjects("            List<",  referencedInterface , "> serverList = null;\r\n");
 this.WriteObjects("            if (Helper.IsPersistedObject(this))\r\n");
 this.WriteObjects("            {\r\n");
-#line 85 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 84 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 if (eagerLoading) { 
-#line 86 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 85 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("                if (",  idsListName , " != null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    ",  taskName , " = new System.Threading.Tasks.Task(() =>\r\n");
@@ -116,23 +115,23 @@ this.WriteObjects("                        {\r\n");
 this.WriteObjects("                            serverList = t.Result;\r\n");
 this.WriteObjects("                        });\r\n");
 this.WriteObjects("                }\r\n");
-#line 102 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 101 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 } else { 
-#line 103 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 102 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("                ",  taskName , " = Context.GetListOfAsync<",  referencedInterface , ">(this, \"",  name , "\")\r\n");
 this.WriteObjects("                    .OnResult(t =>\r\n");
 this.WriteObjects("                    {\r\n");
 this.WriteObjects("                        serverList = t.Result;\r\n");
 this.WriteObjects("                    });\r\n");
-#line 108 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 107 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 } 
-#line 109 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 108 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            else\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                ",  taskName , " = new System.Threading.Tasks.Task(() =>\r\n");
+this.WriteObjects("                ",  taskName , " = System.Threading.Tasks.Task.FromResult(new List<",  referencedInterface , ">()).ContinueWith(t =>\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    serverList = new List<",  referencedInterface , ">();\r\n");
+this.WriteObjects("                    serverList = t.Result;\r\n");
 this.WriteObjects("                });\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("\r\n");
@@ -141,17 +140,17 @@ this.WriteObjects("            {\r\n");
 this.WriteObjects("                ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ">(\r\n");
 this.WriteObjects("                    \"",  otherName , "\",\r\n");
 this.WriteObjects("                    ");
-#line 122 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 121 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 if (!String.IsNullOrEmpty(positionPropertyName)) { 
-#line 122 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 121 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("\"",  positionPropertyName , "\"");
-#line 122 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 121 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 } else { 
-#line 122 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 121 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("null");
-#line 122 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 121 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 } 
-#line 122 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 121 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects(",\r\n");
 this.WriteObjects("                    this,\r\n");
 this.WriteObjects("                    On",  name , "CollectionChanged,\r\n");
@@ -168,14 +167,14 @@ this.WriteObjects("                ",  eventName , "(this);\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , "> ",  wrapperName , ";\r\n");
-#line 139 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 138 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 if (eagerLoading)
     {
 
-#line 142 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 141 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("        private List<int> ",  name , "Ids;\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 145 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 144 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 }
 
     AddSerialization(serializationList, name, eagerLoading);

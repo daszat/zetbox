@@ -1049,13 +1049,13 @@ namespace Zetbox.App.Calendar
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.WorkScheduleRules as IRelationListSync<Zetbox.App.Calendar.WorkScheduleRule>).RemoveWithoutClearParent(this);
+                    (__oldValue.WorkScheduleRules as IRelationListSync<Zetbox.App.Calendar.WorkScheduleRule>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.WorkScheduleRules as IRelationListSync<Zetbox.App.Calendar.WorkScheduleRule>).AddWithoutSetParent(this);
+                    (__newValue.WorkScheduleRules as IRelationListSync<Zetbox.App.Calendar.WorkScheduleRule>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("WorkSchedule", __oldValue, __newValue);

@@ -203,13 +203,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Antworten as IRelationListSync<Zetbox.App.Test.Antwort>).RemoveWithoutClearParent(this);
+                    (__oldValue.Antworten as IRelationListSync<Zetbox.App.Test.Antwort>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Antworten as IRelationListSync<Zetbox.App.Test.Antwort>).AddWithoutSetParent(this);
+                    (__newValue.Antworten as IRelationListSync<Zetbox.App.Test.Antwort>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Fragebogen", __oldValue, __newValue);

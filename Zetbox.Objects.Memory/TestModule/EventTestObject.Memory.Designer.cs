@@ -102,7 +102,7 @@ namespace Zetbox.App.Test
             if (_fk_Event.HasValue)
                 _triggerFetchEventTask = Context.FindAsync<Zetbox.App.Calendar.Event>(_fk_Event.Value);
             else
-                _triggerFetchEventTask = new System.Threading.Tasks.Task<Zetbox.App.Calendar.Event>(() => null);
+                _triggerFetchEventTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.Event>(null);
 
             _triggerFetchEventTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchEventAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Calendar.EventMemoryImpl)task.Result;
             }
             set

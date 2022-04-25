@@ -102,7 +102,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.SchemaMigration
             {
                 var task = TriggerFetchChangedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -442,7 +441,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -465,7 +464,6 @@ namespace Zetbox.App.SchemaMigration
             {
                 var task = TriggerFetchCreatedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -717,7 +715,6 @@ namespace Zetbox.App.SchemaMigration
                 {
                     var task = TriggerFetchDestinationPropertyAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (IList<Zetbox.App.Base.Property>)_DestinationProperty;
             }
@@ -777,7 +774,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 {
                     var task = TriggerFetchEnumEntriesAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _EnumEntries;
             }
@@ -805,9 +801,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
             else
             {
-                _triggerFetchEnumEntriesTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchEnumEntriesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.SchemaMigration.SourceEnum>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.SchemaMigration.SourceEnum>();
+                    serverList = t.Result;
                 });
             }
 
@@ -1088,7 +1084,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             if (_fk_References.HasValue)
                 _triggerFetchReferencesTask = Context.FindAsync<Zetbox.App.SchemaMigration.SourceColumn>(_fk_References.Value);
             else
-                _triggerFetchReferencesTask = new System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn>(() => null);
+                _triggerFetchReferencesTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.SchemaMigration.SourceColumn>(null);
 
             _triggerFetchReferencesTask.OnResult(t =>
             {
@@ -1111,7 +1107,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             {
                 var task = TriggerFetchReferencesAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)task.Result;
             }
             set
@@ -1151,13 +1146,13 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Referers as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>).RemoveWithoutClearParent(this);
+                    (__oldValue.Referers as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Referers as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>).AddWithoutSetParent(this);
+                    (__newValue.Referers as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("References", __oldValue, __newValue);
@@ -1194,7 +1189,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 {
                     var task = TriggerFetchReferersAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _Referers;
             }
@@ -1222,9 +1216,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
             else
             {
-                _triggerFetchReferersTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchReferersTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.SchemaMigration.SourceColumn>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.SchemaMigration.SourceColumn>();
+                    serverList = t.Result;
                 });
             }
 
@@ -1376,7 +1370,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             if (_fk_SourceTable.HasValue)
                 _triggerFetchSourceTableTask = Context.FindAsync<Zetbox.App.SchemaMigration.SourceTable>(_fk_SourceTable.Value);
             else
-                _triggerFetchSourceTableTask = new System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceTable>(() => null);
+                _triggerFetchSourceTableTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.SchemaMigration.SourceTable>(null);
 
             _triggerFetchSourceTableTask.OnResult(t =>
             {
@@ -1399,7 +1393,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             {
                 var task = TriggerFetchSourceTableAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.SchemaMigration.SourceTableMemoryImpl)task.Result;
             }
             set
@@ -1439,13 +1432,13 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.SourceColumn as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>).RemoveWithoutClearParent(this);
+                    (__oldValue.SourceColumn as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.SourceColumn as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>).AddWithoutSetParent(this);
+                    (__newValue.SourceColumn as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("SourceTable", __oldValue, __newValue);

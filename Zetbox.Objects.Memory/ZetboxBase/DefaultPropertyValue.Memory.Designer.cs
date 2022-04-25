@@ -102,7 +102,7 @@ namespace Zetbox.App.Base
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchChangedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -313,7 +312,7 @@ namespace Zetbox.App.Base
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -336,7 +335,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchCreatedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -596,7 +594,7 @@ namespace Zetbox.App.Base
             if (_fk_Property.HasValue)
                 _triggerFetchPropertyTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value);
             else
-                _triggerFetchPropertyTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Property>(() => null);
+                _triggerFetchPropertyTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(null);
 
             _triggerFetchPropertyTask.OnResult(t =>
             {
@@ -619,7 +617,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchPropertyAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set

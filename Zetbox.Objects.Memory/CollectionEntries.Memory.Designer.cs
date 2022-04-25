@@ -159,7 +159,7 @@ namespace Zetbox.App.Test
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Test.N_to_M_relations_A>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Test.N_to_M_relations_A>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.N_to_M_relations_A>(null);
 
             return _triggerFetchATask;
         }
@@ -172,7 +172,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)task.Result;
             }
             set
@@ -285,7 +284,7 @@ namespace Zetbox.App.Test
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Test.N_to_M_relations_B>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Test.N_to_M_relations_B>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.N_to_M_relations_B>(null);
 
             return _triggerFetchBTask;
         }
@@ -298,7 +297,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)task.Result;
             }
             set
@@ -631,7 +629,7 @@ namespace Zetbox.App.Base
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Base.CalculatedObjectReferenceProperty>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Base.CalculatedObjectReferenceProperty>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.CalculatedObjectReferenceProperty>(null);
 
             return _triggerFetchATask;
         }
@@ -644,7 +642,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)task.Result;
             }
             set
@@ -758,7 +755,7 @@ namespace Zetbox.App.Base
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Property>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(null);
 
             return _triggerFetchBTask;
         }
@@ -771,7 +768,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set
@@ -1122,7 +1118,7 @@ namespace Zetbox.App.Calendar
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(null);
 
             return _triggerFetchATask;
         }
@@ -1135,7 +1131,6 @@ namespace Zetbox.App.Calendar
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Calendar.CalendarBookMemoryImpl)task.Result;
             }
             set
@@ -1249,7 +1244,7 @@ namespace Zetbox.App.Calendar
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Group>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Group>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Group>(null);
 
             return _triggerFetchBTask;
         }
@@ -1262,7 +1257,6 @@ namespace Zetbox.App.Calendar
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.GroupMemoryImpl)task.Result;
             }
             set
@@ -1578,7 +1572,7 @@ namespace Zetbox.App.Calendar
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(null);
 
             return _triggerFetchATask;
         }
@@ -1591,7 +1585,6 @@ namespace Zetbox.App.Calendar
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Calendar.CalendarBookMemoryImpl)task.Result;
             }
             set
@@ -1704,7 +1697,7 @@ namespace Zetbox.App.Calendar
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             return _triggerFetchBTask;
         }
@@ -1717,7 +1710,6 @@ namespace Zetbox.App.Calendar
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -2034,7 +2026,7 @@ namespace Zetbox.App.Calendar
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(null);
 
             return _triggerFetchATask;
         }
@@ -2047,7 +2039,6 @@ namespace Zetbox.App.Calendar
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Calendar.CalendarBookMemoryImpl)task.Result;
             }
             set
@@ -2161,7 +2152,7 @@ namespace Zetbox.App.Calendar
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Group>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Group>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Group>(null);
 
             return _triggerFetchBTask;
         }
@@ -2174,7 +2165,6 @@ namespace Zetbox.App.Calendar
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.GroupMemoryImpl)task.Result;
             }
             set
@@ -2490,7 +2480,7 @@ namespace Zetbox.App.Calendar
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(null);
 
             return _triggerFetchATask;
         }
@@ -2503,7 +2493,6 @@ namespace Zetbox.App.Calendar
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Calendar.CalendarBookMemoryImpl)task.Result;
             }
             set
@@ -2616,7 +2605,7 @@ namespace Zetbox.App.Calendar
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             return _triggerFetchBTask;
         }
@@ -2629,7 +2618,6 @@ namespace Zetbox.App.Calendar
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -2946,7 +2934,7 @@ namespace Zetbox.App.Base
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Base.DataType>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Base.DataType>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DataType>(null);
 
             return _triggerFetchATask;
         }
@@ -2959,7 +2947,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.DataTypeMemoryImpl)task.Result;
             }
             set
@@ -3073,7 +3060,7 @@ namespace Zetbox.App.Base
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Interface>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Interface>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Interface>(null);
 
             return _triggerFetchBTask;
         }
@@ -3086,7 +3073,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.InterfaceMemoryImpl)task.Result;
             }
             set
@@ -3437,7 +3423,7 @@ namespace at.dasz.DocumentManagement
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<at.dasz.DocumentManagement.File>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(null);
 
             return _triggerFetchATask;
         }
@@ -3450,7 +3436,6 @@ namespace at.dasz.DocumentManagement
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (at.dasz.DocumentManagement.FileMemoryImpl)task.Result;
             }
             set
@@ -3595,7 +3580,7 @@ namespace at.dasz.DocumentManagement
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Blob>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Blob>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Blob>(null);
 
             return _triggerFetchBTask;
         }
@@ -3608,7 +3593,6 @@ namespace at.dasz.DocumentManagement
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.BlobMemoryImpl)task.Result;
             }
             set
@@ -3979,7 +3963,7 @@ namespace Zetbox.App.Base
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             return _triggerFetchATask;
         }
@@ -3992,7 +3976,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -4105,7 +4088,7 @@ namespace Zetbox.App.Base
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Group>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Group>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Group>(null);
 
             return _triggerFetchBTask;
         }
@@ -4118,7 +4101,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.GroupMemoryImpl)task.Result;
             }
             set
@@ -4416,7 +4398,7 @@ namespace Zetbox.App.Test
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Muhblah>(null);
 
             return _triggerFetchATask;
         }
@@ -4429,7 +4411,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.MuhblahMemoryImpl)task.Result;
             }
             set
@@ -4542,7 +4523,7 @@ namespace Zetbox.App.Test
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Test.TestCustomObject>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Test.TestCustomObject>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.TestCustomObject>(null);
 
             return _triggerFetchBTask;
         }
@@ -4555,7 +4536,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.TestCustomObjectMemoryImpl)task.Result;
             }
             set
@@ -4888,7 +4868,7 @@ namespace Zetbox.App.GUI
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.GUI.NavigationEntry>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.GUI.NavigationEntry>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.NavigationEntry>(null);
 
             return _triggerFetchATask;
         }
@@ -4901,7 +4881,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.NavigationEntryMemoryImpl)task.Result;
             }
             set
@@ -5015,7 +4994,7 @@ namespace Zetbox.App.GUI
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Group>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Group>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Group>(null);
 
             return _triggerFetchBTask;
         }
@@ -5028,7 +5007,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.GroupMemoryImpl)task.Result;
             }
             set
@@ -5379,7 +5357,7 @@ namespace Zetbox.App.GUI
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Base.ObjectReferenceProperty>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectReferenceProperty>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectReferenceProperty>(null);
 
             return _triggerFetchATask;
         }
@@ -5392,7 +5370,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)task.Result;
             }
             set
@@ -5506,7 +5483,7 @@ namespace Zetbox.App.GUI
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Method>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Method>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Method>(null);
 
             return _triggerFetchBTask;
         }
@@ -5519,7 +5496,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.MethodMemoryImpl)task.Result;
             }
             set
@@ -5886,7 +5862,7 @@ namespace Zetbox.App.GUI
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(null);
 
             return _triggerFetchATask;
         }
@@ -5899,7 +5875,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
@@ -6013,7 +5988,7 @@ namespace Zetbox.App.GUI
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
 
             return _triggerFetchBTask;
         }
@@ -6026,7 +6001,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
@@ -6377,7 +6351,7 @@ namespace Zetbox.App.Projekte
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Projekte.Projekt>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Projekte.Projekt>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Projekt>(null);
 
             return _triggerFetchATask;
         }
@@ -6390,7 +6364,6 @@ namespace Zetbox.App.Projekte
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Projekte.ProjektMemoryImpl)task.Result;
             }
             set
@@ -6535,7 +6508,7 @@ namespace Zetbox.App.Projekte
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Projekte.Mitarbeiter>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Projekte.Mitarbeiter>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Mitarbeiter>(null);
 
             return _triggerFetchBTask;
         }
@@ -6548,7 +6521,6 @@ namespace Zetbox.App.Projekte
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Projekte.MitarbeiterMemoryImpl)task.Result;
             }
             set
@@ -6970,7 +6942,7 @@ namespace Zetbox.App.Base
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Base.RoleMembership>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Base.RoleMembership>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.RoleMembership>(null);
 
             return _triggerFetchATask;
         }
@@ -6983,7 +6955,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.RoleMembershipMemoryImpl)task.Result;
             }
             set
@@ -7128,7 +7099,7 @@ namespace Zetbox.App.Base
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Relation>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Relation>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Relation>(null);
 
             return _triggerFetchBTask;
         }
@@ -7141,7 +7112,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.RelationMemoryImpl)task.Result;
             }
             set
@@ -7547,7 +7517,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.SchemaMigration.SourceColumn>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.SourceColumn>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.SchemaMigration.SourceColumn>(null);
 
             return _triggerFetchATask;
         }
@@ -7560,7 +7530,6 @@ namespace Zetbox.App.SchemaMigration
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)task.Result;
             }
             set
@@ -7705,7 +7674,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Property>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(null);
 
             return _triggerFetchBTask;
         }
@@ -7718,7 +7687,6 @@ namespace Zetbox.App.SchemaMigration
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set
@@ -8089,7 +8057,7 @@ namespace Zetbox.App.Test
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Test.TestStudent>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Test.TestStudent>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.TestStudent>(null);
 
             return _triggerFetchATask;
         }
@@ -8102,7 +8070,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.TestStudentMemoryImpl)task.Result;
             }
             set
@@ -8215,7 +8182,7 @@ namespace Zetbox.App.Test
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Test.Fragebogen>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Test.Fragebogen>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Fragebogen>(null);
 
             return _triggerFetchBTask;
         }
@@ -8228,7 +8195,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.FragebogenMemoryImpl)task.Result;
             }
             set
@@ -8561,7 +8527,7 @@ namespace Zetbox.App.Base
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Base.IndexConstraint>(_fk_A.Value);
             else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Base.IndexConstraint>(() => null);
+                _triggerFetchATask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.IndexConstraint>(null);
 
             return _triggerFetchATask;
         }
@@ -8574,7 +8540,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IndexConstraintMemoryImpl)task.Result;
             }
             set
@@ -8688,7 +8653,7 @@ namespace Zetbox.App.Base
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_B.Value);
             else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Property>(() => null);
+                _triggerFetchBTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(null);
 
             return _triggerFetchBTask;
         }
@@ -8701,7 +8666,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set

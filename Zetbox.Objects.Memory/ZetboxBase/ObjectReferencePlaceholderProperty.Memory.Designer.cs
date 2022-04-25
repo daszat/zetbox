@@ -335,7 +335,7 @@ namespace Zetbox.App.Base
             if (_fk_ReferencedObjectClass.HasValue)
                 _triggerFetchReferencedObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value);
             else
-                _triggerFetchReferencedObjectClassTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
+                _triggerFetchReferencedObjectClassTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
 
             _triggerFetchReferencedObjectClassTask.OnResult(t =>
             {
@@ -358,7 +358,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchReferencedObjectClassAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set

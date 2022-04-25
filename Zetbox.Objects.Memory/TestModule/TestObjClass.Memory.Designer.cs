@@ -205,7 +205,7 @@ namespace Zetbox.App.Test
             if (_fk_ObjectProp.HasValue)
                 _triggerFetchObjectPropTask = Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value);
             else
-                _triggerFetchObjectPropTask = new System.Threading.Tasks.Task<Zetbox.App.Projekte.Kunde>(() => null);
+                _triggerFetchObjectPropTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Kunde>(null);
 
             _triggerFetchObjectPropTask.OnResult(t =>
             {
@@ -228,7 +228,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchObjectPropAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Projekte.KundeMemoryImpl)task.Result;
             }
             set

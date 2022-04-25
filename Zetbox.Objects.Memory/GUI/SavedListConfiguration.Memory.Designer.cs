@@ -231,7 +231,7 @@ namespace Zetbox.App.GUI
             if (_fk_Owner.HasValue)
                 _triggerFetchOwnerTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Owner.Value);
             else
-                _triggerFetchOwnerTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchOwnerTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchOwnerTask.OnResult(t =>
             {
@@ -254,7 +254,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchOwnerAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -370,7 +369,7 @@ namespace Zetbox.App.GUI
             if (_fk_Type.HasValue)
                 _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
             else
-                _triggerFetchTypeTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
+                _triggerFetchTypeTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
 
             _triggerFetchTypeTask.OnResult(t =>
             {
@@ -393,7 +392,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchTypeAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set

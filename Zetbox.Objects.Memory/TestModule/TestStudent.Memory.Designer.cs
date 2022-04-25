@@ -108,7 +108,6 @@ namespace Zetbox.App.Test
                 {
                     var task = TriggerFetchTestbogenAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Test.Fragebogen>)_Testbogen;
             }

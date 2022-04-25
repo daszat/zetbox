@@ -850,13 +850,13 @@ namespace Zetbox.App.Projekte
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Tasks as IRelationListSync<Zetbox.App.Projekte.Task>).RemoveWithoutClearParent(this);
+                    (__oldValue.Tasks as IRelationListSync<Zetbox.App.Projekte.Task>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Tasks as IRelationListSync<Zetbox.App.Projekte.Task>).AddWithoutSetParent(this);
+                    (__newValue.Tasks as IRelationListSync<Zetbox.App.Projekte.Task>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Projekt", __oldValue, __newValue);

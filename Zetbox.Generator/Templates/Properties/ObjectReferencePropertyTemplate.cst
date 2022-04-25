@@ -116,7 +116,7 @@
             if (<%= fkBackingName %>.HasValue)
                 <%= taskName %> = Context.FindAsync<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
             else
-                <%= taskName %> = new System.Threading.Tasks.Task<<%= referencedInterface %>>(() => null);
+                <%= taskName %> = System.Threading.Tasks.Task.FromResult<<%= referencedInterface %>>(null);
 
 <% if (callGetterSetterEvents) {                                                                    %>
             <%= taskName %>.OnResult(t =>
@@ -141,7 +141,6 @@
             {
                 var task = TriggerFetch<%= name %>Async();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (<%= referencedImplementation %>)task.Result;
             }
             set
@@ -206,7 +205,7 @@
 <%      if (inverseNavigatorIsList) {                                                               %>
 <%          // TODO: check whether __oldValue is loaded before potentially triggering a DB Call     %>
                     // remove from old list
-                    (__oldValue.<%= inverseNavigatorName %> as IRelationListSync<<%= ownInterface %>>).RemoveWithoutClearParent(this);
+                    (__oldValue.<%= inverseNavigatorName %> as IRelationListSync<<%= ownInterface %>>)?.RemoveWithoutClearParent(this);
 <%      } else {                                                                                    %>
                     // unset old reference
                     __oldValue.<%= inverseNavigatorName %> = null;
@@ -217,7 +216,7 @@
                 {
 <%      if (inverseNavigatorIsList) {                                                               %>
                     // add to new list
-                    (__newValue.<%= inverseNavigatorName %> as IRelationListSync<<%= ownInterface %>>).AddWithoutSetParent(this);
+                    (__newValue.<%= inverseNavigatorName %> as IRelationListSync<<%= ownInterface %>>)?.AddWithoutSetParent(this);
 <%      } else {                                                                                    %>
                     // set new reference
                     __newValue.<%= inverseNavigatorName %> = this;

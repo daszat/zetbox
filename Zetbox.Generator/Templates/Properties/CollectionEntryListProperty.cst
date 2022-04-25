@@ -51,7 +51,6 @@
                 {
                     var task = TriggerFetch<%= name %>Async();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (<%= exposedCollectionInterface %><<%= referencedInterface %>>)<%= backingName %>;
             }

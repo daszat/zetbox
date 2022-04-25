@@ -121,7 +121,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchMemberAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Identity>)_Member;
             }
@@ -228,7 +227,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
+                _triggerFetchModuleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {
@@ -251,7 +250,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
             {
                 var task = TriggerFetchModuleAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set

@@ -145,13 +145,13 @@ namespace Zetbox.App.GUI
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.FilterConfigurations as IRelationListSync<Zetbox.App.GUI.ObjectClassFilterConfiguration>).RemoveWithoutClearParent(this);
+                    (__oldValue.FilterConfigurations as IRelationListSync<Zetbox.App.GUI.ObjectClassFilterConfiguration>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.FilterConfigurations as IRelationListSync<Zetbox.App.GUI.ObjectClassFilterConfiguration>).AddWithoutSetParent(this);
+                    (__newValue.FilterConfigurations as IRelationListSync<Zetbox.App.GUI.ObjectClassFilterConfiguration>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ObjectClass", __oldValue, __newValue);

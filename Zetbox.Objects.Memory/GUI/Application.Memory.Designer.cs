@@ -102,7 +102,7 @@ namespace Zetbox.App.GUI
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchChangedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -313,7 +312,7 @@ namespace Zetbox.App.GUI
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -336,7 +335,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchCreatedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -654,7 +652,7 @@ namespace Zetbox.App.GUI
             if (_fk_Icon.HasValue)
                 _triggerFetchIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_Icon.Value);
             else
-                _triggerFetchIconTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.Icon>(() => null);
+                _triggerFetchIconTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
 
             _triggerFetchIconTask.OnResult(t =>
             {
@@ -677,7 +675,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchIconAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
             set
@@ -793,7 +790,7 @@ namespace Zetbox.App.GUI
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
+                _triggerFetchModuleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {
@@ -816,7 +813,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchModuleAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
@@ -990,7 +986,7 @@ namespace Zetbox.App.GUI
             if (_fk_RootScreen.HasValue)
                 _triggerFetchRootScreenTask = Context.FindAsync<Zetbox.App.GUI.NavigationScreen>(_fk_RootScreen.Value);
             else
-                _triggerFetchRootScreenTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.NavigationScreen>(() => null);
+                _triggerFetchRootScreenTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.NavigationScreen>(null);
 
             _triggerFetchRootScreenTask.OnResult(t =>
             {
@@ -1013,7 +1009,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchRootScreenAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.NavigationScreenMemoryImpl)task.Result;
             }
             set
@@ -1129,7 +1124,7 @@ namespace Zetbox.App.GUI
             if (_fk_WorkspaceViewModel.HasValue)
                 _triggerFetchWorkspaceViewModelTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_WorkspaceViewModel.Value);
             else
-                _triggerFetchWorkspaceViewModelTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor>(() => null);
+                _triggerFetchWorkspaceViewModelTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(null);
 
             _triggerFetchWorkspaceViewModelTask.OnResult(t =>
             {
@@ -1152,7 +1147,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchWorkspaceViewModelAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set

@@ -160,7 +160,7 @@ namespace Zetbox.App.Test
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value);
             else
-                _triggerFetchParentTask = new System.Threading.Tasks.Task<Zetbox.App.Test.RequiredParent>(() => null);
+                _triggerFetchParentTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.RequiredParent>(null);
 
             _triggerFetchParentTask.OnResult(t =>
             {
@@ -183,7 +183,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchParentAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.RequiredParentMemoryImpl)task.Result;
             }
             set
@@ -223,13 +222,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Children as IRelationListSync<Zetbox.App.Test.RequiredParentChild>).RemoveWithoutClearParent(this);
+                    (__oldValue.Children as IRelationListSync<Zetbox.App.Test.RequiredParentChild>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Children as IRelationListSync<Zetbox.App.Test.RequiredParentChild>).AddWithoutSetParent(this);
+                    (__newValue.Children as IRelationListSync<Zetbox.App.Test.RequiredParentChild>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);

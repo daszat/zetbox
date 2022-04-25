@@ -218,7 +218,7 @@ namespace Zetbox.App.Projekte
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -241,7 +241,6 @@ namespace Zetbox.App.Projekte
             {
                 var task = TriggerFetchChangedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -429,7 +428,7 @@ namespace Zetbox.App.Projekte
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -452,7 +451,6 @@ namespace Zetbox.App.Projekte
             {
                 var task = TriggerFetchCreatedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -712,7 +710,7 @@ namespace Zetbox.App.Projekte
             if (_fk_Kunde.HasValue)
                 _triggerFetchKundeTask = Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_Kunde.Value);
             else
-                _triggerFetchKundeTask = new System.Threading.Tasks.Task<Zetbox.App.Projekte.Kunde>(() => null);
+                _triggerFetchKundeTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Kunde>(null);
 
             _triggerFetchKundeTask.OnResult(t =>
             {
@@ -735,7 +733,6 @@ namespace Zetbox.App.Projekte
             {
                 var task = TriggerFetchKundeAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Projekte.KundeMemoryImpl)task.Result;
             }
             set
@@ -851,7 +848,7 @@ namespace Zetbox.App.Projekte
             if (_fk_Mitarbeiter.HasValue)
                 _triggerFetchMitarbeiterTask = Context.FindAsync<Zetbox.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
             else
-                _triggerFetchMitarbeiterTask = new System.Threading.Tasks.Task<Zetbox.App.Projekte.Mitarbeiter>(() => null);
+                _triggerFetchMitarbeiterTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Mitarbeiter>(null);
 
             _triggerFetchMitarbeiterTask.OnResult(t =>
             {
@@ -874,7 +871,6 @@ namespace Zetbox.App.Projekte
             {
                 var task = TriggerFetchMitarbeiterAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Projekte.MitarbeiterMemoryImpl)task.Result;
             }
             set
@@ -990,7 +986,7 @@ namespace Zetbox.App.Projekte
             if (_fk_Projekt.HasValue)
                 _triggerFetchProjektTask = Context.FindAsync<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value);
             else
-                _triggerFetchProjektTask = new System.Threading.Tasks.Task<Zetbox.App.Projekte.Projekt>(() => null);
+                _triggerFetchProjektTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Projekt>(null);
 
             _triggerFetchProjektTask.OnResult(t =>
             {
@@ -1013,7 +1009,6 @@ namespace Zetbox.App.Projekte
             {
                 var task = TriggerFetchProjektAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Projekte.ProjektMemoryImpl)task.Result;
             }
             set
@@ -1053,13 +1048,13 @@ namespace Zetbox.App.Projekte
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Auftraege as IRelationListSync<Zetbox.App.Projekte.Auftrag>).RemoveWithoutClearParent(this);
+                    (__oldValue.Auftraege as IRelationListSync<Zetbox.App.Projekte.Auftrag>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Auftraege as IRelationListSync<Zetbox.App.Projekte.Auftrag>).AddWithoutSetParent(this);
+                    (__newValue.Auftraege as IRelationListSync<Zetbox.App.Projekte.Auftrag>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Projekt", __oldValue, __newValue);

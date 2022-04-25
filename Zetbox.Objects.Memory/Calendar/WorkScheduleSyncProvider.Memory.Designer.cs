@@ -102,7 +102,7 @@ namespace Zetbox.App.Calendar
             if (_fk_Calendar.HasValue)
                 _triggerFetchCalendarTask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value);
             else
-                _triggerFetchCalendarTask = new System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook>(() => null);
+                _triggerFetchCalendarTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(null);
 
             _triggerFetchCalendarTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.Calendar
             {
                 var task = TriggerFetchCalendarAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Calendar.CalendarBookMemoryImpl)task.Result;
             }
             set
@@ -240,7 +239,7 @@ namespace Zetbox.App.Calendar
             if (_fk_WorkSchedule.HasValue)
                 _triggerFetchWorkScheduleTask = Context.FindAsync<Zetbox.App.Calendar.WorkSchedule>(_fk_WorkSchedule.Value);
             else
-                _triggerFetchWorkScheduleTask = new System.Threading.Tasks.Task<Zetbox.App.Calendar.WorkSchedule>(() => null);
+                _triggerFetchWorkScheduleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.WorkSchedule>(null);
 
             _triggerFetchWorkScheduleTask.OnResult(t =>
             {
@@ -263,7 +262,6 @@ namespace Zetbox.App.Calendar
             {
                 var task = TriggerFetchWorkScheduleAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Calendar.WorkScheduleMemoryImpl)task.Result;
             }
             set

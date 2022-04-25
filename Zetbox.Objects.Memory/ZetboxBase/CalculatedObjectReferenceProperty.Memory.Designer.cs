@@ -50,7 +50,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchInputsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Property>)_Inputs;
             }
@@ -159,7 +158,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
             if (_fk_ReferencedClass.HasValue)
                 _triggerFetchReferencedClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);
             else
-                _triggerFetchReferencedClassTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
+                _triggerFetchReferencedClassTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
 
             _triggerFetchReferencedClassTask.OnResult(t =>
             {
@@ -182,7 +181,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
             {
                 var task = TriggerFetchReferencedClassAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set

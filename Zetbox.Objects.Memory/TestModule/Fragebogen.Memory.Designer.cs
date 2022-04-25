@@ -54,7 +54,6 @@ namespace Zetbox.App.Test
                 {
                     var task = TriggerFetchAntwortenAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _Antworten;
             }
@@ -93,9 +92,9 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchAntwortenTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchAntwortenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.Antwort>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.Test.Antwort>();
+                    serverList = t.Result;
                 });
             }
 
@@ -196,7 +195,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                 {
                     var task = TriggerFetchStudentAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Test.TestStudent>)_Student;
             }

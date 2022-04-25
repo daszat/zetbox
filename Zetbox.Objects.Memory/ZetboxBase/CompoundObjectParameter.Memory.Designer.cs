@@ -103,7 +103,7 @@ namespace Zetbox.App.Base
             if (_fk_CompoundObject.HasValue)
                 _triggerFetchCompoundObjectTask = Context.FindAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value);
             else
-                _triggerFetchCompoundObjectTask = new System.Threading.Tasks.Task<Zetbox.App.Base.CompoundObject>(() => null);
+                _triggerFetchCompoundObjectTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.CompoundObject>(null);
 
             _triggerFetchCompoundObjectTask.OnResult(t =>
             {
@@ -126,7 +126,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchCompoundObjectAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.CompoundObjectMemoryImpl)task.Result;
             }
             set

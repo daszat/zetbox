@@ -102,7 +102,7 @@ namespace Zetbox.App.Test
             if (_fk_AnotherFile.HasValue)
                 _triggerFetchAnotherFileTask = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_AnotherFile.Value);
             else
-                _triggerFetchAnotherFileTask = new System.Threading.Tasks.Task<at.dasz.DocumentManagement.File>(() => null);
+                _triggerFetchAnotherFileTask = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(null);
 
             _triggerFetchAnotherFileTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchAnotherFileAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (at.dasz.DocumentManagement.FileMemoryImpl)task.Result;
             }
             set
@@ -240,7 +239,7 @@ namespace Zetbox.App.Test
             if (_fk_AnyFile.HasValue)
                 _triggerFetchAnyFileTask = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_AnyFile.Value);
             else
-                _triggerFetchAnyFileTask = new System.Threading.Tasks.Task<at.dasz.DocumentManagement.File>(() => null);
+                _triggerFetchAnyFileTask = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(null);
 
             _triggerFetchAnyFileTask.OnResult(t =>
             {
@@ -263,7 +262,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchAnyFileAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (at.dasz.DocumentManagement.FileMemoryImpl)task.Result;
             }
             set

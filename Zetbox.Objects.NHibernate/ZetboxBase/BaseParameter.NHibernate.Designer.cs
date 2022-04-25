@@ -987,13 +987,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Parameter as IRelationListSync<Zetbox.App.Base.BaseParameter>).RemoveWithoutClearParent(this);
+                    (__oldValue.Parameter as IRelationListSync<Zetbox.App.Base.BaseParameter>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Parameter as IRelationListSync<Zetbox.App.Base.BaseParameter>).AddWithoutSetParent(this);
+                    (__newValue.Parameter as IRelationListSync<Zetbox.App.Base.BaseParameter>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Method", __oldValue, __newValue);

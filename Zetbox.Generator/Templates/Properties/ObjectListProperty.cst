@@ -62,7 +62,6 @@
                 {
                     var task = TriggerFetch<%= name %>Async();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return <%= wrapperName %>;
             }
@@ -109,9 +108,9 @@
             }
             else
             {
-                <%= taskName %> = new System.Threading.Tasks.Task(() =>
+                <%= taskName %> = System.Threading.Tasks.Task.FromResult(new List<<%= referencedInterface %>>()).ContinueWith(t =>
                 {
-                    serverList = new List<<%= referencedInterface %>>();
+                    serverList = t.Result;
                 });
             }
 

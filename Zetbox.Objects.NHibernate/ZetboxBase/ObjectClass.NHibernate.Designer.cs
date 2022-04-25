@@ -197,13 +197,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.SubClasses as IRelationListSync<Zetbox.App.Base.ObjectClass>).RemoveWithoutClearParent(this);
+                    (__oldValue.SubClasses as IRelationListSync<Zetbox.App.Base.ObjectClass>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.SubClasses as IRelationListSync<Zetbox.App.Base.ObjectClass>).AddWithoutSetParent(this);
+                    (__newValue.SubClasses as IRelationListSync<Zetbox.App.Base.ObjectClass>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("BaseObjectClass", __oldValue, __newValue);

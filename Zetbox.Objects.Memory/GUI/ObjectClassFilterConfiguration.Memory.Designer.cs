@@ -103,7 +103,7 @@ namespace Zetbox.App.GUI
             if (_fk_ObjectClass.HasValue)
                 _triggerFetchObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value);
             else
-                _triggerFetchObjectClassTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
+                _triggerFetchObjectClassTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
 
             _triggerFetchObjectClassTask.OnResult(t =>
             {
@@ -126,7 +126,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchObjectClassAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set
@@ -166,13 +165,13 @@ namespace Zetbox.App.GUI
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.FilterConfigurations as IRelationListSync<Zetbox.App.GUI.ObjectClassFilterConfiguration>).RemoveWithoutClearParent(this);
+                    (__oldValue.FilterConfigurations as IRelationListSync<Zetbox.App.GUI.ObjectClassFilterConfiguration>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.FilterConfigurations as IRelationListSync<Zetbox.App.GUI.ObjectClassFilterConfiguration>).AddWithoutSetParent(this);
+                    (__newValue.FilterConfigurations as IRelationListSync<Zetbox.App.GUI.ObjectClassFilterConfiguration>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ObjectClass", __oldValue, __newValue);

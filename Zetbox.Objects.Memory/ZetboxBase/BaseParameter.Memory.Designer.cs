@@ -102,7 +102,7 @@ namespace Zetbox.App.Base
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchChangedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -313,7 +312,7 @@ namespace Zetbox.App.Base
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -336,7 +335,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchCreatedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -957,7 +955,7 @@ namespace Zetbox.App.Base
             if (_fk_Method.HasValue)
                 _triggerFetchMethodTask = Context.FindAsync<Zetbox.App.Base.Method>(_fk_Method.Value);
             else
-                _triggerFetchMethodTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Method>(() => null);
+                _triggerFetchMethodTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Method>(null);
 
             _triggerFetchMethodTask.OnResult(t =>
             {
@@ -980,7 +978,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchMethodAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.MethodMemoryImpl)task.Result;
             }
             set
@@ -1020,13 +1017,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Parameter as IRelationListSync<Zetbox.App.Base.BaseParameter>).RemoveWithoutClearParent(this);
+                    (__oldValue.Parameter as IRelationListSync<Zetbox.App.Base.BaseParameter>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Parameter as IRelationListSync<Zetbox.App.Base.BaseParameter>).AddWithoutSetParent(this);
+                    (__newValue.Parameter as IRelationListSync<Zetbox.App.Base.BaseParameter>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Method", __oldValue, __newValue);

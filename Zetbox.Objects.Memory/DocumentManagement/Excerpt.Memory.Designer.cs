@@ -102,7 +102,7 @@ namespace at.dasz.DocumentManagement
             if (_fk_File.HasValue)
                 _triggerFetchFileTask = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_File.Value);
             else
-                _triggerFetchFileTask = new System.Threading.Tasks.Task<at.dasz.DocumentManagement.File>(() => null);
+                _triggerFetchFileTask = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(null);
 
             _triggerFetchFileTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace at.dasz.DocumentManagement
             {
                 var task = TriggerFetchFileAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (at.dasz.DocumentManagement.FileMemoryImpl)task.Result;
             }
             set

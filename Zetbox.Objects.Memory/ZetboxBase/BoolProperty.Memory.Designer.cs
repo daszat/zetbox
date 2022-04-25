@@ -103,7 +103,7 @@ namespace Zetbox.App.Base
             if (_fk_FalseIcon.HasValue)
                 _triggerFetchFalseIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
             else
-                _triggerFetchFalseIconTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.Icon>(() => null);
+                _triggerFetchFalseIconTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
 
             _triggerFetchFalseIconTask.OnResult(t =>
             {
@@ -126,7 +126,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchFalseIconAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
             set
@@ -300,7 +299,7 @@ namespace Zetbox.App.Base
             if (_fk_NullIcon.HasValue)
                 _triggerFetchNullIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
             else
-                _triggerFetchNullIconTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.Icon>(() => null);
+                _triggerFetchNullIconTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
 
             _triggerFetchNullIconTask.OnResult(t =>
             {
@@ -323,7 +322,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchNullIconAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
             set
@@ -497,7 +495,7 @@ namespace Zetbox.App.Base
             if (_fk_TrueIcon.HasValue)
                 _triggerFetchTrueIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
             else
-                _triggerFetchTrueIconTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.Icon>(() => null);
+                _triggerFetchTrueIconTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
 
             _triggerFetchTrueIconTask.OnResult(t =>
             {
@@ -520,7 +518,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchTrueIconAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
             set

@@ -103,7 +103,7 @@ namespace Zetbox.App.GUI
             if (_fk_DefaultDisplayKind.HasValue)
                 _triggerFetchDefaultDisplayKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultDisplayKind.Value);
             else
-                _triggerFetchDefaultDisplayKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+                _triggerFetchDefaultDisplayKindTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
 
             _triggerFetchDefaultDisplayKindTask.OnResult(t =>
             {
@@ -126,7 +126,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchDefaultDisplayKindAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
@@ -242,7 +241,7 @@ namespace Zetbox.App.GUI
             if (_fk_DefaultEditorKind.HasValue)
                 _triggerFetchDefaultEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultEditorKind.Value);
             else
-                _triggerFetchDefaultEditorKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+                _triggerFetchDefaultEditorKindTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
 
             _triggerFetchDefaultEditorKindTask.OnResult(t =>
             {
@@ -265,7 +264,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchDefaultEditorKindAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
@@ -381,7 +379,7 @@ namespace Zetbox.App.GUI
             if (_fk_DefaultGridCellDisplayKind.HasValue)
                 _triggerFetchDefaultGridCellDisplayKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellDisplayKind.Value);
             else
-                _triggerFetchDefaultGridCellDisplayKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+                _triggerFetchDefaultGridCellDisplayKindTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
 
             _triggerFetchDefaultGridCellDisplayKindTask.OnResult(t =>
             {
@@ -404,7 +402,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchDefaultGridCellDisplayKindAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
@@ -520,7 +517,7 @@ namespace Zetbox.App.GUI
             if (_fk_DefaultGridCellEditorKind.HasValue)
                 _triggerFetchDefaultGridCellEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellEditorKind.Value);
             else
-                _triggerFetchDefaultGridCellEditorKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+                _triggerFetchDefaultGridCellEditorKindTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
 
             _triggerFetchDefaultGridCellEditorKindTask.OnResult(t =>
             {
@@ -543,7 +540,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchDefaultGridCellEditorKindAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
@@ -659,7 +655,7 @@ namespace Zetbox.App.GUI
             if (_fk_DefaultGridCellPreEditorKind.HasValue)
                 _triggerFetchDefaultGridCellPreEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellPreEditorKind.Value);
             else
-                _triggerFetchDefaultGridCellPreEditorKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+                _triggerFetchDefaultGridCellPreEditorKindTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
 
             _triggerFetchDefaultGridCellPreEditorKindTask.OnResult(t =>
             {
@@ -682,7 +678,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchDefaultGridCellPreEditorKindAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
@@ -998,7 +993,7 @@ namespace Zetbox.App.GUI
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
+                _triggerFetchModuleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {
@@ -1021,7 +1016,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchModuleAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
@@ -1084,7 +1078,6 @@ namespace Zetbox.App.GUI
                 {
                     var task = TriggerFetchSecondaryControlKindsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.GUI.ControlKind>)_SecondaryControlKinds;
             }

@@ -168,7 +168,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchGroupsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Group>)_Groups;
             }

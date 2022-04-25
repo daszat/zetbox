@@ -160,7 +160,7 @@ namespace Zetbox.App.Test
             if (_fk_OneSide.HasValue)
                 _triggerFetchOneSideTask = Context.FindAsync<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
             else
-                _triggerFetchOneSideTask = new System.Threading.Tasks.Task<Zetbox.App.Test.One_to_N_relations_One>(() => null);
+                _triggerFetchOneSideTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.One_to_N_relations_One>(null);
 
             _triggerFetchOneSideTask.OnResult(t =>
             {
@@ -183,7 +183,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchOneSideAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)task.Result;
             }
             set
@@ -223,13 +222,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.NSide as IRelationListSync<Zetbox.App.Test.One_to_N_relations_N>).RemoveWithoutClearParent(this);
+                    (__oldValue.NSide as IRelationListSync<Zetbox.App.Test.One_to_N_relations_N>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.NSide as IRelationListSync<Zetbox.App.Test.One_to_N_relations_N>).AddWithoutSetParent(this);
+                    (__newValue.NSide as IRelationListSync<Zetbox.App.Test.One_to_N_relations_N>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("OneSide", __oldValue, __newValue);

@@ -209,7 +209,7 @@ if (inverseNavigatorIsList) {
 
 #line 160 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                    // remove from old list\r\n");
-this.WriteObjects("                    (__oldValue.",  inverseNavigatorName , " as IRelationListSync<",  ownInterface , ">).RemoveWithoutClearParent(this);\r\n");
+this.WriteObjects("                    (__oldValue.",  inverseNavigatorName , " as IRelationListSync<",  ownInterface , ">)?.RemoveWithoutClearParent(this);\r\n");
 #line 162 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 } else { 
 #line 163 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
@@ -226,7 +226,7 @@ this.WriteObjects("                {\r\n");
 if (inverseNavigatorIsList) { 
 #line 171 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                    // add to new list\r\n");
-this.WriteObjects("                    (__newValue.",  inverseNavigatorName , " as IRelationListSync<",  ownInterface , ">).AddWithoutSetParent(this);\r\n");
+this.WriteObjects("                    (__newValue.",  inverseNavigatorName , " as IRelationListSync<",  ownInterface , ">)?.AddWithoutSetParent(this);\r\n");
 #line 173 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 } else { 
 #line 174 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"

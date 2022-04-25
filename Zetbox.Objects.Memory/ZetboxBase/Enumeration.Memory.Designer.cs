@@ -112,7 +112,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchEnumerationEntriesAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _EnumerationEntries;
             }
@@ -140,9 +139,9 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchEnumerationEntriesTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchEnumerationEntriesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.EnumerationEntry>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.Base.EnumerationEntry>();
+                    serverList = t.Result;
                 });
             }
 

@@ -179,7 +179,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchMethodsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Method>)_Methods;
             }
@@ -286,7 +285,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             if (_fk_RelationEnd.HasValue)
                 _triggerFetchRelationEndTask = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
             else
-                _triggerFetchRelationEndTask = new System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd>(() => null);
+                _triggerFetchRelationEndTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.RelationEnd>(null);
 
             _triggerFetchRelationEndTask.OnResult(t =>
             {
@@ -309,7 +308,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             {
                 var task = TriggerFetchRelationEndAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.RelationEndMemoryImpl)task.Result;
             }
             set

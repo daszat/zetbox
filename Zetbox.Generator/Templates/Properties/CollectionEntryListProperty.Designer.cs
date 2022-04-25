@@ -70,7 +70,6 @@ this.WriteObjects("                if (",  backingName , " == null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var task = TriggerFetch",  name , "Async();\r\n");
 this.WriteObjects("                    task.TryRunSynchronously();\r\n");
-this.WriteObjects("                    task.Wait();\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return (",  exposedCollectionInterface , "<",  referencedInterface , ">)",  backingName , ";\r\n");
 this.WriteObjects("            }\r\n");
@@ -86,25 +85,25 @@ this.WriteObjects("        System.Threading.Tasks.Task ",  taskName , ";\r\n");
 this.WriteObjects("        public System.Threading.Tasks.Task TriggerFetch",  name , "Async()\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            if (",  taskName , " != null) return ",  taskName , ";\r\n");
-#line 71 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 70 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 // eagerly loaded relation already has the objects loaded
     if (!eagerLoading)
     {
 
-#line 75 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 74 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("            ",  taskName , " = Context.FetchRelationAsync<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
-#line 77 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 76 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
     else
     {
 
-#line 81 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 80 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("            if (!",  name , "_was_eagerLoaded) ",  taskName , " = Context.FetchRelationAsync<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
 this.WriteObjects("            else ",  taskName , " = System.Threading.Tasks.Task.FromResult<Guid?>(null);\r\n");
-#line 84 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 83 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
 
-#line 86 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 85 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("            ",  taskName , " = ",  taskName , ".OnResult(r =>\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                ",  backingName , "\r\n");
@@ -124,17 +123,17 @@ this.WriteObjects("                ",  eventName , "(this);\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        private ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ", ICollection<",  entryType , ">> ",  backingName , ";\r\n");
-#line 106 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 105 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 if (eagerLoading)
     {
 
-#line 109 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 108 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 111 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 110 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
         AddSerialization(serializationList, name, eagerLoading);
 
-#line 114 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 113 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("        // END ",  this.GetType() , " for ",  name , "\r\n");
 
         }

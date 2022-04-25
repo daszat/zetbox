@@ -50,7 +50,6 @@ namespace Zetbox.App.Test
                 {
                     var task = TriggerFetchASideAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Test.N_to_M_relations_A>)_ASide;
             }

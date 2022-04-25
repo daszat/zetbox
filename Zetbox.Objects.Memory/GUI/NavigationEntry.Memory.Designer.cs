@@ -102,7 +102,7 @@ namespace Zetbox.App.GUI
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchChangedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -265,7 +264,6 @@ namespace Zetbox.App.GUI
                 {
                     var task = TriggerFetchChildrenAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _Children;
             }
@@ -293,9 +291,9 @@ namespace Zetbox.App.GUI
             }
             else
             {
-                _triggerFetchChildrenTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchChildrenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.GUI.NavigationEntry>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.GUI.NavigationEntry>();
+                    serverList = t.Result;
                 });
             }
 
@@ -446,7 +444,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -469,7 +467,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             {
                 var task = TriggerFetchCreatedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -676,7 +673,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     var task = TriggerFetchGroupsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Group>)_Groups;
             }
@@ -785,7 +781,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
+                _triggerFetchModuleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {
@@ -808,7 +804,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             {
                 var task = TriggerFetchModuleAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
@@ -924,7 +919,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.GUI.NavigationEntry>(_fk_Parent.Value);
             else
-                _triggerFetchParentTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.NavigationEntry>(() => null);
+                _triggerFetchParentTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.NavigationEntry>(null);
 
             _triggerFetchParentTask.OnResult(t =>
             {
@@ -947,7 +942,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             {
                 var task = TriggerFetchParentAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.NavigationEntryMemoryImpl)task.Result;
             }
             set
@@ -987,13 +981,13 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Children as IRelationListSync<Zetbox.App.GUI.NavigationEntry>).RemoveWithoutClearParent(this);
+                    (__oldValue.Children as IRelationListSync<Zetbox.App.GUI.NavigationEntry>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Children as IRelationListSync<Zetbox.App.GUI.NavigationEntry>).AddWithoutSetParent(this);
+                    (__newValue.Children as IRelationListSync<Zetbox.App.GUI.NavigationEntry>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
@@ -1110,7 +1104,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             if (_fk_RequestedKind.HasValue)
                 _triggerFetchRequestedKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);
             else
-                _triggerFetchRequestedKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+                _triggerFetchRequestedKindTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
 
             _triggerFetchRequestedKindTask.OnResult(t =>
             {
@@ -1133,7 +1127,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             {
                 var task = TriggerFetchRequestedKindAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
@@ -1307,7 +1300,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             if (_fk_ViewModelDescriptor.HasValue)
                 _triggerFetchViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ViewModelDescriptor.Value);
             else
-                _triggerFetchViewModelDescriptorTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor>(() => null);
+                _triggerFetchViewModelDescriptorTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(null);
 
             _triggerFetchViewModelDescriptorTask.OnResult(t =>
             {
@@ -1330,7 +1323,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             {
                 var task = TriggerFetchViewModelDescriptorAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set

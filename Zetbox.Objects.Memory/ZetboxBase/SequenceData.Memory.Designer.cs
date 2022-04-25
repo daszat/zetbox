@@ -160,7 +160,7 @@ namespace Zetbox.App.Base
             if (_fk_Sequence.HasValue)
                 _triggerFetchSequenceTask = Context.FindAsync<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
             else
-                _triggerFetchSequenceTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Sequence>(() => null);
+                _triggerFetchSequenceTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Sequence>(null);
 
             _triggerFetchSequenceTask.OnResult(t =>
             {
@@ -183,7 +183,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchSequenceAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.SequenceMemoryImpl)task.Result;
             }
             set

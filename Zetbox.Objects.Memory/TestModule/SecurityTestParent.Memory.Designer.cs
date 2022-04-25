@@ -54,7 +54,6 @@ namespace Zetbox.App.Test
                 {
                     var task = TriggerFetchChildrenAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _Children;
             }
@@ -82,9 +81,9 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchChildrenTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchChildrenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.SecurityTestChild>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.Test.SecurityTestChild>();
+                    serverList = t.Result;
                 });
             }
 

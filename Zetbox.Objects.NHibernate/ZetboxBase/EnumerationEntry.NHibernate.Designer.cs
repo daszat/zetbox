@@ -599,13 +599,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.EnumerationEntries as IRelationListSync<Zetbox.App.Base.EnumerationEntry>).RemoveWithoutClearParent(this);
+                    (__oldValue.EnumerationEntries as IRelationListSync<Zetbox.App.Base.EnumerationEntry>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.EnumerationEntries as IRelationListSync<Zetbox.App.Base.EnumerationEntry>).AddWithoutSetParent(this);
+                    (__newValue.EnumerationEntries as IRelationListSync<Zetbox.App.Base.EnumerationEntry>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Enumeration", __oldValue, __newValue);

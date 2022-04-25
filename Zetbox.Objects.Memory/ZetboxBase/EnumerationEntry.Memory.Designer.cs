@@ -102,7 +102,7 @@ namespace Zetbox.App.Base
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchChangedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -313,7 +312,7 @@ namespace Zetbox.App.Base
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -336,7 +335,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchCreatedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -583,7 +581,7 @@ namespace Zetbox.App.Base
             if (_fk_Enumeration.HasValue)
                 _triggerFetchEnumerationTask = Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
             else
-                _triggerFetchEnumerationTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Enumeration>(() => null);
+                _triggerFetchEnumerationTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Enumeration>(null);
 
             _triggerFetchEnumerationTask.OnResult(t =>
             {
@@ -606,7 +604,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchEnumerationAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.EnumerationMemoryImpl)task.Result;
             }
             set
@@ -646,13 +643,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.EnumerationEntries as IRelationListSync<Zetbox.App.Base.EnumerationEntry>).RemoveWithoutClearParent(this);
+                    (__oldValue.EnumerationEntries as IRelationListSync<Zetbox.App.Base.EnumerationEntry>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.EnumerationEntries as IRelationListSync<Zetbox.App.Base.EnumerationEntry>).AddWithoutSetParent(this);
+                    (__newValue.EnumerationEntries as IRelationListSync<Zetbox.App.Base.EnumerationEntry>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Enumeration", __oldValue, __newValue);

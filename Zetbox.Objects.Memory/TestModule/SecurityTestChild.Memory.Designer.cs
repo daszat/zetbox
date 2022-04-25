@@ -102,7 +102,7 @@ namespace Zetbox.App.Test
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchChangedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -313,7 +312,7 @@ namespace Zetbox.App.Test
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -336,7 +335,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchCreatedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -524,7 +522,7 @@ namespace Zetbox.App.Test
             if (_fk_Identity.HasValue)
                 _triggerFetchIdentityTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Identity.Value);
             else
-                _triggerFetchIdentityTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchIdentityTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchIdentityTask.OnResult(t =>
             {
@@ -547,7 +545,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchIdentityAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -720,7 +717,7 @@ namespace Zetbox.App.Test
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.SecurityTestParent>(_fk_Parent.Value);
             else
-                _triggerFetchParentTask = new System.Threading.Tasks.Task<Zetbox.App.Test.SecurityTestParent>(() => null);
+                _triggerFetchParentTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.SecurityTestParent>(null);
 
             _triggerFetchParentTask.OnResult(t =>
             {
@@ -743,7 +740,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchParentAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.SecurityTestParentMemoryImpl)task.Result;
             }
             set
@@ -783,13 +779,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Children as IRelationListSync<Zetbox.App.Test.SecurityTestChild>).RemoveWithoutClearParent(this);
+                    (__oldValue.Children as IRelationListSync<Zetbox.App.Test.SecurityTestChild>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Children as IRelationListSync<Zetbox.App.Test.SecurityTestChild>).AddWithoutSetParent(this);
+                    (__newValue.Children as IRelationListSync<Zetbox.App.Test.SecurityTestChild>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);

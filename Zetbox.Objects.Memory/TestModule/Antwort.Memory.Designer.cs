@@ -160,7 +160,7 @@ namespace Zetbox.App.Test
             if (_fk_Fragebogen.HasValue)
                 _triggerFetchFragebogenTask = Context.FindAsync<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
             else
-                _triggerFetchFragebogenTask = new System.Threading.Tasks.Task<Zetbox.App.Test.Fragebogen>(() => null);
+                _triggerFetchFragebogenTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Fragebogen>(null);
 
             _triggerFetchFragebogenTask.OnResult(t =>
             {
@@ -183,7 +183,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchFragebogenAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.FragebogenMemoryImpl)task.Result;
             }
             set
@@ -223,13 +222,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Antworten as IRelationListSync<Zetbox.App.Test.Antwort>).RemoveWithoutClearParent(this);
+                    (__oldValue.Antworten as IRelationListSync<Zetbox.App.Test.Antwort>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Antworten as IRelationListSync<Zetbox.App.Test.Antwort>).AddWithoutSetParent(this);
+                    (__newValue.Antworten as IRelationListSync<Zetbox.App.Test.Antwort>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Fragebogen", __oldValue, __newValue);

@@ -54,7 +54,6 @@ namespace Zetbox.App.Test
                 {
                     var task = TriggerFetchNEndsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _NEnds;
             }
@@ -82,9 +81,9 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchNEndsTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchNEndsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.OrderedNEnd>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.Test.OrderedNEnd>();
+                    serverList = t.Result;
                 });
             }
 

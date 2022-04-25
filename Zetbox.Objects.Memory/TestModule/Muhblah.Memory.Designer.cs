@@ -144,7 +144,6 @@ namespace Zetbox.App.Test
                 {
                     var task = TriggerFetchTestCustomObjects_List_NavAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _TestCustomObjects_List_Nav;
             }
@@ -172,9 +171,9 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchTestCustomObjects_List_NavTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchTestCustomObjects_List_NavTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.TestCustomObject>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.Test.TestCustomObject>();
+                    serverList = t.Result;
                 });
             }
 
@@ -215,7 +214,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 {
                     var task = TriggerFetchTestCustomObjects_ManyList_NavAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Test.TestCustomObject>)_TestCustomObjects_ManyList_Nav;
             }
@@ -321,7 +319,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             if (_fk_TestCustomObjects_Nav.HasValue)
                 _triggerFetchTestCustomObjects_NavTask = Context.FindAsync<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_Nav.Value);
             else
-                _triggerFetchTestCustomObjects_NavTask = new System.Threading.Tasks.Task<Zetbox.App.Test.TestCustomObject>(() => null);
+                _triggerFetchTestCustomObjects_NavTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.TestCustomObject>(null);
 
             _triggerFetchTestCustomObjects_NavTask.OnResult(t =>
             {
@@ -344,7 +342,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             {
                 var task = TriggerFetchTestCustomObjects_NavAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.TestCustomObjectMemoryImpl)task.Result;
             }
             set
@@ -384,13 +381,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.MubBlah_List_Nav as IRelationListSync<Zetbox.App.Test.Muhblah>).RemoveWithoutClearParent(this);
+                    (__oldValue.MubBlah_List_Nav as IRelationListSync<Zetbox.App.Test.Muhblah>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.MubBlah_List_Nav as IRelationListSync<Zetbox.App.Test.Muhblah>).AddWithoutSetParent(this);
+                    (__newValue.MubBlah_List_Nav as IRelationListSync<Zetbox.App.Test.Muhblah>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("TestCustomObjects_Nav", __oldValue, __newValue);
@@ -475,7 +472,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             if (_fk_TestCustomObjects_One_Nav.HasValue)
                 _triggerFetchTestCustomObjects_One_NavTask = Context.FindAsync<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_One_Nav.Value);
             else
-                _triggerFetchTestCustomObjects_One_NavTask = new System.Threading.Tasks.Task<Zetbox.App.Test.TestCustomObject>(() => null);
+                _triggerFetchTestCustomObjects_One_NavTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.TestCustomObject>(null);
 
             _triggerFetchTestCustomObjects_One_NavTask.OnResult(t =>
             {
@@ -498,7 +495,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             {
                 var task = TriggerFetchTestCustomObjects_One_NavAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.TestCustomObjectMemoryImpl)task.Result;
             }
             set

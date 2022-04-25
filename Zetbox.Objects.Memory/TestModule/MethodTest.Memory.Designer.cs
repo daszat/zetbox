@@ -54,7 +54,6 @@ namespace Zetbox.App.Test
                 {
                     var task = TriggerFetchChildrenAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _Children;
             }
@@ -82,9 +81,9 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchChildrenTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchChildrenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.MethodTest>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.Test.MethodTest>();
+                    serverList = t.Result;
                 });
             }
 
@@ -177,7 +176,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.MethodTest>(_fk_Parent.Value);
             else
-                _triggerFetchParentTask = new System.Threading.Tasks.Task<Zetbox.App.Test.MethodTest>(() => null);
+                _triggerFetchParentTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.MethodTest>(null);
 
             _triggerFetchParentTask.OnResult(t =>
             {
@@ -200,7 +199,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             {
                 var task = TriggerFetchParentAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.MethodTestMemoryImpl)task.Result;
             }
             set
@@ -240,13 +238,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Children as IRelationListSync<Zetbox.App.Test.MethodTest>).RemoveWithoutClearParent(this);
+                    (__oldValue.Children as IRelationListSync<Zetbox.App.Test.MethodTest>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Children as IRelationListSync<Zetbox.App.Test.MethodTest>).AddWithoutSetParent(this);
+                    (__newValue.Children as IRelationListSync<Zetbox.App.Test.MethodTest>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);

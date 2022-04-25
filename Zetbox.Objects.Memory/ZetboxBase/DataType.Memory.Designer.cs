@@ -102,7 +102,7 @@ namespace Zetbox.App.Base
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchChangedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -265,7 +264,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchConstraintsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _Constraints;
             }
@@ -304,9 +302,9 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchConstraintsTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchConstraintsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.InstanceConstraint>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.Base.InstanceConstraint>();
+                    serverList = t.Result;
                 });
             }
 
@@ -401,7 +399,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -424,7 +422,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             {
                 var task = TriggerFetchCreatedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -613,7 +610,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             if (_fk_DefaultIcon.HasValue)
                 _triggerFetchDefaultIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_DefaultIcon.Value);
             else
-                _triggerFetchDefaultIconTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.Icon>(() => null);
+                _triggerFetchDefaultIconTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
 
             _triggerFetchDefaultIconTask.OnResult(t =>
             {
@@ -636,7 +633,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             {
                 var task = TriggerFetchDefaultIconAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
             set
@@ -886,7 +882,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     var task = TriggerFetchImplementsInterfacesAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Interface>)_ImplementsInterfaces;
             }
@@ -944,7 +939,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImple
                 {
                     var task = TriggerFetchMethodsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _Methods;
             }
@@ -983,9 +977,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImple
             }
             else
             {
-                _triggerFetchMethodsTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchMethodsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.Method>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.Base.Method>();
+                    serverList = t.Result;
                 });
             }
 
@@ -1081,7 +1075,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
+                _triggerFetchModuleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {
@@ -1104,7 +1098,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             {
                 var task = TriggerFetchModuleAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
@@ -1229,7 +1222,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
                 {
                     var task = TriggerFetchPropertiesAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _Properties;
             }
@@ -1268,9 +1260,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             }
             else
             {
-                _triggerFetchPropertiesTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchPropertiesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.Property>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.Base.Property>();
+                    serverList = t.Result;
                 });
             }
 
@@ -1366,7 +1358,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             if (_fk_RequestedKind.HasValue)
                 _triggerFetchRequestedKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);
             else
-                _triggerFetchRequestedKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+                _triggerFetchRequestedKindTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
 
             _triggerFetchRequestedKindTask.OnResult(t =>
             {
@@ -1389,7 +1381,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             {
                 var task = TriggerFetchRequestedKindAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set

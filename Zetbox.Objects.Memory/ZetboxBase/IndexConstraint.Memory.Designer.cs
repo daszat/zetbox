@@ -121,7 +121,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchPropertiesAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Property>)_Properties;
             }

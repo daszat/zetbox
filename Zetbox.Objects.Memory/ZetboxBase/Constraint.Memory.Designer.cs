@@ -102,7 +102,7 @@ namespace Zetbox.App.Base
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchChangedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -314,7 +313,7 @@ namespace Zetbox.App.Base
             if (_fk_ConstrainedProperty.HasValue)
                 _triggerFetchConstrainedPropertyTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_ConstrainedProperty.Value);
             else
-                _triggerFetchConstrainedPropertyTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Property>(() => null);
+                _triggerFetchConstrainedPropertyTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(null);
 
             _triggerFetchConstrainedPropertyTask.OnResult(t =>
             {
@@ -337,7 +336,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchConstrainedPropertyAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set
@@ -377,13 +375,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Constraints as IRelationListSync<Zetbox.App.Base.Constraint>).RemoveWithoutClearParent(this);
+                    (__oldValue.Constraints as IRelationListSync<Zetbox.App.Base.Constraint>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Constraints as IRelationListSync<Zetbox.App.Base.Constraint>).AddWithoutSetParent(this);
+                    (__newValue.Constraints as IRelationListSync<Zetbox.App.Base.Constraint>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ConstrainedProperty", __oldValue, __newValue);
@@ -468,7 +466,7 @@ namespace Zetbox.App.Base
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -491,7 +489,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchCreatedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set

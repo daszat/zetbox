@@ -102,7 +102,7 @@ namespace Zetbox.App.Test
             if (_fk_OneEnd.HasValue)
                 _triggerFetchOneEndTask = Context.FindAsync<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
             else
-                _triggerFetchOneEndTask = new System.Threading.Tasks.Task<Zetbox.App.Test.OrderedOneEnd>(() => null);
+                _triggerFetchOneEndTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.OrderedOneEnd>(null);
 
             _triggerFetchOneEndTask.OnResult(t =>
             {
@@ -125,7 +125,6 @@ namespace Zetbox.App.Test
             {
                 var task = TriggerFetchOneEndAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Test.OrderedOneEndMemoryImpl)task.Result;
             }
             set
@@ -165,13 +164,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.NEnds as IRelationListSync<Zetbox.App.Test.OrderedNEnd>).RemoveWithoutClearParent(this);
+                    (__oldValue.NEnds as IRelationListSync<Zetbox.App.Test.OrderedNEnd>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.NEnds as IRelationListSync<Zetbox.App.Test.OrderedNEnd>).AddWithoutSetParent(this);
+                    (__newValue.NEnds as IRelationListSync<Zetbox.App.Test.OrderedNEnd>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("OneEnd", __oldValue, __newValue);

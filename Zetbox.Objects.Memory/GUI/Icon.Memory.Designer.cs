@@ -103,7 +103,7 @@ namespace Zetbox.App.GUI
             if (_fk_Blob.HasValue)
                 _triggerFetchBlobTask = Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value);
             else
-                _triggerFetchBlobTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Blob>(() => null);
+                _triggerFetchBlobTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Blob>(null);
 
             _triggerFetchBlobTask.OnResult(t =>
             {
@@ -126,7 +126,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchBlobAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.BlobMemoryImpl)task.Result;
             }
             set
@@ -371,7 +370,7 @@ namespace Zetbox.App.GUI
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
+                _triggerFetchModuleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {
@@ -394,7 +393,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchModuleAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set

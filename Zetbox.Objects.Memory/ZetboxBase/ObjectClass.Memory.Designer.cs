@@ -54,7 +54,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchAccessControlListAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _AccessControlList;
             }
@@ -82,9 +81,9 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchAccessControlListTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchAccessControlListTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.AccessControl>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.Base.AccessControl>();
+                    serverList = t.Result;
                 });
             }
 
@@ -178,7 +177,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             if (_fk_BaseObjectClass.HasValue)
                 _triggerFetchBaseObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
             else
-                _triggerFetchBaseObjectClassTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
+                _triggerFetchBaseObjectClassTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
 
             _triggerFetchBaseObjectClassTask.OnResult(t =>
             {
@@ -201,7 +200,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             {
                 var task = TriggerFetchBaseObjectClassAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set
@@ -241,13 +239,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.SubClasses as IRelationListSync<Zetbox.App.Base.ObjectClass>).RemoveWithoutClearParent(this);
+                    (__oldValue.SubClasses as IRelationListSync<Zetbox.App.Base.ObjectClass>)?.RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.SubClasses as IRelationListSync<Zetbox.App.Base.ObjectClass>).AddWithoutSetParent(this);
+                    (__newValue.SubClasses as IRelationListSync<Zetbox.App.Base.ObjectClass>)?.AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("BaseObjectClass", __oldValue, __newValue);
@@ -336,9 +334,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
         public System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> GetProp_DefaultViewModelDescriptor()
         {
-            Console.WriteLine($"GetProp_DefaultViewModelDescriptor()");
-            Console.WriteLine($"_fk_guid_DefaultViewModelDescriptor = {_fk_guid_DefaultViewModelDescriptor}");
-            Console.WriteLine($"_fk_DefaultViewModelDescriptor = {_fk_DefaultViewModelDescriptor}");
             return TriggerFetchDefaultViewModelDescriptorAsync();
         }
 
@@ -381,7 +376,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             if (_fk_DefaultViewModelDescriptor.HasValue)
                 _triggerFetchDefaultViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
             else
-                _triggerFetchDefaultViewModelDescriptorTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor>(() => null);
+                _triggerFetchDefaultViewModelDescriptorTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(null);
 
             _triggerFetchDefaultViewModelDescriptorTask.OnResult(t =>
             {
@@ -404,7 +399,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             {
                 var task = TriggerFetchDefaultViewModelDescriptorAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
@@ -471,7 +465,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 {
                     var task = TriggerFetchFilterConfigurationsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _FilterConfigurations;
             }
@@ -499,9 +492,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             }
             else
             {
-                _triggerFetchFilterConfigurationsTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchFilterConfigurationsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.GUI.ObjectClassFilterConfiguration>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.GUI.ObjectClassFilterConfiguration>();
+                    serverList = t.Result;
                 });
             }
 
@@ -830,7 +823,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                 {
                     var task = TriggerFetchSubClassesAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return _SubClasses;
             }
@@ -858,9 +850,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             }
             else
             {
-                _triggerFetchSubClassesTask = new System.Threading.Tasks.Task(() =>
+                _triggerFetchSubClassesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.ObjectClass>()).ContinueWith(t =>
                 {
-                    serverList = new List<Zetbox.App.Base.ObjectClass>();
+                    serverList = t.Result;
                 });
             }
 
@@ -1704,9 +1696,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
             await base.ReloadReferences();
-            Console.WriteLine("ObjectClass.Memory.ReloadReferences()");
-            Console.WriteLine($"_fk_guid_DefaultViewModelDescriptor = {_fk_guid_DefaultViewModelDescriptor}");
-            Console.WriteLine($"_fk_DefaultViewModelDescriptor = {_fk_DefaultViewModelDescriptor}");
 
             // fix direct object references
 
