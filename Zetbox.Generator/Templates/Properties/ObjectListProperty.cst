@@ -108,7 +108,7 @@
             }
             else
             {
-                <%= taskName %> = System.Threading.Tasks.Task.FromResult(new List<<%= referencedInterface %>>()).ContinueWith(t =>
+                <%= taskName %> = System.Threading.Tasks.Task.FromResult(new List<<%= referencedInterface %>>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

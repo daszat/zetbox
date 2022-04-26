@@ -1260,7 +1260,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             }
             else
             {
-                _triggerFetchPropertiesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.Property>()).ContinueWith(t =>
+                _triggerFetchPropertiesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.Property>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

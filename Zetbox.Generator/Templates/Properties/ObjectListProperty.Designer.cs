@@ -129,7 +129,7 @@ this.WriteObjects("                    });\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            else\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                ",  taskName , " = System.Threading.Tasks.Task.FromResult(new List<",  referencedInterface , ">()).ContinueWith(t =>\r\n");
+this.WriteObjects("                ",  taskName , " = System.Threading.Tasks.Task.FromResult(new List<",  referencedInterface , ">()).OnResult(t =>\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    serverList = t.Result;\r\n");
 this.WriteObjects("                });\r\n");
