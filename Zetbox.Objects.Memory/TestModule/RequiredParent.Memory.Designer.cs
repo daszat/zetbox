@@ -81,7 +81,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchChildrenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.RequiredParentChild>()).ContinueWith(t =>
+                _triggerFetchChildrenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.RequiredParentChild>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

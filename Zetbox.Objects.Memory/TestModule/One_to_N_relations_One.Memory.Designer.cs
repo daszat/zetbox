@@ -139,7 +139,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchNSideTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.One_to_N_relations_N>()).ContinueWith(t =>
+                _triggerFetchNSideTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.One_to_N_relations_N>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
@@ -213,7 +213,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             }
             else
             {
-                _triggerFetchOrderedNSideTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.One_to_N_relations_OrderedN>()).ContinueWith(t =>
+                _triggerFetchOrderedNSideTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.One_to_N_relations_OrderedN>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

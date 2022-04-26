@@ -269,13 +269,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.TestCustomObjects_List_Nav as IRelationListSync<Zetbox.App.Test.TestCustomObject>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.TestCustomObjects_List_Nav as IRelationListSync<Zetbox.App.Test.TestCustomObject>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.TestCustomObjects_List_Nav as IRelationListSync<Zetbox.App.Test.TestCustomObject>)?.AddWithoutSetParent(this);
+                    (__newValue.TestCustomObjects_List_Nav as IRelationListSync<Zetbox.App.Test.TestCustomObject>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("MubBlah_Nav", __oldValue, __newValue);

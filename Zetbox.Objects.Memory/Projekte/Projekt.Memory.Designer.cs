@@ -113,7 +113,7 @@ namespace Zetbox.App.Projekte
             }
             else
             {
-                _triggerFetchAuftraegeTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Projekte.Auftrag>()).ContinueWith(t =>
+                _triggerFetchAuftraegeTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Projekte.Auftrag>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
@@ -1072,7 +1072,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
             }
             else
             {
-                _triggerFetchTasksTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Projekte.Task>()).ContinueWith(t =>
+                _triggerFetchTasksTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Projekte.Task>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

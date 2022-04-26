@@ -884,7 +884,7 @@ namespace Zetbox.App.SchemaMigration
             }
             else
             {
-                _triggerFetchSourceColumnTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.SchemaMigration.SourceColumn>()).ContinueWith(t =>
+                _triggerFetchSourceColumnTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.SchemaMigration.SourceColumn>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
@@ -1042,13 +1042,13 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.SourceTables as IRelationListSync<Zetbox.App.SchemaMigration.SourceTable>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.SourceTables as IRelationListSync<Zetbox.App.SchemaMigration.SourceTable>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.SourceTables as IRelationListSync<Zetbox.App.SchemaMigration.SourceTable>)?.AddWithoutSetParent(this);
+                    (__newValue.SourceTables as IRelationListSync<Zetbox.App.SchemaMigration.SourceTable>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("StagingDatabase", __oldValue, __newValue);

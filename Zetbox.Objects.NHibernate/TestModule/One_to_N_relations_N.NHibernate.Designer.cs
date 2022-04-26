@@ -203,13 +203,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.NSide as IRelationListSync<Zetbox.App.Test.One_to_N_relations_N>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.NSide as IRelationListSync<Zetbox.App.Test.One_to_N_relations_N>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.NSide as IRelationListSync<Zetbox.App.Test.One_to_N_relations_N>)?.AddWithoutSetParent(this);
+                    (__newValue.NSide as IRelationListSync<Zetbox.App.Test.One_to_N_relations_N>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("OneSide", __oldValue, __newValue);

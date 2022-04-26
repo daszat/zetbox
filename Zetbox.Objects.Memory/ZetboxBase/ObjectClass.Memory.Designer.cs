@@ -81,7 +81,7 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchAccessControlListTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.AccessControl>()).ContinueWith(t =>
+                _triggerFetchAccessControlListTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.AccessControl>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
@@ -239,13 +239,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.SubClasses as IRelationListSync<Zetbox.App.Base.ObjectClass>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.SubClasses as IRelationListSync<Zetbox.App.Base.ObjectClass>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.SubClasses as IRelationListSync<Zetbox.App.Base.ObjectClass>)?.AddWithoutSetParent(this);
+                    (__newValue.SubClasses as IRelationListSync<Zetbox.App.Base.ObjectClass>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("BaseObjectClass", __oldValue, __newValue);
@@ -492,7 +492,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             }
             else
             {
-                _triggerFetchFilterConfigurationsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.GUI.ObjectClassFilterConfiguration>()).ContinueWith(t =>
+                _triggerFetchFilterConfigurationsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.GUI.ObjectClassFilterConfiguration>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
@@ -850,7 +850,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             }
             else
             {
-                _triggerFetchSubClassesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.ObjectClass>()).ContinueWith(t =>
+                _triggerFetchSubClassesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.ObjectClass>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

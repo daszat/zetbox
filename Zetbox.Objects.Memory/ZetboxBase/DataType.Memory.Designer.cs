@@ -302,7 +302,7 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchConstraintsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.InstanceConstraint>()).ContinueWith(t =>
+                _triggerFetchConstraintsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.InstanceConstraint>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
@@ -977,7 +977,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImple
             }
             else
             {
-                _triggerFetchMethodsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.Method>()).ContinueWith(t =>
+                _triggerFetchMethodsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.Method>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

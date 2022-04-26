@@ -1079,13 +1079,13 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Referers as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Referers as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Referers as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>)?.AddWithoutSetParent(this);
+                    (__newValue.Referers as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("References", __oldValue, __newValue);
@@ -1328,13 +1328,13 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.SourceColumn as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.SourceColumn as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.SourceColumn as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>)?.AddWithoutSetParent(this);
+                    (__newValue.SourceColumn as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("SourceTable", __oldValue, __newValue);

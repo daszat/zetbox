@@ -145,13 +145,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.NEnds as IRelationListSync<Zetbox.App.Test.OrderedNEnd>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.NEnds as IRelationListSync<Zetbox.App.Test.OrderedNEnd>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.NEnds as IRelationListSync<Zetbox.App.Test.OrderedNEnd>)?.AddWithoutSetParent(this);
+                    (__newValue.NEnds as IRelationListSync<Zetbox.App.Test.OrderedNEnd>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("OneEnd", __oldValue, __newValue);

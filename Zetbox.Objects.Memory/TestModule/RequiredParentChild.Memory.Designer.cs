@@ -222,13 +222,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Children as IRelationListSync<Zetbox.App.Test.RequiredParentChild>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Children as IRelationListSync<Zetbox.App.Test.RequiredParentChild>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Children as IRelationListSync<Zetbox.App.Test.RequiredParentChild>)?.AddWithoutSetParent(this);
+                    (__newValue.Children as IRelationListSync<Zetbox.App.Test.RequiredParentChild>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);

@@ -738,13 +738,13 @@ namespace Zetbox.App.SchemaMigration
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.EnumEntries as IRelationListSync<Zetbox.App.SchemaMigration.SourceEnum>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.EnumEntries as IRelationListSync<Zetbox.App.SchemaMigration.SourceEnum>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.EnumEntries as IRelationListSync<Zetbox.App.SchemaMigration.SourceEnum>)?.AddWithoutSetParent(this);
+                    (__newValue.EnumEntries as IRelationListSync<Zetbox.App.SchemaMigration.SourceEnum>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("SourceColumn", __oldValue, __newValue);

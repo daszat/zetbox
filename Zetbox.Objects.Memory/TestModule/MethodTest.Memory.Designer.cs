@@ -81,7 +81,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchChildrenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.MethodTest>()).ContinueWith(t =>
+                _triggerFetchChildrenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.MethodTest>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
@@ -238,13 +238,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Children as IRelationListSync<Zetbox.App.Test.MethodTest>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Children as IRelationListSync<Zetbox.App.Test.MethodTest>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Children as IRelationListSync<Zetbox.App.Test.MethodTest>)?.AddWithoutSetParent(this);
+                    (__newValue.Children as IRelationListSync<Zetbox.App.Test.MethodTest>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);

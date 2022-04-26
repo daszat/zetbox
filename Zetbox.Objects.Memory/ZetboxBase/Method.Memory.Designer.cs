@@ -1383,13 +1383,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Methods as IRelationListSync<Zetbox.App.Base.Method>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Methods as IRelationListSync<Zetbox.App.Base.Method>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Methods as IRelationListSync<Zetbox.App.Base.Method>)?.AddWithoutSetParent(this);
+                    (__newValue.Methods as IRelationListSync<Zetbox.App.Base.Method>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ObjectClass", __oldValue, __newValue);
@@ -1453,7 +1453,7 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchParameterTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.BaseParameter>()).ContinueWith(t =>
+                _triggerFetchParameterTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.BaseParameter>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

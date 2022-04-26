@@ -81,7 +81,7 @@ namespace Zetbox.App.GUI
             }
             else
             {
-                _triggerFetchChildControlKindsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.GUI.ControlKind>()).ContinueWith(t =>
+                _triggerFetchChildControlKindsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.GUI.ControlKind>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
@@ -506,13 +506,13 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.ChildControlKinds as IRelationListSync<Zetbox.App.GUI.ControlKind>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.ChildControlKinds as IRelationListSync<Zetbox.App.GUI.ControlKind>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.ChildControlKinds as IRelationListSync<Zetbox.App.GUI.ControlKind>)?.AddWithoutSetParent(this);
+                    (__newValue.ChildControlKinds as IRelationListSync<Zetbox.App.GUI.ControlKind>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);

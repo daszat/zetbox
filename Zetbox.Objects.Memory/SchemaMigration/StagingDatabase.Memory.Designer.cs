@@ -772,13 +772,13 @@ namespace Zetbox.App.SchemaMigration
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.StagingDatabases as IRelationListSync<Zetbox.App.SchemaMigration.StagingDatabase>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.StagingDatabases as IRelationListSync<Zetbox.App.SchemaMigration.StagingDatabase>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.StagingDatabases as IRelationListSync<Zetbox.App.SchemaMigration.StagingDatabase>)?.AddWithoutSetParent(this);
+                    (__newValue.StagingDatabases as IRelationListSync<Zetbox.App.SchemaMigration.StagingDatabase>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("MigrationProject", __oldValue, __newValue);
@@ -958,7 +958,7 @@ namespace Zetbox.App.SchemaMigration
             }
             else
             {
-                _triggerFetchSourceTablesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.SchemaMigration.SourceTable>()).ContinueWith(t =>
+                _triggerFetchSourceTablesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.SchemaMigration.SourceTable>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

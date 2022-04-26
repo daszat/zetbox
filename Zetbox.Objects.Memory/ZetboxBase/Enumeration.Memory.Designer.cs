@@ -139,7 +139,7 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchEnumerationEntriesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.EnumerationEntry>()).ContinueWith(t =>
+                _triggerFetchEnumerationEntriesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.EnumerationEntry>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

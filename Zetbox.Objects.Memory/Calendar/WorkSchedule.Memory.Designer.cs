@@ -165,13 +165,13 @@ namespace Zetbox.App.Calendar
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.ChildWorkSchedule as IRelationListSync<Zetbox.App.Calendar.WorkSchedule>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.ChildWorkSchedule as IRelationListSync<Zetbox.App.Calendar.WorkSchedule>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.ChildWorkSchedule as IRelationListSync<Zetbox.App.Calendar.WorkSchedule>)?.AddWithoutSetParent(this);
+                    (__newValue.ChildWorkSchedule as IRelationListSync<Zetbox.App.Calendar.WorkSchedule>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("BaseWorkSchedule", __oldValue, __newValue);
@@ -445,7 +445,7 @@ namespace Zetbox.App.Calendar
             }
             else
             {
-                _triggerFetchChildWorkScheduleTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Calendar.WorkSchedule>()).ContinueWith(t =>
+                _triggerFetchChildWorkScheduleTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Calendar.WorkSchedule>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
@@ -996,7 +996,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
             }
             else
             {
-                _triggerFetchWorkScheduleRulesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Calendar.WorkScheduleRule>()).ContinueWith(t =>
+                _triggerFetchWorkScheduleRulesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Calendar.WorkScheduleRule>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

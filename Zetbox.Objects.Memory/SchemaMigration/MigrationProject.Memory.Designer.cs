@@ -768,7 +768,7 @@ namespace Zetbox.App.SchemaMigration
             }
             else
             {
-                _triggerFetchStagingDatabasesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.SchemaMigration.StagingDatabase>()).ContinueWith(t =>
+                _triggerFetchStagingDatabasesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.SchemaMigration.StagingDatabase>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

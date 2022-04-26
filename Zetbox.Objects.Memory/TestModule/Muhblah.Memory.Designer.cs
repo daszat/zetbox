@@ -171,7 +171,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchTestCustomObjects_List_NavTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.TestCustomObject>()).ContinueWith(t =>
+                _triggerFetchTestCustomObjects_List_NavTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.TestCustomObject>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
@@ -381,13 +381,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.MubBlah_List_Nav as IRelationListSync<Zetbox.App.Test.Muhblah>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.MubBlah_List_Nav as IRelationListSync<Zetbox.App.Test.Muhblah>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.MubBlah_List_Nav as IRelationListSync<Zetbox.App.Test.Muhblah>)?.AddWithoutSetParent(this);
+                    (__newValue.MubBlah_List_Nav as IRelationListSync<Zetbox.App.Test.Muhblah>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("TestCustomObjects_Nav", __oldValue, __newValue);

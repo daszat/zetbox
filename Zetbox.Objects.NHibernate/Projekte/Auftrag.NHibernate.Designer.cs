@@ -974,13 +974,13 @@ namespace Zetbox.App.Projekte
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Auftraege as IRelationListSync<Zetbox.App.Projekte.Auftrag>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Auftraege as IRelationListSync<Zetbox.App.Projekte.Auftrag>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Auftraege as IRelationListSync<Zetbox.App.Projekte.Auftrag>)?.AddWithoutSetParent(this);
+                    (__newValue.Auftraege as IRelationListSync<Zetbox.App.Projekte.Auftrag>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Projekt", __oldValue, __newValue);

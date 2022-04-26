@@ -81,7 +81,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchNEndsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.OrderedNEnd>()).ContinueWith(t =>
+                _triggerFetchNEndsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.OrderedNEnd>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

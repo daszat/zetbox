@@ -92,7 +92,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchAntwortenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.Antwort>()).ContinueWith(t =>
+                _triggerFetchAntwortenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.Antwort>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

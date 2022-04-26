@@ -476,7 +476,7 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchConstraintsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.Constraint>()).ContinueWith(t =>
+                _triggerFetchConstraintsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.Constraint>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });

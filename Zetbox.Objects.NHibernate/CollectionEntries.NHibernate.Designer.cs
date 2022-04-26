@@ -158,13 +158,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.BSide as IRelationListSync<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.BSide as IRelationListSync<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.BSide as IRelationListSync<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.BSide as IRelationListSync<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -276,13 +276,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.ASide as IRelationListSync<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.ASide as IRelationListSync<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.ASide as IRelationListSync<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.ASide as IRelationListSync<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
@@ -647,13 +647,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Inputs as IRelationListSync<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Inputs as IRelationListSync<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Inputs as IRelationListSync<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Inputs as IRelationListSync<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -1150,13 +1150,13 @@ namespace Zetbox.App.Calendar
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.GroupReaders as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.GroupReaders as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.GroupReaders as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.GroupReaders as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -1618,13 +1618,13 @@ namespace Zetbox.App.Calendar
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Readers as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Readers as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Readers as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Readers as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -2081,13 +2081,13 @@ namespace Zetbox.App.Calendar
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.GroupWriters as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.GroupWriters as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.GroupWriters as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.GroupWriters as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -2549,13 +2549,13 @@ namespace Zetbox.App.Calendar
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Writers as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Writers as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Writers as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Writers as IRelationListSync<Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -3012,13 +3012,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.ImplementsInterfaces as IRelationListSync<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.ImplementsInterfaces as IRelationListSync<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.ImplementsInterfaces as IRelationListSync<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.ImplementsInterfaces as IRelationListSync<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -3515,13 +3515,13 @@ namespace at.dasz.DocumentManagement
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Revisions as IRelationListSync<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Revisions as IRelationListSync<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Revisions as IRelationListSync<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Revisions as IRelationListSync<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -4083,13 +4083,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Groups as IRelationListSync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Groups as IRelationListSync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Groups as IRelationListSync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Groups as IRelationListSync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -4201,13 +4201,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Member as IRelationListSync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Member as IRelationListSync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Member as IRelationListSync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Member as IRelationListSync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
@@ -4537,13 +4537,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.TestCustomObjects_ManyList_Nav as IRelationListSync<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.TestCustomObjects_ManyList_Nav as IRelationListSync<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.TestCustomObjects_ManyList_Nav as IRelationListSync<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.TestCustomObjects_ManyList_Nav as IRelationListSync<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -4655,13 +4655,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.MuhBlah_ManyList_Nav as IRelationListSync<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.MuhBlah_ManyList_Nav as IRelationListSync<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.MuhBlah_ManyList_Nav as IRelationListSync<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.MuhBlah_ManyList_Nav as IRelationListSync<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
@@ -5026,13 +5026,13 @@ namespace Zetbox.App.GUI
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Groups as IRelationListSync<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Groups as IRelationListSync<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Groups as IRelationListSync<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Groups as IRelationListSync<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -5529,13 +5529,13 @@ namespace Zetbox.App.GUI
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Methods as IRelationListSync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Methods as IRelationListSync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Methods as IRelationListSync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Methods as IRelationListSync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -5649,13 +5649,13 @@ namespace Zetbox.App.GUI
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.ShowByProperties as IRelationListSync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.ShowByProperties as IRelationListSync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.ShowByProperties as IRelationListSync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.ShowByProperties as IRelationListSync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
@@ -6058,13 +6058,13 @@ namespace Zetbox.App.GUI
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.SecondaryControlKinds as IRelationListSync<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.SecondaryControlKinds as IRelationListSync<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.SecondaryControlKinds as IRelationListSync<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.SecondaryControlKinds as IRelationListSync<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -6561,13 +6561,13 @@ namespace Zetbox.App.Projekte
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Mitarbeiter as IRelationListSync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Mitarbeiter as IRelationListSync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Mitarbeiter as IRelationListSync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Mitarbeiter as IRelationListSync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -6711,13 +6711,13 @@ namespace Zetbox.App.Projekte
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Projekte as IRelationListSync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Projekte as IRelationListSync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Projekte as IRelationListSync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Projekte as IRelationListSync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
@@ -7190,13 +7190,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Relations as IRelationListSync<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Relations as IRelationListSync<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Relations as IRelationListSync<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Relations as IRelationListSync<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -7793,13 +7793,13 @@ namespace Zetbox.App.SchemaMigration
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.DestinationProperty as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.DestinationProperty as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.DestinationProperty as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.DestinationProperty as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -8361,13 +8361,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Testbogen as IRelationListSync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Testbogen as IRelationListSync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Testbogen as IRelationListSync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Testbogen as IRelationListSync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -8479,13 +8479,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Student as IRelationListSync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Student as IRelationListSync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Student as IRelationListSync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Student as IRelationListSync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
@@ -8850,13 +8850,13 @@ namespace Zetbox.App.Base
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Properties as IRelationListSync<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Properties as IRelationListSync<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Properties as IRelationListSync<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl>)?.AddWithoutSetParent(this);
+                    (__newValue.Properties as IRelationListSync<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -9288,13 +9288,13 @@ namespace Zetbox.App.Projekte
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.EMails as IRelationListSync<Kunde_EMails_CollectionEntry>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.EMails as IRelationListSync<Kunde_EMails_CollectionEntry>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.EMails as IRelationListSync<Kunde_EMails_CollectionEntry>)?.AddWithoutSetParent(this);
+                    (__newValue.EMails as IRelationListSync<Kunde_EMails_CollectionEntry>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
@@ -9634,13 +9634,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.StringCollection as IRelationListSync<Muhblah_StringCollection_CollectionEntry>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.StringCollection as IRelationListSync<Muhblah_StringCollection_CollectionEntry>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.StringCollection as IRelationListSync<Muhblah_StringCollection_CollectionEntry>)?.AddWithoutSetParent(this);
+                    (__newValue.StringCollection as IRelationListSync<Muhblah_StringCollection_CollectionEntry>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
@@ -9971,13 +9971,13 @@ namespace Zetbox.App.Projekte
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.AuditJournal as IRelationListSync<Projekt_AuditJournal_CollectionEntry>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.AuditJournal as IRelationListSync<Projekt_AuditJournal_CollectionEntry>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.AuditJournal as IRelationListSync<Projekt_AuditJournal_CollectionEntry>)?.AddWithoutSetParent(this);
+                    (__newValue.AuditJournal as IRelationListSync<Projekt_AuditJournal_CollectionEntry>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
@@ -10347,13 +10347,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Phones as IRelationListSync<TestCompany_Phones_CollectionEntry>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.Phones as IRelationListSync<TestCompany_Phones_CollectionEntry>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Phones as IRelationListSync<TestCompany_Phones_CollectionEntry>)?.AddWithoutSetParent(this);
+                    (__newValue.Phones as IRelationListSync<TestCompany_Phones_CollectionEntry>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
@@ -10722,13 +10722,13 @@ namespace Zetbox.App.Test
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.PhoneNumbersOther as IRelationListSync<TestCustomObject_PhoneNumbersOther_CollectionEntry>)?.RemoveWithoutClearParent(this);
+                    (__oldValue.PhoneNumbersOther as IRelationListSync<TestCustomObject_PhoneNumbersOther_CollectionEntry>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.PhoneNumbersOther as IRelationListSync<TestCustomObject_PhoneNumbersOther_CollectionEntry>)?.AddWithoutSetParent(this);
+                    (__newValue.PhoneNumbersOther as IRelationListSync<TestCustomObject_PhoneNumbersOther_CollectionEntry>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
