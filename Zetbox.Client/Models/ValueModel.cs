@@ -294,7 +294,7 @@ namespace Zetbox.Client.Models
 
         public override System.Threading.Tasks.Task<TValue?> GetValueAsync()
         {
-            return new System.Threading.Tasks.Task<TValue?>(() => Value);
+            return System.Threading.Tasks.Task.FromResult<TValue?>(Value);
         }
 
         public override void ClearValue()
@@ -366,7 +366,7 @@ namespace Zetbox.Client.Models
 
         System.Threading.Tasks.Task<TimeSpan?> IValueModel<TimeSpan?>.GetValueAsync()
         {
-            return new System.Threading.Tasks.Task<TimeSpan?>(() => ((IValueModel<TimeSpan?>)this).Value);
+            return System.Threading.Tasks.Task.FromResult<TimeSpan?>(((IValueModel<TimeSpan?>)this).Value);
         }
     }
 
@@ -456,7 +456,7 @@ namespace Zetbox.Client.Models
 
         public override System.Threading.Tasks.Task<TValue> GetValueAsync()
         {
-            return new System.Threading.Tasks.Task<TValue>(() => Value);
+            return System.Threading.Tasks.Task.FromResult<TValue>(Value);
         }
 
         public override void ClearValue()

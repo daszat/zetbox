@@ -767,7 +767,7 @@ namespace Zetbox.Client.Models
             {
                 var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
                 notifier.CollectionChanged += ValueCollectionChanged;
-                _getValueTask = new System.Threading.Tasks.Task<ICollection<ICompoundObject>>(() => MagicCollectionFactory.WrapAsCollection<ICompoundObject>(notifier));
+                _getValueTask = System.Threading.Tasks.Task.FromResult<ICollection<ICompoundObject>>(MagicCollectionFactory.WrapAsCollection<ICompoundObject>(notifier));
             }
             return _getValueTask;
         }
@@ -793,7 +793,7 @@ namespace Zetbox.Client.Models
             {
                 var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
                 notifier.CollectionChanged += ValueCollectionChanged;
-                _getValueTask = new System.Threading.Tasks.Task<IList<ICompoundObject>>(() => MagicCollectionFactory.WrapAsList<ICompoundObject>(notifier));
+                _getValueTask = System.Threading.Tasks.Task.FromResult<IList<ICompoundObject>>(MagicCollectionFactory.WrapAsList<ICompoundObject>(notifier));
             }
             return _getValueTask;
         }
@@ -1049,7 +1049,7 @@ namespace Zetbox.Client.Models
 
         System.Threading.Tasks.Task<TimeSpan?> IValueModel<TimeSpan?>.GetValueAsync()
         {
-            return new System.Threading.Tasks.Task<TimeSpan?>(() => ((IValueModel<TimeSpan?>)this).Value);
+            return System.Threading.Tasks.Task.FromResult<TimeSpan?>(((IValueModel<TimeSpan?>)this).Value);
         }
     }
 

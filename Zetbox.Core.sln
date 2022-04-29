@@ -257,7 +257,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zetbox.Client.Blazor.Client
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zetbox.Client.Blazor.Shared", "Zetbox.Client.Blazor\Shared\Zetbox.Client.Blazor.Shared.csproj", "{48BC6B40-929A-4CDA-8955-A82FBDEBC36C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client.Blazor.Toolkit", "Zetbox.Client.Blazor.Toolkit\Zetbox.Client.Blazor.Toolkit.csproj", "{23DE28C6-3CFA-4A0C-B80F-5330E9968FF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zetbox.Client.Blazor.Toolkit", "Zetbox.Client.Blazor.Toolkit\Zetbox.Client.Blazor.Toolkit.csproj", "{23DE28C6-3CFA-4A0C-B80F-5330E9968FF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

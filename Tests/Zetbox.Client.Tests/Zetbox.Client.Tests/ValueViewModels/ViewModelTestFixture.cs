@@ -93,7 +93,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
 
             protected override System.Threading.Tasks.Task<object> GetValueFromModelAsync()
             {
-                return new System.Threading.Tasks.Task<object>(() => ValueModel.Value);
+                return System.Threading.Tasks.Task.FromResult<object>(ValueModel.Value);
             }
 
             protected override void SetValueToModel(object value)

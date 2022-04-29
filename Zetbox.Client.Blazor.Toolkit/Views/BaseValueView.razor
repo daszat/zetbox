@@ -1,0 +1,21 @@
+﻿@using Zetbox.Client.Presentables.ValueViewModels
+
+@if (Value != null)
+{
+	@Value.FormattedValueAsync
+}
+
+@code {
+	[Parameter]
+	public BaseValueViewModel? Value { get; set; }
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		if (Value != null)
+		{
+			Value.PropertyChanged += (s, e) => StateHasChanged();
+		}
+	}
+}

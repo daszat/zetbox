@@ -19,13 +19,19 @@ Welcome to your new app.
 		@foreach (var prj in projekte)
 		{
 			<tr>
-				<td>@prj.Name</td>
 				<td>
-					<LabeledView value="@prj.PropertyModelsByName["KickOffAm"]" />
+					<BaseValueView Value="@prj.PropertyModelsByName["Name"]"></BaseValueView>
+				</td>
+				<td>
+					<BaseValueView Value="@prj.PropertyModelsByName["KickOffAm"]" />
 				</td>
 			</tr>
 		}
 	</table>
+}
+else
+{
+	<p class="text-info">Loading ...</p>
 }
 
 

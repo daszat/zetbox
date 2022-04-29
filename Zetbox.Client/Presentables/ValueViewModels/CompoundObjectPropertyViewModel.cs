@@ -69,7 +69,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         protected override System.Threading.Tasks.Task<CompoundObjectViewModel> GetValueFromModelAsync()
         {
-            return new System.Threading.Tasks.Task<CompoundObjectViewModel>(() =>
+            return System.Threading.Tasks.Task<CompoundObjectViewModel>.Run(() =>
             {
                 if (!_valueCacheInititalized)
                 {

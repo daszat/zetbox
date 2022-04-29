@@ -23,6 +23,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Net.Mail;
     using System.Text;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Utils;
@@ -871,10 +872,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         protected override System.Threading.Tasks.Task<TValue?> GetValueFromModelAsync()
         {
-            return new System.Threading.Tasks.Task<TValue?>(() =>
-            {
-                return _illegalNullInput ? null : ValueModel.Value;
-            });
+            return Task.FromResult<TValue?>(_illegalNullInput ? null : ValueModel.Value);
         }
 
         private bool _illegalNullInput = false;
@@ -945,7 +943,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         protected override System.Threading.Tasks.Task<TValue> GetValueFromModelAsync()
         {
-            return new System.Threading.Tasks.Task<TValue>(() => ValueModel.Value);
+            return Task.FromResult<TValue>(ValueModel.Value);
         }
 
         protected override void SetValueToModel(TValue value)
@@ -1404,9 +1402,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             protected override System.Threading.Tasks.Task<TimeSpan?> GetValueFromModelAsync()
             {
-                return new System.Threading.Tasks.Task<TimeSpan?>(() =>
+                return System.Threading.Tasks.Task.Run<TimeSpan?>(async () =>
                 {
-                    var val = Parent.GetValueFromModelAsync().Result;
+                    var val = await Parent.GetValueFromModelAsync();
                     if (val == null) return null;
                     return val.Value.TimeOfDay;
                 });
@@ -1498,10 +1496,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             protected override System.Threading.Tasks.Task<DateTime?> GetValueFromModelAsync()
             {
-                return new System.Threading.Tasks.Task<DateTime?>(() =>
+                return System.Threading.Tasks.Task.Run<DateTime?>(async () =>
                 {
-                    var t = Parent.GetValueFromModelAsync();
-                    var modelValue = t.Result;
+                    var modelValue = await Parent.GetValueFromModelAsync();
                     if (modelValue.HasValue)
                     {
                         var val = modelValue.Value;
