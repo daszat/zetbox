@@ -360,12 +360,16 @@ namespace Zetbox.App.Extensions
         {
             if (implType == null) throw new ArgumentNullException("implType");
             if (dt == null) throw new ArgumentNullException("dt");
+
+            // preload 
+            _ = await dt.GetProp_Module();
+
             var dtType = Type.GetType(string.Format("{0}.{1}, {2}", dt.Module.Namespace, dt.Name, Helper.InterfaceAssembly), false);
             if (dtType == null) throw new ArgumentOutOfRangeException("dt", string.Format("Cannot find type '{0}'", string.Format("{0}.{1}", dt.Module.Namespace, dt.Name)));
 
             // Reflected Methods
             // New style
-            foreach (var method in GetAllMethods(dt))
+            foreach (var method in await GetAllMethods(dt))
             {
                 var returnParam = (await method.GetProp_Parameter()).SingleOrDefault(p => p.IsReturnParameter);
                 var infrastructureParameters = returnParam == null
@@ -425,14 +429,14 @@ namespace Zetbox.App.Extensions
 
             if (dt is ObjectClass)
             {
-                CreateDefaultMethodInvocations(implType, dt, "NotifyPreSave", new[] { dtType });
-                CreateDefaultMethodInvocations(implType, dt, "NotifyPostSave", new[] { dtType });
-                CreateDefaultMethodInvocations(implType, dt, "NotifyCreated", new[] { dtType });
-                CreateDefaultMethodInvocations(implType, dt, "NotifyDeleting", new[] { dtType });
+                await CreateDefaultMethodInvocations(implType, dt, "NotifyPreSave", new[] { dtType });
+                await CreateDefaultMethodInvocations(implType, dt, "NotifyPostSave", new[] { dtType });
+                await CreateDefaultMethodInvocations(implType, dt, "NotifyCreated", new[] { dtType });
+                await CreateDefaultMethodInvocations(implType, dt, "NotifyDeleting", new[] { dtType });
             }
 
-            CreateDefaultMethodInvocations(implType, dt, "ToString", new[] { dtType, typeof(MethodReturnEventArgs<string>) });
-            CreateDefaultMethodInvocations(implType, dt, "ObjectIsValid", new[] { dtType, typeof(ObjectIsValidEventArgs) });
+            await CreateDefaultMethodInvocations(implType, dt, "ToString", new[] { dtType, typeof(MethodReturnEventArgs<string>) });
+            await CreateDefaultMethodInvocations(implType, dt, "ObjectIsValid", new[] { dtType, typeof(ObjectIsValidEventArgs) });
 
             // Reflected Properties
             // New style
@@ -445,32 +449,32 @@ namespace Zetbox.App.Extensions
             {
                 if (!prop.GetIsList())
                 {
-                    CreatePropertyInvocations(implType, prop, "get_", "Getter",
+                    await CreatePropertyInvocations(implType, prop, "get_", "Getter",
                         new[] { dtType, typeof(PropertyGetterEventArgs<>).MakeGenericType(dtType.GetPropertyType(prop.Name)) });
                 }
 
                 if (!prop.IsCalculated() && !prop.GetIsList())
                 {
-                    CreatePropertyInvocations(implType, prop, "preSet_", "PreSetter",
+                    await CreatePropertyInvocations(implType, prop, "preSet_", "PreSetter",
                         new[] { dtType, typeof(PropertyPreSetterEventArgs<>).MakeGenericType(dtType.GetPropertyType(prop.Name)) });
-                    CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter",
+                    await CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter",
                         new[] { dtType, typeof(PropertyPostSetterEventArgs<>).MakeGenericType(dtType.GetPropertyType(prop.Name)) });
                 }
 
                 if (prop.GetIsList())
                 {
                     // change notification
-                    CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter", new[] { dtType });
+                    await CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter", new[] { dtType });
                 }
 
-                CreatePropertyInvocations(implType, prop, "isValid_", "IsValid",
+                await CreatePropertyInvocations(implType, prop, "isValid_", "IsValid",
                     new[] { dtType, typeof(PropertyIsValidEventArgs) });
             }
         }
 
-        private void CreateDefaultMethodInvocations(Type implType, DataType dt, string methodName, Type[] paramTypes)
+        private async Task CreateDefaultMethodInvocations(Type implType, DataType dt, string methodName, Type[] paramTypes)
         {
-            var key = new MethodKey(dt.Module.Namespace, dt.Name, methodName, paramTypes);
+            var key = new MethodKey((await dt.GetProp_Module()).Namespace, dt.Name, methodName, paramTypes);
             if (_reflectedMethods.ContainsKey(key))
             {
                 var methodInfos = _reflectedMethods[key];
@@ -482,9 +486,9 @@ namespace Zetbox.App.Extensions
             }
         }
 
-        private void CreatePropertyInvocations(Type implType, Property prop, string methodPrefix, string invocationType, Type[] paramTypes)
+        private async Task CreatePropertyInvocations(Type implType, Property prop, string methodPrefix, string invocationType, Type[] paramTypes)
         {
-            var key = new MethodKey(prop.ObjectClass.Module.Namespace, prop.ObjectClass.Name, string.Format("{0}{1}", methodPrefix, prop.Name), paramTypes);
+            var key = new MethodKey((await (await prop.GetProp_ObjectClass()).GetProp_Module()).Namespace, prop.ObjectClass.Name, string.Format("{0}{1}", methodPrefix, prop.Name), paramTypes);
             if (_reflectedMethods.ContainsKey(key))
             {
                 var methodInfos = _reflectedMethods[key];
@@ -496,16 +500,16 @@ namespace Zetbox.App.Extensions
             }
         }
 
-        private List<Method> GetAllMethods(DataType dt)
+        private async Task<List<Method>> GetAllMethods(DataType dt)
         {
             var result = new List<Method>();
             if (dt != null)
             {
                 if (dt is ObjectClass)
                 {
-                    result = GetAllMethods(((ObjectClass)dt).BaseObjectClass);
+                    result = await GetAllMethods(await ((ObjectClass)dt).GetProp_BaseObjectClass());
                 }
-                var methods = dt.Methods;
+                var methods = await dt.GetProp_Methods();
                 if(methods == null)
                 {
                     throw new InvalidOperationException("Datatype returns a null methods collection");

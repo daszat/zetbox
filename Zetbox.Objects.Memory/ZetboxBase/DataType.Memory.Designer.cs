@@ -1243,9 +1243,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             {
                 if (PropertiesIds != null)
                 {
-                    _triggerFetchPropertiesTask = new System.Threading.Tasks.Task(() =>
+                    _triggerFetchPropertiesTask = System.Threading.Tasks.Task.FromResult(PropertiesIds.Select(id => Context.Find<Zetbox.App.Base.Property>(id)).ToList()).OnResult(t =>
                     {
-                        serverList = PropertiesIds.Select(id => Context.Find<Zetbox.App.Base.Property>(id)).ToList();
+                        serverList = t.Result;
                         PropertiesIds = null; // allow id list to be garbage collected
                     });
                 }
