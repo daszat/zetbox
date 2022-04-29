@@ -459,9 +459,9 @@ namespace Zetbox.App.Base
             {
                 if (ConstraintsIds != null)
                 {
-                    _triggerFetchConstraintsTask = new System.Threading.Tasks.Task(() =>
+                    _triggerFetchConstraintsTask = System.Threading.Tasks.Task.FromResult(ConstraintsIds.Select(id => Context.Find<Zetbox.App.Base.Constraint>(id)).ToList()).OnResult(t =>
                     {
-                        serverList = ConstraintsIds.Select(id => Context.Find<Zetbox.App.Base.Constraint>(id)).ToList();
+                        serverList = t.Result;
                         ConstraintsIds = null; // allow id list to be garbage collected
                     });
                 }

@@ -101,7 +101,7 @@ if (eagerLoading) {
 #line 85 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("                if (",  idsListName , " != null)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    ",  taskName , " = new System.Threading.Tasks.Task.FromResult(",  idsListName , ".Select(id => Context.Find<",  referencedInterface , ">(id)).ToList()).OnResult(t =>\r\n");
+this.WriteObjects("                    ",  taskName , " = System.Threading.Tasks.Task.FromResult(",  idsListName , ".Select(id => Context.Find<",  referencedInterface , ">(id)).ToList()).OnResult(t =>\r\n");
 this.WriteObjects("                    {\r\n");
 this.WriteObjects("                        serverList = t.Result;\r\n");
 this.WriteObjects("                        ",  idsListName , " = null; // allow id list to be garbage collected\r\n");

@@ -75,9 +75,9 @@ namespace Zetbox.App.Test
             {
                 if (AntwortenIds != null)
                 {
-                    _triggerFetchAntwortenTask = new System.Threading.Tasks.Task(() =>
+                    _triggerFetchAntwortenTask = System.Threading.Tasks.Task.FromResult(AntwortenIds.Select(id => Context.Find<Zetbox.App.Test.Antwort>(id)).ToList()).OnResult(t =>
                     {
-                        serverList = AntwortenIds.Select(id => Context.Find<Zetbox.App.Test.Antwort>(id)).ToList();
+                        serverList = t.Result;
                         AntwortenIds = null; // allow id list to be garbage collected
                     });
                 }

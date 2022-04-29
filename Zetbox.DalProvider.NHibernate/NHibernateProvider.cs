@@ -20,6 +20,7 @@ namespace Zetbox.DalProvider.NHibernate
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading;
     using Autofac;
     using Autofac.Core;
     using Zetbox.API;
@@ -36,7 +37,7 @@ namespace Zetbox.DalProvider.NHibernate
         : Autofac.Module
     {
         public static readonly string ServerAssembly = "Zetbox.Objects.NHibernateImpl";
-        private static readonly object _initLock = new object();
+        private static readonly SemaphoreSlim _initLock = new SemaphoreSlim(1, 1);
         private static bool _initQueryDone = false;
 
         protected override void Load(ContainerBuilder moduleBuilder)
@@ -81,20 +82,22 @@ namespace Zetbox.DalProvider.NHibernate
                 .As<IZetboxContext>()
                 .OnActivated(async args =>
                 {
-                    var manager = args.Context.Resolve<INHibernateActionsManager>();
-                    await manager.Init(args.Context.Resolve<IFrozenContext>());
-                    if (!_initQueryDone)
+                    await _initLock.WaitAsync();
+                    try
                     {
-                        lock (_initLock)
+                        var manager = args.Context.Resolve<INHibernateActionsManager>();
+                        await manager.Init(args.Context.Resolve<IFrozenContext>());
+                        if (!_initQueryDone)
                         {
-                            if (!_initQueryDone)
-                            {
-                                var cls = args.Instance.GetQuery<ObjectClass>().FirstOrDefault();
-                                // need to repeat initialization until the first proxy was created
-                                _initQueryDone = cls != null;
-                                Logging.Log.InfoFormat("Initialized NHibernate synchronously: done = {0}", _initQueryDone);
-                            }
+                            var cls = args.Instance.GetQuery<ObjectClass>().FirstOrDefault();
+                            // need to repeat initialization until the first proxy was created
+                            _initQueryDone = cls != null;
+                            Logging.Log.InfoFormat("Initialized NHibernate synchronously: done = {0}", _initQueryDone);
                         }
+                    }
+                    finally
+                    {
+                        _initLock.Release();
                     }
                 })
                 .InstancePerDependency();

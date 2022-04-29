@@ -12,21 +12,21 @@ namespace Zetbox.API
         {
             if (task.Status == TaskStatus.Created)
                 task.Start();
-            return task.ContinueWith(action, TaskContinuationOptions.AttachedToParent | TaskContinuationOptions.ExecuteSynchronously);
+            return task.ContinueWith(action, TaskContinuationOptions.ExecuteSynchronously);
         }
 
         public static Task<T> OnResult<T>(this Task<T> task, Func<Task<T>, T> action)
         {
             if (task.Status == TaskStatus.Created)
                 task.Start();
-            return task.ContinueWith<T>(action, TaskContinuationOptions.AttachedToParent | TaskContinuationOptions.ExecuteSynchronously);
+            return task.ContinueWith<T>(action, TaskContinuationOptions.ExecuteSynchronously);
         }
 
         public static Task OnResult<T>(this Task<T> task, Action<Task<T>> action)
         {
             if (task.Status == TaskStatus.Created)
                 task.Start();
-            return task.ContinueWith(action, TaskContinuationOptions.AttachedToParent | TaskContinuationOptions.ExecuteSynchronously);
+            return task.ContinueWith(action, TaskContinuationOptions.ExecuteSynchronously);
         }
 
         private static readonly bool isBrowser = OperatingSystem.IsBrowser();

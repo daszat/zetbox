@@ -84,7 +84,7 @@
 <% if (eagerLoading) { %>
                 if (<%= idsListName %> != null)
                 {
-                    <%= taskName %> = new System.Threading.Tasks.Task.FromResult(<%= idsListName %>.Select(id => Context.Find<<%= referencedInterface %>>(id)).ToList()).OnResult(t =>
+                    <%= taskName %> = System.Threading.Tasks.Task.FromResult(<%= idsListName %>.Select(id => Context.Find<<%= referencedInterface %>>(id)).ToList()).OnResult(t =>
                     {
                         serverList = t.Result;
                         <%= idsListName %> = null; // allow id list to be garbage collected

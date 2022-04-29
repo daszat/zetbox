@@ -285,9 +285,9 @@ namespace Zetbox.App.Base
             {
                 if (ConstraintsIds != null)
                 {
-                    _triggerFetchConstraintsTask = new System.Threading.Tasks.Task(() =>
+                    _triggerFetchConstraintsTask = System.Threading.Tasks.Task.FromResult(ConstraintsIds.Select(id => Context.Find<Zetbox.App.Base.InstanceConstraint>(id)).ToList()).OnResult(t =>
                     {
-                        serverList = ConstraintsIds.Select(id => Context.Find<Zetbox.App.Base.InstanceConstraint>(id)).ToList();
+                        serverList = t.Result;
                         ConstraintsIds = null; // allow id list to be garbage collected
                     });
                 }
@@ -960,9 +960,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImple
             {
                 if (MethodsIds != null)
                 {
-                    _triggerFetchMethodsTask = new System.Threading.Tasks.Task(() =>
+                    _triggerFetchMethodsTask = System.Threading.Tasks.Task.FromResult(MethodsIds.Select(id => Context.Find<Zetbox.App.Base.Method>(id)).ToList()).OnResult(t =>
                     {
-                        serverList = MethodsIds.Select(id => Context.Find<Zetbox.App.Base.Method>(id)).ToList();
+                        serverList = t.Result;
                         MethodsIds = null; // allow id list to be garbage collected
                     });
                 }
