@@ -22,6 +22,7 @@ namespace Zetbox.DalProvider.Memory
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using System.Threading;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Configuration;
@@ -38,6 +39,8 @@ namespace Zetbox.DalProvider.Memory
 
         public static readonly string ContextClassName = "Zetbox.Objects.Memory.MemoryContext";
         public static readonly string GeneratedAssemblyName = "Zetbox.Objects.MemoryImpl";
+
+        private static readonly SemaphoreSlim _initLock = new SemaphoreSlim(1, 1);
 
         protected override void Load(ContainerBuilder moduleBuilder)
         {
@@ -76,20 +79,23 @@ namespace Zetbox.DalProvider.Memory
                             () => memCtx,
                             c.Resolve<MemoryImplementationType.MemoryFactory>(),
                             c.Resolve<IEnumerable<IZetboxContextEventListener>>());
-
+                        
                         return memCtx;
                     })
                     .As<IFrozenContext>()
                     .OnActivated(async args =>
                     {
+                        await _initLock.WaitAsync();
+                        var manager = args.Context.Resolve<IMemoryActionsManager>();
+                        var listener = args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>();
+
                         await Importer.LoadFromXml(args.Instance, generatedAssembly.GetManifestResourceStream("Zetbox.Objects.MemoryImpl.FrozenObjects.xml"), "FrozenContext XML from Assembly");
                         args.Instance.Seal();
 
-                        var manager = args.Context.Resolve<IMemoryActionsManager>();
-                        var listener = args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>();
-                        await manager.Init(args.Context.Resolve<IFrozenContext>());
+                        await manager.Init(args.Instance);
 
                         ZetboxContextEventListenerHelper.OnCreated(listener, args.Instance);
+                        _initLock.Release();
                     })
                     .SingleInstance();
 

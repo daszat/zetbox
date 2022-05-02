@@ -23,6 +23,7 @@ namespace Zetbox.App.Extensions
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
     using Autofac;
     using Autofac.Core.Registration;
@@ -75,11 +76,12 @@ namespace Zetbox.App.Extensions
         private readonly Dictionary<MethodKey, List<MethodInfo>> _reflectedMethods = new Dictionary<MethodKey, List<MethodInfo>>();
         private readonly Dictionary<MethodKey, bool> _attachedMethods = new Dictionary<MethodKey, bool>();
         private readonly IAssetsManager _assetsMgr;
+        private static readonly SemaphoreSlim _initLock = new SemaphoreSlim(1, 1);
 
         /// <summary>
         /// This provides a per-dalProvider synchronisation root to protect the initialisation
         /// </summary>
-        protected abstract object SyncRoot { get; }
+        protected virtual SemaphoreSlim InitLock  => _initLock;
         /// <summary>
         /// This returns per DalProvider whether the custom actions are already initialised. It is set by the Init() function. Only access it while holding the SyncRoot lock.
         /// </summary>
@@ -120,32 +122,31 @@ namespace Zetbox.App.Extensions
         /// </summary>
         public virtual async Task Init(IReadOnlyZetboxContext ctx)
         {
-            // TODO: lock (SyncRoot)
+            if (IsInitialised) return;
+            await InitLock.WaitAsync();
+
+            try
             {
-                if (IsInitialised) return;
-
                 var implType = this.GetType();
-                try
+                using (Log.InfoTraceMethodCallFormat("Init", "Initializing Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name))
                 {
-                    using (Log.InfoTraceMethodCallFormat("Init", "Initializing Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name))
+                    Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
+
+                    ReflectMethodsAndAssets(ctx);
+                    await CreateInvokeInfosForDataTypes(ctx);
+
+                    foreach (var key in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).Select(i => i.Key))
                     {
-                        Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
-
-                        ReflectMethodsAndAssets(ctx);
-                        await CreateInvokeInfosForDataTypes(ctx);
-
-                        foreach (var key in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).Select(i => i.Key))
-                        {
-                            Log.Warn(string.Format("Couldn't find any method for Invocation {0}", key));
-                        }
-
-                        Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
+                        Log.Warn(string.Format("Couldn't find any method for Invocation {0}", key));
                     }
+
+                    Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
                 }
-                finally
-                {
-                    IsInitialised = true;
-                }
+            }
+            finally
+            {
+                IsInitialised = true;
+                InitLock.Release();
             }
         }
 
@@ -441,7 +442,12 @@ namespace Zetbox.App.Extensions
             // Reflected Properties
             // New style
             var props = await dt.GetProp_Properties();
-            if(props == null)
+            // TODO: Init troubles?
+            if (props == null)
+            {
+                props = await dt.GetProp_Properties();
+            }
+            if (props == null)
             {
                 throw new InvalidOperationException("Cant be null");
             }
@@ -510,7 +516,7 @@ namespace Zetbox.App.Extensions
                     result = await GetAllMethods(await ((ObjectClass)dt).GetProp_BaseObjectClass());
                 }
                 var methods = await dt.GetProp_Methods();
-                if(methods == null)
+                if (methods == null)
                 {
                     throw new InvalidOperationException("Datatype returns a null methods collection");
                 }

@@ -15,6 +15,7 @@ namespace Zetbox.Objects
     using Zetbox.App.Extensions;
     using Zetbox.DalProvider.Base;
     using Zetbox.DalProvider.NHibernate;
+    using System.Threading;
 
     public class NHibernateModule
         : Autofac.Module
@@ -80,10 +81,10 @@ namespace Zetbox.Objects
     internal sealed class NHibernateActionsManager
         : BaseCustomActionsManager, INHibernateActionsManager
     {
-        private static object _syncRoot = new object();
+        private static readonly SemaphoreSlim _initLock = new SemaphoreSlim(1, 1);
         private static bool _isInitialised = false;
 
-        protected override object SyncRoot { get { return _syncRoot; } }
+        protected override SemaphoreSlim InitLock => _initLock;
         protected override bool IsInitialised
         {
             get { return _isInitialised; }

@@ -20,6 +20,7 @@ namespace Zetbox.API.Common
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Security.Principal;
+    using System.Threading;
     using System.Threading.Tasks;
     using Autofac;
     using Zetbox.API.Async;
@@ -47,7 +48,7 @@ namespace Zetbox.API.Common
         /// <summary>
         /// Clear the cache
         /// </summary>
-        void ClearCache();
+        Task ClearCache();
     }
 
     [Serializable]
@@ -76,7 +77,7 @@ namespace Zetbox.API.Common
 
     public abstract class BasePrincipalResolver : IPrincipalResolver
     {
-        private readonly object _lock = new object();
+        private static readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
 
         private readonly ILifetimeScope _parentScope;
         private readonly Dictionary<string, ZetboxPrincipal> _cache;
@@ -121,7 +122,8 @@ namespace Zetbox.API.Common
 
             ZetboxPrincipal result = null;
 
-            lock (_lock)
+            await _lock.WaitAsync();
+            try
             {
                 CheckScope();
 
@@ -129,19 +131,13 @@ namespace Zetbox.API.Common
                 {
                     return _cache[id];
                 }
-            }
 
-            try
-            {
                 var identity = await _resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefaultAsync();
                 if (identity != null && identity.IsDeactivated == false)
                 {
                     var groups = (await identity.GetProp_Groups()).ToList();
                     result = new ZetboxPrincipal(id: identity.ID, userName: identity.UserName, displayName: identity.DisplayName, groups: groups.Select(g => new ZetboxPrincipalGroup(id: g.ID, name: g.Name, exportGuid: g.ExportGuid)));
-                    lock(_lock)
-                    {
-                        _cache[id] = result;
-                    }
+                    _cache[id] = result;
                 }
             }
             catch (Exception ex)
@@ -153,6 +149,11 @@ namespace Zetbox.API.Common
                 }
                 Logging.Log.Warn("Exception while resolving Identity", ex);
             }
+            finally
+            {
+                _lock.Release();
+            }
+
             if (result == null)
             {
                 Logging.Log.WarnFormat("Unable to resolve Identity {0}", name);
@@ -161,11 +162,16 @@ namespace Zetbox.API.Common
             return result;
         }
 
-        void IPrincipalResolver.ClearCache()
+        async Task IPrincipalResolver.ClearCache()
         {
-            lock (_lock)
+            await _lock.WaitAsync();
+            try
             {
                 _clearTime = DateTime.MinValue;
+            }
+            finally
+            {
+                _lock.Release();
             }
         }
     }

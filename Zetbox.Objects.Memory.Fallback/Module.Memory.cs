@@ -6,6 +6,7 @@ namespace Zetbox.Objects
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading;
     using Autofac;
 	using Zetbox.API;
     using Zetbox.App.Extensions;
@@ -56,10 +57,10 @@ namespace Zetbox.Objects
     internal sealed class MemoryActionsManager
         : BaseCustomActionsManager, IMemoryActionsManager
     {
-        private static object _syncRoot = new object();
+        private static readonly SemaphoreSlim _initLock = new SemaphoreSlim(1, 1);
         private static bool _isInitialised = false;
 
-        protected override object SyncRoot { get { return _syncRoot; } }
+        protected override SemaphoreSlim InitLock => _initLock;
         protected override bool IsInitialised
         {
             get { return _isInitialised; }

@@ -37,8 +37,9 @@ namespace Zetbox.Client.Mocks
             return Task.FromResult<ZetboxPrincipal>(null);
         }
 
-        void IPrincipalResolver.ClearCache()
+        Task IPrincipalResolver.ClearCache()
         {
+            return Task.CompletedTask;
         }
     }
 }

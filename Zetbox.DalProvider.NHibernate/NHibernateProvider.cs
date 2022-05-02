@@ -82,11 +82,13 @@ namespace Zetbox.DalProvider.NHibernate
                 .As<IZetboxContext>()
                 .OnActivated(async args =>
                 {
+                    var manager = args.Context.Resolve<INHibernateActionsManager>();
+                    var frozenCtx = args.Context.Resolve<IFrozenContext>();
+
                     await _initLock.WaitAsync();
                     try
                     {
-                        var manager = args.Context.Resolve<INHibernateActionsManager>();
-                        await manager.Init(args.Context.Resolve<IFrozenContext>());
+                        await manager.Init(frozenCtx);
                         if (!_initQueryDone)
                         {
                             var cls = args.Instance.GetQuery<ObjectClass>().FirstOrDefault();
