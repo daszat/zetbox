@@ -69,11 +69,12 @@ namespace Zetbox.App.Test
         public System.Threading.Tasks.Task TriggerFetchChildrenAsync()
         {
             if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Test.SecurityTestChild> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchChildrenTask = Context.GetListOfAsync<Zetbox.App.Test.SecurityTestChild>(this, "Children")
+                task = Context.GetListOfAsync<Zetbox.App.Test.SecurityTestChild>(this, "Children")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -81,13 +82,13 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchChildrenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.SecurityTestChild>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.SecurityTestChild>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchChildrenTask = _triggerFetchChildrenTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _Children = new OneNRelationList<Zetbox.App.Test.SecurityTestChild>(
                     "Parent",
@@ -96,7 +97,7 @@ namespace Zetbox.App.Test
                     OnChildrenCollectionChanged,
                     serverList);
             });
-            return _triggerFetchChildrenTask;
+            return _triggerFetchChildrenTask = task;
         }
 
         internal void OnChildrenCollectionChanged()

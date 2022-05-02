@@ -99,12 +99,14 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchAnotherFileTask != null) return _triggerFetchAnotherFileTask;
 
-            if (_fk_AnotherFile.HasValue)
-                _triggerFetchAnotherFileTask = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_AnotherFile.Value);
-            else
-                _triggerFetchAnotherFileTask = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(null);
+            System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> task;
 
-            _triggerFetchAnotherFileTask.OnResult(t =>
+            if (_fk_AnotherFile.HasValue)
+                task = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_AnotherFile.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(null);
+
+            task.OnResult(t =>
             {
                 if (OnAnotherFile_Getter != null)
                 {
@@ -114,7 +116,7 @@ namespace Zetbox.App.Test
                 }
             });
 
-            return _triggerFetchAnotherFileTask;
+            return _triggerFetchAnotherFileTask = task;
         }
 
         // internal implementation
@@ -236,12 +238,14 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchAnyFileTask != null) return _triggerFetchAnyFileTask;
 
-            if (_fk_AnyFile.HasValue)
-                _triggerFetchAnyFileTask = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_AnyFile.Value);
-            else
-                _triggerFetchAnyFileTask = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(null);
+            System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> task;
 
-            _triggerFetchAnyFileTask.OnResult(t =>
+            if (_fk_AnyFile.HasValue)
+                task = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_AnyFile.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(null);
+
+            task.OnResult(t =>
             {
                 if (OnAnyFile_Getter != null)
                 {
@@ -251,7 +255,7 @@ namespace Zetbox.App.Test
                 }
             });
 
-            return _triggerFetchAnyFileTask;
+            return _triggerFetchAnyFileTask = task;
         }
 
         // internal implementation

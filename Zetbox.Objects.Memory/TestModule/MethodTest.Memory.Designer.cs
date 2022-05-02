@@ -69,11 +69,12 @@ namespace Zetbox.App.Test
         public System.Threading.Tasks.Task TriggerFetchChildrenAsync()
         {
             if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Test.MethodTest> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchChildrenTask = Context.GetListOfAsync<Zetbox.App.Test.MethodTest>(this, "Children")
+                task = Context.GetListOfAsync<Zetbox.App.Test.MethodTest>(this, "Children")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -81,13 +82,13 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchChildrenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.MethodTest>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.MethodTest>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchChildrenTask = _triggerFetchChildrenTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _Children = new OneNRelationList<Zetbox.App.Test.MethodTest>(
                     "Parent",
@@ -96,7 +97,7 @@ namespace Zetbox.App.Test
                     OnChildrenCollectionChanged,
                     serverList);
             });
-            return _triggerFetchChildrenTask;
+            return _triggerFetchChildrenTask = task;
         }
 
         internal void OnChildrenCollectionChanged()
@@ -173,12 +174,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         {
             if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
 
-            if (_fk_Parent.HasValue)
-                _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.MethodTest>(_fk_Parent.Value);
-            else
-                _triggerFetchParentTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.MethodTest>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Test.MethodTest> task;
 
-            _triggerFetchParentTask.OnResult(t =>
+            if (_fk_Parent.HasValue)
+                task = Context.FindAsync<Zetbox.App.Test.MethodTest>(_fk_Parent.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.MethodTest>(null);
+
+            task.OnResult(t =>
             {
                 if (OnParent_Getter != null)
                 {
@@ -188,7 +191,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 }
             });
 
-            return _triggerFetchParentTask;
+            return _triggerFetchParentTask = task;
         }
 
         // internal implementation

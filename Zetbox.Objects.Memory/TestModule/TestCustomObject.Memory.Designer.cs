@@ -133,11 +133,12 @@ namespace Zetbox.App.Test
         public System.Threading.Tasks.Task TriggerFetchMubBlah_List_NavAsync()
         {
             if (_triggerFetchMubBlah_List_NavTask != null) return _triggerFetchMubBlah_List_NavTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Test.Muhblah> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchMubBlah_List_NavTask = Context.GetListOfAsync<Zetbox.App.Test.Muhblah>(this, "MubBlah_List_Nav")
+                task = Context.GetListOfAsync<Zetbox.App.Test.Muhblah>(this, "MubBlah_List_Nav")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -145,13 +146,13 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchMubBlah_List_NavTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.Muhblah>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.Muhblah>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchMubBlah_List_NavTask = _triggerFetchMubBlah_List_NavTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _MubBlah_List_Nav = new OneNRelationList<Zetbox.App.Test.Muhblah>(
                     "TestCustomObjects_Nav",
@@ -160,7 +161,7 @@ namespace Zetbox.App.Test
                     OnMubBlah_List_NavCollectionChanged,
                     serverList);
             });
-            return _triggerFetchMubBlah_List_NavTask;
+            return _triggerFetchMubBlah_List_NavTask = task;
         }
 
         internal void OnMubBlah_List_NavCollectionChanged()
@@ -237,12 +238,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             if (_triggerFetchMubBlah_NavTask != null) return _triggerFetchMubBlah_NavTask;
 
-            if (_fk_MubBlah_Nav.HasValue)
-                _triggerFetchMubBlah_NavTask = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
-            else
-                _triggerFetchMubBlah_NavTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Muhblah>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah> task;
 
-            _triggerFetchMubBlah_NavTask.OnResult(t =>
+            if (_fk_MubBlah_Nav.HasValue)
+                task = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Muhblah>(null);
+
+            task.OnResult(t =>
             {
                 if (OnMubBlah_Nav_Getter != null)
                 {
@@ -252,7 +255,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 }
             });
 
-            return _triggerFetchMubBlah_NavTask;
+            return _triggerFetchMubBlah_NavTask = task;
         }
 
         // internal implementation
@@ -356,8 +359,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         public System.Threading.Tasks.Task TriggerFetchMuhBlah_ManyList_NavAsync()
         {
             if (_triggerFetchMuhBlah_ManyList_NavTask != null) return _triggerFetchMuhBlah_ManyList_NavTask;
-            _triggerFetchMuhBlah_ManyList_NavTask = Context.FetchRelationAsync<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.B, this);
-            _triggerFetchMuhBlah_ManyList_NavTask = _triggerFetchMuhBlah_ManyList_NavTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.B, this);
+            task = task.OnResult(r =>
             {
                 _MuhBlah_ManyList_Nav
                     = new ObservableASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl>>(
@@ -365,7 +369,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                         new RelationshipFilterBSideCollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl>(this.Context, this));
                         // _MuhBlah_ManyList_Nav.CollectionChanged is managed by OnMuhBlah_ManyList_NavCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchMuhBlah_ManyList_NavTask;
+            return _triggerFetchMuhBlah_ManyList_NavTask = task;
         }
 
         internal void OnMuhBlah_ManyList_NavCollectionChanged()
@@ -443,12 +447,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             if (_triggerFetchMuhBlah_One_NavTask != null) return _triggerFetchMuhBlah_One_NavTask;
 
-            if (_fk_MuhBlah_One_Nav.HasValue)
-                _triggerFetchMuhBlah_One_NavTask = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
-            else
-                _triggerFetchMuhBlah_One_NavTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Muhblah>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Test.Muhblah> task;
 
-            _triggerFetchMuhBlah_One_NavTask.OnResult(t =>
+            if (_fk_MuhBlah_One_Nav.HasValue)
+                task = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Muhblah>(null);
+
+            task.OnResult(t =>
             {
                 if (OnMuhBlah_One_Nav_Getter != null)
                 {
@@ -458,7 +464,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 }
             });
 
-            return _triggerFetchMuhBlah_One_NavTask;
+            return _triggerFetchMuhBlah_One_NavTask = task;
         }
 
         // internal implementation

@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchCompoundObjectTask != null) return _triggerFetchCompoundObjectTask;
 
-            if (_fk_CompoundObject.HasValue)
-                _triggerFetchCompoundObjectTask = Context.FindAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value);
-            else
-                _triggerFetchCompoundObjectTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.CompoundObject>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.CompoundObject> task;
 
-            _triggerFetchCompoundObjectTask.OnResult(t =>
+            if (_fk_CompoundObject.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.CompoundObject>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCompoundObject_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchCompoundObjectTask;
+            return _triggerFetchCompoundObjectTask = task;
         }
 
         // internal implementation

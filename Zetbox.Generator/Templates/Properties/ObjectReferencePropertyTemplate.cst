@@ -113,13 +113,15 @@
         {
             if (<%= taskName %> != null) return <%= taskName %>;
 
+            System.Threading.Tasks.Task<<%= referencedInterface %>> task;
+
             if (<%= fkBackingName %>.HasValue)
-                <%= taskName %> = Context.FindAsync<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
+                task = Context.FindAsync<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
             else
-                <%= taskName %> = System.Threading.Tasks.Task.FromResult<<%= referencedInterface %>>(null);
+                task = System.Threading.Tasks.Task.FromResult<<%= referencedInterface %>>(null);
 
 <% if (callGetterSetterEvents) {                                                                    %>
-            <%= taskName %>.OnResult(t =>
+            task.OnResult(t =>
             {
                 if (<%= eventName %>_Getter != null)
                 {
@@ -130,7 +132,7 @@
             });
 
 <% }                                                                                                %>
-            return <%= taskName %>;
+            return <%= taskName %> = task;
         }
 
         // internal implementation

@@ -99,12 +99,14 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -114,7 +116,7 @@ namespace Zetbox.App.Test
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -309,12 +311,14 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -324,7 +328,7 @@ namespace Zetbox.App.Test
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation
@@ -519,12 +523,14 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchIdentityTask != null) return _triggerFetchIdentityTask;
 
-            if (_fk_Identity.HasValue)
-                _triggerFetchIdentityTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Identity.Value);
-            else
-                _triggerFetchIdentityTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchIdentityTask.OnResult(t =>
+            if (_fk_Identity.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Identity.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnIdentity_Getter != null)
                 {
@@ -534,7 +540,7 @@ namespace Zetbox.App.Test
                 }
             });
 
-            return _triggerFetchIdentityTask;
+            return _triggerFetchIdentityTask = task;
         }
 
         // internal implementation
@@ -714,12 +720,14 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
 
-            if (_fk_Parent.HasValue)
-                _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.SecurityTestParent>(_fk_Parent.Value);
-            else
-                _triggerFetchParentTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.SecurityTestParent>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Test.SecurityTestParent> task;
 
-            _triggerFetchParentTask.OnResult(t =>
+            if (_fk_Parent.HasValue)
+                task = Context.FindAsync<Zetbox.App.Test.SecurityTestParent>(_fk_Parent.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.SecurityTestParent>(null);
+
+            task.OnResult(t =>
             {
                 if (OnParent_Getter != null)
                 {
@@ -729,7 +737,7 @@ namespace Zetbox.App.Test
                 }
             });
 
-            return _triggerFetchParentTask;
+            return _triggerFetchParentTask = task;
         }
 
         // internal implementation

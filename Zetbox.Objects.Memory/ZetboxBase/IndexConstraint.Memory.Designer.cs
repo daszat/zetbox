@@ -136,8 +136,9 @@ namespace Zetbox.App.Base
         public System.Threading.Tasks.Task TriggerFetchPropertiesAsync()
         {
             if (_triggerFetchPropertiesTask != null) return _triggerFetchPropertiesTask;
-            _triggerFetchPropertiesTask = Context.FetchRelationAsync<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
-            _triggerFetchPropertiesTask = _triggerFetchPropertiesTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _Properties
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>>(
@@ -145,7 +146,7 @@ namespace Zetbox.App.Base
                         new RelationshipFilterASideCollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>(this.Context, this));
                         // _Properties.CollectionChanged is managed by OnPropertiesCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchPropertiesTask;
+            return _triggerFetchPropertiesTask = task;
         }
 
         internal void OnPropertiesCollectionChanged()

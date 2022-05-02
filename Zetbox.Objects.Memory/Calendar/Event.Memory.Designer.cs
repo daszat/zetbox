@@ -162,12 +162,14 @@ namespace Zetbox.App.Calendar
         {
             if (_triggerFetchCalendarTask != null) return _triggerFetchCalendarTask;
 
-            if (_fk_Calendar.HasValue)
-                _triggerFetchCalendarTask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value);
-            else
-                _triggerFetchCalendarTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> task;
 
-            _triggerFetchCalendarTask.OnResult(t =>
+            if (_fk_Calendar.HasValue)
+                task = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCalendar_Getter != null)
                 {
@@ -177,7 +179,7 @@ namespace Zetbox.App.Calendar
                 }
             });
 
-            return _triggerFetchCalendarTask;
+            return _triggerFetchCalendarTask = task;
         }
 
         // internal implementation
@@ -299,12 +301,14 @@ namespace Zetbox.App.Calendar
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -314,7 +318,7 @@ namespace Zetbox.App.Calendar
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -509,12 +513,14 @@ namespace Zetbox.App.Calendar
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -524,7 +530,7 @@ namespace Zetbox.App.Calendar
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation

@@ -69,11 +69,12 @@ namespace Zetbox.App.Test
         public System.Threading.Tasks.Task TriggerFetchNEndsAsync()
         {
             if (_triggerFetchNEndsTask != null) return _triggerFetchNEndsTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Test.OrderedNEnd> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchNEndsTask = Context.GetListOfAsync<Zetbox.App.Test.OrderedNEnd>(this, "NEnds")
+                task = Context.GetListOfAsync<Zetbox.App.Test.OrderedNEnd>(this, "NEnds")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -81,13 +82,13 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchNEndsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.OrderedNEnd>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.OrderedNEnd>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchNEndsTask = _triggerFetchNEndsTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _NEnds = new OneNRelationList<Zetbox.App.Test.OrderedNEnd>(
                     "OneEnd",
@@ -96,7 +97,7 @@ namespace Zetbox.App.Test
                     OnNEndsCollectionChanged,
                     serverList);
             });
-            return _triggerFetchNEndsTask;
+            return _triggerFetchNEndsTask = task;
         }
 
         internal void OnNEndsCollectionChanged()

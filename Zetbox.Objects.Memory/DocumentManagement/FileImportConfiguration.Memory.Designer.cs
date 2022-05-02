@@ -99,12 +99,14 @@ namespace at.dasz.DocumentManagement
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -114,7 +116,7 @@ namespace at.dasz.DocumentManagement
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -309,12 +311,14 @@ namespace at.dasz.DocumentManagement
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -324,7 +328,7 @@ namespace at.dasz.DocumentManagement
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation
@@ -590,12 +594,14 @@ namespace at.dasz.DocumentManagement
         {
             if (_triggerFetchIdentityTask != null) return _triggerFetchIdentityTask;
 
-            if (_fk_Identity.HasValue)
-                _triggerFetchIdentityTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Identity.Value);
-            else
-                _triggerFetchIdentityTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchIdentityTask.OnResult(t =>
+            if (_fk_Identity.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Identity.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnIdentity_Getter != null)
                 {
@@ -605,7 +611,7 @@ namespace at.dasz.DocumentManagement
                 }
             });
 
-            return _triggerFetchIdentityTask;
+            return _triggerFetchIdentityTask = task;
         }
 
         // internal implementation

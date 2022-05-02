@@ -136,8 +136,9 @@ namespace Zetbox.App.Base
         public System.Threading.Tasks.Task TriggerFetchMemberAsync()
         {
             if (_triggerFetchMemberTask != null) return _triggerFetchMemberTask;
-            _triggerFetchMemberTask = Context.FetchRelationAsync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.B, this);
-            _triggerFetchMemberTask = _triggerFetchMemberTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.B, this);
+            task = task.OnResult(r =>
             {
                 _Member
                     = new ObservableASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>>(
@@ -145,7 +146,7 @@ namespace Zetbox.App.Base
                         new RelationshipFilterBSideCollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>(this.Context, this));
                         // _Member.CollectionChanged is managed by OnMemberCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchMemberTask;
+            return _triggerFetchMemberTask = task;
         }
 
         internal void OnMemberCollectionChanged()
@@ -224,12 +225,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
-            if (_fk_Module.HasValue)
-                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
-            else
-                _triggerFetchModuleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Module> task;
 
-            _triggerFetchModuleTask.OnResult(t =>
+            if (_fk_Module.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+
+            task.OnResult(t =>
             {
                 if (OnModule_Getter != null)
                 {
@@ -239,7 +242,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
                 }
             });
 
-            return _triggerFetchModuleTask;
+            return _triggerFetchModuleTask = task;
         }
 
         // internal implementation

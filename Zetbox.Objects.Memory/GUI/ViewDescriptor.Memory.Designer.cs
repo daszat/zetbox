@@ -100,12 +100,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchControlKindTask != null) return _triggerFetchControlKindTask;
 
-            if (_fk_ControlKind.HasValue)
-                _triggerFetchControlKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_ControlKind.Value);
-            else
-                _triggerFetchControlKindTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> task;
 
-            _triggerFetchControlKindTask.OnResult(t =>
+            if (_fk_ControlKind.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_ControlKind.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
+
+            task.OnResult(t =>
             {
                 if (OnControlKind_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchControlKindTask;
+            return _triggerFetchControlKindTask = task;
         }
 
         // internal implementation
@@ -438,12 +440,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
-            if (_fk_Module.HasValue)
-                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
-            else
-                _triggerFetchModuleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Module> task;
 
-            _triggerFetchModuleTask.OnResult(t =>
+            if (_fk_Module.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+
+            task.OnResult(t =>
             {
                 if (OnModule_Getter != null)
                 {
@@ -453,7 +457,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchModuleTask;
+            return _triggerFetchModuleTask = task;
         }
 
         // internal implementation

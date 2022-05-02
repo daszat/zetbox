@@ -99,12 +99,14 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchOneEndTask != null) return _triggerFetchOneEndTask;
 
-            if (_fk_OneEnd.HasValue)
-                _triggerFetchOneEndTask = Context.FindAsync<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
-            else
-                _triggerFetchOneEndTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.OrderedOneEnd>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Test.OrderedOneEnd> task;
 
-            _triggerFetchOneEndTask.OnResult(t =>
+            if (_fk_OneEnd.HasValue)
+                task = Context.FindAsync<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.OrderedOneEnd>(null);
+
+            task.OnResult(t =>
             {
                 if (OnOneEnd_Getter != null)
                 {
@@ -114,7 +116,7 @@ namespace Zetbox.App.Test
                 }
             });
 
-            return _triggerFetchOneEndTask;
+            return _triggerFetchOneEndTask = task;
         }
 
         // internal implementation

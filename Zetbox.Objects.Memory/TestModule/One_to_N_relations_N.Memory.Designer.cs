@@ -157,12 +157,14 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchOneSideTask != null) return _triggerFetchOneSideTask;
 
-            if (_fk_OneSide.HasValue)
-                _triggerFetchOneSideTask = Context.FindAsync<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
-            else
-                _triggerFetchOneSideTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.One_to_N_relations_One>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Test.One_to_N_relations_One> task;
 
-            _triggerFetchOneSideTask.OnResult(t =>
+            if (_fk_OneSide.HasValue)
+                task = Context.FindAsync<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.One_to_N_relations_One>(null);
+
+            task.OnResult(t =>
             {
                 if (OnOneSide_Getter != null)
                 {
@@ -172,7 +174,7 @@ namespace Zetbox.App.Test
                 }
             });
 
-            return _triggerFetchOneSideTask;
+            return _triggerFetchOneSideTask = task;
         }
 
         // internal implementation

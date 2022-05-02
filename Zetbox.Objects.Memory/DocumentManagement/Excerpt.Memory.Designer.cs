@@ -99,12 +99,14 @@ namespace at.dasz.DocumentManagement
         {
             if (_triggerFetchFileTask != null) return _triggerFetchFileTask;
 
-            if (_fk_File.HasValue)
-                _triggerFetchFileTask = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_File.Value);
-            else
-                _triggerFetchFileTask = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(null);
+            System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> task;
 
-            _triggerFetchFileTask.OnResult(t =>
+            if (_fk_File.HasValue)
+                task = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_File.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.File>(null);
+
+            task.OnResult(t =>
             {
                 if (OnFile_Getter != null)
                 {
@@ -114,7 +116,7 @@ namespace at.dasz.DocumentManagement
                 }
             });
 
-            return _triggerFetchFileTask;
+            return _triggerFetchFileTask = task;
         }
 
         // internal implementation

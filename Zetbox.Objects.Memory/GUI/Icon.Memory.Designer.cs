@@ -100,12 +100,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchBlobTask != null) return _triggerFetchBlobTask;
 
-            if (_fk_Blob.HasValue)
-                _triggerFetchBlobTask = Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value);
-            else
-                _triggerFetchBlobTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Blob>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Blob> task;
 
-            _triggerFetchBlobTask.OnResult(t =>
+            if (_fk_Blob.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Blob>(null);
+
+            task.OnResult(t =>
             {
                 if (OnBlob_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchBlobTask;
+            return _triggerFetchBlobTask = task;
         }
 
         // internal implementation
@@ -367,12 +369,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
-            if (_fk_Module.HasValue)
-                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
-            else
-                _triggerFetchModuleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Module> task;
 
-            _triggerFetchModuleTask.OnResult(t =>
+            if (_fk_Module.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+
+            task.OnResult(t =>
             {
                 if (OnModule_Getter != null)
                 {
@@ -382,7 +386,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchModuleTask;
+            return _triggerFetchModuleTask = task;
         }
 
         // internal implementation

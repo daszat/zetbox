@@ -6,6 +6,7 @@ namespace Zetbox.Objects
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading;
     using Autofac;
 	using Zetbox.API;
     using global::NHibernate;
@@ -15,7 +16,6 @@ namespace Zetbox.Objects
     using Zetbox.App.Extensions;
     using Zetbox.DalProvider.Base;
     using Zetbox.DalProvider.NHibernate;
-    using System.Threading;
 
     public class NHibernateModule
         : Autofac.Module

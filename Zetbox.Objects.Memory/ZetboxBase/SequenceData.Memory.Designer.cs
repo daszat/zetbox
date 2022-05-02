@@ -157,12 +157,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchSequenceTask != null) return _triggerFetchSequenceTask;
 
-            if (_fk_Sequence.HasValue)
-                _triggerFetchSequenceTask = Context.FindAsync<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
-            else
-                _triggerFetchSequenceTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Sequence>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Sequence> task;
 
-            _triggerFetchSequenceTask.OnResult(t =>
+            if (_fk_Sequence.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Sequence>(null);
+
+            task.OnResult(t =>
             {
                 if (OnSequence_Getter != null)
                 {
@@ -172,7 +174,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchSequenceTask;
+            return _triggerFetchSequenceTask = task;
         }
 
         // internal implementation

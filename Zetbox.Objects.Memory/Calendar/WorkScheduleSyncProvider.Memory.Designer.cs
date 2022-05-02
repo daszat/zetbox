@@ -99,12 +99,14 @@ namespace Zetbox.App.Calendar
         {
             if (_triggerFetchCalendarTask != null) return _triggerFetchCalendarTask;
 
-            if (_fk_Calendar.HasValue)
-                _triggerFetchCalendarTask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value);
-            else
-                _triggerFetchCalendarTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Calendar.CalendarBook> task;
 
-            _triggerFetchCalendarTask.OnResult(t =>
+            if (_fk_Calendar.HasValue)
+                task = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.CalendarBook>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCalendar_Getter != null)
                 {
@@ -114,7 +116,7 @@ namespace Zetbox.App.Calendar
                 }
             });
 
-            return _triggerFetchCalendarTask;
+            return _triggerFetchCalendarTask = task;
         }
 
         // internal implementation
@@ -236,12 +238,14 @@ namespace Zetbox.App.Calendar
         {
             if (_triggerFetchWorkScheduleTask != null) return _triggerFetchWorkScheduleTask;
 
-            if (_fk_WorkSchedule.HasValue)
-                _triggerFetchWorkScheduleTask = Context.FindAsync<Zetbox.App.Calendar.WorkSchedule>(_fk_WorkSchedule.Value);
-            else
-                _triggerFetchWorkScheduleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.WorkSchedule>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Calendar.WorkSchedule> task;
 
-            _triggerFetchWorkScheduleTask.OnResult(t =>
+            if (_fk_WorkSchedule.HasValue)
+                task = Context.FindAsync<Zetbox.App.Calendar.WorkSchedule>(_fk_WorkSchedule.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.WorkSchedule>(null);
+
+            task.OnResult(t =>
             {
                 if (OnWorkSchedule_Getter != null)
                 {
@@ -251,7 +255,7 @@ namespace Zetbox.App.Calendar
                 }
             });
 
-            return _triggerFetchWorkScheduleTask;
+            return _triggerFetchWorkScheduleTask = task;
         }
 
         // internal implementation

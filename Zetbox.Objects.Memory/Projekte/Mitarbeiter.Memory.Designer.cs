@@ -99,12 +99,14 @@ namespace Zetbox.App.Projekte
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -114,7 +116,7 @@ namespace Zetbox.App.Projekte
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -309,12 +311,14 @@ namespace Zetbox.App.Projekte
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -324,7 +328,7 @@ namespace Zetbox.App.Projekte
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation
@@ -708,12 +712,14 @@ namespace Zetbox.App.Projekte
         {
             if (_triggerFetchIdentityTask != null) return _triggerFetchIdentityTask;
 
-            if (_fk_Identity.HasValue)
-                _triggerFetchIdentityTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Identity.Value);
-            else
-                _triggerFetchIdentityTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchIdentityTask.OnResult(t =>
+            if (_fk_Identity.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Identity.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnIdentity_Getter != null)
                 {
@@ -723,7 +729,7 @@ namespace Zetbox.App.Projekte
                 }
             });
 
-            return _triggerFetchIdentityTask;
+            return _triggerFetchIdentityTask = task;
         }
 
         // internal implementation
@@ -869,8 +875,9 @@ namespace Zetbox.App.Projekte
         public System.Threading.Tasks.Task TriggerFetchProjekteAsync()
         {
             if (_triggerFetchProjekteTask != null) return _triggerFetchProjekteTask;
-            _triggerFetchProjekteTask = Context.FetchRelationAsync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.B, this);
-            _triggerFetchProjekteTask = _triggerFetchProjekteTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.B, this);
+            task = task.OnResult(r =>
             {
                 _Projekte
                     = new ObservableASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
@@ -878,7 +885,7 @@ namespace Zetbox.App.Projekte
                         new RelationshipFilterBSideCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
                         // _Projekte.CollectionChanged is managed by OnProjekteCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchProjekteTask;
+            return _triggerFetchProjekteTask = task;
         }
 
         internal void OnProjekteCollectionChanged()

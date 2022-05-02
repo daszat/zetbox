@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchObjectClassTask != null) return _triggerFetchObjectClassTask;
 
-            if (_fk_ObjectClass.HasValue)
-                _triggerFetchObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value);
-            else
-                _triggerFetchObjectClassTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> task;
 
-            _triggerFetchObjectClassTask.OnResult(t =>
+            if (_fk_ObjectClass.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+
+            task.OnResult(t =>
             {
                 if (OnObjectClass_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchObjectClassTask;
+            return _triggerFetchObjectClassTask = task;
         }
 
         // internal implementation

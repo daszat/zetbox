@@ -157,12 +157,14 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
 
-            if (_fk_Parent.HasValue)
-                _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value);
-            else
-                _triggerFetchParentTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.RequiredParent>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Test.RequiredParent> task;
 
-            _triggerFetchParentTask.OnResult(t =>
+            if (_fk_Parent.HasValue)
+                task = Context.FindAsync<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.RequiredParent>(null);
+
+            task.OnResult(t =>
             {
                 if (OnParent_Getter != null)
                 {
@@ -172,7 +174,7 @@ namespace Zetbox.App.Test
                 }
             });
 
-            return _triggerFetchParentTask;
+            return _triggerFetchParentTask = task;
         }
 
         // internal implementation

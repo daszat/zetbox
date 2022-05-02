@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchAParentTask != null) return _triggerFetchAParentTask;
 
-            if (_fk_AParent.HasValue)
-                _triggerFetchAParentTask = Context.FindAsync<Zetbox.App.Base.Relation>(_fk_AParent.Value);
-            else
-                _triggerFetchAParentTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Relation>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Relation> task;
 
-            _triggerFetchAParentTask.OnResult(t =>
+            if (_fk_AParent.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Relation>(_fk_AParent.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Relation>(null);
+
+            task.OnResult(t =>
             {
                 if (OnAParent_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchAParentTask;
+            return _triggerFetchAParentTask = task;
         }
 
         // internal implementation
@@ -254,12 +256,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchBParentTask != null) return _triggerFetchBParentTask;
 
-            if (_fk_BParent.HasValue)
-                _triggerFetchBParentTask = Context.FindAsync<Zetbox.App.Base.Relation>(_fk_BParent.Value);
-            else
-                _triggerFetchBParentTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Relation>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Relation> task;
 
-            _triggerFetchBParentTask.OnResult(t =>
+            if (_fk_BParent.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Relation>(_fk_BParent.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Relation>(null);
+
+            task.OnResult(t =>
             {
                 if (OnBParent_Getter != null)
                 {
@@ -269,7 +273,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchBParentTask;
+            return _triggerFetchBParentTask = task;
         }
 
         // internal implementation
@@ -407,12 +411,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -422,7 +428,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -617,12 +623,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -632,7 +640,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation
@@ -1028,12 +1036,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchNavigatorTask != null) return _triggerFetchNavigatorTask;
 
-            if (_fk_Navigator.HasValue)
-                _triggerFetchNavigatorTask = Context.FindAsync<Zetbox.App.Base.ObjectReferenceProperty>(_fk_Navigator.Value);
-            else
-                _triggerFetchNavigatorTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectReferenceProperty>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.ObjectReferenceProperty> task;
 
-            _triggerFetchNavigatorTask.OnResult(t =>
+            if (_fk_Navigator.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.ObjectReferenceProperty>(_fk_Navigator.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectReferenceProperty>(null);
+
+            task.OnResult(t =>
             {
                 if (OnNavigator_Getter != null)
                 {
@@ -1043,7 +1053,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchNavigatorTask;
+            return _triggerFetchNavigatorTask = task;
         }
 
         // internal implementation
@@ -1268,12 +1278,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchTypeTask != null) return _triggerFetchTypeTask;
 
-            if (_fk_Type.HasValue)
-                _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
-            else
-                _triggerFetchTypeTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> task;
 
-            _triggerFetchTypeTask.OnResult(t =>
+            if (_fk_Type.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+
+            task.OnResult(t =>
             {
                 if (OnType_Getter != null)
                 {
@@ -1283,7 +1295,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchTypeTask;
+            return _triggerFetchTypeTask = task;
         }
 
         // internal implementation

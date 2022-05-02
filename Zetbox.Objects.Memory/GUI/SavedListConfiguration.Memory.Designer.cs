@@ -228,12 +228,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchOwnerTask != null) return _triggerFetchOwnerTask;
 
-            if (_fk_Owner.HasValue)
-                _triggerFetchOwnerTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Owner.Value);
-            else
-                _triggerFetchOwnerTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchOwnerTask.OnResult(t =>
+            if (_fk_Owner.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Owner.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnOwner_Getter != null)
                 {
@@ -243,7 +245,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchOwnerTask;
+            return _triggerFetchOwnerTask = task;
         }
 
         // internal implementation
@@ -366,12 +368,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchTypeTask != null) return _triggerFetchTypeTask;
 
-            if (_fk_Type.HasValue)
-                _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
-            else
-                _triggerFetchTypeTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> task;
 
-            _triggerFetchTypeTask.OnResult(t =>
+            if (_fk_Type.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+
+            task.OnResult(t =>
             {
                 if (OnType_Getter != null)
                 {
@@ -381,7 +385,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchTypeTask;
+            return _triggerFetchTypeTask = task;
         }
 
         // internal implementation

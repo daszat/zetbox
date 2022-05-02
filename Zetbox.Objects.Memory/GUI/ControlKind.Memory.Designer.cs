@@ -69,11 +69,12 @@ namespace Zetbox.App.GUI
         public System.Threading.Tasks.Task TriggerFetchChildControlKindsAsync()
         {
             if (_triggerFetchChildControlKindsTask != null) return _triggerFetchChildControlKindsTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.GUI.ControlKind> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchChildControlKindsTask = Context.GetListOfAsync<Zetbox.App.GUI.ControlKind>(this, "ChildControlKinds")
+                task = Context.GetListOfAsync<Zetbox.App.GUI.ControlKind>(this, "ChildControlKinds")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -81,13 +82,13 @@ namespace Zetbox.App.GUI
             }
             else
             {
-                _triggerFetchChildControlKindsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.GUI.ControlKind>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.GUI.ControlKind>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchChildControlKindsTask = _triggerFetchChildControlKindsTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _ChildControlKinds = new OneNRelationList<Zetbox.App.GUI.ControlKind>(
                     "Parent",
@@ -96,7 +97,7 @@ namespace Zetbox.App.GUI
                     OnChildControlKindsCollectionChanged,
                     serverList);
             });
-            return _triggerFetchChildControlKindsTask;
+            return _triggerFetchChildControlKindsTask = task;
         }
 
         internal void OnChildControlKindsCollectionChanged()
@@ -245,12 +246,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
-            if (_fk_Module.HasValue)
-                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
-            else
-                _triggerFetchModuleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Module> task;
 
-            _triggerFetchModuleTask.OnResult(t =>
+            if (_fk_Module.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+
+            task.OnResult(t =>
             {
                 if (OnModule_Getter != null)
                 {
@@ -260,7 +263,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 }
             });
 
-            return _triggerFetchModuleTask;
+            return _triggerFetchModuleTask = task;
         }
 
         // internal implementation
@@ -441,12 +444,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         {
             if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
 
-            if (_fk_Parent.HasValue)
-                _triggerFetchParentTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_Parent.Value);
-            else
-                _triggerFetchParentTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> task;
 
-            _triggerFetchParentTask.OnResult(t =>
+            if (_fk_Parent.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_Parent.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
+
+            task.OnResult(t =>
             {
                 if (OnParent_Getter != null)
                 {
@@ -456,7 +461,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 }
             });
 
-            return _triggerFetchParentTask;
+            return _triggerFetchParentTask = task;
         }
 
         // internal implementation

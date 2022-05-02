@@ -442,11 +442,6 @@ namespace Zetbox.App.Extensions
             // Reflected Properties
             // New style
             var props = await dt.GetProp_Properties();
-            // TODO: Init troubles?
-            if (props == null)
-            {
-                props = await dt.GetProp_Properties();
-            }
             if (props == null)
             {
                 throw new InvalidOperationException("Cant be null");

@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchEnumerationTask != null) return _triggerFetchEnumerationTask;
 
-            if (_fk_Enumeration.HasValue)
-                _triggerFetchEnumerationTask = Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
-            else
-                _triggerFetchEnumerationTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Enumeration>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Enumeration> task;
 
-            _triggerFetchEnumerationTask.OnResult(t =>
+            if (_fk_Enumeration.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Enumeration>(null);
+
+            task.OnResult(t =>
             {
                 if (OnEnumeration_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchEnumerationTask;
+            return _triggerFetchEnumerationTask = task;
         }
 
         // internal implementation

@@ -99,12 +99,14 @@ namespace Zetbox.App.SchemaMigration
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -114,7 +116,7 @@ namespace Zetbox.App.SchemaMigration
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -367,12 +369,14 @@ namespace Zetbox.App.SchemaMigration
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -382,7 +386,7 @@ namespace Zetbox.App.SchemaMigration
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation
@@ -636,12 +640,14 @@ namespace Zetbox.App.SchemaMigration
         {
             if (_triggerFetchDestinationObjectClassTask != null) return _triggerFetchDestinationObjectClassTask;
 
-            if (_fk_DestinationObjectClass.HasValue)
-                _triggerFetchDestinationObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_DestinationObjectClass.Value);
-            else
-                _triggerFetchDestinationObjectClassTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> task;
 
-            _triggerFetchDestinationObjectClassTask.OnResult(t =>
+            if (_fk_DestinationObjectClass.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_DestinationObjectClass.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+
+            task.OnResult(t =>
             {
                 if (OnDestinationObjectClass_Getter != null)
                 {
@@ -651,7 +657,7 @@ namespace Zetbox.App.SchemaMigration
                 }
             });
 
-            return _triggerFetchDestinationObjectClassTask;
+            return _triggerFetchDestinationObjectClassTask = task;
         }
 
         // internal implementation
@@ -872,11 +878,12 @@ namespace Zetbox.App.SchemaMigration
         public System.Threading.Tasks.Task TriggerFetchSourceColumnAsync()
         {
             if (_triggerFetchSourceColumnTask != null) return _triggerFetchSourceColumnTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.SchemaMigration.SourceColumn> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchSourceColumnTask = Context.GetListOfAsync<Zetbox.App.SchemaMigration.SourceColumn>(this, "SourceColumn")
+                task = Context.GetListOfAsync<Zetbox.App.SchemaMigration.SourceColumn>(this, "SourceColumn")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -884,13 +891,13 @@ namespace Zetbox.App.SchemaMigration
             }
             else
             {
-                _triggerFetchSourceColumnTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.SchemaMigration.SourceColumn>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.SchemaMigration.SourceColumn>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchSourceColumnTask = _triggerFetchSourceColumnTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _SourceColumn = new OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn>(
                     "SourceTable",
@@ -899,7 +906,7 @@ namespace Zetbox.App.SchemaMigration
                     OnSourceColumnCollectionChanged,
                     serverList);
             });
-            return _triggerFetchSourceColumnTask;
+            return _triggerFetchSourceColumnTask = task;
         }
 
         internal void OnSourceColumnCollectionChanged()
@@ -977,12 +984,14 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             if (_triggerFetchStagingDatabaseTask != null) return _triggerFetchStagingDatabaseTask;
 
-            if (_fk_StagingDatabase.HasValue)
-                _triggerFetchStagingDatabaseTask = Context.FindAsync<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_StagingDatabase.Value);
-            else
-                _triggerFetchStagingDatabaseTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.SchemaMigration.StagingDatabase>(null);
+            System.Threading.Tasks.Task<Zetbox.App.SchemaMigration.StagingDatabase> task;
 
-            _triggerFetchStagingDatabaseTask.OnResult(t =>
+            if (_fk_StagingDatabase.HasValue)
+                task = Context.FindAsync<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_StagingDatabase.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.SchemaMigration.StagingDatabase>(null);
+
+            task.OnResult(t =>
             {
                 if (OnStagingDatabase_Getter != null)
                 {
@@ -992,7 +1001,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 }
             });
 
-            return _triggerFetchStagingDatabaseTask;
+            return _triggerFetchStagingDatabaseTask = task;
         }
 
         // internal implementation

@@ -65,8 +65,9 @@ namespace Zetbox.App.Test
         public System.Threading.Tasks.Task TriggerFetchBSideAsync()
         {
             if (_triggerFetchBSideTask != null) return _triggerFetchBSideTask;
-            _triggerFetchBSideTask = Context.FetchRelationAsync<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl>(new Guid("3555da6e-0e9b-4f7c-903e-a51f3cce7cd9"), RelationEndRole.A, this);
-            _triggerFetchBSideTask = _triggerFetchBSideTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl>(new Guid("3555da6e-0e9b-4f7c-903e-a51f3cce7cd9"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _BSide
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl>>(
@@ -74,7 +75,7 @@ namespace Zetbox.App.Test
                         new RelationshipFilterASideCollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl>(this.Context, this));
                         // _BSide.CollectionChanged is managed by OnBSideCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchBSideTask;
+            return _triggerFetchBSideTask = task;
         }
 
         internal void OnBSideCollectionChanged()

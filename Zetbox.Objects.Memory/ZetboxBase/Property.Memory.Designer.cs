@@ -228,12 +228,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -243,7 +245,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -453,13 +455,14 @@ namespace Zetbox.App.Base
         public System.Threading.Tasks.Task TriggerFetchConstraintsAsync()
         {
             if (_triggerFetchConstraintsTask != null) return _triggerFetchConstraintsTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Base.Constraint> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
                 if (ConstraintsIds != null)
                 {
-                    _triggerFetchConstraintsTask = System.Threading.Tasks.Task.FromResult(ConstraintsIds.Select(id => Context.Find<Zetbox.App.Base.Constraint>(id)).ToList()).OnResult(t =>
+                    task = System.Threading.Tasks.Task.FromResult(ConstraintsIds.Select(id => Context.Find<Zetbox.App.Base.Constraint>(id)).ToList()).OnResult(t =>
                     {
                         serverList = t.Result;
                         ConstraintsIds = null; // allow id list to be garbage collected
@@ -467,7 +470,7 @@ namespace Zetbox.App.Base
                 }
                 else
                 {
-                    _triggerFetchConstraintsTask = Context.GetListOfAsync<Zetbox.App.Base.Constraint>(this, "Constraints")
+                    task = Context.GetListOfAsync<Zetbox.App.Base.Constraint>(this, "Constraints")
                         .OnResult(t =>
                         {
                             serverList = t.Result;
@@ -476,13 +479,13 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchConstraintsTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.Constraint>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.Constraint>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchConstraintsTask = _triggerFetchConstraintsTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _Constraints = new OneNRelationList<Zetbox.App.Base.Constraint>(
                     "ConstrainedProperty",
@@ -491,7 +494,7 @@ namespace Zetbox.App.Base
                     OnConstraintsCollectionChanged,
                     serverList);
             });
-            return _triggerFetchConstraintsTask;
+            return _triggerFetchConstraintsTask = task;
         }
 
         internal void OnConstraintsCollectionChanged()
@@ -570,12 +573,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -585,7 +590,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation
@@ -839,12 +844,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             if (_triggerFetchDefaultValueTask != null) return _triggerFetchDefaultValueTask;
 
-            if (_fk_DefaultValue.HasValue)
-                _triggerFetchDefaultValueTask = Context.FindAsync<Zetbox.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value);
-            else
-                _triggerFetchDefaultValueTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DefaultPropertyValue>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.DefaultPropertyValue> task;
 
-            _triggerFetchDefaultValueTask.OnResult(t =>
+            if (_fk_DefaultValue.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DefaultPropertyValue>(null);
+
+            task.OnResult(t =>
             {
                 if (OnDefaultValue_Getter != null)
                 {
@@ -854,7 +861,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 }
             });
 
-            return _triggerFetchDefaultValueTask;
+            return _triggerFetchDefaultValueTask = task;
         }
 
         // internal implementation
@@ -1180,12 +1187,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             if (_triggerFetchFilterConfigurationTask != null) return _triggerFetchFilterConfigurationTask;
 
-            if (_fk_FilterConfiguration.HasValue)
-                _triggerFetchFilterConfigurationTask = Context.FindAsync<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_FilterConfiguration.Value);
-            else
-                _triggerFetchFilterConfigurationTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.PropertyFilterConfiguration>(null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.PropertyFilterConfiguration> task;
 
-            _triggerFetchFilterConfigurationTask.OnResult(t =>
+            if (_fk_FilterConfiguration.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_FilterConfiguration.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.PropertyFilterConfiguration>(null);
+
+            task.OnResult(t =>
             {
                 if (OnFilterConfiguration_Getter != null)
                 {
@@ -1195,7 +1204,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 }
             });
 
-            return _triggerFetchFilterConfigurationTask;
+            return _triggerFetchFilterConfigurationTask = task;
         }
 
         // internal implementation
@@ -1450,12 +1459,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
-            if (_fk_Module.HasValue)
-                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
-            else
-                _triggerFetchModuleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Module> task;
 
-            _triggerFetchModuleTask.OnResult(t =>
+            if (_fk_Module.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+
+            task.OnResult(t =>
             {
                 if (OnModule_Getter != null)
                 {
@@ -1465,7 +1476,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 }
             });
 
-            return _triggerFetchModuleTask;
+            return _triggerFetchModuleTask = task;
         }
 
         // internal implementation
@@ -1646,12 +1657,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             if (_triggerFetchObjectClassTask != null) return _triggerFetchObjectClassTask;
 
-            if (_fk_ObjectClass.HasValue)
-                _triggerFetchObjectClassTask = Context.FindAsync<Zetbox.App.Base.DataType>(_fk_ObjectClass.Value);
-            else
-                _triggerFetchObjectClassTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DataType>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.DataType> task;
 
-            _triggerFetchObjectClassTask.OnResult(t =>
+            if (_fk_ObjectClass.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.DataType>(_fk_ObjectClass.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DataType>(null);
+
+            task.OnResult(t =>
             {
                 if (OnObjectClass_Getter != null)
                 {
@@ -1661,7 +1674,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 }
             });
 
-            return _triggerFetchObjectClassTask;
+            return _triggerFetchObjectClassTask = task;
         }
 
         // internal implementation
@@ -1831,12 +1844,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             if (_triggerFetchRequestedKindTask != null) return _triggerFetchRequestedKindTask;
 
-            if (_fk_RequestedKind.HasValue)
-                _triggerFetchRequestedKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);
-            else
-                _triggerFetchRequestedKindTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> task;
 
-            _triggerFetchRequestedKindTask.OnResult(t =>
+            if (_fk_RequestedKind.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
+
+            task.OnResult(t =>
             {
                 if (OnRequestedKind_Getter != null)
                 {
@@ -1846,7 +1861,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 }
             });
 
-            return _triggerFetchRequestedKindTask;
+            return _triggerFetchRequestedKindTask = task;
         }
 
         // internal implementation
@@ -2027,12 +2042,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             if (_triggerFetchValueModelDescriptorTask != null) return _triggerFetchValueModelDescriptorTask;
 
-            if (_fk_ValueModelDescriptor.HasValue)
-                _triggerFetchValueModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value);
-            else
-                _triggerFetchValueModelDescriptorTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> task;
 
-            _triggerFetchValueModelDescriptorTask.OnResult(t =>
+            if (_fk_ValueModelDescriptor.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(null);
+
+            task.OnResult(t =>
             {
                 if (OnValueModelDescriptor_Getter != null)
                 {
@@ -2042,7 +2059,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 }
             });
 
-            return _triggerFetchValueModelDescriptorTask;
+            return _triggerFetchValueModelDescriptorTask = task;
         }
 
         // internal implementation

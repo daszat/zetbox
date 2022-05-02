@@ -99,12 +99,14 @@ namespace Zetbox.App.Calendar
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -114,7 +116,7 @@ namespace Zetbox.App.Calendar
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -309,12 +311,14 @@ namespace Zetbox.App.Calendar
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -324,7 +328,7 @@ namespace Zetbox.App.Calendar
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation
@@ -556,8 +560,9 @@ namespace Zetbox.App.Calendar
         public System.Threading.Tasks.Task TriggerFetchGroupReadersAsync()
         {
             if (_triggerFetchGroupReadersTask != null) return _triggerFetchGroupReadersTask;
-            _triggerFetchGroupReadersTask = Context.FetchRelationAsync<Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryMemoryImpl>(new Guid("775789a3-032e-478e-a01e-ec9f51580c5d"), RelationEndRole.A, this);
-            _triggerFetchGroupReadersTask = _triggerFetchGroupReadersTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryMemoryImpl>(new Guid("775789a3-032e-478e-a01e-ec9f51580c5d"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _GroupReaders
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryMemoryImpl, ICollection<Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryMemoryImpl>>(
@@ -565,7 +570,7 @@ namespace Zetbox.App.Calendar
                         new RelationshipFilterASideCollection<Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryMemoryImpl>(this.Context, this));
                         // _GroupReaders.CollectionChanged is managed by OnGroupReadersCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchGroupReadersTask;
+            return _triggerFetchGroupReadersTask = task;
         }
 
         internal void OnGroupReadersCollectionChanged()
@@ -609,8 +614,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         public System.Threading.Tasks.Task TriggerFetchGroupWritersAsync()
         {
             if (_triggerFetchGroupWritersTask != null) return _triggerFetchGroupWritersTask;
-            _triggerFetchGroupWritersTask = Context.FetchRelationAsync<Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryMemoryImpl>(new Guid("93f20ca2-6935-41bc-8f80-7a441b3cf69d"), RelationEndRole.A, this);
-            _triggerFetchGroupWritersTask = _triggerFetchGroupWritersTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryMemoryImpl>(new Guid("93f20ca2-6935-41bc-8f80-7a441b3cf69d"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _GroupWriters
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryMemoryImpl, ICollection<Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryMemoryImpl>>(
@@ -618,7 +624,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                         new RelationshipFilterASideCollection<Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryMemoryImpl>(this.Context, this));
                         // _GroupWriters.CollectionChanged is managed by OnGroupWritersCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchGroupWritersTask;
+            return _triggerFetchGroupWritersTask = task;
         }
 
         internal void OnGroupWritersCollectionChanged()
@@ -825,12 +831,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         {
             if (_triggerFetchOwnerTask != null) return _triggerFetchOwnerTask;
 
-            if (_fk_Owner.HasValue)
-                _triggerFetchOwnerTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Owner.Value);
-            else
-                _triggerFetchOwnerTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchOwnerTask.OnResult(t =>
+            if (_fk_Owner.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Owner.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnOwner_Getter != null)
                 {
@@ -840,7 +848,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                 }
             });
 
-            return _triggerFetchOwnerTask;
+            return _triggerFetchOwnerTask = task;
         }
 
         // internal implementation
@@ -928,8 +936,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         public System.Threading.Tasks.Task TriggerFetchReadersAsync()
         {
             if (_triggerFetchReadersTask != null) return _triggerFetchReadersTask;
-            _triggerFetchReadersTask = Context.FetchRelationAsync<Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryMemoryImpl>(new Guid("385c829b-02d6-48d0-8184-b3b5df6c25be"), RelationEndRole.A, this);
-            _triggerFetchReadersTask = _triggerFetchReadersTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryMemoryImpl>(new Guid("385c829b-02d6-48d0-8184-b3b5df6c25be"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _Readers
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryMemoryImpl, ICollection<Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryMemoryImpl>>(
@@ -937,7 +946,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                         new RelationshipFilterASideCollection<Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryMemoryImpl>(this.Context, this));
                         // _Readers.CollectionChanged is managed by OnReadersCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchReadersTask;
+            return _triggerFetchReadersTask = task;
         }
 
         internal void OnReadersCollectionChanged()
@@ -981,8 +990,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         public System.Threading.Tasks.Task TriggerFetchWritersAsync()
         {
             if (_triggerFetchWritersTask != null) return _triggerFetchWritersTask;
-            _triggerFetchWritersTask = Context.FetchRelationAsync<Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryMemoryImpl>(new Guid("af8843f9-0085-47ec-bcb6-f0f8a22a2c03"), RelationEndRole.A, this);
-            _triggerFetchWritersTask = _triggerFetchWritersTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryMemoryImpl>(new Guid("af8843f9-0085-47ec-bcb6-f0f8a22a2c03"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _Writers
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryMemoryImpl, ICollection<Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryMemoryImpl>>(
@@ -990,7 +1000,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                         new RelationshipFilterASideCollection<Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryMemoryImpl>(this.Context, this));
                         // _Writers.CollectionChanged is managed by OnWritersCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchWritersTask;
+            return _triggerFetchWritersTask = task;
         }
 
         internal void OnWritersCollectionChanged()

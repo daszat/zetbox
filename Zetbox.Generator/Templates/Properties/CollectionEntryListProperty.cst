@@ -66,23 +66,24 @@
         public System.Threading.Tasks.Task TriggerFetch<%= name %>Async()
         {
             if (<%= taskName %> != null) return <%= taskName %>;
+            System.Threading.Tasks.Task task;
 <%
     // eagerly loaded relation already has the objects loaded
     if (!eagerLoading)
     {
 %>
-            <%= taskName %> = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
+            task = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
 <%
     }
     else
     {
 %>
-            if (!<%= name %>_was_eagerLoaded) <%= taskName %> = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
-            else <%= taskName %> = System.Threading.Tasks.Task.FromResult<Guid?>(null);
+            if (!<%= name %>_was_eagerLoaded) task = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
+            else task = System.Threading.Tasks.Task.FromResult<Guid?>(null);
 <%
     }
 %>
-            <%= taskName %> = <%= taskName %>.OnResult(r =>
+            task = task.OnResult(r =>
             {
                 <%= backingName %>
                     = new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>>(
@@ -90,7 +91,7 @@
                         new RelationshipFilter<%= role %>SideCollection<<%= entryType %>>(this.Context, this));
                         // <%= backingName %>.CollectionChanged is managed by On<%= name %>CollectionChanged() and called from the RelationEntry
             });
-            return <%= taskName %>;
+            return <%= taskName %> = task;
         }
 
         internal void On<%= name %>CollectionChanged()

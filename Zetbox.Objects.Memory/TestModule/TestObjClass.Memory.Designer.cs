@@ -202,12 +202,14 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchObjectPropTask != null) return _triggerFetchObjectPropTask;
 
-            if (_fk_ObjectProp.HasValue)
-                _triggerFetchObjectPropTask = Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value);
-            else
-                _triggerFetchObjectPropTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Kunde>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Projekte.Kunde> task;
 
-            _triggerFetchObjectPropTask.OnResult(t =>
+            if (_fk_ObjectProp.HasValue)
+                task = Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Kunde>(null);
+
+            task.OnResult(t =>
             {
                 if (OnObjectProp_Getter != null)
                 {
@@ -217,7 +219,7 @@ namespace Zetbox.App.Test
                 }
             });
 
-            return _triggerFetchObjectPropTask;
+            return _triggerFetchObjectPropTask = task;
         }
 
         // internal implementation

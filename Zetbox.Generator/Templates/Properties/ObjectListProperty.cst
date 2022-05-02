@@ -77,6 +77,7 @@
         public System.Threading.Tasks.Task TriggerFetch<%= name %>Async()
         {
             if (<%= taskName %> != null) return <%= taskName %>;
+            System.Threading.Tasks.Task task;
 
             List<<%= referencedInterface %>> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -84,7 +85,7 @@
 <% if (eagerLoading) { %>
                 if (<%= idsListName %> != null)
                 {
-                    <%= taskName %> = System.Threading.Tasks.Task.FromResult(<%= idsListName %>.Select(id => Context.Find<<%= referencedInterface %>>(id)).ToList()).OnResult(t =>
+                    task = System.Threading.Tasks.Task.FromResult(<%= idsListName %>.Select(id => Context.Find<<%= referencedInterface %>>(id)).ToList()).OnResult(t =>
                     {
                         serverList = t.Result;
                         <%= idsListName %> = null; // allow id list to be garbage collected
@@ -92,14 +93,14 @@
                 }
                 else
                 {
-                    <%= taskName %> = Context.GetListOfAsync<<%= referencedInterface %>>(this, "<%= name %>")
+                    task = Context.GetListOfAsync<<%= referencedInterface %>>(this, "<%= name %>")
                         .OnResult(t =>
                         {
                             serverList = t.Result;
                         });
                 }
 <% } else { %>
-                <%= taskName %> = Context.GetListOfAsync<<%= referencedInterface %>>(this, "<%= name %>")
+                task = Context.GetListOfAsync<<%= referencedInterface %>>(this, "<%= name %>")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -108,13 +109,13 @@
             }
             else
             {
-                <%= taskName %> = System.Threading.Tasks.Task.FromResult(new List<<%= referencedInterface %>>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<<%= referencedInterface %>>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            <%= taskName %> = <%= taskName %>.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>>(
                     "<%= otherName %>",
@@ -123,7 +124,7 @@
                     On<%= name %>CollectionChanged,
                     serverList);
             });
-            return <%= taskName %>;
+            return <%= taskName %> = task;
         }
 
         internal void On<%= name %>CollectionChanged()

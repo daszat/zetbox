@@ -123,8 +123,9 @@ namespace Zetbox.App.Test
         public System.Threading.Tasks.Task TriggerFetchTestbogenAsync()
         {
             if (_triggerFetchTestbogenTask != null) return _triggerFetchTestbogenTask;
-            _triggerFetchTestbogenTask = Context.FetchRelationAsync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.A, this);
-            _triggerFetchTestbogenTask = _triggerFetchTestbogenTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _Testbogen
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>>(
@@ -132,7 +133,7 @@ namespace Zetbox.App.Test
                         new RelationshipFilterASideCollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>(this.Context, this));
                         // _Testbogen.CollectionChanged is managed by OnTestbogenCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchTestbogenTask;
+            return _triggerFetchTestbogenTask = task;
         }
 
         internal void OnTestbogenCollectionChanged()

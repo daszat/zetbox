@@ -101,11 +101,12 @@ namespace Zetbox.App.Projekte
         public System.Threading.Tasks.Task TriggerFetchAuftraegeAsync()
         {
             if (_triggerFetchAuftraegeTask != null) return _triggerFetchAuftraegeTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Projekte.Auftrag> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchAuftraegeTask = Context.GetListOfAsync<Zetbox.App.Projekte.Auftrag>(this, "Auftraege")
+                task = Context.GetListOfAsync<Zetbox.App.Projekte.Auftrag>(this, "Auftraege")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -113,13 +114,13 @@ namespace Zetbox.App.Projekte
             }
             else
             {
-                _triggerFetchAuftraegeTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Projekte.Auftrag>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Projekte.Auftrag>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchAuftraegeTask = _triggerFetchAuftraegeTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _Auftraege = new OneNRelationList<Zetbox.App.Projekte.Auftrag>(
                     "Projekt",
@@ -128,7 +129,7 @@ namespace Zetbox.App.Projekte
                     OnAuftraegeCollectionChanged,
                     serverList);
             });
-            return _triggerFetchAuftraegeTask;
+            return _triggerFetchAuftraegeTask = task;
         }
 
         internal void OnAuftraegeCollectionChanged()
@@ -310,12 +311,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -325,7 +328,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -520,12 +523,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -535,7 +540,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation
@@ -945,8 +950,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         public System.Threading.Tasks.Task TriggerFetchMitarbeiterAsync()
         {
             if (_triggerFetchMitarbeiterTask != null) return _triggerFetchMitarbeiterTask;
-            _triggerFetchMitarbeiterTask = Context.FetchRelationAsync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.A, this);
-            _triggerFetchMitarbeiterTask = _triggerFetchMitarbeiterTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _Mitarbeiter
                     = new ObservableBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
@@ -954,7 +960,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         new RelationshipFilterASideCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
                         // _Mitarbeiter.CollectionChanged is managed by OnMitarbeiterCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchMitarbeiterTask;
+            return _triggerFetchMitarbeiterTask = task;
         }
 
         internal void OnMitarbeiterCollectionChanged()
@@ -1060,11 +1066,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
         public System.Threading.Tasks.Task TriggerFetchTasksAsync()
         {
             if (_triggerFetchTasksTask != null) return _triggerFetchTasksTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Projekte.Task> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchTasksTask = Context.GetListOfAsync<Zetbox.App.Projekte.Task>(this, "Tasks")
+                task = Context.GetListOfAsync<Zetbox.App.Projekte.Task>(this, "Tasks")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -1072,13 +1079,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
             }
             else
             {
-                _triggerFetchTasksTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Projekte.Task>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Projekte.Task>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchTasksTask = _triggerFetchTasksTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _Tasks = new OneNRelationList<Zetbox.App.Projekte.Task>(
                     "Projekt",
@@ -1087,7 +1094,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
                     OnTasksCollectionChanged,
                     serverList);
             });
-            return _triggerFetchTasksTask;
+            return _triggerFetchTasksTask = task;
         }
 
         internal void OnTasksCollectionChanged()

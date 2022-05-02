@@ -157,12 +157,14 @@ namespace Zetbox.App.Test
         {
             if (_triggerFetchFragebogenTask != null) return _triggerFetchFragebogenTask;
 
-            if (_fk_Fragebogen.HasValue)
-                _triggerFetchFragebogenTask = Context.FindAsync<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
-            else
-                _triggerFetchFragebogenTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Fragebogen>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Test.Fragebogen> task;
 
-            _triggerFetchFragebogenTask.OnResult(t =>
+            if (_fk_Fragebogen.HasValue)
+                task = Context.FindAsync<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Test.Fragebogen>(null);
+
+            task.OnResult(t =>
             {
                 if (OnFragebogen_Getter != null)
                 {
@@ -172,7 +174,7 @@ namespace Zetbox.App.Test
                 }
             });
 
-            return _triggerFetchFragebogenTask;
+            return _triggerFetchFragebogenTask = task;
         }
 
         // internal implementation

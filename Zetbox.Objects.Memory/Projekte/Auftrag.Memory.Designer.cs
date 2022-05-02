@@ -215,12 +215,14 @@ namespace Zetbox.App.Projekte
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -230,7 +232,7 @@ namespace Zetbox.App.Projekte
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -425,12 +427,14 @@ namespace Zetbox.App.Projekte
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -440,7 +444,7 @@ namespace Zetbox.App.Projekte
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation
@@ -707,12 +711,14 @@ namespace Zetbox.App.Projekte
         {
             if (_triggerFetchKundeTask != null) return _triggerFetchKundeTask;
 
-            if (_fk_Kunde.HasValue)
-                _triggerFetchKundeTask = Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_Kunde.Value);
-            else
-                _triggerFetchKundeTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Kunde>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Projekte.Kunde> task;
 
-            _triggerFetchKundeTask.OnResult(t =>
+            if (_fk_Kunde.HasValue)
+                task = Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_Kunde.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Kunde>(null);
+
+            task.OnResult(t =>
             {
                 if (OnKunde_Getter != null)
                 {
@@ -722,7 +728,7 @@ namespace Zetbox.App.Projekte
                 }
             });
 
-            return _triggerFetchKundeTask;
+            return _triggerFetchKundeTask = task;
         }
 
         // internal implementation
@@ -845,12 +851,14 @@ namespace Zetbox.App.Projekte
         {
             if (_triggerFetchMitarbeiterTask != null) return _triggerFetchMitarbeiterTask;
 
-            if (_fk_Mitarbeiter.HasValue)
-                _triggerFetchMitarbeiterTask = Context.FindAsync<Zetbox.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
-            else
-                _triggerFetchMitarbeiterTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Mitarbeiter>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Projekte.Mitarbeiter> task;
 
-            _triggerFetchMitarbeiterTask.OnResult(t =>
+            if (_fk_Mitarbeiter.HasValue)
+                task = Context.FindAsync<Zetbox.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Mitarbeiter>(null);
+
+            task.OnResult(t =>
             {
                 if (OnMitarbeiter_Getter != null)
                 {
@@ -860,7 +868,7 @@ namespace Zetbox.App.Projekte
                 }
             });
 
-            return _triggerFetchMitarbeiterTask;
+            return _triggerFetchMitarbeiterTask = task;
         }
 
         // internal implementation
@@ -983,12 +991,14 @@ namespace Zetbox.App.Projekte
         {
             if (_triggerFetchProjektTask != null) return _triggerFetchProjektTask;
 
-            if (_fk_Projekt.HasValue)
-                _triggerFetchProjektTask = Context.FindAsync<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value);
-            else
-                _triggerFetchProjektTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Projekt>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Projekte.Projekt> task;
 
-            _triggerFetchProjektTask.OnResult(t =>
+            if (_fk_Projekt.HasValue)
+                task = Context.FindAsync<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Projekte.Projekt>(null);
+
+            task.OnResult(t =>
             {
                 if (OnProjekt_Getter != null)
                 {
@@ -998,7 +1008,7 @@ namespace Zetbox.App.Projekte
                 }
             });
 
-            return _triggerFetchProjektTask;
+            return _triggerFetchProjektTask = task;
         }
 
         // internal implementation

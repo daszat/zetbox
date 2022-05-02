@@ -65,9 +65,10 @@ namespace Zetbox.App.Base
         public System.Threading.Tasks.Task TriggerFetchInputsAsync()
         {
             if (_triggerFetchInputsTask != null) return _triggerFetchInputsTask;
-            if (!Inputs_was_eagerLoaded) _triggerFetchInputsTask = Context.FetchRelationAsync<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
-            else _triggerFetchInputsTask = System.Threading.Tasks.Task.FromResult<Guid?>(null);
-            _triggerFetchInputsTask = _triggerFetchInputsTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            if (!Inputs_was_eagerLoaded) task = Context.FetchRelationAsync<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
+            else task = System.Threading.Tasks.Task.FromResult<Guid?>(null);
+            task = task.OnResult(r =>
             {
                 _Inputs
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl>>(
@@ -75,7 +76,7 @@ namespace Zetbox.App.Base
                         new RelationshipFilterASideCollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl>(this.Context, this));
                         // _Inputs.CollectionChanged is managed by OnInputsCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchInputsTask;
+            return _triggerFetchInputsTask = task;
         }
 
         internal void OnInputsCollectionChanged()
@@ -155,12 +156,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         {
             if (_triggerFetchReferencedClassTask != null) return _triggerFetchReferencedClassTask;
 
-            if (_fk_ReferencedClass.HasValue)
-                _triggerFetchReferencedClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);
-            else
-                _triggerFetchReferencedClassTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> task;
 
-            _triggerFetchReferencedClassTask.OnResult(t =>
+            if (_fk_ReferencedClass.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+
+            task.OnResult(t =>
             {
                 if (OnReferencedClass_Getter != null)
                 {
@@ -170,7 +173,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
                 }
             });
 
-            return _triggerFetchReferencedClassTask;
+            return _triggerFetchReferencedClassTask = task;
         }
 
         // internal implementation

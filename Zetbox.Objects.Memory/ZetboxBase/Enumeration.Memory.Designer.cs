@@ -127,11 +127,12 @@ namespace Zetbox.App.Base
         public System.Threading.Tasks.Task TriggerFetchEnumerationEntriesAsync()
         {
             if (_triggerFetchEnumerationEntriesTask != null) return _triggerFetchEnumerationEntriesTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Base.EnumerationEntry> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchEnumerationEntriesTask = Context.GetListOfAsync<Zetbox.App.Base.EnumerationEntry>(this, "EnumerationEntries")
+                task = Context.GetListOfAsync<Zetbox.App.Base.EnumerationEntry>(this, "EnumerationEntries")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -139,13 +140,13 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchEnumerationEntriesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.EnumerationEntry>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Base.EnumerationEntry>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchEnumerationEntriesTask = _triggerFetchEnumerationEntriesTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _EnumerationEntries = new OneNRelationList<Zetbox.App.Base.EnumerationEntry>(
                     "Enumeration",
@@ -154,7 +155,7 @@ namespace Zetbox.App.Base
                     OnEnumerationEntriesCollectionChanged,
                     serverList);
             });
-            return _triggerFetchEnumerationEntriesTask;
+            return _triggerFetchEnumerationEntriesTask = task;
         }
 
         internal void OnEnumerationEntriesCollectionChanged()

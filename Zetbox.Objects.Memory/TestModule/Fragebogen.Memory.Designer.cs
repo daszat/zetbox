@@ -69,13 +69,14 @@ namespace Zetbox.App.Test
         public System.Threading.Tasks.Task TriggerFetchAntwortenAsync()
         {
             if (_triggerFetchAntwortenTask != null) return _triggerFetchAntwortenTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Test.Antwort> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
                 if (AntwortenIds != null)
                 {
-                    _triggerFetchAntwortenTask = System.Threading.Tasks.Task.FromResult(AntwortenIds.Select(id => Context.Find<Zetbox.App.Test.Antwort>(id)).ToList()).OnResult(t =>
+                    task = System.Threading.Tasks.Task.FromResult(AntwortenIds.Select(id => Context.Find<Zetbox.App.Test.Antwort>(id)).ToList()).OnResult(t =>
                     {
                         serverList = t.Result;
                         AntwortenIds = null; // allow id list to be garbage collected
@@ -83,7 +84,7 @@ namespace Zetbox.App.Test
                 }
                 else
                 {
-                    _triggerFetchAntwortenTask = Context.GetListOfAsync<Zetbox.App.Test.Antwort>(this, "Antworten")
+                    task = Context.GetListOfAsync<Zetbox.App.Test.Antwort>(this, "Antworten")
                         .OnResult(t =>
                         {
                             serverList = t.Result;
@@ -92,13 +93,13 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchAntwortenTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.Antwort>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.Antwort>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchAntwortenTask = _triggerFetchAntwortenTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _Antworten = new OneNRelationList<Zetbox.App.Test.Antwort>(
                     "Fragebogen",
@@ -107,7 +108,7 @@ namespace Zetbox.App.Test
                     OnAntwortenCollectionChanged,
                     serverList);
             });
-            return _triggerFetchAntwortenTask;
+            return _triggerFetchAntwortenTask = task;
         }
 
         internal void OnAntwortenCollectionChanged()
@@ -210,8 +211,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
         public System.Threading.Tasks.Task TriggerFetchStudentAsync()
         {
             if (_triggerFetchStudentTask != null) return _triggerFetchStudentTask;
-            _triggerFetchStudentTask = Context.FetchRelationAsync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
-            _triggerFetchStudentTask = _triggerFetchStudentTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
+            task = task.OnResult(r =>
             {
                 _Student
                     = new ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>>(
@@ -219,7 +221,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                         new RelationshipFilterBSideCollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>(this.Context, this));
                         // _Student.CollectionChanged is managed by OnStudentCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchStudentTask;
+            return _triggerFetchStudentTask = task;
         }
 
         internal void OnStudentCollectionChanged()

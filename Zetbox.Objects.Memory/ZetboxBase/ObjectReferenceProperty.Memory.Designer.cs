@@ -194,8 +194,9 @@ namespace Zetbox.App.Base
         public System.Threading.Tasks.Task TriggerFetchMethodsAsync()
         {
             if (_triggerFetchMethodsTask != null) return _triggerFetchMethodsTask;
-            _triggerFetchMethodsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
-            _triggerFetchMethodsTask = _triggerFetchMethodsTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _Methods
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>>(
@@ -203,7 +204,7 @@ namespace Zetbox.App.Base
                         new RelationshipFilterASideCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>(this.Context, this));
                         // _Methods.CollectionChanged is managed by OnMethodsCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchMethodsTask;
+            return _triggerFetchMethodsTask = task;
         }
 
         internal void OnMethodsCollectionChanged()
@@ -282,12 +283,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         {
             if (_triggerFetchRelationEndTask != null) return _triggerFetchRelationEndTask;
 
-            if (_fk_RelationEnd.HasValue)
-                _triggerFetchRelationEndTask = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
-            else
-                _triggerFetchRelationEndTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.RelationEnd>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> task;
 
-            _triggerFetchRelationEndTask.OnResult(t =>
+            if (_fk_RelationEnd.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.RelationEnd>(null);
+
+            task.OnResult(t =>
             {
                 if (OnRelationEnd_Getter != null)
                 {
@@ -297,7 +300,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
                 }
             });
 
-            return _triggerFetchRelationEndTask;
+            return _triggerFetchRelationEndTask = task;
         }
 
         // internal implementation

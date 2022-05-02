@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchFalseIconTask != null) return _triggerFetchFalseIconTask;
 
-            if (_fk_FalseIcon.HasValue)
-                _triggerFetchFalseIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
-            else
-                _triggerFetchFalseIconTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> task;
 
-            _triggerFetchFalseIconTask.OnResult(t =>
+            if (_fk_FalseIcon.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
+
+            task.OnResult(t =>
             {
                 if (OnFalseIcon_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchFalseIconTask;
+            return _triggerFetchFalseIconTask = task;
         }
 
         // internal implementation
@@ -296,12 +298,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchNullIconTask != null) return _triggerFetchNullIconTask;
 
-            if (_fk_NullIcon.HasValue)
-                _triggerFetchNullIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
-            else
-                _triggerFetchNullIconTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> task;
 
-            _triggerFetchNullIconTask.OnResult(t =>
+            if (_fk_NullIcon.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
+
+            task.OnResult(t =>
             {
                 if (OnNullIcon_Getter != null)
                 {
@@ -311,7 +315,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchNullIconTask;
+            return _triggerFetchNullIconTask = task;
         }
 
         // internal implementation
@@ -492,12 +496,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchTrueIconTask != null) return _triggerFetchTrueIconTask;
 
-            if (_fk_TrueIcon.HasValue)
-                _triggerFetchTrueIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
-            else
-                _triggerFetchTrueIconTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> task;
 
-            _triggerFetchTrueIconTask.OnResult(t =>
+            if (_fk_TrueIcon.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
+
+            task.OnResult(t =>
             {
                 if (OnTrueIcon_Getter != null)
                 {
@@ -507,7 +513,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchTrueIconTask;
+            return _triggerFetchTrueIconTask = task;
         }
 
         // internal implementation

@@ -777,15 +777,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     OnHighlightChanged();
                 },
-                createTask: () =>
+                createTask: async () =>
                 {
-                    return Task.Run(async () =>
-                    {
-                        var result = await GetValueFromModelAsync();
-                        // This must be done on the UI-Thread
-                        // Accessing any property might trigger accesses to the zetbox context
-                        return Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight;
-                    });
+                    var result = await GetValueFromModelAsync();
+                    // This must be done on the UI-Thread
+                    // Accessing any property might trigger accesses to the zetbox context
+                    return Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight;
                 },
                 set: (Highlight value) =>
                 {

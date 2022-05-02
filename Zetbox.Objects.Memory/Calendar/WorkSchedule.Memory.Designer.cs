@@ -100,12 +100,14 @@ namespace Zetbox.App.Calendar
         {
             if (_triggerFetchBaseWorkScheduleTask != null) return _triggerFetchBaseWorkScheduleTask;
 
-            if (_fk_BaseWorkSchedule.HasValue)
-                _triggerFetchBaseWorkScheduleTask = Context.FindAsync<Zetbox.App.Calendar.WorkSchedule>(_fk_BaseWorkSchedule.Value);
-            else
-                _triggerFetchBaseWorkScheduleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.WorkSchedule>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Calendar.WorkSchedule> task;
 
-            _triggerFetchBaseWorkScheduleTask.OnResult(t =>
+            if (_fk_BaseWorkSchedule.HasValue)
+                task = Context.FindAsync<Zetbox.App.Calendar.WorkSchedule>(_fk_BaseWorkSchedule.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Calendar.WorkSchedule>(null);
+
+            task.OnResult(t =>
             {
                 if (OnBaseWorkSchedule_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Calendar
                 }
             });
 
-            return _triggerFetchBaseWorkScheduleTask;
+            return _triggerFetchBaseWorkScheduleTask = task;
         }
 
         // internal implementation
@@ -253,12 +255,14 @@ namespace Zetbox.App.Calendar
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -268,7 +272,7 @@ namespace Zetbox.App.Calendar
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -433,11 +437,12 @@ namespace Zetbox.App.Calendar
         public System.Threading.Tasks.Task TriggerFetchChildWorkScheduleAsync()
         {
             if (_triggerFetchChildWorkScheduleTask != null) return _triggerFetchChildWorkScheduleTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Calendar.WorkSchedule> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchChildWorkScheduleTask = Context.GetListOfAsync<Zetbox.App.Calendar.WorkSchedule>(this, "ChildWorkSchedule")
+                task = Context.GetListOfAsync<Zetbox.App.Calendar.WorkSchedule>(this, "ChildWorkSchedule")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -445,13 +450,13 @@ namespace Zetbox.App.Calendar
             }
             else
             {
-                _triggerFetchChildWorkScheduleTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Calendar.WorkSchedule>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Calendar.WorkSchedule>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchChildWorkScheduleTask = _triggerFetchChildWorkScheduleTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _ChildWorkSchedule = new OneNRelationList<Zetbox.App.Calendar.WorkSchedule>(
                     "BaseWorkSchedule",
@@ -460,7 +465,7 @@ namespace Zetbox.App.Calendar
                     OnChildWorkScheduleCollectionChanged,
                     serverList);
             });
-            return _triggerFetchChildWorkScheduleTask;
+            return _triggerFetchChildWorkScheduleTask = task;
         }
 
         internal void OnChildWorkScheduleCollectionChanged()
@@ -537,12 +542,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -552,7 +559,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation
@@ -819,12 +826,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
-            if (_fk_Module.HasValue)
-                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
-            else
-                _triggerFetchModuleTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Module> task;
 
-            _triggerFetchModuleTask.OnResult(t =>
+            if (_fk_Module.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+
+            task.OnResult(t =>
             {
                 if (OnModule_Getter != null)
                 {
@@ -834,7 +843,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 }
             });
 
-            return _triggerFetchModuleTask;
+            return _triggerFetchModuleTask = task;
         }
 
         // internal implementation
@@ -984,11 +993,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         public System.Threading.Tasks.Task TriggerFetchWorkScheduleRulesAsync()
         {
             if (_triggerFetchWorkScheduleRulesTask != null) return _triggerFetchWorkScheduleRulesTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Calendar.WorkScheduleRule> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchWorkScheduleRulesTask = Context.GetListOfAsync<Zetbox.App.Calendar.WorkScheduleRule>(this, "WorkScheduleRules")
+                task = Context.GetListOfAsync<Zetbox.App.Calendar.WorkScheduleRule>(this, "WorkScheduleRules")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -996,13 +1006,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
             }
             else
             {
-                _triggerFetchWorkScheduleRulesTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Calendar.WorkScheduleRule>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Calendar.WorkScheduleRule>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchWorkScheduleRulesTask = _triggerFetchWorkScheduleRulesTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _WorkScheduleRules = new OneNRelationList<Zetbox.App.Calendar.WorkScheduleRule>(
                     "WorkSchedule",
@@ -1011,7 +1021,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                     OnWorkScheduleRulesCollectionChanged,
                     serverList);
             });
-            return _triggerFetchWorkScheduleRulesTask;
+            return _triggerFetchWorkScheduleRulesTask = task;
         }
 
         internal void OnWorkScheduleRulesCollectionChanged()

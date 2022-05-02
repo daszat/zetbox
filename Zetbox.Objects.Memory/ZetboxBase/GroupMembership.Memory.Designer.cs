@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchGroupTask != null) return _triggerFetchGroupTask;
 
-            if (_fk_Group.HasValue)
-                _triggerFetchGroupTask = Context.FindAsync<Zetbox.App.Base.Group>(_fk_Group.Value);
-            else
-                _triggerFetchGroupTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Group>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Group> task;
 
-            _triggerFetchGroupTask.OnResult(t =>
+            if (_fk_Group.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Group>(_fk_Group.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Group>(null);
+
+            task.OnResult(t =>
             {
                 if (OnGroup_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchGroupTask;
+            return _triggerFetchGroupTask = task;
         }
 
         // internal implementation

@@ -39,15 +39,16 @@ this.WriteObjects("    using System;\r\n");
 this.WriteObjects("    using System.Collections.Generic;\r\n");
 this.WriteObjects("    using System.Linq;\r\n");
 this.WriteObjects("    using System.Text;\r\n");
+this.WriteObjects("    using System.Threading;\r\n");
 this.WriteObjects("    using Autofac;\r\n");
 this.WriteObjects("	using Zetbox.API;\r\n");
-#line 37 "D:\Projects\zetbox\Zetbox.Generator\Templates\Module.cst"
-foreach(string ns in GetAdditionalImports().OrderBy(s => s).Distinct().OrderBy(s => s)) { 
 #line 38 "D:\Projects\zetbox\Zetbox.Generator\Templates\Module.cst"
-this.WriteObjects("    using ",  ns , ";\r\n");
+foreach(string ns in GetAdditionalImports().OrderBy(s => s).Distinct().OrderBy(s => s)) { 
 #line 39 "D:\Projects\zetbox\Zetbox.Generator\Templates\Module.cst"
-} 
+this.WriteObjects("    using ",  ns , ";\r\n");
 #line 40 "D:\Projects\zetbox\Zetbox.Generator\Templates\Module.cst"
+} 
+#line 41 "D:\Projects\zetbox\Zetbox.Generator\Templates\Module.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    public class ",  shortName , "Module\r\n");
 this.WriteObjects("        : Autofac.Module\r\n");
@@ -56,24 +57,24 @@ this.WriteObjects("        protected override void Load(ContainerBuilder builder
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            base.Load(builder);\r\n");
 this.WriteObjects("\r\n");
-#line 48 "D:\Projects\zetbox\Zetbox.Generator\Templates\Module.cst"
-ApplyRegistrations(); 
 #line 49 "D:\Projects\zetbox\Zetbox.Generator\Templates\Module.cst"
+ApplyRegistrations(); 
+#line 50 "D:\Projects\zetbox\Zetbox.Generator\Templates\Module.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("\r\n");
-#line 52 "D:\Projects\zetbox\Zetbox.Generator\Templates\Module.cst"
-ApplyTypeCheckerTemplate(); 
 #line 53 "D:\Projects\zetbox\Zetbox.Generator\Templates\Module.cst"
+ApplyTypeCheckerTemplate(); 
+#line 54 "D:\Projects\zetbox\Zetbox.Generator\Templates\Module.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    // marker class to provide stable and correct assembly reference\r\n");
 this.WriteObjects("    internal sealed class ",  shortName , "ActionsManager\r\n");
 this.WriteObjects("        : BaseCustomActionsManager, I",  shortName , "ActionsManager\r\n");
 this.WriteObjects("    {\r\n");
-this.WriteObjects("        private static object _syncRoot = new object();\r\n");
+this.WriteObjects("        private static readonly SemaphoreSlim _initLock = new SemaphoreSlim(1, 1);\r\n");
 this.WriteObjects("        private static bool _isInitialised = false;\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        protected override object SyncRoot { get { return _syncRoot; } }\r\n");
+this.WriteObjects("        protected override SemaphoreSlim InitLock => _initLock;\r\n");
 this.WriteObjects("        protected override bool IsInitialised\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get { return _isInitialised; }\r\n");

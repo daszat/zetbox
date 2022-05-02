@@ -127,11 +127,12 @@ namespace Zetbox.App.Test
         public System.Threading.Tasks.Task TriggerFetchNSideAsync()
         {
             if (_triggerFetchNSideTask != null) return _triggerFetchNSideTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Test.One_to_N_relations_N> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchNSideTask = Context.GetListOfAsync<Zetbox.App.Test.One_to_N_relations_N>(this, "NSide")
+                task = Context.GetListOfAsync<Zetbox.App.Test.One_to_N_relations_N>(this, "NSide")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -139,13 +140,13 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchNSideTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.One_to_N_relations_N>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.One_to_N_relations_N>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchNSideTask = _triggerFetchNSideTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _NSide = new OneNRelationList<Zetbox.App.Test.One_to_N_relations_N>(
                     "OneSide",
@@ -154,7 +155,7 @@ namespace Zetbox.App.Test
                     OnNSideCollectionChanged,
                     serverList);
             });
-            return _triggerFetchNSideTask;
+            return _triggerFetchNSideTask = task;
         }
 
         internal void OnNSideCollectionChanged()
@@ -201,11 +202,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
         public System.Threading.Tasks.Task TriggerFetchOrderedNSideAsync()
         {
             if (_triggerFetchOrderedNSideTask != null) return _triggerFetchOrderedNSideTask;
+            System.Threading.Tasks.Task task;
 
             List<Zetbox.App.Test.One_to_N_relations_OrderedN> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
-                _triggerFetchOrderedNSideTask = Context.GetListOfAsync<Zetbox.App.Test.One_to_N_relations_OrderedN>(this, "OrderedNSide")
+                task = Context.GetListOfAsync<Zetbox.App.Test.One_to_N_relations_OrderedN>(this, "OrderedNSide")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -213,13 +215,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             }
             else
             {
-                _triggerFetchOrderedNSideTask = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.One_to_N_relations_OrderedN>()).OnResult(t =>
+                task = System.Threading.Tasks.Task.FromResult(new List<Zetbox.App.Test.One_to_N_relations_OrderedN>()).OnResult(t =>
                 {
                     serverList = t.Result;
                 });
             }
 
-            _triggerFetchOrderedNSideTask = _triggerFetchOrderedNSideTask.OnResult(t =>
+            task = task.OnResult(t =>
             {
                 _OrderedNSide = new OneNRelationList<Zetbox.App.Test.One_to_N_relations_OrderedN>(
                     "OneSide",
@@ -228,7 +230,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
                     OnOrderedNSideCollectionChanged,
                     serverList);
             });
-            return _triggerFetchOrderedNSideTask;
+            return _triggerFetchOrderedNSideTask = task;
         }
 
         internal void OnOrderedNSideCollectionChanged()

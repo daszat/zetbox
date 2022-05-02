@@ -100,12 +100,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchPropertyTask != null) return _triggerFetchPropertyTask;
 
-            if (_fk_Property.HasValue)
-                _triggerFetchPropertyTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value);
-            else
-                _triggerFetchPropertyTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Property> task;
 
-            _triggerFetchPropertyTask.OnResult(t =>
+            if (_fk_Property.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(null);
+
+            task.OnResult(t =>
             {
                 if (OnProperty_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchPropertyTask;
+            return _triggerFetchPropertyTask = task;
         }
 
         // internal implementation

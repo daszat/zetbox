@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchConstrainedTask != null) return _triggerFetchConstrainedTask;
 
-            if (_fk_Constrained.HasValue)
-                _triggerFetchConstrainedTask = Context.FindAsync<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
-            else
-                _triggerFetchConstrainedTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DataType>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.DataType> task;
 
-            _triggerFetchConstrainedTask.OnResult(t =>
+            if (_fk_Constrained.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DataType>(null);
+
+            task.OnResult(t =>
             {
                 if (OnConstrained_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchConstrainedTask;
+            return _triggerFetchConstrainedTask = task;
         }
 
         // internal implementation

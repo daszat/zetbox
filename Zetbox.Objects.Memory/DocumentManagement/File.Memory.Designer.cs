@@ -154,12 +154,14 @@ namespace at.dasz.DocumentManagement
         {
             if (_triggerFetchBlobTask != null) return _triggerFetchBlobTask;
 
-            if (_fk_Blob.HasValue)
-                _triggerFetchBlobTask = Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value);
-            else
-                _triggerFetchBlobTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Blob>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Blob> task;
 
-            _triggerFetchBlobTask.OnResult(t =>
+            if (_fk_Blob.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Blob>(null);
+
+            task.OnResult(t =>
             {
                 if (OnBlob_Getter != null)
                 {
@@ -169,7 +171,7 @@ namespace at.dasz.DocumentManagement
                 }
             });
 
-            return _triggerFetchBlobTask;
+            return _triggerFetchBlobTask = task;
         }
 
         // internal implementation
@@ -291,12 +293,14 @@ namespace at.dasz.DocumentManagement
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -306,7 +310,7 @@ namespace at.dasz.DocumentManagement
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -501,12 +505,14 @@ namespace at.dasz.DocumentManagement
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -516,7 +522,7 @@ namespace at.dasz.DocumentManagement
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation
@@ -711,12 +717,14 @@ namespace at.dasz.DocumentManagement
         {
             if (_triggerFetchExcerptTask != null) return _triggerFetchExcerptTask;
 
-            if (_fk_Excerpt.HasValue)
-                _triggerFetchExcerptTask = Context.FindAsync<at.dasz.DocumentManagement.Excerpt>(_fk_Excerpt.Value);
-            else
-                _triggerFetchExcerptTask = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.Excerpt>(null);
+            System.Threading.Tasks.Task<at.dasz.DocumentManagement.Excerpt> task;
 
-            _triggerFetchExcerptTask.OnResult(t =>
+            if (_fk_Excerpt.HasValue)
+                task = Context.FindAsync<at.dasz.DocumentManagement.Excerpt>(_fk_Excerpt.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<at.dasz.DocumentManagement.Excerpt>(null);
+
+            task.OnResult(t =>
             {
                 if (OnExcerpt_Getter != null)
                 {
@@ -726,7 +734,7 @@ namespace at.dasz.DocumentManagement
                 }
             });
 
-            return _triggerFetchExcerptTask;
+            return _triggerFetchExcerptTask = task;
         }
 
         // internal implementation
@@ -1101,8 +1109,9 @@ namespace at.dasz.DocumentManagement
         public System.Threading.Tasks.Task TriggerFetchRevisionsAsync()
         {
             if (_triggerFetchRevisionsTask != null) return _triggerFetchRevisionsTask;
-            _triggerFetchRevisionsTask = Context.FetchRelationAsync<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
-            _triggerFetchRevisionsTask = _triggerFetchRevisionsTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _Revisions
                     = new ObservableBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl>>(
@@ -1110,7 +1119,7 @@ namespace at.dasz.DocumentManagement
                         new RelationshipFilterASideCollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl>(this.Context, this));
                         // _Revisions.CollectionChanged is managed by OnRevisionsCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchRevisionsTask;
+            return _triggerFetchRevisionsTask = task;
         }
 
         internal void OnRevisionsCollectionChanged()
