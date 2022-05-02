@@ -157,9 +157,10 @@ namespace Zetbox.Client.Presentables
             {
                 if (_CurrentPrincipal == null)
                 {
-                    var task = new Task(async () => _CurrentPrincipal = await _dependencies.PrincipalResolver.GetCurrent());
-                    task.Start();
-                    task.Wait();
+                    // Ensure not null
+                    _CurrentPrincipal = new ZetboxPrincipal(0, string.Empty, string.Empty, Enumerable.Empty<ZetboxPrincipalGroup>());
+                    var task = Task.Run(async () => _CurrentPrincipal = await _dependencies.PrincipalResolver.GetCurrent());
+                    _ = task.ContinueWith(t => OnPropertyChanged(nameof(CurrentPrincipal)), TaskScheduler.Default);
                 }
                 return _CurrentPrincipal;
             }
@@ -325,8 +326,9 @@ namespace Zetbox.Client.Presentables
         /// <param name="propertyName">the changed property</param>
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (_PropertyChangedEvent != null)
-                _PropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
+            if (_PropertyChangedEvent == null) return;
+
+            Task.CompletedTask.ContinueWith(t =>_PropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName)), TaskScheduler.Default);
         }
         #endregion
 
@@ -544,11 +546,11 @@ namespace Zetbox.Client.Presentables
         {
             // Reset error cache
             _errorCache.Errors.Clear();
-            _errorCache.Children.Clear(); 
-            
+            _errorCache.Children.Clear();
+
             DoValidate();
 
-            if(_errorCache == null)
+            if (_errorCache == null)
             {
                 _errorCache = new ValidationError(this);
             }

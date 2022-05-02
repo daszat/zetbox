@@ -6,6 +6,7 @@ namespace Zetbox.API.Async
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
 
     public class PropertyTask<T>
     {
@@ -51,7 +52,7 @@ namespace Zetbox.API.Async
                         self._result = t.Result;
                         if (self._notifier != null)
                             self._notifier();
-                    });
+                    }, TaskScheduler.Default);
         }
 
         /// <summary>
@@ -96,8 +97,8 @@ namespace Zetbox.API.Async
         /// </summary>
         public void Invalidate()
         {
-            if (_task != null)
-                _task.Wait();
+            //if (_task != null)
+            //    _task.Wait();
             _task = null;
         }
     }

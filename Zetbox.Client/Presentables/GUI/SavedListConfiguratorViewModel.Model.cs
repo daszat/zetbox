@@ -51,7 +51,7 @@ namespace Zetbox.Client.Presentables.GUI
                     }
                     else if(!f.IsUserFilter && !string.IsNullOrEmpty(f.Expression))
                     {
-                        mdl = Parent.FilterList.Filter.FirstOrDefault(i => i.ValueSource.IfNotNull(x => x.Expression).IfNotNull(x => x.Replace(FilterModel.PREDICATE_PLACEHOLDER, string.Empty) == f.Expression)) as FilterModel;
+                        mdl = Parent.FilterList.Filter?.FirstOrDefault(i => i.ValueSource.IfNotNull(x => x.Expression).IfNotNull(x => x.Replace(FilterModel.PREDICATE_PLACEHOLDER, string.Empty) == f.Expression)) as FilterModel;
                     }
 
                     if (mdl != null)

@@ -1,5 +1,4 @@
 ﻿@using Zetbox.App.Projekte
-@using Zetbox.Client.Presentables
 @using t = System.Threading.Tasks
 
 @page "/"
@@ -13,38 +12,15 @@
 
 Welcome to your new app.
 
-@if (projekte != null)
-{
-	<table class="table table-bordered">
-		@foreach (var prj in projekte)
-		{
-			<tr>
-				<td>
-					<BaseValueView Value="@prj.PropertyModelsByName["Name"]"></BaseValueView>
-				</td>
-				<td>
-					<BaseValueView Value="@prj.PropertyModelsByName["KickOffAm"]" />
-				</td>
-			</tr>
-		}
-	</table>
-}
-else
-{
-	<p class="text-info">Loading ...</p>
-}
-
+<Zetbox.Client.Blazor.Toolkit.Views.InstanceList.InstanceListDisplay ViewModel="@list"></Zetbox.Client.Blazor.Toolkit.Views.InstanceList.InstanceListDisplay>
 
 @code {
-	private IEnumerable<DataObjectViewModel> projekte;
+	private InstanceListViewModel list;
 
 	protected async override t.Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
 
-		var classes = FrozenContext.GetQuery<Zetbox.App.Base.ObjectClass>().Take(10).ToList();
-
-		var _projekte = await DataContext.GetQuery<Projekt>().ToListAsync();
-		projekte = _projekte.Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, null, i)).ToArray();
+		list = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, NamedObjects.Base.Classes.Zetbox.App.Projekte.Projekt.Find(FrozenContext), null);
 	}
 }

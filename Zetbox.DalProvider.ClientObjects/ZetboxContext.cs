@@ -1121,12 +1121,12 @@ namespace Zetbox.DalProvider.Client
         /// <param name="exportGuid">ExportGuid of the Object to find.</param>
         /// <returns>IPersistenceObject or null if the Object was not found.</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public Task<T> FindPersistenceObjectAsync<T>(Guid exportGuid) where T : class, IPersistenceObject
+        public async Task<T> FindPersistenceObjectAsync<T>(Guid exportGuid) where T : class, IPersistenceObject
         {
-            return Task.FromResult(GetPersistenceObjectQuery<T>()
+            return (await GetPersistenceObjectQuery<T>()
                 .WithDeactivated()
-                .SingleOrDefault(o => ((Zetbox.App.Base.IExportable)o).ExportGuid == exportGuid)
-                ?? MakeAccessDeniedProxy<T>(exportGuid));
+                .SingleOrDefaultAsync(o => ((Zetbox.App.Base.IExportable)o).ExportGuid == exportGuid))
+                ?? MakeAccessDeniedProxy<T>(exportGuid);
         }
 
         /// <summary>
@@ -1154,11 +1154,11 @@ namespace Zetbox.DalProvider.Client
         /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
         /// <returns>A List of IPersistenceObject.</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public Task<IEnumerable<T>> FindPersistenceObjectsAsync<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
+        public async Task<IEnumerable<T>> FindPersistenceObjectsAsync<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
         {
-            return Task.FromResult(GetPersistenceObjectQuery<T>()
+            return await GetPersistenceObjectQuery<T>()
                 .WithDeactivated()
-                .Where(o => exportGuids.Contains(((Zetbox.App.Base.IExportable)o).ExportGuid)) as IEnumerable<T>);
+                .Where(o => exportGuids.Contains(((Zetbox.App.Base.IExportable)o).ExportGuid)).ToListAsync() as IEnumerable<T>;
         }
 
         /// <inheritdoc />

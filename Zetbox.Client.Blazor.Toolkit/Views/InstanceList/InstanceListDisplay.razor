@@ -1,0 +1,48 @@
+﻿@using Zetbox.Client.Presentables.ValueViewModels
+@using Zetbox.Client.Presentables.ZetboxBase
+
+@if (ViewModel != null)
+{
+	<table class="table table-bordered">
+		<tr>
+			@foreach (var col in ViewModel.DisplayedColumns.Columns)
+			{
+				<th>@col.Header</th>
+			}
+		</tr>
+
+		@if (ViewModel.InstancesAsync != null)
+		{
+			@foreach (var item in ViewModel.InstancesAsync)
+			{
+				<tr>
+					@foreach (var col in ViewModel.DisplayedColumns.Columns)
+					{
+						<td>
+							<BaseValueView Value="@item.PropertyModelsByName[col.Property.Name]"></BaseValueView>
+						</td>
+					}
+				</tr>
+			}
+		}
+		else
+		{
+			<p class="text-info">Loading ...</p>
+		}
+	</table>
+}
+
+@code {
+	[Parameter]
+	public InstanceListViewModel? ViewModel { get; set; }
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		if (ViewModel != null)
+		{
+			ViewModel.PropertyChanged += (s, e) => StateHasChanged();
+		}
+	}
+}

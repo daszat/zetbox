@@ -859,7 +859,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 catch (Exception ex)
                 {
                     errorReporter.Value.Show(ex);
-
                 }
             });
 

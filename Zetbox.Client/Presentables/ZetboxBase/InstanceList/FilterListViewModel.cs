@@ -30,6 +30,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.Client.Presentables.FilterViewModels;
     using Zetbox.API.Client;
     using System.Threading.Tasks;
+    using System.Threading;
 
     [ViewModelDescriptor]
     public class FilterListViewModel : ViewModel
@@ -38,6 +39,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         private ObjectClass _type;
         private IFulltextSupport _fulltextSupport;
+
+        private SemaphoreSlim _initlock = new SemaphoreSlim(1, 1);
 
         public FilterListViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ObjectClass type, IFulltextSupport fulltextSupport = null)
             : base(appCtx, dataCtx, parent)
@@ -220,60 +223,68 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         private ObservableCollection<FilterViewModel> _FilterViewModels = null;
         private ObservableCollection<FilterListEntryViewModel> _FilterListEntryViewModels = null;
 
-        private ReadOnlyObservableCollection<IFilterModel> _filterRO = null;
-        private ReadOnlyObservableCollection<FilterViewModel> _FilterViewModelsRO = null;
-        private ReadOnlyObservableCollection<FilterListEntryViewModel> _FilterListEntryViewModelsRO = null;
+        private ReadOnlyObservableCollection<IFilterModel> _filterRO = new (new ObservableCollection<IFilterModel>());
+        private ReadOnlyObservableCollection<FilterViewModel> _FilterViewModelsRO = new (new ObservableCollection<FilterViewModel>());
+        private ReadOnlyObservableCollection<FilterListEntryViewModel> _FilterListEntryViewModelsRO = new (new ObservableCollection<FilterListEntryViewModel>());
 
-        private void InitializeFilter()
+        private async Task InitializeFilter()
         {
-            if (_filter == null)
+            await _initlock.WaitAsync();
+            try
             {
-                _filter = new ObservableCollection<IFilterModel>();
-                _FilterViewModels = new ObservableCollection<FilterViewModel>();
-                _FilterListEntryViewModels = new ObservableCollection<FilterListEntryViewModel>();
-
-                _filterRO = new ReadOnlyObservableCollection<IFilterModel>(_filter);
-                _FilterViewModelsRO = new ReadOnlyObservableCollection<FilterViewModel>(_FilterViewModels);
-                _FilterListEntryViewModelsRO = new ReadOnlyObservableCollection<FilterListEntryViewModel>(_FilterListEntryViewModels);
-
-                if (EnableAutoFilter)
+                if (_filter == null)
                 {
-                    // Resolve default property filter
-                    var t = _type;
-                    while (t != null)
+                    _filter = new ObservableCollection<IFilterModel>();
+                    _FilterViewModels = new ObservableCollection<FilterViewModel>();
+                    _FilterListEntryViewModels = new ObservableCollection<FilterListEntryViewModel>();
+
+                    if (EnableAutoFilter)
                     {
-                        // Add ObjectClass filter expressions
-                        foreach (var cfc in t.FilterConfigurations)
+                        // Resolve default property filter
+                        var t = _type;
+                        while (t != null)
                         {
-                            AddFilter(cfc.CreateFilterModel(DataContext));
+                            // Add ObjectClass filter expressions
+                            foreach (var cfc in t.FilterConfigurations)
+                            {
+                                await AddFilter(cfc.CreateFilterModel(DataContext));
+                            }
+
+                            // Add Property filter expressions
+                            foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
+                            {
+                                await AddFilter(prop.FilterConfiguration.CreateFilterModel(DataContext));
+                            }
+                            if (t is ObjectClass)
+                            {
+                                t = ((ObjectClass)t).BaseObjectClass;
+                            }
                         }
 
-                        // Add Property filter expressions
-                        foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
+                        if (HasFulltextSupport)
                         {
-                            AddFilter(prop.FilterConfiguration.CreateFilterModel(DataContext));
+                            await AddFilter(new FulltextFilterModel(FrozenContext));
                         }
-                        if (t is ObjectClass)
+                        else if (_filter.Count == 0)
                         {
-                            t = ((ObjectClass)t).BaseObjectClass;
+                            // Add default ToString Filter only if there is no filter configuration & no fulltext filter can be applied
+                            await AddFilter(new ToStringFilterModel(FrozenContext));
+                        }
+
+                        if (_type.ImplementsIDeactivatable())
+                        {
+                            await AddFilter(new WithDeactivatedFilterModel(FrozenContext));
                         }
                     }
 
-                    if (HasFulltextSupport)
-                    {
-                        AddFilter(new FulltextFilterModel(FrozenContext));
-                    }
-                    else if (_filter.Count == 0)
-                    {
-                        // Add default ToString Filter only if there is no filter configuration & no fulltext filter can be applied
-                        AddFilter(new ToStringFilterModel(FrozenContext));
-                    }
-
-                    if (_type.ImplementsIDeactivatable())
-                    {
-                        AddFilter(new WithDeactivatedFilterModel(FrozenContext));
-                    }
+                    _filterRO = new ReadOnlyObservableCollection<IFilterModel>(_filter);
+                    _FilterViewModelsRO = new ReadOnlyObservableCollection<FilterViewModel>(_FilterViewModels);
+                    _FilterListEntryViewModelsRO = new ReadOnlyObservableCollection<FilterListEntryViewModel>(_FilterListEntryViewModels);
                 }
+            }
+            finally
+            {
+                _initlock.Release();
             }
         }
 
@@ -281,7 +292,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                InitializeFilter();
+                _ = InitializeFilter();
                 return _filterRO;
             }
         }
@@ -290,7 +301,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                InitializeFilter();
+                _ = InitializeFilter();
                 return _FilterViewModelsRO;
             }
         }
@@ -299,34 +310,35 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                InitializeFilter();
+                _ = InitializeFilter();
                 return _FilterListEntryViewModelsRO;
             }
         }
 
-        public void AddFilter(IFilterModel mdl)
+        public Task AddFilter(IFilterModel mdl)
         {
-            AddFilter(-1, mdl, false, null);
+            return AddFilter(-1, mdl, false, null);
         }
-        public void AddFilter(int index, IFilterModel mdl)
+        public Task AddFilter(int index, IFilterModel mdl)
         {
-            AddFilter(index, mdl, false, null);
+            return AddFilter(index, mdl, false, null);
         }
-        public void AddFilter(IFilterModel mdl, bool allowRemove)
+        public Task AddFilter(IFilterModel mdl, bool allowRemove)
         {
-            AddFilter(-1, mdl, allowRemove, null);
+            return AddFilter(-1, mdl, allowRemove, null);
         }
-        public void AddFilter(int index, IFilterModel mdl, bool allowRemove)
+        public Task AddFilter(int index, IFilterModel mdl, bool allowRemove)
         {
-            AddFilter(index, mdl, allowRemove, null);
+            return AddFilter(index, mdl, allowRemove, null);
         }
-        public void AddFilter(IFilterModel mdl, bool allowRemove, IEnumerable<Property> sourceProperties)
+        public Task AddFilter(IFilterModel mdl, bool allowRemove, IEnumerable<Property> sourceProperties)
         {
-            AddFilter(-1, mdl, allowRemove, sourceProperties);
+            return AddFilter(-1, mdl, allowRemove, sourceProperties);
         }
-        public void AddFilter(int index, IFilterModel mdl, bool allowRemove, IEnumerable<Property> sourceProperties)
+        public async Task AddFilter(int index, IFilterModel mdl, bool allowRemove, IEnumerable<Property> sourceProperties)
         {
-            InitializeFilter();
+            await InitializeFilter();
+
             if (index >= 0)
             {
                 _filter.Insert(index, mdl);
@@ -357,13 +369,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (allowRemove) UpdateRespectRequieredFilter();
             UpdateExclusiveFilter();
 
-            OnPropertyChanged("IsExclusiveFilterActive");
-            OnPropertyChanged("RespectRequiredFilter");
-            OnPropertyChanged("HasUserFilter");
-            OnPropertyChanged("Filter");
-            OnPropertyChanged("ShowFilter");
-            OnPropertyChanged("FilterViewModels");
-            OnPropertyChanged("FilterListEntryViewModels");
+            NotifyFilterChanged();
         }
 
         public bool RemoveFilter(IFilterModel mdl)
@@ -381,13 +387,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             UpdateRespectRequieredFilter();
             UpdateExclusiveFilter();
 
-            OnPropertyChanged("IsExclusiveFilterActive");
-            OnPropertyChanged("RespectRequiredFilter");
-            OnPropertyChanged("HasUserFilter");
-            OnPropertyChanged("ShowFilter");
-            OnPropertyChanged("Filter");
-            OnPropertyChanged("FilterViewModels");
-            OnPropertyChanged("FilterListEntryViewModels");
+            NotifyFilterChanged();
             return true;
         }
 
@@ -510,6 +510,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
 
             return result;
+        }
+
+        private void NotifyFilterChanged()
+        {
+            OnPropertyChanged("IsExclusiveFilterActive");
+            OnPropertyChanged("RespectRequiredFilter");
+            OnPropertyChanged("HasUserFilter");
+            OnPropertyChanged("Filter");
+            OnPropertyChanged("ShowFilter");
+            OnPropertyChanged("FilterViewModels");
+            OnPropertyChanged("FilterListEntryViewModels");
         }
     }
 
