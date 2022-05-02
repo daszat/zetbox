@@ -5,11 +5,12 @@ namespace Zetbox.API.Common.GUI
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API.Utils;
 
     public interface IIconConverter
     {
-        System.Drawing.Image ToImage(Zetbox.App.GUI.Icon icon);
+        Task<System.Drawing.Image> ToImage(Zetbox.App.GUI.Icon icon);
     }
 
     public class IconConverter : IIconConverter
@@ -35,7 +36,7 @@ namespace Zetbox.API.Common.GUI
             }
         }
 
-        public System.Drawing.Image ToImage(Zetbox.App.GUI.Icon icon)
+        public async Task<System.Drawing.Image> ToImage(Zetbox.App.GUI.Icon icon)
         {
             if (icon == null) return null;
             if (icon.ObjectState == DataObjectState.New) return null;
@@ -45,13 +46,14 @@ namespace Zetbox.API.Common.GUI
                 System.Drawing.Image bmp;
                 if (!_cache.TryGetValue(icon.ExportGuid, out bmp))
                 {
-                    var realIcon = Context.FindPersistenceObject<Zetbox.App.GUI.Icon>(icon.ExportGuid);
-                    if (realIcon.Blob == null)
+                    var realIcon = await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(icon.ExportGuid);
+                    var blob = await realIcon.GetProp_Blob();
+                    if (blob == null)
                     {
                         Logging.Log.WarnFormat("Icon#{0} has no associated request", realIcon.ID);
                         return null;
                     }
-                    bmp = System.Drawing.Image.FromStream(realIcon.Blob.GetStream());
+                    bmp = System.Drawing.Image.FromStream(blob.GetStream());
                     _cache[icon.ExportGuid] = bmp;
                 }
                 return bmp;

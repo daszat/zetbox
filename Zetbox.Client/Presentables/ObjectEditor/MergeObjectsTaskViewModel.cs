@@ -10,6 +10,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     using Zetbox.Client.Models;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class MergeObjectsTaskViewModel : ViewModel
@@ -31,7 +32,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             _sourceMdl.Value = source;
 
             var ws = GetWorkspace() as IContextViewModel;
-            if(ws == null)
+            if (ws == null)
             {
                 throw new InvalidOperationException("A MergeObjectsTaskViewModel must be bound to a IContextViewModel workspace");
             }
@@ -52,7 +53,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         void _mdl_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "Value")
+            if (e.PropertyName == "Value")
             {
                 ClearProperties();
             }
@@ -96,7 +97,9 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         {
             get
             {
-                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext)));
+                if (base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext)));
+                return base.Icon;
             }
             set
             {
@@ -109,7 +112,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         {
             get
             {
-                if(_target == null)
+                if (_target == null)
                 {
                     _target = ViewModelFactory.CreateViewModel<ObjectReferenceViewModel.Factory>().Invoke(DataContext, this, _targetMdl);
                 }
@@ -132,9 +135,9 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         private void ClearProperties()
         {
-            if(_properties != null)
+            if (_properties != null)
             {
-                foreach(var p in _properties)
+                foreach (var p in _properties)
                 {
                     p.Dispose();
                 }
@@ -154,7 +157,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
                     var target = Target.Value;
                     var source = Source.Value;
-                    foreach(var p in target.PropertyModelsByName.Where(i => !i.Value.IsReadOnly))
+                    foreach (var p in target.PropertyModelsByName.Where(i => !i.Value.IsReadOnly))
                     {
                         var targetProp = p.Value;
                         var sourceProp = source.PropertyModelsByName[p.Key];
@@ -182,12 +185,12 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 if (_SwapCommand == null)
                 {
                     _SwapCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
-                        this, 
-                        MergeObjectsTaskViewModelResources.SwapCommand, 
-                        MergeObjectsTaskViewModelResources.SwapCommand_Tooltip, 
+                        DataContext,
+                        this,
+                        MergeObjectsTaskViewModelResources.SwapCommand,
+                        MergeObjectsTaskViewModelResources.SwapCommand_Tooltip,
                         Swap, null, null);
-                    _SwapCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
+                    Task.Run(async () => _SwapCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext)));
                 }
                 return _SwapCommand;
             }
@@ -211,7 +214,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 return MergeObjectsTaskViewModelResources.Target_Tooltip;
             }
         }
-        
+
         public string SourceHelpText
         {
             get

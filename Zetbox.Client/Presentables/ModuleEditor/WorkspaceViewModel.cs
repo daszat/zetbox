@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.App.Base;
@@ -100,7 +101,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     GroupingTreeItemViewModel grpMdl;
 
                     grpMdl = ViewModelFactory.CreateViewModel<GroupingTreeItemViewModel.Factory>().Invoke(DataContext, this, "Data model");
-                    grpMdl.Icon = IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.Base.DataType.Find(FrozenContext).DefaultIcon);
+                    Task.Run(async () => grpMdl.Icon = await IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.Base.DataType.Find(FrozenContext).DefaultIcon));
                     lst.Add(grpMdl);
 
                     // Object Classes
@@ -178,7 +179,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     lst.Add(assemblyLstMdl);
 
                     grpMdl = ViewModelFactory.CreateViewModel<GroupingTreeItemViewModel.Factory>().Invoke(DataContext, this, "Application & UI");
-                    grpMdl.Icon = IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.GUI.Application.Find(FrozenContext).DefaultIcon);
+                    Task.Run(async () => grpMdl.Icon = await IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.GUI.Application.Find(FrozenContext).DefaultIcon));
                     lst.Add(grpMdl);
 
                     // Application
@@ -219,7 +220,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     grpMdl.Children.Add(lstMdl);
                     
                     grpMdl = ViewModelFactory.CreateViewModel<GroupingTreeItemViewModel.Factory>().Invoke(DataContext, this, "Other meta data");
-                    grpMdl.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.propertiesORoptions_ico.Find(FrozenContext));
+                    Task.Run(async () => grpMdl.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.propertiesORoptions_ico.Find(FrozenContext)));
                     lst.Add(grpMdl);
 
                     // Relation
@@ -326,7 +327,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 if (_EditCurrentModuleCommand == null)
                 {
                     _EditCurrentModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Edit Module", "Opens the Editor for the current module", () => EditCurrentModule(), null, null);
-                    _EditCurrentModuleCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
+                    Task.Run(async () => _EditCurrentModuleCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext)));
                 }
                 return _EditCurrentModuleCommand;
             }

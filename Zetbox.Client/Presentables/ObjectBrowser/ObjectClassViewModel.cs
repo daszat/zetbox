@@ -25,6 +25,7 @@ using Zetbox.App.Base;
 using Zetbox.App.Extensions;
 using Zetbox.Client.Presentables.ZetboxBase;
 using Zetbox.API.Common;
+using System.Threading.Tasks;
 
 namespace Zetbox.Client.Presentables.ObjectBrowser
 {
@@ -64,7 +65,12 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
         public override System.Drawing.Image Icon
         {
-            get { return IconConverter.ToImage(_cls.DefaultIcon); }
+            get
+            {
+                if (base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(_cls.DefaultIcon));
+                return base.Icon;
+            }
         }
 
         #region public interface

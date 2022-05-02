@@ -18,6 +18,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Async;
@@ -332,7 +333,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         Open,
                         CanOpen,
                         CanOpenReason);
-                    _OpenCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
+                    Task.Run(async() => _OpenCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext)));
                 }
                 return _OpenCommand;
             }
@@ -399,7 +400,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         New,
                         CanNew,
                         CanNewReason);
-                    _NewCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
+                    Task.Run(async () => _NewCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext)));
                 }
                 return _NewCommand;
             }
@@ -590,7 +591,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         PrintTwoWeeksCommand,
                         PrintMonthCommand,
                         PrintSheetCommand);
-                    _printCommandGroup.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
+                    Task.Run(async () => _printCommandGroup.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext)));
                 }
                 return _printCommandGroup;
             }
@@ -610,7 +611,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         CalendarResources.PrintTodayCommand_Tooltip,
                         PrintToday,
                         null, null);
-                    _PrintTodayCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
+                    Task.Run(async () => _PrintTodayCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext)));
                 }
                 return _PrintTodayCommand;
             }
@@ -635,7 +636,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         CalendarResources.PrintThisWeekCommand_Tooltip,
                         PrintThisWeek,
                         null, null);
-                    _PrintThisWeekCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
+                    Task.Run(async () => _PrintThisWeekCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext)));
                 }
                 return _PrintThisWeekCommand;
             }
@@ -661,7 +662,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         CalendarResources.PrintTwoWeeksCommand_Tooltip,
                         PrintTwoWeeks,
                         null, null);
-                    _PrintTwoWeeksCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
+                    Task.Run(async () => _PrintTwoWeeksCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext)));
                 }
                 return _PrintTwoWeeksCommand;
             }
@@ -687,7 +688,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         CalendarResources.PrintMonthCommand_Tooltip,
                         PrintMonth,
                         null, null);
-                    _PrintMonthCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
+                    Task.Run(async () => _PrintMonthCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext)));
                 }
                 return _PrintMonthCommand;
             }
@@ -713,7 +714,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         CalendarResources.PrintSheetCommand_Tooltip,
                         PrintSheet,
                         null, null);
-                    _PrintSheetCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
+                    Task.Run(async () => _PrintSheetCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext)));
                 }
                 return _PrintSheetCommand;
             }

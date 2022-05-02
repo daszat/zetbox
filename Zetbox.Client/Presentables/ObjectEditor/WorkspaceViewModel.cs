@@ -237,7 +237,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                             WorkspaceViewModelResources.SaveCommand_Name,
                             WorkspaceViewModelResources.SaveCommand_Tooltip,
                             () => { Save(); }, CanSave, null);
-                    _saveCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.save_png.Find(FrozenContext));
+                    Task.Run(async () => _saveCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.save_png.Find(FrozenContext)));
                 }
                 return _saveCommand;
             }
@@ -257,7 +257,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                     _saveAndCloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, this, WorkspaceViewModelResources.SaveAndCloseCommand_Name, WorkspaceViewModelResources.SaveAndCloseCommand_Tooltip,
                         () => { SaveAndClose(); }, CanSave, null);
-                    _saveAndCloseCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.save_png.Find(FrozenContext));
+                    Task.Run(async () => _saveAndCloseCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.save_png.Find(FrozenContext)));
                 }
                 return _saveAndCloseCommand;
             }
@@ -414,7 +414,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                             WorkspaceViewModelResources.VerifyContextCommand_Tootlip,
                             ShowVerificationResults,
                             null, null);
-                    _verifyCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.ok_png.Find(FrozenContext));
+                    Task.Run(async () => _verifyCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.ok_png.Find(FrozenContext)));
                 }
                 return _verifyCommand;
             }

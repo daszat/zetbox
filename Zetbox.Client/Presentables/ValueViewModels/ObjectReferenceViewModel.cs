@@ -315,7 +315,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         () => SelectValue(),
                         () => AllowSelectValue && !IsReadOnly,
                         null);
-                    _SelectValueCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext));
+                    Task.Run(async () => _SelectValueCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext)));
                 }
                 return _SelectValueCommand;
             }

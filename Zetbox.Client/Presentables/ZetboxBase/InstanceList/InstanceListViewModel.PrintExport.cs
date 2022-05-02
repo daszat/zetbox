@@ -41,7 +41,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         InstanceListViewModelResources.PrintCommand,
                         InstanceListViewModelResources.PrintCommand_Tooltip,
                         Print, null, null);
-                    _PrintCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
+                    Task.Run(async () => _PrintCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext)));
                 }
                 return _PrintCommand;
             }
@@ -127,7 +127,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         InstanceListViewModelResources.ExportCSVCommand,
                         InstanceListViewModelResources.ExportCSVCommand_Tooltip,
                         async () => await Export(), null, null);
-                    _ExportCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.document_export_png.Find(FrozenContext));
+                    Task.Run(async () => _ExportCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.document_export_png.Find(FrozenContext)));
                 }
                 return _ExportCommand;
             }
@@ -178,7 +178,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         async () => await ExportXML(),
                         CanExportXML,
                         null);
-                    _ExportXMLCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.document_export_png.Find(FrozenContext));
+                    Task.Run(async () => _ExportXMLCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.document_export_png.Find(FrozenContext)));
                 }
                 return _ExportXMLCommand;
             }

@@ -25,6 +25,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
     using Zetbox.App.GUI;
     using at.dasz.DocumentManagement;
     using Autofac;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class ImportedFileNavigationSearchScreenViewModel : NavigationSearchScreenViewModel
@@ -65,7 +66,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
                         OpenAll,
                         () => ListViewModel.Instances.Count > 0,
                         () => ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Reason);
-                    _OpenAllCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
+                    Task.Run(async () => _OpenAllCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext)));
                 }
                 return _OpenAllCommand;
             }

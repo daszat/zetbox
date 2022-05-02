@@ -9,6 +9,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class MergePropertyViewModel : ViewModel
@@ -86,7 +87,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                         MergePropertyViewModelResources.UseSourceCommand,
                         MergePropertyViewModelResources.UseSourceCommand_Tooltip, 
                         UseSource, null, null);
-                    _UseSourceCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.back_png.Find(FrozenContext));
+                    Task.Run(async () => _UseSourceCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.back_png.Find(FrozenContext)));
                 }
                 return _UseSourceCommand;
             }
@@ -145,7 +146,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                         MergePropertyViewModelResources.UseTargetCommand,
                         MergePropertyViewModelResources.UseTargetCommand_Tooltip, 
                         UseTarget, null, null);
-                    _UseTargetCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.ok_png.Find(FrozenContext));
+                    Task.Run(async () => _UseTargetCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.ok_png.Find(FrozenContext)));
                 }
                 return _UseTargetCommand;
             }
@@ -186,7 +187,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                         MergeValues,
                         CanMergeValues,
                         CanMergeValuesReason);
-                    _MergeValuesCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
+                    Task.Run(async () => _MergeValuesCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext)));
                 }
                 return _MergeValuesCommand;
             }

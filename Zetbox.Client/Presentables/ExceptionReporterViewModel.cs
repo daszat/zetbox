@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables
     using System.Drawing;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
@@ -318,7 +319,7 @@ namespace Zetbox.Client.Presentables
                         ExceptionReporterViewModelResources.Report,
                         ExceptionReporterViewModelResources.Report_Tooltip,
                         Report, null, null);
-                    _ReportCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.todo_png.Find(FrozenContext));
+                    Task.Run(async () => _ReportCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.todo_png.Find(FrozenContext)));
                 }
                 return _ReportCommand;
             }
@@ -363,7 +364,7 @@ namespace Zetbox.Client.Presentables
                         ExceptionReporterViewModelResources.Cancel,
                         ExceptionReporterViewModelResources.Cancel_Tooltip,
                         Cancel, null, null);
-                    _CancelCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.no_png.Find(FrozenContext));
+                    Task.Run(async () => _CancelCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.no_png.Find(FrozenContext)));
                 }
                 return _CancelCommand;
             }

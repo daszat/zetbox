@@ -9,6 +9,7 @@ using Zetbox.App.Extensions;
 using Zetbox.App.Base;
 using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 using Zetbox.Client.Presentables.ZetboxBase;
+using System.Threading.Tasks;
 
 namespace Zetbox.Client.Presentables.ModuleEditor
 {
@@ -33,7 +34,9 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         {
             get
             {
-                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext)));
+                if (base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext)));
+                return base.Icon;
             }
             set
             {
@@ -102,7 +105,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                                 {
                                     newCtx.SubmitChanges();
                                     if (Parent is IRefreshCommandListener)
-                                    { 
+                                    {
                                         ((IRefreshCommandListener)Parent).Refresh();
                                     }
                                     if (Created != null)

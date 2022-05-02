@@ -19,6 +19,7 @@ namespace Zetbox.Client.Presentables
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
@@ -68,7 +69,12 @@ namespace Zetbox.Client.Presentables
 
         public override System.Drawing.Image Icon
         {
-            get { return IconConverter.ToImage(_dataType.DefaultIcon); }
+            get
+            {
+                if(base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(_dataType.DefaultIcon));
+                return base.Icon;
+            }
         }
 
         protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, PropertyGroupCollection lst)
@@ -81,21 +87,21 @@ namespace Zetbox.Client.Presentables
                         this,
                         tag,
                         translatedTag,
-                        new[] { 
+                        new[] {
                             ViewModelFactory.CreateViewModel<StackPanelViewModel.Factory>()
                                 .Invoke(
                                     DataContext,
                                     this,
                                     tag,
                                     new[] {
-                                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Settings", 
+                                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Settings",
                                             lst.GetWithKeys().Where(kv => !kv.Key.StartsWith("Show"))
                                                 .Select(kv => kv.Value)),
-                                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "List", 
+                                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "List",
                                             lst.GetWithKeys().Where(kv => kv.Key.StartsWith("Show"))
                                                 .Select(kv => kv.Value)
-                                                .Concat(new[] { 
-                                                    ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Preview", "", ViewModelFactory.CreateViewModel<PropertiesPrewiewViewModel.Factory>().Invoke(DataContext, this, _dataType)) 
+                                                .Concat(new[] {
+                                                    ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Preview", "", ViewModelFactory.CreateViewModel<PropertiesPrewiewViewModel.Factory>().Invoke(DataContext, this, _dataType))
                                                 })),
                                     })
                         });

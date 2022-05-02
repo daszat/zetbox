@@ -539,10 +539,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                if (_type != null)
-                    return IconConverter.ToImage(_type.DefaultIcon);
-                else
-                    return null;
+                if (base.Icon == null && _type != null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(_type.DefaultIcon));
+                return base.Icon;
             }
         }
 

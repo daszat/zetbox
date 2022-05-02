@@ -19,6 +19,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Utils;
@@ -50,7 +51,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         WeekCalendar.WeekCalendarViewModelResources.NextWeekCommand_Label,
                         WeekCalendar.WeekCalendarViewModelResources.NextWeekCommand_Tooltip, 
                         NextWeek, null, null);
-                    _NextWeekCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.forward_png.Find(FrozenContext));
+                    Task.Run(async () => _NextWeekCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.forward_png.Find(FrozenContext)));
                 }
                 return _NextWeekCommand;
             }
@@ -72,7 +73,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         WeekCalendar.WeekCalendarViewModelResources.PrevWeekCommand_Label,
                         WeekCalendar.WeekCalendarViewModelResources.PrevWeekCommand_Tooltip,
                         PrevWeek, null, null);
-                    _PrevWeekCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.back_png.Find(FrozenContext));
+                    Task.Run(async () => _PrevWeekCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.back_png.Find(FrozenContext)));
                 }
                 return _PrevWeekCommand;
             }
@@ -94,7 +95,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         WeekCalendar.WeekCalendarViewModelResources.ThisWeekCommand_Label,
                         WeekCalendar.WeekCalendarViewModelResources.ThisWeekCommand_Tooltip,
                         ThisWeek, null, null);
-                    _ThisWeekCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.date_png.Find(FrozenContext));
+                    Task.Run(async () => _ThisWeekCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.date_png.Find(FrozenContext)));
                 }
                 return _ThisWeekCommand;
             }

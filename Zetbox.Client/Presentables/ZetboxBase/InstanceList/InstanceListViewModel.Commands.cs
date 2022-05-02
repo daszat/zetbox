@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -239,7 +240,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         SelectColumns,
                         () => AllowSelectColumns,
                         null);
-                    _SelectColumnsCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.todo_png.Find(FrozenContext));
+                    Task.Run(async () => _SelectColumnsCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.todo_png.Find(FrozenContext)));
                 }
                 return _SelectColumnsCommand;
             }
@@ -289,7 +290,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         InstanceListViewModelResources.MergeCommand, 
                         InstanceListViewModelResources.MergeCommand_Tooltip, 
                         Merge, CanMerge, CanMergeReason);
-                    _MergeCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
+                    Task.Run(async () => _MergeCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext)));
                 }
                 return _MergeCommand;
             }

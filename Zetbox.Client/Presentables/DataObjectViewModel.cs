@@ -34,6 +34,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.API.Common;
     using Zetbox.Client.GUI;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Proxies a whole IDataObject
@@ -509,7 +510,7 @@ namespace Zetbox.Client.Presentables
                         Merge, 
                         CanMerge,
                         () => DataObjectViewModelResources.MergeCommand_Reason);
-                    _MergeCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
+                    Task.Run(async () => _MergeCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext)));
                 }
                 return _MergeCommand;
             }
@@ -565,11 +566,11 @@ namespace Zetbox.Client.Presentables
                 {
                     if (_object is Icon)
                     {
-                        _iconCache = IconConverter.ToImage((Icon)_object);
+                        Task.Run(async () => Icon = await IconConverter.ToImage((Icon)_object));
                     }
                     else
                     {
-                        _iconCache = IconConverter.ToImage(_object.GetObjectClass(FrozenContext).DefaultIcon);
+                        Task.Run(async () => Icon = await IconConverter.ToImage(_object.GetObjectClass(FrozenContext).DefaultIcon));
                     }
                 }
                 return _iconCache;

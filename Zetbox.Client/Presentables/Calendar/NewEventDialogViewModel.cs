@@ -8,6 +8,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.API;
     using Zetbox.Client.Presentables.ZetboxBase;
     using Zetbox.App.Calendar;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class NewEventDialogViewModel : WindowViewModel
@@ -100,7 +101,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         New, 
                         CanNew, 
                         CanNewReason);
-                    _NewCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
+                    Task.Run(async () => _NewCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext)));
 
                 }
                 return _NewCommand;

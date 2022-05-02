@@ -268,7 +268,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 get
                 {
-                    return CurrentPrincipal.IsAdministrator();
+                    return CurrentPrincipal?.IsAdministrator() == true;
                 }
             }
 
@@ -276,7 +276,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 if (DataContext.IsDisposed) return false;
 
-                var result = CurrentPrincipal.IsAdministrator();
+                var result = CurrentPrincipal?.IsAdministrator() == true;
                 if(!result)
                 {
                     this.Reason = "Only a Administrator may start the debugger";

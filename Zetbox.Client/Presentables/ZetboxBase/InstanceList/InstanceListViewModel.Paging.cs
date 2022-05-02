@@ -18,6 +18,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.FilterViewModels;
@@ -40,7 +41,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         NextPage, 
                         CanNextPage, 
                         null);
-                    _NextPageCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.forward_png.Find(FrozenContext));
+                    Task.Run(async () => _NextPageCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.forward_png.Find(FrozenContext)));
                 }
                 return _NextPageCommand;
             }
@@ -77,7 +78,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         PrevPage, 
                         CanPrevPage, 
                         null);
-                    _PrevPageCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.back_png.Find(FrozenContext));
+                    Task.Run(async () => _PrevPageCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.back_png.Find(FrozenContext)));
                 }
                 return _PrevPageCommand;
             }

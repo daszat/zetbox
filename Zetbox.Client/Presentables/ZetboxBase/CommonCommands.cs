@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
@@ -215,7 +216,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext)));
+                if (base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext)));
+                return base.Icon;
             }
             set
             {
@@ -320,7 +323,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext)));
+                if (base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext)));
+                return base.Icon;
             }
             set
             {
@@ -478,7 +483,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext)));
+                if (base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext)));
+                return base.Icon;
             }
             set
             {
@@ -663,7 +670,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext)));
+                if (base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext)));
+                return base.Icon;
             }
             set
             {
@@ -734,7 +743,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return base.Icon ?? (base.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.info_png.Find(FrozenContext)));
+                if(base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.info_png.Find(FrozenContext)));
+                return base.Icon;
             }
             set
             {
@@ -793,7 +804,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return base.Icon ?? (base.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.otheroptions_ico.Find(FrozenContext)));
+                if (base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.otheroptions_ico.Find(FrozenContext)));
+                return base.Icon;
             }
             set
             {
@@ -854,7 +867,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return base.Icon ?? (base.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.propertiesORoptions_ico.Find(FrozenContext)));
+                if (base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.propertiesORoptions_ico.Find(FrozenContext)));
+                return base.Icon;
             }
             set
             {

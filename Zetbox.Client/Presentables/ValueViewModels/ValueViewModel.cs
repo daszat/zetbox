@@ -1148,7 +1148,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         () => Edit(),
                         () => !IsReadOnly,
                         null);
-                    _EditCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext));
+                    Task.Run(async () => _EditCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext)));
                 }
                 return _EditCommand;
             }
@@ -1194,7 +1194,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         () => SendMail(),
                         () => _mailSender != null && !string.IsNullOrWhiteSpace(Value) && IsMailaddress(Value),
                         SendMailReason);
-                    _SendMailCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext));
+                    Task.Run(async () => _SendMailCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext)));
                 }
                 return _SendMailCommand;
             }
@@ -1877,21 +1877,26 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             get
             {
                 if (_customIcon != null)
-                {
-                    return _customIcon;
-                }
-                else if (base.Value == true)
-                {
-                    return IconConverter.ToImage(BoolModel.TrueIcon);
-                }
-                else if (base.Value == false)
-                {
-                    return IconConverter.ToImage(BoolModel.FalseIcon);
-                }
-                else
-                {
-                    return IconConverter.ToImage(BoolModel.NullIcon);
-                }
+                    Task.Run(async () =>
+                    {
+                        if (_customIcon != null)
+                        {
+                            return _customIcon;
+                        }
+                        else if (base.Value == true)
+                        {
+                            return await IconConverter.ToImage(BoolModel.TrueIcon);
+                        }
+                        else if (base.Value == false)
+                        {
+                            return await IconConverter.ToImage(BoolModel.FalseIcon);
+                        }
+                        else
+                        {
+                            return await IconConverter.ToImage(BoolModel.NullIcon);
+                        }
+                    });
+                return _customIcon;
             }
             set
             {

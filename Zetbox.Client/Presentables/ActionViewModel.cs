@@ -25,6 +25,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.API.Common;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class ActionViewModel
@@ -77,7 +78,8 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                return IconConverter.ToImage(Method.Icon) ?? base.Icon;
+                Task.Run(async () => base.Icon = await IconConverter.ToImage(Method.Icon) ?? base.Icon);
+                return null;
             }
             set
             {

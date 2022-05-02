@@ -27,6 +27,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
     using System.ComponentModel;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener, IDeleteCommandParameter, IOpenCommandParameter, INewCommandParameter
@@ -53,7 +54,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         public override System.Drawing.Image Icon
         {
-            get { return IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.GUI.NavigationEntry.Find(FrozenContext).DefaultIcon); }
+            get
+            {
+                if (base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.GUI.NavigationEntry.Find(FrozenContext).DefaultIcon));
+                return base.Icon;
+            }
         }
 
         public ViewModel DashboardViewModel

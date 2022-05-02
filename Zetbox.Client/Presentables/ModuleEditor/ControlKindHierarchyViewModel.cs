@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -52,7 +53,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         public override System.Drawing.Image Icon
         {
-            get { return IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.GUI.ControlKind.Find(FrozenContext).DefaultIcon); }
+            get
+            {
+                if(base.Icon == null)
+                    Task.Run(async () => base.Icon = await IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.GUI.ControlKind.Find(FrozenContext).DefaultIcon));
+                return base.Icon;
+            }
         }
 
         public ViewModel DashboardViewModel

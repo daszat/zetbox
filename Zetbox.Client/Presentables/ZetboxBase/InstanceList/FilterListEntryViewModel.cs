@@ -23,6 +23,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.Client.Presentables.FilterViewModels;
     using Zetbox.App.GUI;
     using Zetbox.App.Base;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class FilterListEntryViewModel : ViewModel
@@ -100,7 +101,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         FilterListEntryViewModelResources.RemoveCommand, 
                         FilterListEntryViewModelResources.RemoveCommand_Tooltip,
                         Remove, () => IsUserFilter, null);
-                    _RemoveCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
+                    Task.Run(async () => _RemoveCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext)));
                 }
                 return _RemoveCommand;
             }

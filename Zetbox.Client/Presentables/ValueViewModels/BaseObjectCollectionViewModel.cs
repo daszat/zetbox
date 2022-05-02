@@ -450,7 +450,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         () => AddExistingItem(),
                         () => AllowAddExisting && !IsReadOnly,
                         null);
-                    _AddExistingCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext));
+                    Task.Run(async () => _AddExistingCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext)));
                 }
                 return _AddExistingCommand;
             }

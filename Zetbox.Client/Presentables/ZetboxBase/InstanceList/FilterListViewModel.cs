@@ -29,6 +29,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.FilterViewModels;
     using Zetbox.API.Client;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class FilterListViewModel : ViewModel
@@ -445,7 +446,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         AddFilter,
                         () => AllowFilter && AllowUserFilter,
                         null);
-                    _AddFilterCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
+                    Task.Run(async () => _AddFilterCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext)));
                 }
                 return _AddFilterCommand;
             }
