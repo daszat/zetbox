@@ -620,9 +620,10 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                         ShowObject(obj, activate: false);
                     }
 
-                    ViewModelFactory.CreateDelayedTask(this, () =>
+                    await ViewModelFactory.CreateDelayedTask(this, () =>
                     {
                         this.SelectedItem = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, objects.First());
+                        return Task.CompletedTask;
                     }).Trigger();
                 }
                 return true;

@@ -692,7 +692,7 @@ namespace Zetbox.Client.Presentables
 
         #region delayed tasks
 
-        public virtual IDelayedTask CreateDelayedTask(ViewModel displayer, Action loadAction)
+        public virtual IDelayedTask CreateDelayedTask(ViewModel displayer, Func<Task> loadAction)
         {
             return new ImmediateTask(loadAction);
         }
@@ -702,10 +702,10 @@ namespace Zetbox.Client.Presentables
         /// </summary>
         /// <param name="displayer"></param>
         /// <param name="loadAction"></param>
-        public virtual void TriggerDelayedTask(ViewModel displayer, Action loadAction)
+        public virtual Task TriggerDelayedTask(ViewModel displayer, Func<Task> loadAction)
         {
             var task = CreateDelayedTask(displayer, loadAction);
-            task.Trigger();
+            return task.Trigger();
         }
 
         #endregion

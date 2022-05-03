@@ -110,9 +110,10 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     newWorkspace.ShowObject(obj, activate: false);
                 }
 
-                newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
+                await newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
                 {
                     newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
+                    return Task.CompletedTask;
                 }).Trigger();
             }
             else

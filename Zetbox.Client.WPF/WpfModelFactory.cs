@@ -218,7 +218,7 @@ namespace Zetbox.Client.WPF
             MessageBox.Show(message, caption);
         }
 
-        public override IDelayedTask CreateDelayedTask(ViewModel displayer, Action loadAction)
+        public override IDelayedTask CreateDelayedTask(ViewModel displayer, Func<Task> loadAction)
         {
             return new WpfDelayedTask(displayer, loadAction);
         }

@@ -18,6 +18,7 @@ namespace Zetbox.Client.Presentables.GUI
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.GUI;
     using Zetbox.Client.Models;
@@ -115,6 +116,7 @@ namespace Zetbox.Client.Presentables.GUI
                             }
                         }
                         OnPropertyChanged("Statistic");
+                        return Task.CompletedTask;
                     }).Trigger();
                 }
                 return _statisticModel;

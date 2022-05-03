@@ -20,6 +20,7 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
 
     public class ASideCollectionWrapper<TA, TB, TEntry, TBaseCollection>
@@ -36,11 +37,23 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
 
         protected override IEnumerable<TA> GetItems()
         {
+            var t = Task.Run(async () =>
+            {
+                var triggerFetch = typeof(TEntry).FindMethod("TriggerFetchAAsync", null);
+                foreach (var entry in Collection)
+                {
+                    await (Task)triggerFetch.Invoke(entry, null);
+                }
+            });
+            t.Wait();
             return Collection.Select(e => e.A);
         }
 
         protected override TA ItemFromEntry(TEntry entry)
         {
+            var triggerFetch = typeof(TEntry).FindMethod("TriggerFetchAAsync", null);
+            var t = Task.Run(async () => await (Task)triggerFetch.Invoke(entry, null));
+            t.Wait();
             return entry.A;
         }
 
@@ -66,11 +79,23 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
 
         protected override IEnumerable<TB> GetItems()
         {
+            var t = Task.Run(async () => 
+            {
+                var triggerFetch = typeof(TEntry).FindMethod("TriggerFetchBAsync", null);
+                foreach (var entry in Collection)
+                {
+                    await (Task)triggerFetch.Invoke(entry, null);
+                }
+            });
+            t.Wait();
             return Collection.Select(e => e.B);
         }
 
         protected override TB ItemFromEntry(TEntry entry)
         {
+            var triggerFetch = typeof(TEntry).FindMethod("TriggerFetchBAsync", null);
+            var t = Task.Run(async () => await (Task)triggerFetch.Invoke(entry, null));
+            t.Wait();
             return entry.B;
         }
 

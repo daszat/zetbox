@@ -10,6 +10,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class PropertiesPrewiewViewModel : ViewModel
@@ -51,6 +52,7 @@ namespace Zetbox.Client.Presentables
             {
                 _displayedColumns = null;
                 OnPropertyChanged("DisplayedColumns");
+                return Task.CompletedTask;
             })
             .Trigger();
         }

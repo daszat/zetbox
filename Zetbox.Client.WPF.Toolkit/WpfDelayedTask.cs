@@ -20,6 +20,7 @@ namespace Zetbox.Client.WPF.Toolkit
     using System.Linq;
     using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using System.Windows.Threading;
     using Zetbox.API.Client;
     using Zetbox.Client.Presentables;
@@ -30,9 +31,9 @@ namespace Zetbox.Client.WPF.Toolkit
     public sealed class WpfDelayedTask : IDelayedTask
     {
         private readonly ViewModel _displayer;
-        private readonly Action _task;
+        private readonly Func<Task> _task;
 
-        public WpfDelayedTask(ViewModel displayer, Action task)
+        public WpfDelayedTask(ViewModel displayer, Func<Task> task)
         {
             if (task == null) throw new ArgumentNullException("task");
 
@@ -40,16 +41,16 @@ namespace Zetbox.Client.WPF.Toolkit
             _task = task;
         }
 
-        public void Trigger()
+        public Task Trigger()
         {
             if (_displayer != null)
                 _displayer.SetBusy();
 
-            Dispatcher.FromThread(Thread.CurrentThread).BeginInvoke(new Action(() =>
+            Dispatcher.FromThread(Thread.CurrentThread).BeginInvoke(new Action(async () =>
             {
                 try
                 {
-                    _task();
+                    await _task();
                 }
                 finally
                 {
@@ -57,6 +58,8 @@ namespace Zetbox.Client.WPF.Toolkit
                         _displayer.ClearBusy();
                 }
             }), DispatcherPriority.Background); // prio must be Background to let fakeprogressoverlay be rendered
+
+            return Task.CompletedTask;
         }
     }
 }

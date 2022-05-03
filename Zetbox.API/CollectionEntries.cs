@@ -16,6 +16,7 @@
 namespace Zetbox.API
 {
     using System;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Asserts that the Relation "RelationID" contains the tuple (AObject, BObject).

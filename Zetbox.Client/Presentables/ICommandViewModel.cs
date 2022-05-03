@@ -187,6 +187,8 @@ namespace Zetbox.Client.Presentables
                         {
                             Executing = false;
                         }
+
+                        return Task.CompletedTask;
                     });
                 }
                 else

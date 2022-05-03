@@ -60,8 +60,8 @@ namespace Zetbox.Client.Presentables
         TModelFactory CreateViewModel<TModelFactory>(ViewModelDescriptor desc) where TModelFactory : class;
         TModelFactory CreateViewModel<TModelFactory>(System.Type t) where TModelFactory : class;
 
-        IDelayedTask CreateDelayedTask(ViewModel displayer, Action loadAction);
-        void TriggerDelayedTask(ViewModel displayer, Action loadAction);
+        IDelayedTask CreateDelayedTask(ViewModel displayer, Func<Task> loadAction);
+        Task TriggerDelayedTask(ViewModel displayer, Func<Task> loadAction);
 
         // IMultipleInstancesManager
         void OnIMultipleInstancesManagerCreated(Zetbox.API.IZetboxContext ctx, IMultipleInstancesManager workspace);

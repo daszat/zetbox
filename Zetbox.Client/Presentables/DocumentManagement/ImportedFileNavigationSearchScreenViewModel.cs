@@ -87,6 +87,8 @@ namespace Zetbox.Client.Presentables.DocumentManagement
                     newWorkspace.ShowObject(obj.Object, activate: false);
                 }
                 newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
+
+                return Task.CompletedTask;
             }).Trigger();
 
             return Task.CompletedTask;

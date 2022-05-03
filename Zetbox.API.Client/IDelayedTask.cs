@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Zetbox.API.Client
 {
@@ -24,23 +25,23 @@ namespace Zetbox.API.Client
         /// <summary>
         /// Trigger one execution of this Task. The execution may be delayed by the implementation by queueing it onto the UI's message pump or similar.
         /// </summary>
-        void Trigger();
+        Task Trigger();
     }
 
     public class ImmediateTask : IDelayedTask
     {
-        private readonly Action _task;
+        private readonly Func<Task> _task;
 
-        public ImmediateTask(Action task)
+        public ImmediateTask(Func<Task> task)
         {
             if (task == null) throw new ArgumentNullException("task");
 
             _task = task;
         }
 
-        public void Trigger()
+        public Task Trigger()
         {
-            _task();
+            return _task();
         }
     }
 }

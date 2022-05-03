@@ -141,9 +141,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             newScope.ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
 
             // ShowForeignObject may take a while
-            newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
+            newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, async () =>
             {
-                var newViewModels = items.Select(i => DataObjectViewModel.Fetch(newScope.ViewModelFactory, newCtx, this, newCtx.Find(DataContext.GetInterfaceType(i), i.ID)));
+                var newViewModels = new List<ViewModel>();
+                foreach(var i in items)
+                { 
+                    newViewModels.Add(DataObjectViewModel.Fetch(newScope.ViewModelFactory, newCtx, this, await newCtx.FindAsync(DataContext.GetInterfaceType(i), i.ID)));
+                }
+
                 var openingArgs = new ItemsOpeningEventArgs(newCtx, newWorkspace, newViewModels);
 
                 OnItemsOpening(newWorkspace, openingArgs);
