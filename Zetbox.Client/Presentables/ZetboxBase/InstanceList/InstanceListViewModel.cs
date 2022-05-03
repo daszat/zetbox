@@ -832,7 +832,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             if (_loadInstancesCoreTask != null)
             {
-                // ClearBusy(); // TODO: Workaround! Cancel should call Finally?
+                ClearBusy(); // TODO: Workaround! Cancel should call Finally?
                 // TODO: _loadInstancesCoreTask.Cancel();
             }
             _loadInstancesCoreTask = null;
@@ -863,6 +863,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 catch (Exception ex)
                 {
                     errorReporter.Value.Show(ex);
+                }
+                finally
+                {
+                    ClearBusy();
                 }
             });
 
