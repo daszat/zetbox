@@ -50,6 +50,7 @@ namespace Zetbox.Client.WPF
     public partial class App : System.Windows.Application
     {
         public static new App Current { get { return (App)(System.Windows.Application.Current); } }
+        public TaskScheduler TaskScheduler { get; private set; }
 
         /// <summary>
         ///  See http://dasz.at/index.php/2007/12/wpf-datetime-format/
@@ -108,6 +109,7 @@ namespace Zetbox.Client.WPF
             base.OnStartup(e);
 
             var uiThread = System.Threading.Thread.CurrentThread;
+            TaskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
             await Task.Delay(1);
             try
             {

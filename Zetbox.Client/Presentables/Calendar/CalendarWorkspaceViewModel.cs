@@ -437,7 +437,7 @@ namespace Zetbox.Client.Presentables.Calendar
             calendar.GetNewEventViewModels(args);
 
             dlg.InputViewModels = args.ViewModels;
-            await scope.ViewModelFactory.ShowModel(dlg, true);
+            scope.ViewModelFactory.ShowModel(dlg, true);
             dlg.Closed += (s, e) =>
             {
                 if (dlg.Result == true)

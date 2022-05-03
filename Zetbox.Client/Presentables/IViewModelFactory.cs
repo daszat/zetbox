@@ -36,10 +36,10 @@ namespace Zetbox.Client.Presentables
 
     public interface IViewModelFactory : IToolkit
     {
-        Task ShowModel(ViewModel mdl, bool activate);
-        Task ShowModel(ViewModel mdl, Zetbox.App.GUI.ControlKind kind, bool activate);
+        void ShowModel(ViewModel mdl, bool activate);
+        void ShowModel(ViewModel mdl, Zetbox.App.GUI.ControlKind kind, bool activate);
 
-        Task ShowDialog(ViewModel mdl, ViewModel ownerMdl = null, Zetbox.App.GUI.ControlKind kind = null);
+        void ShowDialog(ViewModel mdl, ViewModel ownerMdl = null, Zetbox.App.GUI.ControlKind kind = null);
 
         bool CanShowModel(ViewModel mdl);
 
@@ -84,5 +84,7 @@ namespace Zetbox.Client.Presentables
         /// <param name="scope"></param>
         /// <returns></returns>
         IZetboxContext CreateNewContext(ContextIsolationLevel isolationLevel = ContextIsolationLevel.PreferContextCache, Autofac.ILifetimeScope scope = null);
+
+        TaskScheduler UITaskScheduler { get;}
     }
 }

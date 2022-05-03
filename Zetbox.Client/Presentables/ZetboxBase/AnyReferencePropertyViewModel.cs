@@ -108,14 +108,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public async Task SelectValue()
+        public Task SelectValue()
         {
             var selectClass = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                 DataContext,
                 this,
                 (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass.Find(FrozenContext),
                 null,
-                async (chosenClass) =>
+                (chosenClass) =>
                 {
                     if (chosenClass != null)
                     {
@@ -139,11 +139,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         selectionTask.ListViewModel.AllowAddNew = true;
                         OnDataObjectSelectionTaskCreated(selectionTask);
 
-                        await ViewModelFactory.ShowDialog(selectionTask);
+                        ViewModelFactory.ShowDialog(selectionTask);
                     }
                 },
                 null);
-            await ViewModelFactory.ShowDialog(selectClass);
+            ViewModelFactory.ShowDialog(selectClass);
+            return Task.CompletedTask;
         }
 
         public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;

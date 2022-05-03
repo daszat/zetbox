@@ -65,10 +65,12 @@ namespace Zetbox.Client.Presentables
             return result;
         }
 
-        public async Task CreateRelation()
+        public Task CreateRelation()
         {
             var rel = _class.CreateRelation();
-            await ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, rel), true);
+            ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, rel), true);
+
+            return Task.CompletedTask;
         }
     }
 }

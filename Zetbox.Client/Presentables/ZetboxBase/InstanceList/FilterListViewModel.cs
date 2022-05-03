@@ -452,7 +452,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public async Task AddFilter()
+        public Task AddFilter()
         {
             var dlg = ViewModelFactory.CreateViewModel<PropertySelectionTaskViewModel.Factory>()
                 .Invoke(DataContext,
@@ -468,7 +468,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     });
             dlg.FollowRelationsOne = true;
             dlg.FollowRelationsMany = true;
-            await ViewModelFactory.ShowDialog(dlg);
+            ViewModelFactory.ShowDialog(dlg);
+            return Task.CompletedTask;
         }
 
         public void ResetUserFilter()

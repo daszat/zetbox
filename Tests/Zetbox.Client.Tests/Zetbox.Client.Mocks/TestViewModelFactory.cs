@@ -25,6 +25,7 @@ namespace Zetbox.Client.Mocks
     using Zetbox.Client.Presentables;
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.Client.GUI;
+    using System.Threading.Tasks;
 
     class TestViewModelFactory
         : ViewModelFactory
@@ -67,5 +68,7 @@ namespace Zetbox.Client.Mocks
         public override void ShowMessage(string message, string caption)
         {
         }
+
+        public override TaskScheduler UITaskScheduler => TaskScheduler.Default;
     }
 }

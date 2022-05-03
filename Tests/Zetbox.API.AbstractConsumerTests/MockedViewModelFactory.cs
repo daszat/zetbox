@@ -25,6 +25,7 @@ namespace Zetbox.API.AbstractConsumerTests
     using Zetbox.API.Configuration;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.GUI;
+    using System.Threading.Tasks;
 
     public class MockedViewModelFactory : ViewModelFactory
     {
@@ -101,5 +102,7 @@ namespace Zetbox.API.AbstractConsumerTests
         {
             return (T)LastShownModel;
         }
+
+        public override TaskScheduler UITaskScheduler => TaskScheduler.Default;
     }
 }

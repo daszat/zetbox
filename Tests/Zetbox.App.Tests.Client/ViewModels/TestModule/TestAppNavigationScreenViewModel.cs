@@ -201,15 +201,16 @@ namespace Zetbox.Client.Presentables.TestModule
                     this,
                     "Open InstanceListTester",
                     "Open the tester in a real workspace",
-                    async () =>
+                    () =>
                     {
                         var newScope = ViewModelFactory.CreateNewScope();
                         var newCtx = newScope.ViewModelFactory.CreateNewContext();
                         var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
 
-                        await newScope.ViewModelFactory.ShowModel(ws, activate: true);
+                        newScope.ViewModelFactory.ShowModel(ws, activate: true);
 
                         ws.ShowModel(newScope.ViewModelFactory.CreateViewModel<InstanceListTestViewModel.Factory>().Invoke(newCtx, ws, this.Screen));
+                        return Task.CompletedTask;
                     },
                     null,
                     null));

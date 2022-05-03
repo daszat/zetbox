@@ -160,7 +160,7 @@ namespace Zetbox.Client.Presentables
                     // Ensure not null
                     _CurrentPrincipal = new ZetboxPrincipal(0, string.Empty, string.Empty, Enumerable.Empty<ZetboxPrincipalGroup>());
                     var task = Task.Run(async () => _CurrentPrincipal = await _dependencies.PrincipalResolver.GetCurrent());
-                    _ = task.ContinueWith(t => OnPropertyChanged(nameof(CurrentPrincipal)), TaskScheduler.Default);
+                    _ = task.ContinueWith(t => OnPropertyChanged(nameof(CurrentPrincipal)), ViewModelFactory.UITaskScheduler);
                 }
                 return _CurrentPrincipal;
             }
@@ -329,7 +329,7 @@ namespace Zetbox.Client.Presentables
             if (_PropertyChangedEvent == null) return;
 
             // Ensure this notification is running on the main thread
-            Task.CompletedTask.ContinueWith(t => _PropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName)), TaskScheduler.Default);
+            Task.CompletedTask.ContinueWith(t => _PropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName)), ViewModelFactory.UITaskScheduler);
         }
         #endregion
 

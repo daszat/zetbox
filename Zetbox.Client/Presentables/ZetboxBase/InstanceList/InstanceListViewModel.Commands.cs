@@ -246,7 +246,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public async Task SelectColumns()
+        public Task SelectColumns()
         {
             var dlg = ViewModelFactory.CreateViewModel<PropertySelectionTaskViewModel.Factory>()
                 .Invoke(DataContext,
@@ -270,7 +270,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     RemoveDisplayColumn(e.Item.Property);
                 }
             };
-            await ViewModelFactory.ShowDialog(dlg);
+            ViewModelFactory.ShowDialog(dlg);
+            return Task.CompletedTask;
         }
 
         public void ResetDisplayedColumns()
@@ -335,7 +336,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
                 var task = newScope.ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(newCtx, ws, target, source);
                 ws.ShowModel(task);
-                await newScope.ViewModelFactory.ShowModel(ws, RequestedWorkspaceKind, true);
+                newScope.ViewModelFactory.ShowModel(ws, RequestedWorkspaceKind, true);
             }
         }
         #endregion

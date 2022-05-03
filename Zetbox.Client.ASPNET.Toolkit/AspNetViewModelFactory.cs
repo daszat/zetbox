@@ -10,6 +10,7 @@ namespace Zetbox.Client.ASPNET
     using Zetbox.API.Configuration;
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.Client.GUI;
+    using System.Threading.Tasks;
 
     public class AspNetViewModelFactory : ViewModelFactory
     {
@@ -52,5 +53,7 @@ namespace Zetbox.Client.ASPNET
         {
             throw new NotSupportedException();
         }
+
+        public override TaskScheduler UITaskScheduler => TaskScheduler.Default;
     }
 }

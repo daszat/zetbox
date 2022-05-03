@@ -257,11 +257,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region SelectValue
 
-        public async Task SelectValue()
+        public Task SelectValue()
         {
             var selectionTask = CreateDataObjectSelectionTask();
             OnDataObjectSelectionTaskCreated(selectionTask);
-            await ViewModelFactory.ShowDialog(selectionTask);
+            ViewModelFactory.ShowDialog(selectionTask);
+            return Task.CompletedTask;
         }
 
         /// <summary>

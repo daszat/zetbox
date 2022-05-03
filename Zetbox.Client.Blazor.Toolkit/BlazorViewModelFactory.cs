@@ -52,5 +52,7 @@ namespace Zetbox.Client.Blazor
         {
             throw new NotSupportedException();
         }
+
+        public override TaskScheduler UITaskScheduler => TaskScheduler.Default;
     }
 }

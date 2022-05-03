@@ -700,14 +700,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 var item = Item;
                 if (item is DataObjectViewModel)
                 {
-                    await ViewModelFactory.ShowModel(item, true);
+                    ViewModelFactory.ShowModel(item, true);
                 }
                 if (item is BaseValueViewModel)
                 {
                     var objVmdl = item.Parent as DataObjectViewModel;
                     if (objVmdl != null)
                     {
-                        await ViewModelFactory.ShowModel(objVmdl, true);
+                        ViewModelFactory.ShowModel(objVmdl, true);
                         var grp = objVmdl.PropertyGroups.FirstOrDefault(i => i.PropertyModels.Contains(item));
                         if (grp != null)
                         {

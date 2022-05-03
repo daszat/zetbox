@@ -148,16 +148,16 @@ namespace Zetbox.Client.WPF
             timer.Start();
         }
 
-        protected override async Task<object> CreateDefaultView(ViewModel mdl)
+        protected override object CreateDefaultView(ViewModel mdl)
         {
-            System.Windows.Controls.Control view = (System.Windows.Controls.Control)(await base.CreateDefaultView(mdl));
+            System.Windows.Controls.Control view = (System.Windows.Controls.Control)(base.CreateDefaultView(mdl));
             if (view != null) view.DataContext = mdl;
             return view;
         }
 
-        protected override async Task<object> CreateSpecificView(ViewModel mdl, Zetbox.App.GUI.ControlKind kind)
+        protected override object CreateSpecificView(ViewModel mdl, Zetbox.App.GUI.ControlKind kind)
         {
-            System.Windows.Controls.Control view = (System.Windows.Controls.Control)(await base.CreateSpecificView(mdl, kind));
+            System.Windows.Controls.Control view = (System.Windows.Controls.Control)(base.CreateSpecificView(mdl, kind));
             if (view != null) view.DataContext = mdl;
             return view;
         }
@@ -222,5 +222,7 @@ namespace Zetbox.Client.WPF
         {
             return new WpfDelayedTask(displayer, loadAction);
         }
+
+        public override TaskScheduler UITaskScheduler => App.Current.TaskScheduler;
     }
 }

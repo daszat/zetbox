@@ -53,7 +53,8 @@ namespace Zetbox.API.Common.GUI
                         Logging.Log.WarnFormat("Icon#{0} has no associated request", realIcon.ID);
                         return null;
                     }
-                    bmp = System.Drawing.Image.FromStream(blob.GetStream());
+                    using var stream = await Context.GetStreamAsync(blob.ID);
+                    bmp = System.Drawing.Image.FromStream(stream);
                     _cache[icon.ExportGuid] = bmp;
                 }
                 return bmp;

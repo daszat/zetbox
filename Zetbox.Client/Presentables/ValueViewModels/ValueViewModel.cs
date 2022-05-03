@@ -1156,14 +1156,15 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public async Task Edit()
+        public Task Edit()
         {
-            await ViewModelFactory.ShowDialog(
+            ViewModelFactory.ShowDialog(
                     ViewModelFactory.CreateViewModel<MultiLineEditorDialogViewModel.Factory>().Invoke(
                         DataContext,
                         this,
                         Value,
                         (v) => Value = v));
+            return Task.CompletedTask;
         }
     }
 

@@ -94,7 +94,7 @@ namespace Zetbox.Client.Presentables.SchemaMigration
             }
         }
 
-        public async Task Select()
+        public Task Select()
         {
             var dlg = ViewModelFactory.CreateViewModel<PropertySelectionTaskViewModel.Factory>().Invoke(DataContext, Parent, SourceColumn.SourceTable.DestinationObjectClass, (result) =>
             {
@@ -109,7 +109,8 @@ namespace Zetbox.Client.Presentables.SchemaMigration
             });
             dlg.FollowCompoundObjects = true;
 
-            await ViewModelFactory.ShowDialog(dlg);
+            ViewModelFactory.ShowDialog(dlg);
+            return Task.CompletedTask;
         }
 
         protected override void OnPropertyChanged(string propertyName)

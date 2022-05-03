@@ -205,7 +205,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
                 if (objects.Count > 0)
                 {
                     var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
-                    await newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+                    newScope.ViewModelFactory.ShowModel(newWorkspace, true);
 
                     foreach (var obj in objects)
                     {
@@ -329,7 +329,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             if (objects.Count > 0)
             {
                 var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
-                await newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+                newScope.ViewModelFactory.ShowModel(newWorkspace, true);
 
                 foreach (var obj in objects)
                 {

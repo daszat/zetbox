@@ -335,15 +335,18 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             }
         }
 
-        public async Task EditCurrentModule()
+        public Task EditCurrentModule()
         {
-            if (CurrentModule == null) return;
+            if (CurrentModule == null)
+                return Task.CompletedTask;
+
             var newScope = ViewModelFactory.CreateNewScope();
             var newCtx = newScope.ViewModelFactory.CreateNewContext();
             var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
 
             ws.ShowObject(CurrentModule);
-            await newScope.ViewModelFactory.ShowModel(ws, true);
+            newScope.ViewModelFactory.ShowModel(ws, true);
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _ReportProblemCommand = null;

@@ -72,13 +72,13 @@ namespace Zetbox.Client.Presentables.DocumentManagement
             }
         }
 
-        public async Task OpenAll()
+        public Task OpenAll()
         {
             var newScope = ViewModelFactory.CreateNewScope();
             var newCtx = newScope.ViewModelFactory.CreateNewContext();
 
             var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
-            await newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+            newScope.ViewModelFactory.ShowModel(newWorkspace, true);
 
             newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
             {
@@ -88,6 +88,8 @@ namespace Zetbox.Client.Presentables.DocumentManagement
                 }
                 newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
             }).Trigger();
+
+            return Task.CompletedTask;
         }
     }
 }
