@@ -44,25 +44,25 @@ namespace Zetbox.Client.WPF.Toolkit
         private readonly IFrozenContext _frozenCtx;
         private readonly object _requestedKind;
 
-        private static Task<DataTemplate> SelectTemplate(ViewModel mdl, string controlKindName, IFrozenContext frozenCtx)
+        private static Task<ViewDescriptor> SelectTemplate(ViewModel mdl, string controlKindName, IFrozenContext frozenCtx)
         {
             var ck = frozenCtx.GetQuery<ControlKind>().SingleOrDefault(c => c.Name == controlKindName);
             if (ck == null) Logging.Log.WarnFormat("Control kind with name '{0}' was not found", controlKindName);
             return SelectTemplate(mdl, ck, frozenCtx);
         }
 
-        private static async Task<DataTemplate> SelectTemplate(ViewModel mdl, ControlKind controlKind, IFrozenContext frozenCtx)
+        private static async Task<ViewDescriptor> SelectTemplate(ViewModel mdl, ControlKind controlKind, IFrozenContext frozenCtx)
         {
             ViewModelDescriptor pmd = GuiExtensions.GetViewModelDescriptor(mdl, frozenCtx);
             if (pmd == null) return null;
-            return CreateTemplate(await pmd.GetViewDescriptor(Toolkit.WPF, controlKind));
+            return await pmd.GetViewDescriptor(Toolkit.WPF, controlKind);
         }
 
-        private static async Task<DataTemplate> SelectDefaultTemplate(ViewModel mdl, IFrozenContext frozenCtx)
+        private static async Task<ViewDescriptor> SelectDefaultTemplate(ViewModel mdl, IFrozenContext frozenCtx)
         {
             ViewModelDescriptor pmd = GuiExtensions.GetViewModelDescriptor(mdl, frozenCtx);
             if (pmd == null) return null;
-            return CreateTemplate(await pmd.GetViewDescriptor(Toolkit.WPF));
+            return await pmd.GetViewDescriptor(Toolkit.WPF);
         }
 
 #if !DONT_CACHE_TEMPLATE
@@ -126,7 +126,7 @@ namespace Zetbox.Client.WPF.Toolkit
             }
 
             var model = item as ViewModel;
-            Task<DataTemplate> result = Task.Run(async () =>
+            Task<ViewDescriptor> result = Task.Run(async () =>
             {
                 if (model != null)
                 {
@@ -162,7 +162,7 @@ namespace Zetbox.Client.WPF.Toolkit
 
             if (result != null)
             {
-                return result.Result;
+                return CreateTemplate(result.Result);
             }
             else
             {
@@ -203,9 +203,6 @@ namespace Zetbox.Client.WPF.Toolkit
         // default DependencyProperty template
         public static readonly DependencyProperty RequestedKindProperty =
             DependencyProperty.RegisterAttached("RequestedKind", typeof(object), typeof(VisualTypeTemplateSelector), new UIPropertyMetadata());
-
-
-
 
         public static bool GetUseLabeledView(DependencyObject obj)
         {
