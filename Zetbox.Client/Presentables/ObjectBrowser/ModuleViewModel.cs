@@ -48,7 +48,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
                     return WorkspaceViewModelResources.SimpleObjects;
                 }
             }
-            public IEnumerable Children { get; set; }
+            public IEnumerable<ViewModel> Children { get; set; }
 
             public ViewModel DashboardViewModel
             {
@@ -79,8 +79,8 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
         #region public interface
 
-        private List<object> _children;
-        public IEnumerable Children
+        private List<ViewModel> _children;
+        public IEnumerable<ViewModel> Children
         {
             get
             {
@@ -89,7 +89,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
                     var simple = ViewModelFactory.CreateViewModel<TreeNodeSimpleObjects.Factory>().Invoke(DataContext, this);
                     simple.Children = this.SimpleObjectClasses;
                     _children = ObjectClasses
-                        .Cast<object>()
+                        .Cast<ViewModel>()
                         .Concat(new[] {  simple })
                         .ToList();
                 }

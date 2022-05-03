@@ -1,0 +1,75 @@
+﻿@using Zetbox.Client.Presentables.ObjectBrowser
+@using Zetbox.Client.Presentables.ZetboxBase
+@using static Zetbox.Client.Presentables.ObjectBrowser.ModuleViewModel
+
+<div class="row">
+	<div class="col-3">
+		<ul>
+			@foreach (var module in ViewModel.Modules)
+			{
+				<li @onclick:stopPropagation="true" @onclick="@(() => Select(module))" role="button">
+					@module.Name
+					<ul>
+						@foreach (var child in module.Children)
+						{
+							<li @onclick:stopPropagation="true" @onclick="@(() => Select(child))" role="button">
+								@child.Name
+
+								@if(child is TreeNodeSimpleObjects smpl && smpl.Children.Any())
+								{
+									<ul>
+										@foreach(var s_child in smpl.Children)
+										{
+											<li @onclick:stopPropagation="true" @onclick="@(() => Select(s_child))" role="button">
+												@s_child.Name
+											</li>
+										}
+									</ul>
+								}
+							</li>
+						}
+					</ul>
+				</li>
+			}
+		</ul>
+	</div>
+	<div class="col-9">
+		@if(CurrentInstanceList != null)
+		{
+			<Zetbox.Client.Blazor.Toolkit.Views.InstanceList.InstanceListDisplay ViewModel="@CurrentInstanceList"></Zetbox.Client.Blazor.Toolkit.Views.InstanceList.InstanceListDisplay>
+		}
+	</div>
+</div>
+
+@code {
+	private InstanceListViewModel CurrentInstanceList;
+
+	[Parameter]
+	public WorkspaceViewModel ViewModel { get; set; }
+
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		if (ViewModel != null)
+		{
+			ViewModel.PropertyChanged += (_, _) => StateHasChanged();
+		}
+	}
+
+	private void Select(ViewModel selected)
+	{
+		ViewModel.SelectedItem = selected;
+		Console.WriteLine($"Selected {selected.Name}");
+
+		if(selected is Zetbox.Client.Presentables.ObjectBrowser.ObjectClassViewModel objClass)
+		{
+			CurrentInstanceList = (InstanceListViewModel)objClass.DashboardViewModel;
+		}
+		else
+		{
+			CurrentInstanceList = null;
+		}
+	}
+}

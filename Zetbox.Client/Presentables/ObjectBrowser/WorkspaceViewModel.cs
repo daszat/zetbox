@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zetbox.API;
+using Zetbox.API.Async;
 using Zetbox.API.Client;
 using Zetbox.API.Configuration;
 using Zetbox.App.Base;
@@ -55,7 +56,8 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
                 if (_modulesCache == null)
                 {
                     _modulesCache = new ObservableCollection<ModuleViewModel>();
-                    LoadModules();
+                    _ = LoadModules();
+                    return new ObservableCollection<ModuleViewModel>();
                 }
                 return _modulesCache;
             }
@@ -114,13 +116,14 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             }
         }
 
-        private void LoadModules()
+        private async Task LoadModules()
         {
-            var modules = DataContext.GetQuery<Module>().ToList();
+            var modules = await DataContext.GetQuery<Module>().ToListAsync();
             foreach (var m in modules.OrderBy(i => i.Name))
             {
                 Modules.Add(ViewModelFactory.CreateViewModel<ModuleViewModel.Factory>(m).Invoke(DataContext, this, m));
             }
+            OnPropertyChanged(nameof(Modules));
         }
 
         public string AppsMenuItemString

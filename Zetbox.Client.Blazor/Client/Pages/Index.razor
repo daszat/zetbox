@@ -1,5 +1,5 @@
-﻿@using Zetbox.App.Projekte
-@using t = System.Threading.Tasks
+﻿@using t = System.Threading.Tasks
+@using Zetbox.Client.Presentables.ObjectBrowser
 
 @page "/"
 @inject IZetboxContext DataContext
@@ -10,16 +10,16 @@
 
 <h1>Hello zetbox!</h1>
 
-<Zetbox.Client.Blazor.Toolkit.Views.InstanceList.InstanceListDisplay ViewModel="@list"></Zetbox.Client.Blazor.Toolkit.Views.InstanceList.InstanceListDisplay>
+<Zetbox.Client.Blazor.Toolkit.Views.ObjectBrowser.WorkspaceDisplay ViewModel="@workspace"></Zetbox.Client.Blazor.Toolkit.Views.ObjectBrowser.WorkspaceDisplay>
 
 
 @code {
-	private InstanceListViewModel list;
+	private WorkspaceViewModel workspace;
 
 	protected async override t.Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
 
-		list = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, NamedObjects.Base.Classes.Zetbox.App.Projekte.Projekt.Find(FrozenContext), null);
+		workspace = ViewModelFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(DataContext, null);
 	}
 }
