@@ -649,8 +649,7 @@ namespace Zetbox.API.Server
         {
             try
             {
-                var t = FindAsync(ifType, ID);
-                t.TryRunSynchronously();
+                var t = Task.Run(async () => await FindAsync(ifType, ID));
                 return t.Result;
             }
             catch (System.Reflection.TargetInvocationException ex)
@@ -672,8 +671,7 @@ namespace Zetbox.API.Server
         {
             try
             {
-                var t = FindAsync<T>(ID);
-                t.TryRunSynchronously();
+                var t = Task.Run(async () => await FindAsync<T>(ID));
                 return t.Result;
             }
             catch (System.Reflection.TargetInvocationException ex)

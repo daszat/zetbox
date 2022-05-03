@@ -493,37 +493,22 @@ namespace Zetbox.DalProvider.NHibernate
             nhObj.Delete();
         }
 
-        public override System.Threading.Tasks.Task<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        public override async Task<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             CheckDisposed();
-            return new System.Threading.Tasks.Task<IDataObject>(() =>
-            {
-                try
-                {
-                    return (IDataObject)this.GetType()
-                        .FindGenericMethod("Find",
-                            new Type[] { ifType.Type },
-                            new Type[] { typeof(int) })
-                        .Invoke(this, new object[] { ID });
-                }
-                catch (System.Reflection.TargetInvocationException ex)
-                {
-                    // unwrap "business" exception
-                    throw ex.StripTargetInvocationExceptions();
-                }
-            });
+
+            var result = await FindPersistenceObjectAsync(ifType, ID);
+            if (result == null) { throw new ZetboxObjectNotFoundException(ifType.Type, ID); }
+            return (IDataObject)result;
         }
 
-        public override System.Threading.Tasks.Task<T> FindAsync<T>(int ID)
+        public override async Task<T> FindAsync<T>(int ID)
         {
             CheckDisposed();
 
-            return new System.Threading.Tasks.Task<T>(() =>
-            {
-                var result = FindPersistenceObject<T>(ID);
-                if (result == null) { throw new ZetboxObjectNotFoundException(typeof(T), ID); }
-                return result;
-            });
+            var result = await FindPersistenceObjectAsync<T>(ID);
+            if (result == null) { throw new ZetboxObjectNotFoundException(typeof(T), ID); }
+            return result;
         }
 
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
@@ -677,7 +662,7 @@ namespace Zetbox.DalProvider.NHibernate
             // TODO: do batching here
 
             var list = new List<T>();
-            
+
             foreach (var guid in exportGuids)
             {
                 var result = FindPersistenceObject<T>(guid);

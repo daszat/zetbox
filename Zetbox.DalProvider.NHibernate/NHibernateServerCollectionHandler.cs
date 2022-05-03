@@ -49,9 +49,11 @@ namespace Zetbox.DalProvider.NHibernate
             var ceType = ctx.ToImplementationType(rel.GetEntryInterfaceType()).Type;
 
             var method = this.GetType().GetMethod("GetCollectionEntriesInternal", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            return (IEnumerable<IRelationEntry>)method
+            var result = (Task<IEnumerable<IRelationEntry>>)method
                 .MakeGenericMethod(ceType)
                 .Invoke(this, new object[] { parent, rel, endRole });
+
+            return await result;
         }
 
         //// Helper method which is only called by reflection from GetCollectionEntries
