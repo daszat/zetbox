@@ -579,7 +579,7 @@ namespace Zetbox.Client.Presentables
             }
             set
             {
-                if (_iconCache != null)
+                if (_iconCache != value)
                 {
                     _iconCache = value;
                     OnPropertyChanged("Icon");
