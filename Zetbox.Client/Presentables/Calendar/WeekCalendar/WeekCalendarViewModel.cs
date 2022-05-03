@@ -57,9 +57,11 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public void NextWeek()
+        public Task NextWeek()
         {
             From = From.AddDays(7);
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _PrevWeekCommand = null;
@@ -79,9 +81,11 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public void PrevWeek()
+        public Task PrevWeek()
         {
             From = From.AddDays(-7);
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _ThisWeekCommand = null;
@@ -101,9 +105,11 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public void ThisWeek()
+        public Task ThisWeek()
         {
             From = DateTime.Today.FirstWeekDay();
+
+            return Task.CompletedTask;
         }
 
         public void Refresh()
@@ -223,19 +229,21 @@ namespace Zetbox.Client.Presentables.Calendar
                         WeekCalendar.WeekCalendarViewModelResources.JumpToDateCommand_Label,
                         WeekCalendar.WeekCalendarViewModelResources.JumpToDateCommand_Tooltip, 
                         JumpToDate,
-                        () => _jumpToDateMdl != null && _jumpToDateMdl.Value.HasValue,
+                        () => Task.FromResult(_jumpToDateMdl != null && _jumpToDateMdl.Value.HasValue),
                         null);
                 }
                 return _JumpToDateCommand;
             }
         }
 
-        public void JumpToDate()
+        public Task JumpToDate()
         {
             if (_jumpToDateMdl != null && _jumpToDateMdl.Value.HasValue)
             {
                 From = _jumpToDateMdl.Value.Value.FirstWeekDay();
             }
+
+            return Task.CompletedTask;
         }
 
         private List<DayCalendarViewModel> _DayItems;

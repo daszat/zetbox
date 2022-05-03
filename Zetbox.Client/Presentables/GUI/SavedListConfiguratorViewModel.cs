@@ -43,9 +43,9 @@ namespace Zetbox.Client.Presentables.GUI
         {
         }
 
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override async Task<System.Collections.ObjectModel.ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            var cmds = base.CreateCommands();
+            var cmds = await base.CreateCommands();
             cmds.Add(SaveCommand);
             cmds.Add(SaveAsCommand);
             cmds.Add(RenameCommand);
@@ -198,17 +198,17 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-        public void SaveAs()
+        public async Task SaveAs()
         {
             string name = string.Empty;
             ViewModelFactory.CreateDialog(DataContext, SavedListConfiguratorViewModelResources.SaveDlgTitle)
                 .AddString("name", SavedListConfiguratorViewModelResources.SaveDlgNameLabel)
                 .Show((p) => { name = p["name"] as string; });
             if (string.IsNullOrEmpty(name)) return;
-            Save(name);
+            await Save(name);
         }
 
-        public void Save()
+        public async Task Save()
         {
             string name = string.Empty;
             if (SelectedItem == null || !SelectedItem.IsMyOwn)
@@ -225,7 +225,7 @@ namespace Zetbox.Client.Presentables.GUI
                 name = SelectedItem.Name;
             }
 
-            Save(name);
+            await Save(name);
         }
 
         private ICommandViewModel _ResetCommand = null;
@@ -245,12 +245,14 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-        public void Reset()
+        public Task Reset()
         {
             SelectedItem = null;
             Parent.ResetSort(refresh: false);
             Parent.FilterList.ResetUserFilter();
             Parent.ResetDisplayedColumns();
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _DeleteCommand = null;
@@ -263,23 +265,24 @@ namespace Zetbox.Client.Presentables.GUI
                     _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         SavedListConfiguratorViewModelResources.DeleteCommandName,
                         SavedListConfiguratorViewModelResources.DeleteCommandTooltip,
-                        Delete, () => SelectedItem != null,
-                        () => SavedListConfiguratorViewModelResources.DeleteCommandReason);
+                        Delete, 
+                        () => Task.FromResult(SelectedItem != null),
+                        () => Task.FromResult(SavedListConfiguratorViewModelResources.DeleteCommandReason));
                     Task.Run(async () => _DeleteCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext)));
                 }
                 return _DeleteCommand;
             }
         }
 
-        public void Delete()
+        public async Task Delete()
         {
             if (SelectedItem != null)
             {
-                Delete(SelectedItem);
+                await Delete(SelectedItem);
             }
         }
 
-        public void Delete(SavedListConfigViewModel itemToDelete)
+        public Task Delete(SavedListConfigViewModel itemToDelete)
         {
             if (itemToDelete == null) throw new ArgumentNullException("itemToDelete");
             if (ViewModelFactory.GetDecisionFromUser(string.Format(SavedListConfiguratorViewModelResources.DeleteMessage, itemToDelete.Name), SavedListConfiguratorViewModelResources.DeleteTitle) == true)
@@ -299,6 +302,8 @@ namespace Zetbox.Client.Presentables.GUI
                     }
                 }
             }
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _RenameCommand = null;
@@ -311,22 +316,23 @@ namespace Zetbox.Client.Presentables.GUI
                     _RenameCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         SavedListConfiguratorViewModelResources.RenameCommandName,
                         SavedListConfiguratorViewModelResources.RenameCommandTooltip,
-                        Rename, () => SelectedItem != null,
-                        () => SavedListConfiguratorViewModelResources.RenameCommandReason);
+                        Rename,
+                        () => Task.FromResult(SelectedItem != null),
+                        () => Task.FromResult(SavedListConfiguratorViewModelResources.RenameCommandReason));
                 }
                 return _RenameCommand;
             }
         }
 
-        public void Rename()
+        public async Task Rename()
         {
             if (SelectedItem != null)
             {
-                Rename(SelectedItem);
+                await Rename(SelectedItem);
             }
         }
 
-        public void Rename(SavedListConfigViewModel itemToRename)
+        public Task Rename(SavedListConfigViewModel itemToRename)
         {
             if (itemToRename == null) throw new ArgumentNullException("itemToRename");
 
@@ -336,7 +342,7 @@ namespace Zetbox.Client.Presentables.GUI
             ViewModelFactory.CreateDialog(DataContext, SavedListConfiguratorViewModelResources.SaveDlgTitle)
                 .AddString("name", SavedListConfiguratorViewModelResources.SaveDlgNameLabel)
                 .Show(p => { newName = p["name"] as string; });
-            if (string.IsNullOrEmpty(newName)) return;
+            if (string.IsNullOrEmpty(newName)) return Task.CompletedTask;
 
             using (var ctx = ViewModelFactory.CreateNewContext())
             {
@@ -351,6 +357,8 @@ namespace Zetbox.Client.Presentables.GUI
                     UpdateViewModel(oldName, item);
                 }
             }
+
+            return Task.CompletedTask;
         }
         #endregion
 
@@ -549,9 +557,9 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-        public void Delete()
+        public Task Delete()
         {
-            Parent.Delete(this);
+            return Parent.Delete(this);
         }
 
         private ICommandViewModel _RenameCommand = null;
@@ -571,9 +579,9 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-        public void Rename()
+        public Task Rename()
         {
-            Parent.Rename(this);
+            return Parent.Rename(this);
         }
         #endregion
     }

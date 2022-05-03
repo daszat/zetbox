@@ -26,6 +26,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.Extensions;
     using Zetbox.Client.Presentables.ZetboxBase;
     using Zetbox.Client.Models;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class ObjectClassViewModel : DataTypeViewModel
@@ -64,10 +65,10 @@ namespace Zetbox.Client.Presentables
             return result;
         }
 
-        public void CreateRelation()
+        public async Task CreateRelation()
         {
             var rel = _class.CreateRelation();
-            ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, rel), true);
+            await ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, rel), true);
         }
     }
 }

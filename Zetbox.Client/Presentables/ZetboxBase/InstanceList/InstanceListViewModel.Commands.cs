@@ -32,9 +32,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         : IRefreshCommandListener, IDeleteCommandParameter, INewCommandParameter, IOpenCommandParameter
     {
         #region Commands
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override async Task<System.Collections.ObjectModel.ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            var result = base.CreateCommands();
+            var result = await base.CreateCommands();
 
             var showOpenCommand = AllowOpen && (OpenCommand == DefaultCommand);
             var showDefaultCommand = OpenCommand != DefaultCommand;
@@ -238,7 +238,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         InstanceListViewModelResources.SelectColumnsCommand,
                         InstanceListViewModelResources.SelectColumnsCommand_Tooltip,
                         SelectColumns,
-                        () => AllowSelectColumns,
+                        () => Task.FromResult(AllowSelectColumns),
                         null);
                     Task.Run(async () => _SelectColumnsCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.todo_png.Find(FrozenContext)));
                 }
@@ -246,7 +246,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public void SelectColumns()
+        public async Task SelectColumns()
         {
             var dlg = ViewModelFactory.CreateViewModel<PropertySelectionTaskViewModel.Factory>()
                 .Invoke(DataContext,
@@ -270,7 +270,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     RemoveDisplayColumn(e.Item.Property);
                 }
             };
-            ViewModelFactory.ShowDialog(dlg);
+            await ViewModelFactory.ShowDialog(dlg);
         }
 
         public void ResetDisplayedColumns()
@@ -289,26 +289,28 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _MergeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
                         InstanceListViewModelResources.MergeCommand, 
                         InstanceListViewModelResources.MergeCommand_Tooltip, 
-                        Merge, CanMerge, CanMergeReason);
+                        Merge, 
+                        CanMerge, 
+                        CanMergeReason);
                     Task.Run(async () => _MergeCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext)));
                 }
                 return _MergeCommand;
             }
         }
 
-        public bool CanMerge()
+        public Task<bool> CanMerge()
         {
-            return SelectedItems.Count == 2;
+            return Task.FromResult(SelectedItems.Count == 2);
         }
 
-        public string CanMergeReason()
+        public Task<string> CanMergeReason()
         {
-            return InstanceListViewModelResources.MergeCommand_Reason;
+            return Task.FromResult(InstanceListViewModelResources.MergeCommand_Reason);
         }
 
-        public void Merge()
+        public async Task Merge()
         {
-            if (!CanMerge()) return;
+            if (!(await CanMerge())) return;
 
             if (GetWorkspace() is IContextViewModel && GetWorkspace() is IMultipleInstancesManager)
             {
@@ -333,7 +335,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
                 var task = newScope.ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(newCtx, ws, target, source);
                 ws.ShowModel(task);
-                newScope.ViewModelFactory.ShowModel(ws, RequestedWorkspaceKind, true);
+                await newScope.ViewModelFactory.ShowModel(ws, RequestedWorkspaceKind, true);
             }
         }
         #endregion

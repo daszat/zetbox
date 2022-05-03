@@ -58,7 +58,8 @@ namespace Zetbox.API
             //}
             else if (!isBrowser)
             {
-                task.Wait();
+                if(System.Threading.SynchronizationContext.Current == null)
+                    task.Wait();
             }
         }
     }

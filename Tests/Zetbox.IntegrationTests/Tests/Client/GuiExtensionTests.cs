@@ -19,6 +19,7 @@ namespace Zetbox.IntegrationTests.Client
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Autofac;
     using NUnit.Framework;
     using Zetbox.API.AbstractConsumerTests;
@@ -30,14 +31,14 @@ namespace Zetbox.IntegrationTests.Client
     {
         [Test]
         [Ignore("Test fails on linux due to trying to reflect on WPF classes which do not exist")]
-        public void should_resolve_ViewDescriptor()
+        public async Task should_resolve_ViewDescriptor()
         {
             var ctx = GetContext();
 
             var vmd = ctx.GetQuery<ViewModelDescriptor>().First(v => v.ViewModelTypeRef == "Zetbox.Client.Presentables.DataObjectViewModel, Zetbox.Client");
             Assert.That(vmd, Is.Not.Null, "ViewModelDescriptor");
 
-            var vd = vmd.GetViewDescriptor(Toolkit.WPF);
+            var vd = await vmd.GetViewDescriptor(Toolkit.WPF);
             Assert.That(vd, Is.Not.Null, "ViewDescriptor");
 
             Assert.That(vd.ControlTypeRef, Is.EqualTo("Zetbox.Client.WPF.View.ObjectEditor.DataObjectEditor, Zetbox.Client.WPF"));

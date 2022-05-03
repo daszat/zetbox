@@ -26,12 +26,13 @@ using Zetbox.App.Extensions;
 using Zetbox.Client.Models;
 using Zetbox.Client.Presentables.ValueViewModels;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Zetbox.Client.Presentables
 {
     [ViewModelDescriptor]
     public class ValueInputTaskViewModel
-        : WindowViewModel, Zetbox.Client.Presentables.IValueInputTaskViewModel
+        : WindowViewModel, IValueInputTaskViewModel
     {
         public new delegate ValueInputTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name,
             IEnumerable<ViewModel> items,
@@ -121,13 +122,13 @@ namespace Zetbox.Client.Presentables
                     {
                         var e = new CanInvokeEventArgs<bool>() { Result = true, Values = ExtractValues() };
                         CanInvoke?.Invoke(this, e);
-                        return e.Result;
+                        return Task.FromResult(e.Result);
                     },
                     () =>
                     {
                         var e = new CanInvokeEventArgs<string>() { Result = "", Values = ExtractValues() };
                         CanInvokeReason?.Invoke(this, e);
-                        return e.Result;
+                        return Task.FromResult(e.Result);
                     });
                 _InvokeCommand.IsDefault = true;
             }
@@ -148,10 +149,12 @@ namespace Zetbox.Client.Presentables
             _InvokeCommand.Label = acceptLabel;
         }
 
-        public void Invoke()
+        public Task Invoke()
         {
             _callback(ExtractValues());
             Show = false;
+
+            return  Task.CompletedTask;;
         }
 
         private Dictionary<object, object> ExtractValues()
@@ -191,15 +194,17 @@ namespace Zetbox.Client.Presentables
             _CancelCommand.Label = cancelLabel;
         }
 
-        public void Cancel()
+        public Task Cancel()
         {
             if (CancelCallback != null) CancelCallback();
             Show = false;
+
+            return Task.CompletedTask;
         }
 
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override async Task<ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            var result = base.CreateCommands();
+            var result = await base.CreateCommands();
             result.Add(InvokeCommand);
             result.Add(CancelCommand);
             return result;
@@ -218,6 +223,8 @@ namespace Zetbox.Client.Presentables
                             {
                                 callback(ExtractValues());
                                 Show = false;
+
+                                return Task.CompletedTask;
                             },
                             null,
                             null);

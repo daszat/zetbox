@@ -179,9 +179,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region Commands
 
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override async Task<System.Collections.ObjectModel.ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            var cmds = base.CreateCommands();
+            var cmds = await base.CreateCommands();
 
             cmds.Add(SelectValueCommand);
             cmds.Add(CreateNewItemAndSetValueCommand);
@@ -257,11 +257,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region SelectValue
 
-        public void SelectValue()
+        public async Task SelectValue()
         {
             var selectionTask = CreateDataObjectSelectionTask();
             OnDataObjectSelectionTaskCreated(selectionTask);
-            ViewModelFactory.ShowDialog(selectionTask);
+            await ViewModelFactory.ShowDialog(selectionTask);
         }
 
         /// <summary>
@@ -312,8 +312,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         this,
                         ObjectReferenceViewModelResources.SelectValueCommand_Name,
                         ObjectReferenceViewModelResources.SelectValueCommand_Tooltip,
-                        () => SelectValue(),
-                        () => AllowSelectValue && !IsReadOnly,
+                        SelectValue,
+                        () => Task.FromResult(AllowSelectValue && !IsReadOnly),
                         null);
                     Task.Run(async () => _SelectValueCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext)));
                 }

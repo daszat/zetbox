@@ -214,19 +214,19 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public bool CanOpen()
+        public Task<bool> CanOpen()
         {
-            return SelectedItem != null;
+            return Task.FromResult(SelectedItem != null);
         }
 
-        public string CanOpenReason()
+        public Task<string> CanOpenReason()
         {
-            return CommonCommandsResources.DataObjectCommand_NothingSelected;
+            return Task.FromResult(CommonCommandsResources.DataObjectCommand_NothingSelected);
         }
 
-        public void Open()
+        public async Task Open()
         {
-            if (!CanOpen()) return;
+            if (!(await CanOpen())) return;
             var newScope = ViewModelFactory.CreateNewScope();
             var newCtx = newScope.ViewModelFactory.CreateNewContext();
 
@@ -248,7 +248,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 Refresh(); // A dialog makes it easy to know when the time for a refresh has come
             };
 
-            ViewModelFactory.ShowModel(ws, true);
+            await ViewModelFactory.ShowModel(ws, true);
         }
 
         #endregion

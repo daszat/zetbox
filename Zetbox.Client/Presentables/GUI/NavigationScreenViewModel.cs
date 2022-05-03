@@ -26,6 +26,7 @@ namespace Zetbox.Client.Presentables.GUI
     using Zetbox.App.Extensions;
     using Zetbox.Client.Presentables.ZetboxBase;
     using Zetbox.App.Base;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class NavigationScreenViewModel
@@ -70,7 +71,7 @@ namespace Zetbox.Client.Presentables.GUI
                 if (_ExecuteCommand == null)
                 {
                     _ExecuteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, Name, "",
-                        () => Displayer.NavigateTo(this),
+                        () => { Displayer.NavigateTo(this); return Task.CompletedTask; },
                         null,
                         null);
                 }

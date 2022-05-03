@@ -47,7 +47,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public void Print()
+        public Task Print()
         {
             var doc = new MigraDoc.DocumentObjectModel.Document();
             var s = doc.AddSection();
@@ -114,6 +114,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             pdf.Save(filename);
 
             fileOpener.ShellExecute(filename);
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _ExportCommand = null;
@@ -175,7 +177,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _ExportXMLCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         InstanceListViewModelResources.ExportXmlCommand,
                         InstanceListViewModelResources.ExportXmlommand_Tooltip,
-                        async () => await ExportXML(),
+                        ExportXML,
                         CanExportXML,
                         null);
                     Task.Run(async () => _ExportXMLCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.document_export_png.Find(FrozenContext)));
@@ -185,13 +187,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
         private bool? _canExportXML;
-        public bool CanExportXML()
+        public Task<bool> CanExportXML()
         {
             if (_canExportXML == null)
             {
                 _canExportXML = DataType.ImplementsIExportable();
             }
-            return _canExportXML.Value;
+            return Task.FromResult(_canExportXML.Value);
         }
 
         public async Task ExportXML()

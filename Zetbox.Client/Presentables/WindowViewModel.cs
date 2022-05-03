@@ -19,6 +19,7 @@ namespace Zetbox.Client.Presentables
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
 
     /// <summary>
@@ -38,9 +39,11 @@ namespace Zetbox.Client.Presentables
         {
         }
 
-        public void Close()
+        public Task Close()
         {
             this.Show = false;
+
+            return Task.CompletedTask;
         }
 
         private bool _show = true;

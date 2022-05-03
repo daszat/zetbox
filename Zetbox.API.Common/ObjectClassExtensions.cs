@@ -15,7 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Zetbox.API;
 using Zetbox.App.Base;
 
@@ -283,22 +283,22 @@ namespace Zetbox.App.Extensions
             return false;
         }
 
-        public static bool ImplementsIMergeable(this ObjectClass cls)
+        public static Task<bool> ImplementsIMergeable(this ObjectClass cls)
         {
             return ImplementsIMergeable(cls, true);
         }
 
-        public static bool ImplementsIMergeable(this ObjectClass cls, bool lookupInBase)
+        public static async Task<bool> ImplementsIMergeable(this ObjectClass cls, bool lookupInBase)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
 
             while (cls != null)
             {
                 // TODO: use named objects
-                if (cls.ImplementsInterfaces.Count(o => o.Name == "IMergeable" && o.Module.Name == "ZetboxBase") == 1)
+                if ((await cls.GetProp_ImplementsInterfaces()).Count(o => o.Name == "IMergeable" && o.Module.Name == "ZetboxBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
-                cls = cls.BaseObjectClass;
+                cls = await cls.GetProp_BaseObjectClass();
             }
             return false;
         }

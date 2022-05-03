@@ -108,28 +108,28 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public bool CanNew()
+        public Task<bool> CanNew()
         {
-            if(SelectedInputViewModel == null) return false;
+            if(SelectedInputViewModel == null) return Task.FromResult(false);
             if (!SelectedInputViewModel.IsValid)
             {
                 SelectedInputViewModel.Validate();
             }
-            return SelectedInputViewModel.IsValid;
+            return Task.FromResult(SelectedInputViewModel.IsValid);
         }
 
-        public string CanNewReason()
+        public Task<string> CanNewReason()
         {
-            if(SelectedInputViewModel == null) return CommonCommandsResources.DataObjectCommand_NothingSelected;
-            if (!SelectedInputViewModel.IsValid) return SelectedInputViewModel.ValidationError.ToString();
+            if(SelectedInputViewModel == null) return Task.FromResult(CommonCommandsResources.DataObjectCommand_NothingSelected);
+            if (!SelectedInputViewModel.IsValid) return Task.FromResult(SelectedInputViewModel.ValidationError.ToString());
 
-            return CommonCommandsResources.DataObjectCommand_ProgrammerError;
+            return Task.FromResult(CommonCommandsResources.DataObjectCommand_ProgrammerError);
         }
 
-        public void New()
+        public async Task New()
         {
             if (SelectedInputViewModel != null) SelectedInputViewModel.Validate();
-            if (!CanNew()) return;
+            if (!(await CanNew())) return;
 
             Result = true;
             Show = false;
@@ -150,19 +150,19 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public bool CanCancel()
+        public Task<bool> CanCancel()
         {
-            return true;
+            return Task.FromResult(true);
         }
 
-        public string CanCancelReason()
+        public Task<string> CanCancelReason()
         {
-            return string.Empty;
+            return Task.FromResult(string.Empty);
         }
 
-        public void Cancel()
+        public async Task Cancel()
         {
-            if (!CanCancel()) return;
+            if (!(await CanCancel())) return;
             Show = false;
         }
         #endregion

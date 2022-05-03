@@ -29,6 +29,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
     using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class ParameterInputTaskViewModel
@@ -138,11 +139,13 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public void Invoke()
+        public Task Invoke()
         {
             var parameter = ValueViewModels.Select(i => i.ValueModel.GetUntypedValue()).ToArray();
             _callback(parameter);
             Show = false;
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _CancelCommand = null;
@@ -165,14 +168,15 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public void Cancel()
+        public Task Cancel()
         {
             Show = false;
+            return Task.CompletedTask;
         }
 
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override async Task<ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            var result = base.CreateCommands();
+            var result = await base.CreateCommands();
             result.Add(InvokeCommand);
             result.Add(CancelCommand);
             return result;

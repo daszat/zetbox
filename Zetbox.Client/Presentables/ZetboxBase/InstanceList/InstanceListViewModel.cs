@@ -424,13 +424,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
         private bool _allowMerge = true;
+        private bool? _allowMergeResult;
         [DefaultValue(true)]
         public bool AllowMerge
         {
             get
             {
                 if (DataContext.IsElevatedMode) return true;
-                return DataType.ImplementsIMergeable() && _allowMerge;
+                if(_allowMergeResult != null) return _allowMergeResult.Value;
+
+                Task.Run(async () => _allowMergeResult = await DataType.ImplementsIMergeable() && _allowMerge).ContinueWith(t => OnPropertyChanged(nameof(AllowMerge)));
+                return false;
             }
             set
             {

@@ -24,6 +24,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Linq;
     using System.Linq.Dynamic;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.API.Utils;
@@ -46,9 +47,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
         }
 
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override async Task<ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            var commands = base.CreateCommands();
+            var commands = await base.CreateCommands();
             commands.Add(ClearSortCommand);
             return commands;
         }
@@ -69,22 +70,24 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #endregion
 
         #region Move
-        public bool CanMove()
+        public Task<bool> CanMove()
         {
-            return SelectedItem != null && !IsFiltering && !IsSorting && !IsReadOnly;
+            return Task.FromResult(SelectedItem != null && !IsFiltering && !IsSorting && !IsReadOnly);
         }
 
-        public void MoveItemUp()
+        public Task MoveItemUp()
         {
             var memories = SelectedItems.ToList();
             memories.ForEach(i => MoveItemUp(i));
             SelectedItems.Clear();
             memories.ForEach(i => SelectedItems.Add(i));
+
+            return Task.CompletedTask;
         }
 
-        public void MoveItemUp(CompoundObjectViewModel item)
+        public Task MoveItemUp(CompoundObjectViewModel item)
         {
-            if (item == null) { return; }
+            if (item == null) { return Task.CompletedTask; }
 
             var idx = ValueModel.Value.IndexOf(item.Object);
             if (idx > 0)
@@ -92,20 +95,24 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 ValueModel.Value.RemoveAt(idx);
                 ValueModel.Value.Insert(idx - 1, item.Object);
             }
+
+            return Task.CompletedTask;
         }
 
-        public void MoveItemTop()
+        public Task MoveItemTop()
         {
             var memories = SelectedItems.ToList();
             memories.Reverse();
             memories.ForEach(i => MoveItemTop(i));
             SelectedItems.Clear();
             memories.ForEach(i => SelectedItems.Add(i));
+
+            return Task.CompletedTask;
         }
 
-        public void MoveItemTop(CompoundObjectViewModel item)
+        public Task MoveItemTop(CompoundObjectViewModel item)
         {
-            if (item == null) { return; }
+            if (item == null) { return Task.CompletedTask; }
 
             var idx = ValueModel.Value.IndexOf(item.Object);
             if (idx > 0)
@@ -113,19 +120,23 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 ValueModel.Value.RemoveAt(idx);
                 ValueModel.Value.Insert(0, item.Object);
             }
+
+            return Task.CompletedTask;
         }
 
-        public void MoveItemDown()
+        public Task MoveItemDown()
         {
             var memories = SelectedItems.ToList();
             memories.ForEach(i => MoveItemDown(i));
             SelectedItems.Clear();
             memories.ForEach(i => SelectedItems.Add(i));
+
+            return Task.CompletedTask;
         }
 
-        public void MoveItemDown(CompoundObjectViewModel item)
+        public Task MoveItemDown(CompoundObjectViewModel item)
         {
-            if (item == null) { return; }
+            if (item == null) { return Task.CompletedTask; }
 
             var idx = ValueModel.Value.IndexOf(item.Object);
             if (idx != -1 && idx + 1 < Value.Count)
@@ -133,18 +144,22 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 ValueModel.Value.RemoveAt(idx);
                 ValueModel.Value.Insert(idx + 1, item.Object);
             }
+
+            return Task.CompletedTask;
         }
-        public void MoveItemBottom()
+        public Task MoveItemBottom()
         {
             var memories = SelectedItems.ToList();
             memories.ForEach(i => MoveItemBottom(i));
             SelectedItems.Clear();
             memories.ForEach(i => SelectedItems.Add(i));
+
+            return Task.CompletedTask;
         }
 
-        public void MoveItemBottom(CompoundObjectViewModel item)
+        public Task MoveItemBottom(CompoundObjectViewModel item)
         {
-            if (item == null) { return; }
+            if (item == null) { return Task.CompletedTask; }
 
             var idx = ValueModel.Value.IndexOf(item.Object);
             if (idx != -1 && idx + 1 < Value.Count)
@@ -152,6 +167,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 ValueModel.Value.RemoveAt(idx);
                 ValueModel.Value.Add(item.Object);
             }
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _MoveItemUpCommand = null;
@@ -256,19 +273,21 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     _ClearSortCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Clear sort", "Clear the current sorting",
                         ClearSort,
-                        () => IsSorting,
+                        () => Task.FromResult(IsSorting),
                         null);
                 }
                 return _ClearSortCommand;
             }
         }
 
-        public void ClearSort()
+        public Task ClearSort()
         {
             if (IsSorting)
             {
                 Sort(null, SortDirection);
             }
+
+            return Task.CompletedTask;
         }
     }
 }

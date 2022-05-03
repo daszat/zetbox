@@ -221,9 +221,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public virtual void ClearValue()
+        public virtual Task ClearValue()
         {
             ValueModel.ClearValue();
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _ClearValueCommand = null;
@@ -238,8 +240,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         this,
                         ValueViewModelResources.ClearValueCommand_Name,
                         ValueViewModelResources.ClearValueCommand_Tooltip,
-                        () => ClearValue(),
-                        () => AllowNullInput && !IsReadOnly,
+                        ClearValue,
+                        () => Task.FromResult(AllowNullInput && !IsReadOnly),
                         null);
                     //_ClearValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.
                 }
@@ -1145,8 +1147,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         this,
                         ValueViewModelResources.EditCommand_Name,
                         ValueViewModelResources.EditCommand_Tooltip,
-                        () => Edit(),
-                        () => !IsReadOnly,
+                        Edit,
+                        () => Task.FromResult(!IsReadOnly),
                         null);
                     Task.Run(async () => _EditCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext)));
                 }
@@ -1154,9 +1156,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public void Edit()
+        public async Task Edit()
         {
-            ViewModelFactory.ShowDialog(
+            await ViewModelFactory.ShowDialog(
                     ViewModelFactory.CreateViewModel<MultiLineEditorDialogViewModel.Factory>().Invoke(
                         DataContext,
                         this,
@@ -1191,8 +1193,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         this,
                         ValueViewModelResources.SendMailCommand_Name,
                         ValueViewModelResources.SendMailCommand_Tooltip,
-                        () => SendMail(),
-                        () => _mailSender != null && !string.IsNullOrWhiteSpace(Value) && IsMailaddress(Value),
+                        SendMail,
+                        () => Task.FromResult(_mailSender != null && !string.IsNullOrWhiteSpace(Value) && IsMailaddress(Value)),
                         SendMailReason);
                     Task.Run(async () => _SendMailCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext)));
                 }
@@ -1215,7 +1217,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public void SendMail()
+        public Task SendMail()
         {
             if (_mailSender != null && IsMailaddress(Value))
             {
@@ -1230,14 +1232,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     // Do nothing.
                 }
             };
+
+            return Task.CompletedTask;
         }
 
-        public string SendMailReason()
+        public Task<string> SendMailReason()
         {
-            if (_mailSender == null) return ValueViewModelResources.NoMailSender;
-            if (string.IsNullOrWhiteSpace(Value)) return ValueViewModelResources.NoMailAddress;
-            if (!IsMailaddress(Value)) return ValueViewModelResources.InvalidMailFormat;
-            return string.Empty;
+            if (_mailSender == null) return Task.FromResult(ValueViewModelResources.NoMailSender);
+            if (string.IsNullOrWhiteSpace(Value)) return Task.FromResult(ValueViewModelResources.NoMailAddress);
+            if (!IsMailaddress(Value)) return Task.FromResult(ValueViewModelResources.InvalidMailFormat);
+            return Task.FromResult(string.Empty);
         }
     }
 

@@ -25,6 +25,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
     using System.Collections;
+    using System.Threading.Tasks;
 
     public interface ISelectionTaskViewModel
     {
@@ -82,20 +83,22 @@ namespace Zetbox.Client.Presentables
                         DataObjectSelectionTaskViewModelResources.Choose,
                         DataObjectSelectionTaskViewModelResources.Choose_Tooltip,
                         () => Choose(SelectedItems.Cast<TViewModel>()),
-                        () => SelectedItems != null && SelectedItems.Cast<TViewModel>().Count() > 0,
+                        () => Task.FromResult(SelectedItems != null && SelectedItems.Cast<TViewModel>().Count() > 0),
                         null);
                 }
                 return _ChooseCommand;
             }
         }
 
-        public void Choose(IEnumerable<TViewModel> items)
+        public Task Choose(IEnumerable<TViewModel> items)
         {
             if (items != null && items.Count() > 0)
             {
                 _callback(items);
                 Show = false;
             }
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _CancelCommand = null;
@@ -118,10 +121,12 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public void Cancel()
+        public Task Cancel()
         {
             _callback(null);
             Show = false;
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _SelectAndChooseCommand = null;

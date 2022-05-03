@@ -21,6 +21,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API.Utils;
     
     public interface IValueViewModel : INotifyPropertyChanged
@@ -60,7 +61,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         /// <summary>
         /// Clears the value of this Model. After calling this method the value should be <value>null</value> or "empty".
         /// </summary>
-        void ClearValue();
+        Task ClearValue();
 
         ICommandViewModel ClearValueCommand { get; }
 
@@ -123,18 +124,18 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         /// Remove the currently selected item from the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
         /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
-        void Remove();
+        Task Remove();
 
         /// <summary>
         /// Permanentely delete the currently selected item from the data store.
         /// Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/> on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
-        void Delete();
+        Task Delete();
 
         /// <summary>
         /// Opens the currently selected item for the user to edit.
         /// </summary>
-        void Open();
+        Task Open();
 
         /// <summary>
         /// Stores the currently selected item of this list. 
@@ -155,13 +156,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         /// Moves the given item one item up in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
         /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
-        void MoveItemUp(TElement item);
+        Task MoveItemUp(TElement item);
 
         /// <summary>
         /// Moves the given item one item down in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
         /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
-        void MoveItemDown(TElement item);
+        Task MoveItemDown(TElement item);
 
     }
 }

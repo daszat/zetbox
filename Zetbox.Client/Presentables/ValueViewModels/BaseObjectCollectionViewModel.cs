@@ -65,14 +65,14 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     }
                 }
             }
-            dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
+            dataCtx.IsElevatedModeChanged += async (s, e) => await dataCtx_IsElevatedModeChanged(s, e);
         }
 
-        void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
+        async Task dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
         {
             OnPropertyChanged("AllowAddNew");
             OnPropertyChanged("AllowDelete");
-            CreateCommands();
+            await CreateCommands();
         }
 
         public IObjectCollectionValueModel<TModelCollection> ObjectCollectionModel { get; private set; }
@@ -349,9 +349,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #endregion
 
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override async Task<System.Collections.ObjectModel.ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            var cmds = base.CreateCommands();
+            var cmds = await base.CreateCommands();
 
             if (AllowAddExisting) cmds.Add(AddExistingCommand);
             if (AllowAddNew) cmds.Add(CreateNewCommand);
@@ -429,10 +429,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public void Open()
+        public Task Open()
         {
             if (OpenCommand.CanExecute(null))
                 OpenCommand.Execute(null);
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _AddExistingCommand = null;
@@ -447,8 +448,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         this,
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Name,
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Tooltip,
-                        () => AddExistingItem(),
-                        () => AllowAddExisting && !IsReadOnly,
+                        AddExistingItem,
+                        () => Task.FromResult(AllowAddExisting && !IsReadOnly),
                         null);
                     Task.Run(async () => _AddExistingCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext)));
                 }
@@ -469,7 +470,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.RemoveCommand_Name,
                         BaseObjectCollectionViewModelResources.RemoveCommand_Tooltip,
                         Remove, // Collection will change while deleting!
-                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly,
+                        () => Task.FromResult(SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly),
                         null);
                 }
                 return _RemoveCommand;
@@ -489,10 +490,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public void Delete()
+        public Task Delete()
         {
             if (DeleteCommand.CanExecute(null))
                 DeleteCommand.Execute(null);
+
+            return Task.CompletedTask;
         }
 
         public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;
@@ -518,7 +521,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         /// <summary>
         /// Adds an existing item into this ObjectList. Asks the User which should be added.
         /// </summary>
-        public void AddExistingItem()
+        public Task AddExistingItem()
         {
             var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                     DataContext,
@@ -541,17 +544,21 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             lstMdl.ListViewModel.AllowAddNew = AllowAddNew || AllowAddNewWhenAddingExisting;
             OnDataObjectSelectionTaskCreated(lstMdl);
             ViewModelFactory.ShowDialog(lstMdl);
+
+            return Task.CompletedTask;
         }
 
-        public virtual void Remove()
+        public virtual Task Remove()
         {
-            if (SelectedItems == null || SelectedItems.Count == 0) return;
+            if (SelectedItems == null || SelectedItems.Count == 0) return Task.CompletedTask;
 
             EnsureValueCache();
             foreach (var item in SelectedItems.ToArray())
             {
                 ValueModel.Value.Remove(item.Object);
             }
+
+            return Task.CompletedTask;
         }
 
         #endregion
@@ -702,10 +709,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region IValueViewModel Members
 
-        public override void ClearValue()
+        public override Task ClearValue()
         {
             EnsureValueCache();
             ValueModel.Value.Clear();
+
+            return Task.CompletedTask;
         }
         #endregion
 

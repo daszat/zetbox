@@ -484,11 +484,11 @@ namespace Zetbox.Client.Presentables
         #endregion
 
         #region Commands
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override async Task<ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            var result = base.CreateCommands();
+            var result = await base.CreateCommands();
 
-            if (CanMerge())
+            if (await CanMerge())
             {
                 result.Add(MergeCommand);
             }
@@ -509,29 +509,31 @@ namespace Zetbox.Client.Presentables
                         DataObjectViewModelResources.MergeCommand_Tooltip,
                         Merge, 
                         CanMerge,
-                        () => DataObjectViewModelResources.MergeCommand_Reason);
+                        () => Task.FromResult(DataObjectViewModelResources.MergeCommand_Reason));
                     Task.Run(async () => _MergeCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext)));
                 }
                 return _MergeCommand;
             }
         }
 
-        private bool CanMerge()
+        private async Task<bool> CanMerge()
         {
             if (DataContext.IsElevatedMode) return true;
 
             return Object.CurrentAccessRights.HasWriteRights()
-                && Object.GetObjectClass(FrozenContext).ImplementsIMergeable()
+                && (await Object.GetObjectClass(FrozenContext).ImplementsIMergeable())
                 && GetWorkspace() is IMultipleInstancesManager;
         }
 
-        public void Merge()
+        public Task Merge()
         {
             var ws = (IMultipleInstancesManager)GetWorkspace();
 
             var task = ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(DataContext, GetWorkspace(), Object, null);
             ws.AddItem(task);
             ws.SelectedItem = task;
+
+            return Task.CompletedTask;
         }
         #endregion
         #endregion

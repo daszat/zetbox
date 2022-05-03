@@ -16,6 +16,7 @@
 namespace Zetbox.Client.Presentables
 {
     using System;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.API.Client.PerfCounter;
@@ -35,10 +36,10 @@ namespace Zetbox.Client.Presentables
 
     public interface IViewModelFactory : IToolkit
     {
-        void ShowModel(ViewModel mdl, bool activate);
-        void ShowModel(ViewModel mdl, Zetbox.App.GUI.ControlKind kind, bool activate);
+        Task ShowModel(ViewModel mdl, bool activate);
+        Task ShowModel(ViewModel mdl, Zetbox.App.GUI.ControlKind kind, bool activate);
 
-        void ShowDialog(ViewModel mdl, ViewModel ownerMdl = null, Zetbox.App.GUI.ControlKind kind = null);
+        Task ShowDialog(ViewModel mdl, ViewModel ownerMdl = null, Zetbox.App.GUI.ControlKind kind = null);
 
         bool CanShowModel(ViewModel mdl);
 

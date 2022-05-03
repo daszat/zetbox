@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables.Debugger
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Utils;
 
@@ -65,7 +66,7 @@ namespace Zetbox.Client.Presentables.Debugger
                         null,
                         CacheDebuggerViewModelResources.ClearCommand_Name,
                         CacheDebuggerViewModelResources.ClearCommand_Tooltip,
-                        Cache.ClearAll,
+                        () => { Cache.ClearAll(); return Task.CompletedTask; },
                         null, null);
 
                 }

@@ -21,6 +21,7 @@ namespace Zetbox.Client.Presentables.DtoViewModels
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Dtos;
 
@@ -136,10 +137,12 @@ namespace Zetbox.Client.Presentables.DtoViewModels
             }
         }
 
-        public void Print()
+        public Task Print()
         {
             var printer = new DtoPrinter(_fileOpener, _tmpService);
             printer.PrintAsList(this);
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _ExportCommand = null;
@@ -152,7 +155,7 @@ namespace Zetbox.Client.Presentables.DtoViewModels
                     _ExportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
                         "Export", "Export als Excel", 
                         Export,
-                        () => IsExportable, 
+                        () => Task.FromResult(IsExportable), 
                         null);
                 }
                 return _ExportCommand;
@@ -167,10 +170,12 @@ namespace Zetbox.Client.Presentables.DtoViewModels
             }
         }
 
-        public virtual void Export()
+        public virtual Task Export()
         {
             var printer = new DtoExporter(_fileOpener, _tmpService);
             printer.Export(this);
+
+            return Task.CompletedTask;
         }
 
         private bool _isPrintableRoot;

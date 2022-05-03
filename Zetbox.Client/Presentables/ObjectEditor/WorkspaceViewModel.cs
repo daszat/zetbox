@@ -181,9 +181,9 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         #region Commands
 
         #region CommandCollection management
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override async Task<System.Collections.ObjectModel.ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            var result = base.CreateCommands();
+            var result = await base.CreateCommands();
 
             result.Add(SaveAndCloseCommand);
             result.Add(SaveCommand);
@@ -236,7 +236,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                             this,
                             WorkspaceViewModelResources.SaveCommand_Name,
                             WorkspaceViewModelResources.SaveCommand_Tooltip,
-                            () => { Save(); }, CanSave, null);
+                            async () => { await Save(); }, CanSave, null);
                     Task.Run(async () => _saveCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.save_png.Find(FrozenContext)));
                 }
                 return _saveCommand;
@@ -256,7 +256,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 {
                     _saveAndCloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, this, WorkspaceViewModelResources.SaveAndCloseCommand_Name, WorkspaceViewModelResources.SaveAndCloseCommand_Tooltip,
-                        () => { SaveAndClose(); }, CanSave, null);
+                        async () => { await SaveAndClose(); }, CanSave, null);
                     Task.Run(async () => _saveAndCloseCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.save_png.Find(FrozenContext)));
                 }
                 return _saveAndCloseCommand;
@@ -300,9 +300,9 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         /// Called too often, will slow UI down if it would realy evaluate errors
         /// </summary>
         /// <returns></returns>
-        public bool CanSave()
+        public Task<bool> CanSave()
         {
-            return ValidationManager.IsValid;
+            return Task.FromResult(ValidationManager.IsValid);
         }
 
         public event EventHandler Saving;
@@ -325,7 +325,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        public bool Save()
+        public Task<bool> Save()
         {
             UpdateErrors();
             if (ValidationManager.IsValid)
@@ -343,13 +343,13 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                             Items.Remove(i);
                         }
                     }
-                    return true;
+                    return Task.FromResult(true);
                 }
                 catch (Exception ex)
                 {
                     if (_exceptionHandler.Show(DataContext, ex))
                     {
-                        return false;
+                        return Task.FromResult(false);
                     }
                     else
                     {
@@ -362,14 +362,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 ShowVerificationResults();
             }
 
-            return false;
+            return Task.FromResult(false);
         }
 
-        public void SaveAndClose()
+        public async Task SaveAndClose()
         {
-            if (Save())
+            if (await Save())
             {
-                Close();
+                await Close();
             }
         }
 
@@ -420,7 +420,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        public void ShowVerificationResults()
+        public Task ShowVerificationResults()
         {
             UpdateErrors();
             if (!ValidationManager.IsValid)
@@ -431,6 +431,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             {
                 ShowErrors = false;
             }
+
+            return Task.CompletedTask;
         }
 
         private bool _showErrors = false;
@@ -686,26 +688,26 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        public bool CanExecGotoObject()
+        public Task<bool> CanExecGotoObject()
         {
-            return Item is DataObjectViewModel || Item is BaseValueViewModel;
+            return Task.FromResult(Item is DataObjectViewModel || Item is BaseValueViewModel);
         }
 
-        public void GotoObject()
+        public async Task GotoObject()
         {
-            if (CanExecGotoObject())
+            if (await CanExecGotoObject())
             {
                 var item = Item;
                 if (item is DataObjectViewModel)
                 {
-                    ViewModelFactory.ShowModel(item, true);
+                    await ViewModelFactory.ShowModel(item, true);
                 }
                 if (item is BaseValueViewModel)
                 {
                     var objVmdl = item.Parent as DataObjectViewModel;
                     if (objVmdl != null)
                     {
-                        ViewModelFactory.ShowModel(objVmdl, true);
+                        await ViewModelFactory.ShowModel(objVmdl, true);
                         var grp = objVmdl.PropertyGroups.FirstOrDefault(i => i.PropertyModels.Contains(item));
                         if (grp != null)
                         {

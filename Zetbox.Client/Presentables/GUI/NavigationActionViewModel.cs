@@ -26,6 +26,7 @@ namespace Zetbox.Client.Presentables.GUI
     using Zetbox.App.Extensions;
     using Zetbox.Client.Presentables.ZetboxBase;
     using Zetbox.App.Base;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class NavigationActionViewModel
@@ -78,18 +79,19 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-        public virtual bool CanExecute()
+        public virtual Task<bool> CanExecute()
         {
-            return false;
+            return Task.FromResult(false);
         }
 
-        public virtual void Execute()
+        public virtual Task Execute()
         {
+            return Task.CompletedTask;
         }
 
-        public virtual string GetReason()
+        public virtual Task<string> GetReason()
         {
-            return "This is the empty implementation, derive your own view model and override CanExecute/Execute/GetReason";
+            return Task.FromResult("This is the empty implementation, derive your own view model and override CanExecute/Execute/GetReason");
         }
     }
 }

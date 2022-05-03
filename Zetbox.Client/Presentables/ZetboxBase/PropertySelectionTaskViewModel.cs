@@ -28,6 +28,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.API.Common;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class PropertySelectionTaskViewModel : WindowViewModel
@@ -110,14 +111,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         #endregion
 
         #region Commands
-        public bool CanChoose()
+        public Task<bool> CanChoose()
         {
-            return SelectedItem != null || MultiSelect;
+            return Task.FromResult(SelectedItem != null || MultiSelect);
         }
 
-        public void Choose()
+        public async Task Choose()
         {
-            if (!CanChoose()) return;
+            if (!(await CanChoose())) return;
 
             IList<Property> result = new List<Property>();
             var prop = SelectedItem;
@@ -147,10 +148,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public void Cancel()
+        public Task Cancel()
         {
             _callback(null);
             Show = false;
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _CancelCommand = null;

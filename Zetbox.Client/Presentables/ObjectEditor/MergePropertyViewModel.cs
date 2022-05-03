@@ -93,7 +93,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        public void UseSource()
+        public Task UseSource()
         {
             if (Target is ObjectListViewModel)
             {
@@ -129,6 +129,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
             UsingSource = true;
             UsingTarget = false;
+
+            return Task.CompletedTask;
         }
         #endregion
 
@@ -152,7 +154,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        public void UseTarget()
+        public Task UseTarget()
         {
             // Clear source lists to prevent merging during replace
             if (Source is ObjectListViewModel)
@@ -168,6 +170,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
             UsingSource = false;
             UsingTarget = true;
+
+            return Task.CompletedTask;
         }
         #endregion
 
@@ -193,21 +197,21 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        private bool CanMergeValues()
+        private Task<bool> CanMergeValues()
         {
-            return Target is StringValueViewModel
+            return Task.FromResult(Target is StringValueViewModel
                 || Target is ObjectListViewModel
-                || Target is ObjectCollectionViewModel;
+                || Target is ObjectCollectionViewModel);
         }
 
-        private string CanMergeValuesReason()
+        private Task<string> CanMergeValuesReason()
         {
-            return MergePropertyViewModelResources.MergeValuesCommand_Reason;
+            return Task.FromResult(MergePropertyViewModelResources.MergeValuesCommand_Reason);
         }
 
-        public void MergeValues()
+        public async Task MergeValues()
         {
-            if (!CanMergeValues()) return;
+            if (!(await CanMergeValues())) return;
 
             if (Target is StringValueViewModel)
             {
@@ -219,7 +223,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 var s = (ObjectListViewModel)Source;
                 var lst = s.Value.ToList();
 
-                s.ClearValue();
+                await s.ClearValue();
                 foreach (var obj in lst)
                 {
                     t.Add(obj);
@@ -232,7 +236,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 var s = (ObjectCollectionViewModel)Source;
                 var lst = s.Value.ToList();
 
-                s.ClearValue();
+                await s.ClearValue();
                 foreach (var obj in lst)
                 {
                     t.Add(obj);

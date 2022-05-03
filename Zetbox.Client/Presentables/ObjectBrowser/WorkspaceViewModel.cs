@@ -165,25 +165,25 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 if (_ImportCommand == null)
                 {
-                    _ImportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Import", "Import zetbox objects", async () => await Import(), CanImport, CanImportReason);
+                    _ImportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Import", "Import zetbox objects", Import, CanImport, CanImportReason);
                 }
                 return _ImportCommand;
             }
         }
 
-        public bool CanImport()
+        public Task<bool> CanImport()
         {
-            return true;
+            return Task.FromResult(true);
         }
 
-        public string CanImportReason()
+        public Task<string> CanImportReason()
         {
-            return "";
+            return Task.FromResult("");
         }
 
         public async Task Import()
         {
-            if (!CanImport()) return;
+            if (!(await CanImport())) return;
             var filename = ViewModelFactory.GetSourceFileNameFromUser("XML|*.xml", "All files|*.*");
             if (!string.IsNullOrWhiteSpace(filename))
             {
@@ -205,7 +205,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
                 if (objects.Count > 0)
                 {
                     var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
-                    newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+                    await newScope.ViewModelFactory.ShowModel(newWorkspace, true);
 
                     foreach (var obj in objects)
                     {
@@ -329,7 +329,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             if (objects.Count > 0)
             {
                 var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
-                newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+                await newScope.ViewModelFactory.ShowModel(newWorkspace, true);
 
                 foreach (var obj in objects)
                 {

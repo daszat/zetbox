@@ -20,6 +20,7 @@ namespace Zetbox.App.Extensions
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
@@ -43,7 +44,7 @@ namespace Zetbox.App.Extensions
         /// <param name="pmd">the specified ViewModelDescriptor</param>
         /// <param name="tk">the specified Toolkit</param>
         /// <returns>the default ViewDescriptor to display this ViewModel with this Toolkit</returns>
-        public static ViewDescriptor GetViewDescriptor(
+        public static Task<ViewDescriptor> GetViewDescriptor(
             this ViewModelDescriptor pmd,
             Toolkit tk)
         {
@@ -62,7 +63,7 @@ namespace Zetbox.App.Extensions
         /// <param name="tk"></param>
         /// <param name="requestedControlKind"></param>
         /// <returns></returns>
-        public static ViewDescriptor GetViewDescriptor(
+        public static async Task<ViewDescriptor> GetViewDescriptor(
             this ViewModelDescriptor self,
             Toolkit tk,
             ControlKind requestedControlKind)
@@ -77,20 +78,21 @@ namespace Zetbox.App.Extensions
             if (_viewDescriptorCache.ContainsKey(key)) return _viewDescriptorCache[key];
             #endregion
 
+            var defaultEditorKind = await self.GetProp_DefaultEditorKind();
             // If the ViewModel has a more specific DefaultKind respect its choice
-            if (self.DefaultEditorKind != null
+            if (defaultEditorKind != null
                 && requestedControlKind != null
-                && self.DefaultEditorKind.AndParents().Select(i => i.ExportGuid).Contains(requestedControlKind.ExportGuid))
+                && defaultEditorKind.AndParents().Select(i => i.ExportGuid).Contains(requestedControlKind.ExportGuid))
             {
-                if (requestedControlKind != self.DefaultEditorKind)
+                if (requestedControlKind != defaultEditorKind)
                 {
-                    Logging.Log.DebugFormat("Using more specific default kind: {0} -> {1}", requestedControlKind.Name, self.DefaultEditorKind.Name);
+                    Logging.Log.DebugFormat("Using more specific default kind: {0} -> {1}", requestedControlKind.Name, defaultEditorKind.Name);
                 }
-                requestedControlKind = self.DefaultEditorKind;
+                requestedControlKind = defaultEditorKind;
             }
             else
             {
-                requestedControlKind = self.SecondaryControlKinds
+                requestedControlKind = (await self.GetProp_SecondaryControlKinds())
                     .FirstOrDefault(
                         sck => sck.AndParents()
                                 .Select(i => i.ExportGuid)
@@ -117,7 +119,7 @@ namespace Zetbox.App.Extensions
                 var parent = type != null && type.BaseType != null ? type.BaseType.GetViewModelDescriptor(self.ReadOnlyContext) : null;
                 if (parent != null)
                 {
-                    result = GetViewDescriptor(parent, tk, requestedControlKind);
+                    result = await GetViewDescriptor(parent, tk, requestedControlKind);
                 }
                 else
                 {

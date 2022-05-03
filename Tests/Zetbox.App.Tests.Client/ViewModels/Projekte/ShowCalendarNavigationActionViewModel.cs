@@ -35,14 +35,16 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
         {
         }
 
-        public override bool CanExecute()
+        public override System.Threading.Tasks.Task<bool> CanExecute()
         {
-            return !DataContext.IsDisposed;
+            return System.Threading.Tasks.Task.FromResult(!DataContext.IsDisposed);
         }
 
-        public override void Execute()
+        public override System.Threading.Tasks.Task Execute()
         {
             ViewModelFactory.ShowMessage("Synchronisation of milestones is not implemented yet", "Not implemented yet");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

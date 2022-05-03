@@ -47,15 +47,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public bool CanNextPage()
+        public Task<bool> CanNextPage()
         {
-            return InstancesCount >= Helper.MAXLISTCOUNT 
-                && FilterList.IsExclusiveFilterActive == false; // Currently fulltext search does not support paging
+            return Task.FromResult(InstancesCount >= Helper.MAXLISTCOUNT 
+                && FilterList.IsExclusiveFilterActive == false); // Currently fulltext search does not support paging
         }
 
-        public void NextPage()
+        public async Task NextPage()
         {
-            if (!CanNextPage()) return;
+            if (!(await CanNextPage())) return;
 
             CurrentPage = CurrentPage + 1;
             Refresh(false);
@@ -84,15 +84,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public bool CanPrevPage()
+        public Task<bool> CanPrevPage()
         {
-            return CurrentPage > 1
-                && FilterList.IsExclusiveFilterActive == false; // Currently fulltext search does not support paging
+            return Task.FromResult(CurrentPage > 1
+                && FilterList.IsExclusiveFilterActive == false); // Currently fulltext search does not support paging
         }
 
-        public void PrevPage()
+        public async Task PrevPage()
         {
-            if (!CanPrevPage()) return;
+            if (!(await CanPrevPage())) return;
 
             CurrentPage = CurrentPage - 1;
             Refresh(false);

@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -57,7 +58,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
         #region Commands
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override Task<ObservableCollection<ICommandViewModel>> CreateCommands()
         {
             var cmds = new ObservableCollection<ICommandViewModel>();
 
@@ -65,7 +66,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             cmds.Add(AddRelationCommand);
             cmds.Add(RemoveCommand);
 
-            return cmds;
+            return Task.FromResult(cmds);
         }
 
         private ICommandViewModel _AddRelationCommand = null;
@@ -88,22 +89,22 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public bool CanAddRelation()
+        public Task<bool> CanAddRelation()
         {
-            return (Value.Count == 0 && StartingObjectClass == null) || GetLastClass() != null;
+            return Task.FromResult((Value.Count == 0 && StartingObjectClass == null) || GetLastClass() != null);
         }
 
-        public string CanAddRelationReason()
+        public Task<string> CanAddRelationReason()
         {
             if ((Value.Count > 0 || StartingObjectClass != null) && GetLastClass() == null)
             {
-                return RelationChainViewModelResources.AddRelationCommand_ChainInvalidReason;
+                return Task.FromResult(RelationChainViewModelResources.AddRelationCommand_ChainInvalidReason);
             }
 
-            return string.Empty;
+            return Task.FromResult(string.Empty);
         }
 
-        public void AddRelation()
+        public Task AddRelation()
         {
             if (Value.Count == 0 && StartingObjectClass == null)
             {
@@ -113,6 +114,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 ContinueAddRelation();
             }
+
+            return Task.CompletedTask;
         }
 
         private ObjectClass GetLastClass()
@@ -188,9 +191,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             ViewModelFactory.ShowDialog(lstMdl);
         }
 
-        public override void Remove()
+        public override Task Remove()
         {
-            if (SelectedItems == null || SelectedItems.Count == 0) return;
+            if (SelectedItems == null || SelectedItems.Count == 0) return Task.CompletedTask;
 
             EnsureValueCache();
 
@@ -203,6 +206,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     ValueModel.Value.RemoveAt(i);
                 }
             }
+
+            return Task.CompletedTask;
         }
 
         #endregion

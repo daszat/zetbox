@@ -78,9 +78,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
         #region Commands
-        protected override System.Collections.ObjectModel.ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override async Task<System.Collections.ObjectModel.ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            var cmds = base.CreateCommands();
+            var cmds = await base.CreateCommands();
             cmds.Add(OpenReferenceCommand);
             cmds.Add(SelectValueCommand);
             cmds.Add(ClearValueCommand);
@@ -108,14 +108,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public void SelectValue()
+        public async Task SelectValue()
         {
             var selectClass = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                 DataContext,
                 this,
                 (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass.Find(FrozenContext),
                 null,
-                (chosenClass) =>
+                async (chosenClass) =>
                 {
                     if (chosenClass != null)
                     {
@@ -139,11 +139,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         selectionTask.ListViewModel.AllowAddNew = true;
                         OnDataObjectSelectionTaskCreated(selectionTask);
 
-                        ViewModelFactory.ShowDialog(selectionTask);
+                        await ViewModelFactory.ShowDialog(selectionTask);
                     }
                 },
                 null);
-            ViewModelFactory.ShowDialog(selectClass);
+            await ViewModelFactory.ShowDialog(selectClass);
         }
 
         public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;
@@ -169,8 +169,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         this,
                         ObjectReferenceViewModelResources.SelectValueCommand_Name,
                         ObjectReferenceViewModelResources.SelectValueCommand_Tooltip,
-                        () => SelectValue(),
-                        () => AllowSelectValue && !IsReadOnly,
+                        SelectValue,
+                        () => Task.FromResult(AllowSelectValue && !IsReadOnly),
                         null);
                     Task.Run(async () => _SelectValueCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext)));
                 }

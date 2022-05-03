@@ -328,7 +328,8 @@ namespace Zetbox.Client.Presentables
         {
             if (_PropertyChangedEvent == null) return;
 
-            Task.CompletedTask.ContinueWith(t =>_PropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName)), TaskScheduler.Default);
+            // Ensure this notification is running on the main thread
+            Task.CompletedTask.ContinueWith(t => _PropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName)), TaskScheduler.Default);
         }
         #endregion
 
@@ -368,7 +369,8 @@ namespace Zetbox.Client.Presentables
             {
                 if (commandsStore == null)
                 {
-                    commandsStore = CreateCommands();
+                    commandsStore = new ObservableCollection<ICommandViewModel>(); // init only once
+                    Task.Run(async () => commandsStore = await CreateCommands()).ContinueWith(t => OnPropertyChanged(nameof(Commands)));
                 }
                 return commandsStore;
             }
@@ -378,9 +380,9 @@ namespace Zetbox.Client.Presentables
         /// Override this to create commands associated with this view model. The view is responsible to display them.
         /// </summary>
         /// <returns></returns>
-        protected virtual ObservableCollection<ICommandViewModel> CreateCommands()
+        protected virtual Task<ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            return new ObservableCollection<ICommandViewModel>();
+            return Task.FromResult(new ObservableCollection<ICommandViewModel>());
         }
 
         #endregion
@@ -465,14 +467,14 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public bool CanHelp()
+        public Task<bool> CanHelp()
         {
-            return HasHelpText;
+            return Task.FromResult(HasHelpText);
         }
 
-        public void Help()
+        public async Task Help()
         {
-            if (!CanHelp()) return;
+            if (!(await CanHelp())) return;
 
             // The basic implementation - a toolkit might implement it better
             var dlg = ViewModelFactory.CreateDialog(DataContext, ViewModelResources.HelpCommand)

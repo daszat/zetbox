@@ -20,18 +20,19 @@ namespace Zetbox.Client.Presentables
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// A ViewModel able to edit a set of IDataObjects.
     /// </summary>
     public interface IContextViewModel
     {
-        bool CanSave();
+        Task<bool> CanSave();
         /// <summary>
         /// Tries to save the current changes.
         /// </summary>
         /// <returns>false if saving failed due to communication or validation errors</returns>
-        bool Save();
+        Task<bool> Save();
         ICommandViewModel SaveCommand { get; }
         event EventHandler Saving;
         event EventHandler Saved;

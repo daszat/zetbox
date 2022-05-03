@@ -18,12 +18,13 @@ namespace Zetbox.Client.Presentables
     using Zetbox.Client.Presentables.ValueViewModels;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IValueInputTaskViewModel
     {
-        void Cancel();
+        Task Cancel();
         ICommandViewModel CancelCommand { get; }
-        void Invoke();
+        Task Invoke();
         ICommandViewModel InvokeCommand { get; }
         string Name { get; }
         IEnumerable<BaseValueViewModel> ValueViewModels { get; }

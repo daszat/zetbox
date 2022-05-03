@@ -64,21 +64,21 @@ namespace Zetbox.Client.Presentables.DocumentManagement
                         ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Label,
                         ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Tooltip,
                         OpenAll,
-                        () => ListViewModel.Instances.Count > 0,
-                        () => ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Reason);
+                        () => Task.FromResult(ListViewModel.Instances.Count > 0),
+                        () => Task.FromResult(ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Reason));
                     Task.Run(async () => _OpenAllCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext)));
                 }
                 return _OpenAllCommand;
             }
         }
 
-        public void OpenAll()
+        public async Task OpenAll()
         {
             var newScope = ViewModelFactory.CreateNewScope();
             var newCtx = newScope.ViewModelFactory.CreateNewContext();
 
             var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
-            newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+            await newScope.ViewModelFactory.ShowModel(newWorkspace, true);
 
             newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
             {

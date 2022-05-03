@@ -19,6 +19,7 @@ namespace Zetbox.Client.Presentables.TestModule
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
@@ -76,6 +77,8 @@ namespace Zetbox.Client.Presentables.TestModule
                                 System.Threading.Thread.Sleep(2000);
                             }
                         });
+
+                        return Task.CompletedTask;
                     },
                     null,
                     null));
@@ -124,6 +127,8 @@ namespace Zetbox.Client.Presentables.TestModule
                                     string.Join("\n", values.Select(i => string.Format("{0}: \"{1}\"", i.Key, i.Value))),
                                     "received parameter");
                             });
+
+                        return Task.CompletedTask;
                     },
                     null,
                     null));
@@ -184,6 +189,8 @@ namespace Zetbox.Client.Presentables.TestModule
                                     string.Join("\n", values.Select(i => string.Format("{0}: \"{1}\"", i.Key, i.Value))),
                                     "received parameter");
                             });
+
+                        return Task.CompletedTask;
                     },
                     null,
                     null));
@@ -194,13 +201,13 @@ namespace Zetbox.Client.Presentables.TestModule
                     this,
                     "Open InstanceListTester",
                     "Open the tester in a real workspace",
-                    () =>
+                    async () =>
                     {
                         var newScope = ViewModelFactory.CreateNewScope();
                         var newCtx = newScope.ViewModelFactory.CreateNewContext();
                         var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
 
-                        newScope.ViewModelFactory.ShowModel(ws, activate: true);
+                        await newScope.ViewModelFactory.ShowModel(ws, activate: true);
 
                         ws.ShowModel(newScope.ViewModelFactory.CreateViewModel<InstanceListTestViewModel.Factory>().Invoke(newCtx, ws, this.Screen));
                     },
@@ -235,6 +242,8 @@ namespace Zetbox.Client.Presentables.TestModule
                                 },
                                 null);
                         newScope.ViewModelFactory.ShowDialog(selectClass);
+
+                        return Task.CompletedTask;
                     },
                     null,
                     null));

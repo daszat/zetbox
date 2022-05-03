@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables.GUI
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
@@ -238,16 +239,18 @@ namespace Zetbox.Client.Presentables.GUI
                         NavigatorViewModelResources.HomeCommand_Name,
                         NavigatorViewModelResources.HomeCommand_Tooltip,
                         Home,
-                        () => CurrentScreen != Root,
+                        () => Task.FromResult(CurrentScreen != Root),
                         null);
                 }
                 return _HomeCommand;
             }
         }
 
-        public void Home()
+        public Task Home()
         {
             CurrentScreen = Root;
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _BackCommand = null;
@@ -263,14 +266,14 @@ namespace Zetbox.Client.Presentables.GUI
                         NavigatorViewModelResources.BackCommand_Name,
                         NavigatorViewModelResources.BackCommand_Tooltip,
                         Back,
-                        () => _history.Count > 1,
+                        () => Task.FromResult(_history.Count > 1),
                         null);
                 }
                 return _BackCommand;
             }
         }
 
-        public void Back()
+        public Task Back()
         {
             if (_history.Count > 1)
             {
@@ -280,6 +283,8 @@ namespace Zetbox.Client.Presentables.GUI
                 // remove the back step from history too
                 _history.RemoveAt(_history.Count - 1);
             }
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _NavigateToCommand = null;
@@ -295,13 +300,13 @@ namespace Zetbox.Client.Presentables.GUI
                                 NavigatorViewModelResources.NavigateToCommand_Name,
                                 NavigatorViewModelResources.NavigateToCommand_Tooltip,
                                 NavigateTo,
-                                screen => CurrentScreen != screen);
+                                screen => Task.FromResult(CurrentScreen != screen));
                 }
                 return _NavigateToCommand;
             }
         }
 
-        public void NavigateTo(NavigationEntryViewModel screen)
+        public Task NavigateTo(NavigationEntryViewModel screen)
         {
             if (CurrentScreen != screen)
             {
@@ -314,6 +319,8 @@ namespace Zetbox.Client.Presentables.GUI
                     screen = screen.ParentScreen;
                 }
             }
+
+            return Task.CompletedTask;
         }
         #endregion
 

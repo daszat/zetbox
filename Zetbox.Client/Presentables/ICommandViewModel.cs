@@ -22,6 +22,7 @@ namespace Zetbox.Client.Presentables
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
 
     /// <summary>
@@ -347,7 +348,7 @@ namespace Zetbox.Client.Presentables
                 }
             }
         }
-        
+
         private bool _isCancel = false;
         public bool IsCancel
         {
@@ -381,13 +382,13 @@ namespace Zetbox.Client.Presentables
         /// <param name="canExecute">A function to determinante if the action can be executed. If null, true is assumed.</param>
         /// <param name="getReason">A function to receive a reason why the action cannot be executed. Can be null. If a function is provided, the tooltip will be overridden in case of can execute == false. Thus a simple string can always be returned.</param>
         /// <returns></returns>
-        public new delegate SimpleCommandViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute, Func<string> getReason);
+        public new delegate SimpleCommandViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Func<Task> execute, Func<Task<bool>> canExecute, Func<Task<string>> getReason);
 
-        private readonly Action execute;
-        private readonly Func<bool> canExecute;
-        private readonly Func<string> getReason;
+        private readonly Func<Task> execute;
+        private readonly Func<Task<bool>> canExecute;
+        private readonly Func<Task<string>> getReason;
 
-        public SimpleCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute, Func<string> getReason)
+        public SimpleCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Func<Task> execute, Func<Task<bool>> canExecute, Func<Task<string>> getReason)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
             if (execute == null) throw new ArgumentNullException("execute");
@@ -406,28 +407,31 @@ namespace Zetbox.Client.Presentables
             if (DataContext.IsDisposed) return false;
             if (canExecute == null) return true;
 
-            var canExec = canExecute();
-            if (getReason != null)
+            return Task.Run(async () =>
             {
-                base.Reason = canExec ? string.Empty : getReason();
-            }
-            return canExec;
+                var canExec = await canExecute();
+                if (getReason != null)
+                {
+                    base.Reason = canExec ? string.Empty : await getReason();
+                }
+                return canExec;
+            }).Result;
         }
 
         protected override void DoExecute(object data)
         {
-            execute();
+            _ = execute();
         }
     }
 
     public sealed class SimpleParameterCommandViewModel<T> : CommandViewModel
     {
-        public new delegate SimpleParameterCommandViewModel<T> Factory(IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute);
+        public new delegate SimpleParameterCommandViewModel<T> Factory(IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Func<T, Task> execute, Func<T, Task<bool>> canExecute);
 
-        private readonly Action<T> execute;
-        private readonly Func<T, bool> canExecute;
+        private readonly Func<T, Task> execute;
+        private readonly Func<T, Task<bool>> canExecute;
 
-        public SimpleParameterCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute)
+        public SimpleParameterCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Func<T, Task> execute, Func<T, Task<bool>> canExecute)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
             if (execute == null) throw new ArgumentNullException("execute");
@@ -440,25 +444,28 @@ namespace Zetbox.Client.Presentables
             if (DataContext.IsDisposed) return false;
             if (canExecute == null) return true;
 
-            if (data is T)
+            return Task.Run(async () =>
             {
-                return canExecute((T)data);
-            }
-            else
-            {
-                return canExecute(default(T));
-            }
+                if (data is T)
+                {
+                    return await canExecute((T)data);
+                }
+                else
+                {
+                    return await canExecute(default(T));
+                }
+            }).Result;
         }
 
         protected override void DoExecute(object data)
         {
             if (data is T)
             {
-                execute((T)data);
+                _ = execute((T)data);
             }
             else
             {
-                execute(default(T));
+                _ = execute(default(T));
             }
         }
     }
@@ -563,9 +570,9 @@ namespace Zetbox.Client.Presentables
             // Nothing to do, just a container
         }
 
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override async Task<System.Collections.ObjectModel.ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            return new ObservableCollection<ICommandViewModel>(base.CreateCommands().Concat(_children));
+            return new ObservableCollection<ICommandViewModel>((await base.CreateCommands()).Concat(_children));
         }
     }
 }

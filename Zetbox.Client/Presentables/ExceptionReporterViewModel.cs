@@ -325,7 +325,7 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public void Report()
+        public Task Report()
         {
             lock (UIExceptionReporter.SyncRoot)
             {
@@ -349,6 +349,8 @@ namespace Zetbox.Client.Presentables
                 }
             }
             this.Show = false;
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _CancelCommand = null;
@@ -370,10 +372,12 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public void Cancel()
+        public Task Cancel()
         {
             this.Show = false;
             Clear();
+
+            return Task.CompletedTask;
         }
         #endregion
 

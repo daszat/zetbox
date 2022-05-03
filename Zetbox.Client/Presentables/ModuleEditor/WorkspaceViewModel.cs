@@ -173,9 +173,11 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                                     // TODO: This will produce a scope leak!
                                 }
                             }
+
+                            return Task.CompletedTask;
                         },
-                        () => assemblyLstMdl.SelectedItems.Count > 0,
-                        () => "Nothing selected"));
+                        () => Task.FromResult(assemblyLstMdl.SelectedItems.Count > 0),
+                        () => Task.FromResult("Nothing selected")));
                     lst.Add(assemblyLstMdl);
 
                     grpMdl = ViewModelFactory.CreateViewModel<GroupingTreeItemViewModel.Factory>().Invoke(DataContext, this, "Application & UI");
@@ -326,14 +328,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             {
                 if (_EditCurrentModuleCommand == null)
                 {
-                    _EditCurrentModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Edit Module", "Opens the Editor for the current module", () => EditCurrentModule(), null, null);
+                    _EditCurrentModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Edit Module", "Opens the Editor for the current module", EditCurrentModule, null, null);
                     Task.Run(async () => _EditCurrentModuleCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext)));
                 }
                 return _EditCurrentModuleCommand;
             }
         }
 
-        public void EditCurrentModule()
+        public async Task EditCurrentModule()
         {
             if (CurrentModule == null) return;
             var newScope = ViewModelFactory.CreateNewScope();
@@ -341,7 +343,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
 
             ws.ShowObject(CurrentModule);
-            newScope.ViewModelFactory.ShowModel(ws, true);
+            await newScope.ViewModelFactory.ShowModel(ws, true);
         }
 
         private ICommandViewModel _ReportProblemCommand = null;

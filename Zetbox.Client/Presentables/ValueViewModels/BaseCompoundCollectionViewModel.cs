@@ -46,17 +46,17 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             : base(appCtx, dataCtx, parent, mdl)
         {
             this.ObjectCollectionModel = mdl;
-            dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
+            dataCtx.IsElevatedModeChanged += async (s, e) => await dataCtx_IsElevatedModeChanged(s, e);
         }
 
         public ICompoundCollectionValueModel<TModelCollection> ObjectCollectionModel { get; private set; }
         public CompoundObject ReferencedClass { get { return ObjectCollectionModel.CompoundObjectDefinition; } }
 
-        void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
+        async Task dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
         {
             OnPropertyChanged("AllowAddNew");
             OnPropertyChanged("AllowDelete");
-            CreateCommands();
+            await CreateCommands();
         }
 
         private GridDisplayConfiguration _displayedColumns = null;
@@ -285,10 +285,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region Commands
 
-        
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+
+        protected override async Task<System.Collections.ObjectModel.ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            var cmds = base.CreateCommands();
+            var cmds = await base.CreateCommands();
 
             if (AllowAddNew) cmds.Add(CreateNewCommand);
             if (AllowOpen) cmds.Add(OpenCommand);
@@ -318,18 +318,18 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     CommonCommandsResources.NewDataObjectCommand_Tooltip,
                     CreateNew,
                     CanCreateNew, 
-                    () => string.Empty);
+                    () => Task.FromResult(string.Empty));
             }
         }
 
-        public bool CanCreateNew()
+        public Task<bool> CanCreateNew()
         {
-            return AllowAddNew;
+            return Task.FromResult(AllowAddNew);
         }
 
-        public void CreateNew()
+        public async Task CreateNew()
         {
-            if (!CanCreateNew()) return;
+            if (!(await CanCreateNew())) return;
 
             var obj = DataContext.CreateCompoundObject(ReferencedClass.GetDescribedInterfaceType());
             OnObjectCreated(obj);
@@ -370,21 +370,22 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     CommonCommandsResources.OpenDataObjectCommand_Tooltip,
                     Open,
                     CanOpen,
-                    () => CommonCommandsResources.DataObjectCommand_NothingSelected);
+                    () => Task.FromResult(CommonCommandsResources.DataObjectCommand_NothingSelected));
             }
         }
 
-        public bool CanOpen()
+        public Task<bool> CanOpen()
         {
-            return SelectedItems.Count > 0;
+            return Task.FromResult(SelectedItems.Count > 0);
         }
 
-        public void Open()
+        public async Task Open()
         {
-            if (!CanOpen()) return;
+            if (!(await CanOpen())) return;
 
             foreach (var cpObj in SelectedItems)
             {
+                // TODO: implementation missing
             }
         }
 
@@ -401,7 +402,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         CommonCommandsResources.DeleteDataObjectCommand_Name,
                         CommonCommandsResources.DeleteDataObjectCommand_Tooltip,
                         Delete, // Collection will change while deleting!
-                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly,
+                        () => Task.FromResult(SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly),
                         null);
                 }
                 return _deleteCommand;
@@ -418,21 +419,23 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             SelectedItem = item;
         }
 
-        public virtual void Delete()
+        public virtual Task Delete()
         {
-            if (SelectedItems == null || SelectedItems.Count == 0) return;
+            if (SelectedItems == null || SelectedItems.Count == 0) return Task.CompletedTask;
 
             EnsureValueCache();
             foreach (var item in SelectedItems.ToArray())
             {
                 ValueModel.Value.Remove(item.Object);
             }
+
+            return Task.CompletedTask;
         }
 
-        public virtual void Remove()
+        public virtual Task Remove()
         {
             // Redirect -> it's the same
-            Delete();
+            return Delete();
         }
 
         #endregion
@@ -558,10 +561,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region IValueViewModel Members
 
-        public override void ClearValue()
+        public override Task ClearValue()
         {
             EnsureValueCache();
             ValueModel.Value.Clear();
+
+            return Task.CompletedTask;
         }
         #endregion
 

@@ -22,6 +22,7 @@ using Zetbox.App.Base;
 using System.Collections.ObjectModel;
 using Zetbox.App.SchemaMigration;
 using Zetbox.Client.Presentables.ZetboxBase;
+using System.Threading.Tasks;
 
 namespace Zetbox.Client.Presentables.SchemaMigration
 {
@@ -37,14 +38,14 @@ namespace Zetbox.Client.Presentables.SchemaMigration
         {
         }
 
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override Task<ObservableCollection<ICommandViewModel>> CreateCommands()
         {
             var cmds = new ObservableCollection<ICommandViewModel>();
 
             cmds.Add(SelectCommand);
             cmds.Add(ClearValueCommand);
 
-            return cmds;
+            return Task.FromResult(cmds);
         }
 
 
@@ -87,13 +88,13 @@ namespace Zetbox.Client.Presentables.SchemaMigration
             {
                 if (_SelectCommand == null)
                 {
-                    _SelectCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, null, "Select", "Select a destination property", Select, () => SourceColumn != null, null);
+                    _SelectCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, null, "Select", "Select a destination property", Select, () => Task.FromResult(SourceColumn != null), null);
                 }
                 return _SelectCommand;
             }
         }
 
-        public void Select()
+        public async Task Select()
         {
             var dlg = ViewModelFactory.CreateViewModel<PropertySelectionTaskViewModel.Factory>().Invoke(DataContext, Parent, SourceColumn.SourceTable.DestinationObjectClass, (result) =>
             {
@@ -108,7 +109,7 @@ namespace Zetbox.Client.Presentables.SchemaMigration
             });
             dlg.FollowCompoundObjects = true;
 
-            ViewModelFactory.ShowDialog(dlg);
+            await ViewModelFactory.ShowDialog(dlg);
         }
 
         protected override void OnPropertyChanged(string propertyName)

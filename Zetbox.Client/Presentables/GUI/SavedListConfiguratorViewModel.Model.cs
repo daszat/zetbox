@@ -30,6 +30,7 @@ namespace Zetbox.Client.Presentables.GUI
     using Zetbox.Client.Models;
     using Zetbox.Client.GUI;
     using Zetbox.App.Base;
+    using System.Threading.Tasks;
 
     // No ViewModelDescriptor -> internal
     public partial class SavedListConfiguratorViewModel
@@ -103,7 +104,7 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-        private void Save(string name)
+        private Task Save(string name)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
             using (var ctx = ViewModelFactory.CreateNewContext())
@@ -152,6 +153,8 @@ namespace Zetbox.Client.Presentables.GUI
 
                 UpdateViewModel(name, item);
             }
+
+            return Task.CompletedTask;
         }
     }
 }

@@ -444,7 +444,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         InstanceListViewModelResources.AddFilterCommand,
                         InstanceListViewModelResources.AddFilterCommand_Tooltip,
                         AddFilter,
-                        () => AllowFilter && AllowUserFilter,
+                        () => Task.FromResult(AllowFilter && AllowUserFilter),
                         null);
                     Task.Run(async () => _AddFilterCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext)));
                 }
@@ -452,7 +452,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public void AddFilter()
+        public async Task AddFilter()
         {
             var dlg = ViewModelFactory.CreateViewModel<PropertySelectionTaskViewModel.Factory>()
                 .Invoke(DataContext,
@@ -468,7 +468,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     });
             dlg.FollowRelationsOne = true;
             dlg.FollowRelationsMany = true;
-            ViewModelFactory.ShowDialog(dlg);
+            await ViewModelFactory.ShowDialog(dlg);
         }
 
         public void ResetUserFilter()

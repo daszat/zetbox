@@ -60,11 +60,6 @@ namespace Zetbox.Client.Presentables.DocumentManagement
             base.PropertyModelsByName["IsFileReadonly"].IsReadOnly = File.IsFileReadonly;
         }
 
-        protected override System.Collections.ObjectModel.ObservableCollection<ICommandViewModel> CreateCommands()
-        {
-            return base.CreateCommands();
-        }
-
         public File File { get; private set; }
 
         public bool CanUpload

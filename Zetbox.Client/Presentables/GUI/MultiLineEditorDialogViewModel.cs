@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Zetbox.API;
 
 namespace Zetbox.Client.Presentables.GUI
@@ -81,10 +82,12 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-        public void Ok()
+        public Task Ok()
         {
             _callback(_value);
             Show = false;
+
+            return Task.CompletedTask;
         }
 
         private ICommandViewModel _CancelCommand = null;
@@ -107,9 +110,11 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-        public void Cancel()
+        public Task Cancel()
         {
             Show = false;
+
+            return Task.CompletedTask;
         }
     }
 }

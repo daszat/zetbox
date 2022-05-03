@@ -100,16 +100,20 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _RemoveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
                         FilterListEntryViewModelResources.RemoveCommand, 
                         FilterListEntryViewModelResources.RemoveCommand_Tooltip,
-                        Remove, () => IsUserFilter, null);
+                        Remove, 
+                        () => Task.FromResult(IsUserFilter), 
+                        null);
                     Task.Run(async () => _RemoveCommand.Icon = await IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext)));
                 }
                 return _RemoveCommand;
             }
         }
 
-        public void Remove()
+        public Task Remove()
         {
             Parent.RemoveFilter(FilterViewModel.Filter);
+
+            return Task.CompletedTask;
         }
     }
 }

@@ -196,13 +196,15 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        public void Swap()
+        public Task Swap()
         {
             var tmp = _targetMdl.Value;
             _targetMdl.Value = _sourceMdl.Value;
             _sourceMdl.Value = tmp;
 
             ClearProperties();
+
+            return Task.CompletedTask;
         }
         #endregion
 

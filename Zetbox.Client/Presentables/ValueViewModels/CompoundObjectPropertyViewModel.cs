@@ -21,6 +21,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.App.Base;
@@ -107,9 +108,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public override void ClearValue()
+        public override Task ClearValue()
         {
             ValueModel.Value = DataContext.CreateCompoundObject(DataContext.GetInterfaceType(ReferencedType.GetDataType()));
+
+            return Task.CompletedTask;
         }
     }
 }

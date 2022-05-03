@@ -21,6 +21,7 @@ namespace Zetbox.Client.WPF.Toolkit
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -43,25 +44,25 @@ namespace Zetbox.Client.WPF.Toolkit
         private readonly IFrozenContext _frozenCtx;
         private readonly object _requestedKind;
 
-        private static DataTemplate SelectTemplate(ViewModel mdl, string controlKindName, IFrozenContext frozenCtx)
+        private static Task<DataTemplate> SelectTemplate(ViewModel mdl, string controlKindName, IFrozenContext frozenCtx)
         {
             var ck = frozenCtx.GetQuery<ControlKind>().SingleOrDefault(c => c.Name == controlKindName);
             if (ck == null) Logging.Log.WarnFormat("Control kind with name '{0}' was not found", controlKindName);
             return SelectTemplate(mdl, ck, frozenCtx);
         }
 
-        private static DataTemplate SelectTemplate(ViewModel mdl, ControlKind controlKind, IFrozenContext frozenCtx)
+        private static async Task<DataTemplate> SelectTemplate(ViewModel mdl, ControlKind controlKind, IFrozenContext frozenCtx)
         {
             ViewModelDescriptor pmd = GuiExtensions.GetViewModelDescriptor(mdl, frozenCtx);
             if (pmd == null) return null;
-            return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF, controlKind));
+            return CreateTemplate(await pmd.GetViewDescriptor(Toolkit.WPF, controlKind));
         }
 
-        private static DataTemplate SelectDefaultTemplate(ViewModel mdl, IFrozenContext frozenCtx)
+        private static async Task<DataTemplate> SelectDefaultTemplate(ViewModel mdl, IFrozenContext frozenCtx)
         {
             ViewModelDescriptor pmd = GuiExtensions.GetViewModelDescriptor(mdl, frozenCtx);
             if (pmd == null) return null;
-            return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF));
+            return CreateTemplate(await pmd.GetViewDescriptor(Toolkit.WPF));
         }
 
 #if !DONT_CACHE_TEMPLATE
@@ -125,39 +126,43 @@ namespace Zetbox.Client.WPF.Toolkit
             }
 
             var model = item as ViewModel;
-            DataTemplate result = null;
-            if (model != null)
+            Task<DataTemplate> result = Task.Run(async () =>
             {
-                if (rk is ControlKind)
+                if (model != null)
                 {
-                    if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk.ToString(), model.GetType().FullName); }
-                    result = SelectTemplate(model, rk as ControlKind, _frozenCtx);
+                    if (rk is ControlKind)
+                    {
+                        if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk.ToString(), model.GetType().FullName); }
+                        return await SelectTemplate(model, rk as ControlKind, _frozenCtx);
+                    }
+                    else if (rk is String)
+                    {
+                        if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk, model.GetType().FullName); }
+                        return await SelectTemplate(model, rk as String, _frozenCtx);
+                    }
+                    else if (rk == null && model.RequestedKind != null)
+                    {
+                        if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Searching '{0}' Template for {1}", model.RequestedKind.ToString(), model.GetType().FullName); }
+                        return await SelectTemplate(model, model.RequestedKind, _frozenCtx);
+                    }
+                    else if (rk == null)
+                    {
+                        if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Searching default Template for {0}", model.GetType().FullName); }
+                        return await SelectDefaultTemplate(model, _frozenCtx);
+                    }
+                    else
+                    {
+                        Logging.Log.ErrorFormat("RequestedKind of type '{0}' is neither string nor ControlKind", rk.GetType().FullName);
+                        return null;
+                    }
                 }
-                else if (rk is String)
-                {
-                    if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk, model.GetType().FullName); }
-                    result = SelectTemplate(model, rk as String, _frozenCtx);
-                }
-                else if (rk == null && model.RequestedKind != null)
-                {
-                    if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Searching '{0}' Template for {1}", model.RequestedKind.ToString(), model.GetType().FullName); }
-                    result = SelectTemplate(model, model.RequestedKind, _frozenCtx);
-                }
-                else if (rk == null)
-                {
-                    if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Searching default Template for {0}", model.GetType().FullName); }
-                    result = SelectDefaultTemplate(model, _frozenCtx);
-                }
-                else
-                {
-                    result = null;
-                    Logging.Log.ErrorFormat("RequestedKind of type '{0}' is neither string nor ControlKind", rk.GetType().FullName);
-                }
-            }
+
+                return null;
+            });
 
             if (result != null)
             {
-                return result;
+                return result.Result;
             }
             else
             {

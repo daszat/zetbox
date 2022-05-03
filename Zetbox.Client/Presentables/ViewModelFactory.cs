@@ -23,6 +23,7 @@ namespace Zetbox.Client.Presentables
     using System.Linq.Expressions;
     using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
@@ -416,7 +417,7 @@ namespace Zetbox.Client.Presentables
         /// </summary>
         /// <param name="mdl">the model to be viewed</param>
         /// <returns>the configured view</returns>
-        protected virtual object CreateDefaultView(ViewModel mdl)
+        protected virtual async Task<object> CreateDefaultView(ViewModel mdl)
         {
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
 
@@ -425,8 +426,8 @@ namespace Zetbox.Client.Presentables
             if (pmd == null) return null;
 
             var vDesc = mdl.RequestedKind != null
-                ? pmd.GetViewDescriptor(Toolkit, mdl.RequestedKind)
-                : pmd.GetViewDescriptor(Toolkit);
+                ? await pmd.GetViewDescriptor(Toolkit, mdl.RequestedKind)
+                : await pmd.GetViewDescriptor(Toolkit);
 
             return CreateSpecificView(mdl, vDesc);
         }
@@ -437,7 +438,7 @@ namespace Zetbox.Client.Presentables
         /// <param name="mdl">the model to be viewed</param>
         /// <param name="kind">the kind of view to create</param>
         /// <returns>the configured view</returns>
-        protected virtual object CreateSpecificView(ViewModel mdl, ControlKind kind)
+        protected virtual async Task<object> CreateSpecificView(ViewModel mdl, ControlKind kind)
         {
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
             if (kind == null) { throw new ArgumentNullException("kind"); }
@@ -446,7 +447,7 @@ namespace Zetbox.Client.Presentables
 
             if (pmd == null) return null;
 
-            return CreateSpecificView(mdl, pmd.GetViewDescriptor(Toolkit, kind));
+            return CreateSpecificView(mdl, await pmd.GetViewDescriptor(Toolkit, kind));
         }
 
         /// <summary>
@@ -537,15 +538,15 @@ namespace Zetbox.Client.Presentables
             return Activator.CreateInstance(Type.GetType(vDesc.ControlTypeRef));
         }
 
-        public void ShowModel(ViewModel mdl, ControlKind kind, bool activate)
+        public async Task ShowModel(ViewModel mdl, ControlKind kind, bool activate)
         {
             if (kind == null)
             {
-                ShowModel(mdl, activate);
+                await ShowModel(mdl, activate);
             }
             else
             {
-                ShowInView(mdl, CreateSpecificView(mdl, kind), activate, false, null);
+                ShowInView(mdl, await CreateSpecificView(mdl, kind), activate, false, null);
             }
         }
 
@@ -554,7 +555,7 @@ namespace Zetbox.Client.Presentables
         /// </summary>
         /// <param name="mdl"></param>
         /// <param name="activate"></param>
-        public void ShowModel(ViewModel mdl, bool activate)
+        public async Task ShowModel(ViewModel mdl, bool activate)
         {
             if (mdl == null)
                 throw new ArgumentNullException("mdl");
@@ -563,7 +564,7 @@ namespace Zetbox.Client.Presentables
 
             if (dom == null)
             {
-                ShowInView(mdl, CreateDefaultView(mdl), activate, false, null);
+                ShowInView(mdl, await CreateDefaultView(mdl), activate, false, null);
             }
             else
             {
@@ -615,18 +616,18 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public void ShowDialog(ViewModel mdl, ViewModel ownerModel, Zetbox.App.GUI.ControlKind kind = null)
+        public async Task ShowDialog(ViewModel mdl, ViewModel ownerModel, Zetbox.App.GUI.ControlKind kind = null)
         {
             if (mdl == null)
                 throw new ArgumentNullException("mdl");
 
             if (kind == null)
             {
-                ShowInView(mdl, CreateDefaultView(mdl), true, true, ownerModel ?? mdl.GetWorkspace());
+                ShowInView(mdl, await CreateDefaultView(mdl), true, true, ownerModel ?? mdl.GetWorkspace());
             }
             else
             {
-                ShowInView(mdl, CreateSpecificView(mdl, kind), true, true, ownerModel ?? mdl.GetWorkspace());
+                ShowInView(mdl, await CreateSpecificView(mdl, kind), true, true, ownerModel ?? mdl.GetWorkspace());
             }
         }
 

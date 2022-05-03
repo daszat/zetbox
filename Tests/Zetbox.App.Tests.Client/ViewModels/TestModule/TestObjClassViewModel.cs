@@ -30,6 +30,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.Test;
     using Zetbox.Client.GUI;
     using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class TestObjClassViewModel
@@ -44,9 +45,9 @@ namespace Zetbox.Client.Presentables
         {
         }
 
-        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override async Task<ObservableCollection<ICommandViewModel>> CreateCommands()
         {
-            var list = base.CreateCommands();
+            var list = await base.CreateCommands();
 
             list.Add(AddTabCommand);
 
@@ -68,19 +69,19 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public bool CanAddTab()
+        public Task<bool> CanAddTab()
         {
-            return true;
+            return Task.FromResult(true);
         }
 
-        public string CanAddTabReason()
+        public Task<string> CanAddTabReason()
         {
-            return "TODO: Add error string here";
+            return Task.FromResult("TODO: Add error string here");
         }
 
-        public void AddTab()
+        public async Task AddTab()
         {
-            if (!CanAddTab()) return;
+            if (!(await CanAddTab())) return;
 
             var key = $"New Tab {PropertyGroups.Count + 1}";
             var tab = UICreator.CustomPropertyGroup(key, key, new[]
