@@ -322,7 +322,7 @@ namespace Zetbox.API.Common.Reporting
             }
             else
             {
-                PdfDocumentRenderer pdf = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.None);
+                PdfDocumentRenderer pdf = new PdfDocumentRenderer(true, PdfFontEmbedding.None);
                 pdf.Document = GetDocument();
                 pdf.RenderDocument();
                 pdf.Save(filename);
@@ -331,7 +331,7 @@ namespace Zetbox.API.Common.Reporting
 
         public virtual Stream GetStream()
         {
-            PdfDocumentRenderer pdf = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.None);
+            PdfDocumentRenderer pdf = new PdfDocumentRenderer(true, PdfFontEmbedding.None);
             pdf.Document = GetDocument();
             pdf.RenderDocument();
             MemoryStream s = new MemoryStream();

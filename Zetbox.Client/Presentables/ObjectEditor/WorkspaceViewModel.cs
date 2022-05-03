@@ -325,7 +325,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        public Task<bool> Save()
+        public async Task<bool> Save()
         {
             UpdateErrors();
             if (ValidationManager.IsValid)
@@ -333,7 +333,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 try
                 {
                     OnSaving();
-                    DataContext.SubmitChanges();
+                    await DataContext.SubmitChanges();
                     OnSaved();
 
                     foreach (var i in Items.OfType<DataObjectViewModel>().ToList())
@@ -343,13 +343,13 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                             Items.Remove(i);
                         }
                     }
-                    return Task.FromResult(true);
+                    return true;
                 }
                 catch (Exception ex)
                 {
                     if (_exceptionHandler.Show(DataContext, ex))
                     {
-                        return Task.FromResult(false);
+                        return false;
                     }
                     else
                     {
@@ -359,10 +359,10 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
             else
             {
-                ShowVerificationResults();
+                await ShowVerificationResults();
             }
 
-            return Task.FromResult(false);
+            return false;
         }
 
         public async Task SaveAndClose()
