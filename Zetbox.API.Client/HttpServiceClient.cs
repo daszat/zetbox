@@ -199,7 +199,10 @@ namespace Zetbox.API.Client
                 using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
                 {
                     reqWriter.Write(version);
-                    response = await req.PostAsync(new Uri(String.Format("{0}?id={1}", GetBlobStreamUri.AbsoluteUri, ID)), new StreamContent(reqStream));
+                    reqStream.Seek(0, SeekOrigin.Begin);
+                    var content = new StreamContent(reqStream);
+                    content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+                    response = await req.PostAsync(new Uri(String.Format("{0}?id={1}", GetBlobStreamUri.AbsoluteUri, ID)), content);
                 }
                 using (var stream = response.Content.ReadAsStream())
                 {
@@ -234,7 +237,10 @@ namespace Zetbox.API.Client
                 reqWriter.Write(upload.ToArray());
                 reqWriter.WriteRaw(Encoding.ASCII.GetBytes("\n"));// required for basic.authenticated POST to apache
 
-                response = await req.PostAsync(SetBlobStreamUri, new StreamContent(reqStream));
+                reqStream.Seek(0, SeekOrigin.Begin);
+                var content = new StreamContent(reqStream);
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+                response = await req.PostAsync(SetBlobStreamUri, content);
             }
             try
             {
@@ -281,7 +287,10 @@ namespace Zetbox.API.Client
                 reqWriter.Write(changedObjects);
                 reqWriter.Write(notificationRequests);
 
-                response = await req.PostAsync(InvokeServerMethodUri, new StreamContent(reqStream));
+                reqStream.Seek(0, SeekOrigin.Begin);
+                var content = new StreamContent(reqStream);
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+                response = await req.PostAsync(InvokeServerMethodUri, content);
             }
             try
             {
