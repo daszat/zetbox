@@ -1060,7 +1060,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
                 binStream.Write(this._EagerLoading);
             }
             binStream.Write(this._IsInlineEditable);
-            binStream.Write(RelationEnd != null ? RelationEnd.ID : (int?)null);
+            binStream.Write(_fk_RelationEnd != null ? _fk_RelationEnd : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

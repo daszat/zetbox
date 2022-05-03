@@ -356,8 +356,8 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -816,8 +816,8 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1309,8 +1309,8 @@ namespace Zetbox.App.Calendar
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1765,8 +1765,8 @@ namespace Zetbox.App.Calendar
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -2225,8 +2225,8 @@ namespace Zetbox.App.Calendar
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -2681,8 +2681,8 @@ namespace Zetbox.App.Calendar
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -3141,8 +3141,8 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -3706,9 +3706,9 @@ namespace at.dasz.DocumentManagement
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
             binStream.Write(this._A_pos);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
             binStream.Write(this._B_pos);
         }
 
@@ -4192,8 +4192,8 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -4631,8 +4631,8 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -5091,8 +5091,8 @@ namespace Zetbox.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -5600,8 +5600,8 @@ namespace Zetbox.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -6093,8 +6093,8 @@ namespace Zetbox.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -6674,9 +6674,9 @@ namespace Zetbox.App.Projekte
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
             binStream.Write(this._A_pos);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
             binStream.Write(this._B_pos);
         }
 
@@ -7253,9 +7253,9 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
             binStream.Write(this._A_pos);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
             binStream.Write(this._B_pos);
         }
 
@@ -7832,9 +7832,9 @@ namespace Zetbox.App.SchemaMigration
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
             binStream.Write(this._A_pos);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
             binStream.Write(this._B_pos);
         }
 
@@ -8318,8 +8318,8 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -8778,8 +8778,8 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

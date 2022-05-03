@@ -1706,12 +1706,12 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(_fk_ChangedBy != null ? _fk_ChangedBy : (int?)null);
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
-            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(_fk_CreatedBy != null ? _fk_CreatedBy : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
@@ -1729,7 +1729,7 @@ namespace Zetbox.App.Base
             }
             binStream.Write(this._IsReturnParameter);
             binStream.Write(this._Label);
-            binStream.Write(Method != null ? Method.ID : (int?)null);
+            binStream.Write(_fk_Method != null ? _fk_Method : (int?)null);
             binStream.Write(this._Parameter_pos);
             binStream.Write(this._Name);
         }

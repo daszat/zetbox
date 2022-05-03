@@ -882,13 +882,13 @@ namespace Zetbox.App.GUI
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(Blob != null ? Blob.ID : (int?)null);
+            binStream.Write(_fk_Blob != null ? _fk_Blob : (int?)null);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
             binStream.Write(this._IconFile);
-            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(_fk_Module != null ? _fk_Module : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

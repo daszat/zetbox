@@ -602,8 +602,8 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(AnotherFile != null ? AnotherFile.ID : (int?)null);
-            binStream.Write(AnyFile != null ? AnyFile.ID : (int?)null);
+            binStream.Write(_fk_AnotherFile != null ? _fk_AnotherFile : (int?)null);
+            binStream.Write(_fk_AnyFile != null ? _fk_AnyFile : (int?)null);
             binStream.Write(this._Name);
         }
 

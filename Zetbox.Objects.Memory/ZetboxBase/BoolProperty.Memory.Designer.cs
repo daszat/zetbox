@@ -1300,11 +1300,11 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(FalseIcon != null ? FalseIcon.ID : (int?)null);
+            binStream.Write(_fk_FalseIcon != null ? _fk_FalseIcon : (int?)null);
             binStream.Write(this._FalseLabel);
-            binStream.Write(NullIcon != null ? NullIcon.ID : (int?)null);
+            binStream.Write(_fk_NullIcon != null ? _fk_NullIcon : (int?)null);
             binStream.Write(this._NullLabel);
-            binStream.Write(TrueIcon != null ? TrueIcon.ID : (int?)null);
+            binStream.Write(_fk_TrueIcon != null ? _fk_TrueIcon : (int?)null);
             binStream.Write(this._TrueLabel);
         }
 

@@ -665,7 +665,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(_fk_Module != null ? _fk_Module : (int?)null);
             binStream.Write(this._Name);
         }
 

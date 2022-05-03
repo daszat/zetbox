@@ -451,7 +451,7 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._CurrentNumber);
-            binStream.Write(Sequence != null ? Sequence.ID : (int?)null);
+            binStream.Write(_fk_Sequence != null ? _fk_Sequence : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

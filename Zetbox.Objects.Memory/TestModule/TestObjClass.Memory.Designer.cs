@@ -792,7 +792,7 @@ namespace Zetbox.App.Test
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write((int?)this._CalculatedEnumeration);
             binStream.Write(this._MyIntProperty);
-            binStream.Write(ObjectProp != null ? ObjectProp.ID : (int?)null);
+            binStream.Write(_fk_ObjectProp != null ? _fk_ObjectProp : (int?)null);
             binStream.Write(this._StringProp);
             binStream.Write((int?)this._TestEnumProp);
             binStream.Write(this._isTestEnumWithDefaultSet);

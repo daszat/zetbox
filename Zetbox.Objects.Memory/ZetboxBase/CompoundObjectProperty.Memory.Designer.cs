@@ -886,7 +886,7 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(CompoundObjectDefinition != null ? CompoundObjectDefinition.ID : (int?)null);
+            binStream.Write(_fk_CompoundObjectDefinition != null ? _fk_CompoundObjectDefinition : (int?)null);
             binStream.Write(this._HasPersistentOrder);
             binStream.Write(this._IsList);
         }

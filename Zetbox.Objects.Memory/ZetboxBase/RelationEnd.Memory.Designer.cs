@@ -1843,14 +1843,14 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(AParent != null ? AParent.ID : (int?)null);
-            binStream.Write(BParent != null ? BParent.ID : (int?)null);
-            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(_fk_AParent != null ? _fk_AParent : (int?)null);
+            binStream.Write(_fk_BParent != null ? _fk_BParent : (int?)null);
+            binStream.Write(_fk_ChangedBy != null ? _fk_ChangedBy : (int?)null);
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
-            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(_fk_CreatedBy != null ? _fk_CreatedBy : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
@@ -1864,9 +1864,9 @@ namespace Zetbox.App.Base
                 binStream.Write(this._HasPersistentOrder);
             }
             binStream.Write((int?)this._Multiplicity);
-            binStream.Write(Navigator != null ? Navigator.ID : (int?)null);
+            binStream.Write(_fk_Navigator != null ? _fk_Navigator : (int?)null);
             binStream.Write(this._RoleName);
-            binStream.Write(Type != null ? Type.ID : (int?)null);
+            binStream.Write(_fk_Type != null ? _fk_Type : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

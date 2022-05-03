@@ -450,7 +450,7 @@ namespace at.dasz.DocumentManagement
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(File != null ? File.ID : (int?)null);
+            binStream.Write(_fk_File != null ? _fk_File : (int?)null);
             binStream.Write(this._Text);
         }
 

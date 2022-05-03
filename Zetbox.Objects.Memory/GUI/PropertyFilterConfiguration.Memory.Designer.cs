@@ -510,7 +510,7 @@ namespace Zetbox.App.GUI
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(Property != null ? Property.ID : (int?)null);
+            binStream.Write(_fk_Property != null ? _fk_Property : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

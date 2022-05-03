@@ -664,7 +664,7 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(Constrained != null ? Constrained.ID : (int?)null);
+            binStream.Write(_fk_Constrained != null ? _fk_Constrained : (int?)null);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);

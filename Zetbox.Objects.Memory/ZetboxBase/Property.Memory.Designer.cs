@@ -3101,7 +3101,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 binStream.Write(this._AllowFilterCollections);
             }
             binStream.Write(this._CategoryTags);
-            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(_fk_ChangedBy != null ? _fk_ChangedBy : (int?)null);
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
@@ -3123,29 +3123,29 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             {
                 binStream.Write(false);
             }
-            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(_fk_CreatedBy != null ? _fk_CreatedBy : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
             }
             binStream.Write(this._DefaultSortPriority);
-            binStream.Write(DefaultValue != null ? DefaultValue.ID : (int?)null);
+            binStream.Write(_fk_DefaultValue != null ? _fk_DefaultValue : (int?)null);
             binStream.Write(this._Description);
             binStream.Write(this._DisableExport);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(FilterConfiguration != null ? FilterConfiguration.ID : (int?)null);
+            binStream.Write(_fk_FilterConfiguration != null ? _fk_FilterConfiguration : (int?)null);
             binStream.Write(this._HelpText);
             binStream.Write(this._Label);
-            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(_fk_Module != null ? _fk_Module : (int?)null);
             binStream.Write(this._Name);
-            binStream.Write(ObjectClass != null ? ObjectClass.ID : (int?)null);
+            binStream.Write(_fk_ObjectClass != null ? _fk_ObjectClass : (int?)null);
             binStream.Write(this._Properties_pos);
-            binStream.Write(RequestedKind != null ? RequestedKind.ID : (int?)null);
+            binStream.Write(_fk_RequestedKind != null ? _fk_RequestedKind : (int?)null);
             binStream.Write((int?)this._RequestedWidth);
-            binStream.Write(ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null);
+            binStream.Write(_fk_ValueModelDescriptor != null ? _fk_ValueModelDescriptor : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

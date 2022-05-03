@@ -1519,12 +1519,12 @@ namespace Zetbox.App.Projekte
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Auftragsname);
             binStream.Write(this._Auftragswert);
-            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(_fk_ChangedBy != null ? _fk_ChangedBy : (int?)null);
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
-            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(_fk_CreatedBy != null ? _fk_CreatedBy : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
@@ -1533,9 +1533,9 @@ namespace Zetbox.App.Projekte
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(Kunde != null ? Kunde.ID : (int?)null);
-            binStream.Write(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null);
-            binStream.Write(Projekt != null ? Projekt.ID : (int?)null);
+            binStream.Write(_fk_Kunde != null ? _fk_Kunde : (int?)null);
+            binStream.Write(_fk_Mitarbeiter != null ? _fk_Mitarbeiter : (int?)null);
+            binStream.Write(_fk_Projekt != null ? _fk_Projekt : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

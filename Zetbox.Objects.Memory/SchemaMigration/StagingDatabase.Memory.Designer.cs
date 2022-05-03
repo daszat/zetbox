@@ -1348,13 +1348,13 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Stagin
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(_fk_ChangedBy != null ? _fk_ChangedBy : (int?)null);
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
             binStream.Write(this._ConnectionStringKey);
-            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(_fk_CreatedBy != null ? _fk_CreatedBy : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
@@ -1364,7 +1364,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Stagin
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(MigrationProject != null ? MigrationProject.ID : (int?)null);
+            binStream.Write(_fk_MigrationProject != null ? _fk_MigrationProject : (int?)null);
             binStream.Write(this._OriginConnectionStringKey);
             binStream.Write(this._Schema);
         }

@@ -1673,11 +1673,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(DefaultDisplayKind != null ? DefaultDisplayKind.ID : (int?)null);
-            binStream.Write(DefaultEditorKind != null ? DefaultEditorKind.ID : (int?)null);
-            binStream.Write(DefaultGridCellDisplayKind != null ? DefaultGridCellDisplayKind.ID : (int?)null);
-            binStream.Write(DefaultGridCellEditorKind != null ? DefaultGridCellEditorKind.ID : (int?)null);
-            binStream.Write(DefaultGridCellPreEditorKind != null ? DefaultGridCellPreEditorKind.ID : (int?)null);
+            binStream.Write(_fk_DefaultDisplayKind != null ? _fk_DefaultDisplayKind : (int?)null);
+            binStream.Write(_fk_DefaultEditorKind != null ? _fk_DefaultEditorKind : (int?)null);
+            binStream.Write(_fk_DefaultGridCellDisplayKind != null ? _fk_DefaultGridCellDisplayKind : (int?)null);
+            binStream.Write(_fk_DefaultGridCellEditorKind != null ? _fk_DefaultGridCellEditorKind : (int?)null);
+            binStream.Write(_fk_DefaultGridCellPreEditorKind != null ? _fk_DefaultGridCellPreEditorKind : (int?)null);
             binStream.Write(this._isDeletedSet);
             if (this._isDeletedSet) {
                 binStream.Write(this._Deleted);
@@ -1687,7 +1687,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(_fk_Module != null ? _fk_Module : (int?)null);
             binStream.Write(this._ViewModelTypeRef);
         }
 

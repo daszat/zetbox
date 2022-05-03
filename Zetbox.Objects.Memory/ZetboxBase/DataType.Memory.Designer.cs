@@ -2389,7 +2389,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(_fk_ChangedBy != null ? _fk_ChangedBy : (int?)null);
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
@@ -2410,12 +2410,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             {
                 binStream.Write(false);
             }
-            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(_fk_CreatedBy != null ? _fk_CreatedBy : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
             }
-            binStream.Write(DefaultIcon != null ? DefaultIcon.ID : (int?)null);
+            binStream.Write(_fk_DefaultIcon != null ? _fk_DefaultIcon : (int?)null);
             binStream.Write(this._Description);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
@@ -2438,7 +2438,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             {
                 binStream.Write(false);
             }
-            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(_fk_Module != null ? _fk_Module : (int?)null);
             binStream.Write(this._Name);
 
             binStream.Write(eagerLoadLists);
@@ -2456,7 +2456,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             {
                 binStream.Write(false);
             }
-            binStream.Write(RequestedKind != null ? RequestedKind.ID : (int?)null);
+            binStream.Write(_fk_RequestedKind != null ? _fk_RequestedKind : (int?)null);
             binStream.Write(this._isShowIconInListsSet);
             if (this._isShowIconInListsSet) {
                 binStream.Write(this._ShowIconInLists);

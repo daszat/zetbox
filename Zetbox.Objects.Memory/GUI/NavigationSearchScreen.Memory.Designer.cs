@@ -1906,13 +1906,13 @@ namespace Zetbox.App.GUI
             binStream.Write((int?)this._InitialSortDirection);
             binStream.Write(this._IsEditable);
             binStream.Write(this._IsMultiselect);
-            binStream.Write(RequestedEditorKind != null ? RequestedEditorKind.ID : (int?)null);
-            binStream.Write(RequestedWorkspaceKind != null ? RequestedWorkspaceKind.ID : (int?)null);
+            binStream.Write(_fk_RequestedEditorKind != null ? _fk_RequestedEditorKind : (int?)null);
+            binStream.Write(_fk_RequestedWorkspaceKind != null ? _fk_RequestedWorkspaceKind : (int?)null);
             binStream.Write(this._RespectRequiredFilter);
             binStream.Write(this._ShowCommands);
             binStream.Write(this._ShowFilter);
             binStream.Write(this._ShowMasterDetail);
-            binStream.Write(Type != null ? Type.ID : (int?)null);
+            binStream.Write(_fk_Type != null ? _fk_Type : (int?)null);
             binStream.Write((int?)this._ViewMethod);
         }
 

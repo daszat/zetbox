@@ -874,9 +874,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(_fk_Module != null ? _fk_Module : (int?)null);
             binStream.Write(this._Name);
-            binStream.Write(Parent != null ? Parent.ID : (int?)null);
+            binStream.Write(_fk_Parent != null ? _fk_Parent : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

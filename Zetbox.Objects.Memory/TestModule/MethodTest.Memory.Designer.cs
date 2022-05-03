@@ -1180,7 +1180,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(Parent != null ? Parent.ID : (int?)null);
+            binStream.Write(_fk_Parent != null ? _fk_Parent : (int?)null);
             binStream.Write(this._StringProp);
         }
 

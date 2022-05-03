@@ -38,7 +38,7 @@
     {
         case SerializerDirection.ToStream:
 %>
-            <%= streamName %>.Write(<%= sourceMember %> != null ? <%= sourceMember %>.ID : (int?)null);
+            <%= streamName %>.Write(_fk_<%= sourceMember %> != null ? _fk_<%= sourceMember %> : (int?)null);
 <%
             break;
         case SerializerDirection.FromStream:

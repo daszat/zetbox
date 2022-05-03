@@ -451,7 +451,7 @@ namespace Zetbox.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Name);
-            binStream.Write(Parent != null ? Parent.ID : (int?)null);
+            binStream.Write(_fk_Parent != null ? _fk_Parent : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

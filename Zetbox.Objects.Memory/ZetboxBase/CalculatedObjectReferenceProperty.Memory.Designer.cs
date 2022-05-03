@@ -834,7 +834,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
                     auxObjects.Add(obj);
                 }
             }
-            binStream.Write(ReferencedClass != null ? ReferencedClass.ID : (int?)null);
+            binStream.Write(_fk_ReferencedClass != null ? _fk_ReferencedClass : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

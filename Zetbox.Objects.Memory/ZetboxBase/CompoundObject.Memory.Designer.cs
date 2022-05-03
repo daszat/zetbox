@@ -855,8 +855,8 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(DefaultPropertyViewModelDescriptor != null ? DefaultPropertyViewModelDescriptor.ID : (int?)null);
-            binStream.Write(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null);
+            binStream.Write(_fk_DefaultPropertyViewModelDescriptor != null ? _fk_DefaultPropertyViewModelDescriptor : (int?)null);
+            binStream.Write(_fk_DefaultViewModelDescriptor != null ? _fk_DefaultViewModelDescriptor : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

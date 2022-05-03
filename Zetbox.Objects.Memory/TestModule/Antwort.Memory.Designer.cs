@@ -633,7 +633,7 @@ namespace Zetbox.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Frage);
-            binStream.Write(Fragebogen != null ? Fragebogen.ID : (int?)null);
+            binStream.Write(_fk_Fragebogen != null ? _fk_Fragebogen : (int?)null);
             binStream.Write(this._gute_Antworten_pos);
             binStream.Write(this._FragenNummer);
             binStream.Write(this._GegebeneAntwort);

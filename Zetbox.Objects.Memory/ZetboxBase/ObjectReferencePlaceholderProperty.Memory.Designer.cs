@@ -1100,7 +1100,7 @@ namespace Zetbox.App.Base
             binStream.Write(this._ImplementorRoleName);
             binStream.Write(this._IsList);
             binStream.Write(this._ItemRoleName);
-            binStream.Write(ReferencedObjectClass != null ? ReferencedObjectClass.ID : (int?)null);
+            binStream.Write(_fk_ReferencedObjectClass != null ? _fk_ReferencedObjectClass : (int?)null);
             binStream.Write(this._Verb);
         }
 

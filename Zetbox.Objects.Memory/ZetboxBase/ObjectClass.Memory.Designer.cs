@@ -1939,9 +1939,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null);
+            binStream.Write(_fk_BaseObjectClass != null ? _fk_BaseObjectClass : (int?)null);
             binStream.Write(this._CodeTemplate);
-            binStream.Write(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null);
+            binStream.Write(_fk_DefaultViewModelDescriptor != null ? _fk_DefaultViewModelDescriptor : (int?)null);
             binStream.Write(this._isIsAbstractSet);
             if (this._isIsAbstractSet) {
                 binStream.Write(this._IsAbstract);

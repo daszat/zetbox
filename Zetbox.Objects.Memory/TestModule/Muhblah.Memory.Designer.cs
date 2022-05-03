@@ -1056,8 +1056,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.WriteCollectionEntries(this._StringCollectionCollection);
             binStream.Write(this._TestBool);
-            binStream.Write(TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null);
-            binStream.Write(TestCustomObjects_One_Nav != null ? TestCustomObjects_One_Nav.ID : (int?)null);
+            binStream.Write(_fk_TestCustomObjects_Nav != null ? _fk_TestCustomObjects_Nav : (int?)null);
+            binStream.Write(_fk_TestCustomObjects_One_Nav != null ? _fk_TestCustomObjects_One_Nav : (int?)null);
             binStream.Write(this._TestDateTime);
             binStream.Write((int?)this._TestEnum);
             binStream.Write(this._TestString);

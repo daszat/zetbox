@@ -656,8 +656,8 @@ namespace Zetbox.App.Calendar
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(Calendar != null ? Calendar.ID : (int?)null);
-            binStream.Write(WorkSchedule != null ? WorkSchedule.ID : (int?)null);
+            binStream.Write(_fk_Calendar != null ? _fk_Calendar : (int?)null);
+            binStream.Write(_fk_WorkSchedule != null ? _fk_WorkSchedule : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

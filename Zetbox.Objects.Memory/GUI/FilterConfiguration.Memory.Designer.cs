@@ -1648,12 +1648,12 @@ namespace Zetbox.App.GUI
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(_fk_ChangedBy != null ? _fk_ChangedBy : (int?)null);
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
-            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(_fk_CreatedBy != null ? _fk_CreatedBy : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
@@ -1663,14 +1663,14 @@ namespace Zetbox.App.GUI
                 binStream.Write(this._ExportGuid);
             }
             binStream.Write(this._Label);
-            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(_fk_Module != null ? _fk_Module : (int?)null);
             binStream.Write(this._isRefreshOnFilterChangedSet);
             if (this._isRefreshOnFilterChangedSet) {
                 binStream.Write(this._RefreshOnFilterChanged);
             }
-            binStream.Write(RequestedKind != null ? RequestedKind.ID : (int?)null);
+            binStream.Write(_fk_RequestedKind != null ? _fk_RequestedKind : (int?)null);
             binStream.Write(this._Required);
-            binStream.Write(ViewModelDescriptor != null ? ViewModelDescriptor.ID : (int?)null);
+            binStream.Write(_fk_ViewModelDescriptor != null ? _fk_ViewModelDescriptor : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

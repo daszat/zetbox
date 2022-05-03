@@ -51,7 +51,7 @@ switch(direction)
         case SerializerDirection.ToStream:
 
 #line 41 "D:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            ",  streamName , ".Write(",  sourceMember , " != null ? ",  sourceMember , ".ID : (int?)null);\r\n");
+this.WriteObjects("            ",  streamName , ".Write(_fk_",  sourceMember , " != null ? _fk_",  sourceMember , " : (int?)null);\r\n");
 #line 43 "D:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:

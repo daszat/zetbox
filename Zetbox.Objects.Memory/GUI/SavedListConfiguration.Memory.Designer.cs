@@ -693,8 +693,8 @@ namespace Zetbox.App.GUI
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(Owner != null ? Owner.ID : (int?)null);
-            binStream.Write(Type != null ? Type.ID : (int?)null);
+            binStream.Write(_fk_Owner != null ? _fk_Owner : (int?)null);
+            binStream.Write(_fk_Type != null ? _fk_Type : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

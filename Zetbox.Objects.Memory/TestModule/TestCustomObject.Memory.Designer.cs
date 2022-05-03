@@ -1049,8 +1049,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Birthday);
-            binStream.Write(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null);
-            binStream.Write(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null);
+            binStream.Write(_fk_MubBlah_Nav != null ? _fk_MubBlah_Nav : (int?)null);
+            binStream.Write(_fk_MuhBlah_One_Nav != null ? _fk_MuhBlah_One_Nav : (int?)null);
             binStream.Write(this._PersonName);
             binStream.Write(this.PhoneNumberMobile);
             binStream.Write(this.PhoneNumberOffice);
