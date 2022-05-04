@@ -15,7 +15,15 @@
 
 		if (Value != null)
 		{
-			Value.PropertyChanged += (s, e) => StateHasChanged();
+			Value.PropertyChanged += (s, e) =>
+			{
+				switch (e.PropertyName)
+				{
+					case nameof(BaseValueViewModel.FormattedValueAsync):
+						StateHasChanged();
+						break;
+				}
+			};
 		}
 	}
 }
