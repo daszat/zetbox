@@ -3,8 +3,16 @@
 
 @if (ViewModel != null)
 {
+	<div>
+		@foreach(var action in ViewModel.Commands)
+		{
+			<CommandButton ViewModel="@action" />
+		}
+	</div>
+
 	<table class="table table-bordered">
 		<tr>
+			<th></th>
 			@foreach (var col in ViewModel.DisplayedColumns.Columns)
 			{
 				<th>@col.Header</th>
@@ -16,6 +24,9 @@
 			@foreach (var item in ViewModel.InstancesAsync)
 			{
 				<tr>
+					<td>
+						<input type="checkbox" value="@(ViewModel.SelectedItem == item)" @onchange="@(i => Select(item, i))">
+					</td>
 					@foreach (var col in ViewModel.DisplayedColumns.Columns)
 					{
 						<td>
@@ -43,6 +54,14 @@
 		if (ViewModel != null)
 		{
 			ViewModel.PropertyChanged += (s, e) => StateHasChanged();
+		}
+	}
+
+	private void Select(DataObjectViewModel item, ChangeEventArgs args)
+	{
+		if (args.Value as bool? == true)
+		{
+			ViewModel.SelectedItem = item;
 		}
 	}
 }

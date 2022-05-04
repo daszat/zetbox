@@ -1,0 +1,25 @@
+﻿
+@if(ViewModel != null)
+{
+	<button @onclick="Click" disabled="@(!ViewModel.CanExecute(null))">@ViewModel.Label</button>
+}
+
+@code {
+	[Parameter]
+	public ICommandViewModel ViewModel { get; set; }
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		if(ViewModel != null)
+		{
+			ViewModel.CanExecuteChanged += (_, _) => StateHasChanged();
+		}
+	}
+
+	public void Click()
+	{
+		ViewModel.Execute(null);
+	}
+}
