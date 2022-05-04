@@ -336,7 +336,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
                 var task = newScope.ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(newCtx, ws, target, source);
                 ws.ShowModel(task);
-                newScope.ViewModelFactory.ShowModel(ws, RequestedWorkspaceKind, true);
+                await newScope.ViewModelFactory.ShowModel(ws, RequestedWorkspaceKind, true);
             }
         }
         #endregion

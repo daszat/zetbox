@@ -103,7 +103,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             if (objects.Count > 0)
             {
                 var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
-                newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+                await newScope.ViewModelFactory.ShowModel(newWorkspace, true);
 
                 foreach (var obj in objects)
                 {

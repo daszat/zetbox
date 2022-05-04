@@ -248,7 +248,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 Refresh(); // A dialog makes it easy to know when the time for a refresh has come
             };
 
-            ViewModelFactory.ShowModel(ws, true);
+            await ViewModelFactory.ShowModel(ws, true);
         }
 
         #endregion
