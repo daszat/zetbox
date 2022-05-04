@@ -205,7 +205,7 @@ namespace Zetbox.App.Base
             SR.Assembly a = null;
             try
             {
-                a = SR.Assembly.ReflectionOnlyLoad(assembly.Name);
+                a = SR.Assembly.Load(assembly.Name);
             }
             catch (FileNotFoundException)
             {
@@ -213,7 +213,7 @@ namespace Zetbox.App.Base
             if (a == null)
             {
                 // Try AssemblyLoader directly
-                a = AssemblyLoader.ReflectionOnlyLoadFrom(assembly.Name);
+                a = AssemblyLoader.Load(assembly.Name);
             }
             if (a == null)
             {
@@ -221,7 +221,7 @@ namespace Zetbox.App.Base
                 var f = _mdlFactory.GetSourceFileNameFromUser("Assembly files|*.dll;*.exe", "All files|*.*");
                 if (!string.IsNullOrEmpty(f))
                 {
-                    a = SR.Assembly.ReflectionOnlyLoadFrom(f);
+                    a = SR.Assembly.LoadFrom(f);
                 }
             }
             if (a == null)
