@@ -1,0 +1,29 @@
+﻿@using Zetbox.Client.Presentables.ValueViewModels
+
+@if (ViewModel != null)
+{
+	@ViewModel.Name
+}
+
+@code {
+	[Parameter]
+	public ViewModel? ViewModel { get; set; }
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		if (ViewModel != null)
+		{
+			ViewModel.PropertyChanged += (s, e) =>
+			{
+				switch (e.PropertyName)
+				{
+					case nameof(ViewModel.Name):
+						StateHasChanged();
+						break;
+				}
+			};
+		}
+	}
+}

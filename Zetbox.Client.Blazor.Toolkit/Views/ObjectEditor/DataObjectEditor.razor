@@ -1,0 +1,55 @@
+﻿@using Zetbox.Client.Presentables.ValueViewModels
+@if (ViewModel != null)
+{
+	<h3>@ViewModel.Name</h3>
+
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		@foreach (var group in ViewModel.PropertyGroups)
+		{
+			<li class="nav-item" role="presentation">
+				<button class="nav-link @(group == initalGroup ? "active" : "")"
+						id="@($"{group.TagName}-tab")" 
+						data-bs-toggle="tab" 
+						data-bs-target="#@($"{group.TagName}")" 
+						type="button" 
+						role="tab" 
+						aria-controls="@($"{group.TagName}")" 
+						aria-selected="@(group == initalGroup)">
+					@group.Name
+				</button>
+			</li>
+		}
+	</ul>
+	<div class="tab-content" id="myTabContent">
+		@foreach (var group in ViewModel.PropertyGroups)
+		{
+			<div class="tab-pane fade @(group == initalGroup ? "show active" : "")" id="@($"{group.TagName}")" role="tabpanel" aria-labelledby="@($"{group.TagName}-tab")">
+				@foreach(var prop in group.PropertyModels.OfType<BaseValueViewModel>())
+				{
+					<div class="row">
+						<BaseValueView Value="@prop"></BaseValueView>
+					</div>
+				}
+			</div>
+		}
+	</div>
+
+}
+
+@code {
+	[Parameter]
+	public DataObjectViewModel ViewModel { get; set; }
+
+	private PropertyGroupViewModel initalGroup;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		if (ViewModel != null)
+		{
+			ViewModel.PropertyChanged += (_, _) => StateHasChanged();
+			// TODO: initalGroup = ViewModel.SelectedPropertyGroup;
+		}
+	}
+}

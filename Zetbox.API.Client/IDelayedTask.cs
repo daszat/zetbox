@@ -39,9 +39,9 @@ namespace Zetbox.API.Client
             _task = task;
         }
 
-        public Task Trigger()
+        public async Task Trigger()
         {
-            return _task();
+            await _task();
         }
     }
 }

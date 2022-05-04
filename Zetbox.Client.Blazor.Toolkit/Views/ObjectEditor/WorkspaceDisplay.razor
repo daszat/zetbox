@@ -1,0 +1,50 @@
+﻿@using Zetbox.Client.Presentables.ObjectEditor
+@using Zetbox.Client.Presentables.ZetboxBase
+@inject BlazorViewModelFactory ViewModelFactory
+
+<h1>Object Editor</h1>
+
+@if (ViewModel != null)
+{
+	<div class="row">
+		<div class="col-3">
+			<ul>
+			@foreach (var obj in ViewModel.Items)
+			{
+				<li role="button">@obj.Name</li>
+			}
+			</ul>
+		</div>
+		<div class="col-9">
+			@if(SelectedDataObjectViewModel != null)
+			{
+				<DataObjectEditor ViewModel="@SelectedDataObjectViewModel" />
+			}
+		</div>
+	</div>
+}
+
+@code {
+
+	private DataObjectViewModel? SelectedDataObjectViewModel => ViewModel.SelectedItem as DataObjectViewModel;
+
+	[Parameter]
+	public WorkspaceViewModel ViewModel { get; set; }
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+	}
+
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+
+		ViewModel = BlazorViewModelFactory.LastObjectEditorWorkspace;
+
+		if(ViewModel != null)
+		{
+			ViewModel.PropertyChanged += (_, _) => StateHasChanged();
+		}
+	}
+}

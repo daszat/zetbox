@@ -48,7 +48,7 @@ namespace Zetbox.Client.Presentables
 
         public void Reset()
         {
-            ViewModelFactory.CreateDelayedTask(this, () =>
+            _ = ViewModelFactory.CreateDelayedTask(this, () =>
             {
                 _displayedColumns = null;
                 OnPropertyChanged("DisplayedColumns");

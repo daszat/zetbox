@@ -120,6 +120,7 @@ namespace Zetbox.Client.Blazor
                 .RegisterType<BlazorViewModelFactory>()
                 .As<IViewModelFactory>()
                 .As<IToolkit>()
+                .AsSelf()
                 .InstancePerLifetimeScope();
 
             moduleBuilder
