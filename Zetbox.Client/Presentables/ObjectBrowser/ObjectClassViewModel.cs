@@ -75,15 +75,15 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
         #region public interface
 
-        private List<object> _children;
-        public IEnumerable Children
+        private List<ViewModel> _children;
+        public IEnumerable<ViewModel> Children
         {
             get
             {
                 if (_children == null)
                 {
                     _children = ObjectClasses
-                        .Cast<object>()
+                        .Cast<ViewModel>()
                         .ToList();
                 }
                 return _children;

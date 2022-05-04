@@ -1,0 +1,58 @@
+﻿@using Zetbox.Client.Presentables.ObjectBrowser
+@using Zetbox.Client.Presentables.ZetboxBase
+@using static Zetbox.Client.Presentables.ObjectBrowser.ModuleViewModel
+
+@if (ViewModel != null)
+{
+	<li @onclick:stopPropagation="true" @onclick="@(() => Select(ViewModel))" role="button">
+		@ViewModel.Name
+
+		@if (Children.Any())
+		{
+			<ul>
+				@foreach (var child in Children)
+				{
+					<TreeNode ViewModel="@child" Workspace="@Workspace"></TreeNode>
+				}
+			</ul>
+		}
+	</li>
+}
+@code {
+	[Parameter]
+	public ViewModel ViewModel { get; set; }
+
+	[Parameter]
+	public WorkspaceViewModel Workspace { get; set; }
+
+	private IEnumerable<ViewModel> Children
+	{
+		get
+		{
+			if (ViewModel is ModuleViewModel module)
+			{
+				return module.Children;
+			}
+			else if (ViewModel is Zetbox.Client.Presentables.ObjectBrowser.ObjectClassViewModel objClass)
+			{
+				return objClass.Children;
+			}
+			else if (ViewModel is TreeNodeSimpleObjects simple)
+			{
+				return simple.Children;
+			}
+			else
+			{
+				return Enumerable.Empty<ViewModel>();
+			}
+		}
+	}
+
+	private void Select(ViewModel selected)
+	{
+		Workspace.SelectedItem = selected;
+		Console.WriteLine($"Selected {selected.Name}");
+
+		StateHasChanged();
+	}
+}
