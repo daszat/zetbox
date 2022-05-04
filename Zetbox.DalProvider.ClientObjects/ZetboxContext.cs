@@ -1256,7 +1256,7 @@ namespace Zetbox.DalProvider.Client
             }
             Directory.CreateDirectory(Path.GetDirectoryName(path));
 
-            //lock (_cacheFileLock)
+            //TODO: lock (_cacheFileLock)
             {
                 if (!File.Exists(path))
                 {

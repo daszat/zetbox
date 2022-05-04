@@ -18,7 +18,8 @@ namespace Zetbox.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Zetbox.API;
+	using System.Threading.Tasks;
+	using Zetbox.API;
     using Zetbox.API.Common;
     using Zetbox.App.Extensions;
 
@@ -95,9 +96,10 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void ToString(Property obj, MethodReturnEventArgs<string> e)
+        public static async Task ToString(Property obj, MethodReturnEventArgs<string> e)
         {
-            if (obj.ObjectClass == null)
+            var cls = await obj.GetProp_ObjectClass();
+            if (cls == null)
             {
                 e.Result = String.Join(" ", new[] { "unattached", obj.Name });
             }
@@ -105,7 +107,7 @@ namespace Zetbox.App.Base
             {
                 e.Result = String.Format("{0} {1}.{2}",
                     obj.GetPropertyTypeString(),
-                    obj.ObjectClass.Name,
+                    cls.Name,
                     obj.Name);
             }
             ToStringHelper.FixupFloatingObjectsToString(obj, e);

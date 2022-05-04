@@ -45,25 +45,47 @@ namespace Zetbox.Client.Presentables
             _dataType = dt;
         }
 
+        private string _nameCache;
         public override string Name
         {
             get
             {
-                if (_dataType.Module != null)
-                    return Assets.GetString(_dataType.Module, ZetboxAssetKeys.DataTypes, ZetboxAssetKeys.ConstructNameKey(_dataType), _dataType.Name);
-                else
-                    return _dataType.Name;
+                if (_nameCache == null)
+                {
+                    _nameCache = string.Empty;
+                    _dataType.GetProp_Module().ContinueWith(t =>
+                    {
+                        if (_dataType.Module != null)
+                            _nameCache = Assets.GetString(_dataType.Module, ZetboxAssetKeys.DataTypes, ZetboxAssetKeys.ConstructNameKey(_dataType), _dataType.Name);
+                        else
+                            _nameCache = _dataType.Name;
+
+                        OnPropertyChanged(nameof(Name));
+                    }, ViewModelFactory.UITaskScheduler);
+                }
+                return _nameCache;
             }
         }
 
+        private string _descriptionCache;
         public string Description
         {
             get
             {
-                if (_dataType.Module != null)
-                    return Assets.GetString(_dataType.Module, ZetboxAssetKeys.DataTypes, ZetboxAssetKeys.ConstructDescriptionKey(_dataType), _dataType.Description);
-                else
-                    return _dataType.Description;
+                if (_descriptionCache == null)
+                {
+                    _descriptionCache = string.Empty;
+                    _dataType.GetProp_Module().ContinueWith(t =>
+                    {
+                        if (_dataType.Module != null)
+                            _descriptionCache = Assets.GetString(_dataType.Module, ZetboxAssetKeys.DataTypes, ZetboxAssetKeys.ConstructDescriptionKey(_dataType), _dataType.Description);
+                        else
+                            _descriptionCache = _dataType.Description;
+
+                        OnPropertyChanged(nameof(Description));
+                    }, ViewModelFactory.UITaskScheduler);
+                }
+                return _descriptionCache;
             }
         }
 
@@ -71,7 +93,7 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                if(base.Icon == null)
+                if (base.Icon == null)
                     Task.Run(async () => base.Icon = await IconConverter.ToImage(_dataType.DefaultIcon));
                 return base.Icon;
             }

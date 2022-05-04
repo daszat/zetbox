@@ -57,13 +57,23 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
         private bool? _hasFulltextSupportCache;
+        public async Task<bool> GetHasFulltextSupport()
+        {
+            return _fulltextSupport != null && (await _fulltextSupport.HasIndexedFields(_type));
+        }
+
         public bool HasFulltextSupport
         {
             get
             {
                 if (_hasFulltextSupportCache == null)
                 {
-                    _hasFulltextSupportCache = _fulltextSupport != null && _fulltextSupport.HasIndexedFields(_type);
+                    _hasFulltextSupportCache = false;
+                    GetHasFulltextSupport().ContinueWith(t =>
+                    {
+                        _hasFulltextSupportCache = t.Result;
+                        OnPropertyChanged(nameof(HasFulltextSupport));
+                    }, ViewModelFactory.UITaskScheduler);
                 }
                 return _hasFulltextSupportCache.Value;
             }
@@ -223,9 +233,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         private ObservableCollection<FilterViewModel> _FilterViewModels = null;
         private ObservableCollection<FilterListEntryViewModel> _FilterListEntryViewModels = null;
 
-        private ReadOnlyObservableCollection<IFilterModel> _filterRO = new (new ObservableCollection<IFilterModel>());
-        private ReadOnlyObservableCollection<FilterViewModel> _FilterViewModelsRO = new (new ObservableCollection<FilterViewModel>());
-        private ReadOnlyObservableCollection<FilterListEntryViewModel> _FilterListEntryViewModelsRO = new (new ObservableCollection<FilterListEntryViewModel>());
+        private ReadOnlyObservableCollection<IFilterModel> _filterRO = new(new ObservableCollection<IFilterModel>());
+        private ReadOnlyObservableCollection<FilterViewModel> _FilterViewModelsRO = new(new ObservableCollection<FilterViewModel>());
+        private ReadOnlyObservableCollection<FilterListEntryViewModel> _FilterListEntryViewModelsRO = new(new ObservableCollection<FilterListEntryViewModel>());
 
         private async Task InitializeFilter()
         {
@@ -261,7 +271,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                             }
                         }
 
-                        if (HasFulltextSupport)
+                        if (await GetHasFulltextSupport())
                         {
                             await AddFilter(new FulltextFilterModel(FrozenContext));
                         }

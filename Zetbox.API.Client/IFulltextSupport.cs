@@ -23,10 +23,11 @@ namespace Zetbox.API.Client
     using System.ComponentModel;
     using Autofac;
     using Zetbox.App.Base;
+	using System.Threading.Tasks;
 
-    public interface IFulltextSupport
+	public interface IFulltextSupport
     {
         bool IsValidSearch(string text);
-        bool HasIndexedFields(ObjectClass cls);
+        Task<bool> HasIndexedFields(ObjectClass cls);
     }
 }

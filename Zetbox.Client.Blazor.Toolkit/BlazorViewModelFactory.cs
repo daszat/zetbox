@@ -11,8 +11,9 @@ namespace Zetbox.Client.Blazor
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.Client.GUI;
     using Microsoft.AspNetCore.Components;
+	using Zetbox.App.GUI;
 
-    public class BlazorViewModelFactory : ViewModelFactory
+	public class BlazorViewModelFactory : ViewModelFactory
     {
         private readonly NavigationManager navigationManager;
 
@@ -43,7 +44,13 @@ namespace Zetbox.Client.Blazor
 			}
         }
 
-        public override void CreateTimer(TimeSpan tickLength, Action action)
+		protected override object CreateView(ViewDescriptor vDesc)
+		{
+            // return the type instead
+			return Type.GetType(vDesc.ControlTypeRef);
+		}
+
+		public override void CreateTimer(TimeSpan tickLength, Action action)
         {
             throw new NotSupportedException();
         }

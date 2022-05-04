@@ -18,17 +18,18 @@ namespace Zetbox.App.GUI
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Zetbox.API;
+	using System.Threading.Tasks;
+	using Zetbox.API;
 
     [Implementor]
     public static class ViewDescriptorActions
     {
         [Invocation]
-        public static void ToString(ViewDescriptor obj, MethodReturnEventArgs<string> e)
+        public static async Task ToString(ViewDescriptor obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0}/{1}: {2}",
                 obj.Toolkit,
-                obj.ControlKind != null ? obj.ControlKind.Name : "(unknown kind)",
+                (await obj.GetProp_ControlKind())?.Name ?? "(unknown kind)",
                 string.IsNullOrWhiteSpace(obj.ControlTypeRef)
                     ? "(none)"
                     : obj.ControlTypeRef);

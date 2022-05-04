@@ -26,8 +26,9 @@ namespace Zetbox.Client
     using Zetbox.App.Extensions;
     using Zetbox.API;
     using Zetbox.API.Client;
+	using System.Threading.Tasks;
 
-    public class DefaultFulltextSupport : IFulltextSupport
+	public class DefaultFulltextSupport : IFulltextSupport
     {
         [Description("Marker module for client side fulltext support")]
         [Feature]
@@ -49,9 +50,9 @@ namespace Zetbox.Client
             return true;
         }
 
-        public bool HasIndexedFields(ObjectClass cls)
+        public async Task<bool> HasIndexedFields(ObjectClass cls)
         {
-            if (cls.ImplementsICustomFulltextFormat()) return true;
+            if (await cls.ImplementsICustomFulltextFormat()) return true;
 
             foreach (var prop in cls.GetAllProperties())
             {
