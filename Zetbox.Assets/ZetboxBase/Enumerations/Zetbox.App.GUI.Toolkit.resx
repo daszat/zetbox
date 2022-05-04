@@ -35,4 +35,10 @@
   <data name="ASPNET_description" space="preserve">
     <value>ASPNET Toolkit</value>
   </data>
+  <data name="Blazor_label" space="preserve">
+    <value>Blazor</value>
+  </data>
+  <data name="Blazor_description" space="preserve">
+    <value />
+  </data>
 </root>
