@@ -45,6 +45,8 @@ namespace Zetbox.Client.WPF
                 .RegisterType<PasswordDialog.Adapter>()
                 .As<IPasswordDialog>()
                 .InstancePerDependency();
+
+            builder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.Microsoft.WindowsIdentityCredentialsResolver+Module, Zetbox.Microsoft", true)));
         }
 
     }

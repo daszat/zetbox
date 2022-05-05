@@ -12,7 +12,7 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-namespace Zetbox.Client
+namespace Zetbox.Microsoft
 {
     using System;
     using System.Collections.Generic;
@@ -28,6 +28,7 @@ namespace Zetbox.Client
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
+    using Zetbox.API.Common;
 
     public class WindowsIdentityCredentialsResolver : ICredentialsResolver
     {
@@ -36,6 +37,11 @@ namespace Zetbox.Client
             protected override void Load(Autofac.ContainerBuilder builder)
             {
                 base.Load(builder);
+
+                builder
+                   .Register<WindowsIdentityPrincipalResolver>(c => new WindowsIdentityPrincipalResolver(c.Resolve<ILifetimeScope>()))
+                   .As<IPrincipalResolver>()
+                   .SingleInstance();
 
                 builder
                     .Register<WindowsIdentityCredentialsResolver>(c => new WindowsIdentityCredentialsResolver())

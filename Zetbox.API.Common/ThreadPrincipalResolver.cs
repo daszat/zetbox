@@ -39,7 +39,7 @@ namespace Zetbox.API.Common
             if (!string.IsNullOrEmpty(Thread.CurrentPrincipal?.Identity?.Name))
                 return Resolve(Thread.CurrentPrincipal.Identity);
             else
-                return null;
+                return Resolve("ARTHUR-P15\\Arthur Zaczek"); // TODO: Fix this!
         }
     }
 }
