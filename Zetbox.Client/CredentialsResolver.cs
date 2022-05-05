@@ -73,7 +73,7 @@ namespace Zetbox.Client
             if (!string.IsNullOrEmpty(Thread.CurrentPrincipal?.Identity?.Name))
                 name = Thread.CurrentPrincipal.Identity.Name;
             else
-                name = WindowsIdentity.GetCurrent()?.Name ?? string.Empty;
+                name = string.Empty;
 
             throw new AuthenticationException(string.Format("You are not authorized to access this application. (username={0})",
                 !string.IsNullOrWhiteSpace(name) ? name : "<empty>"));

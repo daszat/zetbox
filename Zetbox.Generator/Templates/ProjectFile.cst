@@ -26,7 +26,7 @@
 <%@ Parameter Name="schemaProviders" Type="IEnumerable<ISchemaProvider>" %>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace><%= GetAssemblyName() %></RootNamespace>
     <AssemblyName><%= GetAssemblyName() %></AssemblyName>
 	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>

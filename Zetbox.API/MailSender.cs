@@ -96,12 +96,12 @@ namespace Zetbox.API
 
             if (!string.IsNullOrEmpty(msg.Subject))
             {
-                sb.AppendFormat("subject={0}&", Uri.EscapeUriString(msg.Subject));
+                sb.AppendFormat("subject={0}&", Uri.EscapeDataString(msg.Subject));
             }
 
             if (!string.IsNullOrEmpty(msg.Body))
             {
-                sb.AppendFormat("body={0}&", Uri.EscapeUriString(msg.Body));
+                sb.AppendFormat("body={0}&", Uri.EscapeDataString(msg.Body));
             }
 
             if (msg.CC.Count > 0)

@@ -187,10 +187,8 @@ namespace Zetbox.API
             Log.DebugFormat("Resolving Assembly {0} for reflection", args.Name);
             try
             {
-                // http://blogs.msdn.com/b/jmstall/archive/2006/11/22/reflection-type-load-exception.aspx
-                // try loading through ReflectionOnlyLoad first. This will resolve dependencies
-                // Even to System!
-                var a = System.Reflection.Assembly.ReflectionOnlyLoad(args.Name);
+                // TODO: https://docs.microsoft.com/en-US/dotnet/standard/assembly/inspect-contents-using-metadataloadcontext
+                var a = Assembly.Load(args.Name);
                 if (a != null) return a;
             }
             catch
@@ -357,7 +355,8 @@ namespace Zetbox.API
                     // Finally load the Assembly
                     if (reflectOnly)
                     {
-                        result = Assembly.ReflectionOnlyLoadFrom(dllToLoad);
+                        // TODO: https://docs.microsoft.com/en-US/dotnet/standard/assembly/inspect-contents-using-metadataloadcontext
+                        result = Assembly.LoadFrom(dllToLoad);
                     }
                     else
                     {

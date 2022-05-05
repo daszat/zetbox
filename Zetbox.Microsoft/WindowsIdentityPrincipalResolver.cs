@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.API.Common
+namespace Zetbox.Microsoft
 {
     using System;
     using System.Collections.Generic;
@@ -24,12 +24,12 @@ namespace Zetbox.API.Common
     using System.Threading.Tasks;
     using Autofac;
     using Zetbox.API;
-    using Zetbox.App.Base;
+    using Zetbox.API.Common;
 
-    public sealed class ThreadPrincipalResolver
+    public sealed class WindowsIdentityPrincipalResolver
         : BasePrincipalResolver
     {
-        public ThreadPrincipalResolver(ILifetimeScope parentScope)
+        public WindowsIdentityPrincipalResolver(ILifetimeScope parentScope)
             : base(parentScope)
         {
         }
@@ -39,7 +39,7 @@ namespace Zetbox.API.Common
             if (!string.IsNullOrEmpty(Thread.CurrentPrincipal?.Identity?.Name))
                 return Resolve(Thread.CurrentPrincipal.Identity);
             else
-                return Resolve(String.Empty);
+                return Resolve(WindowsIdentity.GetCurrent());
         }
     }
 }

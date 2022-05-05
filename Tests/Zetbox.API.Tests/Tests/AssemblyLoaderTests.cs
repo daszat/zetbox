@@ -54,7 +54,8 @@ namespace Zetbox.API.Tests
         [Test]
         public void AssemblyResolveReflection()
         {
-        	Assert.That(() => Assembly.ReflectionOnlyLoad("test"), Throws.InstanceOf<FileNotFoundException>());
+            // TODO: https://docs.microsoft.com/en-US/dotnet/standard/assembly/inspect-contents-using-metadataloadcontext
+            Assert.That(() => Assembly.Load("test"), Throws.InstanceOf<FileNotFoundException>());
         }
     }
 }

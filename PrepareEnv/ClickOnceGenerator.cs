@@ -154,7 +154,8 @@ namespace PrepareEnv
 
         private static System.Reflection.Assembly FillAppId(EnvConfig envConfig, XmlNode assemblyIdentity, AppId appId)
         {
-            var client = System.Reflection.Assembly.ReflectionOnlyLoadFrom(envConfig.ClientExe);
+            // TODO: https://docs.microsoft.com/en-US/dotnet/standard/assembly/inspect-contents-using-metadataloadcontext
+            var client = System.Reflection.Assembly.LoadFrom(envConfig.ClientExe);
 
             FillClickOnceAssemblyId(client, assemblyIdentity);
             // this seems to be a constant
@@ -197,7 +198,8 @@ namespace PrepareEnv
 
                 var assemblyIdentity = doc.CreateNode(XmlNodeType.Element, "assemblyIdentity", ASMv2_NS);
 
-                FillClickOnceAssemblyId(System.Reflection.Assembly.ReflectionOnlyLoadFrom(file), assemblyIdentity);
+                // TODO: https://docs.microsoft.com/en-US/dotnet/standard/assembly/inspect-contents-using-metadataloadcontext
+                FillClickOnceAssemblyId(System.Reflection.Assembly.LoadFrom(file), assemblyIdentity);
                 dependentAssembly.AppendChild(assemblyIdentity);
 
                 var hash = CreateHashNode(file, nsmgr, doc);
