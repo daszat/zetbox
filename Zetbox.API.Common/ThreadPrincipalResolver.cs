@@ -39,7 +39,7 @@ namespace Zetbox.API.Common
             if (!string.IsNullOrEmpty(Thread.CurrentPrincipal?.Identity?.Name))
                 return Resolve(Thread.CurrentPrincipal.Identity);
             else
-                return Resolve(String.Empty);
+                return null;
         }
     }
 }
