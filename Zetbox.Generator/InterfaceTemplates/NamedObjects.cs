@@ -71,7 +71,7 @@ namespace Zetbox.Generator.InterfaceTemplates
 
         private IEnumerable<NamedObjectDescriptor> GetNamedObjects()
         {
-            foreach (var objClass in ctx.GetQuery<ObjectClass>().ToList().Where(cls => cls.ImplementsIModuleMember(false)))
+            foreach (var objClass in ctx.GetQuery<ObjectClass>().ToList().Where(cls => cls.ImplementsIModuleMember(false).Result))
             {
                 string typeName = null;
                 List<NamedObjectDescriptor> instances = null;

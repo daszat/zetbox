@@ -61,7 +61,7 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
 
         protected virtual bool IsExportable()
         {
-            return rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
+            return rel.A.Type.ImplementsIExportable().Result && rel.B.Type.ImplementsIExportable().Result;
         }
 
         protected override string GetCeInterface()

@@ -66,7 +66,7 @@
         <property name="B<%= Zetbox.API.Helper.PositionSuffix %>"
                   column="`<%= Construct.ListPositionColumnName(rel.A) %>`" />
 <% } %>
-<% if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable()) { %>
+<% if (rel.A.Type.ImplementsIExportable().Result && rel.B.Type.ImplementsIExportable().Result) { %>
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
 <% } %>
     </class>
@@ -102,7 +102,7 @@
         <property name="Value_pos"
                   column="`<%= prop.Name + "Index" %>`" />
 <% } %>
-<% if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { %>
+<% if (((ObjectClass)prop.ObjectClass).ImplementsIExportable().Result) { %>
         <!-- export guid is not needed since serialization is always "in-place"
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
         -->
@@ -140,7 +140,7 @@
         <property name="Value_pos"
                   column="`<%= prop.Name + "Index" %>`" />
 <% } %>
-<% if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { %>
+<% if (((ObjectClass)prop.ObjectClass).ImplementsIExportable().Result) { %>
         <!-- export guid is not needed since serialization is always "in-place"
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
         -->

@@ -32,7 +32,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
         {
             this.CallTemplate("Mappings.ObjectClassHbm",
                  new object[] { ctx }
-                     .Concat(ObjectClassHbm.MakeArgs(ctx, cls, new NameValueCollection() { { "extrasuffix", extraSuffix } }))
+                     .Concat(ObjectClassHbm.MakeArgs(ctx, cls, new NameValueCollection() { { "extrasuffix", extraSuffix } }).Result)
                      .ToArray());
         }
     }

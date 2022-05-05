@@ -58,7 +58,7 @@ this.WriteObjects("            // fix direct object references\r\n");
         string implName = name + Zetbox.API.Helper.ImplementationSuffix;
         string fkBackingName = "_fk_" + name;
         string fkGuidBackingName = "_fk_guid_" + name;
-        bool isExportable = relEnd.Type.ImplementsIExportable() && otherEnd.Type.ImplementsIExportable();
+        bool isExportable = relEnd.Type.ImplementsIExportable().Result && otherEnd.Type.ImplementsIExportable().Result;
 
         ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, name, implName, fkBackingName, fkGuidBackingName, isExportable);
     }        

@@ -83,7 +83,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
         protected override bool IsExportable()
         {
             var oc = prop.ObjectClass as ObjectClass;
-            return oc != null && oc.ImplementsIExportable();
+            return oc != null && oc.ImplementsIExportable().Result;
         }
 
         protected override string[] GetIExportableInterfaces()

@@ -43,7 +43,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             string implNameUnused = null;
             string fkBackingName = "_fk_" + name;
             string fkGuidBackingName = "_fk_guid_" + name;
-            bool isExportable = relEnd.Type.ImplementsIExportable() && otherEnd.Type.ImplementsIExportable();
+            bool isExportable = relEnd.Type.ImplementsIExportable().Result && otherEnd.Type.ImplementsIExportable().Result;
 
             ReloadOneReference.Call(_host, ctx, referencedInterface, referencedImplementation, name, implNameUnused, fkBackingName, fkGuidBackingName, isExportable);
         }

@@ -97,7 +97,7 @@ namespace Zetbox.Generator.Templates
         /// <returns>The interfaces this class implements</returns>
         protected virtual string[] GetInterfaces()
         {
-            if (DataType is ObjectClass && ((ObjectClass)DataType).ImplementsIExportable(false))
+            if (DataType is ObjectClass && ((ObjectClass)DataType).ImplementsIExportable(false).Result)
             {
                 return new string[] { this.DataType.Name, "Zetbox.API.IExportableInternal" };
             }

@@ -582,7 +582,7 @@ namespace Zetbox.Server.SchemaManagement
                 }
             }
 
-            if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
+            if (rel.A.Type.ImplementsIExportable().Result && rel.B.Type.ImplementsIExportable().Result)
             {
                 CheckColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, 0, false, new NewGuidDefaultConstraint());
             }

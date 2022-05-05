@@ -40,7 +40,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
             host.CallTemplate("Mappings.SubclassHbm",
                 new object[] { ctx }
-                    .Concat(ObjectClassHbm.MakeArgs(ctx, cls, host.Settings))
+                    .Concat(ObjectClassHbm.MakeArgs(ctx, cls, host.Settings).Result)
                     .ToArray());
         }
 

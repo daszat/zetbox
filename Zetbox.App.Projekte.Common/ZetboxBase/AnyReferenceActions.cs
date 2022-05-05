@@ -18,6 +18,7 @@ namespace Zetbox.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Extensions;
 
@@ -69,7 +70,7 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void SetObject(AnyReference obj, Zetbox.API.IDataObject newObj)
+        public static async Task SetObject(AnyReference obj, Zetbox.API.IDataObject newObj)
         {
             if (newObj == null)
             {
@@ -81,7 +82,7 @@ namespace Zetbox.App.Base
             {
                 var cls = newObj.GetObjectClass(_frozenCtx);
                 obj.ObjClass = cls.ExportGuid;
-                if (cls.ImplementsIExportable())
+                if (await cls.ImplementsIExportable())
                 {
                     obj.ObjGuid = ((IExportable)newObj).ExportGuid;
                     obj.ObjID = null;

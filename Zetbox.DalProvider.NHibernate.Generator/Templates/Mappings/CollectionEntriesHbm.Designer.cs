@@ -82,7 +82,7 @@ this.WriteObjects("                  column=\"`",  Construct.ListPositionColumnN
 #line 68 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 } 
 #line 69 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable()) { 
+if (rel.A.Type.ImplementsIExportable().Result && rel.B.Type.ImplementsIExportable().Result) { 
 #line 70 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("        <property name=\"ExportGuid\" column=\"`ExportGuid`\" type=\"Guid\" />\r\n");
 #line 71 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
@@ -131,7 +131,7 @@ this.WriteObjects("                  column=\"`",  prop.Name + "Index" , "`\" />
 #line 104 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 } 
 #line 105 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { 
+if (((ObjectClass)prop.ObjectClass).ImplementsIExportable().Result) { 
 #line 106 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("        <!-- export guid is not needed since serialization is always \"in-place\"\r\n");
 this.WriteObjects("        <property name=\"ExportGuid\" column=\"`ExportGuid`\" type=\"Guid\" />\r\n");
@@ -182,7 +182,7 @@ this.WriteObjects("                  column=\"`",  prop.Name + "Index" , "`\" />
 #line 142 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 } 
 #line 143 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { 
+if (((ObjectClass)prop.ObjectClass).ImplementsIExportable().Result) { 
 #line 144 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("        <!-- export guid is not needed since serialization is always \"in-place\"\r\n");
 this.WriteObjects("        <property name=\"ExportGuid\" column=\"`ExportGuid`\" type=\"Guid\" />\r\n");

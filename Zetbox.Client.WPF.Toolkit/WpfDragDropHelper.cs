@@ -148,7 +148,7 @@ namespace Zetbox.Client.WPF.Toolkit
                 var data = _source.GetData();
                 if (data != null)
                 {
-                    _uiSourceElement.Dispatcher.BeginInvoke(new Action(() =>
+                    _uiSourceElement.Dispatcher.BeginInvoke(new Action(async () =>
                     {
                         try
                         {
@@ -177,7 +177,12 @@ namespace Zetbox.Client.WPF.Toolkit
                                 if (lst.Any())
                                 {
                                     var ctx = lst.First().Context;
-                                    var exportable = lst.Where(i => i.GetObjectClass(ctx).ImplementsIExportable()).ToList();
+                                    var exportable = new List<Zetbox.API.IDataObject>();
+                                    foreach (var item in lst)
+                                    {
+                                        if(await item.GetObjectClass(ctx).ImplementsIExportable())
+                                            exportable.Add(item);
+                                    }
                                     if (exportable.Count > 0)
                                     {
                                         dragData.SetData(new[]

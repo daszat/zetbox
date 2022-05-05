@@ -24,6 +24,7 @@ namespace Zetbox.App.Packaging
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Xml;
     using Zetbox.API;
     using Zetbox.API.Utils;
@@ -100,19 +101,19 @@ namespace Zetbox.App.Packaging
             }
         }
 
-        public static void ExportFromContext(IReadOnlyZetboxContext ctx, string filename, string[] schemaModules, string[] ownerModules)
+        public static async Task ExportFromContext(IReadOnlyZetboxContext ctx, string filename, string[] schemaModules, string[] ownerModules)
         {
             using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Write))
             {
-                ExportFromContext(ctx, s, schemaModules, ownerModules);
+                await ExportFromContext(ctx, s, schemaModules, ownerModules);
             }
         }
 
-        public static void ExportFromContext(IReadOnlyZetboxContext ctx, Stream stream, string[] schemaModules, string[] ownerModules, string streamDescription)
+        public static async Task ExportFromContext(IReadOnlyZetboxContext ctx, Stream stream, string[] schemaModules, string[] ownerModules, string streamDescription)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
             {
-                ExportFromContext(ctx, s, schemaModules, ownerModules);
+                await ExportFromContext(ctx, s, schemaModules, ownerModules);
             }
         }
 
@@ -134,7 +135,7 @@ namespace Zetbox.App.Packaging
         /// <param name="ownerModules">A list of strings naming the data-owning modules. This selects whose data should
         /// be exported.  Specify a single asterisk (<code>"*"</code>) to select all available data, independent of
         /// module-membership. This also includes data that is not member of any module.</param>
-        public static void ExportFromContext(IReadOnlyZetboxContext ctx, IPackageProvider s, string[] schemaModules, string[] ownerModules)
+        public static async Task ExportFromContext(IReadOnlyZetboxContext ctx, IPackageProvider s, string[] schemaModules, string[] ownerModules)
         {
             using (Log.DebugTraceMethodCall("ExportFromContext"))
             {
@@ -165,7 +166,7 @@ namespace Zetbox.App.Packaging
                                 ExportObject(s, obj, schemaNamespaces);
                             }
                         }
-                        else if (objClass.ImplementsIModuleMember())
+                        else if (await objClass.ImplementsIModuleMember())
                         {
                             Log.InfoFormat("    exporting parts of class {0}", objClass.Name);
                             foreach (var obj in AllModuleMembers(ctx, objClass)
@@ -189,9 +190,9 @@ namespace Zetbox.App.Packaging
                     {
                         if (rel.GetRelationType() != RelationType.n_m)
                             continue;
-                        if (!rel.A.Type.ImplementsIExportable())
+                        if (!(await rel.A.Type.ImplementsIExportable()))
                             continue;
-                        if (!rel.B.Type.ImplementsIExportable())
+                        if (!(await rel.B.Type.ImplementsIExportable()))
                             continue;
 
                         try
@@ -205,10 +206,10 @@ namespace Zetbox.App.Packaging
                                 msgFormat = "    exporting relation {0}";
                                 entries = ctx.Internals().GetPersistenceObjectQuery(ifType).OrderBy(o => ((IExportable)o).ExportGuid);
                             }
-                            else if (rel.A.Type.ImplementsIModuleMember() || rel.B.Type.ImplementsIModuleMember())
+                            else if ((await rel.A.Type.ImplementsIModuleMember()) || (await rel.B.Type.ImplementsIModuleMember()))
                             {
                                 msgFormat = "    exporting filtered relation {0}";
-                                entries = FetchRelationEntries(ctx, moduleID, rel).AsQueryable();
+                                entries = (await FetchRelationEntries(ctx, moduleID, rel)).AsQueryable();
                             }
                             else
                             {
@@ -331,18 +332,18 @@ namespace Zetbox.App.Packaging
 
         #region Xml/Export private Methods
 
-        private static List<IPersistenceObject> FetchRelationEntries(IReadOnlyZetboxContext ctx, int moduleID, Relation rel)
+        private static async Task<List<IPersistenceObject>> FetchRelationEntries(IReadOnlyZetboxContext ctx, int moduleID, Relation rel)
         {
             var t = rel.GetEntryInterfaceType().Type;
             var ta = rel.A.Type.GetDescribedInterfaceType().Type;
             var tb = rel.B.Type.GetDescribedInterfaceType().Type;
 
             string methodName = "FetchRelationEntries";
-            if (rel.A.Type.ImplementsIModuleMember())
+            if (await rel.A.Type.ImplementsIModuleMember())
             {
                 methodName += "A";
             }
-            if (rel.B.Type.ImplementsIModuleMember())
+            if (await rel.B.Type.ImplementsIModuleMember())
             {
                 methodName += "B";
             }

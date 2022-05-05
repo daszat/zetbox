@@ -104,7 +104,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return Task.FromResult(string.Empty);
         }
 
-        public Task AddRelation()
+        public async Task AddRelation()
         {
             if (Value.Count == 0 && StartingObjectClass == null)
             {
@@ -112,10 +112,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
             else
             {
-                ContinueAddRelation();
+                await ContinueAddRelation();
             }
-
-            return Task.CompletedTask;
         }
 
         private ObjectClass GetLastClass()
@@ -140,7 +138,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return nextType;
         }
 
-        private void ContinueAddRelation()
+        private async Task ContinueAddRelation()
         {
             var lastType = GetLastClass();
             if (lastType == null) return;
@@ -148,8 +146,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var qry = DataContext.GetQuery<Relation>()
                 .Where(i => i.A.Type == lastType || i.B.Type == lastType)
                 .ToList()
-                .Where(i => !((i.A.Type.ImplementsIChangedBy() && i.A.Navigator != null && i.A.Navigator.Name == "ChangedBy")
-                           || (i.B.Type.ImplementsIChangedBy() && i.B.Navigator != null && i.B.Navigator.Name == "ChangedBy")))
+                .Where(i => !((/* TODO: (await i.A.Type.ImplementsIChangedBy()) && */ i.A.Navigator != null && i.A.Navigator.Name == "ChangedBy")
+                           || (/* TODO: (await i.B.Type.ImplementsIChangedBy()) && */ i.B.Navigator != null && i.B.Navigator.Name == "ChangedBy")))
                 .AsQueryable();
 
             var selTaskVMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
@@ -168,7 +166,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             selTaskVMdl.ListViewModel.ShowCommands = false;
             selTaskVMdl.ListViewModel.EnableAutoFilter = false;
             selTaskVMdl.ListViewModel.AddFilter(new ToStringFilterModel(FrozenContext));
-            ViewModelFactory.ShowDialog(selTaskVMdl);
+            await ViewModelFactory.ShowDialog(selTaskVMdl);
         }
 
         public void SelectStartingObjectClass()
@@ -178,12 +176,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     this,
                     typeof(ObjectClass).GetObjectClass(FrozenContext),
                     () => DataContext.GetQuery<ObjectClass>(),
-                    (chosen) =>
+                    async (chosen) =>
                     {
                         if (chosen != null)
                         {
                             StartingObjectClass = chosen.First();
-                            ContinueAddRelation();
+                            await ContinueAddRelation();
                         }
                     },
                     null);

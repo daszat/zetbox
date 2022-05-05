@@ -20,6 +20,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
     using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Arebis.CodeGeneration;
     using Zetbox.API;
     using Zetbox.API.SchemaManagement;
@@ -65,7 +66,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 + cls.Name + extraSuffix + Zetbox.API.Helper.ImplementationSuffix;
         }
 
-        public static object[] MakeArgs(IZetboxContext ctx, ObjectClass cls, NameValueCollection templateSettings)
+        public static async Task<object[]> MakeArgs(IZetboxContext ctx, ObjectClass cls, NameValueCollection templateSettings)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (cls == null) { throw new ArgumentNullException("cls"); }
@@ -90,7 +91,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 + Construct.SecurityRulesClassName(cls) + extraSuffix + Zetbox.API.Helper.ImplementationSuffix
                 + ", Zetbox.Objects." + extraSuffix + Zetbox.API.Helper.ImplementationSuffix;
 
-            bool needsConcurrency = cls.ImplementsIChangedBy(true);
+            bool needsConcurrency = await cls.ImplementsIChangedBy(true);
 
             return new object[] { interfaceName, implementationName, schemaName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightTable, needsConcurrency, qualifiedRightsClassName, cls.GetTableMapping() };
         }

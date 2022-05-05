@@ -74,7 +74,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
             bool inverseNavigatorIsList = relEnd.Navigator != null && relEnd.Navigator.GetIsList();
             bool notifyInverseCollection = true;
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
-            bool relDataTypeExportable = rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
+            bool relDataTypeExportable = rel.A.Type.ImplementsIExportable().Result && rel.B.Type.ImplementsIExportable().Result;
             bool callGetterSetterEvents = false;
 
             Properties.ObjectReferencePropertyTemplate.Call(Host,

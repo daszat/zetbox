@@ -19,7 +19,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -80,7 +80,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             bool inverseNavigatorIsList = nav != null && nav.GetIsList();
             bool notifyInverseCollection = true;
             bool eagerLoading = nav != null && nav.EagerLoading;
-            bool relDataTypeExportable = rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
+            bool relDataTypeExportable = Task.Run(async () => await rel.A.Type.ImplementsIExportable() && await rel.B.Type.ImplementsIExportable()).Result;
             bool callGetterSetterEvents = false;
 
             Properties.ObjectReferencePropertyTemplate.Call(Host,

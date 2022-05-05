@@ -187,13 +187,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
         private bool? _canExportXML;
-        public Task<bool> CanExportXML()
+        public async Task<bool> CanExportXML()
         {
             if (_canExportXML == null)
             {
-                _canExportXML = DataType.ImplementsIExportable();
+                _canExportXML = await DataType.ImplementsIExportable();
             }
-            return Task.FromResult(_canExportXML.Value);
+            return _canExportXML.Value;
         }
 
         public async Task ExportXML()

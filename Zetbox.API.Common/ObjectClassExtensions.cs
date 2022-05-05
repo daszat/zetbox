@@ -183,82 +183,82 @@ namespace Zetbox.App.Extensions
             return dt.Module.Namespace + "." + dt.Name;
         }
 
-        public static bool ImplementsIExportable(this ObjectClass cls)
+        public static Task<bool> ImplementsIExportable(this ObjectClass cls)
         {
             return ImplementsIExportable(cls, true);
         }
 
-        public static bool ImplementsIExportable(this ObjectClass cls, bool lookupInBase)
+        public static async Task<bool> ImplementsIExportable(this ObjectClass cls, bool lookupInBase)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
 
             while (cls != null)
             {
                 // TODO: use named objects
-                if (cls.ImplementsInterfaces.Count(o => o.Name == "IExportable" && o.Module.Name == "ZetboxBase") == 1)
+                if ((await cls.GetProp_ImplementsInterfaces()).Count(o => o.Name == "IExportable" && o.Module.Name == "ZetboxBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
-                cls = cls.BaseObjectClass;
+                cls = await cls.GetProp_BaseObjectClass();
             }
             return false;
         }
 
-        public static bool ImplementsIModuleMember(this ObjectClass cls)
+        public static Task<bool> ImplementsIModuleMember(this ObjectClass cls)
         {
             return ImplementsIModuleMember(cls, true);
         }
 
-        public static bool ImplementsIModuleMember(this ObjectClass cls, bool lookupInBase)
+        public static async Task<bool> ImplementsIModuleMember(this ObjectClass cls, bool lookupInBase)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
 
             while (cls != null)
             {
                 // TODO: use named objects
-                if (cls.ImplementsInterfaces.Count(o => o.Name == "IModuleMember" && o.Module.Name == "ZetboxBase") == 1)
+                if ((await cls.GetProp_ImplementsInterfaces()).Count(o => o.Name == "IModuleMember" && o.Module.Name == "ZetboxBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
-                cls = cls.BaseObjectClass;
+                cls = await cls.GetProp_BaseObjectClass();
             }
             return false;
         }
 
-        public static bool ImplementsIChangedBy(this ObjectClass cls)
+        public static Task<bool> ImplementsIChangedBy(this ObjectClass cls)
         {
             return ImplementsIChangedBy(cls, true);
         }
 
-        public static bool ImplementsIChangedBy(this ObjectClass cls, bool lookupInBase)
+        public static async Task<bool> ImplementsIChangedBy(this ObjectClass cls, bool lookupInBase)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
 
             while (cls != null)
             {
                 // TODO: use named objects
-                if (cls.ImplementsInterfaces.Count(o => o.Name == "IChangedBy" && o.Module.Name == "ZetboxBase") == 1)
+                if ((await cls.GetProp_ImplementsInterfaces()).Count(o => o.Name == "IChangedBy" && o.Module.Name == "ZetboxBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
-                cls = cls.BaseObjectClass;
+                cls = await cls.GetProp_BaseObjectClass();
             }
             return false;
         }
 
-        public static bool ImplementsIDeactivatable(this ObjectClass cls)
+        public static Task<bool> ImplementsIDeactivatable(this ObjectClass cls)
         {
             return ImplementsIDeactivatable(cls, true);
         }
 
-        public static bool ImplementsIDeactivatable(this ObjectClass cls, bool lookupInBase)
+        public static async Task<bool> ImplementsIDeactivatable(this ObjectClass cls, bool lookupInBase)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
 
             while (cls != null)
             {
                 // TODO: use named objects
-                if (cls.ImplementsInterfaces.Count(o => o.Name == "IDeactivatable" && o.Module.Name == "ZetboxBase") == 1)
+                if ((await cls.GetProp_ImplementsInterfaces()).Count(o => o.Name == "IDeactivatable" && o.Module.Name == "ZetboxBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
-                cls = cls.BaseObjectClass;
+                cls = await cls.GetProp_BaseObjectClass();
             }
             return false;
         }
@@ -278,7 +278,7 @@ namespace Zetbox.App.Extensions
                 if ((await cls.GetProp_ImplementsInterfaces()).Any(o => o.Name == "ICustomFulltextFormat" && o.Module.Name == "ZetboxBase"))
                     return true;
                 if (!lookupInBase) return false;
-                cls = cls.BaseObjectClass;
+                cls = await cls.GetProp_BaseObjectClass();
             }
             return false;
         }

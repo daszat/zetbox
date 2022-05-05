@@ -5,6 +5,7 @@ namespace Zetbox.API.Common.GUI
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
     using Zetbox.API.Utils;
 
@@ -17,6 +18,7 @@ namespace Zetbox.API.Common.GUI
     {
         private readonly Dictionary<Guid, System.Drawing.Image> _cache = new Dictionary<Guid, System.Drawing.Image>();
         private readonly Func<IZetboxContext> ctxFactroy;
+        private readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
 
         public IconConverter(Func<IZetboxContext> ctx)
         {
@@ -41,6 +43,7 @@ namespace Zetbox.API.Common.GUI
             if (icon == null) return null;
             if (icon.ObjectState == DataObjectState.New) return null;
 
+            await _lock.WaitAsync();
             try
             {
                 System.Drawing.Image bmp;
@@ -63,6 +66,10 @@ namespace Zetbox.API.Common.GUI
             {
                 Logging.Log.Info("Error while loading Icon", ex);
                 return null;
+            }
+            finally
+            {
+                _lock.Release();
             }
         }
     }

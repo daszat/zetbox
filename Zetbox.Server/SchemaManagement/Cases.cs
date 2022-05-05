@@ -1964,7 +1964,7 @@ namespace Zetbox.Server.SchemaManagement
                 db.CreateColumn(tblName, fkBName + Zetbox.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
             }
 
-            if (aType.ImplementsIExportable() && bType.ImplementsIExportable())
+            if (aType.ImplementsIExportable().Result && bType.ImplementsIExportable().Result)
             {
                 db.CreateColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, 0, false, new NewGuidDefaultConstraint());
             }
@@ -2837,7 +2837,7 @@ namespace Zetbox.Server.SchemaManagement
             // do not check fk_ChangedBy since it always changes, even when only recalculations were done.
             // ACLs MUST never use ChangedBy information
             var fkCols = objClass.GetRelationEndsWithLocalStorage()
-                .Where(r => !(r.Type.ImplementsIChangedBy() && r.Navigator != null && r.Navigator.Name == "ChangedBy"))
+                .Where(r => !(r.Type.ImplementsIChangedBy().Result && r.Navigator != null && r.Navigator.Name == "ChangedBy"))
                 .Select(r => Construct.ForeignKeyColumnName(r.GetParent().GetOtherEnd(r)))
                 .ToList();
             db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList, fkCols);

@@ -281,7 +281,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                             await AddFilter(new ToStringFilterModel(FrozenContext));
                         }
 
-                        if (_type.ImplementsIDeactivatable())
+                        if (await _type.ImplementsIDeactivatable())
                         {
                             await AddFilter(new WithDeactivatedFilterModel(FrozenContext));
                         }

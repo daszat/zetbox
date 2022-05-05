@@ -97,7 +97,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             bool notifyInverseCollection = false;
 
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
-            bool relDataTypeExportable = rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
+            bool relDataTypeExportable = rel.A.Type.ImplementsIExportable().Result && rel.B.Type.ImplementsIExportable().Result;
 
             Call(host,
                 ctx,
