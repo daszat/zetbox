@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2022-05-04T12:27:35.9300925Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2022-05-05T06:16:43.5172865Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -15130,6 +15130,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:DeploymentRestrictions>1</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>Zetbox.Client</ZetboxBase:Name>
+  </ZetboxBase:Assembly>
+  <ZetboxBase:Assembly ExportGuid="1021ad34-e07e-4787-8334-e183d33306d4">
+    <ZetboxBase:ChangedOn>2022-05-04T12:46:18Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2022-05-04T12:46:18Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DeploymentRestrictions>1</ZetboxBase:DeploymentRestrictions>
+    <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
+    <ZetboxBase:Name>Zetbox.Client.Blazor.Toolkit</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="157c1754-6eed-49f7-883b-ae2543bafd7e">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:07Z</ZetboxBase:ChangedOn>
