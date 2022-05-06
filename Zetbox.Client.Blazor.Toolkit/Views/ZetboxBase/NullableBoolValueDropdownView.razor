@@ -1,0 +1,11 @@
+﻿@attribute [ViewDescriptor(Zetbox.App.GUI.Toolkit.Blazor)]
+
+@if(ViewModel != null)
+{
+	<span>@ViewModel.Name</span>
+}
+
+@code {
+	[Parameter]
+	public NullableBoolPropertyViewModel ViewModel { get; set; }
+}

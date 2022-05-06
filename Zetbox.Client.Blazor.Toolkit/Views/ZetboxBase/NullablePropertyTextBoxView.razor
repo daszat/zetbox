@@ -1,0 +1,29 @@
+﻿@attribute [ViewDescriptor(Zetbox.App.GUI.Toolkit.Blazor)]
+
+@if(ViewModel != null)
+{
+	<span>@ViewModel.FormattedValueAsync</span>
+}
+
+@code {
+	[Parameter]
+	public BaseValueViewModel ViewModel { get; set; }
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		if (ViewModel != null)
+		{
+			ViewModel.PropertyChanged += (s, e) =>
+			{
+				switch (e.PropertyName)
+				{
+					case nameof(BaseValueViewModel.FormattedValueAsync):
+						StateHasChanged();
+						break;
+				}
+			};
+		}
+	}
+}

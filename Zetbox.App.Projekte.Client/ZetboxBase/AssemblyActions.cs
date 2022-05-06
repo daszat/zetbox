@@ -19,6 +19,7 @@ namespace Zetbox.App.Base
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Text;
     using Zetbox.API;
     using Zetbox.API.Utils;
@@ -27,6 +28,7 @@ namespace Zetbox.App.Base
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables;
     using SR = System.Reflection;
+    using System.Reflection.Metadata;
 
     /// <summary>
     /// Client implementation
@@ -202,18 +204,21 @@ namespace Zetbox.App.Base
         /// <returns></returns>
         private static SR.Assembly ReflectAssembly(Assembly assembly)
         {
+            string[] runtimeAssemblies = Directory.GetFiles(RuntimeEnvironment.GetRuntimeDirectory(), "*.dll");
+            string[] baseAssemblies = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll");
+            string[] commonAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Common"), "*.dll");
+            string[] clientAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Client"), "*.dll");
+            var paths = new List<string>(runtimeAssemblies.Concat(baseAssemblies).Concat(commonAssemblies).Concat(clientAssemblies));
+
             SR.Assembly a = null;
             try
             {
-                a = SR.Assembly.Load(assembly.Name);
+                var resolver = new PathAssemblyResolver(paths);
+                var mlc = new MetadataLoadContext(resolver);
+                a = mlc.LoadFromAssemblyName(assembly.Name);
             }
             catch (FileNotFoundException)
             {
-            }
-            if (a == null)
-            {
-                // Try AssemblyLoader directly
-                a = AssemblyLoader.Load(assembly.Name);
             }
             if (a == null)
             {
@@ -221,7 +226,10 @@ namespace Zetbox.App.Base
                 var f = _mdlFactory.GetSourceFileNameFromUser("Assembly files|*.dll;*.exe", "All files|*.*");
                 if (!string.IsNullOrEmpty(f))
                 {
-                    a = SR.Assembly.LoadFrom(f);
+                    paths.Add(Path.GetDirectoryName(f));
+                    var resolver = new PathAssemblyResolver(paths);
+                    var mlc = new MetadataLoadContext(resolver);
+                    a = mlc.LoadFromAssemblyPath(f);
                 }
             }
             if (a == null)

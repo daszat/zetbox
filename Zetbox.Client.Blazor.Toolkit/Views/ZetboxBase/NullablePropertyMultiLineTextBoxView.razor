@@ -1,0 +1,11 @@
+﻿@attribute [ViewDescriptor(Zetbox.App.GUI.Toolkit.Blazor)]
+
+@if(ViewModel != null)
+{
+	<span>@ViewModel.Value</span>
+}
+
+@code {
+	[Parameter]
+	public IValueViewModel<string> ViewModel { get; set; }
+}
