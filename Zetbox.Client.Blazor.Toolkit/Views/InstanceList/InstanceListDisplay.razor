@@ -61,7 +61,7 @@
 
 	private void Select(DataObjectViewModel item, ChangeEventArgs args)
 	{
-		if (args.Value as bool? == true)
+		if (ViewModel != null && args.Value as bool? == true)
 		{
 			ViewModel.SelectedItem = item;
 		}

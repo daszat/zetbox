@@ -3,29 +3,43 @@
 @using Zetbox.Client.Presentables.ObjectBrowser
 @using Zetbox.Client.Presentables.ZetboxBase
 
-<div class="row">
-	<div class="col-3 vh-100 overflow-auto">
-		<ul>
-			@foreach (var module in ViewModel.Modules)
+@if (ViewModel != null)
+{
+	<div class="row">
+		<div class="col-3 vh-100 overflow-auto">
+			@if(ViewModel.Modules != null)
 			{
-				<TreeNode ViewModel="@module" Workspace="@ViewModel"></TreeNode>
+			<ul>
+				@foreach (var module in ViewModel.Modules)
+				{
+					<TreeNode ViewModel="@module" Workspace="@ViewModel"></TreeNode>
+				}
+				</ul>
 			}
-		</ul>
+			else
+			{
+				<span class="text-info">Loading...</span>
+			}
+		</div>
+		<div class="col-9">
+			@if (CurrentInstanceList != null)
+			{
+				<Zetbox.Client.Blazor.Toolkit.Views.InstanceList.InstanceListDisplay ViewModel="@CurrentInstanceList"></Zetbox.Client.Blazor.Toolkit.Views.InstanceList.InstanceListDisplay>
+			}
+		</div>
 	</div>
-	<div class="col-9">
-		@if (CurrentInstanceList != null)
-		{
-			<Zetbox.Client.Blazor.Toolkit.Views.InstanceList.InstanceListDisplay ViewModel="@CurrentInstanceList"></Zetbox.Client.Blazor.Toolkit.Views.InstanceList.InstanceListDisplay>
-		}
-	</div>
-</div>
+}
+else
+{
+	<span class="text-info">Loading...</span>
+}
 
 @code {
 	private InstanceListViewModel? CurrentInstanceList
 	{
 		get
 		{
-			if (ViewModel.SelectedItem is Zetbox.Client.Presentables.ObjectBrowser.ObjectClassViewModel objClass)
+			if (ViewModel?.SelectedItem is Zetbox.Client.Presentables.ObjectBrowser.ObjectClassViewModel objClass)
 			{
 				return (InstanceListViewModel)objClass.DashboardViewModel;
 			}
@@ -37,7 +51,7 @@
 	}
 
 	[Parameter]
-	public WorkspaceViewModel ViewModel { get; set; }
+	public WorkspaceViewModel? ViewModel { get; set; }
 
 
 	protected override async Task OnParametersSetAsync()

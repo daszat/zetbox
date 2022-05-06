@@ -28,10 +28,10 @@
 
 @code {
 
-	private DataObjectViewModel? SelectedDataObjectViewModel => ViewModel.SelectedItem as DataObjectViewModel;
+	private DataObjectViewModel? SelectedDataObjectViewModel => ViewModel?.SelectedItem as DataObjectViewModel;
 
 	[Parameter]
-	public WorkspaceViewModel ViewModel { get; set; }
+	public WorkspaceViewModel? ViewModel { get; set; }
 
 	protected override async Task OnParametersSetAsync()
 	{

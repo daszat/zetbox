@@ -6,7 +6,7 @@
 
 @code {
 	[Parameter]
-	public ICommandViewModel ViewModel { get; set; }
+	public ICommandViewModel? ViewModel { get; set; }
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -20,6 +20,6 @@
 
 	public void Click()
 	{
-		ViewModel.Execute(null);
+		ViewModel?.Execute(null);
 	}
 }

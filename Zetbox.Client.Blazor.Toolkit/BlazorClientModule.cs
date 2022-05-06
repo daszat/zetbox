@@ -130,7 +130,7 @@ namespace Zetbox.Client.Blazor
 
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
             moduleBuilder.RegisterViewModels(typeof(BlazorClientModule).Assembly);
-            moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client", true)));
+            moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client", true)!)!);
         }
     }
 }

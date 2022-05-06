@@ -10,11 +10,13 @@
 
 <h1>Hello zetbox!</h1>
 
-<Zetbox.Client.Blazor.Toolkit.Views.ObjectBrowser.WorkspaceDisplay ViewModel="@workspace"></Zetbox.Client.Blazor.Toolkit.Views.ObjectBrowser.WorkspaceDisplay>
-
+@if(workspace != null)
+{
+	<Zetbox.Client.Blazor.Toolkit.Views.ObjectBrowser.WorkspaceDisplay ViewModel="@workspace"></Zetbox.Client.Blazor.Toolkit.Views.ObjectBrowser.WorkspaceDisplay>
+}
 
 @code {
-	private WorkspaceViewModel workspace;
+	private WorkspaceViewModel? workspace;
 
 	protected async override t.Task OnInitializedAsync()
 	{

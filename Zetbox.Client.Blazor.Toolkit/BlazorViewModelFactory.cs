@@ -29,7 +29,7 @@ namespace Zetbox.Client.Blazor
         }
 
         // TODO: This is not the best option....
-        public static Presentables.ObjectEditor.WorkspaceViewModel LastObjectEditorWorkspace { get; private set; }
+        public static Presentables.ObjectEditor.WorkspaceViewModel? LastObjectEditorWorkspace { get; private set; }
 
         protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerMdl)
         {
@@ -47,7 +47,7 @@ namespace Zetbox.Client.Blazor
 		protected override object CreateView(ViewDescriptor vDesc)
 		{
             // return the type instead
-			return Type.GetType(vDesc.ControlTypeRef);
+			return Type.GetType(vDesc.ControlTypeRef)!;
 		}
 
 		public override void CreateTimer(TimeSpan tickLength, Action action)

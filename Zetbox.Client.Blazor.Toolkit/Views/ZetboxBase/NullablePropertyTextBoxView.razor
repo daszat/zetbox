@@ -2,12 +2,17 @@
 
 @if(ViewModel != null)
 {
-	<input type="text" value="@ViewModel.FormattedValueAsync" @onchange="@((e) => ViewModel.FormattedValue = e.Value?.ToString())" />
+	<input type="text" 
+		   value="@ViewModel.FormattedValueAsync" 
+		   @onchange="@((e) => ViewModel.FormattedValue = e.Value?.ToString())"
+		   disabled="@(!ViewModel.IsEnabled)"
+		   readonly="@(ViewModel.IsReadOnly)"
+		   />
 }
 
 @code {
 	[Parameter]
-	public BaseValueViewModel ViewModel { get; set; }
+	public BaseValueViewModel? ViewModel { get; set; }
 
 	protected override async Task OnParametersSetAsync()
 	{

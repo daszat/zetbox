@@ -40,9 +40,9 @@
 
 @code {
 	[Parameter]
-	public DataObjectViewModel ViewModel { get; set; }
+	public DataObjectViewModel? ViewModel { get; set; }
 
-	private PropertyGroupViewModel initalGroup;
+	private PropertyGroupViewModel? initalGroup = null;
 
 	protected override async Task OnParametersSetAsync()
 	{

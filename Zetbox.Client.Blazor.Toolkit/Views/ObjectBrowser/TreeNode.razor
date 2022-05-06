@@ -20,10 +20,10 @@
 }
 @code {
 	[Parameter]
-	public ViewModel ViewModel { get; set; }
+	public ViewModel? ViewModel { get; set; }
 
 	[Parameter]
-	public WorkspaceViewModel Workspace { get; set; }
+	public WorkspaceViewModel? Workspace { get; set; }
 
 	private IEnumerable<ViewModel> Children
 	{
@@ -50,9 +50,12 @@
 
 	private void Select(ViewModel selected)
 	{
-		Workspace.SelectedItem = selected;
-		Console.WriteLine($"Selected {selected.Name}");
+		if (Workspace != null)
+		{
+			Workspace.SelectedItem = selected;
+			Console.WriteLine($"Selected {selected.Name}");
 
-		StateHasChanged();
+			StateHasChanged();
+		}
 	}
 }
