@@ -23,7 +23,7 @@ rem refresh local code
 call GetCodeGen.cmd
 IF ERRORLEVEL 1 GOTO FAIL
 
-MSBuild.exe .\Zetbox.Objects\Zetbox.Objects.csproj
+dotnet build .\Zetbox.Objects\Zetbox.Objects.csproj
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem need to export both modules to receive all necessary meta-data
