@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2022-05-05T08:40:12.5709525Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2022-05-06T08:38:48.0097055Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -15398,6 +15398,97 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ZetboxBase.TagPropertyEditorViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewDescriptor ExportGuid="bbb30d1d-88c1-4490-8759-ecc8dfbf9d4c">
+    <GUI:ControlKind>4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.InstanceList.InstanceListDisplay, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="d13b5c81-c12a-47b4-bd86-35a2383ad181">
+    <GUI:ControlKind>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.ObjectBrowser.WorkspaceDisplay, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="76b705c9-941e-45a5-87be-9c653973e4f4">
+    <GUI:ControlKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.ObjectEditor.DataObjectEditor, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="f264d10f-7261-46d5-b857-34c0ceab73da">
+    <GUI:ControlKind>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.ObjectEditor.WorkspaceDisplay, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="6de7d2aa-2e05-451c-b2dc-14c6facfaa7f">
+    <GUI:ControlKind>66e080be-471d-4dc5-9850-25bedbdfc76e</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.ZetboxBase.DataObjectLineDisplay, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="ac9050b3-2af7-41bc-a214-73a00e8209d6">
+    <GUI:ControlKind>9d414225-460a-4c54-8e36-e368804e387f</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.ZetboxBase.EnumSelectionView, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="ccfbcbd4-5dea-4c43-8cb7-43b3a530f56d">
+    <GUI:ControlKind>974fae02-0f72-4631-bcf3-edbebbafea4f</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.ZetboxBase.NullableBoolValueDropdownView, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="9f61f7d0-4d65-43e9-a801-4a1354e84087">
+    <GUI:ControlKind>2073aa42-81ce-4beb-a3f5-c76c788247c5</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.ZetboxBase.NullableDateTimeValueEditor, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="666e5c91-a876-4d87-b098-773f71c538d0">
+    <GUI:ControlKind>729939d2-b67e-4576-a22f-181879e57d0d</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.ZetboxBase.NullableEMailTextBoxEditor, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="ae675e29-d5b3-485f-ab5f-dedd9d5031b4">
+    <GUI:ControlKind>b8391867-7c76-40fe-b387-96ab5597fd0d</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.ZetboxBase.NullablePropertyMultiLineTextBoxView, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="7c304189-ad53-450a-95f4-4024f44d4b5c">
+    <GUI:ControlKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.ZetboxBase.NullablePropertyTextBoxView, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="b4832a36-2566-4c4a-b006-5126192cc435">
+    <GUI:ControlKind>d55c9558-4ced-47b0-8eda-81553340fb5b</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.ZetboxBase.ObjectReferenceEditor, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="f875d75d-f64b-429b-b323-c02120cf2f72">
+    <GUI:ControlKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.Blazor.Toolkit.Views.ZetboxBase.StringDisplay, Zetbox.Client.Blazor.Toolkit</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>4</GUI:Toolkit>
+  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b53bfe42-5122-47b2-8eab-b1e223073186">
     <GUI:ControlKind>7e30f1de-076c-42d3-80b2-9c1111a6cdfb</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ErrorListView, Zetbox.Client.WPF</GUI:ControlTypeRef>
