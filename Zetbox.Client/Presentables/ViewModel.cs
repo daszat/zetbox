@@ -329,7 +329,7 @@ namespace Zetbox.Client.Presentables
             if (_PropertyChangedEvent == null) return;
 
             // Ensure this notification is running on the main thread
-            Task.CompletedTask.ContinueWith(t => _PropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName)), ViewModelFactory.UITaskScheduler);
+            Task.CompletedTask.ContinueWith(t => _PropertyChangedEvent?.Invoke(this, new PropertyChangedEventArgs(propertyName)), ViewModelFactory.UITaskScheduler);
         }
         #endregion
 
