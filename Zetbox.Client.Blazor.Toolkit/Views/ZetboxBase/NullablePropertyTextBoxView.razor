@@ -2,7 +2,7 @@
 
 @if(ViewModel != null)
 {
-	<span>@ViewModel.FormattedValueAsync</span>
+	<input type="text" value="@ViewModel.FormattedValueAsync" @onchange="@((e) => ViewModel.FormattedValue = e.Value?.ToString())" />
 }
 
 @code {

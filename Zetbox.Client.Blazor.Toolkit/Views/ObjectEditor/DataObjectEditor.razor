@@ -29,7 +29,7 @@
 				@foreach(var prop in group.PropertyModels.OfType<BaseValueViewModel>())
 				{
 					<div class="row">
-						<BaseValueView Value="@prop"></BaseValueView>
+						<LabeledView ViewModel="@prop" />
 					</div>
 				}
 			</div>

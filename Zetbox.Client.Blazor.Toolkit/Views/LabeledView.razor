@@ -2,7 +2,10 @@
 
 @if (ViewModel != null)
 {
-	@ViewModel.Name
+	<div class="form-group">
+		@ViewModel.Name
+		<ContentControl ViewModel="@ViewModel" />
+	</div>
 }
 
 @code {

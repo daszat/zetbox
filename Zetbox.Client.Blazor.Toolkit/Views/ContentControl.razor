@@ -1,0 +1,143 @@
+﻿@using Zetbox.App.Extensions
+@using Zetbox.App.GUI
+@inject IFrozenContext FrozenContext
+
+@if (componentType != null)
+{
+	<DynamicComponent @ref="dc" Type="@componentType" Parameters="@parameters" />
+}
+else
+{
+	<span class="text-info">Null</span>
+}
+
+@code {
+	private Type? componentType;
+	private IDictionary<string, object> parameters = new Dictionary<string, object>();
+	private DynamicComponent? dc;
+	private bool debugLogging = true;
+
+	[Parameter]
+	public object? RequestedKind { get; set; }
+
+	[Parameter]
+	public ViewModel? ViewModel { get; set; }
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		if (ViewModel != null)
+		{
+			componentType = await SelectTemplate(ViewModel, null);
+			parameters = new Dictionary<string, object>()
+			{
+				{ "ViewModel", ViewModel },
+			};
+	}
+	else
+	{
+		componentType = null;
+	}
+}
+
+protected async Task<Type?> SelectTemplate(object item, object? container)
+{
+	if (item == null)
+	{
+	return null;
+	}
+
+	var rk = RequestedKind ?? GetRequestedKind(container);
+
+	// not supported (yet)
+	// var useLabeledView = GetUseLabeledView(container);
+	//if (useLabeledView && item is ILabeledViewModel)
+	//{
+	//	return GetLabeledViewTemplate(container);
+	//}
+
+	var model = item as ViewModel;
+	ViewDescriptor? result = null;
+	if (model != null)
+	{
+	if (rk is ControlKind)
+	{
+		if (debugLogging) { Console.WriteLine("Searching '{0}' Template for {1}", rk.ToString(), model.GetType().FullName); }
+		result = await SelectTemplate(model, rk as ControlKind, FrozenContext);
+	}
+	else if (rk is String)
+	{
+		if (debugLogging) { Console.WriteLine("Searching '{0}' Template for {1}", rk, model.GetType().FullName); }
+		result = await SelectTemplate(model, rk as string, FrozenContext);
+	}
+	else if (rk == null && model.RequestedKind != null)
+	{
+		if (debugLogging) { Console.WriteLine("Searching '{0}' Template for {1}", model.RequestedKind.ToString(), model.GetType().FullName); }
+		result = await SelectTemplate(model, model.RequestedKind, FrozenContext);
+	}
+	else if (rk == null)
+	{
+		if (debugLogging) { Console.WriteLine("Searching default Template for {0}", model.GetType().FullName); }
+		result = await SelectDefaultTemplate(model, FrozenContext);
+	}
+	else
+	{
+		Console.WriteLine("RequestedKind of type '{0}' is neither string nor ControlKind", rk.GetType().FullName);
+	}
+	}
+
+	if (result != null)
+	{
+	return CreateTemplate(result);
+	}
+	else
+	{
+	Console.WriteLine("No '{0}' DataTemplate found for {1}", rk == null ? "(default)" : rk?.ToString(), item);
+	return GetEmptyTemplate(container);
+	}
+}
+
+private Task<ViewDescriptor?> SelectTemplate(ViewModel mdl, string? controlKindName, IFrozenContext frozenCtx)
+{
+	var ck = frozenCtx.GetQuery<ControlKind>().SingleOrDefault(c => c.Name == controlKindName);
+	if (ck == null) Console.WriteLine("Control kind with name '{0}' was not found", controlKindName);
+	return SelectTemplate(mdl, ck, frozenCtx);
+}
+
+private async Task<ViewDescriptor?> SelectTemplate(ViewModel mdl, ControlKind? controlKind, IFrozenContext frozenCtx)
+{
+	ViewModelDescriptor pmd = GuiExtensions.GetViewModelDescriptor(mdl, frozenCtx);
+	if (pmd == null) return null;
+	return await pmd.GetViewDescriptor(Toolkit.Blazor, controlKind);
+}
+
+private async Task<ViewDescriptor?> SelectDefaultTemplate(ViewModel mdl, IFrozenContext frozenCtx)
+{
+	ViewModelDescriptor pmd = GuiExtensions.GetViewModelDescriptor(mdl, frozenCtx);
+	if (pmd == null) return null;
+	return await pmd.GetViewDescriptor(Toolkit.Blazor);
+}
+
+private Type? CreateTemplate(ViewDescriptor visualDesc)
+{
+	if (visualDesc == null)
+	{
+	return null;
+	}
+
+	if (debugLogging) { Console.WriteLine("Creating Template with {0}", visualDesc.ToString()); }
+	return Type.GetType(visualDesc.ControlTypeRef, true);
+}
+
+private static Type? GetEmptyTemplate(object? container)
+{
+	return null; //TODO: typeof(EmptyView);
+}
+
+public static object? GetRequestedKind(object? container)
+{
+	// Not supported yet
+	return null;
+}
+}
