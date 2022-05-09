@@ -46,7 +46,7 @@ create-artifacts:
     ls publish/*.nuspec.template | % {
     	$file = $_.Name.Replace(".nuspec.template", "")
     	$file | out-host
-    	Get-Content "$file.nuspec.template" | Foreach-object { 
+    	Get-Content "publish/$file.nuspec.template" | % { 
     		$_ -replace '##version##', $version 
     	} | Set-Content -encoding "UTF8" "./bin/Release/$file.nuspec"
     }
