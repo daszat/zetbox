@@ -50,10 +50,11 @@ create-artifacts:
     }
     
     echo "packing files"
-    for f in ./bin/Release/*.nuspec; do
-    	nuget pack -NoPackageAnalysis $f -OutputDirectory ./publish/
-    done
-    
+    ls ./bin/Release/*.nuspec | % {
+    	$file = $_.Name
+    	$file | out-host
+    	nuget pack $file
+    }
     
     # for now, publish them
     dotnet nuget push ./publish/*.nupkg -s zetbox --skip-duplicate
