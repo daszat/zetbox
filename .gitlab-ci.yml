@@ -58,7 +58,7 @@ create-artifacts:
     ls ./bin/Release/*.nuspec | % {
     	$file = $_.Name
     	$file | out-host
-    	nuget pack "./bin/Release/$file"
+    	nuget pack "./bin/Release/$file" -OutputDirectory ./bin/Release
     }
     
     # for now, publish them
