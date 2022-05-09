@@ -13,7 +13,7 @@
     <releaseNotes>First package.</releaseNotes>
     <copyright>Copyright © 2019 dasz.at OG</copyright>
     <dependencies>
-	  <group targetFramework="net50">
+	  <group targetFramework="net60">
         <dependency id="NUnit" version="[3.12,4)" />
         <dependency id="zetboxBasic" version="[##version##]" />
         <dependency id="zetboxBasic-Common" version="[##version##]" />

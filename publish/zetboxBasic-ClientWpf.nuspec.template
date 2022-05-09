@@ -14,7 +14,7 @@
     <copyright>Copyright © 2019 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
-	  <group targetFramework="net50">
+	  <group targetFramework="net60">
         <dependency id="zetboxBasic" version="[##version##]" />
         <dependency id="zetboxBasic-Client" version="[##version##]" />
 	  </group>
