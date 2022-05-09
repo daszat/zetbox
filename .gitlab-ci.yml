@@ -2,7 +2,7 @@ variables:
   GIT_DEPTH: "100000"
   MSBuildThisFileDirectory: "./"
   IGNORE_NORMALISATION_GIT_HEAD_MOVE: "1"
-  GIT_STRATEGY: clone
+#  GIT_STRATEGY: clone
 
 stages:
   - build
@@ -34,7 +34,6 @@ create-artifacts:
     echo "Creating local packages"
     rm publish/*.nupkg
     rm publish/*.nuspec
-    cp publish/* ./bin/Release
     
     dotnet nuget remove source zetbox
     dotnet nuget add source "$env:CI_API_V4_URL/projects/$env:CI_PROJECT_ID/packages/nuget/index.json" --name zetbox --username gitlab-ci-token --password $env:CI_JOB_TOKEN --store-password-in-clear-text
@@ -46,6 +45,10 @@ create-artifacts:
     
     echo ""
     echo "setting version"
+    
+    echo "@nuget install ZetboxBasic -Version $version -DependencyVersion Ignore -OutputDirectory \\"%~dp0\\\\bin\\"" > publish/DownloadZetbox.cmd    
+    
+    cp publish/* ./bin/Release
     
     ls ./publish/*.nuspec.template | % {
     	$file = $_.Name.Replace(".nuspec.template", "")
