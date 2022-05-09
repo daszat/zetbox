@@ -46,7 +46,7 @@ create-artifacts:
     echo ""
     echo "setting version"
     
-    echo "@nuget install ZetboxBasic -Version $version -DependencyVersion Ignore -OutputDirectory \\"%~dp0\\\\bin\\"" > publish/DownloadZetbox.cmd    
+    echo "@nuget install ZetboxBasic -Version $version -DependencyVersion Ignore -OutputDirectory ""%~dp0\bin""" > publish/DownloadZetbox.cmd    
     
     cp publish/* ./bin/Release
     
