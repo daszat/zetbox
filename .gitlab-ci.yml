@@ -62,7 +62,8 @@ create-artifacts:
     }
     
     # for now, publish them
-    dotnet nuget push ./bin/Release/*.nupkg -s zetbox --skip-duplicate
+    cd ./bin/Release
+    dotnet nuget push *.nupkg -s zetbox --skip-duplicate
   artifacts:
     paths:
       - 'publish/*.nupkg'
