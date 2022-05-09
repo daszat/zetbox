@@ -51,14 +51,14 @@ create-artifacts:
     	$file | out-host
     	Get-Content "publish/$file.nuspec.template" | % { 
     		$_ -replace '##version##', $version 
-    	} | Set-Content -encoding "UTF8" "./publish/$file.nuspec"
+    	} | Set-Content -encoding "UTF8" "./bin/Release/$file.nuspec"
     }
     
     echo "packing files"
-    ls ./publish/*.nuspec | % {
+    ls ./bin/Release/*.nuspec | % {
     	$file = $_.Name
     	$file | out-host
-    	nuget pack "./publish/$file"
+    	nuget pack "./bin/Release/$file" -OutputDirectory ./publish
     }
     
     # for now, publish them
