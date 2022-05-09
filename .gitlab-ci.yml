@@ -2,6 +2,7 @@ variables:
   GIT_DEPTH: "100000"
   MSBuildThisFileDirectory: "./"
   IGNORE_NORMALISATION_GIT_HEAD_MOVE: "1"
+  GIT_STRATEGY: clone
 
 stages:
   - build
