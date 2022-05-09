@@ -58,9 +58,10 @@ namespace Zetbox.DalProvider.Memory
                 .OnActivated(async args =>
                 {
                     var manager = args.Context.Resolve<IMemoryActionsManager>();
+                    var listener = args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>();
                     await manager.Init(args.Context.Resolve<IFrozenContext>());
 
-                    ZetboxContextEventListenerHelper.OnCreated(args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>(), args.Instance);
+                    ZetboxContextEventListenerHelper.OnCreated(listener, args.Instance);
                 })
                 .InstancePerDependency();
 

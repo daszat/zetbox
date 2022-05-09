@@ -12,7 +12,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst")]
     public partial class UpdateParentTemplate : Zetbox.Generator.ResourceTemplate
     {
 		protected List<UpdateParentTemplateParams> props;
@@ -34,28 +34,28 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 32 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 32 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
 this.WriteObjects("\r\n");
-#line 33 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 33 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
 if (props.Count > 0) {               
-#line 34 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 34 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
 this.WriteObjects("        public override void UpdateParent(string propertyName, IDataObject parentObj)\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            switch(propertyName)\r\n");
 this.WriteObjects("            {\r\n");
-#line 38 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 38 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
 foreach(var prop in props) {    
-#line 39 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 39 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
 ApplyCase(prop);                
-#line 40 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 40 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
 }                                    
-#line 41 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 41 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
 this.WriteObjects("                default:\r\n");
 this.WriteObjects("                    base.UpdateParent(propertyName, parentObj);\r\n");
 this.WriteObjects("                    break;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 46 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 46 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
 }                                    
 
         }

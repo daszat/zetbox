@@ -10,7 +10,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.Memory.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst")]
     public partial class ApplyChangesFromMethod : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -40,7 +40,7 @@ namespace Zetbox.DalProvider.Memory.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 34 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 34 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override void ApplyChangesFrom(",  otherInterface , " obj)\r\n");
 this.WriteObjects("        {\r\n");
@@ -49,59 +49,59 @@ this.WriteObjects("            var other = (",  clsName , ")obj;\r\n");
 this.WriteObjects("            var otherImpl = (",  implName , ")obj;\r\n");
 this.WriteObjects("            var me = (",  clsName , ")this;\r\n");
 this.WriteObjects("\r\n");
-#line 42 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 42 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 // Only Client and Menory objects are applying calculated properties. NH + EF are re-calculating those properties when a depended object has changed. 
-#line 43 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 43 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().OrderBy(p => p.Name)) { 
-#line 44 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 44 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 var propName = prop.Name;                                                     
-#line 45 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 45 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 if (prop.IsList) { 
-#line 46 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 46 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 if (prop.HasPersistentOrder) { 
-#line 47 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 47 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            SynchronizeLists(this._",  propName , "Collection, otherImpl._",  propName , "Collection);\r\n");
-#line 48 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 48 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } else { 
-#line 49 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 49 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            SynchronizeCollections(this._",  propName , "Collection, otherImpl._",  propName , "Collection);\r\n");
-#line 50 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 50 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 51 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 51 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } else { 
-#line 52 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 52 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 if(prop.IsCalculated) { 
-#line 53 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 53 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            this.",  propName , " = otherImpl.",  propName , ";\r\n");
-#line 54 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 54 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } else { 
-#line 55 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 55 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            me.",  propName , " = other.",  propName , ";\r\n");
-#line 56 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 56 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 57 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 57 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 58 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 58 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 59 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 59 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>()/*.Where(p => !p.IsCalculated)*/.OrderBy(p => p.Name)) { 
-#line 60 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 60 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 var propName = prop.Name;                                                     
-#line 61 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 61 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 if (prop.IsList) { 
-#line 62 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 62 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 if (prop.HasPersistentOrder) { 
-#line 63 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 63 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            SynchronizeLists(this._",  propName , "Collection, otherImpl._",  propName , "Collection);\r\n");
-#line 64 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 64 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } else { 
-#line 65 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 65 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            SynchronizeCollections(this._",  propName , "Collection, otherImpl._",  propName , "Collection);\r\n");
-#line 66 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 66 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 67 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 67 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } else { 
-#line 68 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 68 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            if (me.",  propName , " == null && other.",  propName , " != null) {\r\n");
 this.WriteObjects("                me.",  propName , " = (",  prop.GetElementTypeString() , ")other.",  propName , ".Clone();\r\n");
 this.WriteObjects("            } else if (me.",  propName , " != null && other.",  propName , " == null) {\r\n");
@@ -109,25 +109,25 @@ this.WriteObjects("                me.",  propName , " = null;\r\n");
 this.WriteObjects("            } else if (me.",  propName , " != null && other.",  propName , " != null) {\r\n");
 this.WriteObjects("                me.",  propName , ".ApplyChangesFrom(other.",  propName , ");\r\n");
 this.WriteObjects("            }\r\n");
-#line 75 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 75 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 76 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 76 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 77 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 77 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.Name)) {
         var propName = prop.Name;                                                     
         if (prop.RelationEnd.HasPersistentOrder) {
             var positionPropertyName = Construct.ListPositionPropertyName(prop.RelationEnd);
 
-#line 82 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 82 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            this.",  positionPropertyName , " = otherImpl.",  positionPropertyName , ";\r\n");
-#line 83 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 83 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 84 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 84 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            this._fk_",  propName , " = otherImpl._fk_",  propName , ";\r\n");
-#line 85 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 85 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 86 "D:\Projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 86 "C:\projects\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("        }\r\n");
 
         }

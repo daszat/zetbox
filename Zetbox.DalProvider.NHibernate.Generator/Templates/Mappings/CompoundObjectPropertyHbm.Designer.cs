@@ -7,7 +7,7 @@ using Zetbox.App.Base;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst")]
     public partial class CompoundObjectPropertyHbm : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -47,24 +47,24 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
         public override void Generate()
         {
-#line 36 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
+#line 36 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 if (isList) {                                                                    
-#line 37 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
+#line 37 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 this.WriteObjects("        <!-- CompoundObjectProperty IsList -->\r\n");
 this.WriteObjects("        <set name=\"",  propName , "\" inverse=\"true\" batch-size=\"100\">\r\n");
 this.WriteObjects("            <key column=\"`",  ceReverseKeyColumnName , "`\" />\r\n");
 this.WriteObjects("            <one-to-many ",  ceClassAttr , " />\r\n");
 this.WriteObjects("        </set>\r\n");
-#line 42 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
+#line 42 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 } else {                                                                         
-#line 43 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
+#line 43 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 this.WriteObjects("        <!-- CompoundObjectProperty isValue -->\r\n");
 this.WriteObjects("        <component name=\"",  propName , "\" ",  valueClassAttr , ">\r\n");
-#line 45 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
+#line 45 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 PropertiesHbm.Call(Host, ctx, columnName, properties, false);         
-#line 46 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
+#line 46 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 this.WriteObjects("        </component>\r\n");
-#line 47 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
+#line 47 "C:\projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 }                                                                                
 
         }

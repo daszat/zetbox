@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst")]
     public partial class Method : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -41,20 +41,20 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 34 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 34 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
-#line 36 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 36 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 foreach(var attr in GetMethodAttributes())
     {
 
-#line 39 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 39 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        ",  attr , "\r\n");
-#line 41 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 41 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 }
 
-#line 43 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 43 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        ",  GetModifiers() , " ",  GetReturnType() , " ",  m.Name , "(",  GetParameterDefinitions() , ")\r\n");
-#line 46 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 46 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 string delegateName = m.Name + indexSuffix + "_Handler";
     var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
@@ -75,7 +75,7 @@ string delegateName = m.Name + indexSuffix + "_Handler";
     if (returnParam == null)
     {
 
-#line 66 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 66 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            // base.",  m.Name , "();\r\n");
 this.WriteObjects("            if (",  eventName , " != null)\r\n");
@@ -84,33 +84,33 @@ this.WriteObjects("                ",  eventName , "(this",  argumentDefs , ");\
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            else\r\n");
 this.WriteObjects("            {\r\n");
-#line 75 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 75 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 if (m.ObjectClass == dt || !(dt is ObjectClass))
         {
 
-#line 78 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 78 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("                throw new NotImplementedException(\"No handler registered on method ",  m.ObjectClass.Name , ".",  m.Name , "\");\r\n");
-#line 80 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 80 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 }
         else
         {
 
-#line 84 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 84 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("                base.",  m.Name , "(",  m.GetArguments() , ");\r\n");
-#line 86 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 86 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 }
 
-#line 88 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 88 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 91 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 91 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 // define delegate type only on base class
         if (this.m.ObjectClass == this.dt)
         {
 
-#line 95 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 95 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        public delegate void ",  delegateName , "<T>(T obj",  parameterDefs , ");\r\n");
-#line 97 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 97 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 }
     }
     else
@@ -118,7 +118,7 @@ this.WriteObjects("        public delegate void ",  delegateName , "<T>(T obj", 
 
         string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.GetParameterTypeString());
 
-#line 104 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 104 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            var e = new ",  returnArgsType , "();\r\n");
 this.WriteObjects("            if (",  eventName , " != null)\r\n");
@@ -127,41 +127,41 @@ this.WriteObjects("                ",  eventName , "(this, e",  argumentDefs , "
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            else\r\n");
 this.WriteObjects("            {\r\n");
-#line 113 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 113 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 if (m.ObjectClass == dt || !(dt is ObjectClass))
         {
 
-#line 116 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 116 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("                throw new NotImplementedException(\"No handler registered on ",  m.ObjectClass.Name , ".",  m.Name , "\");\r\n");
-#line 118 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 118 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 }
         else
         {
 
-#line 122 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 122 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("                e.Result = base.",  m.Name , "(",  m.GetArguments() , ");\r\n");
-#line 124 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 124 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 }
 
-#line 126 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 126 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            return e.Result;\r\n");
 this.WriteObjects("        }\r\n");
-#line 131 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 131 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 // define delegate type only on base class
         if (this.m.ObjectClass == this.dt)
         {
 
-#line 135 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 135 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        public delegate void ",  delegateName , "<T>(T obj, ",  returnArgsType , " ret",  parameterDefs , ");\r\n");
-#line 137 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 137 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 }
     }
 
 
-#line 141 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 141 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        public static event ",  delegateName , "<",  dt.Name , "> ",  eventName , ";\r\n");
-#line 143 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
+#line 143 "C:\projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 if(index == 0) {
 	// Only for first overload
 	MethodCanExec.Call(Host, ctx, dt, m, eventName);
