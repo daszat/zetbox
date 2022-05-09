@@ -59,6 +59,7 @@ create-artifacts:
     }
     
     # for now, publish them
+    dotnet nuget add source "$env:CI_API_V4_URL/projects/$env:CI_PROJECT_ID/packages/nuget/index.json" --name zetbox --username gitlab-ci-token --password $env:CI_JOB_TOKEN --store-password-in-clear-text
     dotnet nuget push ./publish/*.nupkg -s zetbox --skip-duplicate
   artifacts:
     paths:
@@ -75,5 +76,6 @@ publish-master:
       - master
   script: |
     echo "Creating final packages"
+    dotnet nuget add source "$env:CI_API_V4_URL/projects/$env:CI_PROJECT_ID/packages/nuget/index.json" --name zetbox --username gitlab-ci-token --password $env:CI_JOB_TOKEN --store-password-in-clear-text
     dotnet nuget push ./publish/*.nupkg -s zetbox --skip-duplicate
 
