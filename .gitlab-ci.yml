@@ -35,6 +35,7 @@ create-artifacts:
     rm publish/*.nuspec
     cp publish/* ./bin/Release
     
+    dotnet nuget remove source zetbox
     dotnet nuget add source "$env:CI_API_V4_URL/projects/$env:CI_PROJECT_ID/packages/nuget/index.json" --name zetbox --username gitlab-ci-token --password $env:CI_JOB_TOKEN --store-password-in-clear-text
     
     nuget install GitVersion.CommandLine -Version "5.6.6" -OutputDirectory ./Tools
