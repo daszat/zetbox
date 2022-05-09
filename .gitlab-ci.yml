@@ -10,12 +10,11 @@ stages:
 
 build-zetbox:
   stage: build
-  image: mcr.microsoft.com/dotnet/sdk:5.0
+  image: mcr.microsoft.com/dotnet/sdk:6.0
   tags:
     - Windows  
   script: |
     dotnet --info
-    ls -la
     dotnet build --disable-parallel --ignore-failed-sources --configuration Release Zetbox.Core.sln
     dotnet publish --disable-parallel --ignore-failed-sources --configuration Release  Zetbox.Server.HttpService/Zetbox.Server.HttpService.csproj --output ./bin/Release/HttpService
   artifacts:
@@ -27,32 +26,28 @@ build-zetbox:
         
 create-artifacts:
   stage: deploy
-  image: mcr.microsoft.com/dotnet/sdk:5.0
+  image: mcr.microsoft.com/dotnet/sdk:6.0
   tags:
     - Windows  
   script: |
     echo "Creating local packages"
-    rm publish/*.nupkg || true
-    rm publish/*.nuspec || true
+    rm publish/*.nupkg
+    rm publish/*.nuspec
     cp publish/* ./bin/Release
     
-    version="$(gitversion -nofetch -showvariable NuGetVersionV2)"
+    $version=(gitversion -nofetch -showvariable NuGetVersionV2)
     echo "Version = $version"
     
     echo ""
     echo "setting version"
     
-    for f in publish/*.nuspec.template; do
-    
-    	baseName=`echo $f | cut -d "." -f 1`
-    	newExtension=".new"
-    
-    	cp -f $f $baseName.nuspec
-    	sed -i "s/##version##/$version/g" $baseName.nuspec
-    
-    done
-    
-    cp ./publish/*.nuspec ./bin/Release
+    ls publish/*.nuspec.template | % {
+    	$file = $_.Name.Replace(".nuspec.template", "")
+    	$file | out-host
+    	Get-Content "$file.nuspec.template" | Foreach-object { 
+    		$_ -replace '##version##', $version 
+    	} | Set-Content -encoding "UTF8" "./bin/Release/$file.nuspec"
+    }
     
     echo "packing files"
     for f in ./bin/Release/*.nuspec; do
@@ -69,7 +64,7 @@ create-artifacts:
 
 publish-master:
   stage: publish
-  image: mcr.microsoft.com/dotnet/sdk:5.0
+  image: mcr.microsoft.com/dotnet/sdk:6.0
   tags:
     - Windows
   only:
