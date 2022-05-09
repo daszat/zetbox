@@ -35,7 +35,9 @@ create-artifacts:
     rm publish/*.nuspec
     cp publish/* ./bin/Release
     
-    $version=(gitversion -nofetch -showvariable NuGetVersionV2)
+    nuget install GitVersion.CommandLine -Version "5.6.6" -OutputDirectory ./Tools
+    
+    $version=(./Tools/GitVersion.CommandLine.5.6.6/tools/gitversion.exe -nofetch -showvariable NuGetVersionV2)
     echo "Version = $version"
     
     echo ""
