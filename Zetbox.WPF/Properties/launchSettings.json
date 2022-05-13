@@ -2,7 +2,7 @@
   "profiles": {
     "Zetbox.WPF": {
       "commandName": "Project",
-      "workingDirectory": "c:\\projects\\zetbox"
+      "workingDirectory": "d:\\projects\\zetbox"
     }
   }
 }

@@ -159,11 +159,23 @@ namespace Zetbox.Client.Presentables
                 {
                     // Ensure not null
                     _CurrentPrincipal = new ZetboxPrincipal(0, string.Empty, string.Empty, Enumerable.Empty<ZetboxPrincipalGroup>());
-                    var task = Task.Run(async () => _CurrentPrincipal = await _dependencies.PrincipalResolver.GetCurrent());
+                    var task = Task.Run(async () => await GetCurrentPrincipal());
                     _ = task.ContinueWith(t => OnPropertyChanged(nameof(CurrentPrincipal)), ViewModelFactory.UITaskScheduler);
                 }
                 return _CurrentPrincipal;
             }
+        }
+
+        public async Task<ZetboxPrincipal> GetCurrentPrincipal()
+        {
+            if (_CurrentPrincipal == null)
+            {
+                // Ensure not null
+                _CurrentPrincipal = new ZetboxPrincipal(0, string.Empty, string.Empty, Enumerable.Empty<ZetboxPrincipalGroup>());
+                _CurrentPrincipal = await _dependencies.PrincipalResolver.GetCurrent();
+                OnPropertyChanged(nameof(CurrentPrincipal));
+            }
+            return _CurrentPrincipal;
         }
 
         /// <param name="dependencies">The <see cref="IViewModelDependencies"/> to access the current application context</param>
