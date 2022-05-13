@@ -10,7 +10,7 @@
     <Exec WorkingDirectory="$(SolutionDir)" Command="echo copy from $(SolutionDir)\bin\$(Configuration)\ to $(ProjectDir)\bin" />
     <Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Common&quot; &quot;$(ProjectDir)\bin&quot;" />
     <Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Server&quot; &quot;$(ProjectDir)\bin&quot;" />
-    <Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Client&quot; &quot;$(ProjectDir)\bin\Client&quot;" />
+    <Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Client&quot; &quot;$(ProjectDir)\bin&quot;" />
     <Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Npgsql.*&quot; &quot;$(ProjectDir)\bin&quot;" />
     <Exec WorkingDirectory="$(SolutionDir)" Command="xcopy /y /q /s /e /i &quot;$(SolutionDir)\bin\$(Configuration)\Mono.Security.*&quot; &quot;$(ProjectDir)\bin&quot;" />
   </Target>
