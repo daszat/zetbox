@@ -34,7 +34,7 @@ cd ..\bin\Debug
 ls *.nuspec | % {
 	$file = $_.Name
 	$file | out-host
-	nuget pack $file
+	nuget pack $file  -Properties NoWarn=NU5100
 }
 
 popd
