@@ -3,15 +3,15 @@
   <ItemGroup>
     <Reference Include="Zetbox.Objects">
       <HintPath>..\bin\CodeGen\bin\Release\Common\Generated\Zetbox.Objects.dll</HintPath>
-      <PrivateAssets>All</Private>
+      <PrivateAssets>All</PrivateAssets>
     </Reference>
     <Reference Include="Zetbox.Objects">
       <HintPath>..\bin\CodeGen\bin\Release\Common\Generated\Zetbox.Objects.Memory.dll</HintPath>
-      <PrivateAssets>All</Private>
+      <PrivateAssets>All</PrivateAssets>
     </Reference>
     <Reference Include="Zetbox.Objects">
       <HintPath>..\bin\CodeGen\bin\Release\Client\Generated\Zetbox.Objects.ClientImpl.dll</HintPath>
-      <PrivateAssets>All</Private>
+      <PrivateAssets>All</PrivateAssets>
     </Reference>
   </ItemGroup>
 </Project>
