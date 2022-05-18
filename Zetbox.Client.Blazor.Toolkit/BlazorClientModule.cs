@@ -28,6 +28,9 @@ namespace Zetbox.Client.Blazor
     using Zetbox.API.Client;
     using Zetbox.API.Client.PerfCounter;
 
+    /// <summary>
+    /// DI Configuration for Blazor Module
+    /// </summary>
     [Description("The Blazor Client Module. It replaces the Client Module.")]
     public class BlazorClientModule : Module
     {
@@ -92,6 +95,7 @@ namespace Zetbox.Client.Blazor
         }
         #endregion
 
+        /// <inheritdoc />
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
