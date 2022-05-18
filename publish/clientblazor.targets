@@ -5,13 +5,27 @@
       <HintPath>..\..\bin\CodeGen\bin\Release\Common\Generated\Zetbox.Objects.dll</HintPath>
       <PrivateAssets>All</PrivateAssets>
     </Reference>
-    <Reference Include="Zetbox.Objects.Memory">
-      <HintPath>..\..\bin\CodeGen\bin\Release\Common\Generated\Zetbox.Objects.Memory.dll</HintPath>
-      <PrivateAssets>All</PrivateAssets>
+    <Reference Include="Zetbox.Objects.MemoryImpl">
+      <HintPath>..\..\bin\CodeGen\bin\Release\Common\Generated\Zetbox.Objects.MemoryImpl.dll</HintPath>
     </Reference>
     <Reference Include="Zetbox.Objects.ClientImpl">
       <HintPath>..\..\bin\CodeGen\bin\Release\Client\Generated\Zetbox.Objects.ClientImpl.dll</HintPath>
-      <PrivateAssets>All</PrivateAssets>
     </Reference>
+	<!-- These assemblies needs to be referenced directly, as the assembly loader won't load them in a blazor project -->
+	<Reference Include="Zetbox.App.Projekte.Client">
+		<HintPath>..\..\bin\$(Configuration)\Client\Zetbox.App.Projekte.Client.dll</HintPath>
+	</Reference>
+	<Reference Include="Zetbox.App.Projekte.Common">
+		<HintPath>..\..\bin\$(Configuration)\Common\Zetbox.App.Projekte.Common.dll</HintPath>
+	</Reference>
+	<Reference Include="Zetbox.DalProvider.Base">
+		<HintPath>..\..\bin\$(Configuration)\Zetbox.DalProvider.Base.dll</HintPath>
+	</Reference>
+	<Reference Include="Zetbox.DalProvider.Memory">
+		<HintPath>..\..\bin\$(Configuration)\Zetbox.DalProvider.Memory.dll</HintPath>
+	</Reference>
+	<Reference Include="Zetbox.DalProvider.ClientObjects">
+		<HintPath>..\..\bin\$(Configuration)\Zetbox.DalProvider.ClientObjects.dll</HintPath>
+	</Reference>
   </ItemGroup>
 </Project>
