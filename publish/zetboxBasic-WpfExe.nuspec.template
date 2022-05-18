@@ -21,10 +21,10 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Client\Zetbox.Client.WPF.dll" target="lib\net5.0" />
-    <file src="Client\Zetbox.Client.WPF.pdb" target="lib\net5.0" />
-    <file src="Client\WPFSamplesLib.dll" target="lib\net5.0" />
-    <file src="Client\WPFSamplesLib.pdb" target="lib\net5.0" />
+    <file src="Client\Zetbox.Client.WPF.dll" target="lib\net6.0" />
+    <file src="Client\Zetbox.Client.WPF.pdb" target="lib\net6.0" />
+    <file src="Client\WPFSamplesLib.dll" target="lib\net6.0" />
+    <file src="Client\WPFSamplesLib.pdb" target="lib\net6.0" />
 
     <file src="install-references.ps1" target="tools\install.ps1" />
   </files>

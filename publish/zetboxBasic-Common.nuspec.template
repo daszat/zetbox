@@ -31,13 +31,13 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Common\Zetbox.API.dll" target="lib\net5.0" />
-    <file src="Common\Zetbox.API.pdb" target="lib\net5.0" />
-    <file src="Common\Zetbox.API.xml" target="lib\net5.0" />
-    <file src="Common\Zetbox.API.Common.dll" target="lib\net5.0" />
-    <file src="Common\Zetbox.API.Common.pdb" target="lib\net5.0" />
-    <file src="Common\Zetbox.API.Common.xml" target="lib\net5.0" />
-    <file src="Common\Zetbox.Assets.dll" target="lib\net5.0" />
-    <file src="Common\Zetbox.Assets.pdb" target="lib\net5.0" />
+    <file src="Common\Zetbox.API.dll" target="lib\net6.0" />
+    <file src="Common\Zetbox.API.pdb" target="lib\net6.0" />
+    <file src="Common\Zetbox.API.xml" target="lib\net6.0" />
+    <file src="Common\Zetbox.API.Common.dll" target="lib\net6.0" />
+    <file src="Common\Zetbox.API.Common.pdb" target="lib\net6.0" />
+    <file src="Common\Zetbox.API.Common.xml" target="lib\net6.0" />
+    <file src="Common\Zetbox.Assets.dll" target="lib\net6.0" />
+    <file src="Common\Zetbox.Assets.pdb" target="lib\net6.0" />
   </files>
 </package>

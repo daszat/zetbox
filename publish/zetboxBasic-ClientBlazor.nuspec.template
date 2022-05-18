@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>zetboxBasic-ClientASPNET</id>
+    <id>zetboxBasic-ClientBlazor</id>
     <version>##version##</version>
-    <title>zetbox Basic - client ASP.NET MVC components</title>
+    <title>zetbox Basic - client Blazor components</title>
     <authors>dasz.at OG</authors>
     <owners>dasz.at OG</owners>
 	<license type="expression">LGPL-2.0-or-later</license>
     <projectUrl>http://zetbox.at/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Client ASP.NET MVC components for the zetbox.</description>
+    <description>Client Blazor components for the zetbox.</description>
     <releaseNotes>First package.</releaseNotes>
     <copyright>Copyright © 2019 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
@@ -21,10 +21,9 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Client\Zetbox.Client.ASPNET.Toolkit.dll" target="lib\net6.0" />
-    <file src="Client\Zetbox.Client.ASPNET.Toolkit.pdb" target="lib\net6.0" />
+    <file src="Client\Zetbox.Client.Blazor.Toolkit.dll" target="lib\net6.0" />
+    <file src="Client\Zetbox.Client.Blazor.Toolkit.pdb" target="lib\net6.0" />
 
-    <file src="install-clientaspnet.ps1" target="tools\install.ps1" />
-    <file src="Global.asax.cs.txt.pp" target="content" />
+    <file src="install-clientblazor.ps1" target="tools\install.ps1" />
   </files>
 </package>
