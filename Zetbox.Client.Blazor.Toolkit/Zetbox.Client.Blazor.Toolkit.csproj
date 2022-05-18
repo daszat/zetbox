@@ -6,6 +6,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+		<OutputPath>..\bin\$(Configuration)\Client\</OutputPath>
+		<GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+		<DocumentationFile>..\bin\$(Configuration)\Client\Zetbox.Client.Blazor.Toolkit.xml</DocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<OutputPath>..\bin\$(Configuration)\Client\</OutputPath>
+		<DocumentationFile>..\bin\$(Configuration)\Zetbox.Client.Blazor.Toolkit.xml</DocumentationFile>
+	</PropertyGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />

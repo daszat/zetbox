@@ -12,12 +12,12 @@
 		<DebugType>full</DebugType>
 		<OutputPath>..\bin\$(Configuration)\Client\</OutputPath>
 		<GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-		<DocumentationFile>..\bin\$(Configuration)\Client\Zetbox.API.Client.xml</DocumentationFile>
+		<DocumentationFile>..\bin\$(Configuration)\Client\Zetbox.Client.ASPNET.Toolkit.xml</DocumentationFile>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
 		<DebugType>pdbonly</DebugType>
 		<OutputPath>..\bin\$(Configuration)\Client\</OutputPath>
-		<DocumentationFile>..\bin\$(Configuration)\Client\Zetbox.API.Client.xml</DocumentationFile>
+		<DocumentationFile>..\bin\$(Configuration)\Zetbox.Client.ASPNET.Toolkit.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
