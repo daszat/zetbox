@@ -2,15 +2,15 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Reference Include="Zetbox.Objects">
-      <HintPath>..\bin\CodeGen\bin\Release\Common\Generated\Zetbox.Objects.dll</HintPath>
+      <HintPath>..\..\bin\CodeGen\bin\Release\Common\Generated\Zetbox.Objects.dll</HintPath>
       <PrivateAssets>All</PrivateAssets>
     </Reference>
-    <Reference Include="Zetbox.Objects">
-      <HintPath>..\bin\CodeGen\bin\Release\Common\Generated\Zetbox.Objects.Memory.dll</HintPath>
+    <Reference Include="Zetbox.Objects.Memory">
+      <HintPath>..\..\bin\CodeGen\bin\Release\Common\Generated\Zetbox.Objects.Memory.dll</HintPath>
       <PrivateAssets>All</PrivateAssets>
     </Reference>
-    <Reference Include="Zetbox.Objects">
-      <HintPath>..\bin\CodeGen\bin\Release\Client\Generated\Zetbox.Objects.ClientImpl.dll</HintPath>
+    <Reference Include="Zetbox.Objects.ClientImpl">
+      <HintPath>..\..\bin\CodeGen\bin\Release\Client\Generated\Zetbox.Objects.ClientImpl.dll</HintPath>
       <PrivateAssets>All</PrivateAssets>
     </Reference>
   </ItemGroup>
