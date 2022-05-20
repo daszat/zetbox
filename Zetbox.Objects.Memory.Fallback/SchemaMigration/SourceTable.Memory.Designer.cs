@@ -1148,7 +1148,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 throw new NotImplementedException("No handler registered on method SourceTable.CreateMappingReport");
             }
         }
-        public delegate void CreateMappingReport_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task CreateMappingReport_Handler<T>(T obj);
         public static event CreateMappingReport_Handler<SourceTable> OnCreateMappingReport_SourceTable;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1211,7 +1211,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 throw new NotImplementedException("No handler registered on method SourceTable.CreateObjectClass");
             }
         }
-        public delegate void CreateObjectClass_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task CreateObjectClass_Handler<T>(T obj);
         public static event CreateObjectClass_Handler<SourceTable> OnCreateObjectClass_SourceTable;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

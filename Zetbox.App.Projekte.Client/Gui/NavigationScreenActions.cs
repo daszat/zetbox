@@ -33,9 +33,11 @@ namespace Zetbox.App.GUI
         }
 
         [Invocation]
-        public static void GetDefaultViewModel(Zetbox.App.GUI.NavigationScreen obj, MethodReturnEventArgs<object> e, Zetbox.API.IZetboxContext dataCtx, System.Object parent)
+        public static System.Threading.Tasks.Task GetDefaultViewModel(Zetbox.App.GUI.NavigationScreen obj, MethodReturnEventArgs<object> e, Zetbox.API.IZetboxContext dataCtx, System.Object parent)
         {
             e.Result = _modelFactory.CreateViewModel<NavigationScreenViewModel.Factory>().Invoke(dataCtx, (ViewModel)parent, obj);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

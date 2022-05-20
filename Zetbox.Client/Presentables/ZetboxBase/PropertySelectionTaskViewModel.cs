@@ -305,7 +305,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public SelectedPropertyViewModel Item { get; private set; }
     }
 
-    public delegate void SelectedPropertySelectionChangedHandler(object sender, SelectedPropertySelectionChangedEventArgs e);
+    public delegate System.Threading.Tasks.Task SelectedPropertySelectionChangedHandler(object sender, SelectedPropertySelectionChangedEventArgs e);
 
     public class SelectedPropertyViewModel : DataObjectViewModel
     {

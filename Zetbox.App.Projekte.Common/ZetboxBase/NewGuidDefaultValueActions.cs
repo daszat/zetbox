@@ -24,13 +24,15 @@ namespace Zetbox.App.Base
     public static class NewGuidDefaultValueActions
     {
         [Invocation]
-        public static void GetDefaultValue(Zetbox.App.Base.NewGuidDefaultValue obj, MethodReturnEventArgs<System.Object> e)
+        public static System.Threading.Tasks.Task GetDefaultValue(Zetbox.App.Base.NewGuidDefaultValue obj, MethodReturnEventArgs<System.Object> e)
         {
             e.Result = Guid.NewGuid();
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ToString(Zetbox.App.Base.NewGuidDefaultValue obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.Base.NewGuidDefaultValue obj, MethodReturnEventArgs<string> e)
         {
             if (obj.Property != null)
             {
@@ -40,6 +42,8 @@ namespace Zetbox.App.Base
             {
                 e.Result = "Initializes a property with a new Guid";
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

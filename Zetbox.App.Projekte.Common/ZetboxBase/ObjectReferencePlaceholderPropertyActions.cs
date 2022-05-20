@@ -24,15 +24,17 @@ namespace Zetbox.App.Base
     public static class ObjectReferencePlaceholderPropertyActions
     {
         [Invocation]
-        public static void GetPropertyType(ObjectReferencePlaceholderProperty obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetPropertyType(ObjectReferencePlaceholderProperty obj, MethodReturnEventArgs<Type> e)
         {
             var def = obj.ReferencedObjectClass;
             e.Result = Type.GetType(def.Module.Namespace + "." + def.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
             PropertyActions.DecorateParameterType(obj, e, false, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetElementTypeString(ObjectReferencePlaceholderProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetElementTypeString(ObjectReferencePlaceholderProperty obj, MethodReturnEventArgs<string> e)
         {
             var def = obj.ReferencedObjectClass;
             if (def == null)
@@ -48,13 +50,17 @@ namespace Zetbox.App.Base
                 e.Result = def.Module.Namespace + "." + def.Name;
             }
             PropertyActions.DecorateElementType(obj, e, false);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetPropertyTypeString(ObjectReferencePlaceholderProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetPropertyTypeString(ObjectReferencePlaceholderProperty obj, MethodReturnEventArgs<string> e)
         {
             GetElementTypeString(obj, e);
             PropertyActions.DecorateParameterType(obj, e, false, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

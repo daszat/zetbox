@@ -27,9 +27,11 @@ namespace at.dasz.DocumentManagement
     public static class ImportedFileActions
     {
         [Invocation]
-        public static void NotifyCreated(at.dasz.DocumentManagement.ImportedFile obj)
+        public static System.Threading.Tasks.Task NotifyCreated(at.dasz.DocumentManagement.ImportedFile obj)
         {
             obj.IsFileReadonly = true;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         private static async Task MakeInternal(IZetboxContext ctx, ImportedFile obj, File doc)

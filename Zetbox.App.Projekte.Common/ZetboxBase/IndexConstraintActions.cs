@@ -24,24 +24,30 @@ namespace Zetbox.App.Base
     public static class IndexConstraintActions
     {
         [Invocation]
-        public static void GetErrorText(IndexConstraint obj, MethodReturnEventArgs<string> e, IDataObject constrainedObject)
+        public static System.Threading.Tasks.Task GetErrorText(IndexConstraint obj, MethodReturnEventArgs<string> e, IDataObject constrainedObject)
         {
             e.Result = "";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void IsValid(IndexConstraint obj, MethodReturnEventArgs<bool> e, IDataObject constrainedObject)
+        public static System.Threading.Tasks.Task IsValid(IndexConstraint obj, MethodReturnEventArgs<bool> e, IDataObject constrainedObject)
         {
             e.Result = true; // enforced by database
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ObjectIsValid(IndexConstraint obj, ObjectIsValidEventArgs e)
+        public static System.Threading.Tasks.Task ObjectIsValid(IndexConstraint obj, ObjectIsValidEventArgs e)
         {
             if (obj.Properties.Count == 0)
             {
                 e.Errors.Add("Cannot have index without Properties.");
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

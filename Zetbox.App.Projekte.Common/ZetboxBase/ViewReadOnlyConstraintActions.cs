@@ -24,9 +24,11 @@ namespace Zetbox.App.Base
     public static class ViewReadOnlyConstraintActions
     {
         [Invocation]
-        public static void ToString(ViewReadOnlyConstraint obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(ViewReadOnlyConstraint obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = "Item is readonly in view but changable on the server/client";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

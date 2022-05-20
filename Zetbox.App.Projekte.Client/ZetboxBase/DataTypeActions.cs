@@ -51,7 +51,7 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void NotifyDeleting(DataType obj)
+        public static System.Threading.Tasks.Task NotifyDeleting(DataType obj)
         {
             var ctx = obj.Context;
             foreach (var prop in obj.Properties.ToList())
@@ -68,6 +68,8 @@ namespace Zetbox.App.Base
             {
                 ctx.Delete(c);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         public class PropertyTypeSelectionViewModel : ViewModel
@@ -99,7 +101,7 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void AddProperty(DataType obj, MethodReturnEventArgs<Zetbox.App.Base.Property> e)
+        public static async System.Threading.Tasks.Task AddProperty(DataType obj, MethodReturnEventArgs<Zetbox.App.Base.Property> e)
         {
             var ctx = obj.Context;
             var candidates = new List<PropertyTypeSelectionViewModel>()
@@ -149,7 +151,7 @@ namespace Zetbox.App.Base
                     },
                     null);
             selectClass.RequestedKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_DataObjectSelectionTaskGridKind.Find(_frozenCtx);
-            _vmf.ShowDialog(selectClass);
+            await _vmf.ShowDialog(selectClass);
         }
 
         private static Property ShowCreatePropertyDialog(IZetboxContext ctx, ObjectClass propCls, Module targetModule, out bool show)

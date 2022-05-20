@@ -29,9 +29,13 @@ namespace Zetbox.App.Base
     public static class RelationActions
     {
         [Invocation]
-        public static void ToString(Relation obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Relation obj, MethodReturnEventArgs<string> e)
         {
-            if (obj == null) { e.Result = ""; return; }
+            if (obj == null)
+            {
+                e.Result = "";
+                return System.Threading.Tasks.Task.CompletedTask;
+            }
             var a = obj.A;
             var b = obj.B;
             if (a == null ||
@@ -75,19 +79,23 @@ namespace Zetbox.App.Base
             }
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ObjectIsValid(Relation obj, ObjectIsValidEventArgs e)
+        public static System.Threading.Tasks.Task ObjectIsValid(Relation obj, ObjectIsValidEventArgs e)
         {
             if (obj.A != null && obj.B != null && obj.GetAssociationName().Length > 60)
             {
                 e.Errors.Add(string.Format("The relation name '{0}' (FK_<a>_<verb>_<b>) exceed 60 chars. This could violate a database (Postgres) max identifier length.", obj.GetAssociationName()));
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetOtherEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEnd relEnd)
+        public static System.Threading.Tasks.Task GetOtherEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEnd relEnd)
         {
             if (rel.A == relEnd)
                 e.Result = rel.B;
@@ -95,10 +103,12 @@ namespace Zetbox.App.Base
                 e.Result = rel.A;
             else
                 e.Result = null;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetEndFromRole(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEndRole role)
+        public static System.Threading.Tasks.Task GetEndFromRole(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEndRole role)
         {
             switch (role)
             {
@@ -111,10 +121,12 @@ namespace Zetbox.App.Base
                 default:
                     throw new ArgumentOutOfRangeException("role");
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, ObjectReferenceProperty prop)
+        public static System.Threading.Tasks.Task GetEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, ObjectReferenceProperty prop)
         {
             if (rel.A != null && rel.A.Navigator == prop)
                 e.Result = rel.A;
@@ -122,10 +134,12 @@ namespace Zetbox.App.Base
                 e.Result = rel.B;
             else
                 e.Result = null;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetRelationType(Relation rel, MethodReturnEventArgs<RelationType> e)
+        public static System.Threading.Tasks.Task GetRelationType(Relation rel, MethodReturnEventArgs<RelationType> e)
         {
             if (rel == null)
             {
@@ -160,10 +174,12 @@ namespace Zetbox.App.Base
             {
                 throw new InvalidOperationException(String.Format("Unable to find out RelationType: {0}:{1}", rel.A.Multiplicity, rel.B.Multiplicity));
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void NeedsPositionStorage(Relation rel, MethodReturnEventArgs<bool> e, RelationEndRole endRole)
+        public static System.Threading.Tasks.Task NeedsPositionStorage(Relation rel, MethodReturnEventArgs<bool> e, RelationEndRole endRole)
         {
             if (rel == null)
             {
@@ -187,16 +203,20 @@ namespace Zetbox.App.Base
                     )
                 || (rel.Storage == StorageType.Separate && (rel.A.HasPersistentOrder || rel.B.HasPersistentOrder))
                 );
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetEntryInterfaceType(Relation rel, MethodReturnEventArgs<InterfaceType> e)
+        public static System.Threading.Tasks.Task GetEntryInterfaceType(Relation rel, MethodReturnEventArgs<InterfaceType> e)
         {
             e.Result = rel.Context.GetInterfaceType(String.Format("{0}.{1}_{2}_{3}_RelationEntry", rel.Module.Namespace, rel.A.RoleName, rel.Verb, rel.B.RoleName));
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void SwapRelationEnds(Zetbox.App.Base.Relation obj)
+        public static System.Threading.Tasks.Task SwapRelationEnds(Zetbox.App.Base.Relation obj)
         {
             var tmp = obj.A;
             obj.A = obj.B;
@@ -221,10 +241,12 @@ namespace Zetbox.App.Base
                     obj.Storage = StorageType.MergeIntoA;
                     break;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void isValid_Containment(Relation obj, PropertyIsValidEventArgs e)
+        public static System.Threading.Tasks.Task isValid_Containment(Relation obj, PropertyIsValidEventArgs e)
         {
             var rel = obj;
             if (rel.A != null && rel.B != null)
@@ -233,7 +255,7 @@ namespace Zetbox.App.Base
                 {
                     e.IsValid = false;
                     e.Error = "Incomplete Relation (A.Multiplicity or B.Multiplicity missing)";
-                    return;
+                    return System.Threading.Tasks.Task.CompletedTask;
                 }
 
                 var relType = rel.GetRelationType();
@@ -298,10 +320,12 @@ namespace Zetbox.App.Base
                 e.IsValid = false;
                 e.Error = "Incomplete Relation (A or B missing)";
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void isValid_Storage(Relation obj, PropertyIsValidEventArgs e)
+        public static System.Threading.Tasks.Task isValid_Storage(Relation obj, PropertyIsValidEventArgs e)
         {
             var rel = obj;
             if (rel.A != null && rel.B != null)
@@ -310,7 +334,8 @@ namespace Zetbox.App.Base
                 {
                     e.IsValid = false;
                     e.Error = "Incomplete Relation (Multiplicity is missing)";
-                    return;
+                    return System.Threading.Tasks.Task.CompletedTask;
+
                 }
                 var aUpper = rel.A.Multiplicity.UpperBound();
                 var bUpper = rel.B.Multiplicity.UpperBound();
@@ -355,6 +380,8 @@ namespace Zetbox.App.Base
                 e.IsValid = false;
                 e.Error = "Incomplete Relation (A or B missing)";
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

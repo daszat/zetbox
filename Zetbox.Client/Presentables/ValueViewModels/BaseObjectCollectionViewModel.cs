@@ -389,7 +389,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     ReferencedClass);
 
                 _CreateNewCommand.ObjectCreated += OnObjectCreated;
-                _CreateNewCommand.LocalModelCreated += vm => Add(vm);
+                _CreateNewCommand.LocalModelCreated += vm => 
+                {
+                    Add(vm);
+                    return Task.CompletedTask;
+                };
             }
         }
 
@@ -399,16 +403,18 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 CreateNewCommand.Execute(null);
         }
 
-        public delegate void ObjectCreatedHandler(IDataObject obj);
+        public delegate System.Threading.Tasks.Task ObjectCreatedHandler(IDataObject obj);
         public event ObjectCreatedHandler ObjectCreated;
 
-        private void OnObjectCreated(IDataObject obj)
+        private Task OnObjectCreated(IDataObject obj)
         {
             ObjectCreatedHandler temp = ObjectCreated;
             if (temp != null)
             {
                 temp(obj);
             }
+
+            return Task.CompletedTask;
         }
 
         private OpenDataObjectCommand _OpenCommand;

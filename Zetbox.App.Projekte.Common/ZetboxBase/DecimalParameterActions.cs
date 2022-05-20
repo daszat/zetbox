@@ -24,17 +24,21 @@ namespace Zetbox.App.Base
     public static class DecimalParameterActions
     {
         [Invocation]
-        public static void GetParameterType(DecimalParameter obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetParameterType(DecimalParameter obj, MethodReturnEventArgs<Type> e)
         {
             e.Result = typeof(decimal);
             BaseParameterActions.DecorateParameterType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetParameterTypeString(DecimalParameter obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetParameterTypeString(DecimalParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "decimal";
             BaseParameterActions.DecorateParameterType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Zetbox.App.Base
     public static class OpenIDActions
     {
         [Invocation]
-        public static void ToString(OpenID obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(OpenID obj, MethodReturnEventArgs<string> e)
         {
             if (string.IsNullOrWhiteSpace(obj.Provider) && string.IsNullOrWhiteSpace(obj.UserID))
             {
@@ -35,6 +35,8 @@ namespace Zetbox.App.Base
             {
                 e.Result = string.Format("{0} - {1}", obj.Provider, obj.UserID);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

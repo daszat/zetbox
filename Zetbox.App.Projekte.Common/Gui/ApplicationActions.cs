@@ -32,9 +32,11 @@ namespace Zetbox.App.GUI
         /// Creates the ToString() result for a specified Application.
         /// </summary>
         [Invocation]
-        public static void ToString(Application obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Application obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name.IfNullOrWhiteSpace("<empty application name>");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

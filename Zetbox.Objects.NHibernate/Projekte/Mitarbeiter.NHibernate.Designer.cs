@@ -991,7 +991,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
             }
             return e.Result;
         }
-        public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Zetbox.App.Projekte.Auftrag TestObjectParameter, string TestString);
+        public delegate System.Threading.Tasks.Task TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Zetbox.App.Projekte.Auftrag TestObjectParameter, string TestString);
         public static event TestMethodForParameter_Handler<Mitarbeiter> OnTestMethodForParameter_Mitarbeiter;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

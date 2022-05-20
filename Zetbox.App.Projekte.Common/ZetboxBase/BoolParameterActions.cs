@@ -24,17 +24,21 @@ namespace Zetbox.App.Base
     public static class BoolParameterActions
     {
         [Invocation]
-        public static void GetParameterType(BoolParameter obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetParameterType(BoolParameter obj, MethodReturnEventArgs<Type> e)
         {
             e.Result = typeof(bool);
             BaseParameterActions.DecorateParameterType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetParameterTypeString(BoolParameter obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetParameterTypeString(BoolParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "bool";
             BaseParameterActions.DecorateParameterType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

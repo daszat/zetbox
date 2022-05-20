@@ -531,7 +531,7 @@ namespace Zetbox.API
     //<typeparam name="T">Type of the implementing Object.</typeparam>
     //<param name="obj">Object that has fired this Event.</param>
     //<param name="e">Method return Arguments.</param>
-    public delegate void ToStringHandler<T>(T obj, MethodReturnEventArgs<string> e);
+    public delegate Task ToStringHandler<T>(T obj, MethodReturnEventArgs<string> e);
 
     // <summary>
     // 
@@ -539,7 +539,7 @@ namespace Zetbox.API
     // <typeparam name="T"></typeparam>
     // <param name="obj"></param>
     // <param name="e"></param>
-    public delegate void ObjectIsValidHandler<T>(T obj, ObjectIsValidEventArgs e);
+    public delegate Task ObjectIsValidHandler<T>(T obj, ObjectIsValidEventArgs e);
 
     // TODO: re-enable disabled doc comment after fix for https://bugzilla.novell.com/show_bug.cgi?id=643460
     // <summary>
@@ -548,7 +548,7 @@ namespace Zetbox.API
     //<typeparam name="T">Type of the implementing Object.</typeparam>
     //<param name="obj">Object that has fired this Event.</param>
     //<param name="e">Method return Arguments.</param>
-    public delegate void CanExecMethodEventHandler<T>(T obj, MethodReturnEventArgs<bool> e);
+    public delegate Task CanExecMethodEventHandler<T>(T obj, MethodReturnEventArgs<bool> e);
 
     // TODO: re-enable disabled doc comment after fix for https://bugzilla.novell.com/show_bug.cgi?id=643460
     // <summary>
@@ -557,7 +557,7 @@ namespace Zetbox.API
     //<typeparam name="T">Type of the implementing Object.</typeparam>
     //<param name="obj">Object that has fired this Event.</param>
     //<param name="e">Method return Arguments.</param>
-    public delegate void CanExecReasonMethodEventHandler<T>(T obj, MethodReturnEventArgs<string> e);
+    public delegate Task CanExecReasonMethodEventHandler<T>(T obj, MethodReturnEventArgs<string> e);
 
     // TODO: re-enable disabled doc comment after fix for https://bugzilla.novell.com/show_bug.cgi?id=643460
     //<summary>
@@ -565,7 +565,7 @@ namespace Zetbox.API
     //</summary>
     //<typeparam name="T">Type of the implementing Object.</typeparam>
     //<param name="obj">Object that has fired this Event.</param>
-    public delegate void ObjectEventHandler<T>(T obj) where T : IDataObject;
+    public delegate System.Threading.Tasks.Task ObjectEventHandler<T>(T obj) where T : IDataObject;
 
     public class PropertyGetterEventArgs<V>
         : EventArgs
@@ -653,11 +653,11 @@ namespace Zetbox.API
         public string Error { get; set; }
     }
 
-    public delegate void PropertyGetterHandler<T, V>(T obj, PropertyGetterEventArgs<V> e);
-    public delegate void PropertyPreSetterHandler<T, V>(T obj, PropertyPreSetterEventArgs<V> e);
-    public delegate void PropertyPostSetterHandler<T, V>(T obj, PropertyPostSetterEventArgs<V> e);
-    public delegate void PropertyListChangedHandler<T>(T obj);
-    public delegate void PropertyIsValidHandler<T>(T obj, PropertyIsValidEventArgs e);
+    public delegate System.Threading.Tasks.Task PropertyGetterHandler<T, V>(T obj, PropertyGetterEventArgs<V> e);
+    public delegate System.Threading.Tasks.Task PropertyPreSetterHandler<T, V>(T obj, PropertyPreSetterEventArgs<V> e);
+    public delegate System.Threading.Tasks.Task PropertyPostSetterHandler<T, V>(T obj, PropertyPostSetterEventArgs<V> e);
+    public delegate System.Threading.Tasks.Task PropertyListChangedHandler<T>(T obj);
+    public delegate System.Threading.Tasks.Task PropertyIsValidHandler<T>(T obj, PropertyIsValidEventArgs e);
 
     /// <summary>
     /// Provides a default sort order for lists

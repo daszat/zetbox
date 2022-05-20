@@ -24,9 +24,11 @@ namespace at.dasz.DocumentManagement
     public static class DynamicFileActions
     {
         [Invocation]
-        public static void NotifyCreated(at.dasz.DocumentManagement.DynamicFile obj)
+        public static System.Threading.Tasks.Task NotifyCreated(at.dasz.DocumentManagement.DynamicFile obj)
         {
             // OK
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

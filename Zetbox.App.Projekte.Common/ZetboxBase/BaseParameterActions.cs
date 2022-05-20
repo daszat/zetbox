@@ -56,13 +56,15 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void GetLabel(BaseParameter obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task GetLabel(BaseParameter obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ToString(BaseParameter obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(BaseParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = string.Format("{0}{1} {2}",
                 obj.IsReturnParameter
@@ -72,6 +74,8 @@ namespace Zetbox.App.Base
                 obj.Name);
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

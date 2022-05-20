@@ -24,15 +24,17 @@ namespace Zetbox.App.Base
     public static class CompoundObjectPropertyActions
     {
         [Invocation]
-        public static void GetPropertyType(CompoundObjectProperty obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetPropertyType(CompoundObjectProperty obj, MethodReturnEventArgs<Type> e)
         {
             var def = obj.CompoundObjectDefinition;
             e.Result = Type.GetType(def.Module.Namespace + "." + def.Name, true);
             PropertyActions.DecorateParameterType(obj, e, false, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetElementTypeString(CompoundObjectProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetElementTypeString(CompoundObjectProperty obj, MethodReturnEventArgs<string> e)
         {
             var def = obj.CompoundObjectDefinition;
             if (def == null)
@@ -48,13 +50,17 @@ namespace Zetbox.App.Base
                 e.Result = def.Module.Namespace + "." + def.Name;
             }
             PropertyActions.DecorateElementType(obj, e, false);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetPropertyTypeString(CompoundObjectProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetPropertyTypeString(CompoundObjectProperty obj, MethodReturnEventArgs<string> e)
         {
             GetElementTypeString(obj, e);
             PropertyActions.DecorateParameterType(obj, e, false, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -609,7 +609,7 @@ namespace Zetbox.App.Calendar
                 throw new NotImplementedException("No handler registered on method SyncProvider.PerformSync");
             }
         }
-        public delegate void PerformSync_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task PerformSync_Handler<T>(T obj);
         public static event PerformSync_Handler<SyncProvider> OnPerformSync_SyncProvider;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -672,7 +672,7 @@ namespace Zetbox.App.Calendar
                 throw new NotImplementedException("No handler registered on method SyncProvider.ScheduleSyncNow");
             }
         }
-        public delegate void ScheduleSyncNow_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task ScheduleSyncNow_Handler<T>(T obj);
         public static event ScheduleSyncNow_Handler<SyncProvider> OnScheduleSyncNow_SyncProvider;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

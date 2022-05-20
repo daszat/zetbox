@@ -847,7 +847,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetCurrent_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime start);
+        public delegate System.Threading.Tasks.Task GetCurrent_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime start);
         public static event GetCurrent_Handler<RecurrenceRule> OnGetCurrent_RecurrenceRule;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -911,7 +911,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetCurrent1_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime start, DateTime dt);
+        public delegate System.Threading.Tasks.Task GetCurrent1_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime start, DateTime dt);
         public static event GetCurrent1_Handler<RecurrenceRule> OnGetCurrent1_RecurrenceRule;
 
         /// <summary>
@@ -932,7 +932,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetNext_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime start);
+        public delegate System.Threading.Tasks.Task GetNext_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime start);
         public static event GetNext_Handler<RecurrenceRule> OnGetNext_RecurrenceRule;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -996,7 +996,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetNext1_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime start, DateTime dt);
+        public delegate System.Threading.Tasks.Task GetNext1_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime start, DateTime dt);
         public static event GetNext1_Handler<RecurrenceRule> OnGetNext1_RecurrenceRule;
 
         /// <summary>
@@ -1017,7 +1017,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetRelative_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime dt);
+        public delegate System.Threading.Tasks.Task GetRelative_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime dt);
         public static event GetRelative_Handler<RecurrenceRule> OnGetRelative_RecurrenceRule;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1081,7 +1081,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetWithinInterval_Handler<T>(T obj, MethodReturnEventArgs<IEnumerable<DateTime>> ret, DateTime start, DateTime from, DateTime until);
+        public delegate System.Threading.Tasks.Task GetWithinInterval_Handler<T>(T obj, MethodReturnEventArgs<IEnumerable<DateTime>> ret, DateTime start, DateTime from, DateTime until);
         public static event GetWithinInterval_Handler<RecurrenceRule> OnGetWithinInterval_RecurrenceRule;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

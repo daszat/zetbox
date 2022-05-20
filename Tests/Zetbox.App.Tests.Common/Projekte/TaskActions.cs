@@ -28,50 +28,64 @@ namespace Zetbox.App.Projekte
     public static class TaskActions
     {
         [Invocation]
-        public static void ToString(Task obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Task obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
+        public static System.Threading.Tasks.Task ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
         {
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_Aufwand(Task obj, PropertyPostSetterEventArgs<double?> e)
+        public static System.Threading.Tasks.Task postSet_Aufwand(Task obj, PropertyPostSetterEventArgs<double?> e)
         {
-            if (obj.Context.IsCurrentlyImporting()) return;
+            if (obj.Context.IsCurrentlyImporting()) return System.Threading.Tasks.Task.CompletedTask;
             if (obj.Projekt != null) obj.Projekt.Recalculate("AufwandGes");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_Projekt(Task obj, PropertyPostSetterEventArgs<Projekt> e)
+        public static System.Threading.Tasks.Task postSet_Projekt(Task obj, PropertyPostSetterEventArgs<Projekt> e)
         {
-            if (obj.Context.IsCurrentlyImporting()) return;
+            if (obj.Context.IsCurrentlyImporting()) return System.Threading.Tasks.Task.CompletedTask;
             if (e.OldValue != null) e.OldValue.Recalculate("AufwandGes");
             if (e.NewValue != null) e.NewValue.Recalculate("AufwandGes");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void isValid_Aufwand(Task obj, PropertyIsValidEventArgs e)
+        public static System.Threading.Tasks.Task isValid_Aufwand(Task obj, PropertyIsValidEventArgs e)
         {
             e.IsValid = obj.Aufwand >= 0;
             e.Error = e.IsValid ? string.Empty : "Ungültiger Aufwand";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void isValid_DatumVon(Task obj, PropertyIsValidEventArgs e)
+        public static System.Threading.Tasks.Task isValid_DatumVon(Task obj, PropertyIsValidEventArgs e)
         {
             e.IsValid = !obj.IsInitialized("DatumBis") || obj.DatumBis >= obj.DatumVon || obj.DatumBis == null;
             e.Error = e.IsValid ? string.Empty : "Falsches Zeitalter";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void isValid_DatumBis(Task obj, PropertyIsValidEventArgs e)
+        public static System.Threading.Tasks.Task isValid_DatumBis(Task obj, PropertyIsValidEventArgs e)
         {
             e.IsValid = !obj.IsInitialized("DatumVon") || obj.DatumBis >= obj.DatumVon || obj.DatumBis == null;
             e.Error = e.IsValid ? string.Empty : "Falsches Zeitalter";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

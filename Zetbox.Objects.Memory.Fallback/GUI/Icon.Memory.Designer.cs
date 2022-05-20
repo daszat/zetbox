@@ -462,7 +462,7 @@ namespace Zetbox.App.GUI
             }
             return e.Result;
         }
-        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<Icon> OnGetName_Icon;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -525,7 +525,7 @@ namespace Zetbox.App.GUI
                 throw new NotImplementedException("No handler registered on method Icon.Open");
             }
         }
-        public delegate void Open_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task Open_Handler<T>(T obj);
         public static event Open_Handler<Icon> OnOpen_Icon;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -588,7 +588,7 @@ namespace Zetbox.App.GUI
                 throw new NotImplementedException("No handler registered on method Icon.Upload");
             }
         }
-        public delegate void Upload_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task Upload_Handler<T>(T obj);
         public static event Upload_Handler<Icon> OnUpload_Icon;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

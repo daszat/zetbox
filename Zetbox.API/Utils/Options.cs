@@ -549,7 +549,7 @@ namespace Zetbox.API.Utils
         }
     }
 
-    public delegate void OptionAction<TKey, TValue>(TKey key, TValue value);
+    public delegate System.Threading.Tasks.Task OptionAction<TKey, TValue>(TKey key, TValue value);
 
     public class OptionSet : KeyedCollection<string, Option>
     {

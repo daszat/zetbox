@@ -74,25 +74,29 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void GetLabel(Zetbox.App.Base.Property obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task GetLabel(Zetbox.App.Base.Property obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
 
             if (obj.Module == null || obj.ObjectClass == null)
-                return;
+                return System.Threading.Tasks.Task.CompletedTask;
 
             e.Result = _assets.GetString(obj.Module, ZetboxAssetKeys.ConstructBaseName(obj), ZetboxAssetKeys.ConstructLabelKey(obj), e.Result);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetDescription(Property obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetDescription(Property obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Description;
 
             if (obj.Module == null || obj.ObjectClass == null)
-                return;
+                return System.Threading.Tasks.Task.CompletedTask;
 
             e.Result = _assets.GetString(obj.Module, ZetboxAssetKeys.ConstructBaseName(obj), ZetboxAssetKeys.ConstructDescriptionKey(obj), e.Result);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
@@ -114,66 +118,78 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void GetPropertyType(Zetbox.App.Base.Property obj, Zetbox.API.MethodReturnEventArgs<System.Type> e)
+        public static System.Threading.Tasks.Task GetPropertyType(Zetbox.App.Base.Property obj, Zetbox.API.MethodReturnEventArgs<System.Type> e)
         {
             throw new NotImplementedException();
         }
 
         [Invocation]
-        public static void GetPropertyTypeString(Zetbox.App.Base.Property obj, Zetbox.API.MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetPropertyTypeString(Zetbox.App.Base.Property obj, Zetbox.API.MethodReturnEventArgs<string> e)
         {
             e.Result = "<Invalid Datatype, please implement Property.GetPropertyTypeString()>";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_Name(Property obj, PropertyPostSetterEventArgs<string> e)
+        public static System.Threading.Tasks.Task postSet_Name(Property obj, PropertyPostSetterEventArgs<string> e)
         {
             obj.Recalculate("CodeTemplate");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_ObjectClass(Property obj, PropertyPostSetterEventArgs<DataType> e)
+        public static System.Threading.Tasks.Task postSet_ObjectClass(Property obj, PropertyPostSetterEventArgs<DataType> e)
         {
             obj.Recalculate("CodeTemplate");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_Constraints(Property obj)
+        public static System.Threading.Tasks.Task postSet_Constraints(Property obj)
         {
             obj.Recalculate("CodeTemplate");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void get_CodeTemplate(Property obj, PropertyGetterEventArgs<string> e)
+        public static System.Threading.Tasks.Task get_CodeTemplate(Property obj, PropertyGetterEventArgs<string> e)
         {
             StringBuilder sb = new StringBuilder();
 
             string type = obj.ObjectClass != null ? obj.ObjectClass.Name : "<<TYPE>>";
             string propType = obj.GetPropertyTypeString();
 
-            sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "get", obj.Name, type, "PropertyGetterEventArgs", propType);
+            sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "get", obj.Name, type, "PropertyGetterEventArgs", propType);
             if (!obj.IsCalculated())
             {
-                sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "preSet", obj.Name, type, "PropertyPreSetterEventArgs", propType);
-                sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "postSet", obj.Name, type, "PropertyPostSetterEventArgs", propType);
-                sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3} e)\n{{\n\te.IsValid = obj.{1} == ...;\n\te.Error = e.IsValid ? string.Empty : \"<Error>\";\n}}\n\n", "isValid", obj.Name, type, "PropertyIsValidEventArgs");
+                sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "preSet", obj.Name, type, "PropertyPreSetterEventArgs", propType);
+                sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "postSet", obj.Name, type, "PropertyPostSetterEventArgs", propType);
+                sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task {0}_{1}({2} obj, {3} e)\n{{\n\te.IsValid = obj.{1} == ...;\n\te.Error = e.IsValid ? string.Empty : \"<Error>\";\n}}\n\n", "isValid", obj.Name, type, "PropertyIsValidEventArgs");
             }
 
             e.Result = sb.ToString();
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetName(Property obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetName(Property obj, MethodReturnEventArgs<string> e)
         {
             var cls = obj.ObjectClass as ObjectClass;
             if (cls != null)
             {
                 e.Result = string.Format("{0}_Properties.{1}", cls.GetName(), obj.Name);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void isValid_Name(Property obj, PropertyIsValidEventArgs e)
+        public static System.Threading.Tasks.Task isValid_Name(Property obj, PropertyIsValidEventArgs e)
         {
             e.IsValid = true;
             var dataType = obj.ObjectClass;
@@ -195,16 +211,18 @@ namespace Zetbox.App.Base
                 }
             }
             e.Error = e.IsValid ? string.Empty : "Propertyname is not unique";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void isValid_DefaultSortPriority(Property obj, PropertyIsValidEventArgs e)
+        public static System.Threading.Tasks.Task isValid_DefaultSortPriority(Property obj, PropertyIsValidEventArgs e)
         {
             var cls = obj.ObjectClass;
             if (cls == null || obj.DefaultSortPriority == null)
             {
                 e.IsValid = true;
-                return;
+                return System.Threading.Tasks.Task.CompletedTask;
             }
 
             var other = cls.Properties
@@ -215,6 +233,8 @@ namespace Zetbox.App.Base
             e.Error = e.IsValid 
                 ? string.Empty 
                 : string.Format("{0} other property/ies have the same default sort priority: {1}", other.Count, string.Join(", ", other.Select(p => p.Name)));
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

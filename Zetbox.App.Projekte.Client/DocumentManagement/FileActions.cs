@@ -36,12 +36,14 @@ namespace at.dasz.DocumentManagement
         }
 
         [Invocation]
-        public static void Open(File obj)
+        public static System.Threading.Tasks.Task Open(File obj)
         {
             if (obj.Blob != null)
             {
                 obj.Blob.Open();
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

@@ -377,7 +377,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
             }
             return e.Result;
         }
-        public delegate void GetEntryByName_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.EnumerationEntry> ret, string name);
+        public delegate System.Threading.Tasks.Task GetEntryByName_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.EnumerationEntry> ret, string name);
         public static event GetEntryByName_Handler<Enumeration> OnGetEntryByName_Enumeration;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -441,7 +441,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
             }
             return e.Result;
         }
-        public delegate void GetEntryByValue_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.EnumerationEntry> ret, int val);
+        public delegate System.Threading.Tasks.Task GetEntryByValue_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.EnumerationEntry> ret, int val);
         public static event GetEntryByValue_Handler<Enumeration> OnGetEntryByValue_Enumeration;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -505,7 +505,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
             }
             return e.Result;
         }
-        public delegate void GetLabelByName_Handler<T>(T obj, MethodReturnEventArgs<string> ret, string name);
+        public delegate System.Threading.Tasks.Task GetLabelByName_Handler<T>(T obj, MethodReturnEventArgs<string> ret, string name);
         public static event GetLabelByName_Handler<Enumeration> OnGetLabelByName_Enumeration;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -569,7 +569,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
             }
             return e.Result;
         }
-        public delegate void GetLabelByValue_Handler<T>(T obj, MethodReturnEventArgs<string> ret, int val);
+        public delegate System.Threading.Tasks.Task GetLabelByValue_Handler<T>(T obj, MethodReturnEventArgs<string> ret, int val);
         public static event GetLabelByValue_Handler<Enumeration> OnGetLabelByValue_Enumeration;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -633,7 +633,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
             }
             return e.Result;
         }
-        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<Enumeration> OnGetName_Enumeration;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

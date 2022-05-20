@@ -24,9 +24,11 @@ namespace Zetbox.App.Base
     public static class IndexConstraintActions
     {
         [Invocation]
-        public static void NotifyDeleting(IndexConstraint obj)
+        public static System.Threading.Tasks.Task NotifyDeleting(IndexConstraint obj)
         {
             obj.Properties.Clear();
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

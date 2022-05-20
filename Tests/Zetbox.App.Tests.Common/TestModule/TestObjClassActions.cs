@@ -24,11 +24,13 @@ namespace Zetbox.App.Test
     public static class TestObjClassActions
     {
         [Invocation]
-        public static void get_CalculatedEnumeration(TestObjClass obj, PropertyGetterEventArgs<TestEnum> e)
+        public static System.Threading.Tasks.Task get_CalculatedEnumeration(TestObjClass obj, PropertyGetterEventArgs<TestEnum> e)
         {
             e.Result = obj.ID % 2 == 0
                 ? TestEnum.First
                 : TestEnum.Second;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

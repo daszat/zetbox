@@ -33,9 +33,11 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void Open(Zetbox.App.Base.Blob obj)
+        public static System.Threading.Tasks.Task Open(Zetbox.App.Base.Blob obj)
         {
             _fileOpener.ShellExecute(obj.Context.GetFileInfo(obj.ID));
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

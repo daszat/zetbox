@@ -187,7 +187,7 @@ namespace Zetbox.API.Server.Mocks
                 : result.Concat(baseResult);
         }
 
-        public delegate void TestMethod_Handler<T>(T obj, System.DateTime DateTimeParamForTestMethod);
+        public delegate System.Threading.Tasks.Task TestMethod_Handler<T>(T obj, System.DateTime DateTimeParamForTestMethod);
 
         public override Type GetImplementedInterface()
         {

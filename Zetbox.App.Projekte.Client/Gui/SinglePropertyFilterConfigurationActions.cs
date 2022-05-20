@@ -32,7 +32,7 @@ namespace Zetbox.App.GUI
     public static class SinglePropertyFilterConfigurationActions
     {
         [Invocation]
-        public static void CreateFilterModel(Zetbox.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
+        public static System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             var mdl = new SingleValueFilterModel();
             var prop = obj.Property;
@@ -59,12 +59,16 @@ namespace Zetbox.App.GUI
                 mdl.RefreshOnFilterChanged = true;
             }
             e.Result = mdl;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.GUI.SinglePropertyFilterConfiguration obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.GUI.SinglePropertyFilterConfiguration obj)
         {
             obj.ViewModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

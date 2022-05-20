@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Zetbox.API;
 using Zetbox.App.Base;
 using Zetbox.App.Extensions;
@@ -125,11 +126,12 @@ namespace Zetbox.Client.Presentables.TestModule
             }
         }
 
-        void _TestList_DisplayedColumnsCreated(Models.GridDisplayConfiguration cols)
+        Task _TestList_DisplayedColumnsCreated(Models.GridDisplayConfiguration cols)
         {
             //    cols.Columns.Add(ColumnDisplayModel.Create(NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass_Methods.GetInheritedMethods.Find(FrozenContext)));
             //    cols.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass_Properties.IsAbstract.Find(FrozenContext)));
             //    cols.Columns.Add(ColumnDisplayModel.Create("IsFrozenObject ViewModel", NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_TextKind.Find(FrozenContext), "PropertyModelsByName[IsFrozenObject]"));
+            return Task.CompletedTask;
         }
     }
 }

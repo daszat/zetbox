@@ -24,9 +24,11 @@ namespace at.dasz.DocumentManagement
     public static class ExcerptActions
     {
         [Invocation]
-        public static void ToString(Excerpt obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Excerpt obj, MethodReturnEventArgs<string> e)
         {
             e.Result = (obj.Text ?? string.Empty).MaxLength(100);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -1054,7 +1054,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
             }
             return e.Result;
         }
-        public delegate void Duplicate_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Calendar.WorkSchedule> ret);
+        public delegate System.Threading.Tasks.Task Duplicate_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Calendar.WorkSchedule> ret);
         public static event Duplicate_Handler<WorkSchedule> OnDuplicate_WorkSchedule;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1118,7 +1118,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
             }
             return e.Result;
         }
-        public delegate void GetHolidays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
+        public delegate System.Threading.Tasks.Task GetHolidays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
         public static event GetHolidays_Handler<WorkSchedule> OnGetHolidays_WorkSchedule;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1182,7 +1182,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
             }
             return e.Result;
         }
-        public delegate void GetOffDays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
+        public delegate System.Threading.Tasks.Task GetOffDays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
         public static event GetOffDays_Handler<WorkSchedule> OnGetOffDays_WorkSchedule;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1246,7 +1246,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
             }
             return e.Result;
         }
-        public delegate void GetWorkingDays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
+        public delegate System.Threading.Tasks.Task GetWorkingDays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
         public static event GetWorkingDays_Handler<WorkSchedule> OnGetWorkingDays_WorkSchedule;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1310,7 +1310,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
             }
             return e.Result;
         }
-        public delegate void GetWorkingHours_Handler<T>(T obj, MethodReturnEventArgs<decimal> ret, DateTime from, DateTime until);
+        public delegate System.Threading.Tasks.Task GetWorkingHours_Handler<T>(T obj, MethodReturnEventArgs<decimal> ret, DateTime from, DateTime until);
         public static event GetWorkingHours_Handler<WorkSchedule> OnGetWorkingHours_WorkSchedule;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

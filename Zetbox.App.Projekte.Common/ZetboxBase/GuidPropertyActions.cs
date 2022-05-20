@@ -24,24 +24,30 @@ namespace Zetbox.App.Base
     public static class GuidPropertyActions
     {
         [Invocation]
-        public static void GetPropertyType(GuidProperty obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetPropertyType(GuidProperty obj, MethodReturnEventArgs<Type> e)
         {
             e.Result = typeof(Guid);
             PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetElementTypeString(GuidProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetElementTypeString(GuidProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "Guid";
             PropertyActions.DecorateElementType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetPropertyTypeString(GuidProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetPropertyTypeString(GuidProperty obj, MethodReturnEventArgs<string> e)
         {
             GetElementTypeString(obj, e);
             PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

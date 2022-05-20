@@ -24,9 +24,11 @@ namespace at.dasz.DocumentManagement
     public static class DocumentActions
     {
         [Invocation]
-        public static void NotifyCreated(at.dasz.DocumentManagement.Document obj)
+        public static System.Threading.Tasks.Task NotifyCreated(at.dasz.DocumentManagement.Document obj)
         {
             obj.KeepRevisions = true;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

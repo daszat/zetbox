@@ -312,7 +312,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 throw new NotImplementedException("No handler registered on method MethodTest.Group1");
             }
         }
-        public delegate void Group1_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task Group1_Handler<T>(T obj);
         public static event Group1_Handler<MethodTest> OnGroup1_MethodTest;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -375,7 +375,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 throw new NotImplementedException("No handler registered on method MethodTest.Group2");
             }
         }
-        public delegate void Group2_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task Group2_Handler<T>(T obj);
         public static event Group2_Handler<MethodTest> OnGroup2_MethodTest;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -438,7 +438,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 throw new NotImplementedException("No handler registered on method MethodTest.ObjParameter");
             }
         }
-        public delegate void ObjParameter_Handler<T>(T obj, Zetbox.App.Test.MethodTest objParam);
+        public delegate System.Threading.Tasks.Task ObjParameter_Handler<T>(T obj, Zetbox.App.Test.MethodTest objParam);
         public static event ObjParameter_Handler<MethodTest> OnObjParameter_MethodTest;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -502,7 +502,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             }
             return e.Result;
         }
-        public delegate void ObjRet_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Test.MethodTest> ret);
+        public delegate System.Threading.Tasks.Task ObjRet_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Test.MethodTest> ret);
         public static event ObjRet_Handler<MethodTest> OnObjRet_MethodTest;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -565,7 +565,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 throw new NotImplementedException("No handler registered on method MethodTest.Parameterless");
             }
         }
-        public delegate void Parameterless_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task Parameterless_Handler<T>(T obj);
         public static event Parameterless_Handler<MethodTest> OnParameterless_MethodTest;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -628,7 +628,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 throw new NotImplementedException("No handler registered on method MethodTest.ServerMethod");
             }
         }
-        public delegate void ServerMethod_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task ServerMethod_Handler<T>(T obj);
         public static event ServerMethod_Handler<MethodTest> OnServerMethod_MethodTest;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -692,7 +692,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             }
             return e.Result;
         }
-        public delegate void ServerObjParameter_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Test.TestObjClass> ret, Zetbox.App.Test.TestObjClass input);
+        public delegate System.Threading.Tasks.Task ServerObjParameter_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Test.TestObjClass> ret, Zetbox.App.Test.TestObjClass input);
         public static event ServerObjParameter_Handler<MethodTest> OnServerObjParameter_MethodTest;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -755,7 +755,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 throw new NotImplementedException("No handler registered on method MethodTest.ServerParameterless");
             }
         }
-        public delegate void ServerParameterless_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task ServerParameterless_Handler<T>(T obj);
         public static event ServerParameterless_Handler<MethodTest> OnServerParameterless_MethodTest;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -818,7 +818,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 throw new NotImplementedException("No handler registered on method MethodTest.StringParameter");
             }
         }
-        public delegate void StringParameter_Handler<T>(T obj, string str);
+        public delegate System.Threading.Tasks.Task StringParameter_Handler<T>(T obj, string str);
         public static event StringParameter_Handler<MethodTest> OnStringParameter_MethodTest;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -881,7 +881,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 throw new NotImplementedException("No handler registered on method MethodTest.Summary");
             }
         }
-        public delegate void Summary_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task Summary_Handler<T>(T obj);
         public static event Summary_Handler<MethodTest> OnSummary_MethodTest;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

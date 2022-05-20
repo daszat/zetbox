@@ -32,21 +32,26 @@ namespace Zetbox.App.GUI
         /// Creates the ToString() result for a specified ControlKind.
         /// </summary>
         [Invocation]
-        public static void ToString(ControlKind kind, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(ControlKind kind, MethodReturnEventArgs<string> e)
         {
             if (kind == null)
             {
                 e.Result = "(null)";
-                return;
+                return System.Threading.Tasks.Task.CompletedTask;
+
             }
 
             e.Result = kind.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetName(ControlKind kind, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetName(ControlKind kind, MethodReturnEventArgs<string> e)
         {
             e.Result = "Gui.ControlKinds." + Regex.Replace(kind.Name, "\\W", "_");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

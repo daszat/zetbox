@@ -1157,7 +1157,7 @@ namespace Zetbox.App.GUI
             }
             return e.Result;
         }
-        public delegate void CreateFilterModel_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> ret, Zetbox.API.IZetboxContext ctx);
+        public delegate System.Threading.Tasks.Task CreateFilterModel_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> ret, Zetbox.API.IZetboxContext ctx);
         public static event CreateFilterModel_Handler<FilterConfiguration> OnCreateFilterModel_FilterConfiguration;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1221,7 +1221,7 @@ namespace Zetbox.App.GUI
             }
             return e.Result;
         }
-        public delegate void GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetLabel_Handler<FilterConfiguration> OnGetLabel_FilterConfiguration;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

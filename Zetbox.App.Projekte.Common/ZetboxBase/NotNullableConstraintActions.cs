@@ -25,7 +25,7 @@ namespace Zetbox.App.Base
     public static class NotNullableConstraintActions
     {
         [Invocation]
-        public static void ToString(NotNullableConstraint obj, Zetbox.API.MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(NotNullableConstraint obj, Zetbox.API.MethodReturnEventArgs<string> e)
         {
             if (obj.ConstrainedProperty == null)
             {
@@ -35,10 +35,12 @@ namespace Zetbox.App.Base
             {
                 e.Result = String.Format("{0} should not be NULL", obj.ConstrainedProperty.Name);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void IsValid(
+        public static System.Threading.Tasks.Task IsValid(
             NotNullableConstraint obj,
             MethodReturnEventArgs<bool> e,
             object constrainedObjectParam,
@@ -50,20 +52,24 @@ namespace Zetbox.App.Base
                 if (!dataObj.IsInitialized(obj.ConstrainedProperty.Name))
                 {
                     e.Result = false;
-                    return;
+                    return System.Threading.Tasks.Task.CompletedTask;
                 }
             }
             e.Result = constrainedValueParam != null;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetErrorText(
+        public static System.Threading.Tasks.Task GetErrorText(
             NotNullableConstraint obj,
             MethodReturnEventArgs<string> e,
             object constrainedObjectParam,
             object constrainedValueParam)
         {
             e.Result = String.IsNullOrWhiteSpace(obj.Reason) ? Strings.ErrorEmptyValue : String.Format("{0}: {1}", Strings.ErrorEmptyValue, obj.Reason);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

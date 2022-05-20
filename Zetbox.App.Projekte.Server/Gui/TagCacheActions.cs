@@ -40,7 +40,7 @@ namespace Zetbox.App.GUI
         }
 
         [Invocation]
-        public static void Rebuild(TagCache obj)
+        public static System.Threading.Tasks.Task Rebuild(TagCache obj)
         {
             lock (_lock)
             {
@@ -92,6 +92,8 @@ namespace Zetbox.App.GUI
                     }
                 }
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         private static IQueryable GetUntypedQueryHack<T>(IZetboxContext ctx)

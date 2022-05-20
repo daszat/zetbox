@@ -25,19 +25,23 @@ namespace Zetbox.App.Calendar
     public static class EasterWorkScheduleRuleActions
     {
         [Invocation]
-        public static void ToString(EasterWorkScheduleRule obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(EasterWorkScheduleRule obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = string.Format(e.Result + "; Easter, offset {0} days", obj.Offset);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void AppliesTo(EasterWorkScheduleRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
+        public static System.Threading.Tasks.Task AppliesTo(EasterWorkScheduleRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
         {
             if (obj.CheckValidDate(date))
             {
                 var ostern = GetOstersonntag(date.Year);
                 e.Result = ostern.AddDays(obj.Offset ?? 0) == date.Date;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         private static DateTime GetOstersonntag(int jahr)

@@ -24,13 +24,15 @@ namespace Zetbox.App.Base
     public static class DecimalDefaultValueActions
     {
         [Invocation]
-        public static void GetDefaultValue(Zetbox.App.Base.DecimalDefaultValue obj, MethodReturnEventArgs<object> e)
+        public static System.Threading.Tasks.Task GetDefaultValue(Zetbox.App.Base.DecimalDefaultValue obj, MethodReturnEventArgs<object> e)
         {
             e.Result = obj.DecimalValue;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ToString(Zetbox.App.Base.DecimalDefaultValue obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.Base.DecimalDefaultValue obj, MethodReturnEventArgs<System.String> e)
         {
             if (obj.Property != null)
             {
@@ -42,6 +44,8 @@ namespace Zetbox.App.Base
             {
                 e.Result = "Initializes a property with a configured decimal value";
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

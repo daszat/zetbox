@@ -24,13 +24,15 @@ namespace Zetbox.App.Base
     public static class StringDefaultValueActions
     {
         [Invocation]
-        public static void GetDefaultValue(Zetbox.App.Base.StringDefaultValue obj, MethodReturnEventArgs<object> e)
+        public static System.Threading.Tasks.Task GetDefaultValue(Zetbox.App.Base.StringDefaultValue obj, MethodReturnEventArgs<object> e)
         {
             e.Result = obj.DefaultValue;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ToString(Zetbox.App.Base.StringDefaultValue obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.Base.StringDefaultValue obj, MethodReturnEventArgs<System.String> e)
         {
             if (obj.Property != null)
             {
@@ -42,6 +44,8 @@ namespace Zetbox.App.Base
             {
                 e.Result = "Initializes a property with the configured string";
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -631,7 +631,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public delegate void DisplayedColumnsCreatedHandler(GridDisplayConfiguration cols);
+        public delegate System.Threading.Tasks.Task DisplayedColumnsCreatedHandler(GridDisplayConfiguration cols);
         public event DisplayedColumnsCreatedHandler DisplayedColumnsCreated;
 
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()

@@ -1113,7 +1113,7 @@ namespace Zetbox.App.Calendar
             }
             return e.Result;
         }
-        public delegate void AppliesTo_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, DateTime date);
+        public delegate System.Threading.Tasks.Task AppliesTo_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, DateTime date);
         public static event AppliesTo_Handler<WorkScheduleRule> OnAppliesTo_WorkScheduleRule;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

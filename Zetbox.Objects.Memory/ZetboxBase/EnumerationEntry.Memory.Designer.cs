@@ -1040,7 +1040,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetLabel_Handler<EnumerationEntry> OnGetLabel_EnumerationEntry;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

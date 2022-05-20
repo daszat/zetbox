@@ -1280,7 +1280,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
             return e.Result;
         }
-        public delegate void GetDefaultViewModel_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret, Zetbox.API.IZetboxContext dataCtx, System.Object parent);
+        public delegate System.Threading.Tasks.Task GetDefaultViewModel_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret, Zetbox.API.IZetboxContext dataCtx, System.Object parent);
         public static event GetDefaultViewModel_Handler<NavigationEntry> OnGetDefaultViewModel_NavigationEntry;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

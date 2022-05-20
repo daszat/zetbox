@@ -1566,7 +1566,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
             }
             return e.Result;
         }
-        public delegate void GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetLabel_Handler<Method> OnGetLabel_Method;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1630,7 +1630,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
             }
             return e.Result;
         }
-        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<Method> OnGetName_Method;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1694,7 +1694,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
             }
             return e.Result;
         }
-        public delegate void GetReturnParameter_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.BaseParameter> ret);
+        public delegate System.Threading.Tasks.Task GetReturnParameter_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.BaseParameter> ret);
         public static event GetReturnParameter_Handler<Method> OnGetReturnParameter_Method;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

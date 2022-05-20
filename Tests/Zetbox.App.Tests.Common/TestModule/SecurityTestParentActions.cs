@@ -27,15 +27,19 @@ namespace Zetbox.App.Test
     public static class SecurityTestParentActions
     {
         [Invocation]
-        public static void ToString(SecurityTestParent obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(SecurityTestParent obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_Name(SecurityTestParent obj, PropertyPostSetterEventArgs<string> e)
+        public static System.Threading.Tasks.Task postSet_Name(SecurityTestParent obj, PropertyPostSetterEventArgs<string> e)
         {
             obj.Children.ForEach(c => c.Recalculate("ParentName"));
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

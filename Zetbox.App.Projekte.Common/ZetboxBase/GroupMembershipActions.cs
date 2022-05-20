@@ -25,9 +25,11 @@ namespace Zetbox.App.Base
     public static class GroupMembershipActions
     {
         [Invocation]
-        public static void postSet_Group(GroupMembership obj, PropertyPostSetterEventArgs<Group> e)
+        public static System.Threading.Tasks.Task postSet_Group(GroupMembership obj, PropertyPostSetterEventArgs<Group> e)
         {
             obj.Recalculate("Description");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

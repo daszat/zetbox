@@ -1037,7 +1037,7 @@ namespace Zetbox.App.Projekte
                 throw new NotImplementedException("No handler registered on method Auftrag.RechnungErstellen");
             }
         }
-        public delegate void RechnungErstellen_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task RechnungErstellen_Handler<T>(T obj);
         public static event RechnungErstellen_Handler<Auftrag> OnRechnungErstellen_Auftrag;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

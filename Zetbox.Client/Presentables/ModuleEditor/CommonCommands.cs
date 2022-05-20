@@ -26,7 +26,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             this.module = module;
         }
 
-        public delegate void CreatedEventHandler(ObjectClass newCls);
+        public delegate System.Threading.Tasks.Task CreatedEventHandler(ObjectClass newCls);
         public CreatedEventHandler Created;
         public Func<Zetbox.App.Base.Module> GetCurrentModule;
 

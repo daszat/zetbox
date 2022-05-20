@@ -25,15 +25,19 @@ namespace Zetbox.App.Calendar
     public static class WorkScheduleRuleActions
     {
         [Invocation]
-        public static void ToString(WorkScheduleRule obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(WorkScheduleRule obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = string.Format("{0}; {1} {2}", obj.Name, obj.WorkingHours, obj.WorkingHours == 1 ? "hour" : "hours");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void AppliesTo(WorkScheduleRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
+        public static System.Threading.Tasks.Task AppliesTo(WorkScheduleRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
         {
             // Abstract
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 

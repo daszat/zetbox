@@ -535,7 +535,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
     }
 
-    public delegate void UserFilterAddedEventHander(object sender, UserFilterAddedEventArgs e);
+    public delegate System.Threading.Tasks.Task UserFilterAddedEventHander(object sender, UserFilterAddedEventArgs e);
     public class UserFilterAddedEventArgs : EventArgs
     {
         public UserFilterAddedEventArgs(IEnumerable<Property> props)

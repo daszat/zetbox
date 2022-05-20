@@ -24,15 +24,17 @@ namespace Zetbox.App.Base
     public static class EnumParameterActions
     {
         [Invocation]
-        public static void GetParameterType(EnumParameter obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetParameterType(EnumParameter obj, MethodReturnEventArgs<Type> e)
         {
             var cls = obj.Enumeration;
             e.Result = Type.GetType(cls.Module.Namespace + "." + cls.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
             BaseParameterActions.DecorateParameterType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetParameterTypeString(EnumParameter obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task GetParameterTypeString(EnumParameter obj, MethodReturnEventArgs<System.String> e)
         {
             if (obj.Enumeration == null)
             {
@@ -47,6 +49,8 @@ namespace Zetbox.App.Base
                 e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.Name;
             }
             BaseParameterActions.DecorateParameterType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

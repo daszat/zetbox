@@ -1031,7 +1031,7 @@ namespace Zetbox.App.LicenseManagement
             }
             return e.Result;
         }
-        public delegate void Check_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object certificate);
+        public delegate System.Threading.Tasks.Task Check_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object certificate);
         public static event Check_Handler<License> OnCheck_License;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1094,7 +1094,7 @@ namespace Zetbox.App.LicenseManagement
                 throw new NotImplementedException("No handler registered on method License.Export");
             }
         }
-        public delegate void Export_Handler<T>(T obj, string file);
+        public delegate System.Threading.Tasks.Task Export_Handler<T>(T obj, string file);
         public static event Export_Handler<License> OnExport_License;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1157,7 +1157,7 @@ namespace Zetbox.App.LicenseManagement
                 throw new NotImplementedException("No handler registered on method License.ExportUI");
             }
         }
-        public delegate void ExportUI_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task ExportUI_Handler<T>(T obj);
         public static event ExportUI_Handler<License> OnExportUI_License;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1221,7 +1221,7 @@ namespace Zetbox.App.LicenseManagement
             }
             return e.Result;
         }
-        public delegate void IsSignatureValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object certificate);
+        public delegate System.Threading.Tasks.Task IsSignatureValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object certificate);
         public static event IsSignatureValid_Handler<License> OnIsSignatureValid_License;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1285,7 +1285,7 @@ namespace Zetbox.App.LicenseManagement
             }
             return e.Result;
         }
-        public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
+        public delegate System.Threading.Tasks.Task IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
         public static event IsValid_Handler<License> OnIsValid_License;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1348,7 +1348,7 @@ namespace Zetbox.App.LicenseManagement
                 throw new NotImplementedException("No handler registered on method License.Sign");
             }
         }
-        public delegate void Sign_Handler<T>(T obj, Zetbox.App.LicenseManagement.PrivateKey certificate, string password);
+        public delegate System.Threading.Tasks.Task Sign_Handler<T>(T obj, Zetbox.App.LicenseManagement.PrivateKey certificate, string password);
         public static event Sign_Handler<License> OnSign_License;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1411,7 +1411,7 @@ namespace Zetbox.App.LicenseManagement
                 throw new NotImplementedException("No handler registered on method License.SignUI");
             }
         }
-        public delegate void SignUI_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task SignUI_Handler<T>(T obj);
         public static event SignUI_Handler<License> OnSignUI_License;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

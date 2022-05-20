@@ -35,9 +35,11 @@ namespace Zetbox.App.Base
     public static class BoolPropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.Base.BoolProperty obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.Base.BoolProperty obj)
         {
             obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -24,17 +24,21 @@ namespace Zetbox.App.Base
     public static class DateTimeParameterActions
     {
         [Invocation]
-        public static void GetParameterType(DateTimeParameter obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetParameterType(DateTimeParameter obj, MethodReturnEventArgs<Type> e)
         {
             e.Result = typeof(DateTime);
             BaseParameterActions.DecorateParameterType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetParameterTypeString(DateTimeParameter obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetParameterTypeString(DateTimeParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "DateTime";
             BaseParameterActions.DecorateParameterType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

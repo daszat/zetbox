@@ -24,17 +24,21 @@ namespace Zetbox.App.Base
     public static class BlobActions
     {
         [Invocation]
-        public static void ToString(Zetbox.App.Base.Blob obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.Base.Blob obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = obj.OriginalName;
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetStream(Zetbox.App.Base.Blob obj, MethodReturnEventArgs<System.IO.Stream> e)
+        public static System.Threading.Tasks.Task GetStream(Zetbox.App.Base.Blob obj, MethodReturnEventArgs<System.IO.Stream> e)
         {
             e.Result = obj.Context.GetStream(obj.ID);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

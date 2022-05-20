@@ -35,18 +35,20 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void GetLabel(Zetbox.App.Base.Method obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task GetLabel(Zetbox.App.Base.Method obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
 
             if (obj.Module == null || obj.ObjectClass == null)
-                return;
+                return System.Threading.Tasks.Task.CompletedTask;
 
             e.Result = _assets.GetString(obj.Module, ZetboxAssetKeys.ConstructBaseName(obj), ZetboxAssetKeys.ConstructLabelKey(obj), e.Result);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ToString(Method obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Method obj, MethodReturnEventArgs<string> e)
         {
             // TODO: IsValid?
             if (obj.ObjectClass != null && obj.ObjectClass.Module != null)
@@ -60,28 +62,36 @@ namespace Zetbox.App.Base
             {
                 e.Result = String.Format("new Method #{0}: {1}", obj.ID, obj.Name);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetReturnParameter(Method obj, MethodReturnEventArgs<BaseParameter> e)
+        public static System.Threading.Tasks.Task GetReturnParameter(Method obj, MethodReturnEventArgs<BaseParameter> e)
         {
             e.Result = obj.Parameter.SingleOrDefault(param => param.IsReturnParameter);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_Name(Method obj, PropertyPostSetterEventArgs<string> e)
+        public static System.Threading.Tasks.Task postSet_Name(Method obj, PropertyPostSetterEventArgs<string> e)
         {
             obj.Recalculate("CodeTemplate");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_Parameter(Method obj)
+        public static System.Threading.Tasks.Task postSet_Parameter(Method obj)
         {
             obj.Recalculate("CodeTemplate");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void get_CodeTemplate(Method obj, PropertyGetterEventArgs<string> e)
+        public static System.Threading.Tasks.Task get_CodeTemplate(Method obj, PropertyGetterEventArgs<string> e)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -95,7 +105,7 @@ namespace Zetbox.App.Base
                 objParameter = "<<TYPE>> obj";
             }
 
-            sb.AppendFormat("[Invocation]\npublic static void {0}({1}", obj.Name, objParameter);
+            sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task {0}({1}", obj.Name, objParameter);
 
             var returnParam = obj.GetReturnParameter();
             if (returnParam != null)
@@ -113,22 +123,26 @@ namespace Zetbox.App.Base
             sb.AppendLine(")\n{\n}");
 
             sb.AppendLine();
-            sb.AppendFormat("[Invocation]\npublic static void {0}CanExec({1}, MethodReturnEventArgs<bool> e)\n{{\n}}\n", obj.Name, objParameter);
+            sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task {0}CanExec({1}, MethodReturnEventArgs<bool> e)\n{{\n}}\n", obj.Name, objParameter);
 
             sb.AppendLine();
-            sb.AppendFormat("[Invocation]\npublic static void {0}CanExecReason({1}, MethodReturnEventArgs<string> e)\n{{\n}}\n", obj.Name, objParameter);
+            sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task {0}CanExecReason({1}, MethodReturnEventArgs<string> e)\n{{\n}}\n", obj.Name, objParameter);
 
             e.Result = sb.ToString();
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetName(Method obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetName(Method obj, MethodReturnEventArgs<string> e)
         {
             var cls = obj.ObjectClass as ObjectClass;
             if (cls != null)
             {
                 e.Result = string.Format("{0}_Methods.{1}", cls.GetName(), obj.Name);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

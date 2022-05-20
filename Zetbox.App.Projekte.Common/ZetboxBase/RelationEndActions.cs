@@ -28,7 +28,7 @@ namespace Zetbox.App.Base
     public static class RelationEndActions
     {
         [Invocation]
-        public static void ToString(RelationEnd obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(RelationEnd obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("RelationEnd {0}({1})",
                 obj.RoleName,
@@ -37,11 +37,15 @@ namespace Zetbox.App.Base
                     : obj.Type.Name);
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
         [Invocation]
-        public static void get_Parent(RelationEnd relEnd, PropertyGetterEventArgs<Relation> e)
+        public static System.Threading.Tasks.Task get_Parent(RelationEnd relEnd, PropertyGetterEventArgs<Relation> e)
         {
             e.Result = relEnd.AParent ?? relEnd.BParent;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         // TODO: Replace this when NamedInstances are introduced 
@@ -50,7 +54,7 @@ namespace Zetbox.App.Base
         public static readonly Guid ViewModelDescriptor_ObjectCollectionModel = new Guid("67A49C49-B890-4D35-A8DB-1F8E43BFC7DF");
 
         [Invocation]
-        public static void CreateNavigator(RelationEnd obj, MethodReturnEventArgs<ObjectReferenceProperty> e)
+        public static System.Threading.Tasks.Task CreateNavigator(RelationEnd obj, MethodReturnEventArgs<ObjectReferenceProperty> e)
         {
             Relation rel = obj.AParent ?? obj.BParent;
             RelationEnd other = rel != null ? rel.GetOtherEnd(obj) : null;
@@ -83,10 +87,12 @@ namespace Zetbox.App.Base
             }
 
             e.Result = nav;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void isValid_Navigator(RelationEnd obj, PropertyIsValidEventArgs e)
+        public static System.Threading.Tasks.Task isValid_Navigator(RelationEnd obj, PropertyIsValidEventArgs e)
         {
             var relEnd = obj;
             var rel = relEnd.GetParent();
@@ -94,7 +100,7 @@ namespace Zetbox.App.Base
             {
                 e.IsValid = false;
                 e.Error = "No Relation assigned to Relation end";
-                return;
+                return System.Threading.Tasks.Task.CompletedTask;
             }
             var otherEnd = rel.GetOtherEnd(relEnd);
             var orp = obj.Navigator;
@@ -141,16 +147,20 @@ namespace Zetbox.App.Base
                         break;
                 }
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void isValid_HasPersistentOrder(RelationEnd obj, PropertyIsValidEventArgs e)
+        public static System.Threading.Tasks.Task isValid_HasPersistentOrder(RelationEnd obj, PropertyIsValidEventArgs e)
         {
             if (obj.HasPersistentOrder && obj.Multiplicity != Multiplicity.ZeroOrMore)
             {
                 e.IsValid = false;
                 e.Error = String.Format("Can only require persistent order when multiplicity is ZeroOrMore, but multiplicity is {0}", obj.Multiplicity);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -32,13 +32,15 @@ namespace Zetbox.App.LicenseManagement
         }
 
         [Invocation]
-        public static void Load(PrivateKey obj)
+        public static System.Threading.Tasks.Task Load(PrivateKey obj)
         {
             string path = _factory.GetSourceFileNameFromUser();
             if (!string.IsNullOrEmpty(path))
             {
                 obj.LoadFromFile(path);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -1033,7 +1033,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                 throw new NotImplementedException("No handler registered on method CalendarBook.GetNewEventViewModels");
             }
         }
-        public delegate void GetNewEventViewModels_Handler<T>(T obj, System.Object args);
+        public delegate System.Threading.Tasks.Task GetNewEventViewModels_Handler<T>(T obj, System.Object args);
         public static event GetNewEventViewModels_Handler<CalendarBook> OnGetNewEventViewModels_CalendarBook;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

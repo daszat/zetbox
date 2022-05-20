@@ -28,9 +28,11 @@ namespace Zetbox.App.Base
     public static class CalculatedObjectReferencePropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.Base.CalculatedObjectReferenceProperty obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.Base.CalculatedObjectReferenceProperty obj)
         {
             // At creating time there is no way to discover if the navigator is a Reference or List
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

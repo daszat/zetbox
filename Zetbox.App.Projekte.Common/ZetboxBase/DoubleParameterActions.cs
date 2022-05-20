@@ -24,17 +24,21 @@ namespace Zetbox.App.Base
     public static class DoubleParameterActions
     {
         [Invocation]
-        public static void GetParameterType(DoubleParameter obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetParameterType(DoubleParameter obj, MethodReturnEventArgs<Type> e)
         {
             e.Result = typeof(double);
             BaseParameterActions.DecorateParameterType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetParameterTypeString(DoubleParameter obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetParameterTypeString(DoubleParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "double";
             BaseParameterActions.DecorateParameterType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

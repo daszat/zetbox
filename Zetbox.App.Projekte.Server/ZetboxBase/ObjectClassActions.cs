@@ -43,7 +43,7 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void ReplaceObject(ObjectClass obj, Zetbox.API.IDataObject target, Zetbox.API.IDataObject source)
+        public async static System.Threading.Tasks.Task ReplaceObject(ObjectClass obj, Zetbox.API.IDataObject target, Zetbox.API.IDataObject source)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             if (target == null) throw new ArgumentNullException("target");
@@ -115,7 +115,7 @@ namespace Zetbox.App.Base
                 }
 
                 ctx.Delete(sourceObj);
-                ctx.SubmitChanges();
+                await ctx.SubmitChanges();
             }
         }
     }

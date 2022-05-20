@@ -489,7 +489,7 @@ namespace Zetbox.App.Test
                 throw new NotImplementedException("No handler registered on method TestObjClass.TestMethod");
             }
         }
-        public delegate void TestMethod_Handler<T>(T obj, DateTime DateTimeParamForTestMethod);
+        public delegate System.Threading.Tasks.Task TestMethod_Handler<T>(T obj, DateTime DateTimeParamForTestMethod);
         public static event TestMethod_Handler<TestObjClass> OnTestMethod_TestObjClass;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

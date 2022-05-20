@@ -22,6 +22,7 @@ namespace Zetbox.Client.Presentables.Debugger
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
 
     [ViewModelDescriptor]
@@ -92,18 +93,22 @@ namespace Zetbox.Client.Presentables.Debugger
             ctx.Changed += Changed;
         }
 
-        void Disposed(object sender, GenericEventArgs<IReadOnlyZetboxContext> e)
+        Task Disposed(object sender, GenericEventArgs<IReadOnlyZetboxContext> e)
         {
             var mdl = GetModel((IZetboxContext)e.Data);
             _activeCtxCache.Remove(mdl);
             _disposedCtxCache.Add(mdl);
             mdl.Disposed();
+
+            return Task.CompletedTask;
         }
 
-        void Changed(object sender, GenericEventArgs<IZetboxContext> e)
+        Task Changed(object sender, GenericEventArgs<IZetboxContext> e)
         {
             var mdl = GetModel(e.Data);
             mdl.OnContextChanged();
+
+            return Task.CompletedTask;
         }
         #endregion
     }

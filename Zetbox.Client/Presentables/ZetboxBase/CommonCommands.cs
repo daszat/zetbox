@@ -595,7 +595,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public delegate void ObjectCreatedHandler(IDataObject obj);
+        public delegate System.Threading.Tasks.Task ObjectCreatedHandler(IDataObject obj);
         public event ObjectCreatedHandler ObjectCreated;
         protected void OnObjectCreated(IDataObject obj)
         {
@@ -606,7 +606,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public delegate void LocalModelCreatedHandler(DataObjectViewModel vm);
+        public delegate System.Threading.Tasks.Task LocalModelCreatedHandler(DataObjectViewModel vm);
         public event LocalModelCreatedHandler LocalModelCreated;
         protected void OnLocalModelCreated(DataObjectViewModel vm)
         {

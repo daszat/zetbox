@@ -35,9 +35,11 @@ namespace Zetbox.App.Base
     public static class EnumerationPropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.Base.EnumerationProperty obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.Base.EnumerationProperty obj)
         {
             obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_EnumerationValueViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

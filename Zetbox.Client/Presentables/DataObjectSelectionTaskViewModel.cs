@@ -209,7 +209,7 @@ namespace Zetbox.Client.Presentables
         public DataObjectSelectionTaskViewModel TaskViewModel { get; private set; }
     }
 
-    public delegate void DataObjectSelectionTaskCreatedEventHandler(object sender, DataObjectSelectionTaskEventArgs e);
+    public delegate System.Threading.Tasks.Task DataObjectSelectionTaskCreatedEventHandler(object sender, DataObjectSelectionTaskEventArgs e);
 
     [ViewModelDescriptor]
     public class DataObjectSelectionTaskViewModel
@@ -242,13 +242,13 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        void ListViewModel_ObjectCreated(IDataObject obj)
+        async Task ListViewModel_ObjectCreated(IDataObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
 
             // Same like choose
             var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
-            Choose(new[] { mdl });
+            await Choose(new[] { mdl });
         }
 
         public InstanceListViewModel ListViewModel { get; private set; }

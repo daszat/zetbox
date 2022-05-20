@@ -25,9 +25,11 @@ namespace Zetbox.App.Base
     public static class RoleMembershipActions
     {
         [Invocation]
-        public static void postSet_Relations(RoleMembership obj)
+        public static System.Threading.Tasks.Task postSet_Relations(RoleMembership obj)
         {
             obj.Recalculate("Description");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

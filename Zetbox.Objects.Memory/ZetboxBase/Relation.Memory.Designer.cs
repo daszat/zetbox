@@ -1247,7 +1247,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetEnd_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.RelationEnd> ret, Zetbox.App.Base.ObjectReferenceProperty prop);
+        public delegate System.Threading.Tasks.Task GetEnd_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.RelationEnd> ret, Zetbox.App.Base.ObjectReferenceProperty prop);
         public static event GetEnd_Handler<Relation> OnGetEnd_Relation;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1311,7 +1311,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetEndFromRole_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.RelationEnd> ret, Zetbox.API.RelationEndRole role);
+        public delegate System.Threading.Tasks.Task GetEndFromRole_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.RelationEnd> ret, Zetbox.API.RelationEndRole role);
         public static event GetEndFromRole_Handler<Relation> OnGetEndFromRole_Relation;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1375,7 +1375,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetEntryInterfaceType_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.API.InterfaceType> ret);
+        public delegate System.Threading.Tasks.Task GetEntryInterfaceType_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.API.InterfaceType> ret);
         public static event GetEntryInterfaceType_Handler<Relation> OnGetEntryInterfaceType_Relation;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1439,7 +1439,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetOtherEnd_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.RelationEnd> ret, Zetbox.App.Base.RelationEnd relEnd);
+        public delegate System.Threading.Tasks.Task GetOtherEnd_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.RelationEnd> ret, Zetbox.App.Base.RelationEnd relEnd);
         public static event GetOtherEnd_Handler<Relation> OnGetOtherEnd_Relation;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1503,7 +1503,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetRelationType_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.API.RelationType> ret);
+        public delegate System.Threading.Tasks.Task GetRelationType_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.API.RelationType> ret);
         public static event GetRelationType_Handler<Relation> OnGetRelationType_Relation;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1567,7 +1567,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void NeedsPositionStorage_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, Zetbox.API.RelationEndRole endRole);
+        public delegate System.Threading.Tasks.Task NeedsPositionStorage_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, Zetbox.API.RelationEndRole endRole);
         public static event NeedsPositionStorage_Handler<Relation> OnNeedsPositionStorage_Relation;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1630,7 +1630,7 @@ namespace Zetbox.App.Base
                 throw new NotImplementedException("No handler registered on method Relation.SwapRelationEnds");
             }
         }
-        public delegate void SwapRelationEnds_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task SwapRelationEnds_Handler<T>(T obj);
         public static event SwapRelationEnds_Handler<Relation> OnSwapRelationEnds_Relation;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

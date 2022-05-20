@@ -39,7 +39,7 @@ namespace Zetbox.App.GUI
         }
 
         [Invocation]
-        public static void CreateFilterModel(Zetbox.App.GUI.DateRangeFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
+        public static System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.DateRangeFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             var mdl = DateRangeFilterModel.Create(
                 FrozenContext,
@@ -52,13 +52,17 @@ namespace Zetbox.App.GUI
             mdl.Required = obj.Required;
             mdl.RefreshOnFilterChanged = obj.RefreshOnFilterChanged;
             e.Result = mdl;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.GUI.DateRangeFilterConfiguration obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.GUI.DateRangeFilterConfiguration obj)
         {
             obj.ViewModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_DateRangeFilterViewModel
                .Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

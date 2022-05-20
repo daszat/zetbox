@@ -1290,7 +1290,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void CreateNavigator_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.ObjectReferenceProperty> ret);
+        public delegate System.Threading.Tasks.Task CreateNavigator_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.ObjectReferenceProperty> ret);
         public static event CreateNavigator_Handler<RelationEnd> OnCreateNavigator_RelationEnd;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

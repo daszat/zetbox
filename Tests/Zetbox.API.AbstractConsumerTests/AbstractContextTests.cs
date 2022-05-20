@@ -25,6 +25,7 @@ namespace Zetbox.API.AbstractConsumerTests
     using Zetbox.App.Test;
     using NUnit.Framework;
     using System.Reflection;
+    using System.Threading.Tasks;
 
     public abstract class AbstractContextTests
         : AbstractTestFixture
@@ -556,7 +557,11 @@ namespace Zetbox.API.AbstractConsumerTests
             using (IZetboxContext ctx = GetContext())
             {
                 bool hasCreated = false;
-                GenericEventHandler<IPersistenceObject> createdHandler = new GenericEventHandler<IPersistenceObject>(delegate(object obj, GenericEventArgs<IPersistenceObject> e) { hasCreated = true; });
+                GenericEventHandler<IPersistenceObject> createdHandler = new GenericEventHandler<IPersistenceObject>(delegate(object obj, GenericEventArgs<IPersistenceObject> e) 
+                { 
+                    hasCreated = true;
+                    return Task.CompletedTask;
+                });
                 ctx.ObjectCreated += createdHandler;
 
                 TestObjClass newObj = ctx.Create<TestObjClass>();
@@ -601,6 +606,7 @@ namespace Zetbox.API.AbstractConsumerTests
                     delegate(object obj, GenericEventArgs<IPersistenceObject> e)
                     {
                         hasDeleted = true;
+                        return Task.CompletedTask;
                     });
                 ctx.ObjectDeleted += deletedHandler;
 

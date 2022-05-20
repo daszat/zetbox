@@ -24,24 +24,30 @@ namespace Zetbox.App.Base
     public static class BoolPropertyActions
     {
         [Invocation]
-        public static void GetPropertyType(BoolProperty obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetPropertyType(BoolProperty obj, MethodReturnEventArgs<Type> e)
         {
             e.Result = typeof(bool);
             PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetElementTypeString(BoolProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetElementTypeString(BoolProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "bool";
             PropertyActions.DecorateElementType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetPropertyTypeString(BoolProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetPropertyTypeString(BoolProperty obj, MethodReturnEventArgs<string> e)
         {
             GetElementTypeString(obj, e);
             PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

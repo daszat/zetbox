@@ -32,13 +32,15 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void ToString(Zetbox.App.Base.AnyReference obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.Base.AnyReference obj, MethodReturnEventArgs<string> e)
         {
             e.Result = string.Format("{0} - {1}/{2}",  obj.ObjClass, obj.ObjGuid, obj.ObjID);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetObject(AnyReference obj, MethodReturnEventArgs<Zetbox.API.IDataObject> e, Zetbox.API.IZetboxContext ctx)
+        public static System.Threading.Tasks.Task GetObject(AnyReference obj, MethodReturnEventArgs<Zetbox.API.IDataObject> e, Zetbox.API.IZetboxContext ctx)
         {
             if (obj.ObjClass == null)
             {
@@ -61,12 +63,16 @@ namespace Zetbox.App.Base
                     e.Result = null;
                 }
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void HasObject(AnyReference obj, MethodReturnEventArgs<bool> e)
+        public static System.Threading.Tasks.Task HasObject(AnyReference obj, MethodReturnEventArgs<bool> e)
         {
             e.Result = obj.ObjClass != null;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

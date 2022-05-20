@@ -397,7 +397,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void AddTo_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime dt);
+        public delegate System.Threading.Tasks.Task AddTo_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime dt);
         public static event AddTo_Handler<DateTimeOffset> OnAddTo_DateTimeOffset;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

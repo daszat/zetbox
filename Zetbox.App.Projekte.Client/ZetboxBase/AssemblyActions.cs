@@ -44,7 +44,7 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void RegenerateTypeRefs(Assembly assembly, MethodReturnEventArgs<System.Boolean> e)
+        public static System.Threading.Tasks.Task RegenerateTypeRefs(Assembly assembly, MethodReturnEventArgs<System.Boolean> e)
         {
             using (Logging.Log.InfoTraceMethodCall(assembly.Name))
             {
@@ -85,6 +85,8 @@ namespace Zetbox.App.Base
                     Logging.Log.Warn("Failed to RegenerateTypeRefs", ex);
                     e.Result = false;
                 }
+
+                return System.Threading.Tasks.Task.CompletedTask;
             }
         }
 

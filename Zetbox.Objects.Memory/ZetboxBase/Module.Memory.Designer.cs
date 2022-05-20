@@ -782,7 +782,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<Module> OnGetName_Module;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

@@ -27,6 +27,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
     using Zetbox.Client.Presentables.ValueViewModels;
     using Moq;
     using NUnit.Framework;
+    using System.Threading.Tasks;
 
     public abstract class in_state_B_PUI
            : ViewModelTestFixture
@@ -121,7 +122,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
             [Test]
             public void should_stay_in_B_PUI()
             {
-                obj.StateChanged += (s, e) => Assert.Fail("Unexpected {0}", e);
+                obj.StateChanged += (s, e) => { Assert.Fail("Unexpected {0}", e); return Task.CompletedTask; };
 
                 RaiseValueModelChangedEvent();
 
@@ -196,7 +197,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
             [Test]
             public void should_stay_in_B_PUI()
             {
-                obj.StateChanged += (s, e) => Assert.Fail("Unexpected {0}", e);
+                obj.StateChanged += (s, e) => { Assert.Fail("Unexpected {0}", e); return Task.CompletedTask; };
 
                 Assert.That(() => obj.FormattedValue = nextPartialInput, Throws.InvalidOperationException);
 
@@ -264,7 +265,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
             [Test]
             public void should_stay_in_B_PUI()
             {
-                obj.StateChanged += (s, e) => Assert.Fail("Unexpected {0}", e);
+                obj.StateChanged += (s, e) => { Assert.Fail("Unexpected {0}", e); return Task.CompletedTask; };
 
                 Assert.That(() => obj.FormattedValue = validInput, Throws.InvalidOperationException);
 
@@ -331,7 +332,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
             [Test]
             public void should_stay_in_B_PUI()
             {
-                obj.StateChanged += (s, e) => Assert.Fail("Unexpected {0}", e);
+                obj.StateChanged += (s, e) => { Assert.Fail("Unexpected {0}", e); return Task.CompletedTask; };
 
                 Assert.That(() => obj.Value = validValue, Throws.InvalidOperationException);
 

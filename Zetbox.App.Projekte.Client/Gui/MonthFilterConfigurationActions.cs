@@ -39,19 +39,23 @@ namespace Zetbox.App.GUI
         }
 
         [Invocation]
-        public static void CreateFilterModel(Zetbox.App.GUI.MonthFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
+        public static System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.MonthFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             var mdl = MonthValueFilterModel.Create(FrozenContext, obj.GetLabel(), FilterValueSource.FromProperty(obj.Property), obj.IsCurrentMonthDefault ?? false);
             mdl.Required = obj.Required;
             mdl.RefreshOnFilterChanged = obj.RefreshOnFilterChanged;
             e.Result = mdl;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.GUI.MonthFilterConfiguration obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.GUI.MonthFilterConfiguration obj)
         {
             obj.ViewModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
-  
+
     }
 }

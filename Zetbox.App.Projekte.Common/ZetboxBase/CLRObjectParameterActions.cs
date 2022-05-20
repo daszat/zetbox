@@ -24,19 +24,21 @@ namespace Zetbox.App.Base
     public static class CLRObjectParameterActions
     {
         [Invocation]
-        public static void GetParameterType(CLRObjectParameter obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetParameterType(CLRObjectParameter obj, MethodReturnEventArgs<Type> e)
         {
             e.Result = Type.GetType(obj.TypeRef, throwOnError: true);
             BaseParameterActions.DecorateParameterType(obj, e, false);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetParameterTypeString(CLRObjectParameter obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetParameterTypeString(CLRObjectParameter obj, MethodReturnEventArgs<string> e)
         {
             if(obj == null || string.IsNullOrWhiteSpace(obj.TypeRef))
             {
                 e.Result = "<no type set>";
-                return;
+                return System.Threading.Tasks.Task.CompletedTask;
             }
 
             var type = Type.GetType(obj.TypeRef, throwOnError: false);
@@ -49,6 +51,8 @@ namespace Zetbox.App.Base
                 e.Result = type.ToCSharpTypeRef();
                 BaseParameterActions.DecorateParameterType(obj, e, false);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

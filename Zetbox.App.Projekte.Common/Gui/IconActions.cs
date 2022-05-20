@@ -25,15 +25,19 @@ namespace Zetbox.App.GUI
     public static class IconActions
     {
         [Invocation]
-        public static void ToString(Icon obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Icon obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.IconFile;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetName(Icon obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetName(Icon obj, MethodReturnEventArgs<string> e)
         {
             e.Result = string.Format("Gui.Icons.{0}.{1}", obj.Module.Name, Regex.Replace(obj.IconFile, @"\W", "_"));
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

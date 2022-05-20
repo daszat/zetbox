@@ -54,12 +54,14 @@ namespace Zetbox.App.GUI
         }
 
         [Invocation]
-        public static void Open(Zetbox.App.GUI.Icon obj)
+        public static System.Threading.Tasks.Task Open(Zetbox.App.GUI.Icon obj)
         {
             if (obj.Blob != null)
             {
                 obj.Blob.Open();
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

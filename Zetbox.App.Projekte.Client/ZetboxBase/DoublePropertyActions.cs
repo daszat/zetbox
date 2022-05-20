@@ -35,9 +35,11 @@ namespace Zetbox.App.Base
     public static class DoublePropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.Base.DoubleProperty obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.Base.DoubleProperty obj)
         {
             obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDoublePropertyViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

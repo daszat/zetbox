@@ -27,12 +27,14 @@ namespace Zetbox.App.Test
     public static class RecurrenceRuleTesterActions
     {
         [Invocation]
-        public static void ToString(RecurrenceRuleTester obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(RecurrenceRuleTester obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "a RecurrenceRuleTester";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
         [Invocation]
-        public static void GetCurrent(RecurrenceRuleTester obj, MethodReturnEventArgs<DateTime> e, DateTime? dt)
+        public static System.Threading.Tasks.Task GetCurrent(RecurrenceRuleTester obj, MethodReturnEventArgs<DateTime> e, DateTime? dt)
         {
             if (dt.HasValue)
             {
@@ -42,10 +44,12 @@ namespace Zetbox.App.Test
             {
                 e.Result = obj.Rule.GetCurrent(DateTime.Today);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetNext(RecurrenceRuleTester obj, MethodReturnEventArgs<DateTime> e, DateTime? dt)
+        public static System.Threading.Tasks.Task GetNext(RecurrenceRuleTester obj, MethodReturnEventArgs<DateTime> e, DateTime? dt)
         {
             if (dt.HasValue)
             {
@@ -55,6 +59,8 @@ namespace Zetbox.App.Test
             {
                 e.Result = obj.Rule.GetNext(DateTime.Today);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Zetbox.App.Test
         //}
 
         [Invocation]
-        public static void ServerObjParameter(MethodTest obj, MethodReturnEventArgs<TestObjClass> e, TestObjClass input)
+        public static System.Threading.Tasks.Task ServerObjParameter(MethodTest obj, MethodReturnEventArgs<TestObjClass> e, TestObjClass input)
         {
             var ctx = obj.Context;
 
@@ -51,11 +51,15 @@ namespace Zetbox.App.Test
             newB.ObjectProp = kundeB;
 
             e.Result = input ?? newA;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ServerMethod(MethodTest obj)
+        public static System.Threading.Tasks.Task ServerMethod(MethodTest obj)
         {
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

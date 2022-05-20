@@ -337,7 +337,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             Add(vmdl);
         }
 
-        public delegate void ObjectCreatedHandler(ICompoundObject obj);
+        public delegate System.Threading.Tasks.Task ObjectCreatedHandler(ICompoundObject obj);
         public event ObjectCreatedHandler ObjectCreated;
 
         private void OnObjectCreated(ICompoundObject obj)

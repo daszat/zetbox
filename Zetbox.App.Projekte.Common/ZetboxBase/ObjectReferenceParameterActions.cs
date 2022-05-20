@@ -28,15 +28,17 @@ namespace Zetbox.App.Base
     public static class ObjectReferenceParameterActions
     {
         [Invocation]
-        public static void GetParameterType(ObjectReferenceParameter obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetParameterType(ObjectReferenceParameter obj, MethodReturnEventArgs<Type> e)
         {
             var def = obj.ObjectClass;
             e.Result = Type.GetType(def.Module.Namespace + "." + def.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
             BaseParameterActions.DecorateParameterType(obj, e, false);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetParameterTypeString(ObjectReferenceParameter obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetParameterTypeString(ObjectReferenceParameter obj, MethodReturnEventArgs<string> e)
         {
             var def = obj.ObjectClass;
             if (def == null)
@@ -52,6 +54,8 @@ namespace Zetbox.App.Base
                 e.Result = def.Module.Namespace + "." + def.Name;
             }
             BaseParameterActions.DecorateParameterType(obj, e, false);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

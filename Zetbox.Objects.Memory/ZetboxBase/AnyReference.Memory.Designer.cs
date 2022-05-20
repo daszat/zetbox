@@ -229,7 +229,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetObject_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.API.IDataObject> ret, Zetbox.API.IZetboxContext ctx);
+        public delegate System.Threading.Tasks.Task GetObject_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.API.IDataObject> ret, Zetbox.API.IZetboxContext ctx);
         public static event GetObject_Handler<AnyReference> OnGetObject_AnyReference;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -293,7 +293,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void HasObject_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
+        public delegate System.Threading.Tasks.Task HasObject_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
         public static event HasObject_Handler<AnyReference> OnHasObject_AnyReference;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -356,7 +356,7 @@ namespace Zetbox.App.Base
                 throw new NotImplementedException("No handler registered on method AnyReference.SetObject");
             }
         }
-        public delegate void SetObject_Handler<T>(T obj, Zetbox.API.IDataObject newObj);
+        public delegate System.Threading.Tasks.Task SetObject_Handler<T>(T obj, Zetbox.API.IDataObject newObj);
         public static event SetObject_Handler<AnyReference> OnSetObject_AnyReference;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

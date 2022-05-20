@@ -26,16 +26,18 @@ namespace Zetbox.App.GUI
     public static class ViewModelDescriptorActions
     {
         [Invocation]
-        public static void ToString(ViewModelDescriptor obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(ViewModelDescriptor obj, MethodReturnEventArgs<string> e)
         {
             e.Result = string.Format("{0} (default: {1}) [{2}]",
                 obj.Description,
                 obj.DefaultEditorKind,
                 string.IsNullOrWhiteSpace(obj.ViewModelTypeRef) ? "(no type)" : obj.ViewModelTypeRef);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetName(ViewModelDescriptor obj, MethodReturnEventArgs<string> e)
         {
             if (!string.IsNullOrWhiteSpace(obj.ViewModelTypeRef) && obj.ViewModelTypeRef != "ERROR")
             {
@@ -43,6 +45,8 @@ namespace Zetbox.App.GUI
 
                 e.Result = string.Format("Gui.ViewModelDescriptors.{0}", Regex.Replace(spec.GetSimpleName(addAssemblyNames: false), @"\W+", "_"));
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

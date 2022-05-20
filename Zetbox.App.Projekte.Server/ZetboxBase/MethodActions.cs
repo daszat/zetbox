@@ -32,14 +32,15 @@ namespace Zetbox.App.Base
     public static class MethodActions
     {
         [Invocation]
-        public static void NotifyPreSave(Zetbox.App.Base.Method obj)
+        public static System.Threading.Tasks.Task NotifyPreSave(Zetbox.App.Base.Method obj)
         {
             // TODO: replace with constraint
             if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.Name))
             {
                 throw new ArgumentException(string.Format("Method Name {0} has some illegal chars", obj.Name));
             }
-        }
 
+            return System.Threading.Tasks.Task.CompletedTask;
+        }
     }
 }

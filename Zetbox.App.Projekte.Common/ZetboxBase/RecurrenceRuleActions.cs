@@ -27,7 +27,7 @@ namespace Zetbox.App.Base
     public class RecurrenceRuleActions
     {
         [Invocation]
-        public static void ToString(RecurrenceRule obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(RecurrenceRule obj, MethodReturnEventArgs<string> e)
         {
             var interval = obj.Interval ?? 1;
             if (interval <= 0)
@@ -60,6 +60,8 @@ namespace Zetbox.App.Base
                 sb.Append("not defined");
             }
             e.Result = sb.ToString();
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         private static string ToString(Frequency f)
@@ -111,35 +113,43 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start)
+        public static System.Threading.Tasks.Task GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start)
         {
             e.Result = obj.GetNext(start, DateTime.Now);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start, DateTime dt)
+        public static System.Threading.Tasks.Task GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start, DateTime dt)
         {
             var occurrences = obj.GetWithinInterval(start, dt, dt.Add(GetIntervalTimeSpan(obj.Frequency, obj.Interval)));
             e.Result = occurrences.Where(i => i != dt).FirstOrDefault();
             if (e.Result == default(DateTime)) e.Result = dt;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetCurrent(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start)
+        public static System.Threading.Tasks.Task GetCurrent(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start)
         {
             e.Result = obj.GetCurrent(start, DateTime.Now);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetCurrent(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start, DateTime dt)
+        public static System.Threading.Tasks.Task GetCurrent(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start, DateTime dt)
         {
             var occurrences = obj.GetWithinInterval(start, dt.Add(-GetIntervalTimeSpan(obj.Frequency, obj.Interval)), dt);
             e.Result = occurrences.LastOrDefault();
             if (e.Result == default(DateTime)) e.Result = dt;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetRelative(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime dt)
+        public static System.Threading.Tasks.Task GetRelative(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime dt)
         {
             if (obj.Count.HasValue == false)
             {
@@ -158,6 +168,8 @@ namespace Zetbox.App.Base
                 }
                 e.Result = result;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         private static IEnumerable<int> ToInt(string val)
@@ -214,12 +226,12 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void GetWithinInterval(RecurrenceRule obj, MethodReturnEventArgs<IEnumerable<DateTime>> e, DateTime start, DateTime from, DateTime until)
+        public static System.Threading.Tasks.Task GetWithinInterval(RecurrenceRule obj, MethodReturnEventArgs<IEnumerable<DateTime>> e, DateTime start, DateTime from, DateTime until)
         {
             if (obj.Frequency == null)
             {
                 e.Result = Enumerable.Empty<DateTime>();
-                return;
+                return System.Threading.Tasks.Task.CompletedTask;
             }
             var interval = obj.Interval ?? 1;
             if (interval <= 0)
@@ -310,6 +322,8 @@ namespace Zetbox.App.Base
             }
 
             e.Result = result;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         private static int AddToResult(List<DateTime> result, DateTime current, DateTime start, DateTime until)

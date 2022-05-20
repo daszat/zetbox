@@ -19,6 +19,7 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace Zetbox.Client.WPF.CustomControls
 {
@@ -35,11 +36,15 @@ namespace Zetbox.Client.WPF.CustomControls
             this.Height = 33; // Fixed height
         }
 
-        private delegate void MethodeInvoke();
+        private delegate System.Threading.Tasks.Task MethodeInvoke();
 
         public override void OnApplyTemplate()
         {
-            Dispatcher.BeginInvoke(new MethodeInvoke(InvalidateMeasure), DispatcherPriority.Background, null);
+            Dispatcher.BeginInvoke(new MethodeInvoke(() =>
+            {
+                InvalidateMeasure();
+                return Task.CompletedTask;
+            }), DispatcherPriority.Background, null);
             base.OnApplyTemplate();
         }
     }

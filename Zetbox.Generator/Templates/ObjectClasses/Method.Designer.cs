@@ -109,7 +109,7 @@ this.WriteObjects("        }\r\n");
         {
 
 #line 95 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
-this.WriteObjects("        public delegate void ",  delegateName , "<T>(T obj",  parameterDefs , ");\r\n");
+this.WriteObjects("        public delegate System.Threading.Tasks.Task ",  delegateName , "<T>(T obj",  parameterDefs , ");\r\n");
 #line 97 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 }
     }
@@ -153,7 +153,7 @@ this.WriteObjects("        }\r\n");
         {
 
 #line 135 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
-this.WriteObjects("        public delegate void ",  delegateName , "<T>(T obj, ",  returnArgsType , " ret",  parameterDefs , ");\r\n");
+this.WriteObjects("        public delegate System.Threading.Tasks.Task ",  delegateName , "<T>(T obj, ",  returnArgsType , " ret",  parameterDefs , ");\r\n");
 #line 137 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 }
     }

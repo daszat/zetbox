@@ -32,23 +32,27 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void GetLabel(Zetbox.App.Base.EnumerationEntry obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task GetLabel(Zetbox.App.Base.EnumerationEntry obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
 
             if (obj.Enumeration == null || obj.Enumeration.Module == null)
-                return;
+                return System.Threading.Tasks.Task.CompletedTask;
 
             e.Result = _assets.GetString(obj.Enumeration.Module, ZetboxAssetKeys.ConstructBaseName(obj.Enumeration), ZetboxAssetKeys.ConstructLabelKey(obj), e.Result);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
-        
+
         [Invocation]
-        public static void ToString(EnumerationEntry obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(EnumerationEntry obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Enumeration + "." + obj.Name;
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

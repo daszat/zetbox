@@ -28,9 +28,11 @@ namespace Zetbox.App.Base
     public static class CompoundObjectActions
     {
         [Invocation]
-        public static void GetName(CompoundObject obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetName(CompoundObject obj, MethodReturnEventArgs<string> e)
         {
             e.Result = string.Format("Base.CompoundObjects.{0}.{1}", obj.Module.Namespace, obj.Name);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

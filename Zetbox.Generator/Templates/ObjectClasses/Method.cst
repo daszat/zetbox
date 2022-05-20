@@ -92,7 +92,7 @@
         if (this.m.ObjectClass == this.dt)
         {
 %>
-        public delegate void <%= delegateName %><T>(T obj<%= parameterDefs %>);
+        public delegate System.Threading.Tasks.Task <%= delegateName %><T>(T obj<%= parameterDefs %>);
 <%
         }
     }
@@ -132,7 +132,7 @@
         if (this.m.ObjectClass == this.dt)
         {
 %>
-        public delegate void <%= delegateName %><T>(T obj, <%= returnArgsType %> ret<%= parameterDefs %>);
+        public delegate System.Threading.Tasks.Task <%= delegateName %><T>(T obj, <%= returnArgsType %> ret<%= parameterDefs %>);
 <%
         }
     }

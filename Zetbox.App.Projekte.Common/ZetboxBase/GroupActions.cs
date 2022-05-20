@@ -24,17 +24,21 @@ namespace Zetbox.App.Base
     public static class GroupActions
     {
         [Invocation]
-        public static void ToString(Group obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Group obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetName(Group kind, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetName(Group kind, MethodReturnEventArgs<string> e)
         {
             e.Result = "Base.Groups." + kind.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

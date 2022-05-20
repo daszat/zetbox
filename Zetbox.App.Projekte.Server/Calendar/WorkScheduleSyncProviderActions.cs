@@ -26,12 +26,12 @@ namespace Zetbox.App.Calendar
     public static class WorkScheduleSyncProviderActions
     {
         [Invocation]
-        public static void PerformSync(WorkScheduleSyncProvider obj)
+        public static System.Threading.Tasks.Task PerformSync(WorkScheduleSyncProvider obj)
         {
             if (obj.Calendar == null || obj.WorkSchedule == null)
             {
                 Logging.Server.Warn(string.Format("{0}.PerformSync: unable to sync. Either calendar or work schedule is null", obj.Name));
-                return;
+                return System.Threading.Tasks.Task.CompletedTask;
             }
 
             var ctx = obj.Context;
@@ -75,6 +75,8 @@ namespace Zetbox.App.Calendar
             Logging.Server.Info(string.Format("{0}.PerformSync: created {1} events", obj.Name, counter));
 
             obj.NextSync = DateTime.Today.AddDays(1); // once a day is good enougth
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

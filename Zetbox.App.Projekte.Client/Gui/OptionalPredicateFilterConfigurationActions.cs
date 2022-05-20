@@ -39,7 +39,7 @@ namespace Zetbox.App.GUI
         }
 
         [Invocation]
-        public static void CreateFilterModel(Zetbox.App.GUI.OptionalPredicateFilterConfiguration obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> e, Zetbox.API.IZetboxContext ctx)
+        public static System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.OptionalPredicateFilterConfiguration obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             var mdl = new OptionalPredicateFilterModel();
             mdl.Label = obj.Label;
@@ -55,12 +55,16 @@ namespace Zetbox.App.GUI
             mdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl, /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel.Find(FrozenContext)));
 
             e.Result = mdl;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.GUI.OptionalPredicateFilterConfiguration obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.GUI.OptionalPredicateFilterConfiguration obj)
         {
             obj.ViewModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_OptionalPredicateFilterViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

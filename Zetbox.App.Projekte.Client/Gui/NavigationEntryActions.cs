@@ -24,9 +24,11 @@ namespace Zetbox.App.GUI
     public static class NavigationEntryActions
     {
         [Invocation]
-        public static void GetDefaultViewModel(Zetbox.App.GUI.NavigationEntry obj, MethodReturnEventArgs<object> e, Zetbox.API.IZetboxContext dataCtx, System.Object parent)
+        public static System.Threading.Tasks.Task GetDefaultViewModel(Zetbox.App.GUI.NavigationEntry obj, MethodReturnEventArgs<object> e, Zetbox.API.IZetboxContext dataCtx, System.Object parent)
         {
             // do nothing
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

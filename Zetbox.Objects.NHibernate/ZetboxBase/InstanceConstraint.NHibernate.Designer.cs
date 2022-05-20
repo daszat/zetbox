@@ -346,7 +346,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, Zetbox.API.IDataObject constrainedObject);
+        public delegate System.Threading.Tasks.Task GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, Zetbox.API.IDataObject constrainedObject);
         public static event GetErrorText_Handler<InstanceConstraint> OnGetErrorText_InstanceConstraint;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -410,7 +410,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, Zetbox.API.IDataObject constrainedObject);
+        public delegate System.Threading.Tasks.Task IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, Zetbox.API.IDataObject constrainedObject);
         public static event IsValid_Handler<InstanceConstraint> OnIsValid_InstanceConstraint;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

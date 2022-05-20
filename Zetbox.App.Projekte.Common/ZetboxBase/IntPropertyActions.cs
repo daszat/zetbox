@@ -24,24 +24,30 @@ namespace Zetbox.App.Base
     public static class IntPropertyActions
     {
         [Invocation]
-        public static void GetPropertyType(IntProperty obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetPropertyType(IntProperty obj, MethodReturnEventArgs<Type> e)
         {
             e.Result = typeof(int);
             PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetElementTypeString(IntProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetElementTypeString(IntProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "int";
             PropertyActions.DecorateElementType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetPropertyTypeString(IntProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetPropertyTypeString(IntProperty obj, MethodReturnEventArgs<string> e)
         {
             GetElementTypeString(obj, e);
             PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

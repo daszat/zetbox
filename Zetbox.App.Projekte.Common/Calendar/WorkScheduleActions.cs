@@ -26,33 +26,43 @@ namespace Zetbox.App.Calendar
     public static class WorkScheduleActions
     {
         [Invocation]
-        public static void ToString(WorkSchedule obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(WorkSchedule obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = obj.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetWorkingHours(WorkSchedule obj, MethodReturnEventArgs<System.Decimal> e, System.DateTime from, System.DateTime until)
+        public static System.Threading.Tasks.Task GetWorkingHours(WorkSchedule obj, MethodReturnEventArgs<System.Decimal> e, System.DateTime from, System.DateTime until)
         {
             e.Result = Calc(obj, from, until, CalcModes.WorkingHours);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetWorkingDays(WorkSchedule obj, MethodReturnEventArgs<System.Int32> e, System.DateTime from, System.DateTime until)
+        public static System.Threading.Tasks.Task GetWorkingDays(WorkSchedule obj, MethodReturnEventArgs<System.Int32> e, System.DateTime from, System.DateTime until)
         {
             e.Result = (int)Calc(obj, from, until, CalcModes.WorkingDays);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetOffDays(WorkSchedule obj, MethodReturnEventArgs<System.Int32> e, System.DateTime from, System.DateTime until)
+        public static System.Threading.Tasks.Task GetOffDays(WorkSchedule obj, MethodReturnEventArgs<System.Int32> e, System.DateTime from, System.DateTime until)
         {
             e.Result = (int)Calc(obj, from, until, CalcModes.OffDays);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetHolidays(WorkSchedule obj, MethodReturnEventArgs<int> e, DateTime from, DateTime until)
+        public static System.Threading.Tasks.Task GetHolidays(WorkSchedule obj, MethodReturnEventArgs<int> e, DateTime from, DateTime until)
         {
             e.Result = (int)Calc(obj, from, until, CalcModes.Holidays);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         private enum CalcModes
@@ -150,7 +160,7 @@ namespace Zetbox.App.Calendar
         }
 
         [Invocation]
-        public static void Duplicate(WorkSchedule obj, MethodReturnEventArgs<Zetbox.App.Calendar.WorkSchedule> e)
+        public static System.Threading.Tasks.Task Duplicate(WorkSchedule obj, MethodReturnEventArgs<Zetbox.App.Calendar.WorkSchedule> e)
         {
             var ctx = obj.Context;
             var result = ctx.Create<WorkSchedule>();
@@ -188,6 +198,8 @@ namespace Zetbox.App.Calendar
             }
 
             e.Result = result;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

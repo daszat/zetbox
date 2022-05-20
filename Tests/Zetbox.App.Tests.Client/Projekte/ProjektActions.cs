@@ -34,13 +34,15 @@ namespace Zetbox.App.Projekte
         }
 
         [Invocation]
-        public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs<System.Object> e, string title, Zetbox.App.Base.DateTimeRange range)
+        public static System.Threading.Tasks.Task GetSummaryReport(Projekt obj, MethodReturnEventArgs<System.Object> e, string title, Zetbox.App.Base.DateTimeRange range)
         {
             using (var rpt = _rptFactory())
             {
                 ProjectReport.Call(rpt);
                 rpt.Open("ProjectReport.pdf");
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

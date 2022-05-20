@@ -1507,7 +1507,7 @@ namespace Zetbox.API
         public T Data { get; set; }
     }
 
-    public delegate void GenericEventHandler<TEventArgs>(object sender, GenericEventArgs<TEventArgs> e);
+    public delegate System.Threading.Tasks.Task GenericEventHandler<TEventArgs>(object sender, GenericEventArgs<TEventArgs> e);
 
     public static class DateTimeExtensions
     {

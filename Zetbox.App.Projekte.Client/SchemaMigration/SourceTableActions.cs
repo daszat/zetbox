@@ -39,7 +39,7 @@ namespace Zetbox.App.SchemaMigration
 
         }
         [Invocation]
-        public static void CreateMappingReport(Zetbox.App.SchemaMigration.SourceTable obj)
+        public static System.Threading.Tasks.Task CreateMappingReport(Zetbox.App.SchemaMigration.SourceTable obj)
         {
             var fileName = _mdlFactory.GetDestinationFileNameFromUser("Migration Report " + obj.Name + ".pdf", "PDF|*.pdf");
             if (!string.IsNullOrEmpty(fileName))
@@ -49,6 +49,8 @@ namespace Zetbox.App.SchemaMigration
                 r.Save(fileName);
                 _fileOpener.ShellExecute(fileName);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

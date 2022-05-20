@@ -520,7 +520,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             }
             return e.Result;
         }
-        public delegate void GetIsList_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
+        public delegate System.Threading.Tasks.Task GetIsList_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
         public static event GetIsList_Handler<ObjectReferenceProperty> OnGetIsList_ObjectReferenceProperty;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

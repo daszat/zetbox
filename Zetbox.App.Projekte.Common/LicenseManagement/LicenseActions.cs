@@ -27,39 +27,51 @@ namespace Zetbox.App.LicenseManagement
     public static class LicenseActions
     {
         [Invocation]
-        public static void ToString(License obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(License obj, MethodReturnEventArgs<string> e)
         {
             e.Result = $"{obj.Licensee}: {obj.ValidFrom.ToShortDateString()} - {obj.ValidThru.ToShortDateString()}, {obj.Description}";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void preSet_ValidFrom(License obj, PropertyPreSetterEventArgs<DateTime> e)
+        public static System.Threading.Tasks.Task preSet_ValidFrom(License obj, PropertyPreSetterEventArgs<DateTime> e)
         {
             e.Result = e.NewValue.Date;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void preSet_ValidThru(License obj, PropertyPreSetterEventArgs<DateTime> e)
+        public static System.Threading.Tasks.Task preSet_ValidThru(License obj, PropertyPreSetterEventArgs<DateTime> e)
         {
             e.Result = e.NewValue.Date;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void NotifyCreated(License obj)
+        public static System.Threading.Tasks.Task NotifyCreated(License obj)
         {
             obj.ValidThru = DateTime.Today.AddYears(1);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void Check(License obj, MethodReturnEventArgs<bool> e, System.Object certificate)
+        public static System.Threading.Tasks.Task Check(License obj, MethodReturnEventArgs<bool> e, System.Object certificate)
         {
             e.Result = obj.IsValid() && obj.IsSignatureValid(certificate);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
         [Invocation]
-        public static void IsValid(License obj, MethodReturnEventArgs<bool> e)
+        public static System.Threading.Tasks.Task IsValid(License obj, MethodReturnEventArgs<bool> e)
         {
             var today = DateTime.Today;
             e.Result = obj.ValidFrom <= today && today <= obj.ValidThru;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         private static byte[] ComputeHash(License obj)
@@ -79,7 +91,7 @@ namespace Zetbox.App.LicenseManagement
         }
 
         [Invocation]
-        public static void IsSignatureValid(License obj, MethodReturnEventArgs<bool> e, System.Object certificate)
+        public static System.Threading.Tasks.Task IsSignatureValid(License obj, MethodReturnEventArgs<bool> e, System.Object certificate)
         {
             X509Certificate2 cert;
             if (certificate is X509Certificate2)
@@ -98,21 +110,27 @@ namespace Zetbox.App.LicenseManagement
             var rsaKey = cert.GetRSAPublicKey() ?? throw new InvalidOperationException("given public key is not an RSA key");
             var hash = ComputeHash(obj);
             e.Result = rsaKey.VerifyHash(hash, Convert.FromBase64String(obj.Signature), HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void Sign(License obj, Zetbox.App.LicenseManagement.PrivateKey certificate, string password)
+        public static System.Threading.Tasks.Task Sign(License obj, Zetbox.App.LicenseManagement.PrivateKey certificate, string password)
         {
             var key = new X509Certificate2(Convert.FromBase64String(certificate.Certificate), !string.IsNullOrWhiteSpace(password) ? password : certificate.Password);
             var cng_private = key.GetRSAPrivateKey();
             var hash = ComputeHash(obj);
             obj.Signature = Convert.ToBase64String(cng_private.SignHash(hash, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1));
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void Export(License obj, string file)
+        public static System.Threading.Tasks.Task Export(License obj, string file)
         {
             App.Packaging.Exporter.Export(obj.Context, file, new[] { obj });
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

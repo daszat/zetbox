@@ -913,7 +913,7 @@ namespace Zetbox.App.Projekte
                 throw new NotImplementedException("No handler registered on method Task.GetMergeableProperties");
             }
         }
-        public delegate void GetMergeableProperties_Handler<T>(T obj, IEnumerable<System.Object> properties);
+        public delegate System.Threading.Tasks.Task GetMergeableProperties_Handler<T>(T obj, IEnumerable<System.Object> properties);
         public static event GetMergeableProperties_Handler<Task> OnGetMergeableProperties_Task;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -976,7 +976,7 @@ namespace Zetbox.App.Projekte
                 throw new NotImplementedException("No handler registered on method Task.MergeFrom");
             }
         }
-        public delegate void MergeFrom_Handler<T>(T obj, Zetbox.API.IDataObject source);
+        public delegate System.Threading.Tasks.Task MergeFrom_Handler<T>(T obj, Zetbox.API.IDataObject source);
         public static event MergeFrom_Handler<Task> OnMergeFrom_Task;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

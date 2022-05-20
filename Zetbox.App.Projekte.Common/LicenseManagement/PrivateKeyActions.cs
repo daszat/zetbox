@@ -25,15 +25,19 @@ namespace Zetbox.App.LicenseManagement
     public static class PrivateKeyActions
     {
         [Invocation]
-        public static void ToString(PrivateKey obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(PrivateKey obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Description;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void LoadFromFile(PrivateKey obj, string file)
+        public static System.Threading.Tasks.Task LoadFromFile(PrivateKey obj, string file)
         {
             obj.Certificate = Convert.ToBase64String(File.ReadAllBytes(file));
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -24,17 +24,21 @@ namespace Zetbox.App.Base
     public static class StringParameterActions
     {
         [Invocation]
-        public static void GetParameterType(StringParameter obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetParameterType(StringParameter obj, MethodReturnEventArgs<Type> e)
         {
             e.Result = typeof(string);
             BaseParameterActions.DecorateParameterType(obj, e, false);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetParameterTypeString(StringParameter obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetParameterTypeString(StringParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "string";
             BaseParameterActions.DecorateParameterType(obj, e, false);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

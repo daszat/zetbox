@@ -25,18 +25,22 @@ namespace Zetbox.App.Calendar
     public static class DayOfWeekWorkScheduleRuleActions
     {
         [Invocation]
-        public static void ToString(DayOfWeekWorkScheduleRule obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(DayOfWeekWorkScheduleRule obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = string.Format(e.Result + "; every {0}", obj.DayOfWeek.ToString());
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void AppliesTo(DayOfWeekWorkScheduleRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
+        public static System.Threading.Tasks.Task AppliesTo(DayOfWeekWorkScheduleRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
         {
             if (obj.CheckValidDate(date))
             {
                 e.Result = (int)date.DayOfWeek == (int)obj.DayOfWeek;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

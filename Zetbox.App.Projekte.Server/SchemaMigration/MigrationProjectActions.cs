@@ -43,7 +43,7 @@ namespace Zetbox.App.SchemaMigration
         }
 
         [Invocation]
-        public static void UpdateFromSourceSchema(Zetbox.App.SchemaMigration.MigrationProject obj)
+        public static System.Threading.Tasks.Task UpdateFromSourceSchema(Zetbox.App.SchemaMigration.MigrationProject obj)
         {
             foreach (var s in obj.StagingDatabases)
             {
@@ -106,6 +106,8 @@ namespace Zetbox.App.SchemaMigration
             // TODO: For now, submit changes
             // Later, implement InvokeOnServer correctly
             obj.Context.SubmitChanges();
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

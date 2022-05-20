@@ -10,18 +10,6 @@ namespace Zetbox.API.Async
 {
     public static class AsyncQueryableExtensions
     {
-        public static Task<T> SingleOrDefaultAsync<T>(this IQueryable<T> qry)
-        {
-            if (qry.Provider is IAsyncQueryProvider)
-            {
-                return ((IAsyncQueryProvider)qry.Provider).ExecuteAsync<T>(Expression.Call(typeof(Queryable), "SingleOrDefault", new Type[] { typeof(T) }, new Expression[] { qry.Expression }));
-            }
-            else
-            {
-                return Task.FromResult(qry.SingleOrDefault());
-            }
-        }
-
         public static Task<T> FirstOrDefaultAsync<T>(this IQueryable<T> qry, Expression<Func<T, bool>> predicate)
         {
             if (qry.Provider is IAsyncQueryProvider)
@@ -55,6 +43,66 @@ namespace Zetbox.API.Async
             else
             {
                 return Task.FromResult(qry.SingleOrDefault(predicate));
+            }
+        }
+
+        public static Task<T> SingleOrDefaultAsync<T>(this IQueryable<T> qry)
+        {
+            if (qry.Provider is IAsyncQueryProvider)
+            {
+                return ((IAsyncQueryProvider)qry.Provider).ExecuteAsync<T>(Expression.Call(typeof(Queryable), "SingleOrDefault", new Type[] { typeof(T) }, new Expression[] { qry.Expression }));
+            }
+            else
+            {
+                return Task.FromResult(qry.SingleOrDefault());
+            }
+        }
+
+        public static Task<bool> AnyAsync<T>(this IQueryable<T> qry, Expression<Func<T, bool>> predicate)
+        {
+            if (qry.Provider is IAsyncQueryProvider)
+            {
+                return ((IAsyncQueryProvider)qry.Provider).ExecuteAsync<bool>(Expression.Call(typeof(Queryable), "Any", new Type[] { typeof(T) }, new Expression[] { qry.Expression, Expression.Quote(predicate) }));
+            }
+            else
+            {
+                return Task.FromResult(qry.Any(predicate));
+            }
+        }
+
+        public static Task<bool> AnyAsync<T>(this IQueryable<T> qry)
+        {
+            if (qry.Provider is IAsyncQueryProvider)
+            {
+                return ((IAsyncQueryProvider)qry.Provider).ExecuteAsync<bool>(Expression.Call(typeof(Queryable), "Any", new Type[] { typeof(T) }, new Expression[] { qry.Expression }));
+            }
+            else
+            {
+                return Task.FromResult(qry.Any());
+            }
+        }
+
+        public static Task<int> CountAsync<T>(this IQueryable<T> qry, Expression<Func<T, bool>> predicate)
+        {
+            if (qry.Provider is IAsyncQueryProvider)
+            {
+                return ((IAsyncQueryProvider)qry.Provider).ExecuteAsync<int>(Expression.Call(typeof(Queryable), "Any", new Type[] { typeof(T) }, new Expression[] { qry.Expression, Expression.Quote(predicate) }));
+            }
+            else
+            {
+                return Task.FromResult(qry.Count(predicate));
+            }
+        }
+
+        public static Task<int> CountAsync<T>(this IQueryable<T> qry)
+        {
+            if (qry.Provider is IAsyncQueryProvider)
+            {
+                return ((IAsyncQueryProvider)qry.Provider).ExecuteAsync<int>(Expression.Call(typeof(Queryable), "Any", new Type[] { typeof(T) }, new Expression[] { qry.Expression }));
+            }
+            else
+            {
+                return Task.FromResult(qry.Count());
             }
         }
 

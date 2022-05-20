@@ -35,9 +35,11 @@ namespace Zetbox.App.Base
     public static class GuidPropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.Base.GuidProperty obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.Base.GuidProperty obj)
         {
             obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableGuidPropertyViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

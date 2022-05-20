@@ -27,7 +27,7 @@ namespace Zetbox.App.Base
     public static class DataTypeActions
     {
         [Invocation]
-        public static void ToString(DataType obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(DataType obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0}.{1}",
                 obj.Module == null
@@ -36,16 +36,20 @@ namespace Zetbox.App.Base
                 obj.Name);
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetDataType(DataType obj, Zetbox.API.MethodReturnEventArgs<System.Type> e)
+        public static System.Threading.Tasks.Task GetDataType(DataType obj, Zetbox.API.MethodReturnEventArgs<System.Type> e)
         {
             e.Result = Type.GetType(obj.GetDataTypeString() + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetDataTypeString(DataType obj, Zetbox.API.MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetDataTypeString(DataType obj, Zetbox.API.MethodReturnEventArgs<string> e)
         {
             if (obj.Module == null)
             {
@@ -55,10 +59,12 @@ namespace Zetbox.App.Base
             {
                 e.Result = obj.Module.Namespace + "." + obj.Name;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ImplementInterfaces(DataType obj)
+        public static System.Threading.Tasks.Task ImplementInterfaces(DataType obj)
         {
             IZetboxContext ctx = obj.Context;
             if (obj.Module == null)
@@ -252,6 +258,8 @@ namespace Zetbox.App.Base
                 }
                 #endregion
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

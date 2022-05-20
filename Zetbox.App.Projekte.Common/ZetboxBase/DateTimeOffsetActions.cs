@@ -26,7 +26,7 @@ namespace Zetbox.App.Base
     public class DateTimeOffsetActions
     {
         [Invocation]
-        public static void ToString(DateTimeOffset obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(DateTimeOffset obj, MethodReturnEventArgs<string> e)
         {
             var sb = new StringBuilder();
 
@@ -38,10 +38,12 @@ namespace Zetbox.App.Base
             if (obj.Seconds.HasValue) sb.AppendFormat(" {0} seconds", obj.Seconds.Value);
 
             e.Result = sb.ToString();
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void AddTo(DateTimeOffset obj, MethodReturnEventArgs<DateTime> e, DateTime dt)
+        public static System.Threading.Tasks.Task AddTo(DateTimeOffset obj, MethodReturnEventArgs<DateTime> e, DateTime dt)
         {
             e.Result = dt
                 .AddYears(obj.Years ?? 0)
@@ -50,6 +52,8 @@ namespace Zetbox.App.Base
                 .AddHours(obj.Hours ?? 0.0)
                 .AddMinutes(obj.Minutes ?? 0.0)
                 .AddSeconds(obj.Seconds ?? 0.0);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

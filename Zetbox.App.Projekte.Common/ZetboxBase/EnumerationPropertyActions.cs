@@ -24,15 +24,17 @@ namespace Zetbox.App.Base
     public static class EnumerationPropertyActions
     {
         [Invocation]
-        public static void GetPropertyType(EnumerationProperty obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetPropertyType(EnumerationProperty obj, MethodReturnEventArgs<Type> e)
         {
             var cls = obj.Enumeration;
             e.Result = Type.GetType(cls.Module.Namespace + "." + cls.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
             PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetElementTypeString(EnumerationProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetElementTypeString(EnumerationProperty obj, MethodReturnEventArgs<string> e)
         {
             var cls = obj.Enumeration;
             if (cls == null)
@@ -48,13 +50,17 @@ namespace Zetbox.App.Base
                 e.Result = cls.Module.Namespace + "." + cls.Name;
             }
             PropertyActions.DecorateElementType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetPropertyTypeString(EnumerationProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetPropertyTypeString(EnumerationProperty obj, MethodReturnEventArgs<string> e)
         {
             GetElementTypeString(obj, e);
             PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

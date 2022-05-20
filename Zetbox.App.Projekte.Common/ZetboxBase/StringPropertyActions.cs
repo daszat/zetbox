@@ -25,33 +25,41 @@ namespace Zetbox.App.Base
     public static class StringPropertyActions
     {
         [Invocation]
-        public static void ObjectIsValid(StringProperty obj, ObjectIsValidEventArgs e)
+        public static System.Threading.Tasks.Task ObjectIsValid(StringProperty obj, ObjectIsValidEventArgs e)
         {
             if (obj.GetLengthConstraint() == null)
             {
                 e.Errors.Add(string.Format("String property {0}.{1} must have a string range constraint", obj.ObjectClass.Name, obj.Name));
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetPropertyType(StringProperty obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetPropertyType(StringProperty obj, MethodReturnEventArgs<Type> e)
         {
             e.Result = typeof(string);
             PropertyActions.DecorateParameterType(obj, e, false, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetElementTypeString(StringProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetElementTypeString(StringProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "string";
             PropertyActions.DecorateElementType(obj, e, false);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetPropertyTypeString(StringProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetPropertyTypeString(StringProperty obj, MethodReturnEventArgs<string> e)
         {
             GetElementTypeString(obj, e);
             PropertyActions.DecorateParameterType(obj, e, false, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

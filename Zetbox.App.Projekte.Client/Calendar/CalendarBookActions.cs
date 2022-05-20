@@ -44,7 +44,7 @@ namespace Zetbox.App.Calendar
         }
 
         [Invocation]
-        public static void GetNewEventViewModels(CalendarBook obj, object /* I'm so sorry, Zetbox.Objects.dll cannot use custom classes */ args)
+        public static System.Threading.Tasks.Task GetNewEventViewModels(CalendarBook obj, object /* I'm so sorry, Zetbox.Objects.dll cannot use custom classes */ args)
         {
             var eventArgs = (NewEventViewModelsArgs)args;
             eventArgs.ViewModels.Insert(0, eventArgs.ViewModelFactory.CreateViewModel<EventInputViewModel.Factory>()
@@ -53,6 +53,8 @@ namespace Zetbox.App.Calendar
             // For testing only!
             //eventArgs.ViewModels.Add(eventArgs.ViewModelFactory.CreateViewModel<Zetbox.App.Projekte.Client.ViewModel.TestModule.EventTestInputViewModel.Factory>()
             //    .Invoke(eventArgs.DataContext, eventArgs.Parent, obj, eventArgs.SelectedStartDate, eventArgs.IsAllDay));
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

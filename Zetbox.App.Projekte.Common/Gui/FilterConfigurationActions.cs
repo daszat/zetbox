@@ -27,9 +27,11 @@ namespace Zetbox.App.GUI
     {
         
         [Invocation]
-        public static void GetLabel(Zetbox.App.GUI.FilterConfiguration obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task GetLabel(Zetbox.App.GUI.FilterConfiguration obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : string.Empty;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

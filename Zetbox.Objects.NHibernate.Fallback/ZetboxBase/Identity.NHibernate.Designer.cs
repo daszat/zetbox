@@ -535,7 +535,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
                 throw new NotImplementedException("No handler registered on method Identity.ClearLoginToken");
             }
         }
-        public delegate void ClearLoginToken_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task ClearLoginToken_Handler<T>(T obj);
         public static event ClearLoginToken_Handler<Identity> OnClearLoginToken_Identity;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -598,7 +598,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
                 throw new NotImplementedException("No handler registered on method Identity.CreateLoginToken");
             }
         }
-        public delegate void CreateLoginToken_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task CreateLoginToken_Handler<T>(T obj);
         public static event CreateLoginToken_Handler<Identity> OnCreateLoginToken_Identity;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -661,7 +661,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
                 throw new NotImplementedException("No handler registered on method Identity.SetPassword");
             }
         }
-        public delegate void SetPassword_Handler<T>(T obj, string plainTextPassword);
+        public delegate System.Threading.Tasks.Task SetPassword_Handler<T>(T obj, string plainTextPassword);
         public static event SetPassword_Handler<Identity> OnSetPassword_Identity;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -724,7 +724,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
                 throw new NotImplementedException("No handler registered on method Identity.SetPasswordUI");
             }
         }
-        public delegate void SetPasswordUI_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task SetPasswordUI_Handler<T>(T obj);
         public static event SetPasswordUI_Handler<Identity> OnSetPasswordUI_Identity;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

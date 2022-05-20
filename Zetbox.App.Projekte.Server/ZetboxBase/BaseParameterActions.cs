@@ -27,7 +27,7 @@ namespace Zetbox.App.Base
     public static class BaseParameterActions
     {
         [Invocation]
-        public static void NotifyPreSave(Zetbox.App.Base.BaseParameter obj)
+        public static System.Threading.Tasks.Task NotifyPreSave(Zetbox.App.Base.BaseParameter obj)
         {
             if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.Name))
             {
@@ -42,6 +42,8 @@ namespace Zetbox.App.Base
                     obj.Method.ObjectClass.Name,
                     obj.Method.Name));
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

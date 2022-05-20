@@ -706,7 +706,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetDefaultValue_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret);
+        public delegate System.Threading.Tasks.Task GetDefaultValue_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret);
         public static event GetDefaultValue_Handler<DefaultPropertyValue> OnGetDefaultValue_DefaultPropertyValue;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

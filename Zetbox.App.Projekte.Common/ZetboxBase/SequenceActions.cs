@@ -29,28 +29,34 @@ namespace Zetbox.App.Base
     public static class SequenceActions
     {
         [Invocation]
-        public static void ToString(Sequence obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Sequence obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetName(Sequence obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetName(Sequence obj, MethodReturnEventArgs<string> e)
         {
             if (!string.IsNullOrEmpty(obj.Name) && obj.Module != null && !string.IsNullOrEmpty(obj.Module.Name))
             {
                 e.Result = "Base.Sequences." + obj.Module.Name + "." + Regex.Replace(obj.Name, "\\W", "_");
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void preSet_Data(Sequence obj, PropertyPreSetterEventArgs<SequenceData> e)
+        public static System.Threading.Tasks.Task preSet_Data(Sequence obj, PropertyPreSetterEventArgs<SequenceData> e)
         {
             // TODO: Workaroud: No! Changing Sequence Data is not allowed
             if (e.OldValue != null)
             {
                 e.Result = e.OldValue;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

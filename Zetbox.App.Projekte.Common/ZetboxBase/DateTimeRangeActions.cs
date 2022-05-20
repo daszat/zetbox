@@ -24,15 +24,19 @@ namespace Zetbox.App.Base
     public static class DateTimeRangeActions
     {
         [Invocation]
-        public static void ToString(DateTimeRange obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(DateTimeRange obj, MethodReturnEventArgs<string> e)
         {
             e.Result = string.Format("{0:d} - {1:d}", obj.From, obj.Thru);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void get_TotalDays(DateTimeRange obj, PropertyGetterEventArgs<int?> e)
+        public static System.Threading.Tasks.Task get_TotalDays(DateTimeRange obj, PropertyGetterEventArgs<int?> e)
         {
             e.Result = obj.From.HasValue && obj.Thru.HasValue ? (int?)((obj.Thru.Value - obj.From.Value).TotalDays) : null;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -1990,7 +1990,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             return e.Result;
         }
-        public delegate void GetDescription_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetDescription_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetDescription_Handler<Property> OnGetDescription_Property;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -2054,7 +2054,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             return e.Result;
         }
-        public delegate void GetElementTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetElementTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetElementTypeString_Handler<Property> OnGetElementTypeString_Property;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -2118,7 +2118,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             return e.Result;
         }
-        public delegate void GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetLabel_Handler<Property> OnGetLabel_Property;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -2182,7 +2182,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             return e.Result;
         }
-        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<Property> OnGetName_Property;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -2246,7 +2246,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             return e.Result;
         }
-        public delegate void GetPropertyType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
+        public delegate System.Threading.Tasks.Task GetPropertyType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
         public static event GetPropertyType_Handler<Property> OnGetPropertyType_Property;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -2310,7 +2310,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             return e.Result;
         }
-        public delegate void GetPropertyTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetPropertyTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetPropertyTypeString_Handler<Property> OnGetPropertyTypeString_Property;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

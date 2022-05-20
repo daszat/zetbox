@@ -25,8 +25,10 @@ namespace Zetbox.App.Test
     public static class TestStudentActions
     {
         [Invocation]
-        public static void postSet_Testbogen(TestStudent obj)
+        public static System.Threading.Tasks.Task postSet_Testbogen(TestStudent obj)
         {
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

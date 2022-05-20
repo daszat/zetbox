@@ -28,58 +28,72 @@ namespace Zetbox.App.Projekte
     public static class ProjektActions
     {
         [Invocation]
-        public static void ToString(Projekt obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Projekt obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetFulltextIndexBody(Projekt obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetFulltextIndexBody(Projekt obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name + "\n" + obj.Kundenname;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_Tasks(Projekt obj)
+        public static System.Threading.Tasks.Task postSet_Tasks(Projekt obj)
         {
-            if (obj.Context.IsCurrentlyImporting()) return;
+            if (obj.Context.IsCurrentlyImporting()) return System.Threading.Tasks.Task.CompletedTask;
 
             obj.Recalculate("AufwandGes");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_KickOffAm(Projekt obj, PropertyPostSetterEventArgs<DateTime> e)
+        public static System.Threading.Tasks.Task postSet_KickOffAm(Projekt obj, PropertyPostSetterEventArgs<DateTime> e)
         {
-            if (obj.Context.IsCurrentlyImporting()) return;
+            if (obj.Context.IsCurrentlyImporting()) return System.Threading.Tasks.Task.CompletedTask;
 
             if (obj.KickOffBis.HasValue)
             {
                 obj.KickOffBis = e.NewValue.Date + obj.KickOffBis.Value.TimeOfDay;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void preSet_KickOffBis(Projekt obj, PropertyPreSetterEventArgs<DateTime?> e)
+        public static System.Threading.Tasks.Task preSet_KickOffBis(Projekt obj, PropertyPreSetterEventArgs<DateTime?> e)
         {
-            if (obj.Context.IsCurrentlyImporting()) return;
+            if (obj.Context.IsCurrentlyImporting()) return System.Threading.Tasks.Task.CompletedTask;
 
             if (e.NewValue.HasValue)
             {
                 e.Result = obj.KickOffAm.Date + e.NewValue.Value.TimeOfDay;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void get_AufwandGes(Projekt obj, PropertyGetterEventArgs<double?> e)
+        public static System.Threading.Tasks.Task get_AufwandGes(Projekt obj, PropertyGetterEventArgs<double?> e)
         {
             e.Result = obj.Tasks.Sum(t => t.Aufwand);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void isValid_KickOffBis(Projekt obj, PropertyIsValidEventArgs e)
+        public static System.Threading.Tasks.Task isValid_KickOffBis(Projekt obj, PropertyIsValidEventArgs e)
         {
             e.IsValid = obj.KickOffBis == null || obj.KickOffBis >= obj.KickOffAm;
             e.Error = e.IsValid ? string.Empty : "Bis-Datum ist leer oder liegt vor dem Von-Datum";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
     }

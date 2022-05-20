@@ -123,7 +123,7 @@ namespace Zetbox.App.Test
             }
             return e.Result;
         }
-        public delegate void GetCurrent_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime? dt);
+        public delegate System.Threading.Tasks.Task GetCurrent_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime? dt);
         public static event GetCurrent_Handler<RecurrenceRuleTester> OnGetCurrent_RecurrenceRuleTester;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -187,7 +187,7 @@ namespace Zetbox.App.Test
             }
             return e.Result;
         }
-        public delegate void GetNext_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime? dt);
+        public delegate System.Threading.Tasks.Task GetNext_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime? dt);
         public static event GetNext_Handler<RecurrenceRuleTester> OnGetNext_RecurrenceRuleTester;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

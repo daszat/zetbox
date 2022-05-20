@@ -1540,7 +1540,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 throw new NotImplementedException("No handler registered on method SourceColumn.CreateProperty");
             }
         }
-        public delegate void CreateProperty_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task CreateProperty_Handler<T>(T obj);
         public static event CreateProperty_Handler<SourceColumn> OnCreateProperty_SourceColumn;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

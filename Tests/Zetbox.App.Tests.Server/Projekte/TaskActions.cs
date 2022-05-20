@@ -28,10 +28,12 @@ namespace Zetbox.App.Projekte
     public static class TaskActions
     {
         [Invocation]
-        public static void ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
+        public static System.Threading.Tasks.Task ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
         {
             if (obj.Aufwand < 0) e.Errors.Add("Ungültiger Aufwand");
             if (obj.DatumBis < obj.DatumVon) e.Errors.Add("Falscher Zeitraum");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

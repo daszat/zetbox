@@ -28,13 +28,17 @@ namespace Zetbox.App.Projekte
     public class TaskActions
     {
         [Invocation]
-        public static void GetMergeableProperties(Task obj, IEnumerable<System.Object> properties)
+        public static System.Threading.Tasks.Task GetMergeableProperties(Task obj, IEnumerable<System.Object> properties)
         {
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void MergeFrom(Task obj, Zetbox.API.IDataObject source)
+        public static System.Threading.Tasks.Task MergeFrom(Task obj, Zetbox.API.IDataObject source)
         {
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -123,7 +123,7 @@ namespace Zetbox.App.GUI
                 throw new NotImplementedException("No handler registered on method TagCache.Rebuild");
             }
         }
-        public delegate void Rebuild_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task Rebuild_Handler<T>(T obj);
         public static event Rebuild_Handler<TagCache> OnRebuild_TagCache;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

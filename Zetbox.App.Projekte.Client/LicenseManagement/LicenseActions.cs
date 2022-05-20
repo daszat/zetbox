@@ -38,17 +38,19 @@ namespace Zetbox.App.LicenseManagement
         }
 
         [Invocation]
-        public static void ExportUI(License obj)
+        public static System.Threading.Tasks.Task ExportUI(License obj)
         {
             var file = _vmf.GetDestinationFileNameFromUser(Helper.GetLegalFileName($"{obj.Licensee?.Replace(".", "_")}-{obj.ValidFrom.ToString("yyyyMMdd")}-{obj.ValidThru.ToString("yyyyMMdd")}.license"));
             if (!string.IsNullOrWhiteSpace(file))
             {
                 obj.Export(file);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void SignUI(License obj)
+        public static System.Threading.Tasks.Task SignUI(License obj)
         {
             _vmf.CreateDialog(obj.Context, "Sign")
                 .AddObjectReference("key", "Private key", NamedObjects.Base.Classes.Zetbox.App.LicenseManagement.PrivateKey.Find(_frozenContext))
@@ -74,6 +76,8 @@ namespace Zetbox.App.LicenseManagement
                     }
                 })
                 .Show();
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

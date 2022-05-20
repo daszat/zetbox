@@ -770,7 +770,7 @@ namespace Zetbox.App.LicenseManagement
                 throw new NotImplementedException("No handler registered on method PrivateKey.Load");
             }
         }
-        public delegate void Load_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task Load_Handler<T>(T obj);
         public static event Load_Handler<PrivateKey> OnLoad_PrivateKey;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -833,7 +833,7 @@ namespace Zetbox.App.LicenseManagement
                 throw new NotImplementedException("No handler registered on method PrivateKey.LoadFromFile");
             }
         }
-        public delegate void LoadFromFile_Handler<T>(T obj, string file);
+        public delegate System.Threading.Tasks.Task LoadFromFile_Handler<T>(T obj, string file);
         public static event LoadFromFile_Handler<PrivateKey> OnLoadFromFile_PrivateKey;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

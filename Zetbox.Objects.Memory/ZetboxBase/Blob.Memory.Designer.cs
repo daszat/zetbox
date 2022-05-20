@@ -724,7 +724,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetStream_Handler<T>(T obj, MethodReturnEventArgs<System.IO.Stream> ret);
+        public delegate System.Threading.Tasks.Task GetStream_Handler<T>(T obj, MethodReturnEventArgs<System.IO.Stream> ret);
         public static event GetStream_Handler<Blob> OnGetStream_Blob;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -787,7 +787,7 @@ namespace Zetbox.App.Base
                 throw new NotImplementedException("No handler registered on method Blob.Open");
             }
         }
-        public delegate void Open_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task Open_Handler<T>(T obj);
         public static event Open_Handler<Blob> OnOpen_Blob;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

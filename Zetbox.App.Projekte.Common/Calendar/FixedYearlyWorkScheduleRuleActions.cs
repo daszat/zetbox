@@ -25,18 +25,22 @@ namespace Zetbox.App.Calendar
     public static class FixedYearlyWorkScheduleRuleActions
     {
         [Invocation]
-        public static void ToString(FixedYearlyWorkScheduleRule obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(FixedYearlyWorkScheduleRule obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = string.Format(e.Result + "; Yearly on {0}.{1}", obj.Day, obj.Month);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void AppliesTo(FixedYearlyWorkScheduleRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
+        public static System.Threading.Tasks.Task AppliesTo(FixedYearlyWorkScheduleRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
         {
             if (obj.CheckValidDate(date))
             {
                 e.Result = date.Day == obj.Day && date.Month == obj.Month;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -24,9 +24,11 @@ namespace Zetbox.App.SchemaMigration
     public static class MigrationProjectActions
     {
         [Invocation]
-        public static void ToString(Zetbox.App.SchemaMigration.MigrationProject obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.SchemaMigration.MigrationProject obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = !string.IsNullOrEmpty(obj.Description) ? obj.Description : "new Migration Project";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
     }

@@ -24,17 +24,21 @@ namespace Zetbox.App.Base
     public static class ModuleActions
     {
         [Invocation]
-        public static void ToString(Module obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Module obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetName(Module obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetName(Module obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "Base.Modules." + obj.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

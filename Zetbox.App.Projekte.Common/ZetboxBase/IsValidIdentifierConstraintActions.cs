@@ -24,13 +24,15 @@ namespace Zetbox.App.Base
     public static class IsValidIdentifierConstraintActions
     {
         [Invocation]
-        public static void ToString(IsValidIdentifierConstraint obj, Zetbox.API.MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(IsValidIdentifierConstraint obj, Zetbox.API.MethodReturnEventArgs<string> e)
         {
             e.Result = "Method names, property names, enum names etc. must be valid names.";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void IsValid(
+        public static System.Threading.Tasks.Task IsValid(
                    IsValidIdentifierConstraint obj,
                    MethodReturnEventArgs<bool> e,
                    object constrainedObjectParam,
@@ -38,16 +40,20 @@ namespace Zetbox.App.Base
         {
             e.Result = string.IsNullOrEmpty(constrainedValueParam as string) 
                     || System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier((string)constrainedValueParam);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetErrorText(
+        public static System.Threading.Tasks.Task GetErrorText(
             IsValidIdentifierConstraint obj,
             MethodReturnEventArgs<string> e,
             object constrainedObjectParam,
             object constrainedValueParam)
         {
             e.Result = string.Format("'{0}' is not a valid identifier", constrainedValueParam);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -239,7 +239,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         DataContext,
                         this,
                         ReferencedClass);
-                    _createNewItemAndSetValueCommand.LocalModelCreated += vm => Value = vm;
+                    _createNewItemAndSetValueCommand.LocalModelCreated += vm => 
+                    {
+                        Value = vm;
+                        return Task.CompletedTask;
+                    };
                 }
                 return _createNewItemAndSetValueCommand;
             }

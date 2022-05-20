@@ -24,7 +24,7 @@ namespace Zetbox.App.Base
     public static class IsValidNamespaceConstraintActions
     {
         [Invocation]
-        public static void IsValid(
+        public static System.Threading.Tasks.Task IsValid(
                    IsValidNamespaceConstraint obj,
                    MethodReturnEventArgs<bool> e,
                    object constrainedObjectParam,
@@ -40,6 +40,8 @@ namespace Zetbox.App.Base
                     e.Result &= System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(ns);
                 }
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

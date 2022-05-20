@@ -24,9 +24,11 @@ namespace Zetbox.App.SchemaMigration
     public static class StagingDatabaseActions
     {
         [Invocation]
-        public static void ToString(Zetbox.App.SchemaMigration.StagingDatabase obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.SchemaMigration.StagingDatabase obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = obj.Description;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
     }

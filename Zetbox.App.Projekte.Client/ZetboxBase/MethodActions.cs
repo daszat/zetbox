@@ -35,13 +35,15 @@ namespace Zetbox.App.Base
     public static class MethodActions
     {
         [Invocation]
-        public static void NotifyDeleting(Method obj)
+        public static System.Threading.Tasks.Task NotifyDeleting(Method obj)
         {
             var ctx = obj.Context;
             foreach (var p in obj.Parameter.ToList())
             {
                 ctx.Delete(p);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

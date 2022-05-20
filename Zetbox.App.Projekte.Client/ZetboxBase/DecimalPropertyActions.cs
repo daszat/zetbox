@@ -35,9 +35,11 @@ namespace Zetbox.App.Base
     public static class DecimalPropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.Base.DecimalProperty obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.Base.DecimalProperty obj)
         {
             obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDecimalPropertyViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

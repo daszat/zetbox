@@ -24,24 +24,30 @@ namespace Zetbox.App.Base
     public static class DecimalPropertyActions
     {
         [Invocation]
-        public static void GetPropertyType(DecimalProperty obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetPropertyType(DecimalProperty obj, MethodReturnEventArgs<Type> e)
         {
             e.Result = typeof(decimal);
             PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetElementTypeString(DecimalProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetElementTypeString(DecimalProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "decimal";
             PropertyActions.DecorateElementType(obj, e, true);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetPropertyTypeString(DecimalProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetPropertyTypeString(DecimalProperty obj, MethodReturnEventArgs<string> e)
         {
             GetElementTypeString(obj, e);
             PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

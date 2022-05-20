@@ -24,7 +24,7 @@ namespace Zetbox.App.Base
     public static class CurrentDateTimeDefaultValueActions
     {
         [Invocation]
-        public static void GetDefaultValue(CurrentDateTimeDefaultValue obj, MethodReturnEventArgs<System.Object> e)
+        public static System.Threading.Tasks.Task GetDefaultValue(CurrentDateTimeDefaultValue obj, MethodReturnEventArgs<System.Object> e)
         {
             var dtProp = (DateTimeProperty)obj.Property;
             switch (dtProp.DateTimeStyle)
@@ -40,10 +40,12 @@ namespace Zetbox.App.Base
                     e.Result = DateTime.Now;
                     break;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ToString(Zetbox.App.Base.CurrentDateTimeDefaultValue obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.Base.CurrentDateTimeDefaultValue obj, MethodReturnEventArgs<string> e)
         {
             if (obj.Property != null)
             {
@@ -66,6 +68,8 @@ namespace Zetbox.App.Base
             {
                 e.Result = "Initializes a property with the current date and time";
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

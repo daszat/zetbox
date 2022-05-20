@@ -154,9 +154,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         this,
                         typeof(NavigationEntry).GetObjectClass(FrozenContext));
                     _NewCommand.ObjectCreated += (obj) =>
+                    { 
                         ((NavigationEntry)obj).Parent = SelectedItem != null
                             ? obj.Context.Find<NavigationEntry>(SelectedItem.ID)
                             : null;
+                        return Task.CompletedTask;
+                    };
                 }
                 return _NewCommand;
             }

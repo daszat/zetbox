@@ -806,7 +806,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void RegenerateTypeRefs_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
+        public delegate System.Threading.Tasks.Task RegenerateTypeRefs_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
         public static event RegenerateTypeRefs_Handler<Assembly> OnRegenerateTypeRefs_Assembly;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

@@ -35,10 +35,12 @@ namespace Zetbox.App.Base
     public static class ObjectReferencePropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.Base.ObjectReferenceProperty obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.Base.ObjectReferenceProperty obj)
         {
             // Is implemented by CreateNavigator
             // At creating time there is no way to discover if the navigator is a Reference or List
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

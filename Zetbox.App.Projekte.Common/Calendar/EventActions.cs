@@ -25,23 +25,27 @@ namespace Zetbox.App.Calendar
     public static class EventActions
     {
         [Invocation]
-        public static void ToString(Event obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(Event obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = string.Format("{0} - {1}: {2} ({3})",
                 obj.IsAllDay ? obj.StartDate.ToShortDateString() : obj.StartDate.ToShortDateString() + " " + obj.StartDate.ToShortTimeString(),
                 obj.IsAllDay ? obj.EndDate.ToShortDateString() : obj.EndDate.ToShortDateString() + " " + obj.EndDate.ToShortTimeString(),
                 obj.Summary,
                 obj.Location);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void NotifyPreSave(Event obj)
+        public static System.Threading.Tasks.Task NotifyPreSave(Event obj)
         {
             if (obj.IsAllDay)
             {
                 obj.StartDate = obj.StartDate.Date;
                 obj.EndDate = obj.EndDate.Date;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

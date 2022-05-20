@@ -35,13 +35,15 @@ namespace Zetbox.App.Base
     public static class CompoundObjectPropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.Base.CompoundObjectProperty obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.Base.CompoundObjectProperty obj)
         {
             obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_CompoundObjectDefinition(CompoundObjectProperty obj, PropertyPostSetterEventArgs<CompoundObject> e)
+        public static System.Threading.Tasks.Task postSet_CompoundObjectDefinition(CompoundObjectProperty obj, PropertyPostSetterEventArgs<CompoundObject> e)
         {
             var def = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(obj.Context);
             if (obj.ValueModelDescriptor == def && e.OldValue == null && e.NewValue != null && e.NewValue.DefaultPropertyViewModelDescriptor != null)
@@ -49,6 +51,8 @@ namespace Zetbox.App.Base
                 // Only once, during initialize
                 obj.ValueModelDescriptor = e.NewValue.DefaultPropertyViewModelDescriptor;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

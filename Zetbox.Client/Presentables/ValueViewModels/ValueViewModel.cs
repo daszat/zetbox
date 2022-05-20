@@ -589,7 +589,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         public event StateChangedEventHandler StateChanged;
-        public delegate void StateChangedEventHandler(object sender, StateChangedEventArgs args);
+        public delegate System.Threading.Tasks.Task StateChangedEventHandler(object sender, StateChangedEventArgs args);
 
 
         /// <summary>

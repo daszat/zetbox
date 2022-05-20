@@ -28,8 +28,10 @@ namespace Zetbox.App.Projekte
     public static class ProjektActions
     {
         [Invocation]
-        public static void NotifyPreSave(Projekt obj)
+        public static System.Threading.Tasks.Task NotifyPreSave(Projekt obj)
         {
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

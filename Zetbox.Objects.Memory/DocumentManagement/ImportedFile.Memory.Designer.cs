@@ -180,7 +180,7 @@ namespace at.dasz.DocumentManagement
             }
             return e.Result;
         }
-        public delegate void MakeFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.File> ret);
+        public delegate System.Threading.Tasks.Task MakeFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.File> ret);
         public static event MakeFile_Handler<ImportedFile> OnMakeFile_ImportedFile;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -244,7 +244,7 @@ namespace at.dasz.DocumentManagement
             }
             return e.Result;
         }
-        public delegate void MakeReadonlyFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.File> ret);
+        public delegate System.Threading.Tasks.Task MakeReadonlyFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.File> ret);
         public static event MakeReadonlyFile_Handler<ImportedFile> OnMakeReadonlyFile_ImportedFile;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -308,7 +308,7 @@ namespace at.dasz.DocumentManagement
             }
             return e.Result;
         }
-        public delegate void MakeStaticFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.StaticFile> ret);
+        public delegate System.Threading.Tasks.Task MakeStaticFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.StaticFile> ret);
         public static event MakeStaticFile_Handler<ImportedFile> OnMakeStaticFile_ImportedFile;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

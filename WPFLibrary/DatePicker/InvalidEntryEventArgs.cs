@@ -54,6 +54,6 @@ namespace Microsoft.Samples.KMoore.WPFSamples.DateControls
     /// <summary>
     /// The delegate type for handling the InvalidEntry event
     /// </summary>
-    public delegate void InvalidEntryEventHandler(object sender, InvalidEntryEventArgs e);
+    public delegate System.Threading.Tasks.Task InvalidEntryEventHandler(object sender, InvalidEntryEventArgs e);
 
 }

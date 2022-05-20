@@ -25,9 +25,11 @@ namespace at.dasz.DocumentManagement
     public static class StaticFileActions
     {
         [Invocation]
-        public static void NotifyCreated(at.dasz.DocumentManagement.StaticFile obj)
+        public static System.Threading.Tasks.Task NotifyCreated(at.dasz.DocumentManagement.StaticFile obj)
         {
             obj.IsFileReadonly = true;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

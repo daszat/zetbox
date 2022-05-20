@@ -24,7 +24,7 @@ namespace Zetbox.App.Base
     public static class StringRangeConstraintActions
     {
         [Invocation]
-        public static void ToString(StringRangeConstraint obj, Zetbox.API.MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(StringRangeConstraint obj, Zetbox.API.MethodReturnEventArgs<string> e)
         {
             string maxLength = obj.MaxLength != null ? obj.MaxLength.ToString() : "unlimited";
             // Only display min if there is an actual restriction.
@@ -45,10 +45,12 @@ namespace Zetbox.App.Base
                         : obj.ConstrainedProperty.Name,
                     maxLength);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void IsValid(
+        public static System.Threading.Tasks.Task IsValid(
             StringRangeConstraint obj,
             MethodReturnEventArgs<bool> e,
             object constrainedObjectParam,
@@ -56,10 +58,12 @@ namespace Zetbox.App.Base
         {
             int length = (constrainedValueParam as string ?? String.Empty).Length;
             e.Result = length == 0 || ((obj.MinLength <= length) && (length <= (obj.MaxLength ?? int.MaxValue)));
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetErrorText(
+        public static System.Threading.Tasks.Task GetErrorText(
             StringRangeConstraint obj,
             MethodReturnEventArgs<string> e,
             object constrainedObjectParam,
@@ -87,6 +91,8 @@ namespace Zetbox.App.Base
 
                 e.Result = result.ToString();
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

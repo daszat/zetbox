@@ -24,32 +24,42 @@ namespace Zetbox.App.Base
     public static class EnumerationActions
     {
         [Invocation]
-        public static void GetEntryByName(Zetbox.App.Base.Enumeration obj, MethodReturnEventArgs<Zetbox.App.Base.EnumerationEntry> e, System.String name)
+        public static System.Threading.Tasks.Task GetEntryByName(Zetbox.App.Base.Enumeration obj, MethodReturnEventArgs<Zetbox.App.Base.EnumerationEntry> e, System.String name)
         {
             e.Result = obj.EnumerationEntries.SingleOrDefault(i => i.Name == name);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
         [Invocation]
-        public static void GetEntryByValue(Zetbox.App.Base.Enumeration obj, MethodReturnEventArgs<Zetbox.App.Base.EnumerationEntry> e, System.Int32 val)
+        public static System.Threading.Tasks.Task GetEntryByValue(Zetbox.App.Base.Enumeration obj, MethodReturnEventArgs<Zetbox.App.Base.EnumerationEntry> e, System.Int32 val)
         {
             e.Result = obj.EnumerationEntries.SingleOrDefault(i => i.Value == val);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
         [Invocation]
-        public static void GetLabelByName(Zetbox.App.Base.Enumeration obj, MethodReturnEventArgs<string> e, System.String name)
+        public static System.Threading.Tasks.Task GetLabelByName(Zetbox.App.Base.Enumeration obj, MethodReturnEventArgs<string> e, System.String name)
         {
             var entry = obj.GetEntryByName(name);
             e.Result = entry != null ? entry.GetLabel() : string.Empty;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
         [Invocation]
-        public static void GetLabelByValue(Zetbox.App.Base.Enumeration obj, MethodReturnEventArgs<string> e, System.Int32 val)
+        public static System.Threading.Tasks.Task GetLabelByValue(Zetbox.App.Base.Enumeration obj, MethodReturnEventArgs<string> e, System.Int32 val)
         {
             var entry = obj.GetEntryByValue(val);
             e.Result = entry != null ? entry.GetLabel() : string.Empty;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetName(Enumeration obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetName(Enumeration obj, MethodReturnEventArgs<string> e)
         {
             e.Result = string.Format("Base.Enumerations.{0}.{1}", obj.Module.Namespace, obj.Name);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         /// <summary>
@@ -58,11 +68,13 @@ namespace Zetbox.App.Base
         /// <param name="obj"></param>
         /// <param name="e"></param>
         [Invocation]
-        public static void ToString(Enumeration obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Enumeration obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

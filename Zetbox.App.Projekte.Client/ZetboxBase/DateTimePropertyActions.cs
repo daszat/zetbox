@@ -35,9 +35,11 @@ namespace Zetbox.App.Base
     public static class DateTimePropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.Base.DateTimeProperty obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.Base.DateTimeProperty obj)
         {
             obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

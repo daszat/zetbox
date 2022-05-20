@@ -25,15 +25,19 @@ namespace Zetbox.App.Calendar
     public static class YearlyWorkScheduleRuleActions
     {
         [Invocation]
-        public static void ToString(YearlyWorkScheduleRule obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(YearlyWorkScheduleRule obj, MethodReturnEventArgs<System.String> e)
         {
             // Nothing to do
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void AppliesTo(YearlyWorkScheduleRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
+        public static System.Threading.Tasks.Task AppliesTo(YearlyWorkScheduleRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
         {
             // Abstract
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

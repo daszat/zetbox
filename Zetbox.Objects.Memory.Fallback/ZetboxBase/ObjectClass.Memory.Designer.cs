@@ -1082,7 +1082,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             }
             return e.Result;
         }
-        public delegate void CreateMethod_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.Method> ret);
+        public delegate System.Threading.Tasks.Task CreateMethod_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.Method> ret);
         public static event CreateMethod_Handler<ObjectClass> OnCreateMethod_ObjectClass;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1146,7 +1146,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             }
             return e.Result;
         }
-        public delegate void CreateRelation_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.Relation> ret);
+        public delegate System.Threading.Tasks.Task CreateRelation_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.Relation> ret);
         public static event CreateRelation_Handler<ObjectClass> OnCreateRelation_ObjectClass;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1336,7 +1336,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             }
             return e.Result;
         }
-        public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IEnumerable<Zetbox.App.Base.Method>> ret);
+        public delegate System.Threading.Tasks.Task GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IEnumerable<Zetbox.App.Base.Method>> ret);
         public static event GetInheritedMethods_Handler<ObjectClass> OnGetInheritedMethods_ObjectClass;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1400,7 +1400,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             }
             return e.Result;
         }
-        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<ObjectClass> OnGetName_ObjectClass;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1525,7 +1525,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 throw new NotImplementedException("No handler registered on method ObjectClass.ReplaceObject");
             }
         }
-        public delegate void ReplaceObject_Handler<T>(T obj, Zetbox.API.IDataObject target, Zetbox.API.IDataObject source);
+        public delegate System.Threading.Tasks.Task ReplaceObject_Handler<T>(T obj, Zetbox.API.IDataObject target, Zetbox.API.IDataObject source);
         public static event ReplaceObject_Handler<ObjectClass> OnReplaceObject_ObjectClass;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

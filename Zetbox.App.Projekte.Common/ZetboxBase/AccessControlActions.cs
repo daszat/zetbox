@@ -26,20 +26,24 @@ namespace Zetbox.App.Base
     public static class AccessControlActions
     {
         [Invocation]
-        public static void ToString(Zetbox.App.Base.AccessControl obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.Base.AccessControl obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Description;
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_Rights(AccessControl obj, PropertyPostSetterEventArgs<AccessRights?> e)
+        public static System.Threading.Tasks.Task postSet_Rights(AccessControl obj, PropertyPostSetterEventArgs<AccessRights?> e)
         {
             obj.Recalculate("Description");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void get_Description(AccessControl obj, PropertyGetterEventArgs<string> e)
+        public static System.Threading.Tasks.Task get_Description(AccessControl obj, PropertyGetterEventArgs<string> e)
         {
             if (obj is GroupMembership)
             {
@@ -75,6 +79,8 @@ namespace Zetbox.App.Base
                 }
                 e.Result = string.Format("{0} has {1} rights", string.Join(".", navigators), obj.Rights);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Zetbox.DalProvider.NHibernate.Tests
     using Zetbox.App.Base;
     using Zetbox.App.Projekte;
     using Zetbox.Server;
+    using stt = System.Threading.Tasks;
 
     [SetUpFixture]
     public class SetUpFixture
@@ -45,11 +46,11 @@ namespace Zetbox.DalProvider.NHibernate.Tests
             base.SetUp(container);
 
             PropertyNHibernateImpl.OnToString_Property
-                += (obj, args) => { args.Result = String.Format("Prop, [{0}]", obj.Description); };
+                += (obj, args) => { args.Result = String.Format("Prop, [{0}]", obj.Description); return stt.Task.CompletedTask; };
             MitarbeiterNHibernateImpl.OnToString_Mitarbeiter
-                += (obj, args) => { args.Result = String.Format("MA, [{0}]", obj.Name); };
+                += (obj, args) => { args.Result = String.Format("MA, [{0}]", obj.Name); return stt.Task.CompletedTask; };
             ProjektNHibernateImpl.OnToString_Projekt
-                += (obj, args) => { args.Result = String.Format("Proj, [{0}]", obj.Name); };
+                += (obj, args) => { args.Result = String.Format("Proj, [{0}]", obj.Name); return stt.Task.CompletedTask; };
         }
 
         protected override string GetConfigFile()

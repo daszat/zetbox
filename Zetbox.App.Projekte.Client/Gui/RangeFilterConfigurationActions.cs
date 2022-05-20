@@ -32,7 +32,7 @@ namespace Zetbox.App.GUI
     public static class RangeFilterConfigurationActions
     {
         [Invocation]
-        public static void CreateFilterModel(Zetbox.App.GUI.RangeFilterConfiguration obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> e, Zetbox.API.IZetboxContext ctx)
+        public static System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.RangeFilterConfiguration obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             var mdl = new RangeFilterModel();
             mdl.Label = obj.GetLabel();
@@ -46,12 +46,16 @@ namespace Zetbox.App.GUI
             mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(ctx, true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
             mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(ctx, true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
             e.Result = mdl;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.GUI.RangeFilterConfiguration obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.GUI.RangeFilterConfiguration obj)
         {
             obj.ViewModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_RangeFilterViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

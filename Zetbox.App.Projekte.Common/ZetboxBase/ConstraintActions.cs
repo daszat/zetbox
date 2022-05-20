@@ -24,7 +24,7 @@ namespace Zetbox.App.Base
     public static class ConstraintActions
     {
         [Invocation]
-        public static void IsValid(
+        public static System.Threading.Tasks.Task IsValid(
             Constraint obj,
             MethodReturnEventArgs<bool> e,
             object constrainedObjectParam,
@@ -32,6 +32,8 @@ namespace Zetbox.App.Base
         {
             // the base constraint accepts all values
             e.Result = true;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

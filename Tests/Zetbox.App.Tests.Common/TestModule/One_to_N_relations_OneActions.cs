@@ -25,9 +25,11 @@ namespace Zetbox.App.Test
     public static class One_to_N_relations_OneActions
     {
         [Invocation]
-        public static void ToString(One_to_N_relations_One obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(One_to_N_relations_One obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

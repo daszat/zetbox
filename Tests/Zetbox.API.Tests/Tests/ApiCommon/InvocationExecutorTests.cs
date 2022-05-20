@@ -142,7 +142,7 @@ namespace Zetbox.API.Tests.InvocationExecutorTests
                 InvocationExecutorTestsMockImplementor.WasCalled = false;
             }
 
-            private delegate void SimpleDelegate();
+            private delegate System.Threading.Tasks.Task SimpleDelegate();
             [Test]
             public void is_valid_on_SimpleMethod()
             {

@@ -28,39 +28,47 @@ namespace Zetbox.App.Base
     public static class ObjectClassActions
     {
         [Invocation]
-        public static void get_CodeTemplate(ObjectClass obj, PropertyGetterEventArgs<string> e)
+        public static System.Threading.Tasks.Task get_CodeTemplate(ObjectClass obj, PropertyGetterEventArgs<string> e)
         {
             StringBuilder sb = new StringBuilder();
 
             string type = obj.Name;
 
-            sb.AppendFormat("[Invocation]\npublic static void ToString({0} obj, MethodReturnEventArgs<string> e)\n{{\n}}\n\n", type);
-            sb.AppendFormat("[Invocation]\npublic static void NotifyPreSave({0} obj)\n{{\n}}\n\n", type);
-            sb.AppendFormat("[Invocation]\npublic static void NotifyPostSave({0} obj)\n{{\n}}\n\n", type);
-            sb.AppendFormat("[Invocation]\npublic static void NotifyCreated({0} obj)\n{{\n}}\n\n", type);
-            sb.AppendFormat("[Invocation]\npublic static void NotifyDeleting({0} obj)\n{{\n}}\n\n", type);
-            sb.AppendFormat("[Invocation]\npublic static void ObjectIsValid({0} obj, ObjectIsValidEventArgs e)\n{{\n}}\n\n", type);
+            sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task ToString({0} obj, MethodReturnEventArgs<string> e)\n{{\n}}\n\n", type);
+            sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task NotifyPreSave({0} obj)\n{{\n}}\n\n", type);
+            sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task NotifyPostSave({0} obj)\n{{\n}}\n\n", type);
+            sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task NotifyCreated({0} obj)\n{{\n}}\n\n", type);
+            sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task NotifyDeleting({0} obj)\n{{\n}}\n\n", type);
+            sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task ObjectIsValid({0} obj, ObjectIsValidEventArgs e)\n{{\n}}\n\n", type);
 
             e.Result = sb.ToString();
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void NotifyPreSave(Zetbox.App.Base.ObjectClass obj)
+        public static System.Threading.Tasks.Task NotifyPreSave(Zetbox.App.Base.ObjectClass obj)
         {
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.Base.ObjectClass obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.Base.ObjectClass obj)
         {
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_BaseObjectClass(Zetbox.App.Base.ObjectClass obj, PropertyPostSetterEventArgs<Zetbox.App.Base.ObjectClass> e)
+        public static System.Threading.Tasks.Task postSet_BaseObjectClass(Zetbox.App.Base.ObjectClass obj, PropertyPostSetterEventArgs<Zetbox.App.Base.ObjectClass> e)
         {
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void CreateRelation(ObjectClass obj, MethodReturnEventArgs<Relation> e)
+        public static System.Threading.Tasks.Task CreateRelation(ObjectClass obj, MethodReturnEventArgs<Relation> e)
         {
             e.Result = obj.Context.Create<Relation>();
             e.Result.Module = obj.Module;
@@ -75,18 +83,22 @@ namespace Zetbox.App.Base
             {
                 e.Result.B = obj.Context.Create<RelationEnd>();
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void CreateMethod(ObjectClass obj, MethodReturnEventArgs<Method> e)
+        public static System.Threading.Tasks.Task CreateMethod(ObjectClass obj, MethodReturnEventArgs<Method> e)
         {
             e.Result = obj.Context.Create<Method>();
             e.Result.Module = obj.Module;
             e.Result.ObjectClass = obj;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetInheritedMethods(ObjectClass obj, MethodReturnEventArgs<IEnumerable<Method>> e)
+        public static System.Threading.Tasks.Task GetInheritedMethods(ObjectClass obj, MethodReturnEventArgs<IEnumerable<Method>> e)
         {
             ObjectClass baseObjectClass = obj.BaseObjectClass;
             if (baseObjectClass != null)
@@ -97,19 +109,25 @@ namespace Zetbox.App.Base
             {
                 e.Result = new List<Method>();
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetName(ObjectClass obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetName(ObjectClass obj, MethodReturnEventArgs<string> e)
         {
             e.Result = string.Format("Base.Classes.{0}.{1}", obj.Module.Namespace, obj.Name);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void isValid_TableMapping(ObjectClass obj, PropertyIsValidEventArgs e)
+        public static System.Threading.Tasks.Task isValid_TableMapping(ObjectClass obj, PropertyIsValidEventArgs e)
         {
             e.IsValid = obj.TableMapping == null || (obj.TableMapping != null && obj.BaseObjectClass == null);
             e.Error = e.IsValid ? string.Empty : "TableMapping is valid only on base classes.";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

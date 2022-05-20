@@ -24,11 +24,13 @@ namespace Zetbox.App.Base
     public static class AssemblyActions
     {
         [Invocation]
-        public static void ToString(Assembly obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Assembly obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
     }

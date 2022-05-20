@@ -189,22 +189,26 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 NewCommand.Execute(null);
         }
 
-        private void OnLocalModelCreated(DataObjectViewModel vm)
+        private Task OnLocalModelCreated(DataObjectViewModel vm)
         {
             AddLocalInstance(vm);
             this.SelectedItem = vm;
+
+            return Task.CompletedTask;
         }
 
-        public delegate void ObjectCreatedHandler(IDataObject obj);
+        public delegate System.Threading.Tasks.Task ObjectCreatedHandler(IDataObject obj);
         public event ObjectCreatedHandler ObjectCreated;
 
-        private void OnObjectCreated(IDataObject obj)
+        private Task OnObjectCreated(IDataObject obj)
         {
             ObjectCreatedHandler temp = ObjectCreated;
             if (temp != null)
             {
                 temp(obj);
             }
+
+            return Task.CompletedTask;
         }
 
         private DeleteDataObjectCommand _DeleteCommand;
@@ -269,6 +273,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     RemoveDisplayColumn(e.Item.Property);
                 }
+
+                return Task.CompletedTask;
             };
             ViewModelFactory.ShowDialog(dlg);
             return Task.CompletedTask;

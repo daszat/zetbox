@@ -24,9 +24,11 @@ namespace Zetbox.App.Base
     public static class InitOnlyConstraintActions
     {
         [Invocation]
-        public static void ToString(Zetbox.App.Base.InitOnlyConstraint obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.Base.InitOnlyConstraint obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = "The item can only be set during initialization";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

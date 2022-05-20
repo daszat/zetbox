@@ -34,26 +34,32 @@ namespace at.dasz.DocumentManagement
         }
 
         [Invocation]
-        public static void ToString(File obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(File obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = obj.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         // required for HandleBlobChange
         [Invocation]
-        public static void NotifyDeleting(File obj)
+        public static System.Threading.Tasks.Task NotifyDeleting(File obj)
         {
             obj.TransientState[DELETE_KEY] = true;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void NotifyPostSave(File obj)
+        public static System.Threading.Tasks.Task NotifyPostSave(File obj)
         {
             obj.TransientState.Remove(DELETE_KEY);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void HandleBlobChange(File obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
+        public static System.Threading.Tasks.Task HandleBlobChange(File obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
             if (obj.IsFileReadonly && !obj.TransientState.ContainsKey(FileActions.DELETE_KEY) && oldBlob != null && newBlob != oldBlob)
             {
@@ -66,24 +72,32 @@ namespace at.dasz.DocumentManagement
             }
 
             e.Result = newBlob;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void UploadCanExec(File obj, MethodReturnEventArgs<bool> e)
+        public static System.Threading.Tasks.Task UploadCanExec(File obj, MethodReturnEventArgs<bool> e)
         {
             e.Result = !(obj.IsFileReadonly && obj.Blob != null); // Readonly with a blob is not changeable
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void UploadCanExecReason(File obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task UploadCanExecReason(File obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "Changing blob on read only files is not allowed";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void preSet_IsFileReadonly(File obj, PropertyPreSetterEventArgs<bool> e)
+        public static System.Threading.Tasks.Task preSet_IsFileReadonly(File obj, PropertyPreSetterEventArgs<bool> e)
         {
-            if (obj.Context == null || obj.Context.IsReadonly) return;
+            if (obj.Context == null || obj.Context.IsReadonly)
+                return System.Threading.Tasks.Task.CompletedTask;
+
             if (e.NewValue == true && e.OldValue == false)
             {
                 obj.TransientState[SET_ISFILEREADONLY_KEY] = true;
@@ -92,34 +106,42 @@ namespace at.dasz.DocumentManagement
             {
                 throw new InvalidOperationException("Changing IsFileReadonly back to false is not allowed");
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void preSet_Blob(File obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
+        public static System.Threading.Tasks.Task preSet_Blob(File obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
         {
             e.Result = obj.HandleBlobChange(e.OldValue, e.NewValue);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_Blob(File obj, PropertyPostSetterEventArgs<Zetbox.App.Base.Blob> e)
+        public static System.Threading.Tasks.Task postSet_Blob(File obj, PropertyPostSetterEventArgs<Zetbox.App.Base.Blob> e)
         {
             if (e.OldValue != e.NewValue)
             {
                 obj.ExtractText();
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void postSet_Excerpt(File obj, PropertyPostSetterEventArgs<Excerpt> e)
+        public static System.Threading.Tasks.Task postSet_Excerpt(File obj, PropertyPostSetterEventArgs<Excerpt> e)
         {
             if (e.OldValue != null)
             {
                 obj.Context.Delete(e.OldValue);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ExtractText(File obj)
+        public static System.Threading.Tasks.Task ExtractText(File obj)
         {
             var blob = obj.Blob;
 
@@ -145,6 +167,8 @@ namespace at.dasz.DocumentManagement
                     excerpt.Text = txt.Trim();
                 }
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

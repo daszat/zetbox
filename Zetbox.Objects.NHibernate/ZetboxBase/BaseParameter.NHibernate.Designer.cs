@@ -1139,7 +1139,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetLabel_Handler<BaseParameter> OnGetLabel_BaseParameter;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1203,7 +1203,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetParameterType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
+        public delegate System.Threading.Tasks.Task GetParameterType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
         public static event GetParameterType_Handler<BaseParameter> OnGetParameterType_BaseParameter;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1267,7 +1267,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetParameterTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetParameterTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetParameterTypeString_Handler<BaseParameter> OnGetParameterTypeString_BaseParameter;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

@@ -25,14 +25,16 @@ namespace Zetbox.App.SchemaMigration
     public static class SourceTableActions
     {
         [Invocation]
-        public static void ToString(Zetbox.App.SchemaMigration.SourceTable obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.SchemaMigration.SourceTable obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = "[" + ((obj.StagingDatabase != null ? obj.StagingDatabase.Description : null) ?? string.Empty) + "]";
             e.Result += "." + (!string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Table");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void CreateObjectClass(Zetbox.App.SchemaMigration.SourceTable obj)
+        public static System.Threading.Tasks.Task CreateObjectClass(Zetbox.App.SchemaMigration.SourceTable obj)
         {
             if (obj.StagingDatabase == null) throw new InvalidOperationException("Not attached to a staging database");
             if (obj.StagingDatabase.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");
@@ -43,6 +45,8 @@ namespace Zetbox.App.SchemaMigration
             obj.DestinationObjectClass.Name = obj.Name;
             obj.DestinationObjectClass.Module = obj.StagingDatabase.MigrationProject.DestinationModule;
             obj.DestinationObjectClass.Description = obj.Description;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

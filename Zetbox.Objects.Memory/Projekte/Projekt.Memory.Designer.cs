@@ -1187,7 +1187,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             }
             return e.Result;
         }
-        public delegate void GetFulltextIndexBody_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetFulltextIndexBody_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetFulltextIndexBody_Handler<Projekt> OnGetFulltextIndexBody_Projekt;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1251,7 +1251,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             }
             return e.Result;
         }
-        public delegate void GetSummaryReport_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret, string title, Zetbox.App.Base.DateTimeRange range);
+        public delegate System.Threading.Tasks.Task GetSummaryReport_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret, string title, Zetbox.App.Base.DateTimeRange range);
         public static event GetSummaryReport_Handler<Projekt> OnGetSummaryReport_Projekt;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

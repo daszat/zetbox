@@ -28,15 +28,17 @@ namespace Zetbox.App.Base
     public static class ObjectReferencePropertyActions
     {
         [Invocation]
-        public static void GetPropertyType(ObjectReferenceProperty obj, MethodReturnEventArgs<Type> e)
+        public static System.Threading.Tasks.Task GetPropertyType(ObjectReferenceProperty obj, MethodReturnEventArgs<Type> e)
         {
             var def = obj.GetReferencedObjectClass();
             e.Result = Type.GetType(def.Module.Namespace + "." + def.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
             PropertyActions.DecorateParameterType(obj, e, false, obj.GetIsList(), obj.RelationEnd.Parent.GetOtherEnd(obj.RelationEnd).HasPersistentOrder);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetElementTypeString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetElementTypeString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
         {
             var def = obj.GetReferencedObjectClass();
             if (def == null)
@@ -52,20 +54,24 @@ namespace Zetbox.App.Base
                 e.Result = def.Module.Namespace + "." + def.Name;
             }
             PropertyActions.DecorateElementType(obj, e, false);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetPropertyTypeString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetPropertyTypeString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
         {
             GetElementTypeString(obj, e);
             if (obj.RelationEnd != null && obj.RelationEnd.Parent != null)
             {
                 PropertyActions.DecorateParameterType(obj, e, false, obj.GetIsList(), obj.RelationEnd.Parent.GetOtherEnd(obj.RelationEnd).HasPersistentOrder);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetIsList(ObjectReferenceProperty prop, MethodReturnEventArgs<bool> e)
+        public static System.Threading.Tasks.Task GetIsList(ObjectReferenceProperty prop, MethodReturnEventArgs<bool> e)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
             RelationEnd relEnd = prop.RelationEnd;
@@ -79,15 +85,19 @@ namespace Zetbox.App.Base
             {
                 e.Result = false;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ToString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "-> " + e.Result;
 
             // already handled by base OnToString_Property()
             // ToStringHelper.FixupFloatingObjects(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -25,15 +25,19 @@ namespace Zetbox.App.Calendar
     public static class SyncProviderActions
     {
         [Invocation]
-        public static void ToString(SyncProvider obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(SyncProvider obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = obj.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ScheduleSyncNow(SyncProvider obj)
+        public static System.Threading.Tasks.Task ScheduleSyncNow(SyncProvider obj)
         {
             obj.NextSync = DateTime.Now;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

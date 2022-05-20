@@ -27,9 +27,11 @@ namespace Zetbox.App.Projekte
     public static class MitarbeiterActions
     {
         [Invocation]
-        public static void ToString(Mitarbeiter obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Mitarbeiter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

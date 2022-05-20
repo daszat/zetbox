@@ -28,15 +28,17 @@ namespace Zetbox.App.Base
     public static class CompoundObjectParameterActions
     {
         [Invocation]
-        public static void GetParameterType(Zetbox.App.Base.CompoundObjectParameter obj, Zetbox.API.MethodReturnEventArgs<System.Type> e)
+        public static System.Threading.Tasks.Task GetParameterType(Zetbox.App.Base.CompoundObjectParameter obj, Zetbox.API.MethodReturnEventArgs<System.Type> e)
         {
             var cls = obj.CompoundObject;
             e.Result = Type.GetType(cls.Module.Namespace + "." + cls.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
             BaseParameterActions.DecorateParameterType(obj, e, false);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetParameterTypeString(CompoundObjectParameter obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task GetParameterTypeString(CompoundObjectParameter obj, MethodReturnEventArgs<string> e)
         {
             var cls = obj.CompoundObject;
             if (cls == null)
@@ -52,6 +54,8 @@ namespace Zetbox.App.Base
                 e.Result = cls.Module.Namespace + "." + cls.Name;
             }
             BaseParameterActions.DecorateParameterType(obj, e, false);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

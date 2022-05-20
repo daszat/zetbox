@@ -24,13 +24,15 @@ namespace Zetbox.App.Base
     public static class IntegerRangeConstraintActions
     {
         [Invocation]
-        public static void ToString(IntegerRangeConstraint obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(IntegerRangeConstraint obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0} <= {1} <= {2}", obj.Min, obj.ConstrainedProperty == null ? "(no property)" : obj.ConstrainedProperty.Name, obj.Max);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void IsValid(
+        public static System.Threading.Tasks.Task IsValid(
             IntegerRangeConstraint obj,
             MethodReturnEventArgs<bool> e,
             object constrainedObjectParam,
@@ -46,10 +48,12 @@ namespace Zetbox.App.Base
                 // Accept null values -> other constraint will check for nulls
                 e.Result = true;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void GetErrorText(
+        public static System.Threading.Tasks.Task GetErrorText(
             IntegerRangeConstraint obj,
             MethodReturnEventArgs<string> e,
             object constrainedObjectParam,
@@ -58,7 +62,7 @@ namespace Zetbox.App.Base
             if (constrainedValueParam == null)
             {
                 e.Result = null;
-                return;
+                return System.Threading.Tasks.Task.CompletedTask;
             }
 
             int v = (int)constrainedValueParam;
@@ -82,6 +86,8 @@ namespace Zetbox.App.Base
 
                 e.Result = result.ToString();
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

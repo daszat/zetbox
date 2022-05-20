@@ -32,10 +32,12 @@ namespace Zetbox.App.Base
     public static class RelationActions
     {
         [Invocation]
-        public static void NotifyCreated(Relation obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Relation obj)
         {
             obj.A = obj.Context.Create<RelationEnd>();
             obj.B = obj.Context.Create<RelationEnd>();
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace Zetbox.App.Base
         /// </summary>
         /// <param name="obj"></param>
         [Invocation]
-        public static void NotifyDeleting(Relation obj)
+        public static System.Threading.Tasks.Task NotifyDeleting(Relation obj)
         {
             var ctx = obj.Context;
             if (obj.A != null)
@@ -58,6 +60,8 @@ namespace Zetbox.App.Base
                 if (obj.B.Navigator != null) ctx.Delete(obj.B.Navigator);
                 ctx.Delete(obj.B);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.FilterViewModels;
@@ -68,10 +69,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        void _filterList_UserFilterAdded(object sender, UserFilterAddedEventArgs e)
+        Task _filterList_UserFilterAdded(object sender, UserFilterAddedEventArgs e)
         {
-            if (DisplayedProperties.Any(dp => dp.SequenceEqual(e.Properties))) return;
+            if (DisplayedProperties.Any(dp => dp.SequenceEqual(e.Properties)))
+                return Task.CompletedTask;
+
             AddDisplayColumn(e.Properties.ToArray());
+
+            return Task.CompletedTask;
         }
 
         /// <summary>

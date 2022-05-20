@@ -27,9 +27,11 @@ namespace Zetbox.App.Projekte
     public static class KundeActions
     {
         [Invocation]
-        public static void ToString(Kunde obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Kunde obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Kundenname;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

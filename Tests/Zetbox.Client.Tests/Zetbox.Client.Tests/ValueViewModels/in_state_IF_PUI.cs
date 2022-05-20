@@ -27,6 +27,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
     using Zetbox.Client.Presentables.ValueViewModels;
     using Moq;
     using NUnit.Framework;
+    using System.Threading.Tasks;
 
     public abstract class in_state_IF_PUI
            : ViewModelTestFixture
@@ -87,7 +88,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
             [Test]
             public void should_stay_in_IF_PUI()
             {
-                obj.StateChanged += (s, e) => Assert.Fail("Unexpected {0}", e);
+                obj.StateChanged += (s, e) => { Assert.Fail("Unexpected {0}", e); return Task.CompletedTask; };
 
                 RaiseValueModelChangedEvent();
 
@@ -161,7 +162,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
             [Test]
             public void should_stay_in_IF_PUI()
             {
-                obj.StateChanged += (s, e) => Assert.Fail("Unexpected {0}", e);
+                obj.StateChanged += (s, e) => { Assert.Fail("Unexpected {0}", e); return Task.CompletedTask; };
 
                 obj.FormattedValue = newPartialInput;
 
@@ -356,6 +357,8 @@ namespace Zetbox.Client.Tests.ValueViewModels
                     {
                         hasReachedIfWm = true;
                     }
+
+                    return Task.CompletedTask;
                 };
 
                 valueModelMock.SetupProperty(o => o.Value);

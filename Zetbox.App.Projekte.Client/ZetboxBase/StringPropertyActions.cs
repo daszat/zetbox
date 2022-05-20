@@ -35,9 +35,11 @@ namespace Zetbox.App.Base
     public static class StringPropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Zetbox.App.Base.StringProperty obj)
+        public static System.Threading.Tasks.Task NotifyCreated(Zetbox.App.Base.StringProperty obj)
         {
             obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_StringValueViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

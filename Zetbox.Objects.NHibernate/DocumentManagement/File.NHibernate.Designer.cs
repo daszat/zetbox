@@ -1167,7 +1167,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
                 throw new NotImplementedException("No handler registered on method File.ExtractText");
             }
         }
-        public delegate void ExtractText_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task ExtractText_Handler<T>(T obj);
         public static event ExtractText_Handler<File> OnExtractText_File;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1231,7 +1231,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
             }
             return e.Result;
         }
-        public delegate void HandleBlobChange_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> ret, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob);
+        public delegate System.Threading.Tasks.Task HandleBlobChange_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> ret, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob);
         public static event HandleBlobChange_Handler<File> OnHandleBlobChange_File;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1294,7 +1294,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
                 throw new NotImplementedException("No handler registered on method File.Open");
             }
         }
-        public delegate void Open_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task Open_Handler<T>(T obj);
         public static event Open_Handler<File> OnOpen_File;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1357,7 +1357,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
                 throw new NotImplementedException("No handler registered on method File.Upload");
             }
         }
-        public delegate void Upload_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task Upload_Handler<T>(T obj);
         public static event Upload_Handler<File> OnUpload_File;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

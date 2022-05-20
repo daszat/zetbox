@@ -25,14 +25,16 @@ namespace Zetbox.App.SchemaMigration
     public static class SourceColumnActions
     {
         [Invocation]
-        public static void ToString(Zetbox.App.SchemaMigration.SourceColumn obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.SchemaMigration.SourceColumn obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = (obj.SourceTable != null ? obj.SourceTable.Name : null) ?? string.Empty;
             e.Result += "." + (!string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Column");
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void CreateProperty(Zetbox.App.SchemaMigration.SourceColumn obj)
+        public static System.Threading.Tasks.Task CreateProperty(Zetbox.App.SchemaMigration.SourceColumn obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             var srcTbl = obj.SourceTable;
@@ -115,6 +117,8 @@ namespace Zetbox.App.SchemaMigration
             p.Description = obj.Description;
             p.ObjectClass = srcTbl.DestinationObjectClass;
             p.Module = srcTbl.StagingDatabase.MigrationProject.DestinationModule;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -1670,7 +1670,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             }
             return e.Result;
         }
-        public delegate void AddProperty_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.Property> ret);
+        public delegate System.Threading.Tasks.Task AddProperty_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.Property> ret);
         public static event AddProperty_Handler<DataType> OnAddProperty_DataType;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1734,7 +1734,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             }
             return e.Result;
         }
-        public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
+        public delegate System.Threading.Tasks.Task GetDataType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
         public static event GetDataType_Handler<DataType> OnGetDataType_DataType;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1798,7 +1798,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             }
             return e.Result;
         }
-        public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -1861,7 +1861,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 throw new NotImplementedException("No handler registered on method DataType.ImplementInterfaces");
             }
         }
-        public delegate void ImplementInterfaces_Handler<T>(T obj);
+        public delegate System.Threading.Tasks.Task ImplementInterfaces_Handler<T>(T obj);
         public static event ImplementInterfaces_Handler<DataType> OnImplementInterfaces_DataType;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

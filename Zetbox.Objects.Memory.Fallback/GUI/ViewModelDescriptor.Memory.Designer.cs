@@ -1201,7 +1201,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             }
             return e.Result;
         }
-        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public delegate System.Threading.Tasks.Task GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<ViewModelDescriptor> OnGetName_ViewModelDescriptor;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

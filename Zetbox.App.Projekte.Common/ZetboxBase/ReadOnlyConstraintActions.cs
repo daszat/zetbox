@@ -24,14 +24,18 @@ namespace Zetbox.App.Base
     public static class ReadOnlyConstraintActions
     {
         [Invocation]
-        public static void IsValid(Zetbox.App.Base.ReadOnlyConstraint obj, MethodReturnEventArgs<System.Boolean> e, object constrainedObject, object constrainedValue)
+        public static System.Threading.Tasks.Task IsValid(Zetbox.App.Base.ReadOnlyConstraint obj, MethodReturnEventArgs<System.Boolean> e, object constrainedObject, object constrainedValue)
         {
             e.Result = true; // always valid
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
         [Invocation]
-        public static void GetErrorText(Zetbox.App.Base.ReadOnlyConstraint obj, MethodReturnEventArgs<System.String> e, object constrainedObject, object constrainedValue)
+        public static System.Threading.Tasks.Task GetErrorText(Zetbox.App.Base.ReadOnlyConstraint obj, MethodReturnEventArgs<System.String> e, object constrainedObject, object constrainedValue)
         {
             e.Result = string.Empty; // always valid
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Zetbox.App.Base
     public static class PropertyActions
     {
         [Invocation]
-        public static void NotifyDeleting(Property obj)
+        public static System.Threading.Tasks.Task NotifyDeleting(Property obj)
         {
             var ctx = obj.Context;
             foreach (var c in obj.Constraints.ToList())
@@ -44,6 +44,8 @@ namespace Zetbox.App.Base
 
             if (obj.DefaultValue != null) ctx.Delete(obj.DefaultValue);
             if (obj.FilterConfiguration != null) ctx.Delete(obj.FilterConfiguration);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

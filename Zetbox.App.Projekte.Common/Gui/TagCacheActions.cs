@@ -29,9 +29,11 @@ namespace Zetbox.App.GUI
     public static class TagCacheActions
     {
         [Invocation]
-        public static void ToString(TagCache obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(TagCache obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

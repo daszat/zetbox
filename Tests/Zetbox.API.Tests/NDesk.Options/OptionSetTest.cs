@@ -45,7 +45,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
-
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace Zetbox.API.Utils.Tests
@@ -102,11 +102,11 @@ namespace Zetbox.API.Utils.Tests
             var libs = new List<string>();
             bool debug = false;
             var p = new OptionSet() {
-				{ "D|define=",  v => defines.Add (v) },
-				{ "L|library:", v => libs.Add (v) },
-				{ "Debug",      v => debug = v != null },
-				{ "E",          v => { /* ignore */ } },
-			};
+                { "D|define=",  v => defines.Add (v) },
+                { "L|library:", v => libs.Add (v) },
+                { "Debug",      v => debug = v != null },
+                { "E",          v => { /* ignore */ } },
+            };
             p.Parse(_("-DNAME", "-D", "NAME2", "-Debug", "-L/foo", "-L", "/bar", "-EDNAME3"));
             Assert.AreEqual(defines.Count, 3);
             Assert.AreEqual(defines[0], "NAME");
@@ -128,9 +128,9 @@ namespace Zetbox.API.Utils.Tests
             string a = null;
             int n = 0;
             OptionSet p = new OptionSet() {
-				{ "a=", v => a = v },
-				{ "n=", (int v) => n = v },
-			};
+                { "a=", v => a = v },
+                { "n=", (int v) => n = v },
+            };
             List<string> extra = p.Parse(_("a", "-a", "s", "-n=42", "n"));
             Assert.AreEqual(extra.Count, 2);
             Assert.AreEqual(extra[0], "a");
@@ -150,10 +150,10 @@ namespace Zetbox.API.Utils.Tests
             int n = -1;
             Foo f = null;
             OptionSet p = new OptionSet() {
-				{ "a:", v => a = v },
-				{ "n:", (int v) => n = v },
-				{ "f:", (Foo v) => f = v },
-			};
+                { "a:", v => a = v },
+                { "n:", (int v) => n = v },
+                { "f:", (Foo v) => f = v },
+            };
             p.Parse(_("-a=s"));
             Assert.AreEqual(a, "s");
             p.Parse(_("-a"));
@@ -186,8 +186,8 @@ namespace Zetbox.API.Utils.Tests
         {
             bool a = false;
             OptionSet p = new OptionSet() {
-				{ "a", v => a = v != null },
-			};
+                { "a", v => a = v != null },
+            };
             p.Parse(_("-a"));
             Assert.AreEqual(a, true);
             p.Parse(_("-a+"));
@@ -205,18 +205,18 @@ namespace Zetbox.API.Utils.Tests
             int help = 0;
             int verbose = 0;
             OptionSet p = new OptionSet() {
-				{ "a=", v => { a = 1; av = v; } },
-				{ "b", "desc", v => {b = 2; bv = v;} },
-				{ "f=", (Foo v) => f = v },
-				{ "v", v => { ++verbose; } },
-				{ "h|?|help", (v) => { switch (v) {
-					case "h": help |= 0x1; break; 
-					case "?": help |= 0x2; break;
-					case "help": help |= 0x4; break;
-				} } },
-			};
+                { "a=", v => { a = 1; av = v; } },
+                { "b", "desc", v => {b = 2; bv = v;} },
+                { "f=", (Foo v) => f = v },
+                { "v", v => { ++verbose; } },
+                { "h|?|help", (v) => { switch (v) {
+                    case "h": help |= 0x1; break;
+                    case "?": help |= 0x2; break;
+                    case "help": help |= 0x4; break;
+                } } },
+            };
             List<string> e = p.Parse(new string[]{"foo", "-v", "-a=42", "/b-",
-				"-a", "64", "bar", "--f", "B", "/h", "-?", "--help", "-v"});
+                "-a", "64", "bar", "--f", "B", "/h", "-?", "--help", "-v"});
 
             Assert.AreEqual(e.Count, 2);
             Assert.AreEqual(e[0], "foo");
@@ -235,12 +235,12 @@ namespace Zetbox.API.Utils.Tests
         {
             string a = null;
             var p = new OptionSet() {
-				{ "a=", v => a = v },
-				{ "b",  v => { } },
-				{ "c",  v => { } },
-				{ "n=", (int v) => { } },
-				{ "f=", (Foo v) => { } },
-			};
+                { "a=", v => a = v },
+                { "b",  v => { } },
+                { "c",  v => { } },
+                { "n=", (int v) => { } },
+                { "f=", (Foo v) => { } },
+            };
             // missing argument
             Utils.AssertException(typeof(OptionException),
                     "Missing required value for option '-a'.",
@@ -268,34 +268,34 @@ namespace Zetbox.API.Utils.Tests
                     "Cannot bundle unregistered option '-z'.",
                     p, v => { v.Parse(_("-cz", "extra")); });
 
-            Assert.That(()=>p.Add("foo", (Action<string>)null), Throws.InstanceOf<ArgumentNullException>());
-            Assert.That(()=>p.Add("foo", (k, val) => {/* ignore */}), Throws.ArgumentException);
+            Assert.That(() => p.Add("foo", (Action<string>)null), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => p.Add("foo", (k, val) => { return Task.CompletedTask; /* ignore */}), Throws.ArgumentException);
         }
 
         [Test]
         public void WriteOptionDescriptions()
         {
             var p = new OptionSet() {
-				{ "p|indicator-style=", "append / indicator to directories",    v => {} },
-				{ "color:",             "controls color info",                  v => {} },
-				{ "color2:",            "set {color}",                          v => {} },
-				{ "rk=",                "required key/value option",            (k, v) => {} },
-				{ "rk2=",               "required {{foo}} {0:key}/{1:value} option",    (k, v) => {} },
-				{ "ok:",                "optional key/value option",            (k, v) => {} },
-				{ "long-desc",
-					"This has a really\nlong, multi-line description that also\ntests\n" +
-						"the-builtin-supercalifragilisticexpialidicious-break-on-hyphen.  " + 
-						"Also, a list:\n" +
-						"  item 1\n" +
-						"  item 2",
-					v => {} },
-				{ "long-desc2",
-					"IWantThisDescriptionToBreakInsideAWordGeneratingAutoWordHyphenation.",
-					v => {} },
-				{ "h|?|help",           "show help text",                       v => {} },
-				{ "version",            "output version information and exit",  v => {} },
-				{ "<>", v => {} },
-			};
+                { "p|indicator-style=", "append / indicator to directories",    v => {} },
+                { "color:",             "controls color info",                  v => {} },
+                { "color2:",            "set {color}",                          v => {} },
+                { "rk=",                "required key/value option",            (k, v) => {return Task.CompletedTask;} },
+                { "rk2=",               "required {{foo}} {0:key}/{1:value} option",    (k, v) => {return Task.CompletedTask;} },
+                { "ok:",                "optional key/value option",            (k, v) => {return Task.CompletedTask;} },
+                { "long-desc",
+                    "This has a really\nlong, multi-line description that also\ntests\n" +
+                        "the-builtin-supercalifragilisticexpialidicious-break-on-hyphen.  " +
+                        "Also, a list:\n" +
+                        "  item 1\n" +
+                        "  item 2",
+                    v => {} },
+                { "long-desc2",
+                    "IWantThisDescriptionToBreakInsideAWordGeneratingAutoWordHyphenation.",
+                    v => {} },
+                { "h|?|help",           "show help text",                       v => {} },
+                { "version",            "output version information and exit",  v => {} },
+                { "<>", v => {} },
+            };
 
             StringWriter expected = new StringWriter();
             expected.WriteLine("  -p, --indicator-style=VALUE");
@@ -329,11 +329,11 @@ namespace Zetbox.API.Utils.Tests
             string a, b, c, f;
             a = b = c = f = null;
             var p = new OptionSet() {
-				{ "a", v => a = "a" },
-				{ "b", v => b = "b" },
-				{ "c", v => c = "c" },
-				{ "f=", v => f = v },
-			};
+                { "a", v => a = "a" },
+                { "b", v => b = "b" },
+                { "c", v => c = "c" },
+                { "f=", v => f = v },
+            };
             List<string> extra = p.Parse(_("-abcf", "foo", "bar"));
             Assert.AreEqual(extra.Count, 1);
             Assert.AreEqual(extra[0], "bar");
@@ -347,9 +347,9 @@ namespace Zetbox.API.Utils.Tests
         public void HaltProcessing()
         {
             var p = new OptionSet() {
-				{ "a", v => {} },
-				{ "b", v => {} },
-			};
+                { "a", v => {} },
+                { "b", v => {} },
+            };
             List<string> e = p.Parse(_("-a", "-b", "--", "-a", "-b"));
             Assert.AreEqual(e.Count, 2);
             Assert.AreEqual(e[0], "-a");
@@ -362,13 +362,13 @@ namespace Zetbox.API.Utils.Tests
             var a = new Dictionary<string, string>();
             var b = new Dictionary<int, char>();
             var p = new OptionSet() {
-				{ "a=", (k,v) => a.Add (k, v) },
-				{ "b=", (int k, char v) => b.Add (k, v) },
-				{ "c:", (k, v) => {if (k != null) a.Add (k, v);} },
-				{ "d={=>}{-->}", (k, v) => a.Add (k, v) },
-				{ "e={}", (k, v) => a.Add (k, v) },
-				{ "f=+/", (k, v) => a.Add (k, v) },
-			};
+                { "a=", (k,v) => { a.Add (k, v); return Task.CompletedTask; } },
+                { "b=", (int k, char v) => { b.Add (k, v); return Task.CompletedTask; } },
+                { "c:", (k, v) => {if (k != null) a.Add (k, v);return Task.CompletedTask;} },
+                { "d={=>}{-->}", (k, v) => { a.Add (k, v);return Task.CompletedTask; } },
+                { "e={}", (k, v) => {a.Add (k, v); return Task.CompletedTask; } },
+                { "f=+/", (k, v) => {a.Add (k, v); return Task.CompletedTask; } },
+            };
             p.Parse(_("-a", "A", "B", "-a", "C", "D", "-a=E=F", "-a:G:H", "-aI=J", "-b", "1", "a", "-b", "2", "b"));
             AssertDictionary(a,
                     "A", "B",
@@ -456,9 +456,9 @@ namespace Zetbox.API.Utils.Tests
             var a = new Dictionary<string, string>();
             var b = new Dictionary<string, string[]>();
             var p = new OptionSet() {
-				new CustomOption ("a==:", null, 2, v => a.Add (v [0], v [1])),
-				new CustomOption ("b==:", null, 3, v => b.Add (v [0], new string[]{v [1], v [2]})),
-			};
+                new CustomOption ("a==:", null, 2, v => a.Add (v [0], v [1])),
+                new CustomOption ("b==:", null, 3, v => b.Add (v [0], new string[]{v [1], v [2]})),
+            };
             p.Parse(_("-a=b=c", "-a=d", "e", "-a:f=g", "-a:h:i", "-a", "j=k", "-a", "l:m"));
             Assert.AreEqual(a.Count, 6);
             Assert.AreEqual(a["b"], "c");
@@ -488,8 +488,8 @@ namespace Zetbox.API.Utils.Tests
         public void Localization()
         {
             var p = new OptionSet(f => "hello!") {
-				{ "n=", (int v) => { } },
-			};
+                { "n=", (int v) => { } },
+            };
             Utils.AssertException(typeof(OptionException), "hello!",
                     p, v => { v.Parse(_("-n=value")); });
 
@@ -540,8 +540,8 @@ namespace Zetbox.API.Utils.Tests
         {
             bool help = false;
             var p = new CiOptionSet() {
-				{ "h|help", v => help = v != null },
-			};
+                { "h|help", v => help = v != null },
+            };
             p.Parse(_("-H"));
             Assert.AreEqual(help, true);
             help = false;
@@ -610,11 +610,11 @@ namespace Zetbox.API.Utils.Tests
         public void OptionContext()
         {
             var p = new OptionSet() {
-				new ContextCheckerOption ("a=", "a desc", "/a",   "a-val", 1),
-				new ContextCheckerOption ("b",  "b desc", "--b+", "--b+",  2),
-				new ContextCheckerOption ("c=", "c desc", "--c",  "C",     3),
-				new ContextCheckerOption ("d",  "d desc", "/d-",  null,    4),
-			};
+                new ContextCheckerOption ("a=", "a desc", "/a",   "a-val", 1),
+                new ContextCheckerOption ("b",  "b desc", "--b+", "--b+",  2),
+                new ContextCheckerOption ("c=", "c desc", "--c",  "C",     3),
+                new ContextCheckerOption ("d",  "d desc", "/d-",  null,    4),
+            };
             Assert.AreEqual(p.Count, 4);
             p.Parse(_("/a", "a-val", "--b+", "--c=C", "/d-"));
         }
@@ -624,8 +624,8 @@ namespace Zetbox.API.Utils.Tests
         {
             var extra = new List<string>();
             var p = new OptionSet() {
-				{ "<>", v => extra.Add (v) },
-			};
+                { "<>", v => extra.Add (v) },
+            };
             var e = p.Parse(_("-a", "b", "--c=D", "E"));
             Assert.AreEqual(e.Count, 0);
             Assert.AreEqual(extra.Count, 4);
@@ -640,8 +640,8 @@ namespace Zetbox.API.Utils.Tests
         {
             var tests = new List<string>();
             var p = new OptionSet() {
-				{ "t|<>=", v => tests.Add (v) },
-			};
+                { "t|<>=", v => tests.Add (v) },
+            };
             var e = p.Parse(_("-tA", "-t:B", "-t=C", "D", "--E=F"));
             Assert.AreEqual(e.Count, 0);
             Assert.AreEqual(tests.Count, 5);
@@ -658,17 +658,17 @@ namespace Zetbox.API.Utils.Tests
             var formats = new Dictionary<string, List<string>>();
             string format = "foo";
             var p = new OptionSet() {
-				{ "f|format=", v => format = v },
-				{ "<>", 
-					v => {
-						List<string> f;
-						if (!formats.TryGetValue (format, out f)) {
-							f = new List<string> ();
-							formats.Add (format, f);
-						}
-						f.Add (v);
-				} },
-			};
+                { "f|format=", v => format = v },
+                { "<>",
+                    v => {
+                        List<string> f;
+                        if (!formats.TryGetValue (format, out f)) {
+                            f = new List<string> ();
+                            formats.Add (format, f);
+                        }
+                        f.Add (v);
+                } },
+            };
             var e = p.Parse(_("a", "b", "-fbar", "c", "d", "--format=baz", "e", "f"));
             Assert.AreEqual(e.Count, 0);
             Assert.AreEqual(formats.Count, 3);

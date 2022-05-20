@@ -35,13 +35,15 @@ namespace Zetbox.App.Base
     public static class ObjectClassActions
     {
         [Invocation]
-        public static void NotifyCreated(ObjectClass obj)
+        public static System.Threading.Tasks.Task NotifyCreated(ObjectClass obj)
         {
             obj.DefaultViewModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_DataObjectViewModel.Find(obj.Context);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void NotifyDeleting(ObjectClass obj)
+        public static System.Threading.Tasks.Task NotifyDeleting(ObjectClass obj)
         {
             var ctx = obj.Context;
             foreach (var ac in obj.AccessControlList.ToList())
@@ -63,6 +65,8 @@ namespace Zetbox.App.Base
             {
                 ctx.Delete(rel);
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

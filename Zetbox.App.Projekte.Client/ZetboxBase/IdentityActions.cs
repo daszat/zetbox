@@ -35,7 +35,7 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void SetPasswordUI(Identity obj)
+        public static System.Threading.Tasks.Task SetPasswordUI(Identity obj)
         {
             _vmf.CreateDialog(obj.Context, Strings.SetPasswordDlgTitle)
                 .AddPassword("pwd", Strings.Password)
@@ -59,6 +59,9 @@ namespace Zetbox.App.Base
 
                     obj.SetPassword(pwd);
                 });
+
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

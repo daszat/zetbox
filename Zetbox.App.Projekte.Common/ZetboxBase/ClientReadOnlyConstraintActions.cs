@@ -24,9 +24,11 @@ namespace Zetbox.App.Base
     public static class ClientReadOnlyConstraintActions
     {
         [Invocation]
-        public static void ToString(Zetbox.App.Base.ClientReadOnlyConstraint obj, MethodReturnEventArgs<System.String> e)
+        public static System.Threading.Tasks.Task ToString(Zetbox.App.Base.ClientReadOnlyConstraint obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = "Item is readonly on client but changable on the server";
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

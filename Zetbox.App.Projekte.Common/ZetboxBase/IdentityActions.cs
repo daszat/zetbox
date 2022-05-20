@@ -32,33 +32,41 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static void NotifyPostSave(Identity obj)
+        public static System.Threading.Tasks.Task NotifyPostSave(Identity obj)
         {
             _principalResolver.ClearCache();
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ToString(Identity obj, MethodReturnEventArgs<string> e)
+        public static System.Threading.Tasks.Task ToString(Identity obj, MethodReturnEventArgs<string> e)
         {
             e.Result = (obj.DisplayName ?? string.Empty) + " (" + (obj.UserName ?? string.Empty) + ")";
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void CreateLoginToken(Identity obj)
+        public static System.Threading.Tasks.Task CreateLoginToken(Identity obj)
         {
             obj.LoginToken = Guid.NewGuid();
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void ClearLoginToken(Identity obj)
+        public static System.Threading.Tasks.Task ClearLoginToken(Identity obj)
         {
             obj.LoginToken = null;
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static void SetPassword(Identity obj, string plainTextPassword)
+        public static System.Threading.Tasks.Task SetPassword(Identity obj, string plainTextPassword)
         {
             if (!string.IsNullOrEmpty(plainTextPassword))
             {
@@ -69,6 +77,8 @@ namespace Zetbox.App.Base
                 // null or empty is a valid argument as this means, that there is no local account (local password) and it is a pure OpenID account (or something)
                 obj.Password = null;
             }
+
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

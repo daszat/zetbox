@@ -34,7 +34,7 @@ namespace Zetbox.API
         public object NewValue { get; private set; }
     }
 
-    public delegate void PropertyChangeWithValueEventHandler(object sender, PropertyChangeWithValueEventArgs e);
+    public delegate System.Threading.Tasks.Task PropertyChangeWithValueEventHandler(object sender, PropertyChangeWithValueEventArgs e);
 
     public interface INotifyingObject : INotifyPropertyChanged, INotifyPropertyChanging
     {
