@@ -1179,12 +1179,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetSummaryReport_Projekt")]
-        public virtual System.Object GetSummaryReport(string title, Zetbox.App.Base.DateTimeRange range)
+        public virtual async System.Threading.Tasks.Task<System.Object> GetSummaryReport(string title, Zetbox.App.Base.DateTimeRange range)
         {
             var e = new MethodReturnEventArgs<System.Object>();
             if (OnGetSummaryReport_Projekt != null)
             {
-                OnGetSummaryReport_Projekt(this, e, title, range);
+                await OnGetSummaryReport_Projekt(this, e, title, range);
             }
             else
             {

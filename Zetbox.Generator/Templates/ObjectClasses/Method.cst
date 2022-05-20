@@ -40,7 +40,7 @@
 <%
     }
 %>
-        <%= GetModifiers() %> <%= GetReturnType() %> <%= m.Name %>(<%= GetParameterDefinitions() %>)
+        <%= GetModifiers() %> async <%= GetReturnType() %> <%= m.Name %>(<%= GetParameterDefinitions() %>)
 <%
 
     string delegateName = m.Name + indexSuffix + "_Handler";
@@ -67,7 +67,7 @@
             // base.<%= m.Name %>();
             if (<%= eventName %> != null)
             {
-                <%= eventName %>(this<%= argumentDefs %>);
+                await <%= eventName %>(this<%= argumentDefs %>);
             }
             else
             {
@@ -81,7 +81,7 @@
         else
         {
 %>
-                base.<%= m.Name %>(<%= m.GetArguments() %>);
+                await base.<%= m.Name %>(<%= m.GetArguments() %>);
 <%
         }
 %>
@@ -105,7 +105,7 @@
             var e = new <%= returnArgsType %>();
             if (<%= eventName %> != null)
             {
-                <%= eventName %>(this, e<%= argumentDefs %>);
+                await <%= eventName %>(this, e<%= argumentDefs %>);
             }
             else
             {
@@ -119,7 +119,7 @@
         else
         {
 %>
-                e.Result = base.<%= m.Name %>(<%= m.GetArguments() %>);
+                e.Result = await base.<%= m.Name %>(<%= m.GetArguments() %>);
 <%
         }
 %>

@@ -67,6 +67,20 @@ namespace Zetbox.Generator.Templates.ObjectClasses
             var ret = m.Parameter.SingleOrDefault(param => param.IsReturnParameter);
             if (ret == null)
             {
+                return "System.Threading.Tasks.Task";
+            }
+            else
+            {
+                return $"System.Threading.Tasks.Task<{ret.GetParameterTypeString()}>";
+            }
+        }
+
+        protected virtual string GetNativeReturnType()
+        {
+            // TODO: repair after implementing a common (Client&Server) MethodInvocation assembly
+            var ret = m.Parameter.SingleOrDefault(param => param.IsReturnParameter);
+            if (ret == null)
+            {
                 return "void";
             }
             else

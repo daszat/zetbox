@@ -53,7 +53,7 @@ this.WriteObjects("        ",  attr , "\r\n");
 }
 
 #line 43 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
-this.WriteObjects("        ",  GetModifiers() , " ",  GetReturnType() , " ",  m.Name , "(",  GetParameterDefinitions() , ")\r\n");
+this.WriteObjects("        ",  GetModifiers() , " async ",  GetReturnType() , " ",  m.Name , "(",  GetParameterDefinitions() , ")\r\n");
 #line 46 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 string delegateName = m.Name + indexSuffix + "_Handler";
     var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
@@ -80,7 +80,7 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            // base.",  m.Name , "();\r\n");
 this.WriteObjects("            if (",  eventName , " != null)\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                ",  eventName , "(this",  argumentDefs , ");\r\n");
+this.WriteObjects("                await ",  eventName , "(this",  argumentDefs , ");\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            else\r\n");
 this.WriteObjects("            {\r\n");
@@ -96,7 +96,7 @@ this.WriteObjects("                throw new NotImplementedException(\"No handle
         {
 
 #line 84 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
-this.WriteObjects("                base.",  m.Name , "(",  m.GetArguments() , ");\r\n");
+this.WriteObjects("                await base.",  m.Name , "(",  m.GetArguments() , ");\r\n");
 #line 86 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 }
 
@@ -123,7 +123,7 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            var e = new ",  returnArgsType , "();\r\n");
 this.WriteObjects("            if (",  eventName , " != null)\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                ",  eventName , "(this, e",  argumentDefs , ");\r\n");
+this.WriteObjects("                await ",  eventName , "(this, e",  argumentDefs , ");\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            else\r\n");
 this.WriteObjects("            {\r\n");
@@ -139,7 +139,7 @@ this.WriteObjects("                throw new NotImplementedException(\"No handle
         {
 
 #line 122 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
-this.WriteObjects("                e.Result = base.",  m.Name , "(",  m.GetArguments() , ");\r\n");
+this.WriteObjects("                e.Result = await base.",  m.Name , "(",  m.GetArguments() , ");\r\n");
 #line 124 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 }
 

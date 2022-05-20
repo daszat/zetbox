@@ -27,7 +27,7 @@
 <%@ Import Namespace="Zetbox.Generator.Extensions" %>
         // BEGIN <%= this.GetType() %>
 
-        <%= GetModifiers() %> <%= GetReturnType() %> <%= m.Name %>(<%= GetParameterDefinitions() %>)
+        <%= GetModifiers() %> async <%= GetReturnType() %> <%= m.Name %>(<%= GetParameterDefinitions() %>)
 <%
     var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
@@ -47,7 +47,7 @@
     {
 %>
         {
-            Context.ClientInternals().InvokeServerMethod(this, "<%= m.Name %>", typeof(<%= GetReturnType() %>), <%= argumentTypes%><%= argumentDefs %>);
+            await Context.ClientInternals().InvokeServerMethod(this, "<%= m.Name %>", typeof(<%= GetNativeReturnType() %>), <%= argumentTypes%><%= argumentDefs %>);
         }
 <%
     }
@@ -55,7 +55,7 @@
     {
 %>
         {
-            return (<%= GetReturnType() %>)Context.ClientInternals().InvokeServerMethod(this, "<%= m.Name %>", typeof(<%= GetReturnType() %>), <%= argumentTypes %><%= argumentDefs %>);
+            return (<%= GetNativeReturnType() %>)await Context.ClientInternals().InvokeServerMethod(this, "<%= m.Name %>", typeof(<%= GetNativeReturnType() %>), <%= argumentTypes %><%= argumentDefs %>);
         }
 <%
     }

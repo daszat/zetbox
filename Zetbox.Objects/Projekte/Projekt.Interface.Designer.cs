@@ -116,6 +116,6 @@ namespace Zetbox.App.Projekte
         /// <summary>
         /// 
         /// </summary>
-        System.Object GetSummaryReport(string title, Zetbox.App.Base.DateTimeRange range);
+        System.Threading.Tasks.Task<System.Object> GetSummaryReport(string title, Zetbox.App.Base.DateTimeRange range);
     }
 }
