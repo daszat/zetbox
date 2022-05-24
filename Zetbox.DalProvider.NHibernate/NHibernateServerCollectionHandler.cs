@@ -46,7 +46,7 @@ namespace Zetbox.DalProvider.NHibernate
             //var relEnd = rel.GetEndFromRole(endRole);
             //var relOtherEnd = rel.GetOtherEnd(relEnd);
             var parent = await ctx.FindAsync(ctx.GetImplementationType(typeof(TParent)).ToInterfaceType(), parentId);
-            var ceType = ctx.ToImplementationType(rel.GetEntryInterfaceType()).Type;
+            var ceType = ctx.ToImplementationType(await rel.GetEntryInterfaceType()).Type;
 
             var method = this.GetType().GetMethod("GetCollectionEntriesInternal", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             var result = (Task<IEnumerable<IRelationEntry>>)method
@@ -57,10 +57,10 @@ namespace Zetbox.DalProvider.NHibernate
         }
 
         //// Helper method which is only called by reflection from GetCollectionEntries
-        private Task<IEnumerable<IRelationEntry>> GetCollectionEntriesInternal<IMPL>(TParent parent, Relation rel, RelationEndRole endRole)
+        private async Task<IEnumerable<IRelationEntry>> GetCollectionEntriesInternal<IMPL>(TParent parent, Relation rel, RelationEndRole endRole)
             where IMPL : NHibernatePersistenceObject
         {
-            return Task.FromResult((IEnumerable<IRelationEntry>)MagicCollectionFactory.WrapAsCollection<IRelationEntry>(parent.GetPrivatePropertyValue<object>(rel.GetEndFromRole(endRole).Navigator.Name)).ToList());
+            return (IEnumerable<IRelationEntry>)MagicCollectionFactory.WrapAsCollection<IRelationEntry>(parent.GetPrivatePropertyValue<object>((await rel.GetEndFromRole(endRole)).Navigator.Name)).ToList();
         }
     }
 }

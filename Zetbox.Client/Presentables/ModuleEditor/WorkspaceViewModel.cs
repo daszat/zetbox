@@ -150,7 +150,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     assemblyLstMdl.Commands.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext,
                         this,
                         "Refresh descriptors", "Refreshes the ViewDescriptors and ViewModelDescriptors",
-                        () =>
+                        async () =>
                         {
                             foreach (var mdl in assemblyLstMdl.SelectedItems)
                             {
@@ -158,14 +158,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                                 var ctx = scope.ViewModelFactory.CreateNewContext();
 
                                 var a = ctx.Find<Assembly>(mdl.ID);
-                                var workspaceShown = a.RegenerateTypeRefs();
+                                var workspaceShown = await a.RegenerateTypeRefs();
 
                                 if (!workspaceShown)
                                 {
                                     // Submit only if no new Descriptor has been created
                                     // when new Descriptor has been created a Workspace will 
                                     // show those Descriptors and the user has to submit them
-                                    ctx.SubmitChanges();
+                                    await ctx.SubmitChanges();
                                     scope.Dispose();
                                 }
                                 else
@@ -173,8 +173,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                                     // TODO: This will produce a scope leak!
                                 }
                             }
-
-                            return Task.CompletedTask;
                         },
                         () => Task.FromResult(assemblyLstMdl.SelectedItems.Count > 0),
                         () => Task.FromResult("Nothing selected")));

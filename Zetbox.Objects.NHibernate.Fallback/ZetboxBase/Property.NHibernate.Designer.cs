@@ -1977,12 +1977,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDescription_Property")]
-        public virtual string GetDescription()
+        public virtual async System.Threading.Tasks.Task<string> GetDescription()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDescription_Property != null)
             {
-                OnGetDescription_Property(this, e);
+                await OnGetDescription_Property(this, e);
             }
             else
             {
@@ -2041,12 +2041,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetElementTypeString_Property")]
-        public virtual string GetElementTypeString()
+        public virtual async System.Threading.Tasks.Task<string> GetElementTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetElementTypeString_Property != null)
             {
-                OnGetElementTypeString_Property(this, e);
+                await OnGetElementTypeString_Property(this, e);
             }
             else
             {
@@ -2105,12 +2105,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_Property")]
-        public virtual string GetLabel()
+        public virtual async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_Property != null)
             {
-                OnGetLabel_Property(this, e);
+                await OnGetLabel_Property(this, e);
             }
             else
             {
@@ -2169,12 +2169,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_Property")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_Property != null)
             {
-                OnGetName_Property(this, e);
+                await OnGetName_Property(this, e);
             }
             else
             {
@@ -2233,12 +2233,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyType_Property")]
-        public virtual System.Type GetPropertyType()
+        public virtual async System.Threading.Tasks.Task<System.Type> GetPropertyType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetPropertyType_Property != null)
             {
-                OnGetPropertyType_Property(this, e);
+                await OnGetPropertyType_Property(this, e);
             }
             else
             {
@@ -2297,12 +2297,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyTypeString_Property")]
-        public virtual string GetPropertyTypeString()
+        public virtual async System.Threading.Tasks.Task<string> GetPropertyTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetPropertyTypeString_Property != null)
             {
-                OnGetPropertyTypeString_Property(this, e);
+                await OnGetPropertyTypeString_Property(this, e);
             }
             else
             {
@@ -2558,60 +2558,60 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_DefaultValue.HasValue)
-                this.DefaultValue = ((Zetbox.App.Base.DefaultPropertyValueNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DefaultPropertyValue>(_fk_guid_DefaultValue.Value));
+                this.DefaultValue = ((Zetbox.App.Base.DefaultPropertyValueNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.DefaultPropertyValue>(_fk_guid_DefaultValue.Value)));
             else
             if (_fk_DefaultValue.HasValue)
-                this.DefaultValue = ((Zetbox.App.Base.DefaultPropertyValueNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value));
+                this.DefaultValue = ((Zetbox.App.Base.DefaultPropertyValueNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value)));
             else
                 this.DefaultValue = null;
 
             if (_fk_guid_FilterConfiguration.HasValue)
-                this.FilterConfiguration = ((Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_guid_FilterConfiguration.Value));
+                this.FilterConfiguration = ((Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_guid_FilterConfiguration.Value)));
             else
             if (_fk_FilterConfiguration.HasValue)
-                this.FilterConfiguration = ((Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_FilterConfiguration.Value));
+                this.FilterConfiguration = ((Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.PropertyFilterConfiguration>(_fk_FilterConfiguration.Value)));
             else
                 this.FilterConfiguration = null;
 
             if (_fk_guid_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value)));
             else
             if (_fk_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_Module.Value)));
             else
                 this.Module = null;
 
             if (_fk_guid_ObjectClass.HasValue)
-                this.ObjectClass = ((Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_guid_ObjectClass.Value));
+                this.ObjectClass = ((Zetbox.App.Base.DataTypeNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.DataType>(_fk_guid_ObjectClass.Value)));
             else
             if (_fk_ObjectClass.HasValue)
-                this.ObjectClass = ((Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_ObjectClass.Value));
+                this.ObjectClass = ((Zetbox.App.Base.DataTypeNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.DataType>(_fk_ObjectClass.Value)));
             else
                 this.ObjectClass = null;
 
             if (_fk_guid_RequestedKind.HasValue)
-                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value));
+                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value)));
             else
             if (_fk_RequestedKind.HasValue)
-                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value));
+                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value)));
             else
                 this.RequestedKind = null;
 
             if (_fk_guid_ValueModelDescriptor.HasValue)
-                this.ValueModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_ValueModelDescriptor.Value));
+                this.ValueModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_ValueModelDescriptor.Value)));
             else
             if (_fk_ValueModelDescriptor.HasValue)
-                this.ValueModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value));
+                this.ValueModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value)));
             else
                 this.ValueModelDescriptor = null;
         }

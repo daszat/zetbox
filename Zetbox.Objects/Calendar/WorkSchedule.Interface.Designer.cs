@@ -68,26 +68,26 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// Duplicates this work schedule
         /// </summary>
-        Zetbox.App.Calendar.WorkSchedule Duplicate();
+        System.Threading.Tasks.Task<Zetbox.App.Calendar.WorkSchedule> Duplicate();
 
         /// <summary>
         /// Gets the number of holidays between two dates. A Holiday is defined as every yearly rule, that is not a working day. All other rules are ignored.
         /// </summary>
-        int GetHolidays(DateTime from, DateTime until);
+        System.Threading.Tasks.Task<int> GetHolidays(DateTime from, DateTime until);
 
         /// <summary>
         /// Gets the number of free days between two dates
         /// </summary>
-        int GetOffDays(DateTime from, DateTime until);
+        System.Threading.Tasks.Task<int> GetOffDays(DateTime from, DateTime until);
 
         /// <summary>
         /// Get the number of working days between two dates
         /// </summary>
-        int GetWorkingDays(DateTime from, DateTime until);
+        System.Threading.Tasks.Task<int> GetWorkingDays(DateTime from, DateTime until);
 
         /// <summary>
         /// Returns the amount of working hours between two dates
         /// </summary>
-        decimal GetWorkingHours(DateTime from, DateTime until);
+        System.Threading.Tasks.Task<decimal> GetWorkingHours(DateTime from, DateTime until);
     }
 }

@@ -228,12 +228,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchOwnerTask != null) return _triggerFetchOwnerTask;
 
-            if (_fk_Owner.HasValue)
-                _triggerFetchOwnerTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Owner.Value);
-            else
-                _triggerFetchOwnerTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchOwnerTask.OnResult(t =>
+            if (_fk_Owner.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Owner.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnOwner_Getter != null)
                 {
@@ -243,7 +245,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchOwnerTask;
+            return _triggerFetchOwnerTask = task;
         }
 
         // internal implementation
@@ -254,7 +256,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchOwnerAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -367,12 +368,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchTypeTask != null) return _triggerFetchTypeTask;
 
-            if (_fk_Type.HasValue)
-                _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
-            else
-                _triggerFetchTypeTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> task;
 
-            _triggerFetchTypeTask.OnResult(t =>
+            if (_fk_Type.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+
+            task.OnResult(t =>
             {
                 if (OnType_Getter != null)
                 {
@@ -382,7 +385,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchTypeTask;
+            return _triggerFetchTypeTask = task;
         }
 
         // internal implementation
@@ -393,7 +396,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchTypeAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set
@@ -534,15 +536,15 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_Owner.HasValue)
-                OwnerImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_Owner.Value);
+                OwnerImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Owner.Value));
             else
                 OwnerImpl = null;
 
             if (_fk_guid_Type.HasValue)
-                TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_Type.Value);
+                TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_Type.Value));
             else
             if (_fk_Type.HasValue)
-                TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
+                TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value));
             else
                 TypeImpl = null;
             // fix cached lists references
@@ -691,8 +693,8 @@ namespace Zetbox.App.GUI
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(Owner != null ? Owner.ID : (int?)null);
-            binStream.Write(Type != null ? Type.ID : (int?)null);
+            binStream.Write(_fk_Owner != null ? _fk_Owner : (int?)null);
+            binStream.Write(_fk_Type != null ? _fk_Type : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

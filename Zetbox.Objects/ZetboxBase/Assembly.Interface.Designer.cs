@@ -37,6 +37,6 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Regenerates the stored list of TypeRefs from the loaded assembly
         /// </summary>
-        bool RegenerateTypeRefs();
+        System.Threading.Tasks.Task<bool> RegenerateTypeRefs();
     }
 }

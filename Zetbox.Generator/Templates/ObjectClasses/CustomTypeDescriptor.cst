@@ -60,7 +60,7 @@
         foreach(var property in properties)
         {
             string propertyName = property.Name;
-            if (property.IsAssociation() && !property.IsObjectReferencePropertySingle())
+            if (property.IsAssociation().Result && !property.IsObjectReferencePropertySingle().Result)
             {
 %>
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
@@ -106,7 +106,7 @@
 <%      } else { %>
                     // position columns
 <%
-            foreach(var rel in rels.Where(r => r.GetRelationType() == RelationType.one_n))
+            foreach(var rel in rels.Where(r => r.GetRelationType().Result == RelationType.one_n))
             {
             // only show debugging if there actually is an position column
             if (   (rel.A.Type == cls && rel.A.HasPersistentOrder)

@@ -58,11 +58,11 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>
         /// Creates a mapping report
         /// </summary>
-        void CreateMappingReport();
+        System.Threading.Tasks.Task CreateMappingReport();
 
         /// <summary>
         /// 
         /// </summary>
-        void UpdateFromSourceSchema();
+        System.Threading.Tasks.Task UpdateFromSourceSchema();
     }
 }

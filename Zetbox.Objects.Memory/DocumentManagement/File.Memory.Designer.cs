@@ -1198,12 +1198,12 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnExtractText_File")]
-        public virtual void ExtractText()
+        public virtual async System.Threading.Tasks.Task ExtractText()
         {
             // base.ExtractText();
             if (OnExtractText_File != null)
             {
-                OnExtractText_File(this);
+                await OnExtractText_File(this);
             }
             else
             {
@@ -1261,12 +1261,12 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnHandleBlobChange_File")]
-        public virtual Zetbox.App.Base.Blob HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.Blob> HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.Blob>();
             if (OnHandleBlobChange_File != null)
             {
-                OnHandleBlobChange_File(this, e, oldBlob, newBlob);
+                await OnHandleBlobChange_File(this, e, oldBlob, newBlob);
             }
             else
             {
@@ -1325,12 +1325,12 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_File")]
-        public virtual void Open()
+        public virtual async System.Threading.Tasks.Task Open()
         {
             // base.Open();
             if (OnOpen_File != null)
             {
-                OnOpen_File(this);
+                await OnOpen_File(this);
             }
             else
             {
@@ -1388,12 +1388,12 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_File")]
-        public virtual void Upload()
+        public virtual async System.Threading.Tasks.Task Upload()
         {
             // base.Upload();
             if (OnUpload_File != null)
             {
-                OnUpload_File(this);
+                await OnUpload_File(this);
             }
             else
             {

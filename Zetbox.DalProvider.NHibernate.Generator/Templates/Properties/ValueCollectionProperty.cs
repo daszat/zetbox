@@ -65,7 +65,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             string exposedCollectionInterface = hasPersistentOrder ? "IList" : "ICollection";
 
             string thisInterface = prop.ObjectClass.Name;
-            string referencedType = prop.GetElementTypeString();
+            string referencedType = prop.GetElementTypeString().Result;
             string referencedCollectionEntry = prop.GetCollectionEntryFullName();
             string referencedCollectionEntryImpl = referencedCollectionEntry + host.Settings["extrasuffix"] + Zetbox.API.Helper.ImplementationSuffix;
             string referencedCollectionEntryProxy = referencedCollectionEntryImpl + "." + prop.GetCollectionEntryClassName() + "Proxy";

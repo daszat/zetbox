@@ -19,7 +19,8 @@ namespace Zetbox.Generator.Extensions
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using System.Threading.Tasks;
+    using Zetbox.API;
     using Zetbox.App.Base;
 
     public static class MethodExtensions
@@ -60,33 +61,34 @@ namespace Zetbox.Generator.Extensions
             return param.Name;
         }
 
-        public static string GetArgumentTypes(this Method method)
+        public static async Task<string> GetArgumentTypes(this Method method)
         {
             if (method == null) { throw new ArgumentNullException("method"); }
 
             return String.Join(", ",
-                method.Parameter
+                (await method.Parameter
                 .Where(p => !p.IsReturnParameter)
-                .Select(p => GetArgumentType(p))
+                .Select(async p => await GetArgumentType(p))
+                .WhenAll())
                 .ToArray());
         }
 
-        public static string GetArgumentType(this BaseParameter param)
+        public static async Task<string> GetArgumentType(this BaseParameter param)
         {
             if (param == null) { throw new ArgumentNullException("param"); }
 
-            return "typeof(" + param.GetParameterTypeString() + ")";
+            return "typeof(" + await param.GetParameterTypeString() + ")";
         }
 
 
-        public static IOrderedEnumerable<Method> OrderByDefault(this IEnumerable<Method> methods)
+        public static Task<IOrderedEnumerable<Method>> OrderByDefault(this IEnumerable<Method> methods)
         {
             if (methods == null) { throw new ArgumentNullException("methods"); }
 
-            return methods
+            return Task.FromResult(methods
                 .OrderBy(m => m.Name)
                 .ThenBy(m => m.Parameter.Count)
-                .ThenBy(m => String.Join("|", m.Parameter.Select(p => p.GetParameterTypeString()).ToArray()));
+                .ThenBy(m => m.ID));
         }
     }
 }

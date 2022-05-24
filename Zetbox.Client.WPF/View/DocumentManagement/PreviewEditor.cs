@@ -54,7 +54,7 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
             {
                 if (ViewModel != null)
                 {
-                    PreviewDocument();
+                    _ = PreviewDocument();
                     ViewModel.Object.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(vmdl_PropertyChanged);
                 }
             }
@@ -64,12 +64,12 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
         {
             if (e.PropertyName == "Blob")
             {
-                PreviewDocument();
+                _ = PreviewDocument();
             }
         }
 
         WPFPreviewControl vistaPreview;
-        protected void PreviewDocument()
+        protected async Task PreviewDocument()
         {
             try
             {
@@ -78,8 +78,8 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
                 {
                     var fi = ViewModel.File.Context.GetFileInfo(blob.ID);
 
-                    if (TryText(blob)) return;
-                    if (TryImage(blob)) return;
+                    if (await TryText(blob)) return;
+                    if (await TryImage(blob)) return;
                     if (TryVistaPreview(fi)) return;
                 }
                 else
@@ -106,13 +106,13 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
             return true;
         }
 
-        private bool TryImage(Blob blob)
+        private async Task<bool> TryImage(Blob blob)
         {
             try
             {
                 var bmpImg = new BitmapImage();
                 bmpImg.BeginInit();
-                bmpImg.StreamSource = blob.GetStream();
+                bmpImg.StreamSource = await blob.GetStream();
                 bmpImg.EndInit();
 
                 PreviewControl.Content = new ZoomBorder() { Child = new Image() { Source = bmpImg } };
@@ -125,11 +125,11 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
             }
         }
 
-        private bool TryText(Blob blob)
+        private async Task<bool> TryText(Blob blob)
         {
             if ("text/plain".Equals(blob.MimeType, StringComparison.InvariantCultureIgnoreCase))
             {
-                using (var s = blob.GetStream())
+                using (var s = await blob.GetStream())
                 {
                     var isUtf8 = Utf8Checker.IsUtf8(s);
                     s.Seek(0, SeekOrigin.Begin);

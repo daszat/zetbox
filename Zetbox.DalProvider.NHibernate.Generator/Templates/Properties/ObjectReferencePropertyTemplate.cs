@@ -40,14 +40,14 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
             string name = prop.Name;
-            string ownInterface = prop.ObjectClass.GetDataTypeString();
+            string ownInterface = prop.ObjectClass.GetDataTypeString().Result;
             string referencedInterface = String.Format(
                 "{0}.{1}",
-                prop.GetReferencedObjectClass().Module.Namespace,
-                prop.GetReferencedObjectClass().Name);
+                prop.GetReferencedObjectClass().Result.Module.Namespace,
+                prop.GetReferencedObjectClass().Result.Name);
 
             var rel = RelationExtensions.Lookup(ctx, prop);
-            var endRole = rel.GetEnd(prop).GetRole();
+            var endRole = rel.GetEnd(prop).Result.GetRole();
             Call(host, ctx, serializationList,
                 ownInterface, name, referencedInterface, rel, endRole, callGetterSetterEvents, updateInverseNavigator, String.Empty);
 
@@ -70,8 +70,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             if (rel == null) { throw new ArgumentNullException("rel"); }
 
             // TODO: split off relation expansion in own Call() method
-            RelationEnd relEnd = rel.GetEndFromRole(endRole);
-            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole).Result;
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd).Result;
 
             string moduleNamespace = rel.Module.Namespace;
             string implName = name + Zetbox.API.Helper.ImplementationSuffix;
@@ -86,14 +86,14 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             string associationNameUnused = rel.GetAssociationName() + assocNameSuffix;
             string targetRoleNameUnused = otherEnd.RoleName;
 
-            string positionPropertyName = rel.NeedsPositionStorage(endRole)
+            string positionPropertyName = rel.NeedsPositionStorage(endRole).Result
                 ? Construct.ListPositionPropertyName(relEnd)
                 : null;
 
             string inverseNavigatorName = updateInverseNavigator && otherEnd.Navigator != null
                 ? otherEnd.Navigator.Name
                 : null;
-            bool inverseNavigatorIsList = otherEnd.Navigator != null && otherEnd.Navigator.GetIsList();
+            bool inverseNavigatorIsList = otherEnd.Navigator != null && otherEnd.Navigator.GetIsList().Result;
             bool notifyInverseCollection = false;
 
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;

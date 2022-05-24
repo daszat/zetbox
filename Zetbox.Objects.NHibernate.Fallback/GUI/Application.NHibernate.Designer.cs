@@ -1266,44 +1266,44 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_Icon.HasValue)
-                this.Icon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_Icon.Value));
+                this.Icon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_Icon.Value)));
             else
             if (_fk_Icon.HasValue)
-                this.Icon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_Icon.Value));
+                this.Icon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_Icon.Value)));
             else
                 this.Icon = null;
 
             if (_fk_guid_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value)));
             else
             if (_fk_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_Module.Value)));
             else
                 this.Module = null;
 
             if (_fk_guid_RootScreen.HasValue)
-                this.RootScreen = ((Zetbox.App.GUI.NavigationScreenNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.NavigationScreen>(_fk_guid_RootScreen.Value));
+                this.RootScreen = ((Zetbox.App.GUI.NavigationScreenNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.NavigationScreen>(_fk_guid_RootScreen.Value)));
             else
             if (_fk_RootScreen.HasValue)
-                this.RootScreen = ((Zetbox.App.GUI.NavigationScreenNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.NavigationScreen>(_fk_RootScreen.Value));
+                this.RootScreen = ((Zetbox.App.GUI.NavigationScreenNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.NavigationScreen>(_fk_RootScreen.Value)));
             else
                 this.RootScreen = null;
 
             if (_fk_guid_WorkspaceViewModel.HasValue)
-                this.WorkspaceViewModel = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_WorkspaceViewModel.Value));
+                this.WorkspaceViewModel = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_WorkspaceViewModel.Value)));
             else
             if (_fk_WorkspaceViewModel.HasValue)
-                this.WorkspaceViewModel = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_WorkspaceViewModel.Value));
+                this.WorkspaceViewModel = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_WorkspaceViewModel.Value)));
             else
                 this.WorkspaceViewModel = null;
         }

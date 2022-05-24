@@ -71,7 +71,7 @@ this.WriteObjects("                _properties = new System.ComponentModel.Prope
 foreach(var property in properties)
         {
             string propertyName = property.Name;
-            if (property.IsAssociation() && !property.IsObjectReferencePropertySingle())
+            if (property.IsAssociation().Result && !property.IsObjectReferencePropertySingle().Result)
             {
 
 #line 66 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
@@ -135,7 +135,7 @@ this.WriteObjects("                    // skipping position columns for frozen c
 #line 107 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("                    // position columns\r\n");
 #line 109 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-foreach(var rel in rels.Where(r => r.GetRelationType() == RelationType.one_n))
+foreach(var rel in rels.Where(r => r.GetRelationType().Result == RelationType.one_n))
             {
             // only show debugging if there actually is an position column
             if (   (rel.A.Type == cls && rel.A.HasPersistentOrder)

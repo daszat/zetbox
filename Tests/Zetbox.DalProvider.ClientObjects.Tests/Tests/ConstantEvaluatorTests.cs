@@ -20,6 +20,7 @@ namespace Zetbox.DalProvider.Client.Tests
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
+    using System.Threading.Tasks;
     using NUnit.Framework;
 
     public struct CETData
@@ -96,9 +97,9 @@ namespace Zetbox.DalProvider.Client.Tests
 
         [Test]
         [TestCaseSource("GetTestCases")]
-        public void Test(CETData data)
+        public async Task Test(CETData data)
         {
-            Assert.That(((ConstantExpression)ConstantEvaluator.PartialEval(data.Expression)).Value, Is.EqualTo(data.ExpectedValue), "PartialEval failed");
+            Assert.That(((ConstantExpression)await ConstantEvaluator.PartialEval(data.Expression)).Value, Is.EqualTo(data.ExpectedValue), "PartialEval failed");
             Assert.That(Expression.Lambda(data.Expression).Compile().DynamicInvoke(null), Is.EqualTo(data.ExpectedValue), "Compilation failed");
         }
     }

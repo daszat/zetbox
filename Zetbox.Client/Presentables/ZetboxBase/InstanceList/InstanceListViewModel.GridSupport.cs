@@ -27,14 +27,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     {
         readonly Dictionary<DataObjectViewModel, DataObjectViewModelProxy> _proxyCache = new Dictionary<DataObjectViewModel, DataObjectViewModelProxy>();
 
-        private DataObjectViewModel GetObjectFromProxy(DataObjectViewModelProxy p)
+        private async Task<DataObjectViewModel> GetObjectFromProxy(DataObjectViewModelProxy p)
         {
             if (p.Object == null)
             {
-                var obj = DataContext.Create(DataContext.GetInterfaceType(_type.GetDataType()));
+                var obj = DataContext.Create(DataContext.GetInterfaceType(await _type.GetDataType()));
                 p.Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
                 _proxyCache[p.Object] = p;
-                OnObjectCreated(obj);
+                await OnObjectCreated(obj);
             }
             return p.Object;
         }
@@ -82,16 +82,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     AllowAddNew = !AllowAddNew;
                     AllowAddNew = !AllowAddNew;
                 },
-                createTask: () =>
+                createTask: async () =>
                 {
-                    return Task.Run(async () =>
-                    {
-                        await LoadInstancesCore();
-                        return new ProxyList(
-                            _filteredInstances,
-                            (vm) => GetProxy(vm),
-                            (p) => GetObjectFromProxy(p));
-                    });
+                    await LoadInstancesCore();
+                    return new ProxyList(
+                        _filteredInstances,
+                        (vm) => GetProxy(vm),
+                        (p) => GetObjectFromProxy(p).Result);
                 },
                 set: null);
         }
@@ -118,7 +115,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _selectedProxies = new ObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy>(
                         SelectedItems,
                         (vm) => GetProxy(vm),
-                        (p) => GetObjectFromProxy(p));
+                        (p) => GetObjectFromProxy(p).Result);
                 }
                 return _selectedProxies;
             }

@@ -58,11 +58,11 @@
                      column="`<%= Construct.ForeignKeyColumnName(rel.A) %>`" />
         <many-to-one name="B"
                      column="`<%= Construct.ForeignKeyColumnName(rel.B) %>`" />
-<% if (rel.NeedsPositionStorage(RelationEndRole.A)) { %>
+<% if (rel.NeedsPositionStorage(RelationEndRole.A).Result) { %>
         <property name="A<%= Zetbox.API.Helper.PositionSuffix %>"
                     column="`<%= Construct.ListPositionColumnName(rel.B) %>`" />
 <% } %>
-<% if (rel.NeedsPositionStorage(RelationEndRole.B)) { %>
+<% if (rel.NeedsPositionStorage(RelationEndRole.B).Result) { %>
         <property name="B<%= Zetbox.API.Helper.PositionSuffix %>"
                   column="`<%= Construct.ListPositionColumnName(rel.A) %>`" />
 <% } %>

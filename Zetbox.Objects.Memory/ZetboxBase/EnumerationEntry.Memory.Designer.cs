@@ -1027,12 +1027,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_EnumerationEntry")]
-        public virtual string GetLabel()
+        public virtual async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_EnumerationEntry != null)
             {
-                OnGetLabel_EnumerationEntry(this, e);
+                await OnGetLabel_EnumerationEntry(this, e);
             }
             else
             {

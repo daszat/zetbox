@@ -21,6 +21,7 @@ namespace Zetbox.Server.SchemaManagement
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
@@ -82,27 +83,27 @@ namespace Zetbox.Server.SchemaManagement
         #region Cases
 
         #region DeleteObjectClass
-        public bool IsDeleteObjectClass(ObjectClass savedObjClass)
+        public async Task<bool> IsDeleteObjectClass(ObjectClass savedObjClass)
         {
-            return schema.FindPersistenceObject<ObjectClass>(savedObjClass.ExportGuid) == null;
+            return await schema.FindPersistenceObjectAsync<ObjectClass>(savedObjClass.ExportGuid) == null;
         }
-        public void DoDeleteObjectClass(ObjectClass savedObjClass)
+        public async Task DoDeleteObjectClass(ObjectClass savedObjClass)
         {
             if (!PreMigration(ClassMigrationEventType.Delete, savedObjClass, null))
                 return;
 
             if (savedObjClass.NeedsRightsTable())
             {
-                DoDeleteObjectClassSecurityRules(savedObjClass);
+                await DoDeleteObjectClassSecurityRules(savedObjClass);
             }
 
             foreach (var lstPop in savedObjClass.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList))
             {
-                DoDeleteValueTypePropertyList(savedObjClass, lstPop, string.Empty);
+                await DoDeleteValueTypePropertyList(savedObjClass, lstPop, string.Empty);
             }
             foreach (var lstPop in savedObjClass.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList))
             {
-                DoDeleteCompoundObjectPropertyList(savedObjClass, lstPop, string.Empty);
+                await DoDeleteCompoundObjectPropertyList(savedObjClass, lstPop, string.Empty);
             }
 
             var mapping = savedObjClass.GetTableMapping();
@@ -127,14 +128,14 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region NewObjectClass
-        public bool IsNewObjectClass(ObjectClass objClass)
+        public async Task<bool> IsNewObjectClass(ObjectClass objClass)
         {
-            return savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid) == null;
+            return await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid) == null;
         }
-        public void DoNewObjectClass(ObjectClass objClass)
+        public Task DoNewObjectClass(ObjectClass objClass)
         {
             if (!PreMigration(ClassMigrationEventType.Add, null, objClass))
-                return;
+                return Task.CompletedTask;
 
             TableMapping mapping = objClass.GetTableMapping();
             if (mapping == TableMapping.TPT || (mapping == TableMapping.TPH && objClass.BaseObjectClass == null))
@@ -160,20 +161,22 @@ namespace Zetbox.Server.SchemaManagement
             }
 
             PostMigration(ClassMigrationEventType.Add, null, objClass);
+
+            return Task.CompletedTask;
         }
 
         #endregion
 
         #region RenameObjectClassTable
-        public bool IsRenameObjectClassTable(ObjectClass objClass)
+        public async Task<bool> IsRenameObjectClassTable(ObjectClass objClass)
         {
-            var saved = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
             if (saved == null) return false;
             return saved.TableName != objClass.TableName || saved.Module.SchemaName != objClass.Module.SchemaName;
         }
-        public void DoRenameObjectClassTable(ObjectClass objClass)
+        public async Task DoRenameObjectClassTable(ObjectClass objClass)
         {
-            var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            var savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
 
             if (!PreMigration(ClassMigrationEventType.RenameTable, savedObjClass, objClass))
                 return;
@@ -191,7 +194,7 @@ namespace Zetbox.Server.SchemaManagement
             {
                 foreach (var prop in objClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList))
                 {
-                    DoRenameValueTypePropertyName(objClass, prop, string.Empty);
+                    await DoRenameValueTypePropertyName(objClass, prop, string.Empty);
                 }
 
                 // FK names will be changed in DoChangeRelationName case
@@ -207,16 +210,16 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region RenameValueTypePropertyName
-        public bool IsRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        public async Task<bool> IsRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid);
             if (saved == null) return false;
             // TODO: What if prefix has changed
             return saved.Name != prop.Name;
         }
-        public void DoRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        public async Task DoRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var savedProp = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid);
 
             if (!PreMigration(PropertyMigrationEventType.Rename, savedProp, prop))
                 return;
@@ -236,21 +239,21 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region MoveValueTypeProperty
-        public bool IsMoveValueTypeProperty(ValueTypeProperty prop)
+        public async Task<bool> IsMoveValueTypeProperty(ValueTypeProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid);
             if (saved == null) return false;
             return saved.ObjectClass.ExportGuid != prop.ObjectClass.ExportGuid;
         }
-        public void DoMoveValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        public async Task DoMoveValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var savedProp = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid);
 
             if (!PreMigration(PropertyMigrationEventType.Move, savedProp, prop))
                 return;
 
             // Reflected changed hierarchie
-            var currentOriginObjClass = schema.FindPersistenceObject<ObjectClass>(savedProp.ObjectClass.ExportGuid);
+            var currentOriginObjClass = await schema.FindPersistenceObjectAsync<ObjectClass>(savedProp.ObjectClass.ExportGuid);
             var movedUp = IsParentOf(objClass, currentOriginObjClass);
             var movedDown = IsParentOf(currentOriginObjClass, objClass);
 
@@ -259,8 +262,8 @@ namespace Zetbox.Server.SchemaManagement
             var colName = Construct.ColumnName(prop, prefix);
             var srcColName = Construct.ColumnName(savedProp, prefix); // TODO: What if prefix has changed
             var dbType = prop.GetDbType();
-            var size = prop.GetSize();
-            var scale = prop.GetScale();
+            var size = await prop.GetSize();
+            var scale = await prop.GetScale();
             var def = SchemaManager.GetDefaultConstraint(prop);
 
             if (movedUp)
@@ -270,7 +273,7 @@ namespace Zetbox.Server.SchemaManagement
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
 
-                if (!prop.IsNullable())
+                if (!await prop.IsNullable())
                 {
                     if (db.CheckColumnContainsNulls(tblName, colName))
                     {
@@ -278,7 +281,7 @@ namespace Zetbox.Server.SchemaManagement
                     }
                     else
                     {
-                        db.AlterColumn(tblName, colName, dbType, size, scale, prop.IsNullable(), def);
+                        db.AlterColumn(tblName, colName, dbType, size, scale, await prop.IsNullable(), def);
                     }
                 }
 
@@ -292,9 +295,9 @@ namespace Zetbox.Server.SchemaManagement
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
 
-                if (!prop.IsNullable())
+                if (!await prop.IsNullable())
                 {
-                    db.AlterColumn(tblName, colName, dbType, size, scale, prop.IsNullable(), def);
+                    db.AlterColumn(tblName, colName, dbType, size, scale, await prop.IsNullable(), def);
                 }
 
                 if (db.CheckColumnExists(srcTblName, srcColName))
@@ -325,11 +328,11 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region NewValueTypeProperty nullable
-        public bool IsNewValueTypePropertyNullable(ValueTypeProperty prop)
+        public async Task<bool> IsNewValueTypePropertyNullable(ValueTypeProperty prop)
         {
-            return prop.IsNullable() && savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
+            return await prop.IsNullable() && savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid) == null;
         }
-        public void DoNewValueTypePropertyNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        public async Task DoNewValueTypePropertyNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             if (!PreMigration(PropertyMigrationEventType.Add, null, prop))
                 return;
@@ -338,24 +341,24 @@ namespace Zetbox.Server.SchemaManagement
             Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.Name, colName);
             CheckValueTypePropertyHasWarnings(prop);
 
-            CreateValueTypePropertyNullable(objClass.GetTableRef(db), prop, colName, true);
+            await CreateValueTypePropertyNullable(objClass.GetTableRef(db), prop, colName, true);
 
             PostMigration(PropertyMigrationEventType.Add, null, prop);
         }
 
-        private void CreateValueTypePropertyNullable(TableRef tblName, ValueTypeProperty prop, string colName, bool withDefault)
+        private async Task CreateValueTypePropertyNullable(TableRef tblName, ValueTypeProperty prop, string colName, bool withDefault)
         {
-            db.CreateColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), true, withDefault ? SchemaManager.GetDefaultConstraint(prop) : null);
+            db.CreateColumn(tblName, colName, prop.GetDbType(), await prop.GetSize(), await prop.GetScale(), true, withDefault ? SchemaManager.GetDefaultConstraint(prop) : null);
         }
 
         #endregion
 
         #region NewValueTypeProperty not nullable
-        public bool IsNewValueTypePropertyNotNullable(ValueTypeProperty prop)
+        public async Task<bool> IsNewValueTypePropertyNotNullable(ValueTypeProperty prop)
         {
-            return !prop.IsNullable() && savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
+            return !await prop.IsNullable() && savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid) == null;
         }
-        public void DoNewValueTypePropertyNotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        public async Task DoNewValueTypePropertyNotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             if (!PreMigration(PropertyMigrationEventType.Add, null, prop))
                 return;
@@ -363,8 +366,8 @@ namespace Zetbox.Server.SchemaManagement
             var tblName = objClass.GetTableRef(db);
             var colName = Construct.ColumnName(prop, prefix);
             var dbType = prop.GetDbType();
-            var size = prop.GetSize();
-            var scale = prop.GetScale();
+            var size = await prop.GetSize();
+            var scale = await prop.GetScale();
             var def = SchemaManager.GetDefaultConstraint(prop);
             var isSimplyCheckable = objClass.GetTableMapping() == TableMapping.TPT || objClass.BaseObjectClass == null;
             bool updateDone = false;
@@ -393,7 +396,7 @@ namespace Zetbox.Server.SchemaManagement
             }
             else if (updateDone && !isSimplyCheckable)
             {
-                CreateTPHNotNullCheckConstraint(tblName, colName, objClass);
+                await CreateTPHNotNullCheckConstraint(tblName, colName, objClass);
             }
             else if (!updateDone && isSimplyCheckable)
             {
@@ -418,7 +421,7 @@ namespace Zetbox.Server.SchemaManagement
             }
         }
 
-        internal void CreateTPHNotNullCheckConstraint(TableRef tblName, string colName, ObjectClass objClass)
+        internal Task CreateTPHNotNullCheckConstraint(TableRef tblName, string colName, ObjectClass objClass)
         {
             // classes that do have this property
             var classes = objClass.AndChildren(c => c.SubClasses).Select(cls => Construct.DiscriminatorValue(cls)).ToList();
@@ -453,6 +456,8 @@ namespace Zetbox.Server.SchemaManagement
             }
             else
                 Log.ErrorFormat("unable to create CHECK constraint for ValueType Property '{0}' in '{1}': column contains invalid NULLs or superfluous values", colName, tblName);
+
+            return Task.CompletedTask;
         }
 
         private bool WriteDefaultValue(TableRef tblName, string colName, DefaultConstraint def, IEnumerable<string> discriminatorFilter)
@@ -490,19 +495,19 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeDefaultValue
-        public bool IsChangeDefaultValue(Property prop)
+        public async Task<bool> IsChangeDefaultValue(Property prop)
         {
-            var saved = savedSchema.FindPersistenceObject<Property>(prop.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<Property>(prop.ExportGuid);
             if (saved == null) return false;
             if (saved.DefaultValue == null && prop.DefaultValue == null) return false;
-            return
+            return 
                 (saved.DefaultValue != null && prop.DefaultValue == null)
                 || (saved.DefaultValue == null && prop.DefaultValue != null)
                 || (saved.DefaultValue.ExportGuid != prop.DefaultValue.ExportGuid);
         }
-        public void DoChangeDefaultValue(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        public async Task DoChangeDefaultValue(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var savedProp = savedSchema.FindPersistenceObject<Property>(prop.ExportGuid);
+            var savedProp = await savedSchema.FindPersistenceObjectAsync<Property>(prop.ExportGuid);
 
             if (!PreMigration(PropertyMigrationEventType.ChangeDefaultValueDefinition, savedProp, prop))
                 return;
@@ -514,22 +519,22 @@ namespace Zetbox.Server.SchemaManagement
             // Another case is responsible to change that.
             var currentIsNullable = db.GetIsColumnNullable(tblName, colName);
 
-            db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), currentIsNullable, SchemaManager.GetDefaultConstraint(prop));
+            db.AlterColumn(tblName, colName, prop.GetDbType(), await prop.GetSize(), await prop.GetScale(), currentIsNullable, SchemaManager.GetDefaultConstraint(prop));
 
             PostMigration(PropertyMigrationEventType.ChangeDefaultValueDefinition, savedProp, prop);
         }
         #endregion
 
         #region ChangeValueTypeProperty_To_NotNullable
-        public bool IsChangeValueTypeProperty_To_NotNullable(ValueTypeProperty prop)
+        public async Task<bool> IsChangeValueTypeProperty_To_NotNullable(ValueTypeProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid);
             if (saved == null) return false;
-            return saved.IsNullable() && !prop.IsNullable();
+            return await saved.IsNullable() && !await prop.IsNullable();
         }
-        public void DoChangeValueTypeProperty_To_NotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        public async Task DoChangeValueTypeProperty_To_NotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var savedProp = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid);
 
             if (!PreMigration(PropertyMigrationEventType.ChangeToNotNullable, savedProp, prop))
                 return;
@@ -551,7 +556,7 @@ namespace Zetbox.Server.SchemaManagement
 
                     WriteDefaultValue(tblName, colName, def, isSimplyCheckable ? null : classes);
                 }
-                db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), null /* don't change contraints */);
+                db.AlterColumn(tblName, colName, prop.GetDbType(), await prop.GetSize(), await prop.GetScale(), await prop.IsNullable(), null /* don't change contraints */);
             }
 
             PostMigration(PropertyMigrationEventType.ChangeToNotNullable, savedProp, prop);
@@ -559,15 +564,15 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeValueTypeProperty_To_Nullable
-        public bool IsChangeValueTypeProperty_To_Nullable(ValueTypeProperty prop)
+        public async Task<bool> IsChangeValueTypeProperty_To_Nullable(ValueTypeProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid);
             if (saved == null) return false;
-            return !saved.IsNullable() && prop.IsNullable();
+            return !await saved.IsNullable() && await prop.IsNullable();
         }
-        public void DoChangeValueTypeProperty_To_Nullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        public async Task DoChangeValueTypeProperty_To_Nullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var savedProp = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid);
 
             if (!PreMigration(PropertyMigrationEventType.ChangeToNullable, savedProp, prop))
                 return;
@@ -575,22 +580,22 @@ namespace Zetbox.Server.SchemaManagement
             var tblName = objClass.GetTableRef(db);
             var colName = Construct.ColumnName(prop, prefix);
 
-            db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), null);
+            db.AlterColumn(tblName, colName, prop.GetDbType(), await prop.GetSize(), await prop.GetScale(), await prop.IsNullable(), null);
 
             PostMigration(PropertyMigrationEventType.ChangeToNullable, savedProp, prop);
         }
         #endregion
 
         #region RenameValueTypePropertyListName
-        public bool IsRenameValueTypePropertyListName(ValueTypeProperty prop)
+        public async Task<bool> IsRenameValueTypePropertyListName(ValueTypeProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid);
             if (saved == null) return false;
             return saved.Name != prop.Name;
         }
-        public void DoRenameValueTypePropertyListName(ObjectClass objClass, ValueTypeProperty prop)
+        public async Task DoRenameValueTypePropertyListName(ObjectClass objClass, ValueTypeProperty prop)
         {
-            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var savedProp = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid);
 
             if (!PreMigration(PropertyMigrationEventType.Rename, savedProp, prop))
                 return;
@@ -602,15 +607,15 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region MoveValueTypePropertyList
-        public bool IsMoveValueTypePropertyList(ValueTypeProperty prop)
+        public async Task<bool> IsMoveValueTypePropertyList(ValueTypeProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid);
             if (saved == null) return false;
             return saved.ObjectClass.ExportGuid != prop.ObjectClass.ExportGuid;
         }
-        public void DoMoveValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
+        public async Task DoMoveValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
         {
-            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var savedProp = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(prop.ExportGuid);
 
             if (!PreMigration(PropertyMigrationEventType.Move, savedProp, prop))
                 return;
@@ -622,11 +627,11 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region NewValueTypePropertyList
-        public bool IsNewValueTypePropertyList(ValueTypeProperty prop)
+        public async Task<bool> IsNewValueTypePropertyList(ValueTypeProperty prop)
         {
-            return savedSchema.FindPersistenceObject<Property>(prop.ExportGuid) == null;
+            return await savedSchema.FindPersistenceObjectAsync<Property>(prop.ExportGuid) == null;
         }
-        public void DoNewValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
+        public async Task DoNewValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
         {
             if (!PreMigration(PropertyMigrationEventType.Add, null, prop))
                 return;
@@ -635,16 +640,16 @@ namespace Zetbox.Server.SchemaManagement
             CheckValueTypePropertyHasWarnings(prop);
 
             var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
-            string fkName = Construct.ForeignKeyColumnName(prop);
+            string fkName = await Construct.ForeignKeyColumnName(prop);
             string valPropName = prop.Name;
             string valPropIndexName = prop.Name + "Index";
-            string assocName = prop.GetAssociationName();
+            string assocName = await prop.GetAssociationName();
             bool hasPersistentOrder = prop.HasPersistentOrder;
 
             db.CreateTable(tblName, true);
             db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false);
 
-            db.CreateColumn(tblName, valPropName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), false, SchemaManager.GetDefaultConstraint(prop));
+            db.CreateColumn(tblName, valPropName, prop.GetDbType(), await prop.GetSize(), await prop.GetScale(), false, SchemaManager.GetDefaultConstraint(prop));
 
             if (hasPersistentOrder)
             {
@@ -658,41 +663,43 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region DeleteValueTypePropertyList
-        public bool IsDeleteValueTypePropertyList(ValueTypeProperty savedProp)
+        public async Task<bool> IsDeleteValueTypePropertyList(ValueTypeProperty savedProp)
         {
-            return savedProp.IsList && schema.FindPersistenceObject<ValueTypeProperty>(savedProp.ExportGuid) == null;
+            return savedProp.IsList && await schema.FindPersistenceObjectAsync<ValueTypeProperty>(savedProp.ExportGuid) == null;
         }
 
-        public void DoDeleteValueTypePropertyList(ObjectClass objClass, ValueTypeProperty savedProp, string prefix)
+        public Task DoDeleteValueTypePropertyList(ObjectClass objClass, ValueTypeProperty savedProp, string prefix)
         {
             if (!PreMigration(PropertyMigrationEventType.Delete, savedProp, null))
-                return;
+                return Task.CompletedTask;
 
             Log.InfoFormat("Delete ValueType Property List: {0}", savedProp.Name);
             var tblName = db.GetTableName(savedProp.Module.SchemaName, savedProp.GetCollectionEntryTable());
             db.DropTable(tblName);
 
             PostMigration(PropertyMigrationEventType.Delete, savedProp, null);
+
+            return Task.CompletedTask;
         }
         #endregion
 
         #region NewCompoundObjectPropertyList
-        public bool IsNewCompoundObjectPropertyList(CompoundObjectProperty prop)
+        public async Task<bool> IsNewCompoundObjectPropertyList(CompoundObjectProperty prop)
         {
-            return savedSchema.FindPersistenceObject<Property>(prop.ExportGuid) == null;
+            return await savedSchema.FindPersistenceObjectAsync<Property>(prop.ExportGuid) == null;
         }
-        public void DoNewCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty cprop)
+        public async Task DoNewCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty cprop)
         {
             if (!PreMigration(PropertyMigrationEventType.Add, null, cprop))
                 return;
 
             Log.InfoFormat("New CompoundObject Property List: {0}", cprop.Name);
             var tblName = db.GetTableName(cprop.Module.SchemaName, cprop.GetCollectionEntryTable());
-            string fkName = Construct.ForeignKeyColumnName(cprop);
+            string fkName = await Construct.ForeignKeyColumnName(cprop);
 
             // TODO: Support nested CompoundObject
             string valPropIndexName = cprop.Name + "Index";
-            string assocName = cprop.GetAssociationName();
+            string assocName = await cprop.GetAssociationName();
             bool hasPersistentOrder = cprop.HasPersistentOrder;
 
             db.CreateTable(tblName, true);
@@ -701,7 +708,7 @@ namespace Zetbox.Server.SchemaManagement
             foreach (ValueTypeProperty p in cprop.CompoundObjectDefinition.Properties)
             {
                 CheckValueTypePropertyHasWarnings(p);
-                db.CreateColumn(tblName, Construct.ColumnName(p, cprop.Name), p.GetDbType(), p.GetSize(), p.GetScale(), true, null);
+                db.CreateColumn(tblName, Construct.ColumnName(p, cprop.Name), p.GetDbType(), await p.GetSize(), await p.GetScale(), true, null);
             }
 
             if (hasPersistentOrder)
@@ -716,33 +723,35 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region DeleteCompoundObjectPropertyList
-        public bool IsDeleteCompoundObjectPropertyList(CompoundObjectProperty savedCProp)
+        public async Task<bool> IsDeleteCompoundObjectPropertyList(CompoundObjectProperty savedCProp)
         {
-            return savedCProp.IsList && schema.FindPersistenceObject<CompoundObjectProperty>(savedCProp.ExportGuid) == null;
+            return savedCProp.IsList && (await schema.FindPersistenceObjectAsync<CompoundObjectProperty>(savedCProp.ExportGuid)) == null;
         }
-        public void DoDeleteCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty savedCProp, string prefix)
+        public Task DoDeleteCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty savedCProp, string prefix)
         {
             if (!PreMigration(PropertyMigrationEventType.Delete, savedCProp, null))
-                return;
+                return Task.CompletedTask;
 
             Log.InfoFormat("Delete CompoundObject Property List: {0}", savedCProp.Name);
             var tblName = db.GetTableName(savedCProp.Module.SchemaName, savedCProp.GetCollectionEntryTable());
             db.DropTable(tblName);
 
             PostMigration(PropertyMigrationEventType.Delete, savedCProp, null);
+
+            return Task.CompletedTask;
         }
         #endregion
 
         #region RenameCompoundObjectPropertyListName
-        public bool IsRenameCompoundObjectPropertyListName(CompoundObjectProperty prop)
+        public async Task<bool> IsRenameCompoundObjectPropertyListName(CompoundObjectProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<CompoundObjectProperty>(prop.ExportGuid);
             if (saved == null) return false;
             return saved.Name != prop.Name;
         }
-        public void DoRenameCompoundObjectPropertyListName(ObjectClass objClass, CompoundObjectProperty cprop)
+        public async Task DoRenameCompoundObjectPropertyListName(ObjectClass objClass, CompoundObjectProperty cprop)
         {
-            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(cprop.ExportGuid);
+            var savedProp = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(cprop.ExportGuid);
 
             if (!PreMigration(PropertyMigrationEventType.Rename, savedProp, cprop))
                 return;
@@ -754,15 +763,15 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region MoveCompoundObjectPropertyList
-        public bool IsMoveCompoundObjectPropertyList(CompoundObjectProperty prop)
+        public async Task<bool> IsMoveCompoundObjectPropertyList(CompoundObjectProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<CompoundObjectProperty>(prop.ExportGuid);
             if (saved == null) return false;
             return saved.ObjectClass.ExportGuid != prop.ObjectClass.ExportGuid;
         }
-        public void DoMoveCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty cprop)
+        public async Task DoMoveCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty cprop)
         {
-            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(cprop.ExportGuid);
+            var savedProp = await savedSchema.FindPersistenceObjectAsync<ValueTypeProperty>(cprop.ExportGuid);
 
             if (!PreMigration(PropertyMigrationEventType.Move, savedProp, cprop))
                 return;
@@ -774,16 +783,16 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region 1_N_RelationChange_FromNotIndexed_To_Indexed
-        public bool Is_1_N_RelationChange_FromNotIndexed_To_Indexed(Relation rel)
+        public async Task<bool> Is_1_N_RelationChange_FromNotIndexed_To_Indexed(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (savedRel == null) return false;
-            return (rel.NeedsPositionStorage(RelationEndRole.A) && !savedRel.NeedsPositionStorage(RelationEndRole.A)) ||
-                    (rel.NeedsPositionStorage(RelationEndRole.B) && !savedRel.NeedsPositionStorage(RelationEndRole.B));
+            return (await rel.NeedsPositionStorage(RelationEndRole.A) && !await savedRel.NeedsPositionStorage(RelationEndRole.A)) ||
+                    (await rel.NeedsPositionStorage(RelationEndRole.B) && !await savedRel.NeedsPositionStorage(RelationEndRole.B));
         }
-        public void Do_1_N_RelationChange_FromNotIndexed_To_Indexed(Relation rel)
+        public async Task Do_1_N_RelationChange_FromNotIndexed_To_Indexed(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
                 return;
@@ -821,16 +830,16 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region 1_N_RelationChange_FromIndexed_To_NotIndexed
-        public bool Is_1_N_RelationChange_FromIndexed_To_NotIndexed(Relation rel)
+        public async Task<bool> Is_1_N_RelationChange_FromIndexed_To_NotIndexed(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (savedRel == null) return false;
-            return (!rel.NeedsPositionStorage(RelationEndRole.A) && savedRel.NeedsPositionStorage(RelationEndRole.A)) ||
-                    (!rel.NeedsPositionStorage(RelationEndRole.B) && savedRel.NeedsPositionStorage(RelationEndRole.B));
+            return (!await rel.NeedsPositionStorage(RelationEndRole.A) && await savedRel.NeedsPositionStorage(RelationEndRole.A)) ||
+                    (!await rel.NeedsPositionStorage(RelationEndRole.B) && await savedRel.NeedsPositionStorage(RelationEndRole.B));
         }
-        public void Do_1_N_RelationChange_FromIndexed_To_NotIndexed(Relation rel)
+        public async Task Do_1_N_RelationChange_FromIndexed_To_NotIndexed(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
                 return;
@@ -840,12 +849,12 @@ namespace Zetbox.Server.SchemaManagement
 
             TableRef tblName;
             RelationEnd otherEnd;
-            if (rel.HasStorage(RelationEndRole.A))
+            if (await rel.HasStorage(RelationEndRole.A))
             {
                 tblName = rel.A.Type.GetTableRef(db);
                 otherEnd = rel.B;
             }
-            else if (rel.HasStorage(RelationEndRole.B))
+            else if (await rel.HasStorage(RelationEndRole.B))
             {
                 tblName = rel.B.Type.GetTableRef(db);
                 otherEnd = rel.A;
@@ -864,16 +873,16 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region 1_N_RelationChange_FromNotNullable_To_Nullable
-        public bool Is_1_N_RelationChange_FromNotNullable_To_Nullable(Relation rel)
+        public async Task<bool> Is_1_N_RelationChange_FromNotNullable_To_Nullable(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (savedRel == null) return false;
             return (rel.A.IsNullable() && !savedRel.A.IsNullable()) ||
                     (rel.B.IsNullable() && !savedRel.B.IsNullable());
         }
-        public void Do_1_N_RelationChange_FromNotNullable_To_Nullable(Relation rel)
+        public async Task Do_1_N_RelationChange_FromNotNullable_To_Nullable(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel))
                 return;
@@ -899,7 +908,7 @@ namespace Zetbox.Server.SchemaManagement
             }
 
             var tblName = relEnd.Type.GetTableRef(db);
-            var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var colName = await Construct.ForeignKeyColumnName(otherEnd);
             var idxName = Construct.IndexName(tblName.Name, colName);
 
             // MS SQL Server (and Postgres?) cannot alter columns when a index exists
@@ -912,16 +921,16 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region 1_N_RelationChange_FromNullable_To_NotNullable
-        public bool Is_1_N_RelationChange_FromNullable_To_NotNullable(Relation rel)
+        public async Task<bool> Is_1_N_RelationChange_FromNullable_To_NotNullable(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (savedRel == null) return false;
             return (!rel.A.IsNullable() && savedRel.A.IsNullable()) ||
                     (!rel.B.IsNullable() && savedRel.B.IsNullable());
         }
-        public void Do_1_N_RelationChange_FromNullable_To_NotNullable(Relation rel)
+        public async Task Do_1_N_RelationChange_FromNullable_To_NotNullable(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel))
                 return;
@@ -947,7 +956,7 @@ namespace Zetbox.Server.SchemaManagement
             }
 
             var tblName = relEnd.Type.GetTableRef(db);
-            var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var colName = await Construct.ForeignKeyColumnName(otherEnd);
             var idxName = Construct.IndexName(tblName.Name, colName);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
@@ -967,11 +976,11 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region Delete_1_N_Relation
-        public bool IsDelete_1_N_Relation(Relation rel)
+        public async Task<bool> IsDelete_1_N_Relation(Relation rel)
         {
-            return schema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
+            return await schema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid) == null;
         }
-        public void DoDelete_1_N_Relation(Relation savedRel)
+        public async Task DoDelete_1_N_Relation(Relation savedRel)
         {
             if (!PreMigration(RelationMigrationEventType.Delete, savedRel, null))
                 return;
@@ -982,16 +991,16 @@ namespace Zetbox.Server.SchemaManagement
             TableRef tblName;
             bool isIndexed = false;
             RelationEnd otherEnd;
-            if (savedRel.HasStorage(RelationEndRole.A))
+            if (await savedRel.HasStorage(RelationEndRole.A))
             {
                 tblName = savedRel.A.Type.GetTableRef(db);
-                isIndexed = savedRel.NeedsPositionStorage(RelationEndRole.A);
+                isIndexed = await savedRel.NeedsPositionStorage(RelationEndRole.A);
                 otherEnd = savedRel.B;
             }
-            else if (savedRel.HasStorage(RelationEndRole.B))
+            else if (await savedRel.HasStorage(RelationEndRole.B))
             {
                 tblName = savedRel.B.Type.GetTableRef(db);
-                isIndexed = savedRel.NeedsPositionStorage(RelationEndRole.B);
+                isIndexed = await savedRel.NeedsPositionStorage(RelationEndRole.B);
                 otherEnd = savedRel.A;
             }
             else
@@ -1000,7 +1009,7 @@ namespace Zetbox.Server.SchemaManagement
                 return;
             }
 
-            var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var colName = await Construct.ForeignKeyColumnName(otherEnd);
             var indexName = Construct.IndexName(tblName.Name, colName);
             var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
 
@@ -1024,9 +1033,9 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeRelationType
-        public bool IsChangeRelationType(Relation rel)
+        public async Task<bool> IsChangeRelationType(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (saved == null) return false;
             return saved.GetRelationType() != rel.GetRelationType();
         }
@@ -1034,17 +1043,17 @@ namespace Zetbox.Server.SchemaManagement
         // public void DoChangeRelationType(Relation rel) { no implementaion }
 
         #region ChangeRelationType_from_1_1_to_1_n
-        public bool IsChangeRelationType_from_1_1_to_1_n(Relation rel)
+        public async Task<bool> IsChangeRelationType_from_1_1_to_1_n(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (saved == null) return false;
             return
-                saved.GetRelationType() == RelationType.one_one &&
-                rel.GetRelationType() == RelationType.one_n;
+                await saved.GetRelationType() == RelationType.one_one &&
+                await rel.GetRelationType() == RelationType.one_n;
         }
-        public void DoChangeRelationType_from_1_1_to_1_n(Relation rel)
+        public async Task DoChangeRelationType_from_1_1_to_1_n(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
                 return;
@@ -1071,9 +1080,9 @@ namespace Zetbox.Server.SchemaManagement
 
             var destTblRef = relEnd.Type.GetTableRef(db);
             var destRefTblName = otherEnd.Type.GetTableRef(db);
-            bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
+            bool isIndexed = await rel.NeedsPositionStorage(relEnd.GetRole());
 
-            string destColName = Construct.ForeignKeyColumnName(otherEnd);
+            string destColName = await Construct.ForeignKeyColumnName(otherEnd);
             string destIndexName = Construct.ListPositionColumnName(otherEnd);
 
             string srcSchemaName = string.Empty;
@@ -1082,17 +1091,17 @@ namespace Zetbox.Server.SchemaManagement
 
             // Difference to 1:N. 1:1 may have storage 'Replicate'
             // use best matching
-            if (savedRel.HasStorage(RelationEndRole.A))
+            if (await savedRel.HasStorage(RelationEndRole.A))
             {
                 srcSchemaName = savedRel.A.Type.Module.SchemaName;
                 srcTblName = savedRel.A.Type.TableName;
-                srcColName = Construct.ForeignKeyColumnName(savedRel.B);
+                srcColName = await Construct.ForeignKeyColumnName(savedRel.B);
             }
-            if (savedRel.HasStorage(RelationEndRole.B) && (string.IsNullOrEmpty(srcSchemaName) || string.IsNullOrEmpty(srcTblName) || db.GetTableName(srcSchemaName, srcTblName) != destTblRef))
+            if (await savedRel.HasStorage(RelationEndRole.B) && (string.IsNullOrEmpty(srcSchemaName) || string.IsNullOrEmpty(srcTblName) || db.GetTableName(srcSchemaName, srcTblName) != destTblRef))
             {
                 srcSchemaName = savedRel.B.Type.Module.SchemaName;
                 srcTblName = savedRel.B.Type.TableName;
-                srcColName = Construct.ForeignKeyColumnName(savedRel.A);
+                srcColName = await Construct.ForeignKeyColumnName(savedRel.A);
             }
 
             var srcTblRef = db.GetTableName(srcSchemaName, srcTblName);
@@ -1135,11 +1144,11 @@ namespace Zetbox.Server.SchemaManagement
             }
 
             // Cleanup
-            if (savedRel.HasStorage(RelationEndRole.A))
+            if (await savedRel.HasStorage(RelationEndRole.A))
             {
                 srcTblName = savedRel.A.Type.TableName;
-                srcColName = Construct.ForeignKeyColumnName(savedRel.B);
-                var srcAssocName = savedRel.GetRelationAssociationName(RelationEndRole.A);
+                srcColName = await Construct.ForeignKeyColumnName(savedRel.B);
+                var srcAssocName = await savedRel.GetRelationAssociationName(RelationEndRole.A);
 
                 if (db.CheckFKConstraintExists(srcTblRef, srcAssocName))
                     db.DropFKConstraint(srcTblRef, srcAssocName);
@@ -1149,11 +1158,11 @@ namespace Zetbox.Server.SchemaManagement
                         db.DropColumn(srcTblRef, srcColName);
                 }
             }
-            if (savedRel.HasStorage(RelationEndRole.B))
+            if (await savedRel.HasStorage(RelationEndRole.B))
             {
                 srcTblName = savedRel.B.Type.TableName;
-                srcColName = Construct.ForeignKeyColumnName(savedRel.A);
-                var srcAssocName = savedRel.GetRelationAssociationName(RelationEndRole.B);
+                srcColName = await Construct.ForeignKeyColumnName(savedRel.A);
+                var srcAssocName = await savedRel.GetRelationAssociationName(RelationEndRole.B);
 
                 if (db.CheckFKConstraintExists(srcTblRef, srcAssocName))
                     db.DropFKConstraint(srcTblRef, srcAssocName);
@@ -1168,17 +1177,17 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeRelationType_from_1_1_to_n_m
-        public bool IsChangeRelationType_from_1_1_to_n_m(Relation rel)
+        public async Task<bool> IsChangeRelationType_from_1_1_to_n_m(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (saved == null) return false;
             return
-                saved.GetRelationType() == RelationType.one_one &&
-                rel.GetRelationType() == RelationType.n_m;
+                await saved.GetRelationType() == RelationType.one_one &&
+                await rel.GetRelationType() == RelationType.n_m;
         }
-        public void DoChangeRelationType_from_1_1_to_n_m(Relation rel)
+        public async Task DoChangeRelationType_from_1_1_to_n_m(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
                 return; string srcAssocName = savedRel.GetAssociationName();
@@ -1207,33 +1216,33 @@ namespace Zetbox.Server.SchemaManagement
             var savedBType = savedRel.B.Type;
 
             var srcTblName = relEnd.Type.GetTableRef(db);
-            var srcColName = Construct.ForeignKeyColumnName(otherEnd);
+            var srcColName = await Construct.ForeignKeyColumnName(otherEnd);
 
             var destTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            var destCol = Construct.ForeignKeyColumnName(relEnd);
-            var destFKCol = Construct.ForeignKeyColumnName(otherEnd);
+            var destCol = await Construct.ForeignKeyColumnName(relEnd);
+            var destFKCol = await Construct.ForeignKeyColumnName(otherEnd);
 
             // Drop relations first as 1:1 and n:m relations share the same names
-            var srcAssocA = savedRel.GetRelationAssociationName(RelationEndRole.A);
+            var srcAssocA = await savedRel.GetRelationAssociationName(RelationEndRole.A);
             if (db.CheckFKConstraintExists(aType.GetTableRef(db), srcAssocA))
                 db.DropFKConstraint(aType.GetTableRef(db), srcAssocA);
-            var srcAssocB = savedRel.GetRelationAssociationName(RelationEndRole.B);
+            var srcAssocB = await savedRel.GetRelationAssociationName(RelationEndRole.B);
             if (db.CheckFKConstraintExists(bType.GetTableRef(db), srcAssocB))
                 db.DropFKConstraint(bType.GetTableRef(db), srcAssocB);
 
-            DoNew_N_M_Relation(rel);
+            await DoNew_N_M_Relation(rel);
             db.InsertFKs(srcTblName, srcColName, destTbl, destCol, destFKCol);
 
             // Drop columns
             if (savedRel.Storage == StorageType.MergeIntoA || savedRel.Storage == StorageType.Replicate)
             {
-                if (db.CheckColumnExists(savedAType.GetTableRef(db), Construct.ForeignKeyColumnName(savedRel.B)))
-                    db.DropColumn(savedAType.GetTableRef(db), Construct.ForeignKeyColumnName(savedRel.B));
+                if (db.CheckColumnExists(savedAType.GetTableRef(db), await Construct.ForeignKeyColumnName(savedRel.B)))
+                    db.DropColumn(savedAType.GetTableRef(db), await Construct.ForeignKeyColumnName(savedRel.B));
             }
             if (savedRel.Storage == StorageType.MergeIntoB || savedRel.Storage == StorageType.Replicate)
             {
-                if (db.CheckColumnExists(savedBType.GetTableRef(db), Construct.ForeignKeyColumnName(savedRel.A)))
-                    db.DropColumn(savedBType.GetTableRef(db), Construct.ForeignKeyColumnName(savedRel.A));
+                if (db.CheckColumnExists(savedBType.GetTableRef(db), await Construct.ForeignKeyColumnName(savedRel.A)))
+                    db.DropColumn(savedBType.GetTableRef(db), await Construct.ForeignKeyColumnName(savedRel.A));
             }
 
             PostMigration(RelationMigrationEventType.ChangeType, savedRel, rel);
@@ -1241,17 +1250,17 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeRelationType_from_1_n_to_1_1
-        public bool IsChangeRelationType_from_1_n_to_1_1(Relation rel)
+        public async Task<bool> IsChangeRelationType_from_1_n_to_1_1(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (saved == null) return false;
             return
-                saved.GetRelationType() == RelationType.one_n &&
-                rel.GetRelationType() == RelationType.one_one;
+                await saved.GetRelationType() == RelationType.one_n &&
+                await rel.GetRelationType() == RelationType.one_one;
         }
-        public void DoChangeRelationType_from_1_n_to_1_1(Relation rel)
+        public async Task DoChangeRelationType_from_1_n_to_1_1(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
                 return; string srcAssocName = savedRel.GetAssociationName();
@@ -1274,8 +1283,8 @@ namespace Zetbox.Server.SchemaManagement
             }
 
             var srcTblName = relEnd.Type.GetTableRef(db);
-            string srcColName = Construct.ForeignKeyColumnName(otherEnd);
-            bool srcIsIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
+            string srcColName = await Construct.ForeignKeyColumnName(otherEnd);
+            bool srcIsIndexed = await rel.NeedsPositionStorage(relEnd.GetRole());
             string srcIndexName = Construct.ListPositionColumnName(otherEnd);
 
             if (!db.CheckFKColumnContainsUniqueValues(srcTblName, srcColName))
@@ -1302,53 +1311,53 @@ namespace Zetbox.Server.SchemaManagement
             // Difference to 1:N. 1:1 may have storage 'Replicate'
             // First try to migrate columns
             // And only migrate because the source data might be used twice
-            if (rel.HasStorage(RelationEndRole.A))
+            if (await rel.HasStorage(RelationEndRole.A))
             {
                 var destTblName = aType.GetTableRef(db);
-                var destColName = Construct.ForeignKeyColumnName(b);
+                var destColName = await Construct.ForeignKeyColumnName(b);
                 if (destTblName != srcTblName)
                 {
-                    New_1_1_Relation_CreateColumns(rel, a, b, RelationEndRole.A);
+                    await New_1_1_Relation_CreateColumns(rel, a, b, RelationEndRole.A);
                     db.MigrateFKs(srcTblName, srcColName, destTblName, destColName);
                     aCreated = true;
                 }
             }
-            if (rel.HasStorage(RelationEndRole.B))
+            if (await rel.HasStorage(RelationEndRole.B))
             {
                 var destTblName = bType.GetTableRef(db);
-                var destColName = Construct.ForeignKeyColumnName(a);
+                var destColName = await Construct.ForeignKeyColumnName(a);
                 if (destTblName != srcTblName)
                 {
-                    New_1_1_Relation_CreateColumns(rel, b, a, RelationEndRole.B);
+                    await New_1_1_Relation_CreateColumns(rel, b, a, RelationEndRole.B);
                     db.MigrateFKs(srcTblName, srcColName, destTblName, destColName);
                     bCreated = true;
                 }
             }
             bool srcColWasReused = false;
             // Then try to rename columns
-            if (rel.HasStorage(RelationEndRole.A) && !aCreated)
+            if (await rel.HasStorage(RelationEndRole.A) && !aCreated)
             {
                 var destTblName = aType.GetTableRef(db);
-                var destColName = Construct.ForeignKeyColumnName(b);
+                var destColName = await Construct.ForeignKeyColumnName(b);
                 if (destTblName == srcTblName && destColName != srcColName)
                 {
                     db.RenameColumn(destTblName, srcColName, destColName);
                 }
-                var assocName = rel.GetRelationAssociationName(RelationEndRole.A);
+                var assocName = await rel.GetRelationAssociationName(RelationEndRole.A);
                 var refTblName = bType.GetTableRef(db);
                 db.CreateFKConstraint(destTblName, refTblName, destColName, assocName, false);
                 db.CreateIndex(destTblName, Construct.IndexName(destTblName.Name, destColName), true, false, destColName);
                 srcColWasReused = true;
             }
-            if (rel.HasStorage(RelationEndRole.B) && !bCreated)
+            if (await rel.HasStorage(RelationEndRole.B) && !bCreated)
             {
                 var destTblName = bType.GetTableRef(db);
-                var destColName = Construct.ForeignKeyColumnName(a);
+                var destColName = await Construct.ForeignKeyColumnName(a);
                 if (destTblName == srcTblName && destColName != srcColName)
                 {
                     db.RenameColumn(destTblName, srcColName, destColName);
                 }
-                var assocName = rel.GetRelationAssociationName(RelationEndRole.B);
+                var assocName = await rel.GetRelationAssociationName(RelationEndRole.B);
                 var refTblName = aType.GetTableRef(db);
                 db.CreateFKConstraint(destTblName, refTblName, destColName, assocName, false);
                 db.CreateIndex(destTblName, Construct.IndexName(destTblName.Name, destColName), true, false, destColName);
@@ -1363,17 +1372,17 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeRelationType_from_1_n_to_n_m
-        public bool IsChangeRelationType_from_1_n_to_n_m(Relation rel)
+        public async Task<bool> IsChangeRelationType_from_1_n_to_n_m(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (saved == null) return false;
             return
-                saved.GetRelationType() == RelationType.one_n &&
-                rel.GetRelationType() == RelationType.n_m;
+                await saved.GetRelationType() == RelationType.one_n &&
+                await rel.GetRelationType() == RelationType.n_m;
         }
-        public void DoChangeRelationType_from_1_n_to_n_m(Relation rel)
+        public async Task DoChangeRelationType_from_1_n_to_n_m(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
                 return;
@@ -1398,32 +1407,32 @@ namespace Zetbox.Server.SchemaManagement
             }
 
             var srcTblName = relEnd.Type.GetTableRef(db);
-            var srcColName = Construct.ForeignKeyColumnName(otherEnd);
+            var srcColName = await Construct.ForeignKeyColumnName(otherEnd);
 
             var destTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            var destCol = Construct.ForeignKeyColumnName(relEnd);
-            var destFKCol = Construct.ForeignKeyColumnName(otherEnd);
+            var destCol = await Construct.ForeignKeyColumnName(relEnd);
+            var destFKCol = await Construct.ForeignKeyColumnName(otherEnd);
 
-            DoNew_N_M_Relation(rel);
+            await DoNew_N_M_Relation(rel);
             db.InsertFKs(srcTblName, srcColName, destTbl, destCol, destFKCol);
-            DoDelete_1_N_Relation(savedRel);
+            await DoDelete_1_N_Relation(savedRel);
 
             PostMigration(RelationMigrationEventType.ChangeType, savedRel, rel);
         }
         #endregion
 
         #region ChangeRelationType_from_n_m_to_1_1
-        public bool IsChangeRelationType_from_n_m_to_1_1(Relation rel)
+        public async Task<bool> IsChangeRelationType_from_n_m_to_1_1(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (saved == null) return false;
             return
-                saved.GetRelationType() == RelationType.n_m &&
-                rel.GetRelationType() == RelationType.one_one;
+                await saved.GetRelationType() == RelationType.n_m &&
+                await rel.GetRelationType() == RelationType.one_one;
         }
-        public void DoChangeRelationType_from_n_m_to_1_1(Relation rel)
+        public async Task DoChangeRelationType_from_n_m_to_1_1(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
                 return;
@@ -1433,21 +1442,21 @@ namespace Zetbox.Server.SchemaManagement
             var srcTblName = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
 
             // Drop relations first as 1:1 and n:m relations share the same names
-            var srcAssocA = savedRel.GetRelationAssociationName(RelationEndRole.A);
+            var srcAssocA = await savedRel.GetRelationAssociationName(RelationEndRole.A);
             if (db.CheckFKConstraintExists(srcTblName, srcAssocA))
                 db.DropFKConstraint(srcTblName, srcAssocA);
-            var srcAssocB = savedRel.GetRelationAssociationName(RelationEndRole.B);
+            var srcAssocB = await savedRel.GetRelationAssociationName(RelationEndRole.B);
             if (db.CheckFKConstraintExists(srcTblName, srcAssocB))
                 db.DropFKConstraint(srcTblName, srcAssocB);
 
-            DoNew_1_1_Relation(rel);
+            await DoNew_1_1_Relation(rel);
 
-            if (rel.HasStorage(RelationEndRole.A))
+            if (await rel.HasStorage(RelationEndRole.A))
             {
                 var destTblName = rel.A.Type.GetTableRef(db);
-                var destColName = Construct.ForeignKeyColumnName(rel.B);
-                var srcColName = Construct.ForeignKeyColumnName(rel.B);
-                var srcFKColName = Construct.ForeignKeyColumnName(rel.A);
+                var destColName = await Construct.ForeignKeyColumnName(rel.B);
+                var srcColName = await Construct.ForeignKeyColumnName(rel.B);
+                var srcFKColName = await Construct.ForeignKeyColumnName(rel.A);
 
                 if (!db.CheckFKColumnContainsUniqueValues(srcTblName, srcColName))
                 {
@@ -1456,12 +1465,12 @@ namespace Zetbox.Server.SchemaManagement
                 }
                 db.CopyFKs(srcTblName, srcColName, destTblName, destColName, srcFKColName);
             }
-            if (rel.HasStorage(RelationEndRole.B))
+            if (await rel.HasStorage(RelationEndRole.B))
             {
                 var destTblName = rel.B.Type.GetTableRef(db);
-                var destColName = Construct.ForeignKeyColumnName(rel.A);
-                var srcColName = Construct.ForeignKeyColumnName(rel.A);
-                var srcFKColName = Construct.ForeignKeyColumnName(rel.B);
+                var destColName = await Construct.ForeignKeyColumnName(rel.A);
+                var srcColName = await Construct.ForeignKeyColumnName(rel.A);
+                var srcFKColName = await Construct.ForeignKeyColumnName(rel.B);
 
                 if (!db.CheckFKColumnContainsUniqueValues(srcTblName, srcColName))
                 {
@@ -1479,17 +1488,17 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeRelationType_from_n_m_to_1_n
-        public bool IsChangeRelationType_from_n_m_to_1_n(Relation rel)
+        public async Task<bool> IsChangeRelationType_from_n_m_to_1_n(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (saved == null) return false;
             return
-                saved.GetRelationType() == RelationType.n_m &&
-                rel.GetRelationType() == RelationType.one_n;
+                await saved.GetRelationType() == RelationType.n_m &&
+                await rel.GetRelationType() == RelationType.one_n;
         }
-        public void DoChangeRelationType_from_n_m_to_1_n(Relation rel)
+        public async Task DoChangeRelationType_from_n_m_to_1_n(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
                 return;
@@ -1515,8 +1524,8 @@ namespace Zetbox.Server.SchemaManagement
 
             var srcTbl = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
             // translate ends to savedEnds
-            var srcCol = Construct.ForeignKeyColumnName(savedRel.GetEndFromRole(otherEnd.GetRole()));
-            var srcFKCol = Construct.ForeignKeyColumnName(savedRel.GetEndFromRole(relEnd.GetRole()));
+            var srcCol = await Construct.ForeignKeyColumnName(await savedRel.GetEndFromRole(otherEnd.GetRole()));
+            var srcFKCol = await Construct.ForeignKeyColumnName(await savedRel.GetEndFromRole(relEnd.GetRole()));
 
             if (!db.CheckFKColumnContainsUniqueValues(srcTbl, srcCol))
             {
@@ -1525,11 +1534,11 @@ namespace Zetbox.Server.SchemaManagement
             }
 
             var destTblName = relEnd.Type.GetTableRef(db);
-            var destColName = Construct.ForeignKeyColumnName(otherEnd);
+            var destColName = await Construct.ForeignKeyColumnName(otherEnd);
 
-            DoNew_1_N_Relation(rel);
+            await DoNew_1_N_Relation(rel);
             db.CopyFKs(srcTbl, srcCol, destTblName, destColName, srcFKCol);
-            DoDelete_N_M_Relation(savedRel);
+            await DoDelete_N_M_Relation(savedRel);
 
             PostMigration(RelationMigrationEventType.ChangeType, savedRel, rel);
         }
@@ -1538,16 +1547,16 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeRelationEndTypes
-        public bool IsChangeRelationEndTypes(Relation rel)
+        public async Task<bool> IsChangeRelationEndTypes(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (saved == null) return false;
             return saved.A.Type.ExportGuid != rel.A.Type.ExportGuid || saved.B.Type.ExportGuid != rel.B.Type.ExportGuid;
         }
 
-        public void DoChangeRelationEndTypes(Relation rel)
+        public async Task DoChangeRelationEndTypes(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeEndType, savedRel, rel))
                 return;
@@ -1559,7 +1568,7 @@ namespace Zetbox.Server.SchemaManagement
                       && savedRel.B.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.B.Type.ExportGuid);
             Log.DebugFormat("moveUp = {0}", moveUp);
 
-            if (rel.GetRelationType() == RelationType.n_m)
+            if (await rel.GetRelationType() == RelationType.n_m)
             {
                 var oldTblName = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
                 var containsData = db.CheckTableContainsData(oldTblName);
@@ -1568,25 +1577,25 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     Log.DebugFormat("Rewiring N:M Relation: {0}", assocName);
 
-                    if (db.CheckFKConstraintExists(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.A)))
-                        db.DropFKConstraint(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.A));
-                    if (db.CheckFKConstraintExists(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.B)))
-                        db.DropFKConstraint(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.B));
+                    if (db.CheckFKConstraintExists(oldTblName, await savedRel.GetRelationAssociationName(RelationEndRole.A)))
+                        db.DropFKConstraint(oldTblName, await savedRel.GetRelationAssociationName(RelationEndRole.A));
+                    if (db.CheckFKConstraintExists(oldTblName, await savedRel.GetRelationAssociationName(RelationEndRole.B)))
+                        db.DropFKConstraint(oldTblName, await savedRel.GetRelationAssociationName(RelationEndRole.B));
 
                     // renaming is handled by DoChangeRelationName
                     //db.RenameTable(oldTblName, newTblName);
 
-                    var fkAName = Construct.ForeignKeyColumnName(savedRel.A);
-                    var fkBName = Construct.ForeignKeyColumnName(savedRel.B);
-                    db.CreateFKConstraint(oldTblName, rel.A.Type.GetTableRef(db), fkAName, savedRel.GetRelationAssociationName(RelationEndRole.A), false);
-                    db.CreateFKConstraint(oldTblName, rel.B.Type.GetTableRef(db), fkBName, savedRel.GetRelationAssociationName(RelationEndRole.B), false);
+                    var fkAName = await Construct.ForeignKeyColumnName(savedRel.A);
+                    var fkBName = await Construct.ForeignKeyColumnName(savedRel.B);
+                    db.CreateFKConstraint(oldTblName, rel.A.Type.GetTableRef(db), fkAName, await savedRel.GetRelationAssociationName(RelationEndRole.A), false);
+                    db.CreateFKConstraint(oldTblName, rel.B.Type.GetTableRef(db), fkBName, await savedRel.GetRelationAssociationName(RelationEndRole.B), false);
                 }
                 else
                 {
                     Log.WarnFormat("Unable to rewire relation. Relation has some instances. Table: " + oldTblName);
                 }
             }
-            else if (rel.GetRelationType() == RelationType.one_n)
+            else if (await rel.GetRelationType() == RelationType.one_n)
             {
                 RelationEnd relEnd, otherEnd;
 
@@ -1607,7 +1616,7 @@ namespace Zetbox.Server.SchemaManagement
 
                 var tblName = relEnd.Type.GetTableRef(db);
                 var refTblName = otherEnd.Type.GetTableRef(db);
-                var colName = Construct.ForeignKeyColumnName(otherEnd);
+                var colName = await Construct.ForeignKeyColumnName(otherEnd);
                 var containsData = db.CheckColumnContainsValues(tblName, colName);
 
                 if (!containsData || moveUp)
@@ -1625,7 +1634,7 @@ namespace Zetbox.Server.SchemaManagement
                     Log.WarnFormat("Unable to rewire relation. Relation has some instances. Table: " + tblName);
                 }
             }
-            else if (rel.GetRelationType() == RelationType.one_one)
+            else if (await rel.GetRelationType() == RelationType.one_one)
             {
                 RelationEnd relEnd, otherEnd;
 
@@ -1647,7 +1656,7 @@ namespace Zetbox.Server.SchemaManagement
 
                 var tblName = relEnd.Type.GetTableRef(db);
                 var refTblName = otherEnd.Type.GetTableRef(db);
-                var colName = Construct.ForeignKeyColumnName(otherEnd);
+                var colName = await Construct.ForeignKeyColumnName(otherEnd);
                 var containsData = db.CheckColumnContainsValues(tblName, colName);
 
                 if (!containsData || moveUp)
@@ -1671,27 +1680,27 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeRelationName
-        public bool IsChangeRelationName(Relation rel)
+        public async Task<bool> IsChangeRelationName(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (saved == null) return false;
             // GetAssociationName and GetRelationAssociationName contains both ARoleName, Verb and BRoleName
             return saved.GetAssociationName() != rel.GetAssociationName();
         }
-        public void DoChangeRelationName(Relation rel)
+        public async Task DoChangeRelationName(Relation rel)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.Rename, savedRel, rel))
                 return;
 
             Log.InfoFormat("Changing relation name and all dependencies from {0} to {1}", savedRel.GetAssociationName(), rel.GetAssociationName());
 
-            var fkAName = Construct.ForeignKeyColumnName(rel.A);
-            var fkBName = Construct.ForeignKeyColumnName(rel.B);
+            var fkAName = await Construct.ForeignKeyColumnName(rel.A);
+            var fkBName = await Construct.ForeignKeyColumnName(rel.B);
 
-            var old_fkAName = Construct.ForeignKeyColumnName(savedRel.A);
-            var old_fkBName = Construct.ForeignKeyColumnName(savedRel.B);
+            var old_fkAName = await Construct.ForeignKeyColumnName(savedRel.A);
+            var old_fkBName = await Construct.ForeignKeyColumnName(savedRel.B);
 
             var aType = rel.A.Type;
             var bType = rel.B.Type;
@@ -1699,15 +1708,15 @@ namespace Zetbox.Server.SchemaManagement
             var old_aType = savedRel.A.Type;
             var old_bType = savedRel.B.Type;
 
-            if (rel.GetRelationType() == RelationType.n_m)
+            if (await rel.GetRelationType() == RelationType.n_m)
             {
                 var srcRelTbl = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
                 var destRelTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
 
-                db.RenameFKConstraint(srcRelTbl, savedRel.GetRelationAssociationName(RelationEndRole.A),
-                    aType.GetTableRef(db), old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
-                db.RenameFKConstraint(srcRelTbl, savedRel.GetRelationAssociationName(RelationEndRole.B),
-                    bType.GetTableRef(db), old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+                db.RenameFKConstraint(srcRelTbl, await savedRel.GetRelationAssociationName(RelationEndRole.A),
+                    aType.GetTableRef(db), old_fkAName, await rel.GetRelationAssociationName(RelationEndRole.A), false);
+                db.RenameFKConstraint(srcRelTbl, await savedRel.GetRelationAssociationName(RelationEndRole.B),
+                    bType.GetTableRef(db), old_fkBName, await rel.GetRelationAssociationName(RelationEndRole.B), false);
 
                 db.RenameTable(srcRelTbl, destRelTbl);
 
@@ -1717,9 +1726,9 @@ namespace Zetbox.Server.SchemaManagement
                 db.RenameIndex(srcRelTbl, Construct.IndexName(srcRelTbl.Name, old_fkAName), Construct.IndexName(destRelTbl.Name, fkAName));
                 db.RenameIndex(srcRelTbl, Construct.IndexName(srcRelTbl.Name, old_fkBName), Construct.IndexName(destRelTbl.Name, fkBName));
             }
-            else if (rel.GetRelationType() == RelationType.one_n)
+            else if (await rel.GetRelationType() == RelationType.one_n)
             {
-                if (savedRel.HasStorage(RelationEndRole.A))
+                if (await savedRel.HasStorage(RelationEndRole.A))
                 {
                     var tbl = aType.GetTableRef(db);
                     var refTbl = bType.GetTableRef(db);
@@ -1728,7 +1737,7 @@ namespace Zetbox.Server.SchemaManagement
                     db.RenameColumn(tbl, old_fkBName, fkBName);
                     db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkBName), Construct.IndexName(tbl.Name, fkBName));
                 }
-                else if (savedRel.HasStorage(RelationEndRole.B))
+                else if (await savedRel.HasStorage(RelationEndRole.B))
                 {
                     var tbl = bType.GetTableRef(db);
                     var refTbl = aType.GetTableRef(db);
@@ -1738,23 +1747,23 @@ namespace Zetbox.Server.SchemaManagement
                     db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkAName), Construct.IndexName(tbl.Name, fkAName));
                 }
             }
-            else if (rel.GetRelationType() == RelationType.one_one)
+            else if (await rel.GetRelationType() == RelationType.one_one)
             {
-                if (savedRel.HasStorage(RelationEndRole.A))
+                if (await savedRel.HasStorage(RelationEndRole.A))
                 {
                     var tbl = aType.GetTableRef(db);
                     var refTbl = bType.GetTableRef(db);
                     var old_tbl = old_aType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.A), refTbl, old_fkBName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+                    db.RenameFKConstraint(tbl, await savedRel.GetRelationAssociationName(RelationEndRole.A), refTbl, old_fkBName, await rel.GetRelationAssociationName(RelationEndRole.A), false);
                     db.RenameColumn(tbl, old_fkBName, fkBName);
                     db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkBName), Construct.IndexName(tbl.Name, fkBName));
                 }
-                if (savedRel.HasStorage(RelationEndRole.B))
+                if (await savedRel.HasStorage(RelationEndRole.B))
                 {
                     var tbl = bType.GetTableRef(db);
                     var refTbl = aType.GetTableRef(db);
                     var old_tbl = old_bType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.B), refTbl, old_fkAName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+                    db.RenameFKConstraint(tbl, await savedRel.GetRelationAssociationName(RelationEndRole.B), refTbl, old_fkAName, await rel.GetRelationAssociationName(RelationEndRole.B), false);
                     db.RenameColumn(tbl, old_fkAName, fkAName);
                     db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkAName), Construct.IndexName(tbl.Name, fkAName));
                 }
@@ -1765,11 +1774,11 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region New_1_N_Relation
-        public bool IsNew_1_N_Relation(Relation rel)
+        public async Task<bool> IsNew_1_N_Relation(Relation rel)
         {
-            return savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
+            return await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid) == null;
         }
-        public void DoNew_1_N_Relation(Relation rel)
+        public async Task DoNew_1_N_Relation(Relation rel)
         {
             if (!PreMigration(RelationMigrationEventType.Add, null, rel))
                 return;
@@ -1785,7 +1794,7 @@ namespace Zetbox.Server.SchemaManagement
 
             Log.InfoFormat("New 1:N Relation: {0}", assocName);
 
-            CreateFKColumn(otherEnd, tblName, colName);
+            await CreateFKColumn(otherEnd, tblName, colName);
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, colName), false, false, colName);
 
@@ -1835,9 +1844,9 @@ namespace Zetbox.Server.SchemaManagement
 
             tblName = relEnd.Type.GetTableRef(db);
             refTblName = otherEnd.Type.GetTableRef(db);
-            hasPersistentOrder = rel.NeedsPositionStorage(relEnd.GetRole());
+            hasPersistentOrder = rel.NeedsPositionStorage(relEnd.GetRole()).Result;
 
-            colName = Construct.ForeignKeyColumnName(otherEnd);
+            colName = Construct.ForeignKeyColumnName(otherEnd).Result;
             listPosName = Construct.ListPositionColumnName(otherEnd);
 
             return true;
@@ -1845,15 +1854,15 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region N_M_RelationChange_FromNotIndexed_To_Indexed
-        public bool Is_N_M_RelationChange_FromNotIndexed_To_Indexed(Relation rel, RelationEndRole role)
+        public async Task<bool> Is_N_M_RelationChange_FromNotIndexed_To_Indexed(Relation rel, RelationEndRole role)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (savedRel == null) return false;
-            return rel.NeedsPositionStorage(role) && !savedRel.NeedsPositionStorage(role);
+            return await rel.NeedsPositionStorage(role) && !await savedRel.NeedsPositionStorage(role);
         }
-        public void Do_N_M_RelationChange_FromNotIndexed_To_Indexed(Relation rel, RelationEndRole role)
+        public async Task Do_N_M_RelationChange_FromNotIndexed_To_Indexed(Relation rel, RelationEndRole role)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
                 return;
@@ -1862,9 +1871,9 @@ namespace Zetbox.Server.SchemaManagement
             Log.InfoFormat("Create N:M Relation {1} PositionStorage: {0}", assocName, role);
 
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            var fkName = Construct.ForeignKeyColumnName(rel.GetEndFromRole(role));
+            var fkName = Construct.ForeignKeyColumnName(await rel.GetEndFromRole(role));
 
-            if(!db.CheckColumnExists(tblName, fkName + Zetbox.API.Helper.PositionSuffix))
+            if (!db.CheckColumnExists(tblName, fkName + Zetbox.API.Helper.PositionSuffix))
                 db.CreateColumn(tblName, fkName + Zetbox.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
 
             PostMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel);
@@ -1872,15 +1881,15 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region N_M_RelationChange_FromIndexed_To_NotIndexed
-        public bool Is_N_M_RelationChange_FromIndexed_To_NotIndexed(Relation rel, RelationEndRole role)
+        public async Task<bool> Is_N_M_RelationChange_FromIndexed_To_NotIndexed(Relation rel, RelationEndRole role)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (savedRel == null) return false;
-            return !rel.NeedsPositionStorage(role) && savedRel.NeedsPositionStorage(role);
+            return !await rel.NeedsPositionStorage(role) && await savedRel.NeedsPositionStorage(role);
         }
-        public void Do_N_M_RelationChange_FromIndexed_To_NotIndexed(Relation rel, RelationEndRole role)
+        public async Task Do_N_M_RelationChange_FromIndexed_To_NotIndexed(Relation rel, RelationEndRole role)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
                 return;
@@ -1889,7 +1898,7 @@ namespace Zetbox.Server.SchemaManagement
             Log.InfoFormat("Drop N:M Relation {1} PositionStorage: {0}", assocName, role);
 
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            var fkName = Construct.ForeignKeyColumnName(rel.GetEndFromRole(role));
+            var fkName = Construct.ForeignKeyColumnName(await rel.GetEndFromRole(role));
 
             if (db.CheckColumnExists(tblName, fkName + Zetbox.API.Helper.PositionSuffix))
                 db.DropColumn(tblName, fkName + Zetbox.API.Helper.PositionSuffix);
@@ -1899,11 +1908,11 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region Delete_N_M_Relation
-        public bool IsDelete_N_M_Relation(Relation savedRel)
+        public async Task<bool> IsDelete_N_M_Relation(Relation savedRel)
         {
-            return schema.FindPersistenceObject<Relation>(savedRel.ExportGuid) == null;
+            return await schema.FindPersistenceObjectAsync<Relation>(savedRel.ExportGuid) == null;
         }
-        public void DoDelete_N_M_Relation(Relation savedRel)
+        public async Task DoDelete_N_M_Relation(Relation savedRel)
         {
             if (!PreMigration(RelationMigrationEventType.Delete, savedRel, null))
                 return;
@@ -1913,10 +1922,10 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
 
-            if (db.CheckFKConstraintExists(tblName, savedRel.GetRelationAssociationName(RelationEndRole.A)))
-                db.DropFKConstraint(tblName, savedRel.GetRelationAssociationName(RelationEndRole.A));
-            if (db.CheckFKConstraintExists(tblName, savedRel.GetRelationAssociationName(RelationEndRole.B)))
-                db.DropFKConstraint(tblName, savedRel.GetRelationAssociationName(RelationEndRole.B));
+            if (db.CheckFKConstraintExists(tblName, await savedRel.GetRelationAssociationName(RelationEndRole.A)))
+                db.DropFKConstraint(tblName, await savedRel.GetRelationAssociationName(RelationEndRole.A));
+            if (db.CheckFKConstraintExists(tblName, await savedRel.GetRelationAssociationName(RelationEndRole.B)))
+                db.DropFKConstraint(tblName, await savedRel.GetRelationAssociationName(RelationEndRole.B));
 
             if (db.CheckTableExists(tblName))
                 db.DropTable(tblName);
@@ -1926,11 +1935,11 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region New_N_M_Relation
-        public bool IsNew_N_M_Relation(Relation rel)
+        public async Task<bool> IsNew_N_M_Relation(Relation rel)
         {
-            return savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
+            return await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid) == null;
         }
-        public void DoNew_N_M_Relation(Relation rel)
+        public async Task DoNew_N_M_Relation(Relation rel)
         {
             if (!PreMigration(RelationMigrationEventType.Add, null, rel))
                 return;
@@ -1953,13 +1962,13 @@ namespace Zetbox.Server.SchemaManagement
             db.CreateTable(tblName, true);
 
             db.CreateColumn(tblName, fkAName, System.Data.DbType.Int32, 0, 0, false);
-            if (rel.NeedsPositionStorage(RelationEndRole.A))
+            if (await rel.NeedsPositionStorage(RelationEndRole.A))
             {
                 db.CreateColumn(tblName, fkAName + Zetbox.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
             }
 
             db.CreateColumn(tblName, fkBName, System.Data.DbType.Int32, 0, 0, false);
-            if (rel.NeedsPositionStorage(RelationEndRole.B))
+            if (await rel.NeedsPositionStorage(RelationEndRole.B))
             {
                 db.CreateColumn(tblName, fkBName + Zetbox.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
             }
@@ -1969,15 +1978,15 @@ namespace Zetbox.Server.SchemaManagement
                 db.CreateColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, 0, false, new NewGuidDefaultConstraint());
             }
 
-            db.CreateFKConstraint(tblName, aType.GetTableRef(db), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+            db.CreateFKConstraint(tblName, aType.GetTableRef(db), fkAName, await rel.GetRelationAssociationName(RelationEndRole.A), false);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkAName), false, false, fkAName);
-            db.CreateFKConstraint(tblName, bType.GetTableRef(db), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+            db.CreateFKConstraint(tblName, bType.GetTableRef(db), fkBName, await rel.GetRelationAssociationName(RelationEndRole.B), false);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkBName), false, false, fkBName);
 
             if (schema.GetQuery<RoleMembership>().Where(rm => rm.Relations.Contains(rel)).Count() > 0)
             {
                 // Relation is in a ACL selector
-                DoCreateUpdateRightsTrigger(rel);
+                await DoCreateUpdateRightsTrigger(rel);
             }
 
             PostMigration(RelationMigrationEventType.Add, null, rel);
@@ -1988,8 +1997,8 @@ namespace Zetbox.Server.SchemaManagement
             assocName = rel.GetAssociationName();
 
             tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            fkAName = Construct.ForeignKeyColumnName(rel.A);
-            fkBName = Construct.ForeignKeyColumnName(rel.B);
+            fkAName = Construct.ForeignKeyColumnName(rel.A).Result;
+            fkBName = Construct.ForeignKeyColumnName(rel.B).Result;
             aType = rel.A.Type;
             bType = rel.B.Type;
 
@@ -1998,35 +2007,35 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region Delete_1_1_Relation
-        public bool IsDelete_1_1_Relation(Relation savedRel)
+        public async Task<bool> IsDelete_1_1_Relation(Relation savedRel)
         {
-            return schema.FindPersistenceObject<Relation>(savedRel.ExportGuid) == null;
+            return await schema.FindPersistenceObjectAsync<Relation>(savedRel.ExportGuid) == null;
         }
-        public void DoDelete_1_1_Relation(Relation savedRel)
+        public async Task DoDelete_1_1_Relation(Relation savedRel)
         {
             if (!PreMigration(RelationMigrationEventType.Delete, savedRel, null))
                 return;
 
             Log.InfoFormat("Deleting 1:1 Relation: {0}", savedRel.GetAssociationName());
 
-            if (savedRel.HasStorage(RelationEndRole.A))
+            if (await savedRel.HasStorage(RelationEndRole.A))
             {
-                Delete_1_1_Relation_DropColumns(savedRel, savedRel.A, savedRel.B, RelationEndRole.A);
+                await Delete_1_1_Relation_DropColumns(savedRel, savedRel.A, savedRel.B, RelationEndRole.A);
             }
             // Difference to 1:N. 1:1 may have storage 'Replicate'
-            if (savedRel.HasStorage(RelationEndRole.B))
+            if (await savedRel.HasStorage(RelationEndRole.B))
             {
-                Delete_1_1_Relation_DropColumns(savedRel, savedRel.B, savedRel.A, RelationEndRole.B);
+                await Delete_1_1_Relation_DropColumns(savedRel, savedRel.B, savedRel.A, RelationEndRole.B);
             }
 
             PostMigration(RelationMigrationEventType.Delete, savedRel, null);
         }
 
-        private void Delete_1_1_Relation_DropColumns(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role)
+        private async Task Delete_1_1_Relation_DropColumns(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role)
         {
             var tblName = relEnd.Type.GetTableRef(db);
-            var colName = Construct.ForeignKeyColumnName(otherEnd);
-            var assocName = rel.GetRelationAssociationName(role);
+            var colName = await Construct.ForeignKeyColumnName(otherEnd);
+            var assocName = await rel.GetRelationAssociationName(role);
             var indexName = Construct.IndexName(tblName.Name, colName);
             var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
 
@@ -2042,17 +2051,17 @@ namespace Zetbox.Server.SchemaManagement
             if (db.CheckColumnExists(tblName, colName))
                 db.DropColumn(tblName, colName);
 
-            if (rel.NeedsPositionStorage(role) && db.CheckColumnExists(tblName, Construct.ListPositionColumnName(otherEnd)))
+            if (await rel.NeedsPositionStorage(role) && db.CheckColumnExists(tblName, Construct.ListPositionColumnName(otherEnd)))
                 db.DropColumn(tblName, Construct.ListPositionColumnName(otherEnd));
         }
         #endregion
 
         #region New_1_1_Relation
-        public bool IsNew_1_1_Relation(Relation rel)
+        public async Task<bool> IsNew_1_1_Relation(Relation rel)
         {
-            return savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
+            return await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid) == null;
         }
-        public void DoNew_1_1_Relation(Relation rel)
+        public async Task DoNew_1_1_Relation(Relation rel)
         {
             if (!PreMigration(RelationMigrationEventType.Add, null, rel))
                 return;
@@ -2061,18 +2070,18 @@ namespace Zetbox.Server.SchemaManagement
 
             if (rel.Storage == StorageType.MergeIntoA || rel.Storage == StorageType.Replicate)
             {
-                New_1_1_Relation_CreateColumns(rel, rel.A, rel.B, RelationEndRole.A);
+                await New_1_1_Relation_CreateColumns(rel, rel.A, rel.B, RelationEndRole.A);
             }
 
             if (rel.Storage == StorageType.MergeIntoB || rel.Storage == StorageType.Replicate)
             {
-                New_1_1_Relation_CreateColumns(rel, rel.B, rel.A, RelationEndRole.B);
+                await New_1_1_Relation_CreateColumns(rel, rel.B, rel.A, RelationEndRole.B);
             }
 
             PostMigration(RelationMigrationEventType.Add, null, rel);
         }
 
-        private void New_1_1_Relation_CreateColumns(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role)
+        private async  Task New_1_1_Relation_CreateColumns(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role)
         {
             TableRef tblName, refTblName;
             string assocName, colName, idxName;
@@ -2081,14 +2090,14 @@ namespace Zetbox.Server.SchemaManagement
                 return;
             }
 
-            CreateFKColumn(otherEnd, tblName, colName);
+            await CreateFKColumn(otherEnd, tblName, colName);
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
             if (db.CheckIndexPossible(tblName, idxName, true, false, colName))
                 db.CreateIndex(tblName, idxName, true, false, colName);
             else
                 Log.WarnFormat("Cannot create index: {0}", idxName);
 
-            if (rel.NeedsPositionStorage(role))
+            if (await rel.NeedsPositionStorage(role))
             {
                 Log.ErrorFormat("1:1 Relation should never need position storage, but this one does!");
             }
@@ -2098,8 +2107,8 @@ namespace Zetbox.Server.SchemaManagement
         {
             tblName = relEnd.Type.GetTableRef(db);
             refTblName = otherEnd.Type.GetTableRef(db);
-            assocName = rel.GetRelationAssociationName(role);
-            colName = Construct.ForeignKeyColumnName(otherEnd);
+            assocName = rel.GetRelationAssociationName(role).Result;
+            colName = Construct.ForeignKeyColumnName(otherEnd).Result;
             idxName = Construct.IndexName(tblName.Name, colName);
 
             return true;
@@ -2108,9 +2117,9 @@ namespace Zetbox.Server.SchemaManagement
         /// <summary>
         /// Creates a fk column "colName" on table "tblName", pointing to "otherEnd".
         /// </summary>
-        private void CreateFKColumn(RelationEnd otherEnd, TableRef tblName, string colName, bool forceTPH = false)
+        private async Task CreateFKColumn(RelationEnd otherEnd, TableRef tblName, string colName, bool forceTPH = false)
         {
-            var relEnd = otherEnd.GetParent().GetOtherEnd(otherEnd);
+            var relEnd = await otherEnd.GetParent().GetOtherEnd(otherEnd);
 
             var isNullable = otherEnd.IsNullable();
             var checkNotNull = !isNullable;
@@ -2130,7 +2139,7 @@ namespace Zetbox.Server.SchemaManagement
             db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, isNullable);
             if (createCheckConstraint)
             {
-                CreateTPHNotNullCheckConstraint(tblName, colName, relEnd.Type);
+                await CreateTPHNotNullCheckConstraint(tblName, colName, relEnd.Type);
             }
 
             if (errorMsg != null)
@@ -2141,16 +2150,15 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region Change_1_1_Storage
-        public bool IsChange_1_1_Storage(Relation rel)
+        public async Task<bool> IsChange_1_1_Storage(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (saved == null) return false;
             return rel.Storage != saved.Storage;
         }
-        public void DoChange_1_1_Storage(Relation rel)
+        public async Task DoChange_1_1_Storage(Relation rel)
         {
-
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeStorage, savedRel, rel))
                 return;
@@ -2160,13 +2168,13 @@ namespace Zetbox.Server.SchemaManagement
             if (savedRel.Storage == StorageType.Replicate)
             {
                 // To MergeIntoA or MergeIntoB
-                if (rel.HasStorage(RelationEndRole.B))
+                if (await rel.HasStorage(RelationEndRole.B))
                 {
-                    Delete_1_1_Relation_DropColumns(savedRel, savedRel.A, savedRel.B, RelationEndRole.A);
+                    await Delete_1_1_Relation_DropColumns(savedRel, savedRel.A, savedRel.B, RelationEndRole.A);
                 }
-                else if (rel.HasStorage(RelationEndRole.A))
+                else if (await rel.HasStorage(RelationEndRole.A))
                 {
-                    Delete_1_1_Relation_DropColumns(savedRel, savedRel.B, savedRel.A, RelationEndRole.B);
+                    await Delete_1_1_Relation_DropColumns(savedRel, savedRel.B, savedRel.A, RelationEndRole.B);
                 }
             }
             else
@@ -2197,11 +2205,11 @@ namespace Zetbox.Server.SchemaManagement
                     throw new InvalidOperationException("Unexpected saved stroage type " + savedRel.Storage.ToString());
                 }
 
-                New_1_1_Relation_CreateColumns(rel, relEnd, otherEnd, role);
+                await New_1_1_Relation_CreateColumns(rel, relEnd, otherEnd, role);
                 var srcTbl = otherEnd.Type.GetTableRef(db);
-                var srcCol = Construct.ForeignKeyColumnName(relEnd);
+                var srcCol = await Construct.ForeignKeyColumnName(relEnd);
                 var destTbl = relEnd.Type.GetTableRef(db);
-                var destCol = Construct.ForeignKeyColumnName(otherEnd);
+                var destCol = await Construct.ForeignKeyColumnName(otherEnd);
                 db.MigrateFKs(srcTbl, srcCol, destTbl, destCol);
                 if (!relEnd.IsNullable())
                 {
@@ -2217,7 +2225,7 @@ namespace Zetbox.Server.SchemaManagement
 
                 if (rel.Storage != StorageType.Replicate)
                 {
-                    Delete_1_1_Relation_DropColumns(rel, otherEnd, relEnd, otherRole);
+                    await Delete_1_1_Relation_DropColumns(rel, otherEnd, relEnd, otherRole);
                 }
             }
 
@@ -2226,9 +2234,9 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region 1_1_RelationChange_FromNullable_To_NotNullable
-        public bool Is_1_1_RelationChange_FromNullable_To_NotNullable(Relation rel, RelationEndRole role)
+        public async Task<bool> Is_1_1_RelationChange_FromNullable_To_NotNullable(Relation rel, RelationEndRole role)
         {
-            Relation savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            Relation savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (savedRel == null)
             {
                 return false;
@@ -2238,18 +2246,18 @@ namespace Zetbox.Server.SchemaManagement
                     || (rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B)
                     || (rel.Storage == StorageType.Replicate));
         }
-        public void Do_1_1_RelationChange_FromNullable_To_NotNullable(Relation rel, RelationEndRole role)
+        public async Task Do_1_1_RelationChange_FromNullable_To_NotNullable(Relation rel, RelationEndRole role)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel))
                 return;
 
-            RelationEnd relEnd = rel.GetEndFromRole(role);
+            RelationEnd relEnd = await rel.GetEndFromRole(role);
             RelationEnd otherEnd = rel.GetOtherEndFromRole(role);
 
             var tblName = relEnd.Type.GetTableRef(db);
-            var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var colName = await Construct.ForeignKeyColumnName(otherEnd);
             var idxName = Construct.IndexName(tblName.Name, colName);
 
             // MS SQL Server (and Postgres?) cannot alter columns when a index exists
@@ -2262,9 +2270,9 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region 1_1_RelationChange_FromNotNullable_To_Nullable
-        public bool Is_1_1_RelationChange_FromNotNullable_To_Nullable(Relation rel, RelationEndRole role)
+        public async Task<bool> Is_1_1_RelationChange_FromNotNullable_To_Nullable(Relation rel, RelationEndRole role)
         {
-            Relation savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            Relation savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
             if (savedRel == null)
             {
                 return false;
@@ -2274,18 +2282,18 @@ namespace Zetbox.Server.SchemaManagement
                     || (rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B)
                     || (rel.Storage == StorageType.Replicate));
         }
-        public void Do_1_1_RelationChange_FromNotNullable_To_Nullable(Relation rel, RelationEndRole role)
+        public async Task Do_1_1_RelationChange_FromNotNullable_To_Nullable(Relation rel, RelationEndRole role)
         {
-            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = await savedSchema.FindPersistenceObjectAsync<Relation>(rel.ExportGuid);
 
             if (!PreMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel))
                 return;
 
-            RelationEnd relEnd = rel.GetEndFromRole(role);
+            RelationEnd relEnd = await rel.GetEndFromRole(role);
             RelationEnd otherEnd = rel.GetOtherEndFromRole(role);
 
             var tblName = relEnd.Type.GetTableRef(db);
-            var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var colName = await Construct.ForeignKeyColumnName(otherEnd);
             var idxName = Construct.IndexName(tblName.Name, colName);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
@@ -2305,16 +2313,16 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region NewObjectClassInheritance
-        public bool IsNewObjectClassInheritance(ObjectClass objClass)
+        public async Task<bool> IsNewObjectClassInheritance(ObjectClass objClass)
         {
             if (objClass.BaseObjectClass == null) return false;
 
-            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            ObjectClass savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
             return savedObjClass == null || savedObjClass.BaseObjectClass == null;
         }
-        public void DoNewObjectClassInheritance(ObjectClass objClass)
+        public async Task DoNewObjectClassInheritance(ObjectClass objClass)
         {
-            var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            var savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
 
             if (!PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
                 return;
@@ -2339,42 +2347,42 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeObjectClassInheritance
-        public bool IsChangeObjectClassInheritance(ObjectClass objClass)
+        public async Task<bool> IsChangeObjectClassInheritance(ObjectClass objClass)
         {
             if (objClass.BaseObjectClass == null) return false;
 
-            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            ObjectClass savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
             if (savedObjClass == null) return false;
             if (savedObjClass.BaseObjectClass == null) return false;
 
             return savedObjClass.BaseObjectClass.ExportGuid != objClass.BaseObjectClass.ExportGuid;
         }
-        public void DoChangeObjectClassInheritance(ObjectClass objClass)
+        public async Task DoChangeObjectClassInheritance(ObjectClass objClass)
         {
-            var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            var savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
 
             if (!PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
                 return;
 
             Log.InfoFormat("Changing ObjectClass Inheritance: {0} -> {1}", objClass.Name, objClass.BaseObjectClass.Name);
-            DoRemoveObjectClassInheritance(objClass);
-            DoNewObjectClassInheritance(objClass);
+            await DoRemoveObjectClassInheritance(objClass);
+            await DoNewObjectClassInheritance(objClass);
 
             PostMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass);
         }
         #endregion
 
         #region RemoveObjectClassInheritance
-        public bool IsRemoveObjectClassInheritance(ObjectClass objClass)
+        public async Task<bool> IsRemoveObjectClassInheritance(ObjectClass objClass)
         {
-            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            ObjectClass savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
             if (savedObjClass == null) return false;
 
             return savedObjClass.BaseObjectClass != null && objClass.BaseObjectClass == null;
         }
-        public void DoRemoveObjectClassInheritance(ObjectClass objClass)
+        public async Task DoRemoveObjectClassInheritance(ObjectClass objClass)
         {
-            var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            var savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
 
             if (!PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
                 return;
@@ -2392,9 +2400,9 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeTptToTph
-        public bool IsChangeTptToTph(ObjectClass objClass)
+        public async Task<bool> IsChangeTptToTph(ObjectClass objClass)
         {
-            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            ObjectClass savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
             if (savedObjClass == null) return false;
 
             return savedObjClass.GetTableMapping() == TableMapping.TPT && objClass.GetTableMapping() == TableMapping.TPH;
@@ -2406,9 +2414,9 @@ namespace Zetbox.Server.SchemaManagement
         /// <remarks>
         /// After this has run the database should look as if the saved schema already was TPH, but nothing else had changed.
         /// </remarks>
-        public void DoChangeTptToTph(ObjectClass objClass)
+        public async Task DoChangeTptToTph(ObjectClass objClass)
         {
-            var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            var savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
 
             if (!PreMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass))
                 return;
@@ -2440,12 +2448,12 @@ namespace Zetbox.Server.SchemaManagement
 
                 foreach (ValueTypeProperty savedProp in savedObjClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList))
                 {
-                    CreateValueTypePropertyNullable(baseTblName, savedProp, Construct.NestedColumnName(savedProp.Name, savedObjClass.TableName), false);
+                    await CreateValueTypePropertyNullable(baseTblName, savedProp, Construct.NestedColumnName(savedProp.Name, savedObjClass.TableName), false);
                     colNamesList.Add(savedProp.Name);
                 }
                 foreach (CompoundObjectProperty savedProp in savedObjClass.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
                 {
-                    CreateCompoundObjectProperty(baseTblName, savedProp, string.Empty, false);
+                    await CreateCompoundObjectProperty(baseTblName, savedProp, string.Empty, false);
 
                     var baseColName = Construct.ColumnName(savedProp, string.Empty);
                     colNamesList.AddRange(savedProp.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>().Select(p => Construct.ColumnName(p, baseColName)));
@@ -2454,8 +2462,8 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     // relink fk column on tblName
                     var tblName = db.GetTableName(savedProp.Module.SchemaName, savedProp.GetCollectionEntryTable());
-                    string fkName = Construct.ForeignKeyColumnName(savedProp);
-                    string assocName = savedProp.GetAssociationName();
+                    string fkName = await Construct.ForeignKeyColumnName(savedProp);
+                    string assocName = await savedProp.GetAssociationName();
 
                     db.DropFKConstraint(tblName, assocName);
                     // TPH downside: constraint doesn't restrict to subclass any more
@@ -2465,8 +2473,8 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     // relink fk column on tblName
                     var tblName = db.GetTableName(savedProp.Module.SchemaName, savedProp.GetCollectionEntryTable());
-                    string fkName = Construct.ForeignKeyColumnName(savedProp);
-                    string assocName = savedProp.GetAssociationName();
+                    string fkName = await Construct.ForeignKeyColumnName(savedProp);
+                    string assocName = await savedProp.GetAssociationName();
 
                     db.DropFKConstraint(tblName, assocName);
                     // TPH downside: constraint doesn't restrict to subclass any more
@@ -2479,7 +2487,7 @@ namespace Zetbox.Server.SchemaManagement
 
                 foreach (Relation savedRel in savedSchema.GetQuery<Relation>().Where(r => r.A.Type == savedObjClass || r.B.Type == savedObjClass).OrderBy(r => r.Module.Namespace))
                 {
-                    switch (savedRel.GetRelationType())
+                    switch (await savedRel.GetRelationType())
                     {
                         case RelationType.one_n:
                             // create new columns on base table
@@ -2493,7 +2501,7 @@ namespace Zetbox.Server.SchemaManagement
                                     // Only do this when we are N-side
                                     if (savedRelEnd.Type == savedObjClass)
                                     {
-                                        CreateFKColumn(savedOtherEnd, baseTblName, Construct.NestedColumnName(colName, savedObjClass.TableName), true);
+                                        await CreateFKColumn(savedOtherEnd, baseTblName, Construct.NestedColumnName(colName, savedObjClass.TableName), true);
                                         colNamesList.Add(colName);
                                         if (hasPersistentOrder)
                                         {
@@ -2514,13 +2522,13 @@ namespace Zetbox.Server.SchemaManagement
                                 {
                                     if (aType == savedObjClass)
                                     {
-                                        db.DropFKConstraint(tblName, savedRel.GetRelationAssociationName(RelationEndRole.A));
-                                        db.CreateFKConstraint(tblName, baseTblName, fkAName, savedRel.GetRelationAssociationName(RelationEndRole.A), false);
+                                        db.DropFKConstraint(tblName, await savedRel.GetRelationAssociationName(RelationEndRole.A));
+                                        db.CreateFKConstraint(tblName, baseTblName, fkAName, await savedRel.GetRelationAssociationName(RelationEndRole.A), false);
                                     }
                                     if (bType == savedObjClass)
                                     {
-                                        db.DropFKConstraint(tblName, savedRel.GetRelationAssociationName(RelationEndRole.B));
-                                        db.CreateFKConstraint(tblName, baseTblName, fkBName, savedRel.GetRelationAssociationName(RelationEndRole.B), false);
+                                        db.DropFKConstraint(tblName, await savedRel.GetRelationAssociationName(RelationEndRole.B));
+                                        db.CreateFKConstraint(tblName, baseTblName, fkBName, await savedRel.GetRelationAssociationName(RelationEndRole.B), false);
                                     }
                                 }
                             }
@@ -2534,7 +2542,7 @@ namespace Zetbox.Server.SchemaManagement
                                 if (TryInspect_1_1_Relation(savedRel, savedRel.A, savedRel.B, RelationEndRole.A, out tblName, out refTblName, out assocName, out colName, out idxName))
                                 {
                                     db.DropFKConstraint(tblName, assocName);
-                                    CreateFKColumn(savedRel.B, baseTblName, Construct.NestedColumnName(colName, savedObjClass.TableName), true);
+                                    await CreateFKColumn(savedRel.B, baseTblName, Construct.NestedColumnName(colName, savedObjClass.TableName), true);
                                     colNamesList.Add(colName);
                                 }
                             }
@@ -2546,7 +2554,7 @@ namespace Zetbox.Server.SchemaManagement
                                 if (TryInspect_1_1_Relation(savedRel, savedRel.B, savedRel.A, RelationEndRole.B, out tblName, out refTblName, out assocName, out colName, out idxName))
                                 {
                                     db.DropFKConstraint(tblName, assocName);
-                                    CreateFKColumn(savedRel.A, baseTblName, Construct.NestedColumnName(colName, savedObjClass.TableName), true);
+                                    await CreateFKColumn(savedRel.A, baseTblName, Construct.NestedColumnName(colName, savedObjClass.TableName), true);
                                     colNamesList.Add(colName);
                                 }
                             }
@@ -2575,7 +2583,7 @@ namespace Zetbox.Server.SchemaManagement
 
                 foreach (Relation savedRel in savedSchema.GetQuery<Relation>().Where(r => r.A.Type == savedObjClass || r.B.Type == savedObjClass).OrderBy(r => r.Module.Namespace))
                 {
-                    switch (savedRel.GetRelationType())
+                    switch (await savedRel.GetRelationType())
                     {
                         case RelationType.one_n:
                             {
@@ -2668,7 +2676,7 @@ namespace Zetbox.Server.SchemaManagement
             // process all children
             foreach (var child in savedObjClass.SubClasses)
             {
-                DoChangeTptToTph(child);
+                await DoChangeTptToTph(child);
             }
 
             // "fix" saved schema, so other cases accessing the "old" schema see the already transformed base table
@@ -2679,12 +2687,12 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeTphToTpt
-        public bool IsChangeTphToTpt(ObjectClass objClass)
+        public async Task<bool> IsChangeTphToTpt(ObjectClass objClass)
         {
             // only migrate on the RootClass
             if (objClass.BaseObjectClass != null) return false;
 
-            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            ObjectClass savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
             if (savedObjClass == null) return false;
 
             return savedObjClass.GetTableMapping() == TableMapping.TPH && objClass.GetTableMapping() == TableMapping.TPT;
@@ -2693,9 +2701,9 @@ namespace Zetbox.Server.SchemaManagement
         /// Changes table layout from table-per-hierarchy to table-per-type. This operates only on the saved schema to avoid doing work of other cases, specifically the Do(New/Change)*Property cases.
         /// </summary>
         /// <param name="objClass"></param>
-        public void DoChangeTphToTpt(ObjectClass objClass)
+        public async Task DoChangeTphToTpt(ObjectClass objClass)
         {
-            var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            var savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
 
             if (!PreMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass))
                 return;
@@ -2711,13 +2719,13 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region NewObjectClassACL
-        public bool IsNewObjectClassACL(ObjectClass objClass)
+        public async Task<bool> IsNewObjectClassACL(ObjectClass objClass)
         {
             if (!objClass.NeedsRightsTable()) return false;
-            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            ObjectClass savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
             return savedObjClass == null || !savedObjClass.NeedsRightsTable();
         }
-        public void DoNewObjectClassACL(ObjectClass objClass)
+        public async Task DoNewObjectClassACL(ObjectClass objClass)
         {
             Log.InfoFormat("New ObjectClass Security Rules: {0}", objClass.Name);
             var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
@@ -2733,13 +2741,13 @@ namespace Zetbox.Server.SchemaManagement
             var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 
-            DoCreateOrReplaceUpdateRightsTrigger(objClass);
-            DoCreateRightsViewUnmaterialized(objClass);
+            await DoCreateOrReplaceUpdateRightsTrigger(objClass);
+            await DoCreateRightsViewUnmaterialized(objClass);
             db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
             db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
         }
 
-        public void DoCreateRightsViewUnmaterialized(ObjectClass objClass)
+        public async Task DoCreateRightsViewUnmaterialized(ObjectClass objClass)
         {
             var tblName = objClass.GetTableRef(db);
             var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
@@ -2767,7 +2775,7 @@ namespace Zetbox.Server.SchemaManagement
                 viewAcl.Right = (Zetbox.API.AccessRights)ac.Rights;
                 try
                 {
-                    viewAcl.Relations.AddRange(SchemaManager.CreateJoinList(db, objClass, ac.Relations));
+                    viewAcl.Relations.AddRange(await SchemaManager.CreateJoinList(db, objClass, ac.Relations));
                 }
                 catch (SchemaManager.JoinListException ex)
                 {
@@ -2780,7 +2788,7 @@ namespace Zetbox.Server.SchemaManagement
             db.CreateRightsViewUnmaterialized(rightsViewUnmaterializedName, tblName, tblRightsName, viewAcls);
         }
 
-        public void DoCreateOrReplaceUpdateRightsTrigger(ObjectClass objClass)
+        public async Task DoCreateOrReplaceUpdateRightsTrigger(ObjectClass objClass)
         {
             var tblName = objClass.GetTableRef(db);
             var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(objClass));
@@ -2821,8 +2829,8 @@ namespace Zetbox.Server.SchemaManagement
                         };
                         try
                         {
-                            rt.ObjectRelations.AddRange(SchemaManager.CreateJoinList(db, dep, ac.Relations.TakeWhileInclusive(r => r != rel)));
-                            rt.IdentityRelations.AddRange(SchemaManager.CreateJoinList(db, identity, ac.Relations.Reverse().TakeWhile(r => r != rel)));
+                            rt.ObjectRelations.AddRange(await SchemaManager.CreateJoinList(db, dep, ac.Relations.TakeWhileInclusive(r => r != rel)));
+                            rt.IdentityRelations.AddRange(await SchemaManager.CreateJoinList(db, identity, ac.Relations.Reverse().TakeWhile(r => r != rel)));
                         }
                         catch (Zetbox.Server.SchemaManagement.SchemaManager.JoinListException ex)
                         {
@@ -2836,14 +2844,15 @@ namespace Zetbox.Server.SchemaManagement
 
             // do not check fk_ChangedBy since it always changes, even when only recalculations were done.
             // ACLs MUST never use ChangedBy information
-            var fkCols = objClass.GetRelationEndsWithLocalStorage()
+            var fkCols = (await objClass.GetRelationEndsWithLocalStorage()
                 .Where(r => !(r.Type.ImplementsIChangedBy().Result && r.Navigator != null && r.Navigator.Name == "ChangedBy"))
-                .Select(r => Construct.ForeignKeyColumnName(r.GetParent().GetOtherEnd(r)))
+                .Select(async r => await Construct.ForeignKeyColumnName(await r.GetParent().GetOtherEnd(r)))
+                .WhenAll())
                 .ToList();
             db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList, fkCols);
         }
 
-        public void DoCreateUpdateRightsTrigger(Relation rel)
+        public async Task DoCreateUpdateRightsTrigger(Relation rel)
         {
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
             var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(rel));
@@ -2878,11 +2887,11 @@ namespace Zetbox.Server.SchemaManagement
                         try
                         {
                             // Ignore last join - our n:m end has two (in & out), but we only need the incoming one
-                            var objJoinList = SchemaManager.CreateJoinList(db, dep, ac.Relations.TakeWhileInclusive(r => r != rel));
+                            var objJoinList = await SchemaManager.CreateJoinList(db, dep, ac.Relations.TakeWhileInclusive(r => r != rel));
                             rt.ObjectRelations.AddRange(objJoinList.Take(objJoinList.Count - 1));
 
                             // Ignore last join - our n:m end has two (in & out), but we only need the incoming one
-                            var idJoinList = SchemaManager.CreateJoinList(db, identity, ac.Relations.Reverse().TakeWhileInclusive(r => r != rel));
+                            var idJoinList = await SchemaManager.CreateJoinList(db, identity, ac.Relations.Reverse().TakeWhileInclusive(r => r != rel));
                             rt.IdentityRelations.AddRange(idJoinList.Take(idJoinList.Count - 1));
                         }
                         catch (Zetbox.Server.SchemaManagement.SchemaManager.JoinListException ex)
@@ -2896,18 +2905,18 @@ namespace Zetbox.Server.SchemaManagement
                 }
             }
 
-            db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList, new List<string>() { Construct.ForeignKeyColumnName(rel.A), Construct.ForeignKeyColumnName(rel.B) });
+            db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList, new List<string>() { await Construct.ForeignKeyColumnName(rel.A), await Construct.ForeignKeyColumnName(rel.B) });
         }
         #endregion
 
         #region ChangeObjectClassACL
-        public bool IsChangeObjectClassACL(ObjectClass objClass)
+        public async Task<bool> IsChangeObjectClassACL(ObjectClass objClass)
         {
             if (objClass == null) throw new ArgumentNullException("objClass");
 
             // Basic checks
             if (!objClass.NeedsRightsTable()) return false;
-            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            ObjectClass savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
             if (savedObjClass == null) return false;
             if (!savedObjClass.NeedsRightsTable()) return false;
 
@@ -2935,37 +2944,39 @@ namespace Zetbox.Server.SchemaManagement
 
         private HashSet<ProcRef> _triggedRightsProcs = new HashSet<ProcRef>();
 
-        public void ExecuteTriggeredRefreshRights()
+        public Task ExecuteTriggeredRefreshRights()
         {
             foreach (var refreshRightsOnProcedureName in _triggedRightsProcs)
             {
                 db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
             }
             _triggedRightsProcs.Clear();
+
+            return Task.CompletedTask;
         }
 
-        public void DoChangeObjectClassACL(ObjectClass objClass)
+        public async Task DoChangeObjectClassACL(ObjectClass objClass)
         {
             var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 
             if (db.CheckViewExists(rightsViewUnmaterializedName))
                 db.DropView(rightsViewUnmaterializedName);
-            DoCreateRightsViewUnmaterialized(objClass);
+            await DoCreateRightsViewUnmaterialized(objClass);
 
-            DoCreateOrReplaceUpdateRightsTrigger(objClass);
+            await DoCreateOrReplaceUpdateRightsTrigger(objClass);
             _triggedRightsProcs.Add(refreshRightsOnProcedureName);
         }
         #endregion
 
         #region DeleteObjectClassSecurityRules
-        public bool IsDeleteObjectClassSecurityRules(ObjectClass objClass)
+        public async Task<bool> IsDeleteObjectClassSecurityRules(ObjectClass objClass)
         {
             if (objClass.NeedsRightsTable()) return false;
-            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            ObjectClass savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
             return savedObjClass != null && savedObjClass.NeedsRightsTable();
         }
-        public void DoDeleteObjectClassSecurityRules(ObjectClass objClass)
+        public Task DoDeleteObjectClassSecurityRules(ObjectClass objClass)
         {
             var tblName = objClass.GetTableRef(db);
             var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
@@ -2986,21 +2997,23 @@ namespace Zetbox.Server.SchemaManagement
 
             if (db.CheckTableExists(tblRightsName))
                 db.DropTable(tblRightsName);
+
+            return Task.CompletedTask;
         }
         #endregion
 
         #region RenameObjectClassACL
-        public bool IsRenameObjectClassACL(ObjectClass objClass)
+        public async Task<bool> IsRenameObjectClassACL(ObjectClass objClass)
         {
             if (!objClass.NeedsRightsTable()) return false;
-            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            ObjectClass savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
             if (savedObjClass == null || !savedObjClass.NeedsRightsTable()) return false;
 
             return objClass.TableName != savedObjClass.TableName || objClass.Module.SchemaName != savedObjClass.Module.SchemaName;
         }
-        public void DoRenameObjectClassACL(ObjectClass objClass)
+        public async Task DoRenameObjectClassACL(ObjectClass objClass)
         {
-            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            ObjectClass savedObjClass = await savedSchema.FindPersistenceObjectAsync<ObjectClass>(objClass.ExportGuid);
 
             var tblName = objClass.GetTableRef(db);
             var savedTblName = savedObjClass.GetTableRef(db);
@@ -3028,22 +3041,22 @@ namespace Zetbox.Server.SchemaManagement
             db.RenameIndex(tblRightsName, Construct.SecurityRulesIndexName(savedObjClass), Construct.SecurityRulesIndexName(objClass));
             db.RenameFKConstraint(tblRightsName, Construct.SecurityRulesFKName(savedObjClass), objClass.GetTableRef(db), "ID", Construct.SecurityRulesFKName(objClass), true);
 
-            DoCreateOrReplaceUpdateRightsTrigger(objClass);
-            DoCreateRightsViewUnmaterialized(objClass);
+            await DoCreateOrReplaceUpdateRightsTrigger(objClass);
+            await DoCreateRightsViewUnmaterialized(objClass);
             db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
         }
         #endregion
 
         #region DeleteValueTypeProperty
-        public bool IsDeleteValueTypeProperty(ValueTypeProperty savedProp)
+        public async Task<bool> IsDeleteValueTypeProperty(ValueTypeProperty savedProp)
         {
-            return !savedProp.IsList && schema.FindPersistenceObject<ValueTypeProperty>(savedProp.ExportGuid) == null;
+            return !savedProp.IsList && await schema.FindPersistenceObjectAsync<ValueTypeProperty>(savedProp.ExportGuid) == null;
         }
 
-        public void DoDeleteValueTypeProperty(ObjectClass objClass, ValueTypeProperty savedProp, string prefix)
+        public Task DoDeleteValueTypeProperty(ObjectClass objClass, ValueTypeProperty savedProp, string prefix)
         {
             if (!PreMigration(PropertyMigrationEventType.Delete, savedProp, null))
-                return;
+                return Task.CompletedTask;
 
             var tblName = objClass.GetTableRef(db);
             var colName = Construct.ColumnName(savedProp, prefix);
@@ -3056,26 +3069,28 @@ namespace Zetbox.Server.SchemaManagement
                 db.DropColumn(tblName, colName);
 
             PostMigration(PropertyMigrationEventType.Delete, savedProp, null);
+
+            return Task.CompletedTask;
         }
         #endregion
 
         #region NewCompoundObjectProperty
-        public bool IsNewCompoundObjectProperty(CompoundObjectProperty prop)
+        public async Task<bool> IsNewCompoundObjectProperty(CompoundObjectProperty prop)
         {
-            return savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid) == null;
+            return await savedSchema.FindPersistenceObjectAsync<CompoundObjectProperty>(prop.ExportGuid) == null;
         }
-        public void DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty cprop, string prefix)
+        public async Task DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty cprop, string prefix)
         {
             if (!PreMigration(PropertyMigrationEventType.Add, null, cprop))
                 return;
 
             var tblName = objClass.GetTableRef(db);
-            CreateCompoundObjectProperty(tblName, cprop, prefix, true);
+            await CreateCompoundObjectProperty(tblName, cprop, prefix, true);
 
             PostMigration(PropertyMigrationEventType.Add, null, cprop);
         }
 
-        private void CreateCompoundObjectProperty(TableRef tblName, CompoundObjectProperty cprop, string prefix, bool logAsNew)
+        private async Task CreateCompoundObjectProperty(TableRef tblName, CompoundObjectProperty cprop, string prefix, bool logAsNew)
         {
             string baseColName = Construct.ColumnName(cprop, prefix);
             if (logAsNew) Log.InfoFormat("New is null column for CompoundObject Property: '{0}'", cprop.Name);
@@ -3090,9 +3105,9 @@ namespace Zetbox.Server.SchemaManagement
                     tblName,
                     colName,
                     valProp.GetDbType(),
-                    valProp.GetSize(),
-                    valProp.GetScale(),
-                    hasData || valProp.IsNullable(),
+                    await valProp.GetSize(),
+                    await valProp.GetScale(),
+                    hasData || await valProp.IsNullable(),
                     null); // CP-Objects does not have a default value. could be nullable or deep in a TPH hierarchy
             }
 
@@ -3101,15 +3116,15 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region DeleteCompoundObjectProperty
-        public bool IsDeleteCompoundObjectProperty(CompoundObjectProperty savedCProp)
+        public async Task<bool> IsDeleteCompoundObjectProperty(CompoundObjectProperty savedCProp)
         {
-            return !savedCProp.IsList && schema.FindPersistenceObject<CompoundObjectProperty>(savedCProp.ExportGuid) == null;
+            return !savedCProp.IsList && await schema.FindPersistenceObjectAsync<CompoundObjectProperty>(savedCProp.ExportGuid) == null;
         }
 
-        public void DoDeleteCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty savedCProp, string prefix)
+        public Task DoDeleteCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty savedCProp, string prefix)
         {
             if (!PreMigration(PropertyMigrationEventType.Delete, savedCProp, null))
-                return;
+                return Task.CompletedTask;
 
             Log.InfoFormat("deleting CompoundObject Property: '{0}'", savedCProp.Name);
 
@@ -3126,20 +3141,22 @@ namespace Zetbox.Server.SchemaManagement
             // TODO: Add nested CompoundObjectProperty
 
             PostMigration(PropertyMigrationEventType.Delete, savedCProp, null);
+
+            return Task.CompletedTask;
         }
         #endregion
 
         #region NewIndexConstraint
-        public bool IsNewIndexConstraint(IndexConstraint uc)
+        public async Task<bool> IsNewIndexConstraint(IndexConstraint uc)
         {
             var isFulltextConstraint = uc is FullTextIndexConstraint;
-            return !isFulltextConstraint && uc.Constrained is ObjectClass && savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
+            return !isFulltextConstraint && uc.Constrained is ObjectClass && await savedSchema.FindPersistenceObjectAsync<IndexConstraint>(uc.ExportGuid) == null;
         }
-        public void DoNewIndexConstraint(IndexConstraint uc)
+        public async Task DoNewIndexConstraint(IndexConstraint uc)
         {
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = objClass.GetTableRef(db);
-            var columns = Construct.GetUCColNames(uc);
+            var columns = await Construct.GetUCColNames(uc);
             var log_idxName = string.Format("{0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
             Log.InfoFormat("New Index Constraint: {0}", log_idxName);
             var idxName = Construct.IndexName(objClass.TableName, columns);
@@ -3159,16 +3176,16 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region DeleteIndexConstraint
-        public bool IsDeleteIndexConstraint(IndexConstraint uc)
+        public async Task<bool> IsDeleteIndexConstraint(IndexConstraint uc)
         {
             var isFulltextConstraint = uc is FullTextIndexConstraint;
-            return !isFulltextConstraint && uc.Constrained is ObjectClass && schema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
+            return !isFulltextConstraint && uc.Constrained is ObjectClass && await schema.FindPersistenceObjectAsync<IndexConstraint>(uc.ExportGuid) == null;
         }
-        public void DoDeleteIndexConstraint(IndexConstraint uc)
+        public async Task DoDeleteIndexConstraint(IndexConstraint uc)
         {
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = objClass.GetTableRef(db);
-            var columns = Construct.GetUCColNames(uc);
+            var columns = await Construct.GetUCColNames(uc);
             var idxName = Construct.IndexName(objClass.TableName, columns);
             if (db.CheckIndexExists(tblName, idxName))
             {
@@ -3179,18 +3196,18 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region ChangeIndexConstraint
-        public bool IsChangeIndexConstraint(IndexConstraint uc)
+        public async Task<bool> IsChangeIndexConstraint(IndexConstraint uc)
         {
             var isFulltextConstraint = uc is FullTextIndexConstraint;
             if (isFulltextConstraint) return false;
 
-            var saved = savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid);
+            var saved = await savedSchema.FindPersistenceObjectAsync<IndexConstraint>(uc.ExportGuid);
             if (saved == null) return false;
 
             if (uc.IsUnique != saved.IsUnique) return true;
 
-            var newCols = Construct.GetUCColNames(uc);
-            var savedCols = Construct.GetUCColNames(saved);
+            var newCols = await Construct.GetUCColNames(uc);
+            var savedCols = await Construct.GetUCColNames(saved);
             if (newCols.Length != savedCols.Length) return true;
             foreach (var c in newCols)
             {
@@ -3204,31 +3221,33 @@ namespace Zetbox.Server.SchemaManagement
 
             return false;
         }
-        public void DoChangeIndexConstraint(IndexConstraint uc)
+        public async Task DoChangeIndexConstraint(IndexConstraint uc)
         {
-            var saved = savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid);
-            DoDeleteIndexConstraint(saved);
-            DoNewIndexConstraint(uc);
+            var saved = await savedSchema.FindPersistenceObjectAsync<IndexConstraint>(uc.ExportGuid);
+            await DoDeleteIndexConstraint(saved);
+            await DoNewIndexConstraint(uc);
         }
         #endregion
 
         #region NewSchema
-        internal bool IsNewSchema(string schemaName)
+        internal Task<bool> IsNewSchema(string schemaName)
         {
-            return db.CheckSchemaExists(schemaName);
+            return Task.FromResult(db.CheckSchemaExists(schemaName));
         }
 
-        internal void DoNewSchema(string schemaName)
+        internal Task DoNewSchema(string schemaName)
         {
             Log.InfoFormat("New Schema: {0}", schemaName);
             db.CreateSchema(schemaName);
+
+            return Task.CompletedTask;
         }
         #endregion
 
         #endregion
 
         #region RefreshRights
-        public void DoCreateRefreshAllRightsProcedure(List<ObjectClass> allACLTables)
+        public Task DoCreateRefreshAllRightsProcedure(List<ObjectClass> allACLTables)
         {
             var procName = db.GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName());
             if (db.CheckProcedureExists(procName))
@@ -3238,6 +3257,8 @@ namespace Zetbox.Server.SchemaManagement
                 .Select(i => db.GetProcedureName(i.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(i)))
                 .ToList();
             db.CreateRefreshAllRightsProcedure(refreshProcNames);
+
+            return Task.CompletedTask;
         }
         #endregion
 

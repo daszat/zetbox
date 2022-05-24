@@ -27,6 +27,7 @@ using NUnit.Framework.Constraints;
 using Zetbox.API.AbstractConsumerTests;
 using Zetbox.App.Base;
 using Zetbox.API.Common;
+using System.Threading.Tasks;
 
 namespace Zetbox.API.Tests.InvocationExecutorTests
 {
@@ -88,7 +89,7 @@ namespace Zetbox.API.Tests.InvocationExecutorTests
             get; set;
         }
 
-        public string GetCodeTemplate()
+        public Task<string> GetCodeTemplate()
         {
             throw new NotImplementedException();
         }

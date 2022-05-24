@@ -137,7 +137,8 @@ namespace Zetbox.Client.Presentables.GUI
                 {
                     _selectedItem = value;
                     OnPropertyChanged("SelectedItem");
-                    Load();
+                    // TODO: unawaited Task
+                    _ = Load();
                     Parent.Refresh();
                 }
             }
@@ -245,14 +246,12 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-        public Task Reset()
+        public async Task Reset()
         {
             SelectedItem = null;
-            Parent.ResetSort(refresh: false);
+            await Parent.ResetSort(refresh: false);
             Parent.FilterList.ResetUserFilter();
             Parent.ResetDisplayedColumns();
-
-            return Task.CompletedTask;
         }
 
         private ICommandViewModel _DeleteCommand = null;
@@ -363,7 +362,7 @@ namespace Zetbox.Client.Presentables.GUI
         #endregion
 
         #region Helper
-        protected object ResolveUntypedValue(object val, IValueModel mdl)
+        protected async Task<object> ResolveUntypedValue(object val, IValueModel mdl)
         {
             if (val == null) return null;
 
@@ -372,11 +371,11 @@ namespace Zetbox.Client.Presentables.GUI
                 var objRefMdl = (IObjectReferenceValueModel)mdl;
                 if (val is Guid)
                 {
-                    return DataContext.FindPersistenceObject(DataContext.GetInterfaceType(objRefMdl.ReferencedClass.GetDataType()), (Guid)val);
+                    return DataContext.FindPersistenceObject(DataContext.GetInterfaceType(await objRefMdl.ReferencedClass.GetDataType()), (Guid)val);
                 }
                 else if (val is int)
                 {
-                    return DataContext.FindPersistenceObject(DataContext.GetInterfaceType(objRefMdl.ReferencedClass.GetDataType()), (int)val);
+                    return DataContext.FindPersistenceObject(DataContext.GetInterfaceType(await objRefMdl.ReferencedClass.GetDataType()), (int)val);
                 }
                 else
                 {

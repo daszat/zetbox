@@ -28,19 +28,17 @@ namespace Zetbox.App.Base
     public static class ObjectReferencePropertyActions
     {
         [Invocation]
-        public static System.Threading.Tasks.Task GetPropertyType(ObjectReferenceProperty obj, MethodReturnEventArgs<Type> e)
+        public static async System.Threading.Tasks.Task GetPropertyType(ObjectReferenceProperty obj, MethodReturnEventArgs<Type> e)
         {
-            var def = obj.GetReferencedObjectClass();
+            var def = await obj.GetReferencedObjectClass();
             e.Result = Type.GetType(def.Module.Namespace + "." + def.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
-            PropertyActions.DecorateParameterType(obj, e, false, obj.GetIsList(), obj.RelationEnd.Parent.GetOtherEnd(obj.RelationEnd).HasPersistentOrder);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            PropertyActions.DecorateParameterType(obj, e, false, await obj.GetIsList(), (await obj.RelationEnd.Parent.GetOtherEnd(obj.RelationEnd)).HasPersistentOrder);
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetElementTypeString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        public static async System.Threading.Tasks.Task GetElementTypeString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
         {
-            var def = obj.GetReferencedObjectClass();
+            var def = await obj.GetReferencedObjectClass();
             if (def == null)
             {
                 e.Result = "<no class>";
@@ -53,40 +51,34 @@ namespace Zetbox.App.Base
             {
                 e.Result = def.Module.Namespace + "." + def.Name;
             }
-            PropertyActions.DecorateElementType(obj, e, false);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            await PropertyActions.DecorateElementType(obj, e, false);
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetPropertyTypeString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        public static async System.Threading.Tasks.Task GetPropertyTypeString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
         {
-            GetElementTypeString(obj, e);
+            await GetElementTypeString(obj, e);
             if (obj.RelationEnd != null && obj.RelationEnd.Parent != null)
             {
-                PropertyActions.DecorateParameterType(obj, e, false, obj.GetIsList(), obj.RelationEnd.Parent.GetOtherEnd(obj.RelationEnd).HasPersistentOrder);
+                PropertyActions.DecorateParameterType(obj, e, false, await obj.GetIsList(), (await obj.RelationEnd.Parent.GetOtherEnd(obj.RelationEnd)).HasPersistentOrder);
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetIsList(ObjectReferenceProperty prop, MethodReturnEventArgs<bool> e)
+        public static async System.Threading.Tasks.Task GetIsList(ObjectReferenceProperty prop, MethodReturnEventArgs<bool> e)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
             RelationEnd relEnd = prop.RelationEnd;
             Relation rel = relEnd.GetParent();
             if (rel != null)
             {
-                RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+                RelationEnd otherEnd = await rel.GetOtherEnd(relEnd);
                 e.Result = otherEnd.Multiplicity.UpperBound() > 1;
             }
             else
             {
                 e.Result = false;
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

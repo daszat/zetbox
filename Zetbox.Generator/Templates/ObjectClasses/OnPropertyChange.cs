@@ -36,7 +36,7 @@ namespace Zetbox.Generator.Templates.ObjectClasses
         {
             return dt.Properties
                 .OfType<ValueTypeProperty>().Where(p => !p.IsList && !p.IsCalculated).Cast<Property>()
-                .Concat(dt.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.GetIsList()).Cast<Property>())
+                .Concat(dt.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.GetIsList().Result).Cast<Property>())
                 .Concat(dt.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList /* && !p.IsCalculated */).Cast<Property>())
                 .OrderBy(p => p.Name)
                 .ToList();
@@ -45,7 +45,7 @@ namespace Zetbox.Generator.Templates.ObjectClasses
         protected virtual List<Property> GetNonModifyingProperties()
         {
             return dt.Properties.OfType<ObjectReferenceProperty>()
-                .Where(p => !p.RelationEnd.Parent.HasStorage(p.RelationEnd.GetRole()))
+                .Where(p => !p.RelationEnd.Parent.HasStorage(p.RelationEnd.GetRole()).Result)
                 .OrderBy(p => p.Name)
                 .Cast<Property>()
                 .ToList();

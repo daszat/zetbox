@@ -21,6 +21,7 @@ namespace Zetbox.API.Common.Fulltext
     using System.Text;
     using Zetbox.App.Extensions;
     using Zetbox.App.Base;
+    using System.Threading.Tasks;
 
     public sealed class DataObjectFormatter
     {
@@ -31,12 +32,12 @@ namespace Zetbox.API.Common.Fulltext
             _resolver = resolver;
         }
 
-        public string Format(IDataObject obj)
+        public async Task<string> Format(IDataObject obj)
         {
             if (obj == null) return string.Empty;
 
             var cls = _resolver.GetObjectClass(obj.Context.GetInterfaceType(obj));
-            var allProps = cls.GetAllProperties();
+            var allProps = await cls.GetAllProperties();
             var result = new StringBuilder();
 
             foreach (var prop in allProps.OfType<StringProperty>().OrderBy(p => p.Name))
@@ -51,7 +52,7 @@ namespace Zetbox.API.Common.Fulltext
             foreach (var prop in allProps.OfType<EnumerationProperty>().OrderBy(p => p.Name))
             {
                 var enumVal = obj.GetPropertyValue<int>(prop.Name);
-                var txtVal = prop.Enumeration.GetLabelByValue(enumVal);
+                var txtVal = await prop.Enumeration.GetLabelByValue(enumVal);
                 if (!string.IsNullOrWhiteSpace(txtVal))
                 {
                     result.AppendLine(txtVal);

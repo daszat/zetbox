@@ -430,12 +430,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_Icon")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_Icon != null)
             {
-                OnGetName_Icon(this, e);
+                await OnGetName_Icon(this, e);
             }
             else
             {
@@ -494,12 +494,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_Icon")]
-        public virtual void Open()
+        public virtual async System.Threading.Tasks.Task Open()
         {
             // base.Open();
             if (OnOpen_Icon != null)
             {
-                OnOpen_Icon(this);
+                await OnOpen_Icon(this);
             }
             else
             {
@@ -557,12 +557,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_Icon")]
-        public virtual void Upload()
+        public virtual async System.Threading.Tasks.Task Upload()
         {
             // base.Upload();
             if (OnUpload_Icon != null)
             {
-                OnUpload_Icon(this);
+                await OnUpload_Icon(this);
             }
             else
             {
@@ -706,18 +706,18 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_guid_Blob.HasValue)
-                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_guid_Blob.Value));
+                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Blob>(_fk_guid_Blob.Value)));
             else
             if (_fk_Blob.HasValue)
-                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_Blob.Value));
+                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value)));
             else
                 this.Blob = null;
 
             if (_fk_guid_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value)));
             else
             if (_fk_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_Module.Value)));
             else
                 this.Module = null;
         }

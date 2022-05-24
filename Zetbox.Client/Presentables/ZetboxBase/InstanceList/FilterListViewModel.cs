@@ -257,13 +257,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                             // Add ObjectClass filter expressions
                             foreach (var cfc in t.FilterConfigurations)
                             {
-                                await AddFilter(cfc.CreateFilterModel(DataContext));
+                                await AddFilter(await cfc.CreateFilterModel(DataContext));
                             }
 
                             // Add Property filter expressions
                             foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
                             {
-                                await AddFilter(prop.FilterConfiguration.CreateFilterModel(DataContext));
+                                await AddFilter(await prop.FilterConfiguration.CreateFilterModel(DataContext));
                             }
                             if (t is ObjectClass)
                             {
@@ -462,24 +462,23 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public Task AddFilter()
+        public async Task AddFilter()
         {
             var dlg = ViewModelFactory.CreateViewModel<PropertySelectionTaskViewModel.Factory>()
                 .Invoke(DataContext,
                     this,
                     _type,
-                    props =>
+                    async props =>
                     {
                         if (props != null)
                         {
-                            AddFilter(FilterModel.FromProperty(DataContext, FrozenContext, props), true, props);
+                            await AddFilter(await FilterModel.FromProperty(DataContext, FrozenContext, props), true, props);
                             OnUserFilterAdded(props);
                         }
                     });
             dlg.FollowRelationsOne = true;
             dlg.FollowRelationsMany = true;
-            ViewModelFactory.ShowDialog(dlg);
-            return Task.CompletedTask;
+            await ViewModelFactory.ShowDialog(dlg);
         }
 
         public void ResetUserFilter()
@@ -503,11 +502,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public IQueryable AppendFilter(IQueryable qry)
+        public async Task<IQueryable> AppendFilter(IQueryable qry)
         {
             foreach (var f in Filter.Where(f => f.Enabled))
             {
-                qry = f.GetQuery(qry);
+                qry = await f.GetQuery(qry);
             }
 
             return qry;

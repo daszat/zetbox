@@ -68,14 +68,14 @@ this.WriteObjects("                     column=\"`",  Construct.ForeignKeyColumn
 this.WriteObjects("        <many-to-one name=\"B\"\r\n");
 this.WriteObjects("                     column=\"`",  Construct.ForeignKeyColumnName(rel.B) , "`\" />\r\n");
 #line 61 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-if (rel.NeedsPositionStorage(RelationEndRole.A)) { 
+if (rel.NeedsPositionStorage(RelationEndRole.A).Result) { 
 #line 62 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("        <property name=\"A",  Zetbox.API.Helper.PositionSuffix , "\"\r\n");
 this.WriteObjects("                    column=\"`",  Construct.ListPositionColumnName(rel.B) , "`\" />\r\n");
 #line 64 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 } 
 #line 65 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-if (rel.NeedsPositionStorage(RelationEndRole.B)) { 
+if (rel.NeedsPositionStorage(RelationEndRole.B).Result) { 
 #line 66 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("        <property name=\"B",  Zetbox.API.Helper.PositionSuffix , "\"\r\n");
 this.WriteObjects("                  column=\"`",  Construct.ListPositionColumnName(rel.A) , "`\" />\r\n");

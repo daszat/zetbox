@@ -120,6 +120,6 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        System.Object GetDefaultViewModel(Zetbox.API.IZetboxContext dataCtx, System.Object parent);
+        System.Threading.Tasks.Task<System.Object> GetDefaultViewModel(Zetbox.API.IZetboxContext dataCtx, System.Object parent);
     }
 }

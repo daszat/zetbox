@@ -163,7 +163,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         private async Task<List<EventViewModel>> QueryContextAsync(DateTime from, DateTime to)
         {
-            var predicateCalendars = GetCalendarPredicate();
+            var predicateCalendars = await GetCalendarPredicate();
 
             List<cal.Event> queryTask;
             if (from != DateTime.MinValue)
@@ -190,13 +190,13 @@ namespace Zetbox.Client.Presentables.Calendar
             .ToList();
         }
 
-        private System.Linq.Expressions.Expression<Func<cal.Event, bool>> GetCalendarPredicate()
+        private async Task<System.Linq.Expressions.Expression<Func<cal.Event, bool>>> GetCalendarPredicate()
         {
             var predicateCalendars = LinqExtensions.False<cal.Event>();
             foreach (var id in _calendars)
             {
                 var localID = id;
-                predicateCalendars = predicateCalendars.OrElse<cal.Event>(i => i.Calendar.ID == localID);
+                predicateCalendars = await predicateCalendars.OrElse<cal.Event>(i => i.Calendar.ID == localID);
             }
             return predicateCalendars;
         }

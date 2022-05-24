@@ -58,51 +58,51 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-        void Group1();
+        System.Threading.Tasks.Task Group1();
 
         /// <summary>
         /// 
         /// </summary>
-        void Group2();
+        System.Threading.Tasks.Task Group2();
 
         /// <summary>
         /// 
         /// </summary>
-        void ObjParameter(Zetbox.App.Test.MethodTest objParam);
+        System.Threading.Tasks.Task ObjParameter(Zetbox.App.Test.MethodTest objParam);
 
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.App.Test.MethodTest ObjRet();
+        System.Threading.Tasks.Task<Zetbox.App.Test.MethodTest> ObjRet();
 
         /// <summary>
         /// 
         /// </summary>
-        void Parameterless();
+        System.Threading.Tasks.Task Parameterless();
 
         /// <summary>
         /// Does nothing, on the server
         /// </summary>
-        void ServerMethod();
+        System.Threading.Tasks.Task ServerMethod();
 
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.App.Test.TestObjClass ServerObjParameter(Zetbox.App.Test.TestObjClass input);
+        System.Threading.Tasks.Task<Zetbox.App.Test.TestObjClass> ServerObjParameter(Zetbox.App.Test.TestObjClass input);
 
         /// <summary>
         /// 
         /// </summary>
-        void ServerParameterless();
+        System.Threading.Tasks.Task ServerParameterless();
 
         /// <summary>
         /// 
         /// </summary>
-        void StringParameter(string str);
+        System.Threading.Tasks.Task StringParameter(string str);
 
         /// <summary>
         /// 
         /// </summary>
-        void Summary();
+        System.Threading.Tasks.Task Summary();
     }
 }

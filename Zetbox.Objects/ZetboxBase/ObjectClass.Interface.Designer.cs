@@ -158,21 +158,21 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Creates a new Method for this class
         /// </summary>
-        Zetbox.App.Base.Method CreateMethod();
+        System.Threading.Tasks.Task<Zetbox.App.Base.Method> CreateMethod();
 
         /// <summary>
         /// Implements the &quot;Create new Relation&quot; use case
         /// </summary>
-        Zetbox.App.Base.Relation CreateRelation();
+        System.Threading.Tasks.Task<Zetbox.App.Base.Relation> CreateRelation();
 
         /// <summary>
         /// 
         /// </summary>
-        IEnumerable<Zetbox.App.Base.Method> GetInheritedMethods();
+        System.Threading.Tasks.Task<IEnumerable<Zetbox.App.Base.Method>> GetInheritedMethods();
 
         /// <summary>
         /// Replaces all references of the given object with the target object. Does not change any other properties and will not delete the source object.
         /// </summary>
-        void ReplaceObject(Zetbox.API.IDataObject target, Zetbox.API.IDataObject source);
+        System.Threading.Tasks.Task ReplaceObject(Zetbox.API.IDataObject target, Zetbox.API.IDataObject source);
     }
 }

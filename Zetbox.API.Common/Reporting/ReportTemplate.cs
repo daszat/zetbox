@@ -25,6 +25,7 @@ namespace Zetbox.API.Common.Reporting
     using System.Resources;
     using System.Text;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
     using Arebis.CodeGeneration;
     using Zetbox.API;
     using Zetbox.API.Common;
@@ -63,9 +64,9 @@ namespace Zetbox.API.Common.Reporting
             return result.Replace('\\', '/');
         }
 
-        protected virtual string GetBlobImageFile(Blob image)
+        protected virtual async Task<string> GetBlobImageFile(Blob image)
         {
-            var imageStream = image.GetStream();
+            var imageStream = await image.GetStream();
             var ext = ".bmp";
             switch (image.MimeType)
             {

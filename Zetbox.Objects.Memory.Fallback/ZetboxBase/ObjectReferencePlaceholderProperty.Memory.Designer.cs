@@ -332,12 +332,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchReferencedObjectClassTask != null) return _triggerFetchReferencedObjectClassTask;
 
-            if (_fk_ReferencedObjectClass.HasValue)
-                _triggerFetchReferencedObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value);
-            else
-                _triggerFetchReferencedObjectClassTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> task;
 
-            _triggerFetchReferencedObjectClassTask.OnResult(t =>
+            if (_fk_ReferencedObjectClass.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+
+            task.OnResult(t =>
             {
                 if (OnReferencedObjectClass_Getter != null)
                 {
@@ -347,7 +349,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchReferencedObjectClassTask;
+            return _triggerFetchReferencedObjectClassTask = task;
         }
 
         // internal implementation
@@ -358,7 +360,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchReferencedObjectClassAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set
@@ -471,16 +472,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDescription_ObjectReferencePlaceholderProperty")]
-        public override string GetDescription()
+        public override async System.Threading.Tasks.Task<string> GetDescription()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDescription_ObjectReferencePlaceholderProperty != null)
             {
-                OnGetDescription_ObjectReferencePlaceholderProperty(this, e);
+                await OnGetDescription_ObjectReferencePlaceholderProperty(this, e);
             }
             else
             {
-                e.Result = base.GetDescription();
+                e.Result = await base.GetDescription();
             }
             return e.Result;
         }
@@ -534,16 +535,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetElementTypeString_ObjectReferencePlaceholderProperty")]
-        public override string GetElementTypeString()
+        public override async System.Threading.Tasks.Task<string> GetElementTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetElementTypeString_ObjectReferencePlaceholderProperty != null)
             {
-                OnGetElementTypeString_ObjectReferencePlaceholderProperty(this, e);
+                await OnGetElementTypeString_ObjectReferencePlaceholderProperty(this, e);
             }
             else
             {
-                e.Result = base.GetElementTypeString();
+                e.Result = await base.GetElementTypeString();
             }
             return e.Result;
         }
@@ -597,16 +598,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_ObjectReferencePlaceholderProperty")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_ObjectReferencePlaceholderProperty != null)
             {
-                OnGetLabel_ObjectReferencePlaceholderProperty(this, e);
+                await OnGetLabel_ObjectReferencePlaceholderProperty(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -660,16 +661,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_ObjectReferencePlaceholderProperty")]
-        public override string GetName()
+        public override async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_ObjectReferencePlaceholderProperty != null)
             {
-                OnGetName_ObjectReferencePlaceholderProperty(this, e);
+                await OnGetName_ObjectReferencePlaceholderProperty(this, e);
             }
             else
             {
-                e.Result = base.GetName();
+                e.Result = await base.GetName();
             }
             return e.Result;
         }
@@ -723,16 +724,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyType_ObjectReferencePlaceholderProperty")]
-        public override System.Type GetPropertyType()
+        public override async System.Threading.Tasks.Task<System.Type> GetPropertyType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetPropertyType_ObjectReferencePlaceholderProperty != null)
             {
-                OnGetPropertyType_ObjectReferencePlaceholderProperty(this, e);
+                await OnGetPropertyType_ObjectReferencePlaceholderProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyType();
+                e.Result = await base.GetPropertyType();
             }
             return e.Result;
         }
@@ -786,16 +787,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyTypeString_ObjectReferencePlaceholderProperty")]
-        public override string GetPropertyTypeString()
+        public override async System.Threading.Tasks.Task<string> GetPropertyTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetPropertyTypeString_ObjectReferencePlaceholderProperty != null)
             {
-                OnGetPropertyTypeString_ObjectReferencePlaceholderProperty(this, e);
+                await OnGetPropertyTypeString_ObjectReferencePlaceholderProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyTypeString();
+                e.Result = await base.GetPropertyTypeString();
             }
             return e.Result;
         }
@@ -928,10 +929,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_ReferencedObjectClass.HasValue)
-                ReferencedObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_ReferencedObjectClass.Value);
+                ReferencedObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_ReferencedObjectClass.Value));
             else
             if (_fk_ReferencedObjectClass.HasValue)
-                ReferencedObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value);
+                ReferencedObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value));
             else
                 ReferencedObjectClassImpl = null;
             // fix cached lists references
@@ -1099,7 +1100,7 @@ namespace Zetbox.App.Base
             binStream.Write(this._ImplementorRoleName);
             binStream.Write(this._IsList);
             binStream.Write(this._ItemRoleName);
-            binStream.Write(ReferencedObjectClass != null ? ReferencedObjectClass.ID : (int?)null);
+            binStream.Write(_fk_ReferencedObjectClass != null ? _fk_ReferencedObjectClass : (int?)null);
             binStream.Write(this._Verb);
         }
 

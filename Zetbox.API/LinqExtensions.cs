@@ -24,6 +24,7 @@ namespace Zetbox.API
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Linq Extensions.
@@ -277,11 +278,11 @@ namespace Zetbox.API
             {
                 this.map = map ?? new Dictionary<ParameterExpression, ParameterExpression>();
             }
-            public static Expression ReplaceParameters(Dictionary<ParameterExpression, ParameterExpression> map, Expression exp)
+            public static async Task<Expression> ReplaceParameters(Dictionary<ParameterExpression, ParameterExpression> map, Expression exp)
             {
-                return new ParameterRebinder(map).Visit(exp);
+                return await new ParameterRebinder(map).Visit(exp);
             }
-            protected override ParameterExpression VisitParameter(ParameterExpression p)
+            protected override Task<ParameterExpression> VisitParameter(ParameterExpression p)
             {
                 ParameterExpression replacement;
                 if (map.TryGetValue(p, out replacement))
@@ -292,7 +293,7 @@ namespace Zetbox.API
             }
         }
 
-        public static Expression<T> Compose<T>(this Expression<T> first, Expression<T> second, Func<Expression, Expression, Expression> merge)
+        public static async Task<Expression<T>> Compose<T>(this Expression<T> first, Expression<T> second, Func<Expression, Expression, Expression> merge)
         {
             if (first == null) throw new ArgumentNullException("first");
             if (second == null) throw new ArgumentNullException("second");
@@ -301,12 +302,12 @@ namespace Zetbox.API
             // build parameter map (from parameters of second to parameters of first)                
             var map = first.Parameters.Select((f, i) => new { f, s = second.Parameters[i] }).ToDictionary(p => p.s, p => p.f);
             // replace parameters in the second lambda expression with parameters from the first                
-            var secondBody = ParameterRebinder.ReplaceParameters(map, second.Body);
+            var secondBody = await ParameterRebinder.ReplaceParameters(map, second.Body);
             // apply composition of lambda expression bodies to parameters from the first expression                 
             return Expression.Lambda<T>(merge(first.Body, secondBody), first.Parameters);
         }
 
-        public static LambdaExpression Compose(this LambdaExpression first, LambdaExpression second, Func<Expression, Expression, Expression> merge)
+        public static async Task<LambdaExpression> Compose(this LambdaExpression first, LambdaExpression second, Func<Expression, Expression, Expression> merge)
         {
             if (first == null) throw new ArgumentNullException("first");
             if (second == null) throw new ArgumentNullException("second");
@@ -315,25 +316,25 @@ namespace Zetbox.API
             // build parameter map (from parameters of second to parameters of first)                
             var map = first.Parameters.Select((f, i) => new { f, s = second.Parameters[i] }).ToDictionary(p => p.s, p => p.f);
             // replace parameters in the second lambda expression with parameters from the first                
-            var secondBody = ParameterRebinder.ReplaceParameters(map, second.Body);
+            var secondBody = await ParameterRebinder.ReplaceParameters(map, second.Body);
             // apply composition of lambda expression bodies to parameters from the first expression                 
             return Expression.Lambda(first.Type, merge(first.Body, secondBody), first.Parameters);
         }
-        public static Expression<Func<T, bool>> AndAlso<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
+        public static async Task<Expression<Func<T, bool>>> AndAlso<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
         {
             if (first == null) throw new ArgumentNullException("first");
-            return first.Compose(second, Expression.AndAlso);
+            return await first.Compose(second, Expression.AndAlso);
         }
-        public static Expression<Func<T, bool>> OrElse<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
+        public static async Task<Expression<Func<T, bool>>> OrElse<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
         {
             if (first == null) throw new ArgumentNullException("first");
-            return first.Compose(second, Expression.OrElse);
+            return await first.Compose(second, Expression.OrElse);
         }
 
-        public static LambdaExpression OrElse(this LambdaExpression first, LambdaExpression second)
+        public static async Task<LambdaExpression> OrElse(this LambdaExpression first, LambdaExpression second)
         {
             if (first == null) throw new ArgumentNullException("first");
-            return first.Compose(second, Expression.OrElse);
+            return await first.Compose(second, Expression.OrElse);
         }
         #endregion
 
@@ -542,6 +543,42 @@ namespace Zetbox.API
                 }
                 yield return element;
             }
+        }
+
+        /// <summary>
+        /// https://stackoverflow.com/a/50244393/178517
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public static async Task<IEnumerable<T>> Where<T>(this IEnumerable<T> source, Func<T, Task<bool>> predicate)
+        {
+            var results = await Task.WhenAll(source.Select(async x => (x, await predicate(x))));
+            return results.Where(x => x.Item2).Select(x => x.Item1);
+        }
+
+        public static async Task<IEnumerable<TResult>> SelectMany<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, Task<IEnumerable<TResult>>> selector)
+        {
+            var x = await Task.WhenAll(source.Select(async x => await selector(x)));
+            return x.SelectMany(x => x);
+        }
+
+        public static async Task<IEnumerable<TResult>> SelectMany<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, Task<IList<TResult>>> selector)
+        {
+            var x = await Task.WhenAll(source.Select(async x => await selector(x)));
+            return x.SelectMany(x => x);
+        }
+
+        /// <summary>
+        /// https://stackoverflow.com/a/50276635/178517
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="tasks"></param>
+        /// <returns></returns>
+        public static async Task<IEnumerable<T>> WhenAll<T>(this IEnumerable<Task<T>> tasks)
+        {
+            return await Task.WhenAll(tasks);
         }
     }
 }

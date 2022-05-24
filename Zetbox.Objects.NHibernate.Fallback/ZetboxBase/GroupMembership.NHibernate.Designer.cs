@@ -242,10 +242,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_Group.HasValue)
-                this.Group = ((Zetbox.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Group>(_fk_guid_Group.Value));
+                this.Group = ((Zetbox.App.Base.GroupNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Group>(_fk_guid_Group.Value)));
             else
             if (_fk_Group.HasValue)
-                this.Group = ((Zetbox.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Group>(_fk_Group.Value));
+                this.Group = ((Zetbox.App.Base.GroupNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Group>(_fk_Group.Value)));
             else
                 this.Group = null;
         }

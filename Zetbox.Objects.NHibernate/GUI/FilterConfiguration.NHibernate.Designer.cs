@@ -1081,12 +1081,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_FilterConfiguration")]
-        public virtual Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
+        public virtual async System.Threading.Tasks.Task<Zetbox.API.IFilterModel> CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_FilterConfiguration != null)
             {
-                OnCreateFilterModel_FilterConfiguration(this, e, ctx);
+                await OnCreateFilterModel_FilterConfiguration(this, e, ctx);
             }
             else
             {
@@ -1145,12 +1145,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_FilterConfiguration")]
-        public virtual string GetLabel()
+        public virtual async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_FilterConfiguration != null)
             {
-                OnGetLabel_FilterConfiguration(this, e);
+                await OnGetLabel_FilterConfiguration(this, e);
             }
             else
             {

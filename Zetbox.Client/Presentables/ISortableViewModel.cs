@@ -20,10 +20,11 @@ namespace Zetbox.Client.Presentables
     using System.Linq;
     using System.Text;
     using System.ComponentModel;
+    using System.Threading.Tasks;
 
     public interface ISortableViewModel : INotifyPropertyChanged
     {
-        void Sort(string propName, ListSortDirection direction);
+        Task Sort(string propName, ListSortDirection direction);
         string SortProperty { get; }
         ListSortDirection SortDirection { get; }
     }

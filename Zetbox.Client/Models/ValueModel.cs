@@ -28,15 +28,16 @@ namespace Zetbox.Client.Models
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
     using Zetbox.API.Async;
+    using System.Threading.Tasks;
 
     public static class BaseParameterExtensionsThisShouldBeMovedToAZetboxMethod
     {
-        public static IValueModel GetValueModel(this BaseParameter parameter, IZetboxContext ctx, bool allowNullInput)
+        public static async Task<IValueModel> GetValueModel(this BaseParameter parameter, IZetboxContext ctx, bool allowNullInput)
         {
             if (parameter == null)
                 throw new ArgumentNullException("parameter");
 
-            var lb = parameter.GetLabel();
+            var lb = await parameter.GetLabel();
             var description = parameter.Description;
             var isList = parameter.IsList;
 
@@ -127,7 +128,7 @@ namespace Zetbox.Client.Models
 
         public abstract void ClearValue();
 
-        public abstract object GetUntypedValue();
+        public abstract Task<object> GetUntypedValue();
 
         public abstract void SetUntypedValue(object val);
 
@@ -242,9 +243,9 @@ namespace Zetbox.Client.Models
         #endregion
 
         #region IValueModel Members
-        public override object GetUntypedValue()
+        public override Task<object> GetUntypedValue()
         {
-            return this.Value;
+            return Task.FromResult((object)this.Value);
         }
 
         public override void SetUntypedValue(object val)
@@ -624,7 +625,7 @@ namespace Zetbox.Client.Models
             if (def == null) throw new ArgumentNullException("def");
 
             this.CompoundObjectDefinition = def;
-            this.Value = ctx.CreateCompoundObject(ctx.GetInterfaceType(def.GetDataType()));
+            this.Value = ctx.CreateCompoundObject(ctx.GetInterfaceType(def.GetDataType().Result));
         }
 
         #region IObjectReferenceValueModel Members
@@ -653,10 +654,10 @@ namespace Zetbox.Client.Models
             this.enumDef = enumeration;
         }
 
-        public override object GetUntypedValue()
+        public override async Task<object> GetUntypedValue()
         {
-            var val = (int?)base.GetUntypedValue();
-            return Enum.GetValues(enumDef.GetDataType()).AsQueryable().OfType<object>().FirstOrDefault(i => (int)i == val);
+            var val = (int?)await base.GetUntypedValue();
+            return Enum.GetValues(await enumDef.GetDataType()).AsQueryable().OfType<object>().FirstOrDefault(i => (int)i == val);
         }
 
         public override void SetUntypedValue(object val)
@@ -671,11 +672,12 @@ namespace Zetbox.Client.Models
             get { return enumDef; }
         }
 
-        public IEnumerable<KeyValuePair<int, string>> GetEntries()
+        public async Task<IEnumerable<KeyValuePair<int, string>>> GetEntries()
         {
-            return enumDef
+            return await enumDef
                 .EnumerationEntries
-                .Select(ee => new KeyValuePair<int, string>(ee.Value, ee.GetLabel()));
+                .Select(async ee => new KeyValuePair<int, string>(ee.Value, await ee.GetLabel()))
+                .WhenAll();
         }
 
         #endregion

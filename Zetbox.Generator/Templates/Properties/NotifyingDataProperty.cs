@@ -44,10 +44,10 @@ namespace Zetbox.Generator.Templates.Properties
 
         public NotifyingDataProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Serialization.SerializationMembersList serializationList, Property prop)
             : this(_host, ctx, serializationList, 
-                    prop.GetElementTypeString(), 
+                    prop.GetElementTypeString().Result, 
                     prop.Name, prop.Module.Namespace, "_" + prop.Name, 
                     prop.IsCalculated(), prop.DisableExport == true, 
-                    prop.ObjectClass.Name, prop.IsNullable(),
+                    prop.ObjectClass.Name, prop.IsNullable().Result,
                     prop.DefaultValue != null && !prop.IsCalculated(), // No default value for calculated properties, default values are used then for database migration
                     prop.ExportGuid)
         {

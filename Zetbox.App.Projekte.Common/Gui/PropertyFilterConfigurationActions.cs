@@ -26,11 +26,9 @@ namespace Zetbox.App.GUI
     public static class PropertyFilterConfigurationActions
     {
         [Invocation]
-        public static System.Threading.Tasks.Task GetLabel(Zetbox.App.GUI.PropertyFilterConfiguration obj, MethodReturnEventArgs<System.String> e)
+        public static async System.Threading.Tasks.Task GetLabel(Zetbox.App.GUI.PropertyFilterConfiguration obj, MethodReturnEventArgs<System.String> e)
         {
-            e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Property.GetLabel();
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : await obj.Property.GetLabel();
         }
     }
 }

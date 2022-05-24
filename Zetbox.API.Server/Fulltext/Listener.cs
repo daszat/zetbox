@@ -21,6 +21,7 @@ namespace Zetbox.API.Server.Fulltext
     using System.Text;
     using Zetbox.App.Base;
     using Zetbox.API.Common;
+    using System.Threading.Tasks;
 
     internal sealed class Listener : IZetboxContextEventListener
     {
@@ -39,30 +40,32 @@ namespace Zetbox.API.Server.Fulltext
             _resolver = resolver;
         }
 
-        public void Created(IReadOnlyZetboxContext ctx)
+        public Task Created(IReadOnlyZetboxContext ctx)
         {
+            return Task.CompletedTask;
         }
 
-        public void Submitted(IReadOnlyZetboxContext ctx, IEnumerable<IDataObject> added, IEnumerable<IDataObject> modified, IEnumerable<Tuple<InterfaceType, int>> deleted)
+        public async Task Submitted(IReadOnlyZetboxContext ctx, IEnumerable<IDataObject> added, IEnumerable<IDataObject> modified, IEnumerable<Tuple<InterfaceType, int>> deleted)
         {
             _queue.Enqueue(new IndexUpdate()
             {
-                added = added.Select(obj => new Tuple<InterfaceType, int, IndexUpdate.Text>(
+                added = (await added.Select(async obj => new Tuple<InterfaceType, int, IndexUpdate.Text>(
                     ctx.GetInterfaceType(obj), 
                     obj.ID, 
-                    Rebuilder.ExtractText(obj, _formatter, _resolver)
-                )).ToList().AsReadOnly(),
-                modified = modified.Select(obj => new Tuple<InterfaceType, int, IndexUpdate.Text>(
+                    await Rebuilder.ExtractText(obj, _formatter, _resolver)
+                )).WhenAll()).ToList().AsReadOnly(),
+                modified = (await modified.Select(async obj => new Tuple<InterfaceType, int, IndexUpdate.Text>(
                     ctx.GetInterfaceType(obj), 
                     obj.ID,
-                    Rebuilder.ExtractText(obj, _formatter, _resolver)
-                )).ToList().AsReadOnly(),
+                    await Rebuilder.ExtractText(obj, _formatter, _resolver)
+                )).WhenAll()).ToList().AsReadOnly(),
                 deleted = deleted.ToList().AsReadOnly()
             });
         }
 
-        public void Disposed(IReadOnlyZetboxContext ctx)
+        public Task Disposed(IReadOnlyZetboxContext ctx)
         {
-        }        
+            return Task.CompletedTask;
+        }
     }
 }

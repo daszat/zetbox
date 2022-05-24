@@ -1267,12 +1267,12 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDefaultViewModel_NavigationEntry")]
-        public virtual System.Object GetDefaultViewModel(Zetbox.API.IZetboxContext dataCtx, System.Object parent)
+        public virtual async System.Threading.Tasks.Task<System.Object> GetDefaultViewModel(Zetbox.API.IZetboxContext dataCtx, System.Object parent)
         {
             var e = new MethodReturnEventArgs<System.Object>();
             if (OnGetDefaultViewModel_NavigationEntry != null)
             {
-                OnGetDefaultViewModel_NavigationEntry(this, e, dataCtx, parent);
+                await OnGetDefaultViewModel_NavigationEntry(this, e, dataCtx, parent);
             }
             else
             {

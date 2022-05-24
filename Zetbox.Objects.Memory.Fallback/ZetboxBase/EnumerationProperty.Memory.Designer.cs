@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchEnumerationTask != null) return _triggerFetchEnumerationTask;
 
-            if (_fk_Enumeration.HasValue)
-                _triggerFetchEnumerationTask = Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
-            else
-                _triggerFetchEnumerationTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Enumeration>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Enumeration> task;
 
-            _triggerFetchEnumerationTask.OnResult(t =>
+            if (_fk_Enumeration.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Enumeration>(null);
+
+            task.OnResult(t =>
             {
                 if (OnEnumeration_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchEnumerationTask;
+            return _triggerFetchEnumerationTask = task;
         }
 
         // internal implementation
@@ -126,7 +128,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchEnumerationAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.EnumerationMemoryImpl)task.Result;
             }
             set
@@ -181,16 +182,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDescription_EnumerationProperty")]
-        public override string GetDescription()
+        public override async System.Threading.Tasks.Task<string> GetDescription()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDescription_EnumerationProperty != null)
             {
-                OnGetDescription_EnumerationProperty(this, e);
+                await OnGetDescription_EnumerationProperty(this, e);
             }
             else
             {
-                e.Result = base.GetDescription();
+                e.Result = await base.GetDescription();
             }
             return e.Result;
         }
@@ -244,16 +245,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetElementTypeString_EnumerationProperty")]
-        public override string GetElementTypeString()
+        public override async System.Threading.Tasks.Task<string> GetElementTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetElementTypeString_EnumerationProperty != null)
             {
-                OnGetElementTypeString_EnumerationProperty(this, e);
+                await OnGetElementTypeString_EnumerationProperty(this, e);
             }
             else
             {
-                e.Result = base.GetElementTypeString();
+                e.Result = await base.GetElementTypeString();
             }
             return e.Result;
         }
@@ -307,16 +308,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_EnumerationProperty")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_EnumerationProperty != null)
             {
-                OnGetLabel_EnumerationProperty(this, e);
+                await OnGetLabel_EnumerationProperty(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -370,16 +371,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_EnumerationProperty")]
-        public override string GetName()
+        public override async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_EnumerationProperty != null)
             {
-                OnGetName_EnumerationProperty(this, e);
+                await OnGetName_EnumerationProperty(this, e);
             }
             else
             {
-                e.Result = base.GetName();
+                e.Result = await base.GetName();
             }
             return e.Result;
         }
@@ -433,16 +434,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyType_EnumerationProperty")]
-        public override System.Type GetPropertyType()
+        public override async System.Threading.Tasks.Task<System.Type> GetPropertyType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetPropertyType_EnumerationProperty != null)
             {
-                OnGetPropertyType_EnumerationProperty(this, e);
+                await OnGetPropertyType_EnumerationProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyType();
+                e.Result = await base.GetPropertyType();
             }
             return e.Result;
         }
@@ -496,16 +497,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyTypeString_EnumerationProperty")]
-        public override string GetPropertyTypeString()
+        public override async System.Threading.Tasks.Task<string> GetPropertyTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetPropertyTypeString_EnumerationProperty != null)
             {
-                OnGetPropertyTypeString_EnumerationProperty(this, e);
+                await OnGetPropertyTypeString_EnumerationProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyTypeString();
+                e.Result = await base.GetPropertyTypeString();
             }
             return e.Result;
         }
@@ -628,10 +629,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_Enumeration.HasValue)
-                EnumerationImpl = (Zetbox.App.Base.EnumerationMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Enumeration>(_fk_guid_Enumeration.Value);
+                EnumerationImpl = (Zetbox.App.Base.EnumerationMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Enumeration>(_fk_guid_Enumeration.Value));
             else
             if (_fk_Enumeration.HasValue)
-                EnumerationImpl = (Zetbox.App.Base.EnumerationMemoryImpl)Context.Find<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
+                EnumerationImpl = (Zetbox.App.Base.EnumerationMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value));
             else
                 EnumerationImpl = null;
             // fix cached lists references
@@ -745,7 +746,7 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(Enumeration != null ? Enumeration.ID : (int?)null);
+            binStream.Write(_fk_Enumeration != null ? _fk_Enumeration : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

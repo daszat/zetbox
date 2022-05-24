@@ -41,9 +41,9 @@ namespace Zetbox.Client.Mocks
             var result = new Mock<ObjectReferenceProperty>();
 
             result.SetupAllProperties();
-            result.Setup(orp => orp.GetPropertyTypeString()).Returns(typeof(ObjectReferenceProperty).FullName);
+            result.Setup(orp => orp.GetPropertyTypeString().Result).Returns(typeof(ObjectReferenceProperty).FullName);
             result.Setup(orp => orp.Name).Returns(propertyName);
-            result.Setup(orp => orp.GetIsList()).Returns(isList);
+            result.Setup(orp => orp.GetIsList().Result).Returns(isList);
 
             return result;
         }

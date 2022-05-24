@@ -34,18 +34,18 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             this.WriteLine("<!-- ObjectReferenceProperty -->");
 
             var rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, prop);
-            var relEnd = rel.GetEnd(prop);
-            var otherEnd = rel.GetOtherEnd(relEnd);
+            var relEnd = rel.GetEnd(prop).Result;
+            var otherEnd = rel.GetOtherEnd(relEnd).Result;
 
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string classAttr = String.Format("class=\"{0}\"",
                 ObjectClassHbm.GetAssemblyQualifiedProxy(otherEnd.Type, this.Settings));
             //string tableAttr = String.Format("table =\"`{0}`\" ", rel.GetAssociationName());
 
-            switch (rel.GetRelationType())
+            switch (rel.GetRelationType().Result)
             {
                 case RelationType.one_one:
-                    if (rel.HasStorage(relEnd.GetRole()))
+                    if (rel.HasStorage(relEnd.GetRole()).Result)
                     {
                         string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix));
                         this.WriteObjects("        <many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " unique=\"true\" ");
@@ -99,7 +99,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                             //this.WriteObjects("fetch=\"join\" ");
                         }
                         this.WriteLine("/>");
-                        if (rel.NeedsPositionStorage(relEnd.GetRole()))
+                        if (rel.NeedsPositionStorage(relEnd.GetRole()).Result)
                         {
                             string posNameAttr = String.Format("name=\"{0}\"", Construct.ListPositionPropertyName(relEnd));
                             string posColumnAttr = String.Format("column=\"`{0}`\"", Construct.ListPositionColumnName(otherEnd, prefix));

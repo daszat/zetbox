@@ -66,14 +66,6 @@ namespace Zetbox.Generator.Extensions
             if (rel == null) { throw new ArgumentNullException("rel"); }
             return String.Format("{0}.{1}", rel.Module.Namespace, rel.GetRelationClassName());
         }
-
-        [Obsolete]
-        public static string GetRelationFkColumnName(this Relation rel, RelationEndRole endRole)
-        {
-            if (rel == null) { throw new ArgumentNullException("rel"); }
-            var relEnd = rel.GetEndFromRole(endRole);
-            return Construct.ForeignKeyColumnName(relEnd);
-        }
         #endregion
 
         #region CollectionEntry naming standards

@@ -49,7 +49,7 @@ namespace Zetbox.Generator.Templates
             else if (p is ObjectReferenceProperty)
             {
                 var orp = (ObjectReferenceProperty)p;
-                if (orp.IsList())
+                if (orp.IsList().Result)
                 {
                     ApplyObjectReferenceListTemplate(orp);
                     ApplyListChangedEvent(p);

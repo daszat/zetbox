@@ -22,6 +22,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using System.Drawing;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class ImageViewModel : FileViewModel
@@ -41,12 +42,19 @@ namespace Zetbox.Client.Presentables.DocumentManagement
         {
             get
             {
-                if (_image == null && File.Blob != null)
-                {
-                    _image = Image.FromStream(File.Blob.GetStream());
-                }
+                Task.Run(async () => await GetImage());
                 return _image;
             }
+        }
+
+        public async Task<Image> GetImage()
+        {
+            if (_image == null && File.Blob != null)
+            {
+                _image = Image.FromStream(await File.Blob.GetStream());
+            }
+            OnPropertyChanged(nameof(Image));
+            return _image;
         }
     }
 }

@@ -37,21 +37,21 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.App.Base.EnumerationEntry GetEntryByName(string name);
+        System.Threading.Tasks.Task<Zetbox.App.Base.EnumerationEntry> GetEntryByName(string name);
 
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.App.Base.EnumerationEntry GetEntryByValue(int val);
+        System.Threading.Tasks.Task<Zetbox.App.Base.EnumerationEntry> GetEntryByValue(int val);
 
         /// <summary>
         /// 
         /// </summary>
-        string GetLabelByName(string name);
+        System.Threading.Tasks.Task<string> GetLabelByName(string name);
 
         /// <summary>
         /// 
         /// </summary>
-        string GetLabelByValue(int val);
+        System.Threading.Tasks.Task<string> GetLabelByValue(int val);
     }
 }

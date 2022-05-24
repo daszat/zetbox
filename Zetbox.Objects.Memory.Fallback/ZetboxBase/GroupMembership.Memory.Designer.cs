@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchGroupTask != null) return _triggerFetchGroupTask;
 
-            if (_fk_Group.HasValue)
-                _triggerFetchGroupTask = Context.FindAsync<Zetbox.App.Base.Group>(_fk_Group.Value);
-            else
-                _triggerFetchGroupTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Group>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Group> task;
 
-            _triggerFetchGroupTask.OnResult(t =>
+            if (_fk_Group.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Group>(_fk_Group.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Group>(null);
+
+            task.OnResult(t =>
             {
                 if (OnGroup_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchGroupTask;
+            return _triggerFetchGroupTask = task;
         }
 
         // internal implementation
@@ -126,7 +128,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchGroupAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.GroupMemoryImpl)task.Result;
             }
             set
@@ -250,10 +251,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_Group.HasValue)
-                GroupImpl = (Zetbox.App.Base.GroupMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Group>(_fk_guid_Group.Value);
+                GroupImpl = (Zetbox.App.Base.GroupMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Group>(_fk_guid_Group.Value));
             else
             if (_fk_Group.HasValue)
-                GroupImpl = (Zetbox.App.Base.GroupMemoryImpl)Context.Find<Zetbox.App.Base.Group>(_fk_Group.Value);
+                GroupImpl = (Zetbox.App.Base.GroupMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Group>(_fk_Group.Value));
             else
                 GroupImpl = null;
             // fix cached lists references
@@ -367,7 +368,7 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(Group != null ? Group.ID : (int?)null);
+            binStream.Write(_fk_Group != null ? _fk_Group : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

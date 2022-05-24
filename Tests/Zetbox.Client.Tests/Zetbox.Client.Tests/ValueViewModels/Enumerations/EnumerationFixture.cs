@@ -74,7 +74,7 @@ namespace Zetbox.Client.Tests.ValueViewModels.Enumerations
             valueModelMock.SetupGet(o => o.ReportErrors).Returns(true);
 
             valueModelMock
-                .Setup<IEnumerable<KeyValuePair<int, string>>>(o => o.GetEntries())
+                .Setup<IEnumerable<KeyValuePair<int, string>>>(o => o.GetEntries().Result)
                 .Returns(values);
 
             obj = new EnumerationValueViewModel(scope.Resolve<IViewModelDependencies>(), scope.Resolve<BaseMemoryContext>(), null, valueModelMock.Object);

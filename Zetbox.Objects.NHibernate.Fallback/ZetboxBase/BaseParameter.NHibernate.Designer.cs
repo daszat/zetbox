@@ -1126,12 +1126,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_BaseParameter")]
-        public virtual string GetLabel()
+        public virtual async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_BaseParameter != null)
             {
-                OnGetLabel_BaseParameter(this, e);
+                await OnGetLabel_BaseParameter(this, e);
             }
             else
             {
@@ -1190,12 +1190,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterType_BaseParameter")]
-        public virtual System.Type GetParameterType()
+        public virtual async System.Threading.Tasks.Task<System.Type> GetParameterType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetParameterType_BaseParameter != null)
             {
-                OnGetParameterType_BaseParameter(this, e);
+                await OnGetParameterType_BaseParameter(this, e);
             }
             else
             {
@@ -1254,12 +1254,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterTypeString_BaseParameter")]
-        public virtual string GetParameterTypeString()
+        public virtual async System.Threading.Tasks.Task<string> GetParameterTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetParameterTypeString_BaseParameter != null)
             {
-                OnGetParameterTypeString_BaseParameter(this, e);
+                await OnGetParameterTypeString_BaseParameter(this, e);
             }
             else
             {
@@ -1434,20 +1434,20 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_Method.HasValue)
-                this.Method = ((Zetbox.App.Base.MethodNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Method>(_fk_guid_Method.Value));
+                this.Method = ((Zetbox.App.Base.MethodNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Method>(_fk_guid_Method.Value)));
             else
             if (_fk_Method.HasValue)
-                this.Method = ((Zetbox.App.Base.MethodNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Method>(_fk_Method.Value));
+                this.Method = ((Zetbox.App.Base.MethodNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Method>(_fk_Method.Value)));
             else
                 this.Method = null;
         }

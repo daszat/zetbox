@@ -42,16 +42,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_IntParameter")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_IntParameter != null)
             {
-                OnGetLabel_IntParameter(this, e);
+                await OnGetLabel_IntParameter(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -105,16 +105,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterType_IntParameter")]
-        public override System.Type GetParameterType()
+        public override async System.Threading.Tasks.Task<System.Type> GetParameterType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetParameterType_IntParameter != null)
             {
-                OnGetParameterType_IntParameter(this, e);
+                await OnGetParameterType_IntParameter(this, e);
             }
             else
             {
-                e.Result = base.GetParameterType();
+                e.Result = await base.GetParameterType();
             }
             return e.Result;
         }
@@ -168,16 +168,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterTypeString_IntParameter")]
-        public override string GetParameterTypeString()
+        public override async System.Threading.Tasks.Task<string> GetParameterTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetParameterTypeString_IntParameter != null)
             {
-                OnGetParameterTypeString_IntParameter(this, e);
+                await OnGetParameterTypeString_IntParameter(this, e);
             }
             else
             {
-                e.Result = base.GetParameterTypeString();
+                e.Result = await base.GetParameterTypeString();
             }
             return e.Result;
         }

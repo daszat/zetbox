@@ -20,24 +20,24 @@ namespace Zetbox.DalProvider.Client
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
-
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Common;
 
     internal class QueryTranslator : ExpressionTreeTranslator
     {
-        public static Expression Translate(Expression e)
+        public static async Task<Expression> Translate(Expression e)
         {
             var t = new QueryTranslator();
-            return t.Visit(e);
+            return await t.Visit(e);
         }
 
-        protected override Expression VisitBinary(BinaryExpression b)
+        protected override async Task<Expression> VisitBinary(BinaryExpression b)
         {
             if (b.NodeType == ExpressionType.Equal && b.Left.Type.IsIDataObject() && b.Right.Type.IsIDataObject())
             {
-                var left = Visit(b.Left);
-                var right = Visit(b.Right);
+                var left = await Visit(b.Left);
+                var right = await Visit(b.Right);
 
                 return Expression.AndAlso(
                     Expression.NotEqual(left, Expression.Constant(null)),
@@ -50,30 +50,30 @@ namespace Zetbox.DalProvider.Client
                         )
                     );
             }
-            return base.VisitBinary(b);
+            return await base.VisitBinary(b);
         }
 
-        protected override Expression VisitUnary(UnaryExpression u)
+        protected override async Task<Expression> VisitUnary(UnaryExpression u)
         {
             if (u.IsIgnorableCastExpression())
             {
-                return Visit(u.Operand);
+                return await Visit(u.Operand);
             }
             else
             {
-                return base.VisitUnary(u);
+                return await base.VisitUnary(u);
             }
         }
 
-        protected override Expression VisitMethodCall(MethodCallExpression m)
+        protected override async Task<Expression> VisitMethodCall(MethodCallExpression m)
         {
             if (m.IsIgnorableCastExpression())
             {
-                return Visit(m.Arguments[0]);
+                return await Visit(m.Arguments[0]);
             }
             else
             {
-                return base.VisitMethodCall(m);
+                return await base.VisitMethodCall(m);
             }
         }
     }

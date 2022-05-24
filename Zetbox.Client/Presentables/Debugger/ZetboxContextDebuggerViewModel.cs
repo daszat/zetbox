@@ -86,11 +86,13 @@ namespace Zetbox.Client.Presentables.Debugger
             return _activeCtxCache.FirstOrDefault(m => m.DebuggingContext == ctx) ?? new ZetboxContextModel(ctx);
         }
 
-        void IZetboxContextDebugger.Created(IZetboxContext ctx)
+        Task IZetboxContextDebugger.Created(IZetboxContext ctx)
         {
             _activeCtxCache.Add(GetModel(ctx));
             ctx.Disposed += Disposed;
             ctx.Changed += Changed;
+
+            return Task.CompletedTask;
         }
 
         Task Disposed(object sender, GenericEventArgs<IReadOnlyZetboxContext> e)

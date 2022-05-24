@@ -1174,12 +1174,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetFulltextIndexBody_Projekt")]
-        public virtual string GetFulltextIndexBody()
+        public virtual async System.Threading.Tasks.Task<string> GetFulltextIndexBody()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetFulltextIndexBody_Projekt != null)
             {
-                OnGetFulltextIndexBody_Projekt(this, e);
+                await OnGetFulltextIndexBody_Projekt(this, e);
             }
             else
             {

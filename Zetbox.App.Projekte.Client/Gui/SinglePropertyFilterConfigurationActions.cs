@@ -32,12 +32,12 @@ namespace Zetbox.App.GUI
     public static class SinglePropertyFilterConfigurationActions
     {
         [Invocation]
-        public static System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
+        public static async System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             var mdl = new SingleValueFilterModel();
             var prop = obj.Property;
 
-            mdl.Label = obj.GetLabel();
+            mdl.Label = await obj.GetLabel();
             mdl.Required = obj.Required;
             mdl.RefreshOnFilterChanged = obj.RefreshOnFilterChanged;
             mdl.ValueSource = FilterValueSource.FromProperty(prop);
@@ -45,7 +45,7 @@ namespace Zetbox.App.GUI
             mdl.ViewModelType = obj.ViewModelDescriptor;
             mdl.RequestedKind = obj.RequestedKind;
 
-            mdl.FilterArguments.Add(new FilterArgumentConfig(prop.GetDetachedValueModel(ctx, true), /*cfg.ArgumentViewModel ?? */ prop.ValueModelDescriptor));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(await prop.GetDetachedValueModel(ctx, true), /*cfg.ArgumentViewModel ?? */ prop.ValueModelDescriptor));
             if (prop is StringProperty)
             {
                 mdl.Operator = FilterOperators.Contains;
@@ -59,8 +59,6 @@ namespace Zetbox.App.GUI
                 mdl.RefreshOnFilterChanged = true;
             }
             e.Result = mdl;
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

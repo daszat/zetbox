@@ -47,16 +47,16 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.API.IDataObject GetObject(Zetbox.API.IZetboxContext ctx);
+        System.Threading.Tasks.Task<Zetbox.API.IDataObject> GetObject(Zetbox.API.IZetboxContext ctx);
 
         /// <summary>
         /// Returns true if the any reference is set to an instance of an object. It&apos;s not guaranteed that the object still exists
         /// </summary>
-        bool HasObject();
+        System.Threading.Tasks.Task<bool> HasObject();
 
         /// <summary>
         /// 
         /// </summary>
-        void SetObject(Zetbox.API.IDataObject newObj);
+        System.Threading.Tasks.Task SetObject(Zetbox.API.IDataObject newObj);
     }
 }

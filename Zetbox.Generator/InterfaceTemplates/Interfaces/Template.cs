@@ -19,7 +19,7 @@ namespace Zetbox.Generator.InterfaceTemplates.Interfaces
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Server;
     using Zetbox.App.Base;
@@ -91,7 +91,7 @@ namespace Zetbox.Generator.InterfaceTemplates.Interfaces
             }
             else if (prop is ObjectReferenceProperty)
             {
-                isList = ((ObjectReferenceProperty)prop).IsList();
+                isList = ((ObjectReferenceProperty)prop).IsList().Result;
             }
             else if (prop is CalculatedObjectReferenceProperty)
             {

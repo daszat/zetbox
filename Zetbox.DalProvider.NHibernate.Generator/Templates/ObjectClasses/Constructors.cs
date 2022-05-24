@@ -48,7 +48,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 {
                     string propertyName = cop.Name;
                     string backingStoreName = "this.Proxy." + propertyName;
-                    string typeName = cop.GetPropertyTypeString();
+                    string typeName = cop.GetPropertyTypeString().Result;
                     string implementationTypeName = typeName + implementationSuffix;
 
                     return new CompoundInitialisationDescriptor(propertyName, backingStoreName, typeName, implementationTypeName);

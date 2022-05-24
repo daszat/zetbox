@@ -42,16 +42,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnExtractText_StaticFile")]
-        public override void ExtractText()
+        public override async System.Threading.Tasks.Task ExtractText()
         {
             // base.ExtractText();
             if (OnExtractText_StaticFile != null)
             {
-                OnExtractText_StaticFile(this);
+                await OnExtractText_StaticFile(this);
             }
             else
             {
-                base.ExtractText();
+                await base.ExtractText();
             }
         }
         public static event ExtractText_Handler<StaticFile> OnExtractText_StaticFile;
@@ -104,16 +104,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnHandleBlobChange_StaticFile")]
-        public override Zetbox.App.Base.Blob HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
+        public override async System.Threading.Tasks.Task<Zetbox.App.Base.Blob> HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.Blob>();
             if (OnHandleBlobChange_StaticFile != null)
             {
-                OnHandleBlobChange_StaticFile(this, e, oldBlob, newBlob);
+                await OnHandleBlobChange_StaticFile(this, e, oldBlob, newBlob);
             }
             else
             {
-                e.Result = base.HandleBlobChange(oldBlob, newBlob);
+                e.Result = await base.HandleBlobChange(oldBlob, newBlob);
             }
             return e.Result;
         }
@@ -167,16 +167,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_StaticFile")]
-        public override void Open()
+        public override async System.Threading.Tasks.Task Open()
         {
             // base.Open();
             if (OnOpen_StaticFile != null)
             {
-                OnOpen_StaticFile(this);
+                await OnOpen_StaticFile(this);
             }
             else
             {
-                base.Open();
+                await base.Open();
             }
         }
         public static event Open_Handler<StaticFile> OnOpen_StaticFile;
@@ -229,16 +229,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_StaticFile")]
-        public override void Upload()
+        public override async System.Threading.Tasks.Task Upload()
         {
             // base.Upload();
             if (OnUpload_StaticFile != null)
             {
-                OnUpload_StaticFile(this);
+                await OnUpload_StaticFile(this);
             }
             else
             {
-                base.Upload();
+                await base.Upload();
             }
         }
         public static event Upload_Handler<StaticFile> OnUpload_StaticFile;

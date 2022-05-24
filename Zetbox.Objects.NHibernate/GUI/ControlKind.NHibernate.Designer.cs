@@ -501,12 +501,12 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_ControlKind")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_ControlKind != null)
             {
-                OnGetName_ControlKind(this, e);
+                await OnGetName_ControlKind(this, e);
             }
             else
             {

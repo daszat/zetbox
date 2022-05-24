@@ -53,16 +53,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_RangeFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
+        public override async System.Threading.Tasks.Task<Zetbox.API.IFilterModel> CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_RangeFilterConfiguration != null)
             {
-                OnCreateFilterModel_RangeFilterConfiguration(this, e, ctx);
+                await OnCreateFilterModel_RangeFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel(ctx);
+                e.Result = await base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -116,16 +116,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_RangeFilterConfiguration")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_RangeFilterConfiguration != null)
             {
-                OnGetLabel_RangeFilterConfiguration(this, e);
+                await OnGetLabel_RangeFilterConfiguration(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }

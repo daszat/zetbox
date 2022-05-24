@@ -19,7 +19,7 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -54,9 +54,9 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
             return rel.ExportGuid.ToString();
         }
 
-        protected override string GetCeClassName()
+        protected override Task<string> GetCeClassName()
         {
-            return rel.GetRelationClassName();
+            return Task.FromResult(rel.GetRelationClassName());
         }
 
         protected virtual bool IsExportable()
@@ -64,19 +64,19 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
             return rel.A.Type.ImplementsIExportable().Result && rel.B.Type.ImplementsIExportable().Result;
         }
 
-        protected override string GetCeInterface()
+        protected override async Task<string> GetCeInterface()
         {
             var ceInterface = String.Format("{0}<{1}, {2}>",
-                IsOrdered() ? "IRelationListEntry" : "IRelationEntry",
+                (await IsOrdered()) ? "IRelationListEntry" : "IRelationEntry",
                 rel.A.Type.GetDescribedInterfaceTypeName(),
                 rel.B.Type.GetDescribedInterfaceTypeName());
 
             return ceInterface + (IsExportable() ? ", Zetbox.App.Base.IExportable" : String.Empty);
         }
 
-        protected override bool IsOrdered()
+        protected override async Task<bool> IsOrdered()
         {
-            return rel.NeedsPositionStorage(RelationEndRole.A) || rel.NeedsPositionStorage(RelationEndRole.B);
+            return await rel.NeedsPositionStorage(RelationEndRole.A) || await rel.NeedsPositionStorage(RelationEndRole.B);
         }
 
 

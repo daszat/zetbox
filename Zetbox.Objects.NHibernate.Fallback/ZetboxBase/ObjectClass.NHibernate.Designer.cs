@@ -945,16 +945,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnAddProperty_ObjectClass")]
-        public override Zetbox.App.Base.Property AddProperty()
+        public override async System.Threading.Tasks.Task<Zetbox.App.Base.Property> AddProperty()
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.Property>();
             if (OnAddProperty_ObjectClass != null)
             {
-                OnAddProperty_ObjectClass(this, e);
+                await OnAddProperty_ObjectClass(this, e);
             }
             else
             {
-                e.Result = base.AddProperty();
+                e.Result = await base.AddProperty();
             }
             return e.Result;
         }
@@ -1008,12 +1008,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateMethod_ObjectClass")]
-        public virtual Zetbox.App.Base.Method CreateMethod()
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.Method> CreateMethod()
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.Method>();
             if (OnCreateMethod_ObjectClass != null)
             {
-                OnCreateMethod_ObjectClass(this, e);
+                await OnCreateMethod_ObjectClass(this, e);
             }
             else
             {
@@ -1072,12 +1072,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateRelation_ObjectClass")]
-        public virtual Zetbox.App.Base.Relation CreateRelation()
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.Relation> CreateRelation()
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.Relation>();
             if (OnCreateRelation_ObjectClass != null)
             {
-                OnCreateRelation_ObjectClass(this, e);
+                await OnCreateRelation_ObjectClass(this, e);
             }
             else
             {
@@ -1136,16 +1136,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDataType_ObjectClass")]
-        public override System.Type GetDataType()
+        public override async System.Threading.Tasks.Task<System.Type> GetDataType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetDataType_ObjectClass != null)
             {
-                OnGetDataType_ObjectClass(this, e);
+                await OnGetDataType_ObjectClass(this, e);
             }
             else
             {
-                e.Result = base.GetDataType();
+                e.Result = await base.GetDataType();
             }
             return e.Result;
         }
@@ -1199,16 +1199,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDataTypeString_ObjectClass")]
-        public override string GetDataTypeString()
+        public override async System.Threading.Tasks.Task<string> GetDataTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDataTypeString_ObjectClass != null)
             {
-                OnGetDataTypeString_ObjectClass(this, e);
+                await OnGetDataTypeString_ObjectClass(this, e);
             }
             else
             {
-                e.Result = base.GetDataTypeString();
+                e.Result = await base.GetDataTypeString();
             }
             return e.Result;
         }
@@ -1262,12 +1262,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetInheritedMethods_ObjectClass")]
-        public virtual IEnumerable<Zetbox.App.Base.Method> GetInheritedMethods()
+        public virtual async System.Threading.Tasks.Task<IEnumerable<Zetbox.App.Base.Method>> GetInheritedMethods()
         {
             var e = new MethodReturnEventArgs<IEnumerable<Zetbox.App.Base.Method>>();
             if (OnGetInheritedMethods_ObjectClass != null)
             {
-                OnGetInheritedMethods_ObjectClass(this, e);
+                await OnGetInheritedMethods_ObjectClass(this, e);
             }
             else
             {
@@ -1326,12 +1326,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_ObjectClass")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_ObjectClass != null)
             {
-                OnGetName_ObjectClass(this, e);
+                await OnGetName_ObjectClass(this, e);
             }
             else
             {
@@ -1390,16 +1390,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnImplementInterfaces_ObjectClass")]
-        public override void ImplementInterfaces()
+        public override async System.Threading.Tasks.Task ImplementInterfaces()
         {
             // base.ImplementInterfaces();
             if (OnImplementInterfaces_ObjectClass != null)
             {
-                OnImplementInterfaces_ObjectClass(this);
+                await OnImplementInterfaces_ObjectClass(this);
             }
             else
             {
-                base.ImplementInterfaces();
+                await base.ImplementInterfaces();
             }
         }
         public static event ImplementInterfaces_Handler<ObjectClass> OnImplementInterfaces_ObjectClass;
@@ -1452,12 +1452,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnReplaceObject_ObjectClass")]
-        public virtual void ReplaceObject(Zetbox.API.IDataObject target, Zetbox.API.IDataObject source)
+        public virtual async System.Threading.Tasks.Task ReplaceObject(Zetbox.API.IDataObject target, Zetbox.API.IDataObject source)
         {
             // base.ReplaceObject();
             if (OnReplaceObject_ObjectClass != null)
             {
-                OnReplaceObject_ObjectClass(this, target, source);
+                await OnReplaceObject_ObjectClass(this, target, source);
             }
             else
             {
@@ -1643,18 +1643,18 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             // fix direct object references
 
             if (_fk_guid_BaseObjectClass.HasValue)
-                this.BaseObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value));
+                this.BaseObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value)));
             else
             if (_fk_BaseObjectClass.HasValue)
-                this.BaseObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_BaseObjectClass.Value));
+                this.BaseObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_BaseObjectClass.Value)));
             else
                 this.BaseObjectClass = null;
 
             if (_fk_guid_DefaultViewModelDescriptor.HasValue)
-                this.DefaultViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value));
+                this.DefaultViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value)));
             else
             if (_fk_DefaultViewModelDescriptor.HasValue)
-                this.DefaultViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value));
+                this.DefaultViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value)));
             else
                 this.DefaultViewModelDescriptor = null;
         }

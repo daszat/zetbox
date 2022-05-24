@@ -47,12 +47,21 @@ namespace Zetbox.Client.Presentables
             Method.PropertyChanged += MethodPropertyChanged;
         }
 
+        private string _label;
         public override string Label
         {
             get
             {
-                return Method.GetLabel();
+                Task.Run(async () => await GetLabel());
+                return _label;
             }
+        }
+
+        public async Task<string> GetLabel()
+        {
+            _label = await Method.GetLabel();
+            OnPropertyChanged(nameof(Label));
+            return _label;
         }
 
         public string Description
@@ -133,9 +142,9 @@ namespace Zetbox.Client.Presentables
         /// <summary>
         /// Execute the modelled Method.
         /// </summary>
-        public void Execute()
+        public async Task Execute()
         {
-            base.Execute(null);
+            await base.Execute(null);
         }
 
         /// <summary>
@@ -143,15 +152,15 @@ namespace Zetbox.Client.Presentables
         /// back on the UI thread after the execution has finished.
         /// </summary>
         /// <param name="callback">A callback or null</param>
-        public void Execute(Action callback)
+        public async Task Execute(Action callback)
         {
-            base.Execute(callback);
+            await base.Execute(callback);
         }
 
-        protected override void DoExecute(object data)
+        protected override async Task DoExecute(object data)
         {
             var parameter = Method.Parameter.Where(i => !i.IsReturnParameter).ToArray();
-            MethodInfo info = Object.GetType().FindMethod(Method.Name, parameter.Select(i => i.GetParameterType()).ToArray());
+            MethodInfo info = Object.GetType().FindMethod(Method.Name, (await parameter.Select(async i => await i.GetParameterType()).WhenAll()).ToArray());
             if (info == null) throw new InvalidOperationException(string.Format(ActionViewModelResources.MethodNotFoundException, Method.Name));
 
             if (parameter.Length > 0)
@@ -162,11 +171,11 @@ namespace Zetbox.Client.Presentables
                         var result = info.Invoke(Object, p);
                         HandleResult(result, data);
                     });
-                ViewModelFactory.ShowDialog(pitMdl);
+                await ViewModelFactory.ShowDialog(pitMdl);
             }
             else
             {
-                var result = info.Invoke(Object, new object[] { });
+                var result = await (Task<object>)info.Invoke(Object, new object[] { });
                 HandleResult(result, data);
             }
         }

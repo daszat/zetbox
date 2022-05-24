@@ -52,7 +52,9 @@ namespace Zetbox.Client.Presentables.GUI
                         Logging.Client.WarnFormat("Unable to create ViewModel from Descriptor: {0}", ex);
                     }
                 }
-                return (NavigationEntryViewModel)screen.GetDefaultViewModel(dataCtx, parent);
+
+                // TODO: .Result
+                return (NavigationEntryViewModel)screen.GetDefaultViewModel(dataCtx, parent).Result;
             });
         }
 

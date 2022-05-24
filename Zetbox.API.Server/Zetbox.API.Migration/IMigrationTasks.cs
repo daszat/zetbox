@@ -20,6 +20,7 @@ namespace Zetbox.API.Migration
     using System.Data;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API.Server;
     using Zetbox.App.SchemaMigration;
 
@@ -137,9 +138,9 @@ namespace Zetbox.API.Migration
         /// <summary>
         /// Executes the basic defined migrations from the specified source table.
         /// </summary>
-        void TableBaseMigration(SourceTable tbl);
-        void TableBaseMigration(SourceTable tbl, params Converter[] nullConverter);
-        void TableBaseMigration(SourceTable tbl, Converter[] nullConverter, Join[] additional_joins);
+        Task TableBaseMigration(SourceTable tbl);
+        Task TableBaseMigration(SourceTable tbl, params Converter[] nullConverter);
+        Task TableBaseMigration(SourceTable tbl, Converter[] nullConverter, Join[] additional_joins);
 
         InputStream ExecuteQueryStreaming(string sql);
         OutputStream WriteTableStreaming(TableRef destTable);

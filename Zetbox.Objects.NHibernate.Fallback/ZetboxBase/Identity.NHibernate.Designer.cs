@@ -523,12 +523,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnClearLoginToken_Identity")]
-        public virtual void ClearLoginToken()
+        public virtual async System.Threading.Tasks.Task ClearLoginToken()
         {
             // base.ClearLoginToken();
             if (OnClearLoginToken_Identity != null)
             {
-                OnClearLoginToken_Identity(this);
+                await OnClearLoginToken_Identity(this);
             }
             else
             {
@@ -586,12 +586,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateLoginToken_Identity")]
-        public virtual void CreateLoginToken()
+        public virtual async System.Threading.Tasks.Task CreateLoginToken()
         {
             // base.CreateLoginToken();
             if (OnCreateLoginToken_Identity != null)
             {
-                OnCreateLoginToken_Identity(this);
+                await OnCreateLoginToken_Identity(this);
             }
             else
             {
@@ -649,12 +649,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnSetPassword_Identity")]
-        public virtual void SetPassword(string plainTextPassword)
+        public virtual async System.Threading.Tasks.Task SetPassword(string plainTextPassword)
         {
             // base.SetPassword();
             if (OnSetPassword_Identity != null)
             {
-                OnSetPassword_Identity(this, plainTextPassword);
+                await OnSetPassword_Identity(this, plainTextPassword);
             }
             else
             {
@@ -712,12 +712,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnSetPasswordUI_Identity")]
-        public virtual void SetPasswordUI()
+        public virtual async System.Threading.Tasks.Task SetPasswordUI()
         {
             // base.SetPasswordUI();
             if (OnSetPasswordUI_Identity != null)
             {
-                OnSetPasswordUI_Identity(this);
+                await OnSetPasswordUI_Identity(this);
             }
             else
             {

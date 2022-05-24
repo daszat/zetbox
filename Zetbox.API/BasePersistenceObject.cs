@@ -363,23 +363,25 @@ namespace Zetbox.API
         {
             get
             {
-                var errors = GetProperties()
-                    .OfType<IValidatingPropertyDescriptor>()
-                    .Select(vpd =>
-                    {
-                        var errorStrings = vpd.GetValidationErrors(this);
-                        if (errorStrings == null || errorStrings.Length == 0)
-                        {
-                            return null;
-                        }
+                return string.Empty;
+                //// TODO: re-implement or ignore it if not needed
+                ////var errors = GetProperties()
+                ////    .OfType<IValidatingPropertyDescriptor>()
+                ////    .Select(async vpd =>
+                ////    {
+                ////        var errorStrings = await vpd.GetValidationErrors(this);
+                ////        if (errorStrings == null || errorStrings.Length == 0)
+                ////        {
+                ////            return null;
+                ////        }
 
-                        var error = String.Join(",", errorStrings);
-                        return vpd.UnderlyingDescriptor.Name + ": " + error;
-                    })
-                    .Concat(ObjectIsValid().Errors.AsEnumerable())
-                    .Where(err => !String.IsNullOrEmpty(err))
-                    .ToArray();
-                return String.Join("\n", errors);
+                ////        var error = String.Join(",", errorStrings);
+                ////        return vpd.UnderlyingDescriptor.Name + ": " + error;
+                ////    })
+                ////    .Concat(ObjectIsValid().Errors.AsEnumerable())
+                ////    .Where(err => !String.IsNullOrEmpty(err))
+                ////    .ToArray();
+                ////return String.Join("\n", errors);
             }
         }
 

@@ -50,7 +50,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchRelationsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (IList<Zetbox.App.Base.Relation>)_Relations;
             }
@@ -66,8 +65,9 @@ namespace Zetbox.App.Base
         public System.Threading.Tasks.Task TriggerFetchRelationsAsync()
         {
             if (_triggerFetchRelationsTask != null) return _triggerFetchRelationsTask;
-            _triggerFetchRelationsTask = Context.FetchRelationAsync<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryMemoryImpl>(new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80"), RelationEndRole.A, this);
-            _triggerFetchRelationsTask = _triggerFetchRelationsTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryMemoryImpl>(new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _Relations
                     = new ObservableBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryMemoryImpl>>(
@@ -75,7 +75,7 @@ namespace Zetbox.App.Base
                         new RelationshipFilterASideCollection<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryMemoryImpl>(this.Context, this));
                         // _Relations.CollectionChanged is managed by OnRelationsCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchRelationsTask;
+            return _triggerFetchRelationsTask = task;
         }
 
         internal void OnRelationsCollectionChanged()

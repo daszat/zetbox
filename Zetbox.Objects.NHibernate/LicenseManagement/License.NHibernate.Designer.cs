@@ -1011,12 +1011,12 @@ namespace Zetbox.App.LicenseManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCheck_License")]
-        public virtual bool Check(System.Object certificate)
+        public virtual async System.Threading.Tasks.Task<bool> Check(System.Object certificate)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnCheck_License != null)
             {
-                OnCheck_License(this, e, certificate);
+                await OnCheck_License(this, e, certificate);
             }
             else
             {
@@ -1075,12 +1075,12 @@ namespace Zetbox.App.LicenseManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnExport_License")]
-        public virtual void Export(string file)
+        public virtual async System.Threading.Tasks.Task Export(string file)
         {
             // base.Export();
             if (OnExport_License != null)
             {
-                OnExport_License(this, file);
+                await OnExport_License(this, file);
             }
             else
             {
@@ -1138,12 +1138,12 @@ namespace Zetbox.App.LicenseManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnExportUI_License")]
-        public virtual void ExportUI()
+        public virtual async System.Threading.Tasks.Task ExportUI()
         {
             // base.ExportUI();
             if (OnExportUI_License != null)
             {
-                OnExportUI_License(this);
+                await OnExportUI_License(this);
             }
             else
             {
@@ -1201,12 +1201,12 @@ namespace Zetbox.App.LicenseManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnIsSignatureValid_License")]
-        public virtual bool IsSignatureValid(System.Object certificate)
+        public virtual async System.Threading.Tasks.Task<bool> IsSignatureValid(System.Object certificate)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsSignatureValid_License != null)
             {
-                OnIsSignatureValid_License(this, e, certificate);
+                await OnIsSignatureValid_License(this, e, certificate);
             }
             else
             {
@@ -1265,12 +1265,12 @@ namespace Zetbox.App.LicenseManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnIsValid_License")]
-        public virtual bool IsValid()
+        public virtual async System.Threading.Tasks.Task<bool> IsValid()
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsValid_License != null)
             {
-                OnIsValid_License(this, e);
+                await OnIsValid_License(this, e);
             }
             else
             {
@@ -1329,12 +1329,12 @@ namespace Zetbox.App.LicenseManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnSign_License")]
-        public virtual void Sign(Zetbox.App.LicenseManagement.PrivateKey certificate, string password)
+        public virtual async System.Threading.Tasks.Task Sign(Zetbox.App.LicenseManagement.PrivateKey certificate, string password)
         {
             // base.Sign();
             if (OnSign_License != null)
             {
-                OnSign_License(this, certificate, password);
+                await OnSign_License(this, certificate, password);
             }
             else
             {
@@ -1392,12 +1392,12 @@ namespace Zetbox.App.LicenseManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnSignUI_License")]
-        public virtual void SignUI()
+        public virtual async System.Threading.Tasks.Task SignUI()
         {
             // base.SignUI();
             if (OnSignUI_License != null)
             {
-                OnSignUI_License(this);
+                await OnSignUI_License(this);
             }
             else
             {

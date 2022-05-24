@@ -32,7 +32,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CompoundObjects
             foreach (var property in compoundObjectProperties.Where(cop => !cop.IsList).OrderBy(cop => cop.Name))
             {
                 string propertyName = property.Name;
-                string typeName = property.GetPropertyTypeString();
+                string typeName = property.GetPropertyTypeString().Result;
                 string implementationTypeName = typeName + ImplementationSuffix;
 
                 var lazyCtxParam = string.IsNullOrEmpty(lazyCtxProperty) ? "null" : lazyCtxProperty;

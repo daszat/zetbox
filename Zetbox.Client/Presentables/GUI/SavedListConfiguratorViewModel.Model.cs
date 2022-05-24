@@ -35,7 +35,7 @@ namespace Zetbox.Client.Presentables.GUI
     // No ViewModelDescriptor -> internal
     public partial class SavedListConfiguratorViewModel
     {
-        private void Load()
+        private async Task Load()
         {
             Parent.FilterList.ResetUserFilter();
             if (_selectedItem != null)
@@ -47,8 +47,8 @@ namespace Zetbox.Client.Presentables.GUI
                     if (f.IsUserFilter && f.Properties != null)
                     {
                         var props = f.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToList();
-                        mdl = FilterModel.FromProperty(DataContext, FrozenContext, props);
-                        Parent.FilterList.AddFilter(mdl, true, props);
+                        mdl = await FilterModel.FromProperty(DataContext, FrozenContext, props);
+                        await Parent.FilterList.AddFilter(mdl, true, props);
                     }
                     else if(!f.IsUserFilter && !string.IsNullOrEmpty(f.Expression))
                     {
@@ -79,11 +79,11 @@ namespace Zetbox.Client.Presentables.GUI
                         {
                             case ColumnDisplayModel.ColumnType.PropertyModel:
                                 var props = col.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToArray();
-                                colMdl = ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, props);
+                                colMdl = await ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, props);
                                 break;
                             case ColumnDisplayModel.ColumnType.MethodModel:
                                 var m = FrozenContext.FindPersistenceObject<Method>(col.Method.Value);
-                                colMdl = ColumnDisplayModel.Create(m);
+                                colMdl = await ColumnDisplayModel.Create(m);
                                 break;
                             case ColumnDisplayModel.ColumnType.ViewModelProperty:
                                 colMdl = ColumnDisplayModel.Create(col.Path, null, col.Path);

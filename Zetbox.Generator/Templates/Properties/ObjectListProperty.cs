@@ -35,16 +35,16 @@ namespace Zetbox.Generator.Templates.Properties
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            if (!prop.IsList()) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
+            if (!prop.IsList().Result) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
 
             string name = prop.Name;
             string wrapperClass = "OneNRelationList";
             var rel = RelationExtensions.Lookup(ctx, prop);
-            var relEnd = rel.GetEnd(prop);
-            var otherEnd = rel.GetOtherEnd(relEnd);
-            var exposedListType = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection";
+            var relEnd = rel.GetEnd(prop).Result;
+            var otherEnd = rel.GetOtherEnd(relEnd).Result;
+            var exposedListType = rel.NeedsPositionStorage(otherEnd.GetRole()).Result ? "IList" : "ICollection";
             // the name of the position property
-            var positionPropertyName = rel.NeedsPositionStorage(otherEnd.GetRole()) ? Construct.ListPositionPropertyName(otherEnd) : String.Empty;
+            var positionPropertyName = rel.NeedsPositionStorage(otherEnd.GetRole()).Result ? Construct.ListPositionPropertyName(otherEnd) : String.Empty;
 
             Call(host, ctx, serializationList, name, wrapperClass, exposedListType, rel, relEnd.GetRole(), positionPropertyName);
         }
@@ -73,14 +73,14 @@ namespace Zetbox.Generator.Templates.Properties
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
 
-            RelationEnd relEnd = rel.GetEndFromRole(endRole);
-            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole).Result;
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd).Result;
 
             string wrapperName = "_" + name;
 
             var otherName = otherEnd.Navigator == null ? relEnd.RoleName : otherEnd.Navigator.Name;
 
-            string referencedInterface = otherEnd.Type.GetDataTypeString();
+            string referencedInterface = otherEnd.Type.GetDataTypeString().Result;
 
             Call(host, ctx, serializationList, name, wrapperName, wrapperClass, exposedListType, rel, endRole, positionPropertyName, otherName, referencedInterface);
         }
@@ -100,7 +100,7 @@ namespace Zetbox.Generator.Templates.Properties
         {
             if (list != null && eagerLoading)
             {
-                list.Add("Serialization.EagerLoadingSerialization", Serialization.SerializerType.Binary, null, null, memberName, true, rel.GetRelationType() == RelationType.n_m);
+                list.Add("Serialization.EagerLoadingSerialization", Serialization.SerializerType.Binary, null, null, memberName, true, rel.GetRelationType().Result == RelationType.n_m);
             }
         }
     }

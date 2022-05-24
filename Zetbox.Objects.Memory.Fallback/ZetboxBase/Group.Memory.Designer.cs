@@ -121,7 +121,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchMemberAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Identity>)_Member;
             }
@@ -137,8 +136,9 @@ namespace Zetbox.App.Base
         public System.Threading.Tasks.Task TriggerFetchMemberAsync()
         {
             if (_triggerFetchMemberTask != null) return _triggerFetchMemberTask;
-            _triggerFetchMemberTask = Context.FetchRelationAsync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.B, this);
-            _triggerFetchMemberTask = _triggerFetchMemberTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.B, this);
+            task = task.OnResult(r =>
             {
                 _Member
                     = new ObservableASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>>(
@@ -146,7 +146,7 @@ namespace Zetbox.App.Base
                         new RelationshipFilterBSideCollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>(this.Context, this));
                         // _Member.CollectionChanged is managed by OnMemberCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchMemberTask;
+            return _triggerFetchMemberTask = task;
         }
 
         internal void OnMemberCollectionChanged()
@@ -225,12 +225,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
-            if (_fk_Module.HasValue)
-                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
-            else
-                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Module> task;
 
-            _triggerFetchModuleTask.OnResult(t =>
+            if (_fk_Module.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+
+            task.OnResult(t =>
             {
                 if (OnModule_Getter != null)
                 {
@@ -240,7 +242,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
                 }
             });
 
-            return _triggerFetchModuleTask;
+            return _triggerFetchModuleTask = task;
         }
 
         // internal implementation
@@ -251,7 +253,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
             {
                 var task = TriggerFetchModuleAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
@@ -364,12 +365,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_Group")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_Group != null)
             {
-                OnGetName_Group(this, e);
+                await OnGetName_Group(this, e);
             }
             else
             {
@@ -514,10 +515,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
             // fix direct object references
 
             if (_fk_guid_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
             else
             if (_fk_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value));
             else
                 ModuleImpl = null;
             // fix cached lists references
@@ -664,7 +665,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(_fk_Module != null ? _fk_Module : (int?)null);
             binStream.Write(this._Name);
         }
 

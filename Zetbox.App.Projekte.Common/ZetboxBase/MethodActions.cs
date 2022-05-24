@@ -91,7 +91,7 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task get_CodeTemplate(Method obj, PropertyGetterEventArgs<string> e)
+        public static async System.Threading.Tasks.Task get_CodeTemplate(Method obj, PropertyGetterEventArgs<string> e)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -107,10 +107,10 @@ namespace Zetbox.App.Base
 
             sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task {0}({1}", obj.Name, objParameter);
 
-            var returnParam = obj.GetReturnParameter();
+            var returnParam = await obj.GetReturnParameter();
             if (returnParam != null)
             {
-                sb.AppendFormat(", MethodReturnEventArgs<{0}> e", returnParam.GetParameterTypeString());
+                sb.AppendFormat(", MethodReturnEventArgs<{0}> e", await returnParam.GetParameterTypeString());
             }
 
             foreach (var param in obj.Parameter.Where(p => !p.IsReturnParameter))
@@ -129,8 +129,6 @@ namespace Zetbox.App.Base
             sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task {0}CanExecReason({1}, MethodReturnEventArgs<string> e)\n{{\n}}\n", obj.Name, objParameter);
 
             e.Result = sb.ToString();
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

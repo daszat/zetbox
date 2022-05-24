@@ -39,18 +39,16 @@ namespace Zetbox.App.SchemaMigration
 
         }
         [Invocation]
-        public static System.Threading.Tasks.Task CreateMappingReport(Zetbox.App.SchemaMigration.SourceTable obj)
+        public static async System.Threading.Tasks.Task CreateMappingReport(Zetbox.App.SchemaMigration.SourceTable obj)
         {
             var fileName = _mdlFactory.GetDestinationFileNameFromUser("Migration Report " + obj.Name + ".pdf", "PDF|*.pdf");
             if (!string.IsNullOrEmpty(fileName))
             {
                 var r = new SourceTableMappingReport();
-                r.CreateReport(obj);
+                await r.CreateReport(obj);
                 r.Save(fileName);
                 _fileOpener.ShellExecute(fileName);
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

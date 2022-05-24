@@ -157,31 +157,31 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-        DateTime GetCurrent(DateTime start);
+        System.Threading.Tasks.Task<DateTime> GetCurrent(DateTime start);
 
         /// <summary>
         /// 
         /// </summary>
-        DateTime GetCurrent(DateTime start, DateTime dt);
+        System.Threading.Tasks.Task<DateTime> GetCurrent(DateTime start, DateTime dt);
 
         /// <summary>
         /// 
         /// </summary>
-        DateTime GetNext(DateTime start);
+        System.Threading.Tasks.Task<DateTime> GetNext(DateTime start);
 
         /// <summary>
         /// 
         /// </summary>
-        DateTime GetNext(DateTime start, DateTime dt);
+        System.Threading.Tasks.Task<DateTime> GetNext(DateTime start, DateTime dt);
 
         /// <summary>
         /// 
         /// </summary>
-        DateTime GetRelative(DateTime dt);
+        System.Threading.Tasks.Task<DateTime> GetRelative(DateTime dt);
 
         /// <summary>
         /// 
         /// </summary>
-        IEnumerable<DateTime> GetWithinInterval(DateTime start, DateTime from, DateTime until);
+        System.Threading.Tasks.Task<IEnumerable<DateTime>> GetWithinInterval(DateTime start, DateTime from, DateTime until);
     }
 }

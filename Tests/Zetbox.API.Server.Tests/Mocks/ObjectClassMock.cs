@@ -94,27 +94,27 @@ namespace Zetbox.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public Zetbox.App.Base.Method CreateMethod()
+        public Task<Zetbox.App.Base.Method> CreateMethod()
         {
             throw new NotImplementedException();
         }
 
-        public Zetbox.App.Base.Relation CreateRelation()
+        public Task<Zetbox.App.Base.Relation> CreateRelation()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Zetbox.App.Base.Method> GetInheritedMethods()
+        public Task<IEnumerable<Zetbox.App.Base.Method>> GetInheritedMethods()
         {
             throw new NotImplementedException();
         }
 
-        public void ImplementInterfaces()
+        public Task ImplementInterfaces()
         {
             throw new NotImplementedException();
         }
 
-        public void ReplaceObject(Zetbox.API.IDataObject target, Zetbox.API.IDataObject source)
+        public Task ReplaceObject(Zetbox.API.IDataObject target, Zetbox.API.IDataObject source)
         {
             throw new NotImplementedException();
         }
@@ -193,17 +193,17 @@ namespace Zetbox.API.Server.Mocks
             set;
         }
 
-        public Type GetDataType()
+        public Task<Type> GetDataType()
         {
             throw new NotImplementedException();
         }
 
-        public string GetDataTypeString()
+        public Task<string> GetDataTypeString()
         {
             throw new NotImplementedException();
         }
 
-        public Zetbox.App.Base.Property AddProperty()
+        public Task<Zetbox.App.Base.Property> AddProperty()
         {
             throw new NotImplementedException();
         }
@@ -428,7 +428,7 @@ namespace Zetbox.API.Server.Mocks
 
         #region INamedObject
 
-        public string GetName()
+        public Task<string> GetName()
         {
             throw new NotImplementedException();
         }

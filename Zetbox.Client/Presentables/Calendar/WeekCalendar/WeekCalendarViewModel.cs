@@ -47,9 +47,9 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_NextWeekCommand == null)
                 {
-                    _NextWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
+                    _NextWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         WeekCalendar.WeekCalendarViewModelResources.NextWeekCommand_Label,
-                        WeekCalendar.WeekCalendarViewModelResources.NextWeekCommand_Tooltip, 
+                        WeekCalendar.WeekCalendarViewModelResources.NextWeekCommand_Tooltip,
                         NextWeek, null, null);
                     Task.Run(async () => _NextWeekCommand.Icon = await IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.forward_png.Find(FrozenContext)));
                 }
@@ -112,28 +112,31 @@ namespace Zetbox.Client.Presentables.Calendar
             return Task.CompletedTask;
         }
 
-        public void Refresh()
+        public async Task Refresh()
         {
             if (DataContext.IsDisposed) return;
 
             var taskFrom = From;
             var taskTo = To;
-            _Source(From, To).OnResult(t =>
-            {
-                if (From == taskFrom && To == taskTo)
-                {
-                    var allItems = t.Result
-                        .SelectMany(e => e.CreateCalendarItemViewModels(From, To))
-                        .ToLookup(c => c.From.Date);
+            var t = await _Source(From, To);
 
-                    foreach (var day in DayItems)
-                    {
-                        day.CalendarItems = allItems[day.Day];
-                    }
+            if (From == taskFrom && To == taskTo)
+            {
+                var tmp  = new List<CalendarItemViewModel>();
+                foreach(var e in t)
+                {
+                    tmp.AddRange(await e.CreateCalendarItemViewModels(From, To));
                 }
-                FindCalendarItemViewModel(_selectedItem)
-                    .ForEach(i => i.IsSelected = true);
-            });
+
+                var allItems = tmp.ToLookup(c => c.From.Date);
+
+                foreach (var day in DayItems)
+                {
+                    day.CalendarItems = allItems[day.Day];
+                }
+            }
+            FindCalendarItemViewModel(_selectedItem)
+                .ForEach(i => i.IsSelected = true);
         }
 
         private DateTime _From = DateTime.Today.FirstWeekDay();
@@ -157,7 +160,7 @@ namespace Zetbox.Client.Presentables.Calendar
                             _DayItems[i].CalendarItems = null;
                         }
                     }
-                    Refresh(); // Get new data
+                    _ = Refresh(); // Get new data
                     OnPropertyChanged("From");
                     OnPropertyChanged("To");
                     OnPropertyChanged("DayItems");
@@ -227,7 +230,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 {
                     _JumpToDateCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         WeekCalendar.WeekCalendarViewModelResources.JumpToDateCommand_Label,
-                        WeekCalendar.WeekCalendarViewModelResources.JumpToDateCommand_Tooltip, 
+                        WeekCalendar.WeekCalendarViewModelResources.JumpToDateCommand_Tooltip,
                         JumpToDate,
                         () => Task.FromResult(_jumpToDateMdl != null && _jumpToDateMdl.Value.HasValue),
                         null);

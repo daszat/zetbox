@@ -21,6 +21,7 @@ namespace Zetbox.API.Migration
     using System.Globalization;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API.Server;
     using Zetbox.App.Base;
     using Zetbox.App.SchemaMigration;
@@ -79,7 +80,8 @@ namespace Zetbox.API.Migration
             _converter = converter != null ? converter.ToDictionary(c => c.Column) : new Dictionary<SourceColumn, Converter>();
             _resultColumnCount = _srcColumns.Length;
 
-            if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
+            // TODO: .Result call
+            if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType().Result))
             {
                 // TODO: That's a bad hack!
                 _errorColIdx = _resultColumnCount;
@@ -435,7 +437,8 @@ namespace Zetbox.API.Migration
         public Type GetFieldType(int i)
         {
             var col = _srcColumns[i];
-            return col.DestinationProperty.SingleOrDefault().GetPropertyType();
+            // TODO: .Result call
+            return col.DestinationProperty.SingleOrDefault().GetPropertyType().Result;
         }
 
         public float GetFloat(int i)

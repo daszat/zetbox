@@ -41,23 +41,23 @@ namespace Zetbox.App.Packaging
             Meta
         }
 
-        public static void PublishFromContext(IZetboxContext ctx, string filename, Filter filter, string[] ownerModules)
+        public static async Task PublishFromContext(IZetboxContext ctx, string filename, Filter filter, string[] ownerModules)
         {
             using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Write))
             {
-                PublishFromContext(ctx, s, filter, ownerModules);
+                await PublishFromContext(ctx, s, filter, ownerModules);
             }
         }
 
-        public static void PublishFromContext(IZetboxContext ctx, Stream stream, Filter filter, string[] ownerModules, string streamDescription)
+        public static async Task PublishFromContext(IZetboxContext ctx, Stream stream, Filter filter, string[] ownerModules, string streamDescription)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
             {
-                PublishFromContext(ctx, s, filter, ownerModules);
+                await PublishFromContext(ctx, s, filter, ownerModules);
             }
         }
 
-        public static void PublishFromContext(IZetboxContext ctx, IPackageProvider s, Filter filter, string[] ownerModules)
+        public static async Task PublishFromContext(IZetboxContext ctx, IPackageProvider s, Filter filter, string[] ownerModules)
         {
             using (Log.DebugTraceMethodCall("PublishFromContext"))
             {
@@ -85,7 +85,7 @@ namespace Zetbox.App.Packaging
                     int counter = 0;
                     foreach (var obj in objects)
                     {
-                        ExportObject(s, obj, propNamespaces);
+                        await ExportObject(s, obj, propNamespaces);
 
                         counter++;
                         if (watch.ElapsedMilliseconds > 1000)
@@ -163,7 +163,7 @@ namespace Zetbox.App.Packaging
                             Log.InfoFormat("    exporting class {0}", objClass.Name);
                             foreach (var obj in AllExportables(ctx, objClass))
                             {
-                                ExportObject(s, obj, schemaNamespaces);
+                                await ExportObject(s, obj, schemaNamespaces);
                             }
                         }
                         else if (await objClass.ImplementsIModuleMember())
@@ -175,7 +175,7 @@ namespace Zetbox.App.Packaging
                                 .OrderBy(obj => obj.ExportGuid)
                                 .Cast<IPersistenceObject>())
                             {
-                                ExportObject(s, obj, schemaNamespaces);
+                                await ExportObject(s, obj, schemaNamespaces);
                             }
                         }
                         else
@@ -188,7 +188,7 @@ namespace Zetbox.App.Packaging
                     foreach (var rel in ctx.GetQuery<Relation>().Where(r => r.Module.ID == moduleID)
                         .OrderBy(r => r.A.Type.Name).ThenBy(r => r.A.RoleName).ThenBy(r => r.B.Type.Name).ThenBy(r => r.B.RoleName).ThenBy(r => r.ExportGuid))
                     {
-                        if (rel.GetRelationType() != RelationType.n_m)
+                        if ((await rel.GetRelationType()) != RelationType.n_m)
                             continue;
                         if (!(await rel.A.Type.ImplementsIExportable()))
                             continue;
@@ -197,7 +197,7 @@ namespace Zetbox.App.Packaging
 
                         try
                         {
-                            var ifType = rel.GetEntryInterfaceType();
+                            var ifType = await rel.GetEntryInterfaceType();
                             string msgFormat;
                             IQueryable<IPersistenceObject> entries;
 
@@ -221,7 +221,7 @@ namespace Zetbox.App.Packaging
 
                             foreach (var obj in entries)
                             {
-                                ExportObject(s, obj, schemaNamespaces);
+                                await ExportObject(s, obj, schemaNamespaces);
                             }
                         }
                         catch (TypeLoadException ex)
@@ -238,23 +238,23 @@ namespace Zetbox.App.Packaging
             }
         }
 
-        public static void Export(IReadOnlyZetboxContext ctx, string filename, IEnumerable<IDataObject> objects)
+        public static async Task Export(IReadOnlyZetboxContext ctx, string filename, IEnumerable<IDataObject> objects)
         {
             using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Write))
             {
-                Export(ctx, s, objects);
+                await Export(ctx, s, objects);
             }
         }
 
-        public static void Export(IReadOnlyZetboxContext ctx, Stream stream, IEnumerable<IDataObject> objects, string streamDescription)
+        public static async Task Export(IReadOnlyZetboxContext ctx, Stream stream, IEnumerable<IDataObject> objects, string streamDescription)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
             {
-                Export(ctx, s, objects);
+                await Export(ctx, s, objects);
             }
         }
 
-        public static void Export(IReadOnlyZetboxContext ctx, IPackageProvider s, IEnumerable<IDataObject> objects)
+        public static async Task Export(IReadOnlyZetboxContext ctx, IPackageProvider s, IEnumerable<IDataObject> objects)
         {
             var schemaList = objects.Select(i => i.GetObjectClass(ctx).Module).Distinct().ToArray();
             var schemaNamespaces = schemaList.Select(m => m.Namespace).ToArray();
@@ -262,13 +262,13 @@ namespace Zetbox.App.Packaging
 
             WriteStartDocument(s, ctx, schemaList);
 
-            ExportInternal(ctx, s, schemaNamespaces, allObjectGuids, objects);
+            await ExportInternal(ctx, s, schemaNamespaces, allObjectGuids, objects);
 
             s.Writer.WriteEndElement();
             s.Writer.WriteEndDocument();
         }
 
-        private static void ExportInternal(IReadOnlyZetboxContext ctx, IPackageProvider s, string[] schemaNamespaces, HashSet<Guid> allObjectGuids, IEnumerable<IDataObject> objects)
+        private static async Task ExportInternal(IReadOnlyZetboxContext ctx, IPackageProvider s, string[] schemaNamespaces, HashSet<Guid> allObjectGuids, IEnumerable<IDataObject> objects)
         {
             foreach (var obj in objects)
             {
@@ -276,20 +276,20 @@ namespace Zetbox.App.Packaging
                 if (allObjectGuids.Contains(exp.ExportGuid)) continue;
                 allObjectGuids.Add(exp.ExportGuid);
 
-                ExportObject(s, obj, schemaNamespaces);
+                await ExportObject(s, obj, schemaNamespaces);
                 var cls = obj.GetObjectClass(ctx);
                 foreach (var rel in cls.GetRelations())
                 {
                     IEnumerable<IDataObject> lst = null;
-                    if (rel.Containment == ContainmentSpecification.AContainsB && rel.A.Type == cls && rel.A.Navigator != null && rel.A.Navigator.GetIsList())
+                    if (rel.Containment == ContainmentSpecification.AContainsB && rel.A.Type == cls && rel.A.Navigator != null && (await rel.A.Navigator.GetIsList()))
                     {
                         lst = obj.GetPropertyValue<IEnumerable>(rel.A.Navigator.Name).OfType<IDataObject>();
                     }
-                    else if (rel.Containment == ContainmentSpecification.BContainsA && rel.B.Type == cls && rel.B.Navigator != null && rel.B.Navigator.GetIsList())
+                    else if (rel.Containment == ContainmentSpecification.BContainsA && rel.B.Type == cls && rel.B.Navigator != null && (await rel.B.Navigator.GetIsList()))
                     {
                         lst = obj.GetPropertyValue<IEnumerable>(rel.B.Navigator.Name).OfType<IDataObject>();
                     }
-                    else if (rel.Containment == ContainmentSpecification.AContainsB && rel.A.Type == cls && rel.A.Navigator != null && !rel.A.Navigator.GetIsList())
+                    else if (rel.Containment == ContainmentSpecification.AContainsB && rel.A.Type == cls && rel.A.Navigator != null && !(await rel.A.Navigator.GetIsList()))
                     {
                         var relObj = obj.GetPropertyValue<IDataObject>(rel.A.Navigator.Name);
                         if (relObj != null)
@@ -297,7 +297,7 @@ namespace Zetbox.App.Packaging
                             lst = new List<IDataObject>(new[] { relObj });
                         }
                     }
-                    else if (rel.Containment == ContainmentSpecification.BContainsA && rel.B.Type == cls && rel.B.Navigator != null && !rel.B.Navigator.GetIsList())
+                    else if (rel.Containment == ContainmentSpecification.BContainsA && rel.B.Type == cls && rel.B.Navigator != null && !(await rel.B.Navigator.GetIsList()))
                     {
                         var relObj = obj.GetPropertyValue<IDataObject>(rel.B.Navigator.Name);
                         if (relObj != null)
@@ -308,7 +308,7 @@ namespace Zetbox.App.Packaging
 
                     if (lst != null && lst.Any())
                     {
-                        ExportInternal(ctx, s, schemaNamespaces, allObjectGuids, lst);
+                        await ExportInternal(ctx, s, schemaNamespaces, allObjectGuids, lst);
                     }
                 }
             }
@@ -334,7 +334,7 @@ namespace Zetbox.App.Packaging
 
         private static async Task<List<IPersistenceObject>> FetchRelationEntries(IReadOnlyZetboxContext ctx, int moduleID, Relation rel)
         {
-            var t = rel.GetEntryInterfaceType().Type;
+            var t = (await rel.GetEntryInterfaceType()).Type;
             var ta = rel.A.Type.GetDescribedInterfaceType().Type;
             var tb = rel.B.Type.GetDescribedInterfaceType().Type;
 
@@ -382,7 +382,7 @@ namespace Zetbox.App.Packaging
                 .OrderBy(o => o.ExportGuid);
         }
 
-        private static void ExportObject(IPackageProvider s, IPersistenceObject obj, string[] propNamespaces)
+        private static async Task ExportObject(IPackageProvider s, IPersistenceObject obj, string[] propNamespaces)
         {
             XmlWriter writer = s.Writer;
             Type t = obj.ReadOnlyContext.GetInterfaceType(obj).Type;
@@ -396,7 +396,7 @@ namespace Zetbox.App.Packaging
             if (obj is Blob && s.SupportsBlobs)
             {
                 var blob = (Blob)obj;
-                s.PutBlob(blob.ExportGuid, blob.OriginalName, blob.GetStream());
+                s.PutBlob(blob.ExportGuid, blob.OriginalName, await blob.GetStream());
             }
             writer.WriteEndElement();
         }

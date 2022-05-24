@@ -54,8 +54,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
         protected override void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
         {
-            RelationEnd relEnd = rel.GetEndFromRole(endRole);
-            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole).Result;
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd).Result;
             var nav = relEnd.Navigator;
 
             // TODO: create/use ObjectReference*IMPLEMENTATION* instead (_fk* can already be made available)
@@ -67,17 +67,17 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             string fkBackingName = "_fk_" + name;
             string publicFKBackingName = "FK_" + name;
             string fkGuidBackingName = "_fk_guid_" + name;
-            string referencedInterface = relEnd.Type.GetDataTypeString();
+            string referencedInterface = relEnd.Type.GetDataTypeString().Result;
             string referencedImplementation = referencedInterface + ImplementationSuffix;
             string associationName = rel.GetAssociationName();
             string targetRoleName = otherEnd.RoleName;
-            string positionPropertyName = rel.NeedsPositionStorage(endRole)
+            string positionPropertyName = rel.NeedsPositionStorage(endRole).Result
                 ? name + Zetbox.API.Helper.PositionSuffix
                 : null;
             string inverseNavigatorName = nav != null
                 ? nav.Name
                 : null;
-            bool inverseNavigatorIsList = nav != null && nav.GetIsList();
+            bool inverseNavigatorIsList = nav != null && nav.GetIsList().Result;
             bool notifyInverseCollection = true;
             bool eagerLoading = nav != null && nav.EagerLoading;
             bool relDataTypeExportable = Task.Run(async () => await rel.A.Type.ImplementsIExportable() && await rel.B.Type.ImplementsIExportable()).Result;

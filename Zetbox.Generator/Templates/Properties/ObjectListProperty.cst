@@ -38,8 +38,8 @@
 <%@ Parameter Name="referencedInterface" Type="string" %>
 <%
 
-    RelationEnd relEnd = rel.GetEndFromRole(endRole);
-    // RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+    RelationEnd relEnd = rel.GetEndFromRole(endRole).Result;
+    // RelationEnd otherEnd = rel.GetOtherEnd(relEnd).Result;
 
     string idsListName = name + "Ids";
     string taskName = "_triggerFetch" + name + "Task";

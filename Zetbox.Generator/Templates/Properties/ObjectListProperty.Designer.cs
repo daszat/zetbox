@@ -52,8 +52,8 @@ namespace Zetbox.Generator.Templates.Properties
         public override void Generate()
         {
 #line 41 "D:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
-RelationEnd relEnd = rel.GetEndFromRole(endRole);
-    // RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+RelationEnd relEnd = rel.GetEndFromRole(endRole).Result;
+    // RelationEnd otherEnd = rel.GetOtherEnd(relEnd).Result;
 
     string idsListName = name + "Ids";
     string taskName = "_triggerFetch" + name + "Task";

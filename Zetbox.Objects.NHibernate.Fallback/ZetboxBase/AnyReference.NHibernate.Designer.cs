@@ -223,12 +223,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetObject_AnyReference")]
-        public virtual Zetbox.API.IDataObject GetObject(Zetbox.API.IZetboxContext ctx)
+        public virtual async System.Threading.Tasks.Task<Zetbox.API.IDataObject> GetObject(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IDataObject>();
             if (OnGetObject_AnyReference != null)
             {
-                OnGetObject_AnyReference(this, e, ctx);
+                await OnGetObject_AnyReference(this, e, ctx);
             }
             else
             {
@@ -287,12 +287,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnHasObject_AnyReference")]
-        public virtual bool HasObject()
+        public virtual async System.Threading.Tasks.Task<bool> HasObject()
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnHasObject_AnyReference != null)
             {
-                OnHasObject_AnyReference(this, e);
+                await OnHasObject_AnyReference(this, e);
             }
             else
             {
@@ -351,12 +351,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnSetObject_AnyReference")]
-        public virtual void SetObject(Zetbox.API.IDataObject newObj)
+        public virtual async System.Threading.Tasks.Task SetObject(Zetbox.API.IDataObject newObj)
         {
             // base.SetObject();
             if (OnSetObject_AnyReference != null)
             {
-                OnSetObject_AnyReference(this, newObj);
+                await OnSetObject_AnyReference(this, newObj);
             }
             else
             {

@@ -130,19 +130,17 @@ namespace Zetbox.API.Server.Fulltext
 
             builder
                 .RegisterCmdLineAction("rebuild-fulltext-index=", "Rebuild and optimize the fulltext index. You can add a comma separated list of class names (including the namespace) to rebuild the index for only those classes. When no filter is given, all classes are rebuilt.",
-                (scope, v) =>
+                async (scope, v) =>
                 {
                     var rebuilder = scope.Resolve<Rebuilder>();
                     if (!string.IsNullOrWhiteSpace(v))
                     {
-                        rebuilder.Rebuild(v.Split(','));
+                        await rebuilder.Rebuild(v.Split(','));
                     }
                     else
                     {
-                        rebuilder.Rebuild();
+                        await rebuilder.Rebuild();
                     }
-
-                    return Task.CompletedTask;
                 });
         }
     }

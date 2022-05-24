@@ -587,16 +587,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDescription_BoolProperty")]
-        public override string GetDescription()
+        public override async System.Threading.Tasks.Task<string> GetDescription()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDescription_BoolProperty != null)
             {
-                OnGetDescription_BoolProperty(this, e);
+                await OnGetDescription_BoolProperty(this, e);
             }
             else
             {
-                e.Result = base.GetDescription();
+                e.Result = await base.GetDescription();
             }
             return e.Result;
         }
@@ -650,16 +650,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetElementTypeString_BoolProperty")]
-        public override string GetElementTypeString()
+        public override async System.Threading.Tasks.Task<string> GetElementTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetElementTypeString_BoolProperty != null)
             {
-                OnGetElementTypeString_BoolProperty(this, e);
+                await OnGetElementTypeString_BoolProperty(this, e);
             }
             else
             {
-                e.Result = base.GetElementTypeString();
+                e.Result = await base.GetElementTypeString();
             }
             return e.Result;
         }
@@ -713,16 +713,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_BoolProperty")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_BoolProperty != null)
             {
-                OnGetLabel_BoolProperty(this, e);
+                await OnGetLabel_BoolProperty(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -776,16 +776,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_BoolProperty")]
-        public override string GetName()
+        public override async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_BoolProperty != null)
             {
-                OnGetName_BoolProperty(this, e);
+                await OnGetName_BoolProperty(this, e);
             }
             else
             {
-                e.Result = base.GetName();
+                e.Result = await base.GetName();
             }
             return e.Result;
         }
@@ -839,16 +839,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyType_BoolProperty")]
-        public override System.Type GetPropertyType()
+        public override async System.Threading.Tasks.Task<System.Type> GetPropertyType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetPropertyType_BoolProperty != null)
             {
-                OnGetPropertyType_BoolProperty(this, e);
+                await OnGetPropertyType_BoolProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyType();
+                e.Result = await base.GetPropertyType();
             }
             return e.Result;
         }
@@ -902,16 +902,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyTypeString_BoolProperty")]
-        public override string GetPropertyTypeString()
+        public override async System.Threading.Tasks.Task<string> GetPropertyTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetPropertyTypeString_BoolProperty != null)
             {
-                OnGetPropertyTypeString_BoolProperty(this, e);
+                await OnGetPropertyTypeString_BoolProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyTypeString();
+                e.Result = await base.GetPropertyTypeString();
             }
             return e.Result;
         }
@@ -1066,26 +1066,26 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_FalseIcon.HasValue)
-                this.FalseIcon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_FalseIcon.Value));
+                this.FalseIcon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_FalseIcon.Value)));
             else
             if (_fk_FalseIcon.HasValue)
-                this.FalseIcon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value));
+                this.FalseIcon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value)));
             else
                 this.FalseIcon = null;
 
             if (_fk_guid_NullIcon.HasValue)
-                this.NullIcon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_NullIcon.Value));
+                this.NullIcon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_NullIcon.Value)));
             else
             if (_fk_NullIcon.HasValue)
-                this.NullIcon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value));
+                this.NullIcon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value)));
             else
                 this.NullIcon = null;
 
             if (_fk_guid_TrueIcon.HasValue)
-                this.TrueIcon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_TrueIcon.Value));
+                this.TrueIcon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_TrueIcon.Value)));
             else
             if (_fk_TrueIcon.HasValue)
-                this.TrueIcon = ((Zetbox.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value));
+                this.TrueIcon = ((Zetbox.App.GUI.IconNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value)));
             else
                 this.TrueIcon = null;
         }

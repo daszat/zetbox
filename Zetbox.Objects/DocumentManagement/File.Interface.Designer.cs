@@ -119,21 +119,21 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Creates an excerpt from the current file
         /// </summary>
-        void ExtractText();
+        System.Threading.Tasks.Task ExtractText();
 
         /// <summary>
         /// Handles the change of the current blob
         /// </summary>
-        Zetbox.App.Base.Blob HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob);
+        System.Threading.Tasks.Task<Zetbox.App.Base.Blob> HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob);
 
         /// <summary>
         /// Öffnet das Dokument schreibgeschützt
         /// </summary>
-        void Open();
+        System.Threading.Tasks.Task Open();
 
         /// <summary>
         /// Uploads a new Content
         /// </summary>
-        void Upload();
+        System.Threading.Tasks.Task Upload();
     }
 }

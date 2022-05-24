@@ -156,8 +156,8 @@ namespace Zetbox.DalProvider.Client.Mocks
             var handler = _memoryFactory
                 .GetServerCollectionHandler(
                     _backingStore,
-                    _iftFactory(rel.A.Type.GetDataType()),
-                    _iftFactory(rel.B.Type.GetDataType()),
+                    _iftFactory(await rel.A.Type.GetDataType()),
+                    _iftFactory(await rel.B.Type.GetDataType()),
                     role);
             var objects = (await handler
                 .GetCollectionEntries(ZetboxGeneratedVersionAttribute.Current, _backingStore, relationId, role, parentId))

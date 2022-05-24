@@ -42,16 +42,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnAddProperty_Interface")]
-        public override Zetbox.App.Base.Property AddProperty()
+        public override async System.Threading.Tasks.Task<Zetbox.App.Base.Property> AddProperty()
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.Property>();
             if (OnAddProperty_Interface != null)
             {
-                OnAddProperty_Interface(this, e);
+                await OnAddProperty_Interface(this, e);
             }
             else
             {
-                e.Result = base.AddProperty();
+                e.Result = await base.AddProperty();
             }
             return e.Result;
         }
@@ -105,16 +105,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDataType_Interface")]
-        public override System.Type GetDataType()
+        public override async System.Threading.Tasks.Task<System.Type> GetDataType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetDataType_Interface != null)
             {
-                OnGetDataType_Interface(this, e);
+                await OnGetDataType_Interface(this, e);
             }
             else
             {
-                e.Result = base.GetDataType();
+                e.Result = await base.GetDataType();
             }
             return e.Result;
         }
@@ -168,16 +168,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDataTypeString_Interface")]
-        public override string GetDataTypeString()
+        public override async System.Threading.Tasks.Task<string> GetDataTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDataTypeString_Interface != null)
             {
-                OnGetDataTypeString_Interface(this, e);
+                await OnGetDataTypeString_Interface(this, e);
             }
             else
             {
-                e.Result = base.GetDataTypeString();
+                e.Result = await base.GetDataTypeString();
             }
             return e.Result;
         }
@@ -231,16 +231,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnImplementInterfaces_Interface")]
-        public override void ImplementInterfaces()
+        public override async System.Threading.Tasks.Task ImplementInterfaces()
         {
             // base.ImplementInterfaces();
             if (OnImplementInterfaces_Interface != null)
             {
-                OnImplementInterfaces_Interface(this);
+                await OnImplementInterfaces_Interface(this);
             }
             else
             {
-                base.ImplementInterfaces();
+                await base.ImplementInterfaces();
             }
         }
         public static event ImplementInterfaces_Handler<Interface> OnImplementInterfaces_Interface;

@@ -514,15 +514,15 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_Owner.HasValue)
-                this.Owner = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_Owner.Value));
+                this.Owner = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_Owner.Value)));
             else
                 this.Owner = null;
 
             if (_fk_guid_Type.HasValue)
-                this.Type = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_Type.Value));
+                this.Type = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_Type.Value)));
             else
             if (_fk_Type.HasValue)
-                this.Type = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_Type.Value));
+                this.Type = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value)));
             else
                 this.Type = null;
         }

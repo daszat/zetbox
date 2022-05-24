@@ -38,7 +38,7 @@ namespace Zetbox.Generator.Templates.Properties
         {
             string propertyName = asCollectionEntry ? "Value" : property.Name;
             string backingStoreName = propertyName + implementationPropertySuffix;
-            string typeName = property.GetElementTypeString();
+            string typeName = property.GetElementTypeString().Result;
             string implementationTypeName = typeName + implementationSuffix;
             string lazyCtxParam = string.IsNullOrEmpty(lazyCtxProperty) ? "null" : lazyCtxProperty;
 

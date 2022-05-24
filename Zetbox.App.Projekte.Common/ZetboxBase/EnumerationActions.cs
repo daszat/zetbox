@@ -38,20 +38,16 @@ namespace Zetbox.App.Base
             return System.Threading.Tasks.Task.CompletedTask;
         }
         [Invocation]
-        public static System.Threading.Tasks.Task GetLabelByName(Zetbox.App.Base.Enumeration obj, MethodReturnEventArgs<string> e, System.String name)
+        public static async System.Threading.Tasks.Task GetLabelByName(Zetbox.App.Base.Enumeration obj, MethodReturnEventArgs<string> e, System.String name)
         {
-            var entry = obj.GetEntryByName(name);
-            e.Result = entry != null ? entry.GetLabel() : string.Empty;
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            var entry = await obj.GetEntryByName(name);
+            e.Result = entry != null ? (await entry.GetLabel()) : string.Empty;
         }
         [Invocation]
-        public static System.Threading.Tasks.Task GetLabelByValue(Zetbox.App.Base.Enumeration obj, MethodReturnEventArgs<string> e, System.Int32 val)
+        public static async System.Threading.Tasks.Task GetLabelByValue(Zetbox.App.Base.Enumeration obj, MethodReturnEventArgs<string> e, System.Int32 val)
         {
-            var entry = obj.GetEntryByValue(val);
-            e.Result = entry != null ? entry.GetLabel() : string.Empty;
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            var entry = await obj.GetEntryByValue(val);
+            e.Result = entry != null ? (await entry.GetLabel()) : string.Empty;
         }
 
         [Invocation]

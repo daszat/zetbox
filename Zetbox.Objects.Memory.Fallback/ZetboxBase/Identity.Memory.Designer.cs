@@ -168,7 +168,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchGroupsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Group>)_Groups;
             }
@@ -184,8 +183,9 @@ namespace Zetbox.App.Base
         public System.Threading.Tasks.Task TriggerFetchGroupsAsync()
         {
             if (_triggerFetchGroupsTask != null) return _triggerFetchGroupsTask;
-            _triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.A, this);
-            _triggerFetchGroupsTask = _triggerFetchGroupsTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _Groups
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>>(
@@ -193,7 +193,7 @@ namespace Zetbox.App.Base
                         new RelationshipFilterASideCollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryMemoryImpl>(this.Context, this));
                         // _Groups.CollectionChanged is managed by OnGroupsCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchGroupsTask;
+            return _triggerFetchGroupsTask = task;
         }
 
         internal void OnGroupsCollectionChanged()
@@ -511,12 +511,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnClearLoginToken_Identity")]
-        public virtual void ClearLoginToken()
+        public virtual async System.Threading.Tasks.Task ClearLoginToken()
         {
             // base.ClearLoginToken();
             if (OnClearLoginToken_Identity != null)
             {
-                OnClearLoginToken_Identity(this);
+                await OnClearLoginToken_Identity(this);
             }
             else
             {
@@ -574,12 +574,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateLoginToken_Identity")]
-        public virtual void CreateLoginToken()
+        public virtual async System.Threading.Tasks.Task CreateLoginToken()
         {
             // base.CreateLoginToken();
             if (OnCreateLoginToken_Identity != null)
             {
-                OnCreateLoginToken_Identity(this);
+                await OnCreateLoginToken_Identity(this);
             }
             else
             {
@@ -637,12 +637,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnSetPassword_Identity")]
-        public virtual void SetPassword(string plainTextPassword)
+        public virtual async System.Threading.Tasks.Task SetPassword(string plainTextPassword)
         {
             // base.SetPassword();
             if (OnSetPassword_Identity != null)
             {
-                OnSetPassword_Identity(this, plainTextPassword);
+                await OnSetPassword_Identity(this, plainTextPassword);
             }
             else
             {
@@ -700,12 +700,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnSetPasswordUI_Identity")]
-        public virtual void SetPasswordUI()
+        public virtual async System.Threading.Tasks.Task SetPasswordUI()
         {
             // base.SetPasswordUI();
             if (OnSetPasswordUI_Identity != null)
             {
-                OnSetPasswordUI_Identity(this);
+                await OnSetPasswordUI_Identity(this);
             }
             else
             {

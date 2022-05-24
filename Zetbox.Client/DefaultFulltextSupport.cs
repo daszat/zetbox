@@ -54,7 +54,7 @@ namespace Zetbox.Client
         {
             if (await cls.ImplementsICustomFulltextFormat()) return true;
 
-            foreach (var prop in cls.GetAllProperties())
+            foreach (var prop in await cls.GetAllProperties())
             {
                 if (prop is StringProperty /* && further restictions */) return true;
                 if (prop is EnumerationProperty) return true;

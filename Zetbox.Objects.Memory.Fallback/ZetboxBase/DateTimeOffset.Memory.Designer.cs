@@ -384,12 +384,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnAddTo_DateTimeOffset")]
-        public virtual DateTime AddTo(DateTime dt)
+        public virtual async System.Threading.Tasks.Task<DateTime> AddTo(DateTime dt)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnAddTo_DateTimeOffset != null)
             {
-                OnAddTo_DateTimeOffset(this, e, dt);
+                await OnAddTo_DateTimeOffset(this, e, dt);
             }
             else
             {

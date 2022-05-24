@@ -38,6 +38,6 @@ namespace Zetbox.App.Base
         /// <summary>
         /// GetDefaultValue
         /// </summary>
-        System.Object GetDefaultValue();
+        System.Threading.Tasks.Task<System.Object> GetDefaultValue();
     }
 }

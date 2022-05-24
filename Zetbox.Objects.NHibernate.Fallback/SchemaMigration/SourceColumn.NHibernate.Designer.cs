@@ -1437,12 +1437,12 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateProperty_SourceColumn")]
-        public virtual void CreateProperty()
+        public virtual async System.Threading.Tasks.Task CreateProperty()
         {
             // base.CreateProperty();
             if (OnCreateProperty_SourceColumn != null)
             {
-                OnCreateProperty_SourceColumn(this);
+                await OnCreateProperty_SourceColumn(this);
             }
             else
             {
@@ -1649,28 +1649,28 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_References.HasValue)
-                this.References = ((Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceColumn>(_fk_guid_References.Value));
+                this.References = ((Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.SchemaMigration.SourceColumn>(_fk_guid_References.Value)));
             else
             if (_fk_References.HasValue)
-                this.References = ((Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceColumn>(_fk_References.Value));
+                this.References = ((Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.SchemaMigration.SourceColumn>(_fk_References.Value)));
             else
                 this.References = null;
 
             if (_fk_guid_SourceTable.HasValue)
-                this.SourceTable = ((Zetbox.App.SchemaMigration.SourceTableNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceTable>(_fk_guid_SourceTable.Value));
+                this.SourceTable = ((Zetbox.App.SchemaMigration.SourceTableNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.SchemaMigration.SourceTable>(_fk_guid_SourceTable.Value)));
             else
             if (_fk_SourceTable.HasValue)
-                this.SourceTable = ((Zetbox.App.SchemaMigration.SourceTableNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceTable>(_fk_SourceTable.Value));
+                this.SourceTable = ((Zetbox.App.SchemaMigration.SourceTableNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.SchemaMigration.SourceTable>(_fk_SourceTable.Value)));
             else
                 this.SourceTable = null;
         }

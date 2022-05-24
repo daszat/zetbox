@@ -810,12 +810,12 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Migrat
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateMappingReport_MigrationProject")]
-        public virtual void CreateMappingReport()
+        public virtual async System.Threading.Tasks.Task CreateMappingReport()
         {
             // base.CreateMappingReport();
             if (OnCreateMappingReport_MigrationProject != null)
             {
-                OnCreateMappingReport_MigrationProject(this);
+                await OnCreateMappingReport_MigrationProject(this);
             }
             else
             {
@@ -873,12 +873,12 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Migrat
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpdateFromSourceSchema_MigrationProject")]
-        public virtual void UpdateFromSourceSchema()
+        public virtual async System.Threading.Tasks.Task UpdateFromSourceSchema()
         {
             // base.UpdateFromSourceSchema();
             if (OnUpdateFromSourceSchema_MigrationProject != null)
             {
-                OnUpdateFromSourceSchema_MigrationProject(this);
+                await OnUpdateFromSourceSchema_MigrationProject(this);
             }
             else
             {

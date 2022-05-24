@@ -21,25 +21,25 @@ namespace Zetbox.API.Server
 
     public interface IServer
     {
-        void AnalyzeDatabase(string connectionName, TextWriter output);
+        Task AnalyzeDatabase(string connectionName, TextWriter output);
         Task CheckSchema(bool withRepair);
-        void CheckSchema(string[] files, bool withRepair);
-        void CheckSchemaFromCurrentMetaData(bool withRepair);
-        void Deploy();
-        void Deploy(params string[] files);
-        void Export(string file, string[] schemaModules, string[] ownerModules);
-        void Import(params string[] files);
-        void Publish(string file, string[] ownerModules);
-        void DeleteModule(string module);
-        void RunBenchmarks();
-        void RunFixes();
-        void SyncIdentities(string source);
-        void UpdateSchema();
-        void UpdateSchema(params string[] files);
+        Task CheckSchema(string[] files, bool withRepair);
+        Task CheckSchemaFromCurrentMetaData(bool withRepair);
+        Task Deploy();
+        Task Deploy(params string[] files);
+        Task Export(string file, string[] schemaModules, string[] ownerModules);
+        Task Import(params string[] files);
+        Task Publish(string file, string[] ownerModules);
+        Task DeleteModule(string module);
+        Task RunBenchmarks();
+        Task RunFixes();
+        Task SyncIdentities(string source);
+        Task UpdateSchema();
+        Task UpdateSchema(params string[] files);
         /// <param name="properties">Pass null to recalculate all properties. Or, pass the list properties you want to have recalculated. An empty list, of course, will not process anything.</param>
-        void RecalculateProperties(Property[] properties);
-        void WipeDatabase();
-        void WaitForDatabase();
-        void RefreshRights();
+        Task RecalculateProperties(Property[] properties);
+        Task WipeDatabase();
+        Task WaitForDatabase();
+        Task RefreshRights();
     }
 }

@@ -79,7 +79,7 @@ namespace Zetbox.App.Base
 
                 foreach (var relEnd in relEnds)
                 {
-                    var otherEnd = relEnd.Parent.GetOtherEnd(relEnd);
+                    var otherEnd = await relEnd.Parent.GetOtherEnd(relEnd);
                     var rel = relEnd.Parent;
 
                     if (otherEnd.Navigator != null)
@@ -89,7 +89,7 @@ namespace Zetbox.App.Base
                         var refClass = (ObjectClass)prop.ObjectClass;
                         var ifType = refClass.GetDescribedInterfaceType();
 
-                        if (prop.GetIsList())
+                        if (await prop.GetIsList())
                         {
                             Logging.Server.DebugFormat("Replacing on list {0}", propName);
                             foreach (var refObj in ctx.Internals().GetPersistenceObjectQuery(ifType).Where(string.Format("{0}.Any(ID == @0)", propName), sourceID))

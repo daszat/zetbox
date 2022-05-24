@@ -90,7 +90,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             _type = type;
             if (qry == null)
             {
-                MethodInfo mi = this.GetType().FindGenericMethod("GetTypedQuery", new Type[] { DataContext.GetInterfaceType(_type.GetDataType()).Type }, null);
+                MethodInfo mi = this.GetType().FindGenericMethod("GetTypedQuery", new Type[] { DataContext.GetInterfaceType(_type.GetDataType().Result).Type }, null);
                 // See Case 552
                 _query = () => (IQueryable)mi.Invoke(this, new object[] { });
             }
@@ -179,7 +179,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return DataContext.GetInterfaceType(_type.GetDataType());
+                return DataContext.GetInterfaceType(_type.GetDataType().Result);
             }
         }
         #endregion
@@ -599,19 +599,19 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_displayedColumns == null)
                 {
-                    _displayedColumns = CreateDisplayedColumns();
+                    Task.Run(async () => await CreateDisplayedColumns());
                 }
                 return _displayedColumns;
             }
         }
 
-        public void AddDisplayColumn(Property[] propPath)
+        public async Task AddDisplayColumn(Property[] propPath)
         {
-            DisplayedColumns.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, propPath));
+            DisplayedColumns.Columns.Add(await ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, propPath));
         }
-        public void AddDisplayColumn(int index, Property[] propPath)
+        public async Task AddDisplayColumn(int index, Property[] propPath)
         {
-            DisplayedColumns.Columns.Insert(index, ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, propPath));
+            DisplayedColumns.Columns.Insert(index, await ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, propPath));
         }
 
         public void RemoveDisplayColumn(Property property)
@@ -634,16 +634,18 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public delegate System.Threading.Tasks.Task DisplayedColumnsCreatedHandler(GridDisplayConfiguration cols);
         public event DisplayedColumnsCreatedHandler DisplayedColumnsCreated;
 
-        protected virtual GridDisplayConfiguration CreateDisplayedColumns()
+        protected virtual async Task<GridDisplayConfiguration> CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration();
-            result.BuildColumns(this._type, IsInlineEditable ? GridDisplayConfiguration.Mode.Editable : GridDisplayConfiguration.Mode.ReadOnly, IsInlineEditable);
+            await result.BuildColumns(this._type, IsInlineEditable ? GridDisplayConfiguration.Mode.Editable : GridDisplayConfiguration.Mode.ReadOnly, IsInlineEditable);
 
             DisplayedColumnsCreatedHandler temp = DisplayedColumnsCreated;
             if (temp != null)
             {
-                temp(result);
+                await temp(result);
             }
+
+            OnPropertyChanged(nameof(DisplayedColumns));
 
             return result;
         }
@@ -767,9 +769,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         #region Execute Filter and fill List
         private Func<IQueryable> _query;
-        protected virtual IQueryable GetQuery()
+        protected virtual async Task<IQueryable> GetQuery()
         {
-            var result = GetUnpagedQuery();
+            var result = await GetUnpagedQuery();
 
             var skip = (CurrentPage - 1) * Zetbox.API.Helper.MAXLISTCOUNT;
 
@@ -781,9 +783,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return result;
         }
 
-        private IQueryable GetUnpagedQuery()
+        private async Task<IQueryable> GetUnpagedQuery()
         {
-            var result = FilterList.AppendFilter(_query());
+            var result = await FilterList.AppendFilter(_query());
+
+            var orderByExpression = await GetOrderByExpression();
 
             if (!string.IsNullOrEmpty(orderByExpression))
             {
@@ -851,14 +855,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 try
                 {
                     // No order by - may be set from outside in LinqQuery!
-                    var execQuery = await GetQuery().ToListAsync();
+                    var execQuery = await (await GetQuery()).ToListAsync();
 
                     _instancesFromServer = execQuery.Cast<IDataObject>()
                             .Where(obj => obj.ObjectState != DataObjectState.Deleted) // Not interested in deleted objects TODO: Discuss if a query should return deleted objects
                             .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj))
                             .ToList();
 
-                    UpdateFilteredInstances();
+                    await UpdateFilteredInstances();
                 }
                 catch (Exception ex)
                 {
@@ -876,11 +880,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// <summary>
         /// Create a fresh <see cref="Instances"/> collection when something has changed.
         /// </summary>
-        private void UpdateFilteredInstances()
+        private async Task UpdateFilteredInstances()
         {
             var tmp = FilterList.AppendPostFilter(new List<DataObjectViewModel>(_instancesFromServer));
 
             // Sort
+            var orderByExpression = await GetOrderByExpression();
+
             if (!string.IsNullOrEmpty(orderByExpression))
             {
                 _filteredInstances =

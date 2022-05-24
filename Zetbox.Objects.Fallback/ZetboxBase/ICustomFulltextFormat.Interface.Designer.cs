@@ -17,6 +17,6 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-        string GetFulltextIndexBody();
+        System.Threading.Tasks.Task<string> GetFulltextIndexBody();
     }
 }

@@ -354,12 +354,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_Group")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_Group != null)
             {
-                OnGetName_Group(this, e);
+                await OnGetName_Group(this, e);
             }
             else
             {

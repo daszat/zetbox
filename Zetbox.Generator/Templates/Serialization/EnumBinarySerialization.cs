@@ -31,7 +31,7 @@ namespace Zetbox.Generator.Templates.Serialization
         {
             string xmlnamespace = prop.Module.Namespace;
             string xmlname = prop.Name;
-            string enumerationType = prop.GetElementTypeString();
+            string enumerationType = prop.GetElementTypeString().Result;
 
             AddToSerializers(list,
                 prop.DisableExport == true ? Templates.Serialization.SerializerType.Binary : SerializerType.All,

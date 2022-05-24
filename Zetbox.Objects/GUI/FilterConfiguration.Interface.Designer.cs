@@ -89,11 +89,11 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx);
+        System.Threading.Tasks.Task<Zetbox.API.IFilterModel> CreateFilterModel(Zetbox.API.IZetboxContext ctx);
 
         /// <summary>
         /// 
         /// </summary>
-        string GetLabel();
+        System.Threading.Tasks.Task<string> GetLabel();
     }
 }

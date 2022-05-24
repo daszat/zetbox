@@ -111,11 +111,9 @@ namespace at.dasz.DocumentManagement
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task preSet_Blob(File obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
+        public static async System.Threading.Tasks.Task preSet_Blob(File obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
         {
-            e.Result = obj.HandleBlobChange(e.OldValue, e.NewValue);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            e.Result = await obj.HandleBlobChange(e.OldValue, e.NewValue);
         }
 
         [Invocation]
@@ -141,13 +139,13 @@ namespace at.dasz.DocumentManagement
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task ExtractText(File obj)
+        public static async System.Threading.Tasks.Task ExtractText(File obj)
         {
             var blob = obj.Blob;
 
             if (blob != null)
             {
-                var txt = _textExtractor.GetText(obj.Blob.GetStream(), blob.MimeType);
+                var txt = _textExtractor.GetText(await obj.Blob.GetStream(), blob.MimeType);
                 var excerpt = obj.Excerpt;
                 if (string.IsNullOrWhiteSpace(txt))
                 {
@@ -167,8 +165,6 @@ namespace at.dasz.DocumentManagement
                     excerpt.Text = txt.Trim();
                 }
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

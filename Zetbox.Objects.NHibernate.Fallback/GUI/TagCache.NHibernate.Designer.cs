@@ -111,12 +111,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnRebuild_TagCache")]
-        public virtual void Rebuild()
+        public virtual async System.Threading.Tasks.Task Rebuild()
         {
             // base.Rebuild();
             if (OnRebuild_TagCache != null)
             {
-                OnRebuild_TagCache(this);
+                await OnRebuild_TagCache(this);
             }
             else
             {

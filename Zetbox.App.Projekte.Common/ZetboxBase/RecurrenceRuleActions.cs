@@ -113,47 +113,39 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start)
+        public static async System.Threading.Tasks.Task GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start)
         {
-            e.Result = obj.GetNext(start, DateTime.Now);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            e.Result = await obj.GetNext(start, DateTime.Now);
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start, DateTime dt)
+        public static async System.Threading.Tasks.Task GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start, DateTime dt)
         {
-            var occurrences = obj.GetWithinInterval(start, dt, dt.Add(GetIntervalTimeSpan(obj.Frequency, obj.Interval)));
+            var occurrences = await obj.GetWithinInterval(start, dt, dt.Add(GetIntervalTimeSpan(obj.Frequency, obj.Interval)));
             e.Result = occurrences.Where(i => i != dt).FirstOrDefault();
             if (e.Result == default(DateTime)) e.Result = dt;
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetCurrent(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start)
+        public static async System.Threading.Tasks.Task GetCurrent(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start)
         {
-            e.Result = obj.GetCurrent(start, DateTime.Now);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            e.Result = await obj.GetCurrent(start, DateTime.Now);
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetCurrent(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start, DateTime dt)
+        public static async System.Threading.Tasks.Task GetCurrent(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start, DateTime dt)
         {
-            var occurrences = obj.GetWithinInterval(start, dt.Add(-GetIntervalTimeSpan(obj.Frequency, obj.Interval)), dt);
+            var occurrences = await obj.GetWithinInterval(start, dt.Add(-GetIntervalTimeSpan(obj.Frequency, obj.Interval)), dt);
             e.Result = occurrences.LastOrDefault();
             if (e.Result == default(DateTime)) e.Result = dt;
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetRelative(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime dt)
+        public static async System.Threading.Tasks.Task GetRelative(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime dt)
         {
             if (obj.Count.HasValue == false)
             {
-                e.Result = obj.GetNext(dt, dt);
+                e.Result = await obj.GetNext(dt, dt);
             }
             else if (obj.Count == 1)
             {
@@ -164,12 +156,10 @@ namespace Zetbox.App.Base
                 var result = dt;
                 for (int i = 0; i < obj.Count; i++)
                 {
-                    result = obj.GetNext(result, result);
+                    result = await obj.GetNext(result, result);
                 }
                 e.Result = result;
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         private static IEnumerable<int> ToInt(string val)

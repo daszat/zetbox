@@ -1491,12 +1491,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnAddProperty_DataType")]
-        public virtual Zetbox.App.Base.Property AddProperty()
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.Property> AddProperty()
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.Property>();
             if (OnAddProperty_DataType != null)
             {
-                OnAddProperty_DataType(this, e);
+                await OnAddProperty_DataType(this, e);
             }
             else
             {
@@ -1555,12 +1555,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDataType_DataType")]
-        public virtual System.Type GetDataType()
+        public virtual async System.Threading.Tasks.Task<System.Type> GetDataType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetDataType_DataType != null)
             {
-                OnGetDataType_DataType(this, e);
+                await OnGetDataType_DataType(this, e);
             }
             else
             {
@@ -1619,12 +1619,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDataTypeString_DataType")]
-        public virtual string GetDataTypeString()
+        public virtual async System.Threading.Tasks.Task<string> GetDataTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDataTypeString_DataType != null)
             {
-                OnGetDataTypeString_DataType(this, e);
+                await OnGetDataTypeString_DataType(this, e);
             }
             else
             {
@@ -1683,12 +1683,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnImplementInterfaces_DataType")]
-        public virtual void ImplementInterfaces()
+        public virtual async System.Threading.Tasks.Task ImplementInterfaces()
         {
             // base.ImplementInterfaces();
             if (OnImplementInterfaces_DataType != null)
             {
-                OnImplementInterfaces_DataType(this);
+                await OnImplementInterfaces_DataType(this);
             }
             else
             {

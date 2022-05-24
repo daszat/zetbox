@@ -29,6 +29,7 @@ namespace Zetbox.App.Base
     using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
     using Zetbox.Client.GUI;
     using Zetbox.API.Common;
+    using stt = System.Threading.Tasks;
 
     /// <summary>
     /// Client implementation
@@ -132,13 +133,14 @@ namespace Zetbox.App.Base
                     ctx,
                     null,
                     candidates,
-                    (chosenClass) =>
+                    async (chosenClass) =>
                     {
                         if (chosenClass != null && chosenClass.Count() == 1)
                         {
                             var propCls = ((PropertyTypeSelectionViewModel)chosenClass.Single()).TargetPropClass;
-                            bool show;
-                            var newProp = ShowCreatePropertyDialog(ctx, propCls, obj.Module, out show);
+                            var result = await ShowCreatePropertyDialog(ctx, propCls, obj.Module);
+                            var newProp = result.Item1;
+                            bool show = result.Item2;
                             if (newProp != null)
                             {
                                 obj.Properties.Add(newProp);
@@ -154,51 +156,51 @@ namespace Zetbox.App.Base
             await _vmf.ShowDialog(selectClass);
         }
 
-        private static Property ShowCreatePropertyDialog(IZetboxContext ctx, ObjectClass propCls, Module targetModule, out bool show)
+        private static async stt.Task<Tuple<Property, bool>> ShowCreatePropertyDialog(IZetboxContext ctx, ObjectClass propCls, Module targetModule)
         {
             var ifType = propCls.GetDescribedInterfaceType();
 
             var dlg = _vmf.CreateDialog(ctx, string.Format(Zetbox.App.Projekte.Client.ZetboxBase.Strings.CreatePropertyDlg_Title, ifType.Type.Name))
-                .AddString("name", NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.Name.Find(_frozenCtx).GetLabel())
-                .AddString("label", NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.Label.Find(_frozenCtx).GetLabel(), allowNullInput: true)
-                .AddString("description", NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.Description.Find(_frozenCtx).GetLabel(), allowNullInput: true)
-                .AddString("categorytags", NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.CategoryTags.Find(_frozenCtx).GetLabel(), allowNullInput: true, vmdesc: NamedObjects.Gui.ViewModelDescriptors.Zetbox_Client_Presentables_ZetboxBase_TagPropertyEditorViewModel.Find(_frozenCtx))
-                .AddObjectReference("module", NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.Module.Find(_frozenCtx).GetLabel(), typeof(Module).GetObjectClass(_frozenCtx), value: targetModule)
+                .AddString("name", await NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.Name.Find(_frozenCtx).GetLabel())
+                .AddString("label", await NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.Label.Find(_frozenCtx).GetLabel(), allowNullInput: true)
+                .AddString("description", await NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.Description.Find(_frozenCtx).GetLabel(), allowNullInput: true)
+                .AddString("categorytags", await NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.CategoryTags.Find(_frozenCtx).GetLabel(), allowNullInput: true, vmdesc: NamedObjects.Gui.ViewModelDescriptors.Zetbox_Client_Presentables_ZetboxBase_TagPropertyEditorViewModel.Find(_frozenCtx))
+                .AddObjectReference("module", await NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.Module.Find(_frozenCtx).GetLabel(), typeof(Module).GetObjectClass(_frozenCtx), value: targetModule)
                 .AddBool("isNullable", Zetbox.App.Projekte.Client.ZetboxBase.Strings.IsNullable, value: true);
 
             if (typeof(StringProperty).IsAssignableFrom(ifType.Type))
             {
                 var p = NamedObjects.Base.Classes.Zetbox.App.Base.StringRangeConstraint_Properties.MaxLength.Find(_frozenCtx);
-                dlg.AddInt("str_maxlengt", p.GetLabel(), allowNullInput: true, description: p.GetDescription());
+                dlg.AddInt("str_maxlengt", await p.GetLabel(), allowNullInput: true, description: await p.GetDescription());
             }
             if (typeof(DateTimeProperty).IsAssignableFrom(ifType.Type))
             {
                 var p = NamedObjects.Base.Classes.Zetbox.App.Base.DateTimeProperty_Properties.DateTimeStyle.Find(_frozenCtx);
-                dlg.AddEnumeration("dt_style", p.GetLabel(), _frozenCtx.FindPersistenceObject<Enumeration>(new Guid("1385e46d-3e5b-4d91-bf9a-94a740f08ba1")), description: p.GetDescription(), value: (int)DateTimeStyles.Date);
+                dlg.AddEnumeration("dt_style", await p.GetLabel(), _frozenCtx.FindPersistenceObject<Enumeration>(new Guid("1385e46d-3e5b-4d91-bf9a-94a740f08ba1")), description: await p.GetDescription(), value: (int)DateTimeStyles.Date);
             }
             if (typeof(DecimalProperty).IsAssignableFrom(ifType.Type))
             {
                 var p = NamedObjects.Base.Classes.Zetbox.App.Base.DecimalProperty_Properties.Precision.Find(_frozenCtx);
                 var s = NamedObjects.Base.Classes.Zetbox.App.Base.DecimalProperty_Properties.Scale.Find(_frozenCtx);
-                dlg.AddInt("decimal_precision", p.GetLabel(), description: p.GetDescription(), value: 10);
-                dlg.AddInt("decimal_scale", s.GetLabel(), description: s.GetDescription(), value: 2);
+                dlg.AddInt("decimal_precision", await p.GetLabel(), description: await p.GetDescription(), value: 10);
+                dlg.AddInt("decimal_scale", await s.GetLabel(), description: await s.GetDescription(), value: 2);
             }
             if (typeof(EnumerationProperty).IsAssignableFrom(ifType.Type))
             {
                 var p = NamedObjects.Base.Classes.Zetbox.App.Base.EnumerationProperty_Properties.Enumeration.Find(_frozenCtx);
-                dlg.AddObjectReference("enum", p.GetLabel(), typeof(Enumeration).GetObjectClass(_frozenCtx), description: p.GetDescription());
+                dlg.AddObjectReference("enum", await p.GetLabel(), typeof(Enumeration).GetObjectClass(_frozenCtx), description: await p.GetDescription());
             }
             if (typeof(CompoundObjectProperty).IsAssignableFrom(ifType.Type))
             {
                 var p = NamedObjects.Base.Classes.Zetbox.App.Base.CompoundObjectProperty_Properties.CompoundObjectDefinition.Find(_frozenCtx);
-                dlg.AddObjectReference("cp_def", p.GetLabel(), typeof(CompoundObject).GetObjectClass(_frozenCtx), description: p.GetDescription());
+                dlg.AddObjectReference("cp_def", await p.GetLabel(), typeof(CompoundObject).GetObjectClass(_frozenCtx), description: await p.GetDescription());
             }
             if (typeof(IntProperty).IsAssignableFrom(ifType.Type))
             {
                 var min = NamedObjects.Base.Classes.Zetbox.App.Base.IntegerRangeConstraint_Properties.Min.Find(_frozenCtx);
                 var max = NamedObjects.Base.Classes.Zetbox.App.Base.IntegerRangeConstraint_Properties.Max.Find(_frozenCtx);
-                dlg.AddInt("int_min", min.GetLabel(), description: min.GetDescription(), allowNullInput: true);
-                dlg.AddInt("int_max", max.GetLabel(), description: max.GetDescription(), allowNullInput: true);
+                dlg.AddInt("int_min", await min.GetLabel(), description: await min.GetDescription(), allowNullInput: true);
+                dlg.AddInt("int_max", await max.GetLabel(), description: await max.GetDescription(), allowNullInput: true);
             }
 
             dlg.AddBool("show", Zetbox.App.Projekte.Client.ZetboxBase.Strings.ShowPropertyWhenFinished, value: false, description: Zetbox.App.Projekte.Client.ZetboxBase.Strings.ShowPropertyWhenFinishedDescription);
@@ -262,8 +264,7 @@ namespace Zetbox.App.Base
                 localShow = (bool)values["show"];
             }));
 
-            show = localShow;
-            return newProp;
+            return new Tuple<Property, bool>(newProp, localShow);
         }
     }
 }

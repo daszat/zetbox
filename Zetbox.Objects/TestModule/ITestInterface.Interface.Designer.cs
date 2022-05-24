@@ -58,6 +58,6 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-        void TestMethod(DateTime DateTimeParam);
+        System.Threading.Tasks.Task TestMethod(DateTime DateTimeParam);
     }
 }

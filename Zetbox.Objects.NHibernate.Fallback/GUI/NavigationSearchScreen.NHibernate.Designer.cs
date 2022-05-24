@@ -1341,16 +1341,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDefaultViewModel_NavigationSearchScreen")]
-        public override System.Object GetDefaultViewModel(Zetbox.API.IZetboxContext dataCtx, System.Object parent)
+        public override async System.Threading.Tasks.Task<System.Object> GetDefaultViewModel(Zetbox.API.IZetboxContext dataCtx, System.Object parent)
         {
             var e = new MethodReturnEventArgs<System.Object>();
             if (OnGetDefaultViewModel_NavigationSearchScreen != null)
             {
-                OnGetDefaultViewModel_NavigationSearchScreen(this, e, dataCtx, parent);
+                await OnGetDefaultViewModel_NavigationSearchScreen(this, e, dataCtx, parent);
             }
             else
             {
-                e.Result = base.GetDefaultViewModel(dataCtx, parent);
+                e.Result = await base.GetDefaultViewModel(dataCtx, parent);
             }
             return e.Result;
         }
@@ -1531,26 +1531,26 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_guid_RequestedEditorKind.HasValue)
-                this.RequestedEditorKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedEditorKind.Value));
+                this.RequestedEditorKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedEditorKind.Value)));
             else
             if (_fk_RequestedEditorKind.HasValue)
-                this.RequestedEditorKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value));
+                this.RequestedEditorKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value)));
             else
                 this.RequestedEditorKind = null;
 
             if (_fk_guid_RequestedWorkspaceKind.HasValue)
-                this.RequestedWorkspaceKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedWorkspaceKind.Value));
+                this.RequestedWorkspaceKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedWorkspaceKind.Value)));
             else
             if (_fk_RequestedWorkspaceKind.HasValue)
-                this.RequestedWorkspaceKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value));
+                this.RequestedWorkspaceKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value)));
             else
                 this.RequestedWorkspaceKind = null;
 
             if (_fk_guid_Type.HasValue)
-                this.Type = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_Type.Value));
+                this.Type = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_Type.Value)));
             else
             if (_fk_Type.HasValue)
-                this.Type = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_Type.Value));
+                this.Type = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value)));
             else
                 this.Type = null;
         }

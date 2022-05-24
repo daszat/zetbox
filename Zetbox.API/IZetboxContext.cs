@@ -28,14 +28,14 @@ namespace Zetbox.API
 {
     public interface IZetboxContextDebugger
     {
-        void Created(IZetboxContext ctx);
+        Task Created(IZetboxContext ctx);
     }
 
     public interface IZetboxContextEventListener
     {
-        void Created(IReadOnlyZetboxContext ctx);
-        void Submitted(IReadOnlyZetboxContext ctx, IEnumerable<IDataObject> added, IEnumerable<IDataObject> modified, IEnumerable<Tuple<InterfaceType, int>> deleted);
-        void Disposed(IReadOnlyZetboxContext ctx);
+        Task Created(IReadOnlyZetboxContext ctx);
+        Task Submitted(IReadOnlyZetboxContext ctx, IEnumerable<IDataObject> added, IEnumerable<IDataObject> modified, IEnumerable<Tuple<InterfaceType, int>> deleted);
+        Task Disposed(IReadOnlyZetboxContext ctx);
     }
 
     public static class ZetboxContextEventListenerHelper

@@ -196,16 +196,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_ObjectClassFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
+        public override async System.Threading.Tasks.Task<Zetbox.API.IFilterModel> CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_ObjectClassFilterConfiguration != null)
             {
-                OnCreateFilterModel_ObjectClassFilterConfiguration(this, e, ctx);
+                await OnCreateFilterModel_ObjectClassFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel(ctx);
+                e.Result = await base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -259,16 +259,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_ObjectClassFilterConfiguration")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_ObjectClassFilterConfiguration != null)
             {
-                OnGetLabel_ObjectClassFilterConfiguration(this, e);
+                await OnGetLabel_ObjectClassFilterConfiguration(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -391,10 +391,10 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_guid_ObjectClass.HasValue)
-                this.ObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_ObjectClass.Value));
+                this.ObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_ObjectClass.Value)));
             else
             if (_fk_ObjectClass.HasValue)
-                this.ObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value));
+                this.ObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value)));
             else
                 this.ObjectClass = null;
         }

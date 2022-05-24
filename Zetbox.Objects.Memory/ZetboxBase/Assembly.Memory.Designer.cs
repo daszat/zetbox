@@ -793,12 +793,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnRegenerateTypeRefs_Assembly")]
-        public virtual bool RegenerateTypeRefs()
+        public virtual async System.Threading.Tasks.Task<bool> RegenerateTypeRefs()
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnRegenerateTypeRefs_Assembly != null)
             {
-                OnRegenerateTypeRefs_Assembly(this, e);
+                await OnRegenerateTypeRefs_Assembly(this, e);
             }
             else
             {

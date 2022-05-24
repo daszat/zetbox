@@ -173,16 +173,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_CompoundObjectParameter")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_CompoundObjectParameter != null)
             {
-                OnGetLabel_CompoundObjectParameter(this, e);
+                await OnGetLabel_CompoundObjectParameter(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -236,16 +236,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterType_CompoundObjectParameter")]
-        public override System.Type GetParameterType()
+        public override async System.Threading.Tasks.Task<System.Type> GetParameterType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetParameterType_CompoundObjectParameter != null)
             {
-                OnGetParameterType_CompoundObjectParameter(this, e);
+                await OnGetParameterType_CompoundObjectParameter(this, e);
             }
             else
             {
-                e.Result = base.GetParameterType();
+                e.Result = await base.GetParameterType();
             }
             return e.Result;
         }
@@ -299,16 +299,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterTypeString_CompoundObjectParameter")]
-        public override string GetParameterTypeString()
+        public override async System.Threading.Tasks.Task<string> GetParameterTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetParameterTypeString_CompoundObjectParameter != null)
             {
-                OnGetParameterTypeString_CompoundObjectParameter(this, e);
+                await OnGetParameterTypeString_CompoundObjectParameter(this, e);
             }
             else
             {
-                e.Result = base.GetParameterTypeString();
+                e.Result = await base.GetParameterTypeString();
             }
             return e.Result;
         }
@@ -431,10 +431,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_CompoundObject.HasValue)
-                this.CompoundObject = ((Zetbox.App.Base.CompoundObjectNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.CompoundObject>(_fk_guid_CompoundObject.Value));
+                this.CompoundObject = ((Zetbox.App.Base.CompoundObjectNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.CompoundObject>(_fk_guid_CompoundObject.Value)));
             else
             if (_fk_CompoundObject.HasValue)
-                this.CompoundObject = ((Zetbox.App.Base.CompoundObjectNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value));
+                this.CompoundObject = ((Zetbox.App.Base.CompoundObjectNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value)));
             else
                 this.CompoundObject = null;
         }

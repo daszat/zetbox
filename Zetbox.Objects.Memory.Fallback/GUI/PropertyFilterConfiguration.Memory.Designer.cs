@@ -100,12 +100,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchPropertyTask != null) return _triggerFetchPropertyTask;
 
-            if (_fk_Property.HasValue)
-                _triggerFetchPropertyTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value);
-            else
-                _triggerFetchPropertyTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Property>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Property> task;
 
-            _triggerFetchPropertyTask.OnResult(t =>
+            if (_fk_Property.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Property>(null);
+
+            task.OnResult(t =>
             {
                 if (OnProperty_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchPropertyTask;
+            return _triggerFetchPropertyTask = task;
         }
 
         // internal implementation
@@ -126,7 +128,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchPropertyAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.PropertyMemoryImpl)task.Result;
             }
             set
@@ -197,16 +198,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_PropertyFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
+        public override async System.Threading.Tasks.Task<Zetbox.API.IFilterModel> CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_PropertyFilterConfiguration != null)
             {
-                OnCreateFilterModel_PropertyFilterConfiguration(this, e, ctx);
+                await OnCreateFilterModel_PropertyFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel(ctx);
+                e.Result = await base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -260,16 +261,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_PropertyFilterConfiguration")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_PropertyFilterConfiguration != null)
             {
-                OnGetLabel_PropertyFilterConfiguration(this, e);
+                await OnGetLabel_PropertyFilterConfiguration(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -392,10 +393,10 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_guid_Property.HasValue)
-                PropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_Property.Value);
+                PropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_guid_Property.Value));
             else
             if (_fk_Property.HasValue)
-                PropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_Property.Value);
+                PropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value));
             else
                 PropertyImpl = null;
             // fix cached lists references
@@ -509,7 +510,7 @@ namespace Zetbox.App.GUI
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(Property != null ? Property.ID : (int?)null);
+            binStream.Write(_fk_Property != null ? _fk_Property : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

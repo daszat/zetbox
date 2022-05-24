@@ -12,6 +12,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.Models;
     using Zetbox.API.Utils;
+    using System.Threading.Tasks;
 
     [ViewModelDescriptor]
     public class EventViewModel : DataObjectViewModel
@@ -124,7 +125,7 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public List<CalendarItemViewModel> CreateCalendarItemViewModels(DateTime displayFrom, DateTime displayTo)
+        public async Task<IList<CalendarItemViewModel>> CreateCalendarItemViewModels(DateTime displayFrom, DateTime displayTo)
         {
             var startDate = Event.StartDate;
             var endDate = Event.EndDate;
@@ -150,7 +151,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (Event.Recurrence.Until.HasValue && Event.Recurrence.Until.Value < displayTo)
                     displayTo = Event.Recurrence.Until.Value;
 
-                occurences = Event.Recurrence.GetWithinInterval(Event.StartDate, displayFrom, displayTo).ToList();
+                occurences = (await Event.Recurrence.GetWithinInterval(Event.StartDate, displayFrom, displayTo)).ToList();
             }
 
             foreach (var o in occurences)

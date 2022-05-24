@@ -87,21 +87,21 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Clears the login token
         /// </summary>
-        void ClearLoginToken();
+        System.Threading.Tasks.Task ClearLoginToken();
 
         /// <summary>
         /// Creates or re-creates the login token
         /// </summary>
-        void CreateLoginToken();
+        System.Threading.Tasks.Task CreateLoginToken();
 
         /// <summary>
         /// Sets a password hash from the given plain text password
         /// </summary>
-        void SetPassword(string plainTextPassword);
+        System.Threading.Tasks.Task SetPassword(string plainTextPassword);
 
         /// <summary>
         /// Sets a new password by opening a dialog
         /// </summary>
-        void SetPasswordUI();
+        System.Threading.Tasks.Task SetPasswordUI();
     }
 }

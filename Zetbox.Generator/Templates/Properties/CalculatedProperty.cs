@@ -36,8 +36,8 @@ namespace Zetbox.Generator.Templates.Properties
             // IZetboxContext ctx, Serialization.SerializationMembersList serializationList, string modulenamespace, string className, string referencedType, string propertyName, string getterEventName, bool isCompound, string backingName)
             Call(host, ctx, serList,
                 prop.Module.Namespace, 
-                prop.ObjectClass.GetDataTypeString(), 
-                prop.GetElementTypeString(), 
+                prop.ObjectClass.GetDataTypeString().Result, 
+                prop.GetElementTypeString().Result, 
                 prop.Name, "On" + prop.Name + "_Getter", 
                 prop.ObjectClass is CompoundObject,
                 prop.DisableExport == true);

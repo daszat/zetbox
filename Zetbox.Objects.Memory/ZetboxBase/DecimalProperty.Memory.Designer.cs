@@ -158,16 +158,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDescription_DecimalProperty")]
-        public override string GetDescription()
+        public override async System.Threading.Tasks.Task<string> GetDescription()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDescription_DecimalProperty != null)
             {
-                OnGetDescription_DecimalProperty(this, e);
+                await OnGetDescription_DecimalProperty(this, e);
             }
             else
             {
-                e.Result = base.GetDescription();
+                e.Result = await base.GetDescription();
             }
             return e.Result;
         }
@@ -221,16 +221,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetElementTypeString_DecimalProperty")]
-        public override string GetElementTypeString()
+        public override async System.Threading.Tasks.Task<string> GetElementTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetElementTypeString_DecimalProperty != null)
             {
-                OnGetElementTypeString_DecimalProperty(this, e);
+                await OnGetElementTypeString_DecimalProperty(this, e);
             }
             else
             {
-                e.Result = base.GetElementTypeString();
+                e.Result = await base.GetElementTypeString();
             }
             return e.Result;
         }
@@ -284,16 +284,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_DecimalProperty")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_DecimalProperty != null)
             {
-                OnGetLabel_DecimalProperty(this, e);
+                await OnGetLabel_DecimalProperty(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -347,16 +347,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_DecimalProperty")]
-        public override string GetName()
+        public override async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_DecimalProperty != null)
             {
-                OnGetName_DecimalProperty(this, e);
+                await OnGetName_DecimalProperty(this, e);
             }
             else
             {
-                e.Result = base.GetName();
+                e.Result = await base.GetName();
             }
             return e.Result;
         }
@@ -410,16 +410,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyType_DecimalProperty")]
-        public override System.Type GetPropertyType()
+        public override async System.Threading.Tasks.Task<System.Type> GetPropertyType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetPropertyType_DecimalProperty != null)
             {
-                OnGetPropertyType_DecimalProperty(this, e);
+                await OnGetPropertyType_DecimalProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyType();
+                e.Result = await base.GetPropertyType();
             }
             return e.Result;
         }
@@ -473,16 +473,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyTypeString_DecimalProperty")]
-        public override string GetPropertyTypeString()
+        public override async System.Threading.Tasks.Task<string> GetPropertyTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetPropertyTypeString_DecimalProperty != null)
             {
-                OnGetPropertyTypeString_DecimalProperty(this, e);
+                await OnGetPropertyTypeString_DecimalProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyTypeString();
+                e.Result = await base.GetPropertyTypeString();
             }
             return e.Result;
         }

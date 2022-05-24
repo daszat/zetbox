@@ -477,12 +477,12 @@ namespace Zetbox.App.Test
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnTestMethod_TestObjClass")]
-        public virtual void TestMethod(DateTime DateTimeParamForTestMethod)
+        public virtual async System.Threading.Tasks.Task TestMethod(DateTime DateTimeParamForTestMethod)
         {
             // base.TestMethod();
             if (OnTestMethod_TestObjClass != null)
             {
-                OnTestMethod_TestObjClass(this, DateTimeParamForTestMethod);
+                await OnTestMethod_TestObjClass(this, DateTimeParamForTestMethod);
             }
             else
             {

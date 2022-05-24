@@ -73,7 +73,7 @@ this.WriteObjects("            }\r\n");
 #line 56 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
 #line 57 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.Name)) {
+foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList().Result).OrderBy(p => p.Name)) {
 		var propName = prop.Name;
         if (prop.RelationEnd.HasPersistentOrder) {
             var positionPropertyName = Construct.ListPositionPropertyName(prop.RelationEnd);

@@ -89,7 +89,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                     new ObjectClasses.Constructors.CompoundInitialisationDescriptor(
                         "Value",
                         "this.Proxy.Value",
-                        prop.GetElementTypeString(),
+                        prop.GetElementTypeString().Result,
                         prop.GetElementTypeString() + ImplementationSuffix)
                 }
                 : new ObjectClasses.Constructors.CompoundInitialisationDescriptor[0];
@@ -117,7 +117,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             base.ApplyClassTailTemplate();
 
             string interfaceName = GetCeInterface();
-            string referencedType = prop.GetElementTypeString();
+            string referencedType = prop.GetElementTypeString().Result;
             if (prop is CompoundObjectProperty)
             {
                 referencedType += ImplementationSuffix;

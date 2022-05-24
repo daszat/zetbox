@@ -53,7 +53,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
         protected override void ApplyBPropertyTemplate()
         {
-            string interfaceType = prop.GetElementTypeString();
+            string interfaceType = prop.GetElementTypeString().Result;
             string implementationType = interfaceType;
 
             var cop = prop as CompoundObjectProperty;

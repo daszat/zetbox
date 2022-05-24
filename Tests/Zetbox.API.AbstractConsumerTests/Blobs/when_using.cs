@@ -85,11 +85,11 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
         }
 
         [Test]
-        public void should_content_be_the_original_content()
+        public async System.Threading.Tasks.Task should_content_be_the_original_content()
         {
             var blob = ctx.Find<Blob>(blob_id);
             Assert.That(blob, Is.Not.Null);
-            var s = blob.GetStream();
+            var s = await blob.GetStream();
             var sr = new StreamReader(s);
             var txt = sr.ReadToEnd();
             Assert.That(txt, Is.EqualTo(txt_data));

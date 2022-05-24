@@ -140,6 +140,6 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.App.Base.ObjectReferenceProperty CreateNavigator();
+        System.Threading.Tasks.Task<Zetbox.App.Base.ObjectReferenceProperty> CreateNavigator();
     }
 }

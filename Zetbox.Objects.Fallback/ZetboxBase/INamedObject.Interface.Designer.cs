@@ -17,6 +17,6 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Returns a name where this instance can be found in the NamedObjects space
         /// </summary>
-        string GetName();
+        System.Threading.Tasks.Task<string> GetName();
     }
 }

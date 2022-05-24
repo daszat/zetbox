@@ -121,7 +121,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchPropertiesAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Property>)_Properties;
             }
@@ -137,8 +136,9 @@ namespace Zetbox.App.Base
         public System.Threading.Tasks.Task TriggerFetchPropertiesAsync()
         {
             if (_triggerFetchPropertiesTask != null) return _triggerFetchPropertiesTask;
-            _triggerFetchPropertiesTask = Context.FetchRelationAsync<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
-            _triggerFetchPropertiesTask = _triggerFetchPropertiesTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _Properties
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>>(
@@ -146,7 +146,7 @@ namespace Zetbox.App.Base
                         new RelationshipFilterASideCollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>(this.Context, this));
                         // _Properties.CollectionChanged is managed by OnPropertiesCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchPropertiesTask;
+            return _triggerFetchPropertiesTask = task;
         }
 
         internal void OnPropertiesCollectionChanged()
@@ -167,16 +167,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetErrorText_IndexConstraint")]
-        public override string GetErrorText(Zetbox.API.IDataObject constrainedObject)
+        public override async System.Threading.Tasks.Task<string> GetErrorText(Zetbox.API.IDataObject constrainedObject)
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetErrorText_IndexConstraint != null)
             {
-                OnGetErrorText_IndexConstraint(this, e, constrainedObject);
+                await OnGetErrorText_IndexConstraint(this, e, constrainedObject);
             }
             else
             {
-                e.Result = base.GetErrorText(constrainedObject);
+                e.Result = await base.GetErrorText(constrainedObject);
             }
             return e.Result;
         }
@@ -230,16 +230,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnIsValid_IndexConstraint")]
-        public override bool IsValid(Zetbox.API.IDataObject constrainedObject)
+        public override async System.Threading.Tasks.Task<bool> IsValid(Zetbox.API.IDataObject constrainedObject)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsValid_IndexConstraint != null)
             {
-                OnIsValid_IndexConstraint(this, e, constrainedObject);
+                await OnIsValid_IndexConstraint(this, e, constrainedObject);
             }
             else
             {
-                e.Result = base.IsValid(constrainedObject);
+                e.Result = await base.IsValid(constrainedObject);
             }
             return e.Result;
         }

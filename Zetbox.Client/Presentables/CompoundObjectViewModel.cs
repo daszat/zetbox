@@ -29,6 +29,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.API.Common;
+    using System.Threading.Tasks;
 
     public class CompoundObjectViewModel
         : ViewModel
@@ -116,9 +117,9 @@ namespace Zetbox.Client.Presentables
                 _propertyModels = new LookupDictionary<Property, Property, BaseValueViewModel>(
                     _propertyList,
                     k => k,
-                    v =>
+                    async v =>
                     {
-                        var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v, v.GetPropertyValueModel(Object));
+                        var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v, await v.GetPropertyValueModel(Object));
                         result.IsReadOnly = IsReadOnly;
                         return result;
                     });
@@ -139,7 +140,7 @@ namespace Zetbox.Client.Presentables
                     _propertyModelsByName = new LookupDictionary<string, Property, BaseValueViewModel>(
                         _propertyList,
                         k => k.Name,
-                        v => _propertyModels[v]
+                        v => Task.FromResult(_propertyModels[v])
                     );
                     OnPropertyModelsByNameCreated();
                 }
@@ -237,7 +238,7 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                return new LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel>(PropertyGroups, mdl => mdl.Title, mdl => mdl);
+                return new LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel>(PropertyGroups, mdl => mdl.Title, mdl => Task.FromResult(mdl));
             }
         }
 

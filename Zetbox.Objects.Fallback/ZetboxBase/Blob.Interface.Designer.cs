@@ -47,11 +47,11 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Returnes the document stream
         /// </summary>
-        System.IO.Stream GetStream();
+        System.Threading.Tasks.Task<System.IO.Stream> GetStream();
 
         /// <summary>
         /// Opens the document
         /// </summary>
-        void Open();
+        System.Threading.Tasks.Task Open();
     }
 }

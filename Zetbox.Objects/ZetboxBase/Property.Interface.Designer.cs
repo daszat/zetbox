@@ -231,26 +231,26 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Returns the translated description
         /// </summary>
-        string GetDescription();
+        System.Threading.Tasks.Task<string> GetDescription();
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
         /// </summary>
-        string GetElementTypeString();
+        System.Threading.Tasks.Task<string> GetElementTypeString();
 
         /// <summary>
         /// 
         /// </summary>
-        string GetLabel();
+        System.Threading.Tasks.Task<string> GetLabel();
 
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
-        System.Type GetPropertyType();
+        System.Threading.Tasks.Task<System.Type> GetPropertyType();
 
         /// <summary>
         /// Returns the String representation of this Property Meta Object.
         /// </summary>
-        string GetPropertyTypeString();
+        System.Threading.Tasks.Task<string> GetPropertyTypeString();
     }
 }

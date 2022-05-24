@@ -261,7 +261,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return true;
         }
 
-        protected override void DoExecute(object data)
+        protected override Task DoExecute(object data)
         {
             var vModels = SelectedItems.OfType<DataObjectViewModel>().ToList();
             if (UseSeparateContext)
@@ -275,6 +275,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 ActivateItem(vModels);
                 OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext), new ItemsOpenedEventArgs(vModels));
             }
+
+            return Task.CompletedTask;
         }
 
         private void OnParameterChanged(object sender, PropertyChangedEventArgs e)
@@ -389,7 +391,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return true;
         }
 
-        protected override void DoExecute(object data)
+        protected override async Task DoExecute(object data)
         {
             if (UseSeparateContext && !ViewModelFactory.GetDecisionFromUser(CommonCommandsResources.DeleteDataObjectCommand_Confirm, CommonCommandsResources.DeleteDataObjectCommand_Confirm_Title))
             {
@@ -409,7 +411,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                             var here = ctx.Find(ctx.GetInterfaceType(other), other.ID);
                             DoDelete(ctx, here);
                         }
-                        ctx.SubmitChanges();
+                        await ctx.SubmitChanges();
                     }
                 }
                 catch (Exception ex)
@@ -527,7 +529,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return true;
         }
 
-        protected override void DoExecute(object data)
+        protected override async Task DoExecute(object data)
         {
             var allCandidates = new List<ObjectClass>();
             allCandidates.Add(Type);
@@ -541,7 +543,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             if (candidates.Count == 1)
             {
-                CreateItem(candidates.First());
+                await CreateItem(candidates.First());
             }
             else
             {
@@ -549,33 +551,33 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         DataContext, this,
                         typeof(ObjectClass).GetObjectClass(FrozenContext),
                         () => candidates.AsQueryable(),
-                        (chosen) =>
+                        async (chosen) =>
                         {
                             if (chosen != null)
                             {
-                                CreateItem((ObjectClass)chosen.First().Object);
+                                await CreateItem((ObjectClass)chosen.First().Object);
                             }
                         }, null);
                 lstMdl.SelectionType = Type.Name;
                 lstMdl.RequestedKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_DataObjectSelectionTaskSimpleKind.Find(FrozenContext);
 
-                ViewModelFactory.ShowModel(lstMdl, true);
+                await ViewModelFactory.ShowModel(lstMdl, true);
             }
         }
 
-        private void CreateItem(ObjectClass dtType)
+        private async Task CreateItem(ObjectClass dtType)
         {
             if (UseSeparateContext)
             {
                 var newScope = ViewModelFactory.CreateNewScope();
                 var newCtx = newScope.ViewModelFactory.CreateNewContext();
-                var newObj = newCtx.Create(newCtx.GetInterfaceType(dtType.GetDataType()));
+                var newObj = newCtx.Create(newCtx.GetInterfaceType(await dtType.GetDataType()));
                 OnObjectCreated(newObj);
                 ActivateForeignItems(newScope, newCtx, new[] { newObj });
             }
             else
             {
-                var newObj = DataContext.Create(DataContext.GetInterfaceType(dtType.GetDataType()));
+                var newObj = DataContext.Create(DataContext.GetInterfaceType(await dtType.GetDataType()));
                 OnObjectCreated(newObj);
 
                 var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), newObj);
@@ -644,14 +646,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return !DataContext.IsDisposed;
         }
 
-        protected override void DoExecute(object data)
+        protected override async Task DoExecute(object data)
         {
             var newScope = ViewModelFactory.CreateNewScope();
             var newCtx = newScope.ViewModelFactory.CreateNewContext();
             var newObjClass = newCtx.FindPersistenceObject<DataType>(this.Type.ExportGuid);
             var newWorkspace = ObjectEditorWorkspace.Create(newScope.Scope, newCtx);
             newWorkspace.ShowObject(newObjClass);
-            newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+            await newScope.ViewModelFactory.ShowModel(newWorkspace, true);
         }
     }
 
@@ -718,12 +720,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return args.CanRefresh;
         }
 
-        protected override void DoExecute(object data)
+        protected override Task DoExecute(object data)
         {
             if (CanExecute(data))
             {
                 Listener.Refresh();
             }
+
+            return Task.CompletedTask;
         }
     }
 
@@ -775,7 +779,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return !DataContext.IsDisposed;
         }
 
-        protected override void DoExecute(object data)
+        protected override Task DoExecute(object data)
         {
             if (CanExecute(data))
             {
@@ -792,6 +796,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     ViewModelFactory.ShowMessage(string.Format(CommonCommandsResources.ReportProblemCommand_Error, ex.Message), CommonCommandsResources.ReportProblemCommand_Error_Title);
                 }
             }
+
+            return Task.CompletedTask;
         }
     }
 
@@ -849,13 +855,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return true;
         }
 
-        protected override void DoExecute(object data)
+        protected override Task DoExecute(object data)
         {
             if (CanExecute(data))
             {
                 DataContext.SetElevatedMode(!DataContext.IsElevatedMode);
                 OnPropertyChanged("IsElevated");
             }
+
+            return Task.CompletedTask;
         }
     }
 
@@ -904,7 +912,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return true;
         }
 
-        protected override void DoExecute(object data)
+        protected override async Task DoExecute(object data)
         {
             if (CanExecute(data))
             {
@@ -912,7 +920,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 var newCtx = newScope.ViewModelFactory.CreateNewContext();
                 var ws = newScope.ViewModelFactory.CreateViewModel<ObjectBrowser.WorkspaceViewModel.Factory>().Invoke(newCtx, null);
                 ControlKind launcher = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_LauncherKind.Find(FrozenContext);
-                newScope.ViewModelFactory.ShowModel(ws, launcher, true);
+                await newScope.ViewModelFactory.ShowModel(ws, launcher, true);
             }
         }
     }

@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchATask != null) return _triggerFetchATask;
 
-            if (_fk_A.HasValue)
-                _triggerFetchATask = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_A.Value);
-            else
-                _triggerFetchATask = new System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> task;
 
-            _triggerFetchATask.OnResult(t =>
+            if (_fk_A.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_A.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.RelationEnd>(null);
+
+            task.OnResult(t =>
             {
                 if (OnA_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchATask;
+            return _triggerFetchATask = task;
         }
 
         // internal implementation
@@ -126,7 +128,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchAAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.RelationEndMemoryImpl)task.Result;
             }
             set
@@ -255,12 +256,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchBTask != null) return _triggerFetchBTask;
 
-            if (_fk_B.HasValue)
-                _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_B.Value);
-            else
-                _triggerFetchBTask = new System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> task;
 
-            _triggerFetchBTask.OnResult(t =>
+            if (_fk_B.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_B.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.RelationEnd>(null);
+
+            task.OnResult(t =>
             {
                 if (OnB_Getter != null)
                 {
@@ -270,7 +273,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchBTask;
+            return _triggerFetchBTask = task;
         }
 
         // internal implementation
@@ -281,7 +284,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchBAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.RelationEndMemoryImpl)task.Result;
             }
             set
@@ -409,12 +411,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchChangedByTask.OnResult(t =>
+            if (_fk_ChangedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnChangedBy_Getter != null)
                 {
@@ -424,7 +428,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchChangedByTask;
+            return _triggerFetchChangedByTask = task;
         }
 
         // internal implementation
@@ -435,7 +439,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchChangedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -691,12 +694,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Identity>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Identity> task;
 
-            _triggerFetchCreatedByTask.OnResult(t =>
+            if (_fk_CreatedBy.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Identity>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCreatedBy_Getter != null)
                 {
@@ -706,7 +711,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchCreatedByTask;
+            return _triggerFetchCreatedByTask = task;
         }
 
         // internal implementation
@@ -717,7 +722,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchCreatedByAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.IdentityMemoryImpl)task.Result;
             }
             set
@@ -1032,12 +1036,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
-            if (_fk_Module.HasValue)
-                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
-            else
-                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Module> task;
 
-            _triggerFetchModuleTask.OnResult(t =>
+            if (_fk_Module.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+
+            task.OnResult(t =>
             {
                 if (OnModule_Getter != null)
                 {
@@ -1047,7 +1053,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchModuleTask;
+            return _triggerFetchModuleTask = task;
         }
 
         // internal implementation
@@ -1058,7 +1064,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchModuleAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
@@ -1229,12 +1234,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEnd_Relation")]
-        public virtual Zetbox.App.Base.RelationEnd GetEnd(Zetbox.App.Base.ObjectReferenceProperty prop)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetEnd(Zetbox.App.Base.ObjectReferenceProperty prop)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.RelationEnd>();
             if (OnGetEnd_Relation != null)
             {
-                OnGetEnd_Relation(this, e, prop);
+                await OnGetEnd_Relation(this, e, prop);
             }
             else
             {
@@ -1293,12 +1298,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEndFromRole_Relation")]
-        public virtual Zetbox.App.Base.RelationEnd GetEndFromRole(Zetbox.API.RelationEndRole role)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetEndFromRole(Zetbox.API.RelationEndRole role)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.RelationEnd>();
             if (OnGetEndFromRole_Relation != null)
             {
-                OnGetEndFromRole_Relation(this, e, role);
+                await OnGetEndFromRole_Relation(this, e, role);
             }
             else
             {
@@ -1357,12 +1362,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEntryInterfaceType_Relation")]
-        public virtual Zetbox.API.InterfaceType GetEntryInterfaceType()
+        public virtual async System.Threading.Tasks.Task<Zetbox.API.InterfaceType> GetEntryInterfaceType()
         {
             var e = new MethodReturnEventArgs<Zetbox.API.InterfaceType>();
             if (OnGetEntryInterfaceType_Relation != null)
             {
-                OnGetEntryInterfaceType_Relation(this, e);
+                await OnGetEntryInterfaceType_Relation(this, e);
             }
             else
             {
@@ -1421,12 +1426,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetOtherEnd_Relation")]
-        public virtual Zetbox.App.Base.RelationEnd GetOtherEnd(Zetbox.App.Base.RelationEnd relEnd)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetOtherEnd(Zetbox.App.Base.RelationEnd relEnd)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.RelationEnd>();
             if (OnGetOtherEnd_Relation != null)
             {
-                OnGetOtherEnd_Relation(this, e, relEnd);
+                await OnGetOtherEnd_Relation(this, e, relEnd);
             }
             else
             {
@@ -1485,12 +1490,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetRelationType_Relation")]
-        public virtual Zetbox.API.RelationType GetRelationType()
+        public virtual async System.Threading.Tasks.Task<Zetbox.API.RelationType> GetRelationType()
         {
             var e = new MethodReturnEventArgs<Zetbox.API.RelationType>();
             if (OnGetRelationType_Relation != null)
             {
-                OnGetRelationType_Relation(this, e);
+                await OnGetRelationType_Relation(this, e);
             }
             else
             {
@@ -1549,12 +1554,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnNeedsPositionStorage_Relation")]
-        public virtual bool NeedsPositionStorage(Zetbox.API.RelationEndRole endRole)
+        public virtual async System.Threading.Tasks.Task<bool> NeedsPositionStorage(Zetbox.API.RelationEndRole endRole)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnNeedsPositionStorage_Relation != null)
             {
-                OnNeedsPositionStorage_Relation(this, e, endRole);
+                await OnNeedsPositionStorage_Relation(this, e, endRole);
             }
             else
             {
@@ -1613,12 +1618,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnSwapRelationEnds_Relation")]
-        public virtual void SwapRelationEnds()
+        public virtual async System.Threading.Tasks.Task SwapRelationEnds()
         {
             // base.SwapRelationEnds();
             if (OnSwapRelationEnds_Relation != null)
             {
-                OnSwapRelationEnds_Relation(this);
+                await OnSwapRelationEnds_Relation(this);
             }
             else
             {
@@ -1811,36 +1816,36 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.RelationEndMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.Find<Zetbox.App.Base.RelationEnd>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.RelationEndMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_A.Value));
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.RelationEndMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.Find<Zetbox.App.Base.RelationEnd>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.RelationEndMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_B.Value));
             else
                 BImpl = null;
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 ChangedByImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 CreatedByImpl = null;
 
             if (_fk_guid_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
             else
             if (_fk_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value));
             else
                 ModuleImpl = null;
             // fix cached lists references
@@ -2064,9 +2069,9 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
-            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(_fk_A != null ? _fk_A : (int?)null);
+            binStream.Write(_fk_B != null ? _fk_B : (int?)null);
+            binStream.Write(_fk_ChangedBy != null ? _fk_ChangedBy : (int?)null);
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
@@ -2075,7 +2080,7 @@ namespace Zetbox.App.Base
             if (this._isContainmentSet) {
                 binStream.Write((int?)this._Containment);
             }
-            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(_fk_CreatedBy != null ? _fk_CreatedBy : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
@@ -2085,7 +2090,7 @@ namespace Zetbox.App.Base
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(_fk_Module != null ? _fk_Module : (int?)null);
             binStream.Write((int?)this._Storage);
             binStream.Write(this._Verb);
         }

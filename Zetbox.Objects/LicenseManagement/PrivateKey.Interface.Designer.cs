@@ -57,11 +57,11 @@ namespace Zetbox.App.LicenseManagement
         /// <summary>
         /// Asks the user to open a file and loads the certificate
         /// </summary>
-        void Load();
+        System.Threading.Tasks.Task Load();
 
         /// <summary>
         /// Loads a certificate from file
         /// </summary>
-        void LoadFromFile(string file);
+        System.Threading.Tasks.Task LoadFromFile(string file);
     }
 }

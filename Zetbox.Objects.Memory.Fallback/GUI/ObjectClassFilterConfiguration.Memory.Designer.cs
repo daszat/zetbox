@@ -100,12 +100,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchObjectClassTask != null) return _triggerFetchObjectClassTask;
 
-            if (_fk_ObjectClass.HasValue)
-                _triggerFetchObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value);
-            else
-                _triggerFetchObjectClassTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> task;
 
-            _triggerFetchObjectClassTask.OnResult(t =>
+            if (_fk_ObjectClass.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+
+            task.OnResult(t =>
             {
                 if (OnObjectClass_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchObjectClassTask;
+            return _triggerFetchObjectClassTask = task;
         }
 
         // internal implementation
@@ -126,7 +128,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchObjectClassAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set
@@ -197,16 +198,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_ObjectClassFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
+        public override async System.Threading.Tasks.Task<Zetbox.API.IFilterModel> CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_ObjectClassFilterConfiguration != null)
             {
-                OnCreateFilterModel_ObjectClassFilterConfiguration(this, e, ctx);
+                await OnCreateFilterModel_ObjectClassFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel(ctx);
+                e.Result = await base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -260,16 +261,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_ObjectClassFilterConfiguration")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_ObjectClassFilterConfiguration != null)
             {
-                OnGetLabel_ObjectClassFilterConfiguration(this, e);
+                await OnGetLabel_ObjectClassFilterConfiguration(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -392,10 +393,10 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_guid_ObjectClass.HasValue)
-                ObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_ObjectClass.Value);
+                ObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_ObjectClass.Value));
             else
             if (_fk_ObjectClass.HasValue)
-                ObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value);
+                ObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value));
             else
                 ObjectClassImpl = null;
             // fix cached lists references
@@ -509,7 +510,7 @@ namespace Zetbox.App.GUI
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(ObjectClass != null ? ObjectClass.ID : (int?)null);
+            binStream.Write(_fk_ObjectClass != null ? _fk_ObjectClass : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

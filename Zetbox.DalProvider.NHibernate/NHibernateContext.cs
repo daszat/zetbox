@@ -257,7 +257,7 @@ namespace Zetbox.DalProvider.NHibernate
             }
         }
 
-        public override Task<int> SubmitChanges()
+        public override async Task<int> SubmitChanges()
         {
             CheckDisposed();
             DebugTraceChangedObjects();
@@ -269,7 +269,7 @@ namespace Zetbox.DalProvider.NHibernate
 
             ValidateModifiedObjects(notifyList);
 
-            FlushSession(objects);
+            await FlushSession(objects);
 
             NotifyChanged(notifyList);
 
@@ -277,20 +277,20 @@ namespace Zetbox.DalProvider.NHibernate
 
             OnSubmitted();
 
-            return Task.FromResult(objects.Count);
+            return objects.Count;
         }
 
-        public override Task<int> SubmitRestore()
+        public override async Task<int> SubmitRestore()
         {
             CheckDisposed();
 
             var objects = GetModifiedObjects().Distinct().ToList();
 
-            FlushSession(objects);
+            await FlushSession(objects);
 
             UpdateObjectState();
 
-            return Task.FromResult(objects.Count);
+            return objects.Count;
         }
 
         private void DebugTraceChangedObjects()
@@ -331,7 +331,7 @@ namespace Zetbox.DalProvider.NHibernate
                     .ToList();
         }
 
-        private void FlushSession(List<NHibernatePersistenceObject> notifySaveList)
+        private async Task FlushSession(List<NHibernatePersistenceObject> notifySaveList)
         {
             var ticks = _perfCounter.IncrementSubmitChanges();
             bool isItMyTransaction = !IsTransactionRunning;
@@ -396,7 +396,7 @@ namespace Zetbox.DalProvider.NHibernate
 
                 Logging.Log.Error("Failed saving transaction", ex);
                 if (ex.InnerException == null) throw;
-                throw _sqlErrorTranslator.Translate(ex.InnerException);
+                throw await _sqlErrorTranslator.Translate(ex.InnerException);
             }
             catch (Exception ex)
             {

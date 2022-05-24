@@ -27,16 +27,16 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.API.IDataObject ChooseObject(Zetbox.API.IZetboxContext ctx, System.Type objectType);
+        System.Threading.Tasks.Task<Zetbox.API.IDataObject> ChooseObject(Zetbox.API.IZetboxContext ctx, System.Type objectType);
 
         /// <summary>
         /// 
         /// </summary>
-        void ShowMessage(string message);
+        System.Threading.Tasks.Task ShowMessage(string message);
 
         /// <summary>
         /// 
         /// </summary>
-        void ShowObject(Zetbox.API.IDataObject obj);
+        System.Threading.Tasks.Task ShowObject(Zetbox.API.IDataObject obj);
     }
 }

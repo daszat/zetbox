@@ -19,6 +19,7 @@ namespace Zetbox.IntegrationTests.Methods
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.API.AbstractConsumerTests;
@@ -77,19 +78,19 @@ namespace Zetbox.IntegrationTests.Methods
         }
 
         [Test]
-        public void should_receive_new_retval()
+        public async Task should_receive_new_retval()
         {
-            var result = obj.ServerObjParameter(null);
+            var result = await obj.ServerObjParameter(null);
             Assert.That(result, Is.Not.Null);
             Assert.That(result.StringProp, Is.EqualTo("A"));
         }
 
         [Test]
-        public void should_receive_sent_retval()
+        public async Task should_receive_sent_retval()
         {
             var newC = ctx.Create<TestObjClass>();
             newC.StringProp = "C";
-            var result = obj.ServerObjParameter(newC);
+            var result = await obj.ServerObjParameter(newC);
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.SameAs(newC));
             Assert.That(result.StringProp, Is.EqualTo("C"));

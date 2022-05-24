@@ -17,16 +17,16 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Converts the imported file to a document
         /// </summary>
-        at.dasz.DocumentManagement.File MakeFile();
+        System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> MakeFile();
 
         /// <summary>
         /// Converts the imported file to a readonly file
         /// </summary>
-        at.dasz.DocumentManagement.File MakeReadonlyFile();
+        System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> MakeReadonlyFile();
 
         /// <summary>
         /// Deprecated, use MakeReadonlyFile instead
         /// </summary>
-        at.dasz.DocumentManagement.StaticFile MakeStaticFile();
+        System.Threading.Tasks.Task<at.dasz.DocumentManagement.StaticFile> MakeStaticFile();
     }
 }

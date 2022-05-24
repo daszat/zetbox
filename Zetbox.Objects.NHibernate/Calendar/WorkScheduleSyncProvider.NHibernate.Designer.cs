@@ -289,16 +289,16 @@ namespace Zetbox.App.Calendar
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnPerformSync_WorkScheduleSyncProvider")]
-        public override void PerformSync()
+        public override async System.Threading.Tasks.Task PerformSync()
         {
             // base.PerformSync();
             if (OnPerformSync_WorkScheduleSyncProvider != null)
             {
-                OnPerformSync_WorkScheduleSyncProvider(this);
+                await OnPerformSync_WorkScheduleSyncProvider(this);
             }
             else
             {
-                base.PerformSync();
+                await base.PerformSync();
             }
         }
         public static event PerformSync_Handler<WorkScheduleSyncProvider> OnPerformSync_WorkScheduleSyncProvider;
@@ -351,16 +351,16 @@ namespace Zetbox.App.Calendar
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnScheduleSyncNow_WorkScheduleSyncProvider")]
-        public override void ScheduleSyncNow()
+        public override async System.Threading.Tasks.Task ScheduleSyncNow()
         {
             // base.ScheduleSyncNow();
             if (OnScheduleSyncNow_WorkScheduleSyncProvider != null)
             {
-                OnScheduleSyncNow_WorkScheduleSyncProvider(this);
+                await OnScheduleSyncNow_WorkScheduleSyncProvider(this);
             }
             else
             {
-                base.ScheduleSyncNow();
+                await base.ScheduleSyncNow();
             }
         }
         public static event ScheduleSyncNow_Handler<WorkScheduleSyncProvider> OnScheduleSyncNow_WorkScheduleSyncProvider;

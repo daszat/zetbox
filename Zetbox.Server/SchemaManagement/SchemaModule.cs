@@ -41,7 +41,7 @@ namespace Zetbox.Server.SchemaManagement
                     var connectionString = cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
                     ISchemaProvider schemaProvider = c.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
                     schemaProvider.Open(connectionString.ConnectionString);
-                    SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
+                    SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx).Wait();
 
                     var globalMigrationFragments = c.Resolve<IEnumerable<IGlobalMigrationFragment>>();
                     var migrationFragments = c.Resolve<IEnumerable<IMigrationFragment>>();

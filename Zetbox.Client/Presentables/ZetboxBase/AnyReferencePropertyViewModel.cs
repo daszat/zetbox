@@ -54,7 +54,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                var obj = Object != null ? Object.GetObject(DataContext) : null;
+                var obj = Object != null ? Object.GetObject(DataContext).Result : null;
                 if (obj == null) return null;
                 return DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj);
             }
@@ -223,9 +223,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return Task.FromResult(false);
         }
 
-        public virtual object DoDragDrop()
+        public virtual async Task<object> DoDragDrop()
         {
-            var obj = Object.GetObject(DataContext);
+            var obj = await Object.GetObject(DataContext);
             if (obj != null && obj.ObjectState.In(DataObjectState.Unmodified, DataObjectState.Modified, DataObjectState.New))
             {
                 return new IDataObject[] { obj };

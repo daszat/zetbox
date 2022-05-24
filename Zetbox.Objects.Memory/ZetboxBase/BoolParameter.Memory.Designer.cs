@@ -42,16 +42,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_BoolParameter")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_BoolParameter != null)
             {
-                OnGetLabel_BoolParameter(this, e);
+                await OnGetLabel_BoolParameter(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -105,16 +105,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterType_BoolParameter")]
-        public override System.Type GetParameterType()
+        public override async System.Threading.Tasks.Task<System.Type> GetParameterType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetParameterType_BoolParameter != null)
             {
-                OnGetParameterType_BoolParameter(this, e);
+                await OnGetParameterType_BoolParameter(this, e);
             }
             else
             {
-                e.Result = base.GetParameterType();
+                e.Result = await base.GetParameterType();
             }
             return e.Result;
         }
@@ -168,16 +168,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterTypeString_BoolParameter")]
-        public override string GetParameterTypeString()
+        public override async System.Threading.Tasks.Task<string> GetParameterTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetParameterTypeString_BoolParameter != null)
             {
-                OnGetParameterTypeString_BoolParameter(this, e);
+                await OnGetParameterTypeString_BoolParameter(this, e);
             }
             else
             {
-                e.Result = base.GetParameterTypeString();
+                e.Result = await base.GetParameterTypeString();
             }
             return e.Result;
         }

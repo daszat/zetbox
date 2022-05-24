@@ -88,6 +88,6 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// Checks if the Rule applies to the given date
         /// </summary>
-        bool AppliesTo(DateTime date);
+        System.Threading.Tasks.Task<bool> AppliesTo(DateTime date);
     }
 }

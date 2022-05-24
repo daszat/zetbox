@@ -33,21 +33,17 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetElementTypeString(DateTimeProperty obj, MethodReturnEventArgs<string> e)
+        public static async System.Threading.Tasks.Task GetElementTypeString(DateTimeProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "DateTime";
-            PropertyActions.DecorateElementType(obj, e, true);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            await PropertyActions.DecorateElementType(obj, e, true);
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetPropertyTypeString(DateTimeProperty obj, MethodReturnEventArgs<string> e)
+        public static async System.Threading.Tasks.Task GetPropertyTypeString(DateTimeProperty obj, MethodReturnEventArgs<string> e)
         {
-            GetElementTypeString(obj, e);
+            await GetElementTypeString(obj, e);
             PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

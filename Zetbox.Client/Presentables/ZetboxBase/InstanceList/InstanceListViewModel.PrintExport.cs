@@ -154,7 +154,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             sw.WriteLine(string.Join(";",
                 cols.Select(i => i.Header).ToArray()));
 
-            var unpagedQuery = GetUnpagedQuery();
+            var unpagedQuery = await GetUnpagedQuery();
 
             try
             {
@@ -202,7 +202,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (!string.IsNullOrWhiteSpace(fileName))
             {
                 SetBusy(string.Format(InstanceListViewModelResources.ExportBusyMessageFormat, 1));
-                var unpagedQuery = GetUnpagedQuery();
+                var unpagedQuery = await GetUnpagedQuery();
 
                 try
                 {

@@ -47,7 +47,7 @@ this.WriteObjects("            // fix direct object references\r\n");
 #line 41 "D:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 // TODO: Use only 1 side relation ends
     foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
-        .Where(orp => !orp.IsList())
+        .Where(orp => !orp.IsList().Result)
         .OrderBy(orp => orp.ObjectClass.Name)
         .ThenBy(orp => orp.Name))
     {

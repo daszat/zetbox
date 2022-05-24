@@ -99,7 +99,7 @@ ApplyPropertyTemplate(p);
         foreach(var mg in MethodsToGenerate().GroupBy(m => m.Name).OrderBy(mg => mg.Key))
         {
             int index = 0;
-            foreach(var m in mg.OrderByDefault())
+            foreach(var m in mg.OrderByDefault().Result)
             {
 
 #line 86 "D:\Projects\zetbox\Zetbox.Generator\Templates\TypeBase.cst"

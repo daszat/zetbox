@@ -53,16 +53,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDescription_IntProperty")]
-        public override string GetDescription()
+        public override async System.Threading.Tasks.Task<string> GetDescription()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDescription_IntProperty != null)
             {
-                OnGetDescription_IntProperty(this, e);
+                await OnGetDescription_IntProperty(this, e);
             }
             else
             {
-                e.Result = base.GetDescription();
+                e.Result = await base.GetDescription();
             }
             return e.Result;
         }
@@ -116,16 +116,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetElementTypeString_IntProperty")]
-        public override string GetElementTypeString()
+        public override async System.Threading.Tasks.Task<string> GetElementTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetElementTypeString_IntProperty != null)
             {
-                OnGetElementTypeString_IntProperty(this, e);
+                await OnGetElementTypeString_IntProperty(this, e);
             }
             else
             {
-                e.Result = base.GetElementTypeString();
+                e.Result = await base.GetElementTypeString();
             }
             return e.Result;
         }
@@ -179,16 +179,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_IntProperty")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_IntProperty != null)
             {
-                OnGetLabel_IntProperty(this, e);
+                await OnGetLabel_IntProperty(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -242,16 +242,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_IntProperty")]
-        public override string GetName()
+        public override async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_IntProperty != null)
             {
-                OnGetName_IntProperty(this, e);
+                await OnGetName_IntProperty(this, e);
             }
             else
             {
-                e.Result = base.GetName();
+                e.Result = await base.GetName();
             }
             return e.Result;
         }
@@ -305,16 +305,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyType_IntProperty")]
-        public override System.Type GetPropertyType()
+        public override async System.Threading.Tasks.Task<System.Type> GetPropertyType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetPropertyType_IntProperty != null)
             {
-                OnGetPropertyType_IntProperty(this, e);
+                await OnGetPropertyType_IntProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyType();
+                e.Result = await base.GetPropertyType();
             }
             return e.Result;
         }
@@ -368,16 +368,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyTypeString_IntProperty")]
-        public override string GetPropertyTypeString()
+        public override async System.Threading.Tasks.Task<string> GetPropertyTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetPropertyTypeString_IntProperty != null)
             {
-                OnGetPropertyTypeString_IntProperty(this, e);
+                await OnGetPropertyTypeString_IntProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyTypeString();
+                e.Result = await base.GetPropertyTypeString();
             }
             return e.Result;
         }

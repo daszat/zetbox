@@ -19,6 +19,7 @@ namespace Zetbox.API.Utils
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// This class transforms a list into a dictionary. The specified lambdas are used to create the keys and values.
@@ -51,7 +52,7 @@ namespace Zetbox.API.Utils
         /// <summary>
         /// The function to get a value from an item.
         /// </summary>
-        private readonly Func<TUnderlyingValue, TValue> _valueFunc;
+        private readonly Func<TUnderlyingValue, Task<TValue>> _valueFunc;
 
         /// <summary>
         /// Initialises a new instance of the LookupDictionary class.
@@ -59,7 +60,7 @@ namespace Zetbox.API.Utils
         /// <param name="list">the list to use as underlying storage</param>
         /// <param name="key">the function to create keys for lookups</param>
         /// <param name="value">the function to create values from items</param>
-        public LookupDictionary(IList<TUnderlyingValue> list, Func<TUnderlyingValue, TKey> key, Func<TUnderlyingValue, TValue> value)
+        public LookupDictionary(IList<TUnderlyingValue> list, Func<TUnderlyingValue, TKey> key, Func<TUnderlyingValue, Task<TValue>> value)
         {
             if (list == null) { throw new ArgumentNullException("list"); }
             if (key == null) { throw new ArgumentNullException("key"); }
@@ -124,7 +125,7 @@ namespace Zetbox.API.Utils
             }
             else
             {
-                _values[key] = value = _valueFunc(_items[key]);
+                _values[key] = value = _valueFunc(_items[key]).Result;
             }
 
             return true;
@@ -141,7 +142,7 @@ namespace Zetbox.API.Utils
                 {
                     if (!_values.ContainsKey(k))
                     {
-                        _values[k] = _valueFunc(_items[k]);
+                        _values[k] = _valueFunc(_items[k]).Result;
                     }
                 }
                 return _values.Values;

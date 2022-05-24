@@ -29,10 +29,11 @@ namespace Zetbox.Client.Models
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables;
     using Zetbox.API.Async;
+    using System.Threading.Tasks;
 
     public static class PropertyExtensionsThisShouldBeMovedToAZetboxMethod
     {
-        public static IValueModel GetPropertyValueModel(this Property prop, INotifyingObject obj)
+        public static async Task<IValueModel> GetPropertyValueModel(this Property prop, INotifyingObject obj)
         {
             if (prop == null)
                 throw new ArgumentNullException("prop");
@@ -74,9 +75,9 @@ namespace Zetbox.Client.Models
             else if (prop is ObjectReferenceProperty)
             {
                 var objRefProp = (ObjectReferenceProperty)prop;
-                if (objRefProp.GetIsList())
+                if (await objRefProp.GetIsList())
                 {
-                    var sorted = objRefProp.RelationEnd.Parent.GetOtherEnd(objRefProp.RelationEnd).HasPersistentOrder;
+                    var sorted = (await objRefProp.RelationEnd.Parent.GetOtherEnd(objRefProp.RelationEnd)).HasPersistentOrder;
                     if (sorted)
                     {
                         return new ObjectListPropertyValueModel(obj, objRefProp);
@@ -121,14 +122,14 @@ namespace Zetbox.Client.Models
             }
         }
 
-        public static IValueModel GetDetachedValueModel(this Property prop, IZetboxContext ctx, bool allowNullInput)
+        public static async Task<IValueModel> GetDetachedValueModel(this Property prop, IZetboxContext ctx, bool allowNullInput)
         {
             if (prop == null)
                 throw new ArgumentNullException("prop");
 
-            var lb = prop.GetLabel();
-            var description = prop.GetDescription();
-            var rk = prop.RequestedKind;
+            var lb = await prop.GetLabel();
+            var description = await prop.GetDescription();
+            var rk = await prop.GetProp_RequestedKind();
 
             if (prop is IntProperty)
             {
@@ -166,7 +167,7 @@ namespace Zetbox.Client.Models
             else if (prop is ObjectReferenceProperty)
             {
                 ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)prop;
-                if (objRefProp.GetIsList())
+                if (await objRefProp.GetIsList())
                 {
                     //var sorted = objRefProp.RelationEnd.Parent.GetOtherEnd(objRefProp.RelationEnd).HasPersistentOrder;
                     //if (sorted)
@@ -180,7 +181,7 @@ namespace Zetbox.Client.Models
                 }
                 else
                 {
-                    return new ObjectReferenceValueModel(lb, description, allowNullInput, false, rk, objRefProp.GetReferencedObjectClass());
+                    return new ObjectReferenceValueModel(lb, description, allowNullInput, false, rk, await objRefProp.GetReferencedObjectClass());
                 }
             }
             else if (prop is CompoundObjectProperty)
@@ -249,7 +250,7 @@ namespace Zetbox.Client.Models
             {
                 if (_AllowNullInput == null)
                 {
-                    _AllowNullInput = Property.IsNullable();
+                    _AllowNullInput = Property.IsNullable().Result;
                 }
                 return _AllowNullInput.Value;
             }
@@ -257,12 +258,12 @@ namespace Zetbox.Client.Models
 
         public string Label
         {
-            get { return Property.GetLabel(); }
+            get { return Property.GetLabel().Result; }
         }
 
         public string Description
         {
-            get { return Property.GetDescription(); }
+            get { return Property.GetDescription().Result; }
         }
 
         public string HelpText
@@ -278,7 +279,7 @@ namespace Zetbox.Client.Models
                 if (DataContext != null && DataContext.IsElevatedMode && !Property.IsCalculated()) return false;
                 if (_IsReadOnly == null)
                 {
-                    _IsReadOnly = Property.IsReadOnly();
+                    _IsReadOnly = Property.IsReadOnly().Result;
                 }
                 return _IsReadOnly.Value;
             }
@@ -286,7 +287,7 @@ namespace Zetbox.Client.Models
 
         public abstract void ClearValue();
 
-        public abstract object GetUntypedValue();
+        public abstract Task<object> GetUntypedValue();
 
         public abstract void SetUntypedValue(object val);
 
@@ -418,9 +419,9 @@ namespace Zetbox.Client.Models
         #endregion
 
         #region IValueModel Members
-        public sealed override object GetUntypedValue()
+        public sealed override Task<object> GetUntypedValue()
         {
-            return this.Value;
+            return Task.FromResult((object)this.Value);
         }
 
         public sealed override void SetUntypedValue(object val)
@@ -639,12 +640,19 @@ namespace Zetbox.Client.Models
         {
             get
             {
-                if (_referencedClass == null)
-                {
-                    _referencedClass = objRefProp.GetReferencedObjectClass();
-                }
+                Task.Run(async () => await GetReferencedClass());
                 return _referencedClass;
             }
+        }
+
+        public async Task<ObjectClass> GetReferencedClass()
+        {
+            if (_referencedClass == null)
+            {
+                _referencedClass = await objRefProp.GetReferencedObjectClass();
+                OnPropertyChanged(nameof(ReferencedClass));
+            }
+            return _referencedClass;
         }
 
         private RelationEnd _relEnd = null;
@@ -833,12 +841,19 @@ namespace Zetbox.Client.Models
         {
             get
             {
-                if (_referencedClass == null)
-                {
-                    _referencedClass = objRefProp.GetReferencedObjectClass();
-                }
+                Task.Run(async () => await GetReferencedClass());
                 return _referencedClass;
             }
+        }
+
+        public async Task<ObjectClass> GetReferencedClass()
+        {
+            if (_referencedClass == null)
+            {
+                _referencedClass = await objRefProp.GetReferencedObjectClass();
+                OnPropertyChanged(nameof(ReferencedClass));
+            }
+            return _referencedClass;
         }
 
         private RelationEnd _relEnd = null;
@@ -967,7 +982,8 @@ namespace Zetbox.Client.Models
             }
         }
 
-        protected override void SetPropertyValue(int? val)
+        // TODO: async void
+        protected override async void SetPropertyValue(int? val)
         {
             // Work around the fact that the conversion from enumeration to int? is not possible.
             if (val == null)
@@ -976,7 +992,7 @@ namespace Zetbox.Client.Models
             }
             else
             {
-                Object.SetPropertyValue<object>(Property.Name, Enum.ToObject(((EnumerationProperty)Property).Enumeration.GetDataType(), val));
+                Object.SetPropertyValue<object>(Property.Name, Enum.ToObject(await ((EnumerationProperty)Property).Enumeration.GetDataType(), val));
             }
         }
 
@@ -987,12 +1003,13 @@ namespace Zetbox.Client.Models
             get { return enumProp.Enumeration; }
         }
 
-        public IEnumerable<KeyValuePair<int, string>> GetEntries()
+        public async Task<IEnumerable<KeyValuePair<int, string>>> GetEntries()
         {
-            return enumProp
+            return await enumProp
                 .Enumeration
                 .EnumerationEntries
-                .Select(ee => new KeyValuePair<int, string>(ee.Value, ee.GetLabel()));
+                .Select(async ee => new KeyValuePair<int, string>(ee.Value, await ee.GetLabel()))
+                .WhenAll();
         }
 
         #endregion

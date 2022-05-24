@@ -189,16 +189,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_PropertyFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
+        public override async System.Threading.Tasks.Task<Zetbox.API.IFilterModel> CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_PropertyFilterConfiguration != null)
             {
-                OnCreateFilterModel_PropertyFilterConfiguration(this, e, ctx);
+                await OnCreateFilterModel_PropertyFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel(ctx);
+                e.Result = await base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -252,16 +252,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_PropertyFilterConfiguration")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_PropertyFilterConfiguration != null)
             {
-                OnGetLabel_PropertyFilterConfiguration(this, e);
+                await OnGetLabel_PropertyFilterConfiguration(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -384,10 +384,10 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_guid_Property.HasValue)
-                this.Property = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_Property.Value));
+                this.Property = ((Zetbox.App.Base.PropertyNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_guid_Property.Value)));
             else
             if (_fk_Property.HasValue)
-                this.Property = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_Property.Value));
+                this.Property = ((Zetbox.App.Base.PropertyNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_Property.Value)));
             else
                 this.Property = null;
         }

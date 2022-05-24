@@ -957,12 +957,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetNewEventViewModels_CalendarBook")]
-        public virtual void GetNewEventViewModels(System.Object args)
+        public virtual async System.Threading.Tasks.Task GetNewEventViewModels(System.Object args)
         {
             // base.GetNewEventViewModels();
             if (OnGetNewEventViewModels_CalendarBook != null)
             {
-                OnGetNewEventViewModels_CalendarBook(this, args);
+                await OnGetNewEventViewModels_CalendarBook(this, args);
             }
             else
             {

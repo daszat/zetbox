@@ -88,6 +88,6 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// Gets a list of ViewModels that can create a new event. Multiple implementations can support different kind of events
         /// </summary>
-        void GetNewEventViewModels(System.Object args);
+        System.Threading.Tasks.Task GetNewEventViewModels(System.Object args);
     }
 }

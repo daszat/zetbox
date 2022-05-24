@@ -47,8 +47,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         protected override void ApplyPostDeletingTemplate()
         {
-            foreach (var prop in dt.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList() && !p.IsCalculated()).OrderBy(p => p.Name).Cast<Property>()
-                         .Concat(dt.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList() && !p.IsCalculated()).OrderBy(p => p.Name).Cast<Property>()))
+            foreach (var prop in dt.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList().Result && !p.IsCalculated()).OrderBy(p => p.Name).Cast<Property>()
+                         .Concat(dt.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList().Result && !p.IsCalculated()).OrderBy(p => p.Name).Cast<Property>()))
             {
                 this.WriteObjects("            foreach(NHibernatePersistenceObject x in ", prop.Name, "Collection) {\r\n");
                 this.WriteObjects("                x.ParentsToDelete.Add(this);\r\n");
@@ -61,11 +61,11 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             {
                 foreach (var rel in cls.GetRelations().OrderBy(r => r.GetAssociationName()))
                 {
-                    if (rel.A.Type == cls && rel.GetRelationType() != RelationType.n_m && rel.Storage != StorageType.Separate)
+                    if (rel.A.Type == cls && rel.GetRelationType().Result != RelationType.n_m && rel.Storage != StorageType.Separate)
                     {
                         ApplyRememberToDeleteTemplate(rel, rel.A);
                     }
-                    else if (rel.B.Type == cls && rel.GetRelationType() != RelationType.n_m && rel.Storage != StorageType.Separate)
+                    else if (rel.B.Type == cls && rel.GetRelationType().Result != RelationType.n_m && rel.Storage != StorageType.Separate)
                     {
                         ApplyRememberToDeleteTemplate(rel, rel.B);
                     }
@@ -81,7 +81,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             var prop = relEnd.Navigator;
             var propName = prop != null ? prop.Name : string.Empty;
 
-            if (rel.GetOtherEnd(relEnd).Multiplicity == Multiplicity.ZeroOrMore)
+            if (rel.GetOtherEnd(relEnd).Result.Multiplicity == Multiplicity.ZeroOrMore)
             {
                 if (prop != null)
                 {
@@ -98,7 +98,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             }
             else
             {
-                if (prop != null && rel.HasStorage(relEnd.GetRole()))
+                if (prop != null && rel.HasStorage(relEnd.GetRole()).Result)
                 {
                     this.WriteObjects("            // ", rel.GetAssociationName(), "\r\n");
                     this.WriteObjects("            if (", propName, " != null) {\r\n");
@@ -106,7 +106,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     this.WriteObjects("                ParentsToDelete.Add((NHibernatePersistenceObject)", propName, ");\r\n");
                     this.WriteObjects("            }\r\n");
                 }
-                else if (prop != null && !rel.HasStorage(relEnd.GetRole()))
+                else if (prop != null && !rel.HasStorage(relEnd.GetRole()).Result)
                 {
                     this.WriteObjects("            // ", rel.GetAssociationName(), "\r\n");
                     this.WriteObjects("            if (", propName, " != null) {\r\n");

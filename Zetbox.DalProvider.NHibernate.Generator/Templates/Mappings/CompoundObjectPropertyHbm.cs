@@ -72,7 +72,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 // not needed
                 ceClassAttr = String.Empty;
             }
-            string ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop);
+            string ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop).Result;
             Call(_host,
                 ctx,
                 prefix,

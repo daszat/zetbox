@@ -159,21 +159,21 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Property wizard
         /// </summary>
-        Zetbox.App.Base.Property AddProperty();
+        System.Threading.Tasks.Task<Zetbox.App.Base.Property> AddProperty();
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
-        System.Type GetDataType();
+        System.Threading.Tasks.Task<System.Type> GetDataType();
 
         /// <summary>
         /// Returns the String representation of this Datatype Meta Object.
         /// </summary>
-        string GetDataTypeString();
+        System.Threading.Tasks.Task<string> GetDataTypeString();
 
         /// <summary>
         /// Implements all available interfaces as Properties and Methods
         /// </summary>
-        void ImplementInterfaces();
+        System.Threading.Tasks.Task ImplementInterfaces();
     }
 }

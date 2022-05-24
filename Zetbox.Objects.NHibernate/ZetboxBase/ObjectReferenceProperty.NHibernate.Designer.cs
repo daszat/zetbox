@@ -370,16 +370,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDescription_ObjectReferenceProperty")]
-        public override string GetDescription()
+        public override async System.Threading.Tasks.Task<string> GetDescription()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDescription_ObjectReferenceProperty != null)
             {
-                OnGetDescription_ObjectReferenceProperty(this, e);
+                await OnGetDescription_ObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetDescription();
+                e.Result = await base.GetDescription();
             }
             return e.Result;
         }
@@ -433,16 +433,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetElementTypeString_ObjectReferenceProperty")]
-        public override string GetElementTypeString()
+        public override async System.Threading.Tasks.Task<string> GetElementTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetElementTypeString_ObjectReferenceProperty != null)
             {
-                OnGetElementTypeString_ObjectReferenceProperty(this, e);
+                await OnGetElementTypeString_ObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetElementTypeString();
+                e.Result = await base.GetElementTypeString();
             }
             return e.Result;
         }
@@ -496,12 +496,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetIsList_ObjectReferenceProperty")]
-        public virtual bool GetIsList()
+        public virtual async System.Threading.Tasks.Task<bool> GetIsList()
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnGetIsList_ObjectReferenceProperty != null)
             {
-                OnGetIsList_ObjectReferenceProperty(this, e);
+                await OnGetIsList_ObjectReferenceProperty(this, e);
             }
             else
             {
@@ -560,16 +560,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_ObjectReferenceProperty")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_ObjectReferenceProperty != null)
             {
-                OnGetLabel_ObjectReferenceProperty(this, e);
+                await OnGetLabel_ObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -623,16 +623,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_ObjectReferenceProperty")]
-        public override string GetName()
+        public override async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_ObjectReferenceProperty != null)
             {
-                OnGetName_ObjectReferenceProperty(this, e);
+                await OnGetName_ObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetName();
+                e.Result = await base.GetName();
             }
             return e.Result;
         }
@@ -686,16 +686,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyType_ObjectReferenceProperty")]
-        public override System.Type GetPropertyType()
+        public override async System.Threading.Tasks.Task<System.Type> GetPropertyType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetPropertyType_ObjectReferenceProperty != null)
             {
-                OnGetPropertyType_ObjectReferenceProperty(this, e);
+                await OnGetPropertyType_ObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyType();
+                e.Result = await base.GetPropertyType();
             }
             return e.Result;
         }
@@ -749,16 +749,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyTypeString_ObjectReferenceProperty")]
-        public override string GetPropertyTypeString()
+        public override async System.Threading.Tasks.Task<string> GetPropertyTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetPropertyTypeString_ObjectReferenceProperty != null)
             {
-                OnGetPropertyTypeString_ObjectReferenceProperty(this, e);
+                await OnGetPropertyTypeString_ObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyTypeString();
+                e.Result = await base.GetPropertyTypeString();
             }
             return e.Result;
         }

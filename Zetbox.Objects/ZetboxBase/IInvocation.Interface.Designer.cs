@@ -37,6 +37,6 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-        string GetCodeTemplate();
+        System.Threading.Tasks.Task<string> GetCodeTemplate();
     }
 }

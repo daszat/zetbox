@@ -39,11 +39,11 @@ namespace Zetbox.App.GUI
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.DateRangeFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
+        public static async System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.DateRangeFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             var mdl = DateRangeFilterModel.Create(
                 FrozenContext,
-                obj.GetLabel(),
+                await obj.GetLabel(),
                 FilterValueSource.FromProperty(obj.Property),
                 obj.RequestedKind,
                 obj.IsCurrentYearDefault ?? false,
@@ -52,8 +52,6 @@ namespace Zetbox.App.GUI
             mdl.Required = obj.Required;
             mdl.RefreshOnFilterChanged = obj.RefreshOnFilterChanged;
             e.Result = mdl;
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

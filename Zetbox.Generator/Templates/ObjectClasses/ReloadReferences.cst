@@ -42,11 +42,11 @@
     foreach(var prop in GetDirectObjectReferences())
     {
         Relation rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, prop);
-        RelationEnd relEnd = rel.GetEnd(prop);
-        RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+        RelationEnd relEnd = rel.GetEnd(prop).Result;
+        RelationEnd otherEnd = rel.GetOtherEnd(relEnd).Result;
 
-        string referencedInterface = otherEnd.Type.GetDataTypeString();
-        string referencedImplementation = otherEnd.Type.GetDataTypeString() + ImplementationSuffix;
+        string referencedInterface = otherEnd.Type.GetDataTypeString().Result;
+        string referencedImplementation = otherEnd.Type.GetDataTypeString().Result + ImplementationSuffix;
         string name = prop.Name;
         string implName = name + Zetbox.API.Helper.ImplementationSuffix;
         string fkBackingName = "_fk_" + name;

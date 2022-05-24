@@ -47,7 +47,7 @@ namespace Zetbox.Client.Presentables
         /// Will execute the command with the given parameter.
         /// </summary>
         /// <param name="data">may be <value>null</value> if no data is expected</param>
-        void Execute(object data);
+        Task Execute(object data);
 
         /// <summary>
         /// Gets a value indicating whether or not this command is currently executing.
@@ -170,25 +170,23 @@ namespace Zetbox.Client.Presentables
         /// <see cref="Executing"/> property and then calls the abstract <see cref="DoExecute"/> method.
         /// </summary>
         /// <param name="data">may be <value>null</value> if no data is expected</param>
-        public void Execute(object data)
+        public async Task Execute(object data)
         {
             if (!Executing)
             {
                 if (UseDelayedTask)
                 {
                     Executing = true;
-                    ViewModelFactory.TriggerDelayedTask(Parent, () =>
+                    await ViewModelFactory.TriggerDelayedTask(Parent, async () =>
                     {
                         try
                         {
-                            DoExecute(data);
+                            await DoExecute(data);
                         }
                         finally
                         {
                             Executing = false;
                         }
-
-                        return Task.CompletedTask;
                     });
                 }
                 else
@@ -196,7 +194,7 @@ namespace Zetbox.Client.Presentables
                     Executing = true;
                     try
                     {
-                        DoExecute(data);
+                        await DoExecute(data);
                     }
                     finally
                     {
@@ -211,7 +209,7 @@ namespace Zetbox.Client.Presentables
         /// It will be called by <see cref="Execute"/> after indicating the executing state to clients.
         /// </summary>
         /// <param name="data">may be <value>null</value> if no data is expected</param>
-        protected abstract void DoExecute(object data);
+        protected abstract Task DoExecute(object data);
 
         /// <summary>The backing store for the <see cref="Executing"/> property.</summary>
         private bool _executingCache = false;
@@ -420,9 +418,9 @@ namespace Zetbox.Client.Presentables
             }).Result;
         }
 
-        protected override void DoExecute(object data)
+        protected override async Task DoExecute(object data)
         {
-            _ = execute();
+            await execute();
         }
     }
 
@@ -459,15 +457,15 @@ namespace Zetbox.Client.Presentables
             }).Result;
         }
 
-        protected override void DoExecute(object data)
+        protected override async Task DoExecute(object data)
         {
             if (data is T)
             {
-                _ = execute((T)data);
+                await execute((T)data);
             }
             else
             {
-                _ = execute(default(T));
+                await execute(default(T));
             }
         }
     }
@@ -498,7 +496,7 @@ namespace Zetbox.Client.Presentables
             else return (data is T);
         }
 
-        protected override void DoExecute(object data)
+        protected override async Task DoExecute(object data)
         {
             IEnumerable<T> objects = null;
             if (data is IEnumerable<T>)
@@ -515,10 +513,10 @@ namespace Zetbox.Client.Presentables
             }
             if (objects == null) return;
 
-            DoExecute(objects);
+            await DoExecute(objects);
         }
 
-        protected abstract void DoExecute(IEnumerable<T> data);
+        protected abstract Task DoExecute(IEnumerable<T> data);
     }
 
     public sealed class SimpleItemCommandViewModel<T> : ItemCommandViewModel<T>
@@ -533,9 +531,11 @@ namespace Zetbox.Client.Presentables
             this.execute = execute;
         }
 
-        protected override void DoExecute(IEnumerable<T> data)
+        protected override Task DoExecute(IEnumerable<T> data)
         {
             execute(data);
+
+            return Task.CompletedTask;
         }
     }
 
@@ -567,9 +567,10 @@ namespace Zetbox.Client.Presentables
             return !DataContext.IsDisposed;
         }
 
-        protected override void DoExecute(object data)
+        protected override Task DoExecute(object data)
         {
             // Nothing to do, just a container
+            return Task.CompletedTask;
         }
 
         protected override async Task<System.Collections.ObjectModel.ObservableCollection<ICommandViewModel>> CreateCommands()

@@ -91,7 +91,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     foreach (var str in _filter)
                     {
                         var localStr = str.ToLower();
-                        predicate = predicate.OrElse<TagEntryViewModel>(i => i.Text.ToLower().Contains(localStr));
+                        // TODO: Result
+                        predicate = predicate.OrElse<TagEntryViewModel>(i => i.Text.ToLower().Contains(localStr)).Result;
                     }
                     return _possibleValuesRO.AsQueryable().Where(predicate);
                 }

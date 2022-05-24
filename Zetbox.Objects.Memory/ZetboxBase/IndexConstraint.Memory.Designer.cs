@@ -167,16 +167,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetErrorText_IndexConstraint")]
-        public override string GetErrorText(Zetbox.API.IDataObject constrainedObject)
+        public override async System.Threading.Tasks.Task<string> GetErrorText(Zetbox.API.IDataObject constrainedObject)
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetErrorText_IndexConstraint != null)
             {
-                OnGetErrorText_IndexConstraint(this, e, constrainedObject);
+                await OnGetErrorText_IndexConstraint(this, e, constrainedObject);
             }
             else
             {
-                e.Result = base.GetErrorText(constrainedObject);
+                e.Result = await base.GetErrorText(constrainedObject);
             }
             return e.Result;
         }
@@ -230,16 +230,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnIsValid_IndexConstraint")]
-        public override bool IsValid(Zetbox.API.IDataObject constrainedObject)
+        public override async System.Threading.Tasks.Task<bool> IsValid(Zetbox.API.IDataObject constrainedObject)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsValid_IndexConstraint != null)
             {
-                OnIsValid_IndexConstraint(this, e, constrainedObject);
+                await OnIsValid_IndexConstraint(this, e, constrainedObject);
             }
             else
             {
-                e.Result = base.IsValid(constrainedObject);
+                e.Result = await base.IsValid(constrainedObject);
             }
             return e.Result;
         }

@@ -27,6 +27,6 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// Rebuilds the tag cache
         /// </summary>
-        void Rebuild();
+        System.Threading.Tasks.Task Rebuild();
     }
 }

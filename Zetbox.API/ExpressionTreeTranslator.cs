@@ -19,13 +19,14 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Zetbox.API
 {
     [Serializable]
     public class ExpressionTreeTranslator
     {
-        public virtual Expression Visit(Expression e)
+        public virtual async Task<Expression> Visit(Expression e)
         {
             if (e == null) return null;
 
@@ -45,7 +46,7 @@ namespace Zetbox.API
                 case ExpressionType.UnaryPlus:
                 case ExpressionType.Unbox:
                     {
-                        return VisitUnary((UnaryExpression)e);
+                        return await VisitUnary((UnaryExpression)e);
                     }
                 case ExpressionType.Add:
                 case ExpressionType.AddChecked:
@@ -71,56 +72,56 @@ namespace Zetbox.API
                 case ExpressionType.LeftShift:
                 case ExpressionType.ExclusiveOr:
                     {
-                        return VisitBinary((BinaryExpression)e);
+                        return await VisitBinary((BinaryExpression)e);
                     }
                 case ExpressionType.TypeIs:
                     {
-                        return VisitTypeIs((TypeBinaryExpression)e);
+                        return await VisitTypeIs((TypeBinaryExpression)e);
                     }
                 case ExpressionType.Conditional:
                     {
-                        return VisitConditional((ConditionalExpression)e);
+                        return await VisitConditional((ConditionalExpression)e);
                     }
                 case ExpressionType.Constant:
                     {
-                        return VisitConstant((ConstantExpression)e);
+                        return await VisitConstant((ConstantExpression)e);
                     }
                 case ExpressionType.Parameter:
                     {
-                        return VisitParameter((ParameterExpression)e);
+                        return await VisitParameter((ParameterExpression)e);
                     }
                 case ExpressionType.MemberAccess:
                     {
-                        return VisitMemberAccess((MemberExpression)e);
+                        return await VisitMemberAccess((MemberExpression)e);
                     }
                 case ExpressionType.Call:
                     {
-                        return VisitMethodCall((MethodCallExpression)e);
+                        return await VisitMethodCall((MethodCallExpression)e);
                     }
                 case ExpressionType.Lambda:
                     {
-                        return VisitLambda((LambdaExpression)e);
+                        return await VisitLambda((LambdaExpression)e);
                     }
                 case ExpressionType.New:
                     {
-                        return VisitNew((NewExpression)e);
+                        return await VisitNew((NewExpression)e);
                     }
                 case ExpressionType.NewArrayInit:
                 case ExpressionType.NewArrayBounds:
                     {
-                        return VisitNewArray((NewArrayExpression)e);
+                        return await VisitNewArray((NewArrayExpression)e);
                     }
                 case ExpressionType.Invoke:
                     {
-                        return VisitInvocation((InvocationExpression)e);
+                        return await VisitInvocation((InvocationExpression)e);
                     }
                 case ExpressionType.MemberInit:
                     {
-                        return VisitMemberInit((MemberInitExpression)e);
+                        return await VisitMemberInit((MemberInitExpression)e);
                     }
                 case ExpressionType.ListInit:
                     {
-                        return VisitListInit((ListInitExpression)e);
+                        return await VisitListInit((ListInitExpression)e);
                     }
                 default:
                     {
@@ -129,37 +130,37 @@ namespace Zetbox.API
             }
         }
 
-        protected virtual MemberBinding VisitBinding(MemberBinding binding)
+        protected virtual async Task<MemberBinding> VisitBinding(MemberBinding binding)
         {
             switch (binding.BindingType)
             {
                 case MemberBindingType.Assignment:
-                    return VisitMemberAssignment((MemberAssignment)binding);
+                    return await VisitMemberAssignment((MemberAssignment)binding);
                 case MemberBindingType.MemberBinding:
-                    return VisitMemberMemberBinding((MemberMemberBinding)binding);
+                    return await VisitMemberMemberBinding((MemberMemberBinding)binding);
                 case MemberBindingType.ListBinding:
-                    return VisitMemberListBinding((MemberListBinding)binding);
+                    return await VisitMemberListBinding((MemberListBinding)binding);
                 default:
                     throw new NotSupportedException(string.Format("Unknown binding type '{0}'", binding.BindingType));
             }
         }
 
-        protected virtual ElementInit VisitElementInitializer(ElementInit initializer)
+        protected virtual async Task<ElementInit> VisitElementInitializer(ElementInit initializer)
         {
             return Expression.ElementInit(initializer.AddMethod,
-                this.VisitExpressionList(initializer.Arguments));
+               await this.VisitExpressionList(initializer.Arguments));
         }
 
-        protected virtual Expression VisitUnary(UnaryExpression u)
+        protected virtual async Task<Expression> VisitUnary(UnaryExpression u)
         {
-            return Expression.MakeUnary(u.NodeType, Visit(u.Operand), u.Type, u.Method);
+            return Expression.MakeUnary(u.NodeType, await Visit(u.Operand), u.Type, u.Method);
         }
 
-        protected virtual Expression VisitBinary(BinaryExpression b)
+        protected virtual async Task<Expression> VisitBinary(BinaryExpression b)
         {
-            Expression left = Visit(b.Left);
-            Expression right = Visit(b.Right);
-            Expression conv = Visit(b.Conversion);
+            Expression left = await Visit(b.Left);
+            Expression right = await Visit(b.Right);
+            Expression conv = await Visit(b.Conversion);
 
             if (b.NodeType == ExpressionType.Coalesce && b.Conversion != null)
                 return Expression.Coalesce(left, right, conv as LambdaExpression);
@@ -167,107 +168,119 @@ namespace Zetbox.API
                 return Expression.MakeBinary(b.NodeType, left, right, b.IsLiftedToNull, b.Method);
         }
 
-        protected virtual Expression VisitTypeIs(TypeBinaryExpression b)
+        protected virtual async Task<Expression> VisitTypeIs(TypeBinaryExpression b)
         {
-            return Expression.TypeIs(Visit(b.Expression), b.TypeOperand);
+            return Expression.TypeIs(await Visit(b.Expression), b.TypeOperand);
         }
 
-        protected virtual Expression VisitConstant(ConstantExpression c)
+        protected virtual Task<Expression> VisitConstant(ConstantExpression c)
         {
-            return c;
+            return Task.FromResult((Expression)c);
         }
 
-        protected virtual Expression VisitConditional(ConditionalExpression c)
+        protected virtual async Task<Expression> VisitConditional(ConditionalExpression c)
         {
-            return Expression.Condition(Visit(c.Test), Visit(c.IfTrue), Visit(c.IfFalse));
+            return Expression.Condition(await Visit(c.Test), await Visit(c.IfTrue), await Visit(c.IfFalse));
         }
 
-        protected virtual ParameterExpression VisitParameter(ParameterExpression p)
+        protected virtual Task<ParameterExpression> VisitParameter(ParameterExpression p)
         {
-            return p;
+            return Task.FromResult(p);
         }
 
-        protected virtual Expression VisitMemberAccess(MemberExpression m)
+        protected virtual async Task<Expression> VisitMemberAccess(MemberExpression m)
         {
-            return Expression.MakeMemberAccess(Visit(m.Expression), m.Member);
+            return Expression.MakeMemberAccess(await Visit(m.Expression), m.Member);
         }
 
-        protected virtual Expression VisitMethodCall(MethodCallExpression m)
+        protected virtual async Task<Expression> VisitMethodCall(MethodCallExpression m)
         {
-            return Expression.Call(Visit(m.Object), m.Method, VisitExpressionList(m.Arguments));
+            return Expression.Call(await Visit(m.Object), m.Method, await VisitExpressionList(m.Arguments));
         }
 
-        protected virtual ReadOnlyCollection<Expression> VisitExpressionList(ReadOnlyCollection<Expression> list)
+        protected virtual async Task<ReadOnlyCollection<Expression>> VisitExpressionList(ReadOnlyCollection<Expression> list)
         {
             List<Expression> result = new List<Expression>();
-            list.ForEach<Expression>(e => result.Add(Visit(e)));
+            foreach (var e in list)
+            {
+                result.Add(await Visit(e));
+            }
             return result.AsReadOnly();
         }
 
-        protected virtual MemberAssignment VisitMemberAssignment(MemberAssignment assignment)
+        protected virtual async Task<MemberAssignment> VisitMemberAssignment(MemberAssignment assignment)
         {
-            return Expression.Bind(assignment.Member, Visit(assignment.Expression));
+            return Expression.Bind(assignment.Member, await Visit(assignment.Expression));
         }
 
-        protected virtual MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding binding)
+        protected virtual async Task<MemberMemberBinding> VisitMemberMemberBinding(MemberMemberBinding binding)
         {
-            return Expression.MemberBind(binding.Member, VisitBindingList(binding.Bindings));
+            return Expression.MemberBind(binding.Member, await VisitBindingList(binding.Bindings));
         }
 
-        protected virtual MemberListBinding VisitMemberListBinding(MemberListBinding binding)
+        protected virtual async Task<MemberListBinding> VisitMemberListBinding(MemberListBinding binding)
         {
-            return Expression.ListBind(binding.Member, VisitElementInitializerList(binding.Initializers));
+            return Expression.ListBind(binding.Member, await VisitElementInitializerList(binding.Initializers));
         }
 
-        protected virtual ReadOnlyCollection<MemberBinding> VisitBindingList(ReadOnlyCollection<MemberBinding> list)
+        protected virtual async Task<ReadOnlyCollection<MemberBinding>> VisitBindingList(ReadOnlyCollection<MemberBinding> list)
         {
             List<MemberBinding> result = new List<MemberBinding>();
-            list.ForEach<MemberBinding>(e => result.Add(VisitBinding(e)));
+            foreach(var e in list)
+            {
+                result.Add(await VisitBinding(e));
+            }
             return result.AsReadOnly();
         }
 
-        protected virtual ReadOnlyCollection<ElementInit> VisitElementInitializerList(ReadOnlyCollection<ElementInit> list)
+        protected virtual async Task<ReadOnlyCollection<ElementInit>> VisitElementInitializerList(ReadOnlyCollection<ElementInit> list)
         {
             List<ElementInit> result = new List<ElementInit>();
-            list.ForEach<ElementInit>(e => result.Add(VisitElementInitializer(e)));
+            foreach (var e in list)
+            {
+                result.Add(await VisitElementInitializer(e));
+            }
             return result.AsReadOnly();
         }
 
-        protected virtual ReadOnlyCollection<ParameterExpression> VisitParameterList(ReadOnlyCollection<ParameterExpression> list)
+        protected virtual async Task<ReadOnlyCollection<ParameterExpression>> VisitParameterList(ReadOnlyCollection<ParameterExpression> list)
         {
             List<ParameterExpression> result = new List<ParameterExpression>();
-            list.ForEach<ParameterExpression>(e => result.Add(VisitParameter(e)));
+            foreach (var e in list)
+            {
+                result.Add(await VisitParameter(e));
+            }
             return result.AsReadOnly();
         }
 
-        protected virtual Expression VisitLambda(LambdaExpression lambda)
+        protected virtual async Task<Expression> VisitLambda(LambdaExpression lambda)
         {
-            return Expression.Lambda(lambda.Type, Visit(lambda.Body), VisitParameterList(lambda.Parameters));
+            return Expression.Lambda(lambda.Type, await Visit(lambda.Body), await VisitParameterList(lambda.Parameters));
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "correct grammar for this method name")]
-        protected virtual NewExpression VisitNew(NewExpression newExpression)
+        protected virtual async Task<NewExpression> VisitNew(NewExpression newExpression)
         {
-            var args = VisitExpressionList(newExpression.Arguments);
+            var args = await VisitExpressionList(newExpression.Arguments);
             if (newExpression.Members != null)
                 return Expression.New(newExpression.Constructor, args, newExpression.Members);
             else
                 return Expression.New(newExpression.Constructor, args);
         }
 
-        protected virtual MemberInitExpression VisitMemberInit(MemberInitExpression init)
+        protected virtual async Task<MemberInitExpression> VisitMemberInit(MemberInitExpression init)
         {
-            return Expression.MemberInit(VisitNew(init.NewExpression), VisitBindingList(init.Bindings));
+            return Expression.MemberInit(await VisitNew(init.NewExpression), await VisitBindingList(init.Bindings));
         }
 
-        protected virtual ListInitExpression VisitListInit(ListInitExpression init)
+        protected virtual async Task<ListInitExpression> VisitListInit(ListInitExpression init)
         {
-            return Expression.ListInit(VisitNew(init.NewExpression), VisitElementInitializerList(init.Initializers));
+            return Expression.ListInit(await VisitNew(init.NewExpression), await VisitElementInitializerList(init.Initializers));
         }
 
-        protected virtual NewArrayExpression VisitNewArray(NewArrayExpression na)
+        protected virtual async Task<NewArrayExpression> VisitNewArray(NewArrayExpression na)
         {
-            var e = VisitExpressionList(na.Expressions);
+            var e = await VisitExpressionList(na.Expressions);
             Type type = na.Type.FindElementTypes().Single(t => t != typeof(object));
             if (na.NodeType == ExpressionType.NewArrayInit)
             {
@@ -279,9 +292,9 @@ namespace Zetbox.API
             }
         }
 
-        protected virtual Expression VisitInvocation(InvocationExpression iv)
+        protected virtual async Task<Expression> VisitInvocation(InvocationExpression iv)
         {
-            return Expression.Invoke(Visit(iv.Expression), VisitExpressionList(iv.Arguments));
+            return Expression.Invoke(await Visit(iv.Expression), await VisitExpressionList(iv.Arguments));
         }
     }
 }

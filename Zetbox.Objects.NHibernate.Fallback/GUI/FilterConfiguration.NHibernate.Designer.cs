@@ -1081,12 +1081,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_FilterConfiguration")]
-        public virtual Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
+        public virtual async System.Threading.Tasks.Task<Zetbox.API.IFilterModel> CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_FilterConfiguration != null)
             {
-                OnCreateFilterModel_FilterConfiguration(this, e, ctx);
+                await OnCreateFilterModel_FilterConfiguration(this, e, ctx);
             }
             else
             {
@@ -1145,12 +1145,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_FilterConfiguration")]
-        public virtual string GetLabel()
+        public virtual async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_FilterConfiguration != null)
             {
-                OnGetLabel_FilterConfiguration(this, e);
+                await OnGetLabel_FilterConfiguration(this, e);
             }
             else
             {
@@ -1342,36 +1342,36 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value)));
             else
             if (_fk_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_Module.Value)));
             else
                 this.Module = null;
 
             if (_fk_guid_RequestedKind.HasValue)
-                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value));
+                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value)));
             else
             if (_fk_RequestedKind.HasValue)
-                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value));
+                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value)));
             else
                 this.RequestedKind = null;
 
             if (_fk_guid_ViewModelDescriptor.HasValue)
-                this.ViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_ViewModelDescriptor.Value));
+                this.ViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_ViewModelDescriptor.Value)));
             else
             if (_fk_ViewModelDescriptor.HasValue)
-                this.ViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ViewModelDescriptor.Value));
+                this.ViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ViewModelDescriptor.Value)));
             else
                 this.ViewModelDescriptor = null;
         }

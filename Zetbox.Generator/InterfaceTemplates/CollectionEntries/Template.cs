@@ -19,7 +19,7 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -29,13 +29,13 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
     {
         protected abstract string GetDefinitionGuid();
 
-        protected abstract string GetCeClassName();
+        protected abstract Task<string> GetCeClassName();
 
         /// <returns>which CollectionEntry interface to implement.</returns>
-        protected abstract string GetCeInterface();
+        protected abstract Task<string> GetCeInterface();
 
         /// <returns>true, if any side is ordered</returns>
-        protected abstract bool IsOrdered();
+        protected abstract Task<bool> IsOrdered();
 
         /// <returns>an one-line description of this interface</returns>
         protected abstract string GetDescription();

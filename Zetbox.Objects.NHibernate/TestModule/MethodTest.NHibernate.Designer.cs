@@ -300,12 +300,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGroup1_MethodTest")]
-        public virtual void Group1()
+        public virtual async System.Threading.Tasks.Task Group1()
         {
             // base.Group1();
             if (OnGroup1_MethodTest != null)
             {
-                OnGroup1_MethodTest(this);
+                await OnGroup1_MethodTest(this);
             }
             else
             {
@@ -363,12 +363,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGroup2_MethodTest")]
-        public virtual void Group2()
+        public virtual async System.Threading.Tasks.Task Group2()
         {
             // base.Group2();
             if (OnGroup2_MethodTest != null)
             {
-                OnGroup2_MethodTest(this);
+                await OnGroup2_MethodTest(this);
             }
             else
             {
@@ -426,12 +426,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnObjParameter_MethodTest")]
-        public virtual void ObjParameter(Zetbox.App.Test.MethodTest objParam)
+        public virtual async System.Threading.Tasks.Task ObjParameter(Zetbox.App.Test.MethodTest objParam)
         {
             // base.ObjParameter();
             if (OnObjParameter_MethodTest != null)
             {
-                OnObjParameter_MethodTest(this, objParam);
+                await OnObjParameter_MethodTest(this, objParam);
             }
             else
             {
@@ -489,12 +489,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnObjRet_MethodTest")]
-        public virtual Zetbox.App.Test.MethodTest ObjRet()
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Test.MethodTest> ObjRet()
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Test.MethodTest>();
             if (OnObjRet_MethodTest != null)
             {
-                OnObjRet_MethodTest(this, e);
+                await OnObjRet_MethodTest(this, e);
             }
             else
             {
@@ -553,12 +553,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnParameterless_MethodTest")]
-        public virtual void Parameterless()
+        public virtual async System.Threading.Tasks.Task Parameterless()
         {
             // base.Parameterless();
             if (OnParameterless_MethodTest != null)
             {
-                OnParameterless_MethodTest(this);
+                await OnParameterless_MethodTest(this);
             }
             else
             {
@@ -616,12 +616,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnServerMethod_MethodTest")]
-        public virtual void ServerMethod()
+        public virtual async System.Threading.Tasks.Task ServerMethod()
         {
             // base.ServerMethod();
             if (OnServerMethod_MethodTest != null)
             {
-                OnServerMethod_MethodTest(this);
+                await OnServerMethod_MethodTest(this);
             }
             else
             {
@@ -679,12 +679,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnServerObjParameter_MethodTest")]
-        public virtual Zetbox.App.Test.TestObjClass ServerObjParameter(Zetbox.App.Test.TestObjClass input)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Test.TestObjClass> ServerObjParameter(Zetbox.App.Test.TestObjClass input)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Test.TestObjClass>();
             if (OnServerObjParameter_MethodTest != null)
             {
-                OnServerObjParameter_MethodTest(this, e, input);
+                await OnServerObjParameter_MethodTest(this, e, input);
             }
             else
             {
@@ -743,12 +743,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnServerParameterless_MethodTest")]
-        public virtual void ServerParameterless()
+        public virtual async System.Threading.Tasks.Task ServerParameterless()
         {
             // base.ServerParameterless();
             if (OnServerParameterless_MethodTest != null)
             {
-                OnServerParameterless_MethodTest(this);
+                await OnServerParameterless_MethodTest(this);
             }
             else
             {
@@ -806,12 +806,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnStringParameter_MethodTest")]
-        public virtual void StringParameter(string str)
+        public virtual async System.Threading.Tasks.Task StringParameter(string str)
         {
             // base.StringParameter();
             if (OnStringParameter_MethodTest != null)
             {
-                OnStringParameter_MethodTest(this, str);
+                await OnStringParameter_MethodTest(this, str);
             }
             else
             {
@@ -869,12 +869,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnSummary_MethodTest")]
-        public virtual void Summary()
+        public virtual async System.Threading.Tasks.Task Summary()
         {
             // base.Summary();
             if (OnSummary_MethodTest != null)
             {
-                OnSummary_MethodTest(this);
+                await OnSummary_MethodTest(this);
             }
             else
             {

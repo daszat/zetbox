@@ -57,11 +57,11 @@ namespace Zetbox.DalProvider.Client
             this.perfCounter = perfCounter;
         }
 
-        private Expression TransformExpression(Expression e)
+        private async Task<Expression> TransformExpression(Expression e)
         {
-            e = QueryTranslator.Translate(e);
+            e = await QueryTranslator.Translate(e);
             // TODO: Maybe merge constant evaluator into QueryTranslator
-            e = ConstantEvaluator.PartialEval(e);
+            e = await ConstantEvaluator.PartialEval(e);
             return e;
         }
 
@@ -104,7 +104,7 @@ namespace Zetbox.DalProvider.Client
                     Logging.Linq.Info(query.ToString());
                 }
 
-                query = TransformExpression(query);
+                query = await TransformExpression(query);
 
                 ValidateServerExpression.CheckValid(query);
 
@@ -155,12 +155,12 @@ namespace Zetbox.DalProvider.Client
                 }
 
                 // Visit
-                query = TransformExpression(query);
+                query = await TransformExpression(query);
 
                 ValidateServerExpression.CheckValid(query);
 
                 // Try to find a local object first
-                result = ExecuteFromLocalObjects<T>(query);
+                result = await ExecuteFromLocalObjects<T>(query);
 
                 // If nothing found local -> goto Server
                 if (result == null)
@@ -209,10 +209,10 @@ namespace Zetbox.DalProvider.Client
             return (IList)mi.Invoke(this, new object[] { query });
         }
 
-        private List<T> QueryFromLocalObjects<T>(Expression query)
+        private async Task<List<T>> QueryFromLocalObjects<T>(Expression query)
         {
             var localObjects = _context.AttachedObjects.AsQueryable().Where(o => o != null && o.ObjectState != DataObjectState.Deleted).OfType<T>();
-            var replacedQuery = new SourceReplacer<T>(localObjects).Visit(query);
+            var replacedQuery = await new SourceReplacer<T>(localObjects).Visit(query);
             return localObjects.Provider.CreateQuery<T>(replacedQuery).ToList();
         }
 
@@ -222,10 +222,10 @@ namespace Zetbox.DalProvider.Client
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
         /// <returns></returns>
-        private T ExecuteFromLocalObjects<T>(Expression query)
+        private async Task<T> ExecuteFromLocalObjects<T>(Expression query)
         {
             var localObjects = _context.AttachedObjects.AsQueryable().Where(o => o != null && o.ObjectState != DataObjectState.Deleted).OfType<T>();
-            var replacedQuery = new SourceReplacer<T>(localObjects).Visit(query) as MethodCallExpression;
+            var replacedQuery = (await new SourceReplacer<T>(localObjects).Visit(query)) as MethodCallExpression;
             Expression resultQuery = replacedQuery;
 
             if (replacedQuery.IsMethodCallExpression("First"))
@@ -248,17 +248,17 @@ namespace Zetbox.DalProvider.Client
                 _newSource = newSource.Expression;
             }
 
-            protected override Expression VisitConstant(ConstantExpression c)
+            protected override async Task<Expression> VisitConstant(ConstantExpression c)
             {
                 if (c.Type.IsGenericType && typeof(ZetboxContextQuery<>).IsAssignableFrom(c.Type.GetGenericTypeDefinition()))
                     return _newSource;
                 else
-                    return base.VisitConstant(c);
+                    return await base.VisitConstant(c);
             }
 
-            protected override Expression VisitMethodCall(MethodCallExpression m)
+            protected override async Task<Expression> VisitMethodCall(MethodCallExpression m)
             {
-                return base.VisitMethodCall(m);
+                return await base.VisitMethodCall(m);
             }
         }
         #endregion

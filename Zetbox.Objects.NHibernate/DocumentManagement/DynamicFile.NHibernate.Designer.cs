@@ -53,16 +53,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnExtractText_DynamicFile")]
-        public override void ExtractText()
+        public override async System.Threading.Tasks.Task ExtractText()
         {
             // base.ExtractText();
             if (OnExtractText_DynamicFile != null)
             {
-                OnExtractText_DynamicFile(this);
+                await OnExtractText_DynamicFile(this);
             }
             else
             {
-                base.ExtractText();
+                await base.ExtractText();
             }
         }
         public static event ExtractText_Handler<DynamicFile> OnExtractText_DynamicFile;
@@ -115,16 +115,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnHandleBlobChange_DynamicFile")]
-        public override Zetbox.App.Base.Blob HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
+        public override async System.Threading.Tasks.Task<Zetbox.App.Base.Blob> HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.Blob>();
             if (OnHandleBlobChange_DynamicFile != null)
             {
-                OnHandleBlobChange_DynamicFile(this, e, oldBlob, newBlob);
+                await OnHandleBlobChange_DynamicFile(this, e, oldBlob, newBlob);
             }
             else
             {
-                e.Result = base.HandleBlobChange(oldBlob, newBlob);
+                e.Result = await base.HandleBlobChange(oldBlob, newBlob);
             }
             return e.Result;
         }
@@ -178,16 +178,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_DynamicFile")]
-        public override void Open()
+        public override async System.Threading.Tasks.Task Open()
         {
             // base.Open();
             if (OnOpen_DynamicFile != null)
             {
-                OnOpen_DynamicFile(this);
+                await OnOpen_DynamicFile(this);
             }
             else
             {
-                base.Open();
+                await base.Open();
             }
         }
         public static event Open_Handler<DynamicFile> OnOpen_DynamicFile;
@@ -240,16 +240,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_DynamicFile")]
-        public override void Upload()
+        public override async System.Threading.Tasks.Task Upload()
         {
             // base.Upload();
             if (OnUpload_DynamicFile != null)
             {
-                OnUpload_DynamicFile(this);
+                await OnUpload_DynamicFile(this);
             }
             else
             {
-                base.Upload();
+                await base.Upload();
             }
         }
         public static event Upload_Handler<DynamicFile> OnUpload_DynamicFile;

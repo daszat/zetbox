@@ -35,8 +35,8 @@ namespace Zetbox.Generator.Templates.Properties
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
             string eventName = "On" + prop.Name;
-            string propType = prop.GetElementTypeString();
-            string objType = prop.ObjectClass.GetDataTypeString();
+            string propType = prop.GetElementTypeString().Result;
+            string objType = prop.ObjectClass.GetDataTypeString().Result;
 
             Call(host, ctx, eventName, propType, objType, true, !isReadOnly);
         }

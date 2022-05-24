@@ -23,15 +23,17 @@ namespace Zetbox.API.Server
     using Zetbox.App.Base;
     using Zetbox.API.SchemaManagement;
     using Zetbox.App.Extensions;
+    using System.Threading.Tasks;
+    using System.Threading;
 
     public interface ISqlErrorTranslator
     {
-        Exception Translate(Exception ex);
+        Task<Exception> Translate(Exception ex);
     }
 
     public abstract class SqlErrorTranslator : ISqlErrorTranslator
     {
-        private static readonly object _lock = new object();
+        private static readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
         private IFrozenContext _frozenCtx;
 
         public SqlErrorTranslator(IFrozenContext frozenCtx)
@@ -39,13 +41,14 @@ namespace Zetbox.API.Server
             _frozenCtx = frozenCtx;
         }
 
-        public abstract Exception Translate(Exception ex);
+        public abstract Task<Exception> Translate(Exception ex);
 
         private Dictionary<string, Relation> _relations;
-        private void EnsureRelations()
+        private async Task EnsureRelations()
         {
             if (_relations != null) return;
-            lock (_lock)
+            await _lock.WaitAsync();
+            try
             {
                 if (_relations == null)
                 {
@@ -53,38 +56,53 @@ namespace Zetbox.API.Server
                         .ToDictionary(r => r.GetAssociationName());
                 }
             }
+            finally
+            {
+                _lock.Release();
+            }
         }
 
         private Dictionary<string, IndexConstraint> _index;
-        private void EnsureIndex()
+        private async Task EnsureIndex()
         {
             if (_index != null) return;
-            lock (_lock)
+            await _lock.WaitAsync();
+            try
             {
                 if (_index == null)
                 {
-                    _index = _frozenCtx.GetQuery<IndexConstraint>()
+                    var tmp = _frozenCtx.GetQuery<IndexConstraint>()
                         .Where(i => i.IsUnique)
                         .Where(i => i.Constrained is ObjectClass) // Only object classes can leed to an index in our database. Interfaces are just a "template"
-                        .ToDictionary(i =>
+                        .ToDictionary(async i =>
                         {
                             var objClass = (ObjectClass)i.Constrained;
                             if (objClass.GetTableMapping() == TableMapping.TPH)
                             {
                                 objClass = objClass.GetRootClass();
                             }
-                            var columns = Construct.GetUCColNames(i);
+                            var columns = await Construct.GetUCColNames(i);
                             // GetTableRef needs an open ISchemaProvider!
                             // Overkill -> construct table name for it's own
                             return Construct.IndexName(objClass.TableName, columns);
                         });
+                    _index = new Dictionary<string, IndexConstraint>();
+                    foreach (var kv in tmp)
+                    {
+                        var key = await kv.Key;
+                        _index[key] = kv.Value;
+                    }
                 }
+            }
+            finally
+            {
+                _lock.Release();
             }
         }
 
-        protected FKViolationExceptionDetail ConstructFKDetail(string msg)
+        protected async Task<FKViolationExceptionDetail> ConstructFKDetail(string msg)
         {
-            EnsureRelations();
+            await EnsureRelations();
             var result = new FKViolationExceptionDetail() { DatabaseError = msg };
             var rel = _relations.FirstOrDefault(kv => msg.Contains(kv.Key)).Value; // KeyValuePair<> is a struct
             if (rel != null)
@@ -94,9 +112,9 @@ namespace Zetbox.API.Server
             return result;
         }
 
-        protected UniqueConstraintViolationExceptionDetail ConstructUniqueConstraintDetail(string msg)
+        protected async Task<UniqueConstraintViolationExceptionDetail> ConstructUniqueConstraintDetail(string msg)
         {
-            EnsureIndex();
+            await EnsureIndex();
             var result = new UniqueConstraintViolationExceptionDetail() { DatabaseError = msg };
             var idx = _index.FirstOrDefault(kv => msg.Contains(kv.Key)).Value; // KeyValuePair<> is a struct
             if (idx != null)

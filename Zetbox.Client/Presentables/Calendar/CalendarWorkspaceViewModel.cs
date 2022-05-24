@@ -352,16 +352,16 @@ namespace Zetbox.Client.Presentables.Calendar
         public async Task Open()
         {
             if (!(await CanOpen())) return;
-            Open(CurrentView.SelectedItem);
+            await Open(CurrentView.SelectedItem);
         }
 
-        public void Open(EventViewModel evt)
+        public async Task Open(EventViewModel evt)
         {
             if (evt == null) return;
             var newScope = ViewModelFactory.CreateNewScope();
             var newCtx = newScope.ViewModelFactory.CreateNewContext();
 
-            var source = evt.Event.Source.GetObject(newCtx);
+            var source = await evt.Event.Source.GetObject(newCtx);
             if (source != null && !source.CurrentAccessRights.HasReadRights())
             {
                 newScope.ViewModelFactory.ShowMessage(CalendarResources.CannotOpenNoRightsMessage, CalendarResources.CannotOpenNoRightsCaption);
@@ -380,7 +380,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 _fetchCache.Invalidate();
                 CurrentView.Refresh(); // A dialog makes it easy to know when the time for a refresh has come
             };
-            newScope.ViewModelFactory.ShowModel(ws, true);
+            await newScope.ViewModelFactory.ShowModel(ws, true);
         }
         #endregion
 
@@ -434,7 +434,7 @@ namespace Zetbox.Client.Presentables.Calendar
             var dlg = scope.ViewModelFactory.CreateViewModel<NewEventDialogViewModel.Factory>().Invoke(ctx, null, calendar);
 
             var args = new NewEventViewModelsArgs(ctx, scope.ViewModelFactory, dlg, calendar, selectedDate, isAllDay);
-            calendar.GetNewEventViewModels(args);
+            await calendar.GetNewEventViewModels(args);
 
             dlg.InputViewModels = args.ViewModels;
             await scope.ViewModelFactory.ShowModel(dlg, true);
@@ -570,16 +570,14 @@ namespace Zetbox.Client.Presentables.Calendar
         #endregion
 
         #region Print Commands
-        protected Task Print(DateTime from, DateTime to)
+        protected async Task Print(DateTime from, DateTime to)
         {
-            var events = _fetchCache.FetchEventsAsync(from, to).Result;
+            var events = await _fetchCache.FetchEventsAsync(from, to);
             using (var rpt = _rptFactory())
             {
-                Reporting.Calendar.Events.Call(rpt, events.SelectMany(e => e.CreateCalendarItemViewModels(from, to)), from, to);
+                Reporting.Calendar.Events.Call(rpt, await events.SelectMany(async e => await e.CreateCalendarItemViewModels(from, to)), from, to);
                 rpt.Open("Events.pdf");
             }
-
-            return Task.CompletedTask;
         }
 
         private ContainerCommand _printCommandGroup;
@@ -731,14 +729,14 @@ namespace Zetbox.Client.Presentables.Calendar
             var dlg = ViewModelFactory.CreateDialog(DataContext, CalendarResources.DlgDateRangeTitle)
                 .AddDateTime("from", CalendarResources.FromLabel, DateTime.Today)
                 .AddDateTime("to", CalendarResources.UntilLabel, DateTime.Today);
-            dlg.Show((values) =>
+            dlg.Show(async (values) =>
             {
                 var from = ((DateTime)values["from"]).Date;
                 var to = ((DateTime)values["to"]).Date.AddDays(1);
-                var events = _fetchCache.FetchEventsAsync(from, to).Result;
+                var events = await _fetchCache.FetchEventsAsync(from, to);
                 using (var rpt = _rptFactory())
                 {
-                    Reporting.Calendar.SheetDays.Call(rpt, events.SelectMany(e => e.CreateCalendarItemViewModels(from, to)), from, to.AddDays(-1));
+                    Reporting.Calendar.SheetDays.Call(rpt, await events.SelectMany(async e => await e.CreateCalendarItemViewModels(from, to)), from, to.AddDays(-1));
                     rpt.Open("SheetDays.pdf");
                 }
             });
@@ -764,12 +762,12 @@ namespace Zetbox.Client.Presentables.Calendar
                         .Invoke(DataContext, this, _fetchCache.FetchEventsAsync);
                     _weekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
                     _weekCalender.New += async (s, e) => await New(e.Date, e.IsAllDay);
-                    _weekCalender.Open += (s, e) => Open(e.Event);
+                    _weekCalender.Open += async (s, e) => await Open(e.Event);
                     _weekCalender.ShowFullWeek = config != null && config.ShowFullWeek;
                     // Initial refresh
                     _fetchCache.SetCalendars(VisibleItems.Select(i => i.Calendar.ID));
                     _weekCalender.SelectedCalendar = this.SelectedItem != null ? this.SelectedItem.CalendarViewModel : null;
-                    _weekCalender.Refresh();
+                    _ = _weekCalender.Refresh();
                 }
                 return _weekCalender;
             }
@@ -799,7 +797,8 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get
             {
-                return CurrentView.SelectedItem != null ? CurrentView.SelectedItem.Event.Source.HasObject() == false : false;
+                // TODO: .Result
+                return CurrentView.SelectedItem != null ? CurrentView.SelectedItem.Event.Source.HasObject().Result == false : false;
             }
         }
 

@@ -169,6 +169,6 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
-        void CreateProperty();
+        System.Threading.Tasks.Task CreateProperty();
     }
 }

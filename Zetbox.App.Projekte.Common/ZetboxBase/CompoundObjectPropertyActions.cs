@@ -34,7 +34,7 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetElementTypeString(CompoundObjectProperty obj, MethodReturnEventArgs<string> e)
+        public static async System.Threading.Tasks.Task GetElementTypeString(CompoundObjectProperty obj, MethodReturnEventArgs<string> e)
         {
             var def = obj.CompoundObjectDefinition;
             if (def == null)
@@ -49,18 +49,14 @@ namespace Zetbox.App.Base
             {
                 e.Result = def.Module.Namespace + "." + def.Name;
             }
-            PropertyActions.DecorateElementType(obj, e, false);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            await PropertyActions.DecorateElementType(obj, e, false);
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetPropertyTypeString(CompoundObjectProperty obj, MethodReturnEventArgs<string> e)
+        public static async System.Threading.Tasks.Task GetPropertyTypeString(CompoundObjectProperty obj, MethodReturnEventArgs<string> e)
         {
-            GetElementTypeString(obj, e);
+            await GetElementTypeString(obj, e);
             PropertyActions.DecorateParameterType(obj, e, false, obj.IsList, obj.HasPersistentOrder);
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

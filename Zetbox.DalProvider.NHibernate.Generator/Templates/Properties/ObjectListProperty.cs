@@ -20,6 +20,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.SchemaManagement;
     using Zetbox.App.Base;
@@ -38,11 +39,11 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             if (host == null) { throw new ArgumentNullException("host"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            if (!prop.IsList()) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
+            if (!prop.IsList().Result) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
 
             var rel = RelationExtensions.Lookup(ctx, prop);
-            var relEnd = rel.GetEnd(prop);
-            var otherEnd = rel.GetOtherEnd(relEnd);
+            var relEnd = rel.GetEnd(prop).Result;
+            var otherEnd = rel.GetOtherEnd(relEnd).Result;
 
             string name = prop.Name;
 
@@ -54,9 +55,9 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 
             var exposedListType = otherEnd.HasPersistentOrder ? "IList" : "ICollection";
             // the name of the position property
-            var positionPropertyName = rel.NeedsPositionStorage(otherEnd.GetRole()) ? Construct.ListPositionPropertyName(otherEnd) : String.Empty;
+            var positionPropertyName = (rel.NeedsPositionStorage(otherEnd.GetRole()).Result) ? Construct.ListPositionPropertyName(otherEnd) : String.Empty;
             var otherName = otherEnd.Navigator == null ? relEnd.RoleName : otherEnd.Navigator.Name;
-            var referencedInterface = otherEnd.Type.GetDataTypeString();
+            var referencedInterface = otherEnd.Type.GetDataTypeString().Result;
             var referencedProxy = Mappings.ObjectClassHbm.GetProxyTypeReference(otherEnd.Type, host.Settings);
 
             Call(host, ctx, serializationList, name, eagerLoading, wrapperName, wrapperClass, exposedListType, positionPropertyName, otherName, referencedInterface, referencedProxy);

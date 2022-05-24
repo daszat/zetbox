@@ -42,16 +42,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetErrorText_ReadOnlyConstraint")]
-        public override string GetErrorText(System.Object constrainedObject, System.Object constrainedValue)
+        public override async System.Threading.Tasks.Task<string> GetErrorText(System.Object constrainedObject, System.Object constrainedValue)
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetErrorText_ReadOnlyConstraint != null)
             {
-                OnGetErrorText_ReadOnlyConstraint(this, e, constrainedObject, constrainedValue);
+                await OnGetErrorText_ReadOnlyConstraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
-                e.Result = base.GetErrorText(constrainedObject, constrainedValue);
+                e.Result = await base.GetErrorText(constrainedObject, constrainedValue);
             }
             return e.Result;
         }
@@ -105,16 +105,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnIsValid_ReadOnlyConstraint")]
-        public override bool IsValid(System.Object constrainedObject, System.Object constrainedValue)
+        public override async System.Threading.Tasks.Task<bool> IsValid(System.Object constrainedObject, System.Object constrainedValue)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsValid_ReadOnlyConstraint != null)
             {
-                OnIsValid_ReadOnlyConstraint(this, e, constrainedObject, constrainedValue);
+                await OnIsValid_ReadOnlyConstraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
-                e.Result = base.IsValid(constrainedObject, constrainedValue);
+                e.Result = await base.IsValid(constrainedObject, constrainedValue);
             }
             return e.Result;
         }

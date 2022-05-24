@@ -100,12 +100,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchControlKindTask != null) return _triggerFetchControlKindTask;
 
-            if (_fk_ControlKind.HasValue)
-                _triggerFetchControlKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_ControlKind.Value);
-            else
-                _triggerFetchControlKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> task;
 
-            _triggerFetchControlKindTask.OnResult(t =>
+            if (_fk_ControlKind.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_ControlKind.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
+
+            task.OnResult(t =>
             {
                 if (OnControlKind_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchControlKindTask;
+            return _triggerFetchControlKindTask = task;
         }
 
         // internal implementation
@@ -126,7 +128,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchControlKindAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
@@ -439,12 +440,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
-            if (_fk_Module.HasValue)
-                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
-            else
-                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Module> task;
 
-            _triggerFetchModuleTask.OnResult(t =>
+            if (_fk_Module.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+
+            task.OnResult(t =>
             {
                 if (OnModule_Getter != null)
                 {
@@ -454,7 +457,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchModuleTask;
+            return _triggerFetchModuleTask = task;
         }
 
         // internal implementation
@@ -465,7 +468,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchModuleAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
@@ -668,18 +670,18 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_guid_ControlKind.HasValue)
-                ControlKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_ControlKind.Value);
+                ControlKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_ControlKind.Value));
             else
             if (_fk_ControlKind.HasValue)
-                ControlKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_ControlKind.Value);
+                ControlKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_ControlKind.Value));
             else
                 ControlKindImpl = null;
 
             if (_fk_guid_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
             else
             if (_fk_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value));
             else
                 ModuleImpl = null;
             // fix cached lists references
@@ -842,7 +844,7 @@ namespace Zetbox.App.GUI
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(ControlKind != null ? ControlKind.ID : (int?)null);
+            binStream.Write(_fk_ControlKind != null ? _fk_ControlKind : (int?)null);
             binStream.Write(this._ControlTypeRef);
             binStream.Write(this._isDeletedSet);
             if (this._isDeletedSet) {
@@ -852,7 +854,7 @@ namespace Zetbox.App.GUI
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(_fk_Module != null ? _fk_Module : (int?)null);
             binStream.Write((int?)this._Toolkit);
         }
 

@@ -19,6 +19,7 @@ namespace Zetbox.Generator.InterfaceTemplates.Properties
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Arebis.CodeGeneration;
     using Zetbox.API;
     using Zetbox.API.Server;
@@ -28,9 +29,9 @@ namespace Zetbox.Generator.InterfaceTemplates.Properties
 
     public partial class SimplePropertyListTemplate
     {
-        protected virtual string GetPropertyTypeString()
+        protected virtual async Task<string> GetPropertyTypeString()
         {
-            return prop.GetPropertyTypeString();
+            return await prop.GetPropertyTypeString();
         }
 
         protected virtual string GetPropertyName()

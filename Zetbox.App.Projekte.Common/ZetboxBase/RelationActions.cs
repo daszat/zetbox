@@ -246,7 +246,7 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task isValid_Containment(Relation obj, PropertyIsValidEventArgs e)
+        public static async System.Threading.Tasks.Task isValid_Containment(Relation obj, PropertyIsValidEventArgs e)
         {
             var rel = obj;
             if (rel.A != null && rel.B != null)
@@ -255,10 +255,10 @@ namespace Zetbox.App.Base
                 {
                     e.IsValid = false;
                     e.Error = "Incomplete Relation (A.Multiplicity or B.Multiplicity missing)";
-                    return System.Threading.Tasks.Task.CompletedTask;
+                    return;
                 }
 
-                var relType = rel.GetRelationType();
+                var relType = await rel.GetRelationType();
 
                 switch (rel.Containment)
                 {
@@ -320,8 +320,6 @@ namespace Zetbox.App.Base
                 e.IsValid = false;
                 e.Error = "Incomplete Relation (A or B missing)";
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

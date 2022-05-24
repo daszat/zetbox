@@ -700,12 +700,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetStream_Blob")]
-        public virtual System.IO.Stream GetStream()
+        public virtual async System.Threading.Tasks.Task<System.IO.Stream> GetStream()
         {
             var e = new MethodReturnEventArgs<System.IO.Stream>();
             if (OnGetStream_Blob != null)
             {
-                OnGetStream_Blob(this, e);
+                await OnGetStream_Blob(this, e);
             }
             else
             {
@@ -764,12 +764,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_Blob")]
-        public virtual void Open()
+        public virtual async System.Threading.Tasks.Task Open()
         {
             // base.Open();
             if (OnOpen_Blob != null)
             {
-                OnOpen_Blob(this);
+                await OnOpen_Blob(this);
             }
             else
             {

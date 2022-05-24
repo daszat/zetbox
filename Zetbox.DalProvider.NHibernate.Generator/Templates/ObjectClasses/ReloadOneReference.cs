@@ -34,8 +34,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
             Relation rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, prop);
-            RelationEnd relEnd = rel.GetEnd(prop);
-            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+            RelationEnd relEnd = rel.GetEnd(prop).Result;
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd).Result;
 
             string referencedInterface = otherEnd.Type.Module.Namespace + "." + otherEnd.Type.Name;
             string referencedImplementation = Mappings.ObjectClassHbm.GetWrapperTypeReference(otherEnd.Type, _host.Settings);

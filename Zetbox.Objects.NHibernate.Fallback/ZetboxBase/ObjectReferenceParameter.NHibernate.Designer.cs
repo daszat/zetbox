@@ -173,16 +173,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_ObjectReferenceParameter")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_ObjectReferenceParameter != null)
             {
-                OnGetLabel_ObjectReferenceParameter(this, e);
+                await OnGetLabel_ObjectReferenceParameter(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -236,16 +236,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterType_ObjectReferenceParameter")]
-        public override System.Type GetParameterType()
+        public override async System.Threading.Tasks.Task<System.Type> GetParameterType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetParameterType_ObjectReferenceParameter != null)
             {
-                OnGetParameterType_ObjectReferenceParameter(this, e);
+                await OnGetParameterType_ObjectReferenceParameter(this, e);
             }
             else
             {
-                e.Result = base.GetParameterType();
+                e.Result = await base.GetParameterType();
             }
             return e.Result;
         }
@@ -299,16 +299,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterTypeString_ObjectReferenceParameter")]
-        public override string GetParameterTypeString()
+        public override async System.Threading.Tasks.Task<string> GetParameterTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetParameterTypeString_ObjectReferenceParameter != null)
             {
-                OnGetParameterTypeString_ObjectReferenceParameter(this, e);
+                await OnGetParameterTypeString_ObjectReferenceParameter(this, e);
             }
             else
             {
-                e.Result = base.GetParameterTypeString();
+                e.Result = await base.GetParameterTypeString();
             }
             return e.Result;
         }
@@ -431,10 +431,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_ObjectClass.HasValue)
-                this.ObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_ObjectClass.Value));
+                this.ObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_ObjectClass.Value)));
             else
             if (_fk_ObjectClass.HasValue)
-                this.ObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value));
+                this.ObjectClass = ((Zetbox.App.Base.ObjectClassNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value)));
             else
                 this.ObjectClass = null;
         }

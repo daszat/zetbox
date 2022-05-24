@@ -49,8 +49,8 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
         protected virtual void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
         {
-            RelationEnd relEnd = rel.GetEndFromRole(endRole);
-            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole).Result;
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd).Result;
 
             // TODO: create/use ObjectReference*IMPLEMENTATION* instead (_fk* can already be made available)
             string moduleNamespace = rel.Module.Namespace;
@@ -61,17 +61,17 @@ namespace Zetbox.Generator.Templates.CollectionEntries
             string fkBackingName = "_fk_" + name;
             string publicFKBackingName = "FK_" + name;
             string fkGuidBackingName = "_fk_guid_" + name;
-            string referencedInterface = relEnd.Type.GetDataTypeString();
+            string referencedInterface = relEnd.Type.GetDataTypeString().Result;
             string referencedImplementation = referencedInterface + ImplementationSuffix;
             string associationName = rel.GetAssociationName();
             string targetRoleName = otherEnd.RoleName;
-            string positionPropertyName = rel.NeedsPositionStorage(endRole)
+            string positionPropertyName = rel.NeedsPositionStorage(endRole).Result
                 ? name + Zetbox.API.Helper.PositionSuffix
                 : null;
             string inverseNavigatorName = relEnd.Navigator != null
                 ? relEnd.Navigator.Name
                 : null;
-            bool inverseNavigatorIsList = relEnd.Navigator != null && relEnd.Navigator.GetIsList();
+            bool inverseNavigatorIsList = relEnd.Navigator != null && relEnd.Navigator.GetIsList().Result;
             bool notifyInverseCollection = true;
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
             bool relDataTypeExportable = rel.A.Type.ImplementsIExportable().Result && rel.B.Type.ImplementsIExportable().Result;
@@ -105,7 +105,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
         protected virtual void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
-            if (rel.NeedsPositionStorage(endRole))
+            if (rel.NeedsPositionStorage(endRole).Result)
             {
                 // provided by ObjectReferencePropertyTemplate
                 string posBackingStore = "_" + endRole + Zetbox.API.Helper.PositionSuffix;

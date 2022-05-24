@@ -758,12 +758,12 @@ namespace Zetbox.App.LicenseManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnLoad_PrivateKey")]
-        public virtual void Load()
+        public virtual async System.Threading.Tasks.Task Load()
         {
             // base.Load();
             if (OnLoad_PrivateKey != null)
             {
-                OnLoad_PrivateKey(this);
+                await OnLoad_PrivateKey(this);
             }
             else
             {
@@ -821,12 +821,12 @@ namespace Zetbox.App.LicenseManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnLoadFromFile_PrivateKey")]
-        public virtual void LoadFromFile(string file)
+        public virtual async System.Threading.Tasks.Task LoadFromFile(string file)
         {
             // base.LoadFromFile();
             if (OnLoadFromFile_PrivateKey != null)
             {
-                OnLoadFromFile_PrivateKey(this, file);
+                await OnLoadFromFile_PrivateKey(this, file);
             }
             else
             {

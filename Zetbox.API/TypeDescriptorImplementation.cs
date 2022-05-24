@@ -18,10 +18,11 @@ namespace Zetbox.API
     using System.Linq;
     using System.ComponentModel;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IValidatingPropertyDescriptor
     {
-        string[] GetValidationErrors(object component);
+        Task<string[]> GetValidationErrors(object component);
         PropertyDescriptor UnderlyingDescriptor { get; }
     }
 
@@ -93,7 +94,7 @@ namespace Zetbox.API
 
         #region IValidatingPropertyDescriptor Members
 
-        public virtual string[] GetValidationErrors(object component)
+        public virtual Task<string[]> GetValidationErrors(object component)
         {
             return null;
         }

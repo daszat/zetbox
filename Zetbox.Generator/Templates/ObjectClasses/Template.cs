@@ -81,7 +81,7 @@ namespace Zetbox.Generator.Templates.ObjectClasses
         {
             var rel = RelationExtensions.Lookup(ctx, prop);
 
-            var relEnd = rel.GetEnd(prop);
+            var relEnd = rel.GetEnd(prop).Result;
             //var otherEnd = rel.GetOtherEnd(relEnd);
 
             // without navigator, there should be no property
@@ -116,7 +116,7 @@ namespace Zetbox.Generator.Templates.ObjectClasses
         protected virtual void ApplyCollectionEntryListTemplate(ObjectReferenceProperty prop)
         {
             var rel = RelationExtensions.Lookup(ctx, prop);
-            var relEnd = rel.GetEnd(prop);
+            var relEnd = rel.GetEnd(prop).Result;
 
             Properties.CollectionEntryListProperty.Call(Host, ctx,
                  this.MembersToSerialize,

@@ -1532,12 +1532,12 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateProperty_SourceColumn")]
-        public virtual void CreateProperty()
+        public virtual async System.Threading.Tasks.Task CreateProperty()
         {
             // base.CreateProperty();
             if (OnCreateProperty_SourceColumn != null)
             {
-                OnCreateProperty_SourceColumn(this);
+                await OnCreateProperty_SourceColumn(this);
             }
             else
             {

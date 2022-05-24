@@ -108,16 +108,16 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-        string GetLabel();
+        System.Threading.Tasks.Task<string> GetLabel();
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
-        System.Type GetParameterType();
+        System.Threading.Tasks.Task<System.Type> GetParameterType();
 
         /// <summary>
         /// Returns the String representation of this Method-Parameter Meta Object.
         /// </summary>
-        string GetParameterTypeString();
+        System.Threading.Tasks.Task<string> GetParameterTypeString();
     }
 }

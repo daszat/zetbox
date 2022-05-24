@@ -179,7 +179,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchMethodsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Method>)_Methods;
             }
@@ -195,8 +194,9 @@ namespace Zetbox.App.Base
         public System.Threading.Tasks.Task TriggerFetchMethodsAsync()
         {
             if (_triggerFetchMethodsTask != null) return _triggerFetchMethodsTask;
-            _triggerFetchMethodsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
-            _triggerFetchMethodsTask = _triggerFetchMethodsTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            task = Context.FetchRelationAsync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
+            task = task.OnResult(r =>
             {
                 _Methods
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>>(
@@ -204,7 +204,7 @@ namespace Zetbox.App.Base
                         new RelationshipFilterASideCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>(this.Context, this));
                         // _Methods.CollectionChanged is managed by OnMethodsCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchMethodsTask;
+            return _triggerFetchMethodsTask = task;
         }
 
         internal void OnMethodsCollectionChanged()
@@ -283,12 +283,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         {
             if (_triggerFetchRelationEndTask != null) return _triggerFetchRelationEndTask;
 
-            if (_fk_RelationEnd.HasValue)
-                _triggerFetchRelationEndTask = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
-            else
-                _triggerFetchRelationEndTask = new System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> task;
 
-            _triggerFetchRelationEndTask.OnResult(t =>
+            if (_fk_RelationEnd.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.RelationEnd>(null);
+
+            task.OnResult(t =>
             {
                 if (OnRelationEnd_Getter != null)
                 {
@@ -298,7 +300,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
                 }
             });
 
-            return _triggerFetchRelationEndTask;
+            return _triggerFetchRelationEndTask = task;
         }
 
         // internal implementation
@@ -309,7 +311,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             {
                 var task = TriggerFetchRelationEndAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.RelationEndMemoryImpl)task.Result;
             }
             set
@@ -380,16 +381,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDescription_ObjectReferenceProperty")]
-        public override string GetDescription()
+        public override async System.Threading.Tasks.Task<string> GetDescription()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDescription_ObjectReferenceProperty != null)
             {
-                OnGetDescription_ObjectReferenceProperty(this, e);
+                await OnGetDescription_ObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetDescription();
+                e.Result = await base.GetDescription();
             }
             return e.Result;
         }
@@ -443,16 +444,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetElementTypeString_ObjectReferenceProperty")]
-        public override string GetElementTypeString()
+        public override async System.Threading.Tasks.Task<string> GetElementTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetElementTypeString_ObjectReferenceProperty != null)
             {
-                OnGetElementTypeString_ObjectReferenceProperty(this, e);
+                await OnGetElementTypeString_ObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetElementTypeString();
+                e.Result = await base.GetElementTypeString();
             }
             return e.Result;
         }
@@ -506,12 +507,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetIsList_ObjectReferenceProperty")]
-        public virtual bool GetIsList()
+        public virtual async System.Threading.Tasks.Task<bool> GetIsList()
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnGetIsList_ObjectReferenceProperty != null)
             {
-                OnGetIsList_ObjectReferenceProperty(this, e);
+                await OnGetIsList_ObjectReferenceProperty(this, e);
             }
             else
             {
@@ -570,16 +571,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_ObjectReferenceProperty")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_ObjectReferenceProperty != null)
             {
-                OnGetLabel_ObjectReferenceProperty(this, e);
+                await OnGetLabel_ObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -633,16 +634,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_ObjectReferenceProperty")]
-        public override string GetName()
+        public override async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_ObjectReferenceProperty != null)
             {
-                OnGetName_ObjectReferenceProperty(this, e);
+                await OnGetName_ObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetName();
+                e.Result = await base.GetName();
             }
             return e.Result;
         }
@@ -696,16 +697,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyType_ObjectReferenceProperty")]
-        public override System.Type GetPropertyType()
+        public override async System.Threading.Tasks.Task<System.Type> GetPropertyType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetPropertyType_ObjectReferenceProperty != null)
             {
-                OnGetPropertyType_ObjectReferenceProperty(this, e);
+                await OnGetPropertyType_ObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyType();
+                e.Result = await base.GetPropertyType();
             }
             return e.Result;
         }
@@ -759,16 +760,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyTypeString_ObjectReferenceProperty")]
-        public override string GetPropertyTypeString()
+        public override async System.Threading.Tasks.Task<string> GetPropertyTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetPropertyTypeString_ObjectReferenceProperty != null)
             {
-                OnGetPropertyTypeString_ObjectReferenceProperty(this, e);
+                await OnGetPropertyTypeString_ObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyTypeString();
+                e.Result = await base.GetPropertyTypeString();
             }
             return e.Result;
         }
@@ -908,10 +909,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             // fix direct object references
 
             if (_fk_guid_RelationEnd.HasValue)
-                RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value);
+                RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value));
             else
             if (_fk_RelationEnd.HasValue)
-                RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.Find<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
+                RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value));
             else
                 RelationEndImpl = null;
             // fix cached lists references
@@ -1059,7 +1060,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
                 binStream.Write(this._EagerLoading);
             }
             binStream.Write(this._IsInlineEditable);
-            binStream.Write(RelationEnd != null ? RelationEnd.ID : (int?)null);
+            binStream.Write(_fk_RelationEnd != null ? _fk_RelationEnd : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

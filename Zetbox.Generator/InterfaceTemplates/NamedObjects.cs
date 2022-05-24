@@ -21,7 +21,9 @@ namespace Zetbox.Generator.InterfaceTemplates
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
 
@@ -49,7 +51,7 @@ namespace Zetbox.Generator.InterfaceTemplates
             BuildCurrentPrefixString();
             indent = "        ";
 
-            foreach (var obj in GetNamedObjects().OrderBy(no => no.PathString).ThenBy(no => no.Name))
+            foreach (var obj in GetNamedObjects().Result.OrderBy(no => no.PathString).ThenBy(no => no.Name))
             {
                 while (!obj.PathString.StartsWith(currentPrefixString))
                 {
@@ -69,18 +71,21 @@ namespace Zetbox.Generator.InterfaceTemplates
             }
         }
 
-        private IEnumerable<NamedObjectDescriptor> GetNamedObjects()
+        private async Task<IEnumerable<NamedObjectDescriptor>> GetNamedObjects()
         {
-            foreach (var objClass in ctx.GetQuery<ObjectClass>().ToList().Where(cls => cls.ImplementsIModuleMember(false).Result))
+            var result = new List<NamedObjectDescriptor>();
+
+            foreach (var objClass in await (await ctx.GetQuery<ObjectClass>().ToListAsync()).Where(async cls => await cls.ImplementsIModuleMember(false)))
             {
                 string typeName = null;
                 List<NamedObjectDescriptor> instances = null;
                 try
                 {
                     typeName = objClass.GetDescribedInterfaceTypeName();
-                    instances = ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
+                    instances = (await ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
                         .OfType<INamedObject>()
-                        .Select(ino => new { Ino = ino, Path = ino.GetName(), Guid = ino.ExportGuid, })
+                        .Select(async ino => new { Ino = ino, Path = await ino.GetName(), Guid = ino.ExportGuid, })
+                        .WhenAll())
                         .Where(ino => !string.IsNullOrEmpty(ino.Path))
                         .Select(ino =>
                         {
@@ -128,10 +133,12 @@ namespace Zetbox.Generator.InterfaceTemplates
                 {
                     foreach (var nod in instances)
                     {
-                        yield return nod;
+                        result.Add( nod);
                     }
                 }
             }
+
+            return result;
         }
 
         private void BuildCurrentPrefixString()

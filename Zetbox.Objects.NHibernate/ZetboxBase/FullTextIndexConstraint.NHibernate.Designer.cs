@@ -53,16 +53,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetErrorText_FullTextIndexConstraint")]
-        public override string GetErrorText(Zetbox.API.IDataObject constrainedObject)
+        public override async System.Threading.Tasks.Task<string> GetErrorText(Zetbox.API.IDataObject constrainedObject)
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetErrorText_FullTextIndexConstraint != null)
             {
-                OnGetErrorText_FullTextIndexConstraint(this, e, constrainedObject);
+                await OnGetErrorText_FullTextIndexConstraint(this, e, constrainedObject);
             }
             else
             {
-                e.Result = base.GetErrorText(constrainedObject);
+                e.Result = await base.GetErrorText(constrainedObject);
             }
             return e.Result;
         }
@@ -116,16 +116,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnIsValid_FullTextIndexConstraint")]
-        public override bool IsValid(Zetbox.API.IDataObject constrainedObject)
+        public override async System.Threading.Tasks.Task<bool> IsValid(Zetbox.API.IDataObject constrainedObject)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsValid_FullTextIndexConstraint != null)
             {
-                OnIsValid_FullTextIndexConstraint(this, e, constrainedObject);
+                await OnIsValid_FullTextIndexConstraint(this, e, constrainedObject);
             }
             else
             {
-                e.Result = base.IsValid(constrainedObject);
+                e.Result = await base.IsValid(constrainedObject);
             }
             return e.Result;
         }

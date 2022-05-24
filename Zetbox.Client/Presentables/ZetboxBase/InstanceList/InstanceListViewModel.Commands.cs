@@ -250,34 +250,31 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public Task SelectColumns()
+        public async Task SelectColumns()
         {
             var dlg = ViewModelFactory.CreateViewModel<PropertySelectionTaskViewModel.Factory>()
                 .Invoke(DataContext,
                     this,
                     _type,
-                    props => { });
+                    props => Task.CompletedTask);
             dlg.FollowRelationsOne = true;
             dlg.FollowRelationsMany = true;
             dlg.FollowRelationsManyDeep = false; // Only first level!
             dlg.MultiSelect = true;
             dlg.UpdateInitialSelectedProperties(this.DisplayedProperties);
-            dlg.SelectedPropertySelectionChanged += (s, e) =>
+            dlg.SelectedPropertySelectionChanged += async (s, e) =>
             {
                 if (e.Item.IsSelected)
                 {
-                    AddDisplayColumn(e.Item.Properties);
+                    await AddDisplayColumn(e.Item.Properties);
                     ViewMethod = InstanceListViewMethod.Details;
                 }
                 else
                 {
                     RemoveDisplayColumn(e.Item.Property);
                 }
-
-                return Task.CompletedTask;
             };
-            ViewModelFactory.ShowDialog(dlg);
-            return Task.CompletedTask;
+            await ViewModelFactory.ShowDialog(dlg);
         }
 
         public void ResetDisplayedColumns()

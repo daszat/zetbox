@@ -58,7 +58,8 @@ namespace Zetbox.API.Server
 
         IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return _provider.ExecuteEnumerable(this._expression).GetEnumerator();
+            // TODO: .Result call
+            return _provider.ExecuteEnumerable(this._expression).Result.GetEnumerator();
         }
 
         public Type ElementType

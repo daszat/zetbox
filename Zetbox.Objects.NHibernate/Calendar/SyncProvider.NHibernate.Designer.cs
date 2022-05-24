@@ -584,12 +584,12 @@ namespace Zetbox.App.Calendar
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnPerformSync_SyncProvider")]
-        public virtual void PerformSync()
+        public virtual async System.Threading.Tasks.Task PerformSync()
         {
             // base.PerformSync();
             if (OnPerformSync_SyncProvider != null)
             {
-                OnPerformSync_SyncProvider(this);
+                await OnPerformSync_SyncProvider(this);
             }
             else
             {
@@ -647,12 +647,12 @@ namespace Zetbox.App.Calendar
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnScheduleSyncNow_SyncProvider")]
-        public virtual void ScheduleSyncNow()
+        public virtual async System.Threading.Tasks.Task ScheduleSyncNow()
         {
             // base.ScheduleSyncNow();
             if (OnScheduleSyncNow_SyncProvider != null)
             {
-                OnScheduleSyncNow_SyncProvider(this);
+                await OnScheduleSyncNow_SyncProvider(this);
             }
             else
             {

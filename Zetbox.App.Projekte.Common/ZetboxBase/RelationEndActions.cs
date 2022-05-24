@@ -54,10 +54,10 @@ namespace Zetbox.App.Base
         public static readonly Guid ViewModelDescriptor_ObjectCollectionModel = new Guid("67A49C49-B890-4D35-A8DB-1F8E43BFC7DF");
 
         [Invocation]
-        public static System.Threading.Tasks.Task CreateNavigator(RelationEnd obj, MethodReturnEventArgs<ObjectReferenceProperty> e)
+        public static async System.Threading.Tasks.Task CreateNavigator(RelationEnd obj, MethodReturnEventArgs<ObjectReferenceProperty> e)
         {
             Relation rel = obj.AParent ?? obj.BParent;
-            RelationEnd other = rel != null ? rel.GetOtherEnd(obj) : null;
+            RelationEnd other = rel != null ? await rel.GetOtherEnd(obj) : null;
 
             var nav = obj.Context.Create<ObjectReferenceProperty>();
             nav.CategoryTags = String.Empty;
@@ -67,9 +67,9 @@ namespace Zetbox.App.Base
 
             if (other != null)
             {
-                if (nav.GetIsList())
+                if (await nav.GetIsList())
                 {
-                    if (nav.RelationEnd.Parent.GetOtherEnd(nav.RelationEnd).HasPersistentOrder)
+                    if ((await nav.RelationEnd.Parent.GetOtherEnd(nav.RelationEnd)).HasPersistentOrder)
                     {
                         nav.ValueModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(ViewModelDescriptor_ObjectListModel);
                     }
@@ -87,12 +87,10 @@ namespace Zetbox.App.Base
             }
 
             e.Result = nav;
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task isValid_Navigator(RelationEnd obj, PropertyIsValidEventArgs e)
+        public static async System.Threading.Tasks.Task isValid_Navigator(RelationEnd obj, PropertyIsValidEventArgs e)
         {
             var relEnd = obj;
             var rel = relEnd.GetParent();
@@ -100,9 +98,9 @@ namespace Zetbox.App.Base
             {
                 e.IsValid = false;
                 e.Error = "No Relation assigned to Relation end";
-                return System.Threading.Tasks.Task.CompletedTask;
+                return;
             }
-            var otherEnd = rel.GetOtherEnd(relEnd);
+            var otherEnd = await rel.GetOtherEnd(relEnd);
             var orp = obj.Navigator;
 
             e.IsValid = true;
@@ -147,8 +145,6 @@ namespace Zetbox.App.Base
                         break;
                 }
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

@@ -1360,12 +1360,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateNavigator_RelationEnd")]
-        public virtual Zetbox.App.Base.ObjectReferenceProperty CreateNavigator()
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.ObjectReferenceProperty> CreateNavigator()
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.ObjectReferenceProperty>();
             if (OnCreateNavigator_RelationEnd != null)
             {
-                OnCreateNavigator_RelationEnd(this, e);
+                await OnCreateNavigator_RelationEnd(this, e);
             }
             else
             {

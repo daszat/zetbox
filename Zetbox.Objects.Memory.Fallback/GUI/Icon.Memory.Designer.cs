@@ -100,12 +100,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchBlobTask != null) return _triggerFetchBlobTask;
 
-            if (_fk_Blob.HasValue)
-                _triggerFetchBlobTask = Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value);
-            else
-                _triggerFetchBlobTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Blob>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Blob> task;
 
-            _triggerFetchBlobTask.OnResult(t =>
+            if (_fk_Blob.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Blob>(null);
+
+            task.OnResult(t =>
             {
                 if (OnBlob_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchBlobTask;
+            return _triggerFetchBlobTask = task;
         }
 
         // internal implementation
@@ -126,7 +128,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchBlobAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.BlobMemoryImpl)task.Result;
             }
             set
@@ -368,12 +369,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
 
-            if (_fk_Module.HasValue)
-                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
-            else
-                _triggerFetchModuleTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Module>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Module> task;
 
-            _triggerFetchModuleTask.OnResult(t =>
+            if (_fk_Module.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Module>(null);
+
+            task.OnResult(t =>
             {
                 if (OnModule_Getter != null)
                 {
@@ -383,7 +386,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchModuleTask;
+            return _triggerFetchModuleTask = task;
         }
 
         // internal implementation
@@ -394,7 +397,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchModuleAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ModuleMemoryImpl)task.Result;
             }
             set
@@ -449,12 +451,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_Icon")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_Icon != null)
             {
-                OnGetName_Icon(this, e);
+                await OnGetName_Icon(this, e);
             }
             else
             {
@@ -513,12 +515,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_Icon")]
-        public virtual void Open()
+        public virtual async System.Threading.Tasks.Task Open()
         {
             // base.Open();
             if (OnOpen_Icon != null)
             {
-                OnOpen_Icon(this);
+                await OnOpen_Icon(this);
             }
             else
             {
@@ -576,12 +578,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_Icon")]
-        public virtual void Upload()
+        public virtual async System.Threading.Tasks.Task Upload()
         {
             // base.Upload();
             if (OnUpload_Icon != null)
             {
-                OnUpload_Icon(this);
+                await OnUpload_Icon(this);
             }
             else
             {
@@ -725,18 +727,18 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_guid_Blob.HasValue)
-                BlobImpl = (Zetbox.App.Base.BlobMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_guid_Blob.Value);
+                BlobImpl = (Zetbox.App.Base.BlobMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Blob>(_fk_guid_Blob.Value));
             else
             if (_fk_Blob.HasValue)
-                BlobImpl = (Zetbox.App.Base.BlobMemoryImpl)Context.Find<Zetbox.App.Base.Blob>(_fk_Blob.Value);
+                BlobImpl = (Zetbox.App.Base.BlobMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value));
             else
                 BlobImpl = null;
 
             if (_fk_guid_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
             else
             if (_fk_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
+                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value));
             else
                 ModuleImpl = null;
             // fix cached lists references
@@ -880,13 +882,13 @@ namespace Zetbox.App.GUI
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(Blob != null ? Blob.ID : (int?)null);
+            binStream.Write(_fk_Blob != null ? _fk_Blob : (int?)null);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
             binStream.Write(this._IconFile);
-            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(_fk_Module != null ? _fk_Module : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

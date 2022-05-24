@@ -159,16 +159,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnAddProperty_Enumeration")]
-        public override Zetbox.App.Base.Property AddProperty()
+        public override async System.Threading.Tasks.Task<Zetbox.App.Base.Property> AddProperty()
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.Property>();
             if (OnAddProperty_Enumeration != null)
             {
-                OnAddProperty_Enumeration(this, e);
+                await OnAddProperty_Enumeration(this, e);
             }
             else
             {
-                e.Result = base.AddProperty();
+                e.Result = await base.AddProperty();
             }
             return e.Result;
         }
@@ -222,16 +222,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDataType_Enumeration")]
-        public override System.Type GetDataType()
+        public override async System.Threading.Tasks.Task<System.Type> GetDataType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetDataType_Enumeration != null)
             {
-                OnGetDataType_Enumeration(this, e);
+                await OnGetDataType_Enumeration(this, e);
             }
             else
             {
-                e.Result = base.GetDataType();
+                e.Result = await base.GetDataType();
             }
             return e.Result;
         }
@@ -285,16 +285,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDataTypeString_Enumeration")]
-        public override string GetDataTypeString()
+        public override async System.Threading.Tasks.Task<string> GetDataTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDataTypeString_Enumeration != null)
             {
-                OnGetDataTypeString_Enumeration(this, e);
+                await OnGetDataTypeString_Enumeration(this, e);
             }
             else
             {
-                e.Result = base.GetDataTypeString();
+                e.Result = await base.GetDataTypeString();
             }
             return e.Result;
         }
@@ -348,12 +348,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEntryByName_Enumeration")]
-        public virtual Zetbox.App.Base.EnumerationEntry GetEntryByName(string name)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.EnumerationEntry> GetEntryByName(string name)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.EnumerationEntry>();
             if (OnGetEntryByName_Enumeration != null)
             {
-                OnGetEntryByName_Enumeration(this, e, name);
+                await OnGetEntryByName_Enumeration(this, e, name);
             }
             else
             {
@@ -412,12 +412,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEntryByValue_Enumeration")]
-        public virtual Zetbox.App.Base.EnumerationEntry GetEntryByValue(int val)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.EnumerationEntry> GetEntryByValue(int val)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.EnumerationEntry>();
             if (OnGetEntryByValue_Enumeration != null)
             {
-                OnGetEntryByValue_Enumeration(this, e, val);
+                await OnGetEntryByValue_Enumeration(this, e, val);
             }
             else
             {
@@ -476,12 +476,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabelByName_Enumeration")]
-        public virtual string GetLabelByName(string name)
+        public virtual async System.Threading.Tasks.Task<string> GetLabelByName(string name)
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabelByName_Enumeration != null)
             {
-                OnGetLabelByName_Enumeration(this, e, name);
+                await OnGetLabelByName_Enumeration(this, e, name);
             }
             else
             {
@@ -540,12 +540,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabelByValue_Enumeration")]
-        public virtual string GetLabelByValue(int val)
+        public virtual async System.Threading.Tasks.Task<string> GetLabelByValue(int val)
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabelByValue_Enumeration != null)
             {
-                OnGetLabelByValue_Enumeration(this, e, val);
+                await OnGetLabelByValue_Enumeration(this, e, val);
             }
             else
             {
@@ -604,12 +604,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_Enumeration")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_Enumeration != null)
             {
-                OnGetName_Enumeration(this, e);
+                await OnGetName_Enumeration(this, e);
             }
             else
             {
@@ -668,16 +668,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnImplementInterfaces_Enumeration")]
-        public override void ImplementInterfaces()
+        public override async System.Threading.Tasks.Task ImplementInterfaces()
         {
             // base.ImplementInterfaces();
             if (OnImplementInterfaces_Enumeration != null)
             {
-                OnImplementInterfaces_Enumeration(this);
+                await OnImplementInterfaces_Enumeration(this);
             }
             else
             {
-                base.ImplementInterfaces();
+                await base.ImplementInterfaces();
             }
         }
         public static event ImplementInterfaces_Handler<Enumeration> OnImplementInterfaces_Enumeration;

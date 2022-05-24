@@ -35,7 +35,7 @@ namespace Zetbox.Generator.Templates.ObjectClasses
         protected virtual void ApplyPreCreatedTemplate()
         {
             foreach (var prop in dt.Properties
-                .Where(p => !p.IsList())
+                .Where(p => !p.IsList().Result)
                 .Where(p => p.DefaultValue == null)
                 .Where(p => !p.IsCalculated())
                 .Where(p => !(p is CompoundObjectProperty)) // Exclude CompoundObject Properties
@@ -54,11 +54,11 @@ namespace Zetbox.Generator.Templates.ObjectClasses
         protected virtual void ApplyPostDeletingTemplate()
         {
             // TODO: implement containment/delete cascading
-            foreach (var prop in dt.Properties.Where(p => p.IsList() && !p.IsCalculated()).OrderBy(p => p.Name))
+            foreach (var prop in dt.Properties.Where(p => p.IsList().Result && !p.IsCalculated()).OrderBy(p => p.Name))
             {
                 this.WriteObjects("            ", prop.Name, ".Clear();\r\n");
             }
-            foreach (var prop in dt.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList() && !p.IsCalculated()).OrderBy(p => p.Name))
+            foreach (var prop in dt.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList().Result && !p.IsCalculated()).OrderBy(p => p.Name))
             {
                 this.WriteObjects("            ", prop.Name, " = null;\r\n");
             }

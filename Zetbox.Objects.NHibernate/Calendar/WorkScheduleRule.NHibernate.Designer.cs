@@ -1100,12 +1100,12 @@ namespace Zetbox.App.Calendar
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnAppliesTo_WorkScheduleRule")]
-        public virtual bool AppliesTo(DateTime date)
+        public virtual async System.Threading.Tasks.Task<bool> AppliesTo(DateTime date)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnAppliesTo_WorkScheduleRule != null)
             {
-                OnAppliesTo_WorkScheduleRule(this, e, date);
+                await OnAppliesTo_WorkScheduleRule(this, e, date);
             }
             else
             {

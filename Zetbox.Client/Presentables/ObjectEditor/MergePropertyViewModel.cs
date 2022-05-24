@@ -93,7 +93,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        public Task UseSource()
+        public async Task UseSource()
         {
             if (Target is ObjectListViewModel)
             {
@@ -101,8 +101,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 var s = (ObjectListViewModel)Source;
                 var lst = s.Value.ToList(); // Duplicate list
 
-                ClearList(t); // Clear/Delete target
-                s.ClearValue(); // Clear now - a later clear would destroy the others end pointer
+                await ClearList(t); // Clear/Delete target
+                await s.ClearValue(); // Clear now - a later clear would destroy the others end pointer
 
                 foreach (var obj in lst)
                 {
@@ -115,8 +115,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 var s = (ObjectCollectionViewModel)Source;
                 var lst = s.Value.ToList();
 
-                ClearCollection(t); // Clear/Delete target
-                s.ClearValue(); // Clear now - a later clear would destroy the others end pointer
+                await ClearCollection(t); // Clear/Delete target
+                await s.ClearValue(); // Clear now - a later clear would destroy the others end pointer
 
                 foreach (var obj in lst)
                 {
@@ -129,8 +129,6 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
             UsingSource = true;
             UsingTarget = false;
-
-            return Task.CompletedTask;
         }
         #endregion
 
@@ -154,24 +152,22 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        public Task UseTarget()
+        public async Task UseTarget()
         {
             // Clear source lists to prevent merging during replace
             if (Source is ObjectListViewModel)
             {
                 var s = (ObjectListViewModel)Source;
-                ClearList(s);
+                await ClearList(s);
             }
             if (Source is ObjectCollectionViewModel)
             {
                 var s = (ObjectCollectionViewModel)Source;
-                ClearCollection(s);
+                await ClearCollection(s);
             }
 
             UsingSource = false;
             UsingTarget = true;
-
-            return Task.CompletedTask;
         }
         #endregion
 
@@ -248,11 +244,11 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         }
         #endregion
 
-        private void ClearCollection(ObjectCollectionViewModel s)
+        private async Task ClearCollection(ObjectCollectionViewModel s)
         {
             var mdl = s.ObjectCollectionModel;
             var rel = mdl.RelEnd.Parent;
-            var otherEnd = rel.GetOtherEnd(mdl.RelEnd);
+            var otherEnd = await rel.GetOtherEnd(mdl.RelEnd);
             if (otherEnd != null && otherEnd.Multiplicity.UpperBound() > 1 && rel.Containment != ContainmentSpecification.Independent)
             {
                 foreach (var obj in mdl.Value.ToList())
@@ -262,15 +258,15 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
             else
             {
-                s.ClearValue();
+                await s.ClearValue();
             }
         }
 
-        private void ClearList(ObjectListViewModel s)
+        private async Task ClearList(ObjectListViewModel s)
         {
             var mdl = s.ObjectCollectionModel;
             var rel = mdl.RelEnd.Parent;
-            var otherEnd = rel.GetOtherEnd(mdl.RelEnd);
+            var otherEnd = await rel.GetOtherEnd(mdl.RelEnd);
             if (otherEnd != null && otherEnd.Multiplicity.UpperBound() > 1 && rel.Containment != ContainmentSpecification.Independent)
             {
                 foreach (var obj in mdl.Value.ToList())
@@ -280,7 +276,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
             else
             {
-                s.ClearValue();
+                await s.ClearValue();
             }
         }
 

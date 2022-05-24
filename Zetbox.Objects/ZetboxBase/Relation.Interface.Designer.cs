@@ -99,36 +99,36 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.App.Base.RelationEnd GetEnd(Zetbox.App.Base.ObjectReferenceProperty prop);
+        System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetEnd(Zetbox.App.Base.ObjectReferenceProperty prop);
 
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.App.Base.RelationEnd GetEndFromRole(Zetbox.API.RelationEndRole role);
+        System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetEndFromRole(Zetbox.API.RelationEndRole role);
 
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.API.InterfaceType GetEntryInterfaceType();
+        System.Threading.Tasks.Task<Zetbox.API.InterfaceType> GetEntryInterfaceType();
 
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.App.Base.RelationEnd GetOtherEnd(Zetbox.App.Base.RelationEnd relEnd);
+        System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetOtherEnd(Zetbox.App.Base.RelationEnd relEnd);
 
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.API.RelationType GetRelationType();
+        System.Threading.Tasks.Task<Zetbox.API.RelationType> GetRelationType();
 
         /// <summary>
         /// 
         /// </summary>
-        bool NeedsPositionStorage(Zetbox.API.RelationEndRole endRole);
+        System.Threading.Tasks.Task<bool> NeedsPositionStorage(Zetbox.API.RelationEndRole endRole);
 
         /// <summary>
         /// 
         /// </summary>
-        void SwapRelationEnds();
+        System.Threading.Tasks.Task SwapRelationEnds();
     }
 }

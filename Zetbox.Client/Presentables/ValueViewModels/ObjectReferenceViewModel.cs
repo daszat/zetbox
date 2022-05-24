@@ -67,7 +67,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 var rel = relEnd.Parent;
                 if (rel != null)
                 {
-                    var relType = rel.GetRelationType();
+                    var relType = rel.GetRelationType().Result;
                     if (relType == RelationType.one_n && rel.Containment == ContainmentSpecification.Independent)
                     {
                         // search first
@@ -577,7 +577,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
 
             var qry = GetUntypedQuery(ReferencedClass);
-            qry = ApplyFilter(qry);
+            qry = await ApplyFilter(qry);
             // Abort query of null was returned
             if (qry == null)
             {
@@ -613,9 +613,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         /// </remarks>
         /// <param name="qry">Query to filter</param>
         /// <returns>filtered query or null</returns>
-        protected virtual IQueryable ApplyFilter(IQueryable qry)
+        protected virtual async Task<IQueryable> ApplyFilter(IQueryable qry)
         {
-            FetchFilterModels();
+            await FetchFilterModels();
             if (_filterModels.Count == 0) return qry;
 
             if (string.IsNullOrEmpty(SearchString))
@@ -632,11 +632,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 if (valMdl != null)
                 {
                     valMdl.Value = SearchString;
-                    var expr = f.GetExpression(qry);
+                    var expr = await f.GetExpression(qry);
                     if (tmp == null)
                         tmp = expr;
                     else
-                        tmp = tmp.OrElse(expr);
+                        tmp = await tmp.OrElse(expr);
                 }
             }
 
@@ -645,7 +645,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         private List<IFilterModel> _filterModels;
-        private void FetchFilterModels()
+        private async Task FetchFilterModels()
         {
             if (_filterModels == null)
             {
@@ -657,13 +657,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     // Add ObjectClass filter expressions
                     foreach (var cfc in t.FilterConfigurations)
                     {
-                        _filterModels.Add(cfc.CreateFilterModel(DataContext));
+                        _filterModels.Add(await cfc.CreateFilterModel(DataContext));
                     }
 
                     // Add Property filter expressions
                     foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
                     {
-                        _filterModels.Add(prop.FilterConfiguration.CreateFilterModel(DataContext));
+                        _filterModels.Add(await prop.FilterConfiguration.CreateFilterModel(DataContext));
                     }
                     t = t.BaseObjectClass;
                 }
@@ -757,15 +757,17 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_displayedColumns == null)
                 {
-                    _displayedColumns = CreateDisplayedColumns();
+                    Task.Run(async () => await CreateDisplayedColumns());
                 }
                 return _displayedColumns;
             }
         }
-        protected virtual GridDisplayConfiguration CreateDisplayedColumns()
+        protected virtual async Task<GridDisplayConfiguration> CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration();
-            result.BuildColumns(ReferencedClass, GridDisplayConfiguration.Mode.ReadOnly, false);
+            await result.BuildColumns(ReferencedClass, GridDisplayConfiguration.Mode.ReadOnly, false);
+            _displayedColumns = result;
+            OnPropertyChanged(nameof(DisplayedColumns));
             return result;
         }
         #endregion

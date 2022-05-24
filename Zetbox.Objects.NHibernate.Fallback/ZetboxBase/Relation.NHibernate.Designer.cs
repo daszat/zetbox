@@ -1171,12 +1171,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEnd_Relation")]
-        public virtual Zetbox.App.Base.RelationEnd GetEnd(Zetbox.App.Base.ObjectReferenceProperty prop)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetEnd(Zetbox.App.Base.ObjectReferenceProperty prop)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.RelationEnd>();
             if (OnGetEnd_Relation != null)
             {
-                OnGetEnd_Relation(this, e, prop);
+                await OnGetEnd_Relation(this, e, prop);
             }
             else
             {
@@ -1235,12 +1235,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEndFromRole_Relation")]
-        public virtual Zetbox.App.Base.RelationEnd GetEndFromRole(Zetbox.API.RelationEndRole role)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetEndFromRole(Zetbox.API.RelationEndRole role)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.RelationEnd>();
             if (OnGetEndFromRole_Relation != null)
             {
-                OnGetEndFromRole_Relation(this, e, role);
+                await OnGetEndFromRole_Relation(this, e, role);
             }
             else
             {
@@ -1299,12 +1299,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEntryInterfaceType_Relation")]
-        public virtual Zetbox.API.InterfaceType GetEntryInterfaceType()
+        public virtual async System.Threading.Tasks.Task<Zetbox.API.InterfaceType> GetEntryInterfaceType()
         {
             var e = new MethodReturnEventArgs<Zetbox.API.InterfaceType>();
             if (OnGetEntryInterfaceType_Relation != null)
             {
-                OnGetEntryInterfaceType_Relation(this, e);
+                await OnGetEntryInterfaceType_Relation(this, e);
             }
             else
             {
@@ -1363,12 +1363,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetOtherEnd_Relation")]
-        public virtual Zetbox.App.Base.RelationEnd GetOtherEnd(Zetbox.App.Base.RelationEnd relEnd)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetOtherEnd(Zetbox.App.Base.RelationEnd relEnd)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.RelationEnd>();
             if (OnGetOtherEnd_Relation != null)
             {
-                OnGetOtherEnd_Relation(this, e, relEnd);
+                await OnGetOtherEnd_Relation(this, e, relEnd);
             }
             else
             {
@@ -1427,12 +1427,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetRelationType_Relation")]
-        public virtual Zetbox.API.RelationType GetRelationType()
+        public virtual async System.Threading.Tasks.Task<Zetbox.API.RelationType> GetRelationType()
         {
             var e = new MethodReturnEventArgs<Zetbox.API.RelationType>();
             if (OnGetRelationType_Relation != null)
             {
-                OnGetRelationType_Relation(this, e);
+                await OnGetRelationType_Relation(this, e);
             }
             else
             {
@@ -1491,12 +1491,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnNeedsPositionStorage_Relation")]
-        public virtual bool NeedsPositionStorage(Zetbox.API.RelationEndRole endRole)
+        public virtual async System.Threading.Tasks.Task<bool> NeedsPositionStorage(Zetbox.API.RelationEndRole endRole)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnNeedsPositionStorage_Relation != null)
             {
-                OnNeedsPositionStorage_Relation(this, e, endRole);
+                await OnNeedsPositionStorage_Relation(this, e, endRole);
             }
             else
             {
@@ -1555,12 +1555,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnSwapRelationEnds_Relation")]
-        public virtual void SwapRelationEnds()
+        public virtual async System.Threading.Tasks.Task SwapRelationEnds()
         {
             // base.SwapRelationEnds();
             if (OnSwapRelationEnds_Relation != null)
             {
-                OnSwapRelationEnds_Relation(this);
+                await OnSwapRelationEnds_Relation(this);
             }
             else
             {
@@ -1753,36 +1753,36 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Zetbox.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.Base.RelationEndNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_guid_A.Value)));
             else
             if (_fk_A.HasValue)
-                this.A = ((Zetbox.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_A.Value));
+                this.A = ((Zetbox.App.Base.RelationEndNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_A.Value)));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Zetbox.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Base.RelationEndNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_guid_B.Value)));
             else
             if (_fk_B.HasValue)
-                this.B = ((Zetbox.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RelationEnd>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.RelationEndNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.RelationEnd>(_fk_B.Value)));
             else
                 this.B = null;
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_Module.Value)));
             else
             if (_fk_Module.HasValue)
-                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_Module.Value));
+                this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_Module.Value)));
             else
                 this.Module = null;
         }

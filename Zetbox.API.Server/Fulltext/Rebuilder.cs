@@ -20,6 +20,7 @@ namespace Zetbox.API.Server.Fulltext
     using System.Globalization;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Autofac;
     using Lucene.Net.Documents;
     using Lucene.Net.Index;
@@ -50,21 +51,21 @@ namespace Zetbox.API.Server.Fulltext
         }
 
         #region shared helper
-        public static IndexUpdate.Text ExtractText(IDataObject obj, Common.Fulltext.DataObjectFormatter formatter, IMetaDataResolver resolver)
+        public static async Task<IndexUpdate.Text> ExtractText(IDataObject obj, Common.Fulltext.DataObjectFormatter formatter, IMetaDataResolver resolver)
         {
             var result = new IndexUpdate.Text();
             var customFormatter = obj as ICustomFulltextFormat;
             if (customFormatter != null)
             {
-                result.Body = customFormatter.GetFulltextIndexBody();
+                result.Body = await customFormatter.GetFulltextIndexBody();
             }
             else
             {
-                result.Body = formatter.Format(obj);
+                result.Body = await formatter.Format(obj);
             }
 
             var cls = resolver.GetObjectClass(obj.Context.GetInterfaceType(obj));
-            var allProps = cls.GetAllProperties();
+            var allProps = await cls.GetAllProperties();
             result.Fields = new Dictionary<string, string>();
 
 
@@ -80,7 +81,7 @@ namespace Zetbox.API.Server.Fulltext
             foreach (var prop in allProps.OfType<EnumerationProperty>().OrderBy(p => p.Name))
             {
                 var enumVal = obj.GetPropertyValue<int>(prop.Name);
-                var txtVal = prop.Enumeration.GetLabelByValue(enumVal);
+                var txtVal = await prop.Enumeration.GetLabelByValue(enumVal);
                 if (!string.IsNullOrWhiteSpace(txtVal))
                 {
                     result.Fields[prop.Name] = txtVal;
@@ -111,7 +112,7 @@ namespace Zetbox.API.Server.Fulltext
             return (List<IDataObject>)mi.Invoke(this, new object[] { ctx, lastID, count });
         }
 
-        public void Rebuild(params string[] classFilter)
+        public async Task Rebuild(params string[] classFilter)
         {
             using (Log.InfoTraceMethodCall("Rebuild"))
             using(var idxWriter = _indexWriterFactory())
@@ -132,7 +133,7 @@ namespace Zetbox.API.Server.Fulltext
                     {
                         Log.InfoFormat("Processing ObjectClass [{0}]", cls.Name);
                         var lastID = 0;
-                        var dtType = cls.GetDataType();
+                        var dtType = await cls.GetDataType();
                         List<IDataObject> parcel = null;
                         do
                         {
@@ -140,7 +141,7 @@ namespace Zetbox.API.Server.Fulltext
                             foreach (var obj in parcel)
                             {
                                 var clsId = string.Format(CultureInfo.InvariantCulture, "{0}#{1}", dtType.FullName, obj.ID);
-                                var txt = ExtractText(obj, _formatter, _resolver);
+                                var txt = await ExtractText(obj, _formatter, _resolver);
 
                                 var doc = new Document();
                                 doc.Add(new Field(Module.FIELD_CLASS, dtType.FullName, new FieldType() { IsStored = true }));

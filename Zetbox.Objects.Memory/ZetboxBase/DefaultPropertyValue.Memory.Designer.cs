@@ -693,12 +693,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDefaultValue_DefaultPropertyValue")]
-        public virtual System.Object GetDefaultValue()
+        public virtual async System.Threading.Tasks.Task<System.Object> GetDefaultValue()
         {
             var e = new MethodReturnEventArgs<System.Object>();
             if (OnGetDefaultValue_DefaultPropertyValue != null)
             {
-                OnGetDefaultValue_DefaultPropertyValue(this, e);
+                await OnGetDefaultValue_DefaultPropertyValue(this, e);
             }
             else
             {

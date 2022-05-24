@@ -97,36 +97,36 @@ namespace Zetbox.App.LicenseManagement
         /// <summary>
         /// 
         /// </summary>
-        bool Check(System.Object certificate);
+        System.Threading.Tasks.Task<bool> Check(System.Object certificate);
 
         /// <summary>
         /// 
         /// </summary>
-        void Export(string file);
+        System.Threading.Tasks.Task Export(string file);
 
         /// <summary>
         /// Exports this License
         /// </summary>
-        void ExportUI();
+        System.Threading.Tasks.Task ExportUI();
 
         /// <summary>
         /// Checks, if the signature is valid
         /// </summary>
-        bool IsSignatureValid(System.Object certificate);
+        System.Threading.Tasks.Task<bool> IsSignatureValid(System.Object certificate);
 
         /// <summary>
         /// Checks, if the time range is valid
         /// </summary>
-        bool IsValid();
+        System.Threading.Tasks.Task<bool> IsValid();
 
         /// <summary>
         /// Sings this license
         /// </summary>
-        void Sign(Zetbox.App.LicenseManagement.PrivateKey certificate, string password);
+        System.Threading.Tasks.Task Sign(Zetbox.App.LicenseManagement.PrivateKey certificate, string password);
 
         /// <summary>
         /// Sings this license
         /// </summary>
-        void SignUI();
+        System.Threading.Tasks.Task SignUI();
     }
 }

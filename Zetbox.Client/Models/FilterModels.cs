@@ -25,6 +25,7 @@ namespace Zetbox.Client.Models
     using System.Linq.Expressions;
     using System.Text;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -97,15 +98,15 @@ namespace Zetbox.Client.Models
     {
         public static readonly string PREDICATE_PLACEHOLDER = "@@PREDICATE@@";
 
-        public static FilterModel FromProperty(IZetboxContext ctx, IFrozenContext frozenCtx, Property prop)
+        public static async Task<FilterModel> FromProperty(IZetboxContext ctx, IFrozenContext frozenCtx, Property prop)
         {
-            return FromProperty(ctx, frozenCtx, new[] { prop });
+            return await FromProperty(ctx, frozenCtx, new[] { prop });
         }
 
-        public static FilterModel FromProperty(IZetboxContext ctx, IFrozenContext frozenCtx, IEnumerable<Property> props)
+        public static async Task<FilterModel> FromProperty(IZetboxContext ctx, IFrozenContext frozenCtx, IEnumerable<Property> props)
         {
             var last = props.Last();
-            var label = string.Join(", ", props.Select(i => i.GetLabel()).ToArray());
+            var label = string.Join(", ", (await props.Select(async i => await i.GetLabel()).WhenAll()).ToArray());
             var cfg = last.FilterConfiguration;
             var kind = cfg.IfNotNull(c => c.RequestedKind);
             ViewModelDescriptor argVMDL = null /* cfg.ArgumentViewModel*/ ?? last.ValueModelDescriptor;
@@ -131,7 +132,7 @@ namespace Zetbox.Client.Models
             else
             {
                 var isList = last.GetIsList();
-                mdl = SingleValueFilterModel.Create(ctx, frozenCtx, label, props, kind, !isList ? argKind : null, argumentViewModelDescriptor: !isList ? argVMDL : null);
+                mdl = await SingleValueFilterModel.Create(ctx, frozenCtx, label, props, kind, !isList ? argKind : null, argumentViewModelDescriptor: !isList ? argVMDL : null);
             }
 
             // Don't set requiered here - this method is used for custom filter. Caller can set it self.
@@ -158,7 +159,7 @@ namespace Zetbox.Client.Models
         {
             foreach (FilterArgumentConfig cfg in e.NewItems)
             {
-                cfg.Value.PropertyChanged += new PropertyChangedEventHandler(delegate(object s, PropertyChangedEventArgs a)
+                cfg.Value.PropertyChanged += new PropertyChangedEventHandler(delegate (object s, PropertyChangedEventArgs a)
                 {
                     if (a.PropertyName == "Value")
                     {
@@ -185,15 +186,15 @@ namespace Zetbox.Client.Models
         }
 
         // Goes to Linq
-        protected virtual string GetPredicate()
+        protected virtual Task<string> GetPredicate()
         {
-            return string.Empty;
+            return Task.FromResult(string.Empty);
         }
 
-        public virtual LambdaExpression GetExpression(IQueryable src)
+        public virtual async Task<LambdaExpression> GetExpression(IQueryable src)
         {
             if (src == null) throw new ArgumentNullException("src");
-            var p = GetPredicate();
+            var p = await GetPredicate();
             if (!string.IsNullOrEmpty(p))
             {
                 return System.Linq.Dynamic.DynamicExpression.ParseLambda(src.ElementType, typeof(bool), p, FilterArgumentValues);
@@ -204,9 +205,9 @@ namespace Zetbox.Client.Models
             }
         }
 
-        public virtual IQueryable GetQuery(IQueryable src)
+        public virtual async Task<IQueryable> GetQuery(IQueryable src)
         {
-            var p = GetPredicate();
+            var p = await GetPredicate();
             if (!string.IsNullOrEmpty(p))
             {
                 return src.Where(p, FilterArgumentValues);
@@ -334,9 +335,9 @@ namespace Zetbox.Client.Models
             base.RefreshOnFilterChanged = true;
         }
 
-        public override IQueryable GetQuery(IQueryable src)
+        public override async Task<IQueryable> GetQuery(IQueryable src)
         {
-            if ((bool)FilterArgument.Value.GetUntypedValue() == true)
+            if ((bool)(await FilterArgument.Value.GetUntypedValue()) == true)
                 return src.WithDeactivated();
             else
                 return src;
@@ -362,28 +363,28 @@ namespace Zetbox.Client.Models
             base.RefreshOnFilterChanged = false;
         }
 
-        public override IQueryable GetQuery(IQueryable src)
+        public override Task<IQueryable> GetQuery(IQueryable src)
         {
             if (FilterArgument.Value != null)
-                return src.FulltextMatch(FilterArgument.Value.GetUntypedValue().ToString());
+                return Task.FromResult(src.FulltextMatch(FilterArgument.Value.GetUntypedValue().ToString()));
             else
-                return src;
+                return Task.FromResult(src);
         }
     }
 
     public class SingleValueFilterModel : FilterModel
     {
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef)
+        public static async Task<SingleValueFilterModel> Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef)
         {
-            return Create(frozenCtx, label, predicate, enumDef, null, null);
+            return await Create(frozenCtx, label, predicate, enumDef, null, null);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static async Task<SingleValueFilterModel> Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
-            return Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), enumDef, requestedKind, requestedArgumentKind);
+            return await Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), enumDef, requestedKind, requestedArgumentKind);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, Guid enumDef, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
+        public static Task<SingleValueFilterModel> Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, Guid enumDef, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -399,20 +400,20 @@ namespace Zetbox.Client.Models
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
                 new EnumerationValueModel(label, "", true, false, requestedArgumentKind, frozenCtx.FindPersistenceObject<Enumeration>(enumDef)),
                 argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_EnumerationValueViewModel.Find(frozenCtx)));
-            return fmdl;
+            return Task.FromResult(fmdl);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, bool isList)
+        public static async Task<SingleValueFilterModel> Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, bool isList)
         {
-            return Create(frozenCtx, label, predicate, referencedClass, null, null, isList);
+            return await Create(frozenCtx, label, predicate, referencedClass, null, null, isList);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind, bool isList)
+        public static async Task<SingleValueFilterModel> Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind, bool isList)
         {
-            return Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), referencedClass, requestedKind, requestedArgumentKind, isList);
+            return await Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), referencedClass, requestedKind, requestedArgumentKind, isList);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind, bool isList, ViewModelDescriptor argumentViewModelDescriptor = null)
+        public static Task<SingleValueFilterModel> Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind, bool isList, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -428,10 +429,10 @@ namespace Zetbox.Client.Models
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
                 new ObjectReferenceValueModel(label, "", true, false, requestedArgumentKind, referencedClass),
                 argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_ObjectReferenceViewModel.Find(frozenCtx)));
-            return fmdl;
+            return Task.FromResult(fmdl);
         }
 
-        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IFilterValueSource predicate, CompoundObject cpObj, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
+        public static Task<SingleValueFilterModel> Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IFilterValueSource predicate, CompoundObject cpObj, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -448,20 +449,20 @@ namespace Zetbox.Client.Models
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
                 new CompoundObjectValueModel(ctx, label, "", true, false, requestedArgumentKind, cpObj),
                 argumentViewModelDescriptor ?? cpObj.DefaultPropertyViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(frozenCtx)));
-            return fmdl;
+            return Task.FromResult((SingleValueFilterModel)fmdl);
         }
 
-        public static SingleValueFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate)
+        public static async Task<SingleValueFilterModel> Create<T>(IFrozenContext frozenCtx, string label, string predicate)
         {
-            return Create<T>(frozenCtx, label, predicate, null, null);
+            return await Create<T>(frozenCtx, label, predicate, null, null);
         }
 
-        public static SingleValueFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static async Task<SingleValueFilterModel> Create<T>(IFrozenContext frozenCtx, string label, string predicate, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
-            return Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), typeof(T), requestedKind, requestedArgumentKind);
+            return await Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), typeof(T), requestedKind, requestedArgumentKind);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, Type propType, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
+        public static Task<SingleValueFilterModel> Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, Type propType, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
             if (propType == null) throw new ArgumentNullException("propType");
@@ -520,63 +521,63 @@ namespace Zetbox.Client.Models
             }
 
             fmdl.FilterArguments.Add(new FilterArgumentConfig(mdl, vDesc));
-            return fmdl;
+            return Task.FromResult(fmdl);
         }
 
-        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, Property prop)
+        public static async Task<SingleValueFilterModel> Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, Property prop)
         {
-            return Create(ctx, frozenCtx, label, new[] { prop });
+            return await Create(ctx, frozenCtx, label, new[] { prop });
         }
 
-        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IEnumerable<Property> props)
+        public static async Task<SingleValueFilterModel> Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IEnumerable<Property> props)
         {
-            return Create(ctx, frozenCtx, label, props, null, null);
+            return await Create(ctx, frozenCtx, label, props, null, null);
         }
 
-        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, Property prop, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static async Task<SingleValueFilterModel> Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, Property prop, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
-            return Create(ctx, frozenCtx, label, new[] { prop }, requestedKind, requestedArgumentKind);
+            return await Create(ctx, frozenCtx, label, new[] { prop }, requestedKind, requestedArgumentKind);
         }
 
-        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IEnumerable<Property> props, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
+        public static async Task<SingleValueFilterModel> Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IEnumerable<Property> props, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             var predicate = FilterValueSource.FromProperty(props);
             var last = props.Last();
             if (last is DecimalProperty)
             {
-                return Create(frozenCtx, label, predicate, typeof(decimal), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
+                return await Create(frozenCtx, label, predicate, typeof(decimal), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is IntProperty)
             {
-                return Create(frozenCtx, label, predicate, typeof(int), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
+                return await Create(frozenCtx, label, predicate, typeof(int), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is DoubleProperty)
             {
-                return Create(frozenCtx, label, predicate, typeof(double), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
+                return await Create(frozenCtx, label, predicate, typeof(double), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is DateTimeProperty)
             {
-                return Create(frozenCtx, label, predicate, typeof(DateTime), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
+                return await Create(frozenCtx, label, predicate, typeof(DateTime), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is StringProperty)
             {
-                return Create(frozenCtx, label, predicate, typeof(string), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
+                return await Create(frozenCtx, label, predicate, typeof(string), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is BoolProperty)
             {
-                return Create(frozenCtx, label, predicate, typeof(bool), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
+                return await Create(frozenCtx, label, predicate, typeof(bool), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is EnumerationProperty)
             {
-                return Create(frozenCtx, label, predicate, ((EnumerationProperty)last).Enumeration.ExportGuid, requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
+                return await Create(frozenCtx, label, predicate, ((EnumerationProperty)last).Enumeration.ExportGuid, requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is ObjectReferenceProperty)
             {
-                return Create(frozenCtx, label, predicate, ((ObjectReferenceProperty)last).GetReferencedObjectClass(), requestedKind, requestedArgumentKind, last.GetIsList(), argumentViewModelDescriptor: argumentViewModelDescriptor);
+                return await Create(frozenCtx, label, predicate, await ((ObjectReferenceProperty)last).GetReferencedObjectClass(), requestedKind, requestedArgumentKind, last.GetIsList(), argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is CompoundObjectProperty)
             {
-                return Create(ctx, frozenCtx, label, predicate, ((CompoundObjectProperty)last).CompoundObjectDefinition, requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
+                return await Create(ctx, frozenCtx, label, predicate, ((CompoundObjectProperty)last).CompoundObjectDefinition, requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else
             {
@@ -598,7 +599,8 @@ namespace Zetbox.Client.Models
             {
                 if (Operator == FilterOperators.Contains)
                 {
-                    return GetStringParts();
+                    // TODO: .Result
+                    return GetStringParts().Result;
                 }
                 else
                 {
@@ -607,7 +609,7 @@ namespace Zetbox.Client.Models
             }
         }
 
-        protected override string GetPredicate()
+        protected override async Task<string> GetPredicate()
         {
             var expr = ValueSource.Expression;
             switch (Operator)
@@ -633,7 +635,7 @@ namespace Zetbox.Client.Models
                 case FilterOperators.Contains:
                     {
                         // Only for strings
-                        var parts = GetStringParts();
+                        var parts = await GetStringParts();
                         var lastInner = ValueSource.LastInnerExpression;
                         var outerExpr = ValueSource.OuterExpression;
                         var sb = new StringBuilder();
@@ -651,9 +653,9 @@ namespace Zetbox.Client.Models
             }
         }
 
-        protected string[] GetStringParts()
+        protected async Task<string[]> GetStringParts()
         {
-            var str = (string)FilterArgument.Value.GetUntypedValue();
+            var str = (string)await FilterArgument.Value.GetUntypedValue();
             string pattern = @"(?<match>[^\s,;""]+)|\""(?<match>[^""]*)""";
             return Regex.Matches(str, pattern).Cast<Match>().Select(m => m.Groups["match"].Value).ToArray();
         }
@@ -671,7 +673,7 @@ namespace Zetbox.Client.Models
             }
         }
 
-        protected override string GetPredicate()
+        protected override Task<string> GetPredicate()
         {
             var sb = new StringBuilder();
             int counter = 0;
@@ -688,7 +690,7 @@ namespace Zetbox.Client.Models
                 counter++;
             }
             sb.Remove(sb.Length - 3, 3);
-            return ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, sb.ToString());
+            return Task.FromResult(ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, sb.ToString()));
         }
 
         private string[] _propNames;
@@ -759,9 +761,9 @@ namespace Zetbox.Client.Models
             base.RefreshOnFilterChanged = true;
         }
 
-        protected override string GetPredicate()
+        protected override Task<string> GetPredicate()
         {
-            return ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, string.Format("{0} >= @0 && {0} < @0.AddMonths(1)", ValueSource.LastInnerExpression));
+            return Task.FromResult(ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, string.Format("{0} >= @0 && {0} < @0.AddMonths(1)", ValueSource.LastInnerExpression)));
         }
     }
 
@@ -799,9 +801,9 @@ namespace Zetbox.Client.Models
         {
         }
 
-        protected override string GetPredicate()
+        protected override Task<string> GetPredicate()
         {
-            return ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, string.Format("{0}.Year == @0", ValueSource.LastInnerExpression));
+            return Task.FromResult(ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, string.Format("{0}.Year == @0", ValueSource.LastInnerExpression)));
         }
     }
 
@@ -860,9 +862,9 @@ namespace Zetbox.Client.Models
             base.RefreshOnFilterChanged = true;
         }
 
-        protected override string GetPredicate()
+        protected override Task<string> GetPredicate()
         {
-            return ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, string.Format("{0} >= @0 AND {0} <= @1", ValueSource.LastInnerExpression));
+            return Task.FromResult(ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, string.Format("{0} >= @0 AND {0} <= @1", ValueSource.LastInnerExpression)));
         }
 
         public DateTimeValueModel From
@@ -894,9 +896,9 @@ namespace Zetbox.Client.Models
             return mdl;
         }
 
-        protected override string GetPredicate()
+        protected override Task<string> GetPredicate()
         {
-            return ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, string.Format("({0} >= @0 AND {0} < @1) OR ({1} >= @0 AND {1} < @1) OR ({0} < @0 AND {1} >= @1)", ValueSource.LastInnerExpression, ToValueSource.LastInnerExpression));
+            return Task.FromResult(ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, string.Format("({0} >= @0 AND {0} < @1) OR ({1} >= @0 AND {1} < @1) OR ({0} < @0 AND {1} >= @1)", ValueSource.LastInnerExpression, ToValueSource.LastInnerExpression)));
         }
 
         public IFilterValueSource ToValueSource
@@ -970,7 +972,7 @@ namespace Zetbox.Client.Models
             return rfmdl;
         }
 
-        protected override string GetPredicate()
+        protected override Task<string> GetPredicate()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -992,7 +994,7 @@ namespace Zetbox.Client.Models
                 sb.Append(GetPredicate(ToOperator, "@1"));
             }
 
-            return ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, sb.ToString());
+            return Task.FromResult(ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, sb.ToString()));
         }
 
         private string GetPredicate(FilterOperators op, string arg)
@@ -1124,19 +1126,16 @@ namespace Zetbox.Client.Models
             base.RefreshOnFilterChanged = true;
         }
 
-        protected override string GetPredicate()
+        protected override Task<string> GetPredicate()
         {
             // Remove PREDICATE_PLACEHOLDER - a OptionalPredicate contains the ready made expression
-            return ValueSource.Expression.Replace(PREDICATE_PLACEHOLDER, "");
+            return Task.FromResult(ValueSource.Expression.Replace(PREDICATE_PLACEHOLDER, ""));
         }
 
-        public override bool Enabled
+        public async Task<bool> IsEnabled()
         {
-            get
-            {
-                if (FilterArgument.Value == null) return false;
-                return (bool)FilterArgument.Value.GetUntypedValue() == true;
-            }
+            if (FilterArgument.Value == null) return false;
+            return (bool)(await FilterArgument.Value.GetUntypedValue()) == true;
         }
     }
 }

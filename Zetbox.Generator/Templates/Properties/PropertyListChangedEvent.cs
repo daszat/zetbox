@@ -34,7 +34,7 @@ namespace Zetbox.Generator.Templates.Properties
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
             string eventName = "On" + prop.Name + "_PostSetter";
-            string objType = prop.ObjectClass.GetDataTypeString();
+            string objType = prop.ObjectClass.GetDataTypeString().Result;
 
             Call(host, ctx, eventName, objType);
         }

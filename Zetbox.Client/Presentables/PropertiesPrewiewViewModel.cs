@@ -64,16 +64,16 @@ namespace Zetbox.Client.Presentables
             {
                 if (_displayedColumns == null)
                 {
-                    _displayedColumns = CreateDisplayedColumns();
+                    Task.Run(async () => await CreateDisplayedColumns());
                 }
                 return _displayedColumns;
             }
         }
 
-        protected virtual GridDisplayConfiguration CreateDisplayedColumns()
+        protected virtual async Task<GridDisplayConfiguration> CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration();
-            result.BuildColumns(_dataType, GridDisplayConfiguration.Mode.Editable, true);
+            await result.BuildColumns(_dataType, GridDisplayConfiguration.Mode.Editable, true);
 
             // Fix column control kinds
             var editKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_EnumerationSelectorKind.Find(FrozenContext);
@@ -83,6 +83,8 @@ namespace Zetbox.Client.Presentables
                 col.GridPreEditKind = editKind;
             }
 
+            _displayedColumns = result;
+            OnPropertyChanged(nameof(DisplayedColumns));
             return result;
         }
 
@@ -137,7 +139,8 @@ namespace Zetbox.Client.Presentables
                     {
                         if (!_cache.ContainsKey(key))
                         {
-                            Property prop = _dataType.GetAllProperties().SingleOrDefault(p => p.Name == key);
+                            // TODO: .Result
+                            Property prop = _dataType.GetAllProperties().Result.SingleOrDefault(p => p.Name == key);
                             var objVmdl = DataObjectViewModel.Fetch(_factory, _dataType.Context, null, prop);
                             var result = objVmdl.PropertyModelsByName["RequestedWidth"];
                             prop.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(prop_PropertyChanged);

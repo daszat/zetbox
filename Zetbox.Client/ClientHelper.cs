@@ -26,6 +26,7 @@ using Zetbox.API.Utils;
 using Zetbox.Client.Presentables;
 using Autofac;
 using Zetbox.App.GUI;
+using System.Threading.Tasks;
 
 namespace Zetbox.Client
 {
@@ -51,7 +52,7 @@ namespace Zetbox.Client
             }
         }
 
-        public static WidthHint GetDisplayWidth(this Property p)
+        public static async Task<WidthHint> GetDisplayWidth(this Property p)
         {
             if(p == null) throw new ArgumentNullException("p");
 
@@ -63,7 +64,7 @@ namespace Zetbox.Client
             if (p is StringProperty)
             {
                 var sp = (StringProperty)p;
-                var length = sp.GetMaxLength();
+                var length = await sp.GetMaxLength();
                 if (length >= 1000) return WidthHint.Huge;
                 if (length >= 500) return WidthHint.Large;
                 if (length >= 200) return WidthHint.Medium;

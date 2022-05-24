@@ -42,16 +42,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnExtractText_ImportedFile")]
-        public override void ExtractText()
+        public override async System.Threading.Tasks.Task ExtractText()
         {
             // base.ExtractText();
             if (OnExtractText_ImportedFile != null)
             {
-                OnExtractText_ImportedFile(this);
+                await OnExtractText_ImportedFile(this);
             }
             else
             {
-                base.ExtractText();
+                await base.ExtractText();
             }
         }
         public static event ExtractText_Handler<ImportedFile> OnExtractText_ImportedFile;
@@ -104,16 +104,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnHandleBlobChange_ImportedFile")]
-        public override Zetbox.App.Base.Blob HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
+        public override async System.Threading.Tasks.Task<Zetbox.App.Base.Blob> HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.Blob>();
             if (OnHandleBlobChange_ImportedFile != null)
             {
-                OnHandleBlobChange_ImportedFile(this, e, oldBlob, newBlob);
+                await OnHandleBlobChange_ImportedFile(this, e, oldBlob, newBlob);
             }
             else
             {
-                e.Result = base.HandleBlobChange(oldBlob, newBlob);
+                e.Result = await base.HandleBlobChange(oldBlob, newBlob);
             }
             return e.Result;
         }
@@ -167,12 +167,12 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnMakeFile_ImportedFile")]
-        public virtual at.dasz.DocumentManagement.File MakeFile()
+        public virtual async System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> MakeFile()
         {
             var e = new MethodReturnEventArgs<at.dasz.DocumentManagement.File>();
             if (OnMakeFile_ImportedFile != null)
             {
-                OnMakeFile_ImportedFile(this, e);
+                await OnMakeFile_ImportedFile(this, e);
             }
             else
             {
@@ -231,12 +231,12 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnMakeReadonlyFile_ImportedFile")]
-        public virtual at.dasz.DocumentManagement.File MakeReadonlyFile()
+        public virtual async System.Threading.Tasks.Task<at.dasz.DocumentManagement.File> MakeReadonlyFile()
         {
             var e = new MethodReturnEventArgs<at.dasz.DocumentManagement.File>();
             if (OnMakeReadonlyFile_ImportedFile != null)
             {
-                OnMakeReadonlyFile_ImportedFile(this, e);
+                await OnMakeReadonlyFile_ImportedFile(this, e);
             }
             else
             {
@@ -295,12 +295,12 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnMakeStaticFile_ImportedFile")]
-        public virtual at.dasz.DocumentManagement.StaticFile MakeStaticFile()
+        public virtual async System.Threading.Tasks.Task<at.dasz.DocumentManagement.StaticFile> MakeStaticFile()
         {
             var e = new MethodReturnEventArgs<at.dasz.DocumentManagement.StaticFile>();
             if (OnMakeStaticFile_ImportedFile != null)
             {
-                OnMakeStaticFile_ImportedFile(this, e);
+                await OnMakeStaticFile_ImportedFile(this, e);
             }
             else
             {
@@ -359,16 +359,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_ImportedFile")]
-        public override void Open()
+        public override async System.Threading.Tasks.Task Open()
         {
             // base.Open();
             if (OnOpen_ImportedFile != null)
             {
-                OnOpen_ImportedFile(this);
+                await OnOpen_ImportedFile(this);
             }
             else
             {
-                base.Open();
+                await base.Open();
             }
         }
         public static event Open_Handler<ImportedFile> OnOpen_ImportedFile;
@@ -421,16 +421,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_ImportedFile")]
-        public override void Upload()
+        public override async System.Threading.Tasks.Task Upload()
         {
             // base.Upload();
             if (OnUpload_ImportedFile != null)
             {
-                OnUpload_ImportedFile(this);
+                await OnUpload_ImportedFile(this);
             }
             else
             {
-                base.Upload();
+                await base.Upload();
             }
         }
         public static event Upload_Handler<ImportedFile> OnUpload_ImportedFile;

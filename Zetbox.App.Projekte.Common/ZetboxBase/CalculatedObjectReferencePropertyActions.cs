@@ -34,7 +34,7 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetElementTypeString(CalculatedObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        public static async System.Threading.Tasks.Task GetElementTypeString(CalculatedObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
         {
             var def = obj.ReferencedClass;
             if (def == null)
@@ -49,18 +49,14 @@ namespace Zetbox.App.Base
             {
                 e.Result = def.Module.Namespace + "." + def.Name;
             }
-            PropertyActions.DecorateElementType(obj, e, false);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            await PropertyActions.DecorateElementType(obj, e, false);
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetPropertyTypeString(CalculatedObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        public static async System.Threading.Tasks.Task GetPropertyTypeString(CalculatedObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
         {
-            GetElementTypeString(obj, e);
+            await GetElementTypeString(obj, e);
             PropertyActions.DecorateParameterType(obj, e, false, false, false);
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

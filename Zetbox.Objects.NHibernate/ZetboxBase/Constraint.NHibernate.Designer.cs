@@ -727,12 +727,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetErrorText_Constraint")]
-        public virtual string GetErrorText(System.Object constrainedObject, System.Object constrainedValue)
+        public virtual async System.Threading.Tasks.Task<string> GetErrorText(System.Object constrainedObject, System.Object constrainedValue)
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetErrorText_Constraint != null)
             {
-                OnGetErrorText_Constraint(this, e, constrainedObject, constrainedValue);
+                await OnGetErrorText_Constraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
@@ -791,12 +791,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnIsValid_Constraint")]
-        public virtual bool IsValid(System.Object constrainedObject, System.Object constrainedValue)
+        public virtual async System.Threading.Tasks.Task<bool> IsValid(System.Object constrainedObject, System.Object constrainedValue)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsValid_Constraint != null)
             {
-                OnIsValid_Constraint(this, e, constrainedObject, constrainedValue);
+                await OnIsValid_Constraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {

@@ -33,15 +33,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     [ViewModelDescriptor]
     public class PropertySelectionTaskViewModel : WindowViewModel
     {
-        public new delegate PropertySelectionTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass objClass, Action<IEnumerable<Property>> callback);
+        public new delegate PropertySelectionTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass objClass, Func<IEnumerable<Property>, Task> callback);
 
-        private readonly Action<IEnumerable<Property>> _callback;
+        private readonly Func<IEnumerable<Property>, Task> _callback;
         private readonly ObjectClass _objClass;
 
         public PropertySelectionTaskViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             ObjectClass objClass,
-            Action<IEnumerable<Property>> callback)
+            Func<IEnumerable<Property>, Task> callback)
             : base(appCtx, dataCtx, parent)
         {
             if (objClass == null) throw new ArgumentNullException("objClass");
@@ -128,7 +128,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 prop = prop.ParentProperty;
             }
 
-            _callback(result.Reverse());
+            await _callback(result.Reverse());
             Show = false;
         }
 
@@ -199,8 +199,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_PossibleValues == null)
                 {
+                    // TODO: .Result
                     _PossibleValues = _objClass.GetAllProperties()
-                        .Where(i => IsPropAvailable(i))
+                        .Result
+                        .Where(async i => await IsPropAvailable(i))
+                        .Result
                         .Select(prop => ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, this, prop, null))
                         .OrderBy(i => i.Name)
                         .ToList();
@@ -217,14 +220,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private bool IsPropAvailable(Property prop)
+        private async Task<bool> IsPropAvailable(Property prop)
         {
             if ((FollowRelationsOne || FollowRelationsMany) && prop is ObjectReferenceProperty)
             {
                 var objRefProp = (ObjectReferenceProperty)prop;
                 return
-                    (FollowRelationsOne && !objRefProp.GetIsList()) ||
-                    (FollowRelationsMany && objRefProp.GetIsList());
+                    (FollowRelationsOne && !await objRefProp.GetIsList()) ||
+                    (FollowRelationsMany && await objRefProp.GetIsList());
             }
             else if (prop.IsCalculated() && !ShowCalculated)
             {
@@ -324,12 +327,22 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             this._IsSelected = parent.IsInitialSelected(Properties);
         }
 
+        private string _name;
         public override string Name
         {
             get
             {
-                return _prop.GetLabel();
+                Task.Run(async () => await GetName());
+                return _name;
             }
+        }
+
+        public async Task<string> GetName()
+        {
+            _name = await _prop.GetLabel();
+
+            OnPropertyChanged(nameof(Name));
+            return _name;
         }
 
         public Property Property
@@ -386,11 +399,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     }
                     if ((Parent.FollowRelationsOne || (Parent.FollowRelationsMany && Parent.FollowRelationsManyDeep)) && _prop is ObjectReferenceProperty)
                     {
+                        // TODO: .Result calls
                         var objRefProp = (ObjectReferenceProperty)_prop;
-                        if ((Parent.FollowRelationsOne && !objRefProp.GetIsList())
-                         || (Parent.FollowRelationsMany && Parent.FollowRelationsManyDeep && objRefProp.GetIsList()))
+                        if ((Parent.FollowRelationsOne && !objRefProp.GetIsList().Result)
+                         || (Parent.FollowRelationsMany && Parent.FollowRelationsManyDeep && objRefProp.GetIsList().Result))
                         {
-                            foreach (var prop in objRefProp.GetReferencedObjectClass().GetAllProperties())
+                            foreach (var prop in objRefProp.GetReferencedObjectClass().Result.GetAllProperties().Result)
                             {
                                 _PossibleValues.Add(ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, Parent, prop, this));
                             }

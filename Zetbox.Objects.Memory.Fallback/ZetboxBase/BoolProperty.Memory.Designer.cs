@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchFalseIconTask != null) return _triggerFetchFalseIconTask;
 
-            if (_fk_FalseIcon.HasValue)
-                _triggerFetchFalseIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
-            else
-                _triggerFetchFalseIconTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.Icon>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> task;
 
-            _triggerFetchFalseIconTask.OnResult(t =>
+            if (_fk_FalseIcon.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
+
+            task.OnResult(t =>
             {
                 if (OnFalseIcon_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchFalseIconTask;
+            return _triggerFetchFalseIconTask = task;
         }
 
         // internal implementation
@@ -126,7 +128,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchFalseIconAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
             set
@@ -297,12 +298,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchNullIconTask != null) return _triggerFetchNullIconTask;
 
-            if (_fk_NullIcon.HasValue)
-                _triggerFetchNullIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
-            else
-                _triggerFetchNullIconTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.Icon>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> task;
 
-            _triggerFetchNullIconTask.OnResult(t =>
+            if (_fk_NullIcon.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
+
+            task.OnResult(t =>
             {
                 if (OnNullIcon_Getter != null)
                 {
@@ -312,7 +315,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchNullIconTask;
+            return _triggerFetchNullIconTask = task;
         }
 
         // internal implementation
@@ -323,7 +326,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchNullIconAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
             set
@@ -494,12 +496,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchTrueIconTask != null) return _triggerFetchTrueIconTask;
 
-            if (_fk_TrueIcon.HasValue)
-                _triggerFetchTrueIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
-            else
-                _triggerFetchTrueIconTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.Icon>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.Icon> task;
 
-            _triggerFetchTrueIconTask.OnResult(t =>
+            if (_fk_TrueIcon.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.Icon>(null);
+
+            task.OnResult(t =>
             {
                 if (OnTrueIcon_Getter != null)
                 {
@@ -509,7 +513,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchTrueIconTask;
+            return _triggerFetchTrueIconTask = task;
         }
 
         // internal implementation
@@ -520,7 +524,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchTrueIconAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.IconMemoryImpl)task.Result;
             }
             set
@@ -633,16 +636,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDescription_BoolProperty")]
-        public override string GetDescription()
+        public override async System.Threading.Tasks.Task<string> GetDescription()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDescription_BoolProperty != null)
             {
-                OnGetDescription_BoolProperty(this, e);
+                await OnGetDescription_BoolProperty(this, e);
             }
             else
             {
-                e.Result = base.GetDescription();
+                e.Result = await base.GetDescription();
             }
             return e.Result;
         }
@@ -696,16 +699,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetElementTypeString_BoolProperty")]
-        public override string GetElementTypeString()
+        public override async System.Threading.Tasks.Task<string> GetElementTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetElementTypeString_BoolProperty != null)
             {
-                OnGetElementTypeString_BoolProperty(this, e);
+                await OnGetElementTypeString_BoolProperty(this, e);
             }
             else
             {
-                e.Result = base.GetElementTypeString();
+                e.Result = await base.GetElementTypeString();
             }
             return e.Result;
         }
@@ -759,16 +762,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_BoolProperty")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_BoolProperty != null)
             {
-                OnGetLabel_BoolProperty(this, e);
+                await OnGetLabel_BoolProperty(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -822,16 +825,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_BoolProperty")]
-        public override string GetName()
+        public override async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_BoolProperty != null)
             {
-                OnGetName_BoolProperty(this, e);
+                await OnGetName_BoolProperty(this, e);
             }
             else
             {
-                e.Result = base.GetName();
+                e.Result = await base.GetName();
             }
             return e.Result;
         }
@@ -885,16 +888,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyType_BoolProperty")]
-        public override System.Type GetPropertyType()
+        public override async System.Threading.Tasks.Task<System.Type> GetPropertyType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetPropertyType_BoolProperty != null)
             {
-                OnGetPropertyType_BoolProperty(this, e);
+                await OnGetPropertyType_BoolProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyType();
+                e.Result = await base.GetPropertyType();
             }
             return e.Result;
         }
@@ -948,16 +951,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyTypeString_BoolProperty")]
-        public override string GetPropertyTypeString()
+        public override async System.Threading.Tasks.Task<string> GetPropertyTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetPropertyTypeString_BoolProperty != null)
             {
-                OnGetPropertyTypeString_BoolProperty(this, e);
+                await OnGetPropertyTypeString_BoolProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyTypeString();
+                e.Result = await base.GetPropertyTypeString();
             }
             return e.Result;
         }
@@ -1112,26 +1115,26 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_FalseIcon.HasValue)
-                FalseIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_FalseIcon.Value);
+                FalseIconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_FalseIcon.Value));
             else
             if (_fk_FalseIcon.HasValue)
-                FalseIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
+                FalseIconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value));
             else
                 FalseIconImpl = null;
 
             if (_fk_guid_NullIcon.HasValue)
-                NullIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_NullIcon.Value);
+                NullIconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_NullIcon.Value));
             else
             if (_fk_NullIcon.HasValue)
-                NullIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
+                NullIconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value));
             else
                 NullIconImpl = null;
 
             if (_fk_guid_TrueIcon.HasValue)
-                TrueIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_TrueIcon.Value);
+                TrueIconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.Icon>(_fk_guid_TrueIcon.Value));
             else
             if (_fk_TrueIcon.HasValue)
-                TrueIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
+                TrueIconImpl = (Zetbox.App.GUI.IconMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value));
             else
                 TrueIconImpl = null;
             // fix cached lists references
@@ -1297,11 +1300,11 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(FalseIcon != null ? FalseIcon.ID : (int?)null);
+            binStream.Write(_fk_FalseIcon != null ? _fk_FalseIcon : (int?)null);
             binStream.Write(this._FalseLabel);
-            binStream.Write(NullIcon != null ? NullIcon.ID : (int?)null);
+            binStream.Write(_fk_NullIcon != null ? _fk_NullIcon : (int?)null);
             binStream.Write(this._NullLabel);
-            binStream.Write(TrueIcon != null ? TrueIcon.ID : (int?)null);
+            binStream.Write(_fk_TrueIcon != null ? _fk_TrueIcon : (int?)null);
             binStream.Write(this._TrueLabel);
         }
 

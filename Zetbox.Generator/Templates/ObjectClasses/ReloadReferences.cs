@@ -32,7 +32,7 @@ namespace Zetbox.Generator.Templates.ObjectClasses
         {
             return cls.Properties
                         .OfType<ObjectReferenceProperty>()
-                        .Where(orp => !orp.IsList())
+                        .Where(orp => !orp.IsList().Result)
                         .OrderBy(orp => orp.ObjectClass.Name)
                         .ThenBy(orp => orp.Name);
         }

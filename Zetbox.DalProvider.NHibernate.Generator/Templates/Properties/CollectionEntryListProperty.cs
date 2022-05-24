@@ -35,8 +35,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
 
-            RelationEnd relEnd = rel.GetEndFromRole(endRole);
-            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole).Result;
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd).Result;
 
             string backingCollectionType = RelationToBackingCollectionType(rel, otherEnd);
 
@@ -52,22 +52,22 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             if (rel == null) { throw new ArgumentNullException("rel"); }
 
 
-            RelationEnd relEnd = rel.GetEndFromRole(endRole);
-            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole).Result;
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd).Result;
 
             string name = relEnd.Navigator.Name;
-            string exposedCollectionInterface = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection";
-            string referencedInterface = otherEnd.Type.GetDataTypeString();
+            string exposedCollectionInterface = rel.NeedsPositionStorage(otherEnd.GetRole()).Result ? "IList" : "ICollection";
+            string referencedInterface = otherEnd.Type.GetDataTypeString().Result;
             string backingName = "_" + name;
 
-            string aSideType = rel.A.Type.GetDataTypeString();
-            string bSideType = rel.B.Type.GetDataTypeString();
+            string aSideType = rel.A.Type.GetDataTypeString().Result;
+            string bSideType = rel.B.Type.GetDataTypeString().Result;
             string entryType = rel.GetRelationFullName() + host.Settings["extrasuffix"] + Zetbox.API.Helper.ImplementationSuffix;
-            string providerCollectionType = (rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList<" : "ICollection<")
+            string providerCollectionType = (rel.NeedsPositionStorage(otherEnd.GetRole()).Result ? "IList<" : "ICollection<")
                 + entryType + ">";
 
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
-            bool serializeRelationEntries = rel.GetRelationType() == RelationType.n_m;
+            bool serializeRelationEntries = rel.GetRelationType().Result == RelationType.n_m;
 
             string entryProxyType = entryType + "." + rel.GetRelationClassName() + "Proxy";
 
@@ -83,7 +83,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 
             string result;
 
-            if (rel.NeedsPositionStorage(otherEnd.GetRole()))
+            if (rel.NeedsPositionStorage(otherEnd.GetRole()).Result)
             {
                 result = String.Format("NHibernate{0}SideListWrapper", otherEnd.GetRole());
             }

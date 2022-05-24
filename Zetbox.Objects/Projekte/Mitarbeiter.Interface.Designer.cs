@@ -98,6 +98,6 @@ namespace Zetbox.App.Projekte
         /// <summary>
         /// 
         /// </summary>
-        DateTime TestMethodForParameter(bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Zetbox.App.Projekte.Auftrag TestObjectParameter, string TestString);
+        System.Threading.Tasks.Task<DateTime> TestMethodForParameter(bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Zetbox.App.Projekte.Auftrag TestObjectParameter, string TestString);
     }
 }

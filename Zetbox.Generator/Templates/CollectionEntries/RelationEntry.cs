@@ -139,19 +139,19 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
         protected override bool IsOrdered()
         {
-            return rel.NeedsPositionStorage(RelationEndRole.A) || rel.NeedsPositionStorage(RelationEndRole.B);
+            return rel.NeedsPositionStorage(RelationEndRole.A).Result || rel.NeedsPositionStorage(RelationEndRole.B).Result;
         }
 
         protected override void ApplyChangesFromBody()
         {
             this.WriteLine("            me._fk_A = other._fk_A;");
-            if (rel.NeedsPositionStorage(RelationEndRole.A))
+            if (rel.NeedsPositionStorage(RelationEndRole.A).Result)
             {
                 this.WriteLine("            me.AIndex = other.AIndex;");
             }
 
             this.WriteLine("            me._fk_B = other._fk_B;");
-            if (rel.NeedsPositionStorage(RelationEndRole.B))
+            if (rel.NeedsPositionStorage(RelationEndRole.B).Result)
             {
                 this.WriteLine("            me.BIndex = other.BIndex;");
             }

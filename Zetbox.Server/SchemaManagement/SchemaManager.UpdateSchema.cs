@@ -19,6 +19,7 @@ namespace Zetbox.Server.SchemaManagement
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
@@ -30,7 +31,7 @@ namespace Zetbox.Server.SchemaManagement
 
     public partial class SchemaManager
     {
-        public void UpdateSchema()
+        public async Task UpdateSchema()
         {
             using (Log.DebugTraceMethodCall("UpdateSchema"))
             {
@@ -46,24 +47,24 @@ namespace Zetbox.Server.SchemaManagement
                         gmf.PreMigration(db);
                     }
 
-                    DropVolatileObjects();
+                    await DropVolatileObjects();
 
-                    UpdateDatabaseSchemas();
-                    UpdateTables();
-                    UpdateRelations();
-                    UpdateInheritance();
-                    UpdateSecurityTables();
-                    UpdateConstraints();
+                    await UpdateDatabaseSchemas();
+                    await UpdateTables();
+                    await UpdateRelations();
+                    await UpdateInheritance();
+                    await UpdateSecurityTables();
+                    await UpdateConstraints();
 
-                    UpdateDeletedRelations();
-                    UpdateDeletedTables();
+                    await UpdateDeletedRelations();
+                    await UpdateDeletedTables();
 
-                    UpdateProcedures();
+                    await UpdateProcedures();
 
-                    CreateFinalCheckConstraints();
-                    CreateFinalRightsInfrastructure();
+                    await CreateFinalCheckConstraints();
+                    await CreateFinalRightsInfrastructure();
 
-                    SaveSchema(schema);
+                    await SaveSchema(schema);
 
                     foreach (var gmf in _globalMigrationFragments)
                     {
@@ -83,7 +84,7 @@ namespace Zetbox.Server.SchemaManagement
             }
         }
 
-        private void CreateFinalRightsInfrastructure()
+        private async Task CreateFinalRightsInfrastructure()
         {
             Log.Info("Recreating Rights Infrastructure");
 
@@ -99,27 +100,27 @@ namespace Zetbox.Server.SchemaManagement
                 Log.InfoFormat("Refreshing ObjectClass Security Rules: {0}", objClass.Name);
 
                 if (!db.CheckViewExists(rightsViewUnmaterializedName))
-                    Case.DoCreateRightsViewUnmaterialized(objClass);
+                    await Case.DoCreateRightsViewUnmaterialized(objClass);
                 if (!db.CheckProcedureExists(refreshRightsOnProcedureName))
                     db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
 
-                Case.DoCreateOrReplaceUpdateRightsTrigger(objClass);
+                await Case.DoCreateOrReplaceUpdateRightsTrigger(objClass);
             }
             // Either we just removed it to keep the dependency away, then nothing has changed
             // or, the case has triggered the execution and we do it now that everything is in place again.
-            Case.ExecuteTriggeredRefreshRights();
+            await Case.ExecuteTriggeredRefreshRights();
         }
 
-        private void CreateFinalCheckConstraints()
+        private async Task CreateFinalCheckConstraints()
         {
             Log.Info("Recreating Check Constraints");
 
             // this does more than required (dropping already existing), but good enough for now.
             // has to be revisited if someone else creates check constraints.
-            Workaround_UpdateTPHNotNullCheckConstraint();
+            await Workaround_UpdateTPHNotNullCheckConstraint();
         }
 
-        private void DropVolatileObjects()
+        private Task DropVolatileObjects()
         {
             Log.Info("Dropping volatile objects");
 
@@ -139,9 +140,11 @@ namespace Zetbox.Server.SchemaManagement
             {
                 db.DropProcedure(procName);
             }
+
+            return Task.CompletedTask;
         }
 
-        private void Workaround_UpdateTPHNotNullCheckConstraint()
+        private async Task Workaround_UpdateTPHNotNullCheckConstraint()
         {
             foreach (var prop in schema.GetQuery<ValueTypeProperty>())
             {
@@ -160,15 +163,15 @@ namespace Zetbox.Server.SchemaManagement
                     db.DropCheckConstraint(tblName, checkConstraintName);
                 }
 
-                if (!prop.IsNullable() && cls != null && cls.BaseObjectClass != null && cls.GetTableMapping() == TableMapping.TPH)
+                if (!await prop.IsNullable() && cls != null && cls.BaseObjectClass != null && cls.GetTableMapping() == TableMapping.TPH)
                 {
-                    Case.CreateTPHNotNullCheckConstraint(tblName, colName, cls);
+                    await Case.CreateTPHNotNullCheckConstraint(tblName, colName, cls);
                 }
             }
 
             foreach (var rel in schema.GetQuery<Relation>())
             {
-                if (rel.GetRelationType() == RelationType.one_n)
+                if (await rel.GetRelationType() == RelationType.one_n)
                 {
                     string assocName, colName, listPosName;
                     RelationEnd relEnd, otherEnd;
@@ -186,18 +189,18 @@ namespace Zetbox.Server.SchemaManagement
                         var checkNotNull = !isNullable;
                         if (checkNotNull && (relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null))
                         {
-                            Case.CreateTPHNotNullCheckConstraint(tblName, colName, relEnd.Type);
+                            await Case.CreateTPHNotNullCheckConstraint(tblName, colName, relEnd.Type);
                         }
                     }
                 }
-                else if (rel.GetRelationType() == RelationType.one_one)
+                else if (await rel.GetRelationType() == RelationType.one_one)
                 {
                     // TODO: ....
                 }
             }
         }
 
-        private void UpdateDatabaseSchemas()
+        private async Task UpdateDatabaseSchemas()
         {
             Log.Info("Updating database schemas");
             Log.Debug("-------------------------");
@@ -210,14 +213,14 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (var moduleName in schema.GetQuery<Module>().Select(m => m.SchemaName))
             {
-                if (!Case.IsNewSchema(moduleName))
+                if (!await Case.IsNewSchema(moduleName))
                 {
-                    Case.DoNewSchema(moduleName);
+                    await Case.DoNewSchema(moduleName);
                 }
             }
         }
 
-        private void UpdateConstraints()
+        private async Task UpdateConstraints()
         {
             Log.Info("Updating Constraints");
             Log.Debug("--------------------");
@@ -225,39 +228,39 @@ namespace Zetbox.Server.SchemaManagement
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
                 Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
-                UpdateIndexConstraints(objClass);
+                await UpdateIndexConstraints(objClass);
             }
             Log.Debug(String.Empty);
         }
 
-        private void UpdateIndexConstraints(ObjectClass objClass)
+        private async Task UpdateIndexConstraints(ObjectClass objClass)
         {
             foreach (IndexConstraint uc in Case.savedSchema.GetQuery<IndexConstraint>().Where(p => p.Constrained.ExportGuid == objClass.ExportGuid))
             {
-                if (Case.IsDeleteIndexConstraint(uc))
+                if (await Case.IsDeleteIndexConstraint(uc))
                 {
-                    Case.DoDeleteIndexConstraint(uc);
+                    await Case.DoDeleteIndexConstraint(uc);
                 }
             }
 
             foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
             {
-                if (Case.IsChangeIndexConstraint(uc))
+                if (await Case.IsChangeIndexConstraint(uc))
                 {
-                    Case.DoChangeIndexConstraint(uc);
+                    await Case.DoChangeIndexConstraint(uc);
                 }
             }
 
             foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
             {
-                if (Case.IsNewIndexConstraint(uc))
+                if (await Case.IsNewIndexConstraint(uc))
                 {
-                    Case.DoNewIndexConstraint(uc);
+                    await Case.DoNewIndexConstraint(uc);
                 }
             }
         }
 
-        private void UpdateProcedures()
+        private Task UpdateProcedures()
         {
             Log.Info("Updating Procedures");
             Log.Debug("-------------------");
@@ -301,7 +304,7 @@ namespace Zetbox.Server.SchemaManagement
             var refSpecs = refSpecsASide.Concat(refSpecsBSide)
                 .ToLookup(
                     refSpec => db.GetTableName(refSpec.schemaName, refSpec.tblName),
-                    refSpec => new KeyValuePair<TableRef, string>(db.GetTableName(refSpec.refSchemaName, refSpec.refTableName), Construct.ForeignKeyColumnName(refSpec.OtherEnd)));
+                    refSpec => new KeyValuePair<TableRef, string>(db.GetTableName(refSpec.refSchemaName, refSpec.refTableName), Construct.ForeignKeyColumnName(refSpec.OtherEnd).Result));
 
             db.CreatePositionColumnValidCheckProcedures(refSpecs);
 
@@ -326,9 +329,11 @@ namespace Zetbox.Server.SchemaManagement
                 db.DropProcedure(getContinuousSequenceNumberRef);
                 db.CreateContinuousSequenceNumberProcedure();
             }
+
+            return Task.CompletedTask;
         }
 
-        private void UpdateDeletedTables()
+        private async Task UpdateDeletedTables()
         {
             Log.Info("Updating deleted Tables");
             Log.Debug("-----------------------");
@@ -336,36 +341,36 @@ namespace Zetbox.Server.SchemaManagement
             foreach (ObjectClass objClass in Case.savedSchema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
                 Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
-                if (Case.IsDeleteObjectClass(objClass))
+                if (await Case.IsDeleteObjectClass(objClass))
                 {
-                    Case.DoDeleteObjectClass(objClass);
+                    await Case.DoDeleteObjectClass(objClass);
                 }
             }
             Log.Debug(String.Empty);
         }
 
-        private void UpdateSecurityTables()
+        private async Task UpdateSecurityTables()
         {
             Log.Info("Updating Security Tables");
             Log.Debug("-------------------------");
 
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
-                if (Case.IsNewObjectClassACL(objClass))
+                if (await Case.IsNewObjectClassACL(objClass))
                 {
-                    Case.DoNewObjectClassACL(objClass);
+                    await Case.DoNewObjectClassACL(objClass);
                 }
-                if (Case.IsRenameObjectClassACL(objClass))
+                if (await Case.IsRenameObjectClassACL(objClass))
                 {
-                    Case.DoRenameObjectClassACL(objClass);
+                    await Case.DoRenameObjectClassACL(objClass);
                 }
-                if (Case.IsChangeObjectClassACL(objClass))
+                if (await Case.IsChangeObjectClassACL(objClass))
                 {
-                    Case.DoChangeObjectClassACL(objClass);
+                    await Case.DoChangeObjectClassACL(objClass);
                 }
-                if (Case.IsDeleteObjectClassSecurityRules(objClass))
+                if (await Case.IsDeleteObjectClassSecurityRules(objClass))
                 {
-                    Case.DoDeleteObjectClassSecurityRules(objClass);
+                    await Case.DoDeleteObjectClassSecurityRules(objClass);
                 }
             }
 
@@ -375,10 +380,10 @@ namespace Zetbox.Server.SchemaManagement
                 .OrderBy(o => o.Module.Namespace)
                 .ThenBy(o => o.Name)
                 .ToList();
-            Case.DoCreateRefreshAllRightsProcedure(allACLTables);
+            await Case.DoCreateRefreshAllRightsProcedure(allACLTables);
         }
 
-        private void UpdateTables()
+        private async Task UpdateTables()
         {
             Log.Info("Updating Tables & Columns");
             Log.Debug("-------------------------");
@@ -391,20 +396,20 @@ namespace Zetbox.Server.SchemaManagement
 
                 // Delete early to avoid collisions with newly created columns (like changing data type)
                 // Note: migration of data types is not supported now. Only chance is to delete and recreate a column
-                UpdateDeletedColumns(objClass, String.Empty);
+                await UpdateDeletedColumns(objClass, String.Empty);
             }
 
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().Where(o => o.BaseObjectClass == null).OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
                 Log.DebugFormat("TPH/TPT migrations for Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
-                if (Case.IsChangeTphToTpt(objClass))
+                if (await Case.IsChangeTphToTpt(objClass))
                 {
-                    Case.DoChangeTphToTpt(objClass);
+                    await Case.DoChangeTphToTpt(objClass);
                 }
-                if (Case.IsChangeTptToTph(objClass))
+                if (await Case.IsChangeTptToTph(objClass))
                 {
-                    Case.DoChangeTptToTph(objClass);
+                    await Case.DoChangeTptToTph(objClass);
                 }
             }
 
@@ -418,9 +423,9 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (ObjectClass objClass in classes)
             {
-                if (Case.IsRenameObjectClassTable(objClass))
+                if (await Case.IsRenameObjectClassTable(objClass))
                 {
-                    Case.DoRenameObjectClassTable(objClass);
+                    await Case.DoRenameObjectClassTable(objClass);
                 }
             }
 
@@ -428,128 +433,128 @@ namespace Zetbox.Server.SchemaManagement
             {
                 Log.DebugFormat("Managing Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
-                if (Case.IsNewObjectClass(objClass))
+                if (await Case.IsNewObjectClass(objClass))
                 {
-                    Case.DoNewObjectClass(objClass);
+                    await Case.DoNewObjectClass(objClass);
                 }
             }
 
             foreach (ObjectClass objClass in classes)
             {
-                UpdateColumns(objClass, objClass.Properties, String.Empty);
+                await UpdateColumns(objClass, objClass.Properties, String.Empty);
             }
 
             Log.Debug(String.Empty);
         }
 
-        private void UpdateColumns(ObjectClass objClass, ICollection<Property> properties, string prefix)
+        private async Task UpdateColumns(ObjectClass objClass, ICollection<Property> properties, string prefix)
         {
             foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => !p.IsList))
             {
-                if (Case.IsNewValueTypePropertyNullable(prop))
+                if (await Case.IsNewValueTypePropertyNullable(prop))
                 {
-                    Case.DoNewValueTypePropertyNullable(objClass, prop, prefix);
+                    await Case.DoNewValueTypePropertyNullable(objClass, prop, prefix);
                 }
-                if (Case.IsNewValueTypePropertyNotNullable(prop))
+                if (await Case.IsNewValueTypePropertyNotNullable(prop))
                 {
-                    Case.DoNewValueTypePropertyNotNullable(objClass, prop, prefix);
+                    await Case.DoNewValueTypePropertyNotNullable(objClass, prop, prefix);
                 }
-                if (Case.IsRenameValueTypePropertyName(objClass, prop, prefix))
+                if (await Case.IsRenameValueTypePropertyName(objClass, prop, prefix))
                 {
-                    Case.DoRenameValueTypePropertyName(objClass, prop, prefix);
+                    await Case.DoRenameValueTypePropertyName(objClass, prop, prefix);
                 }
-                if (Case.IsMoveValueTypeProperty(prop))
+                if (await Case.IsMoveValueTypeProperty(prop))
                 {
-                    Case.DoMoveValueTypeProperty(objClass, prop, prefix);
+                    await Case.DoMoveValueTypeProperty(objClass, prop, prefix);
                 }
-                if (Case.IsChangeValueTypeProperty_To_NotNullable(prop))
+                if (await Case.IsChangeValueTypeProperty_To_NotNullable(prop))
                 {
-                    Case.DoChangeValueTypeProperty_To_NotNullable(objClass, prop, prefix);
+                    await Case.DoChangeValueTypeProperty_To_NotNullable(objClass, prop, prefix);
                 }
-                if (Case.IsChangeValueTypeProperty_To_Nullable(prop))
+                if (await Case.IsChangeValueTypeProperty_To_Nullable(prop))
                 {
-                    Case.DoChangeValueTypeProperty_To_Nullable(objClass, prop, prefix);
+                    await Case.DoChangeValueTypeProperty_To_Nullable(objClass, prop, prefix);
                 }
-                if (Case.IsChangeDefaultValue(prop))
+                if (await Case.IsChangeDefaultValue(prop))
                 {
-                    Case.DoChangeDefaultValue(objClass, prop, prefix);
+                    await Case.DoChangeDefaultValue(objClass, prop, prefix);
                 }
             }
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
-                if (Case.IsNewCompoundObjectProperty(sprop))
+                if (await Case.IsNewCompoundObjectProperty(sprop))
                 {
-                    Case.DoNewCompoundObjectProperty(objClass, sprop, prefix);
+                    await Case.DoNewCompoundObjectProperty(objClass, sprop, prefix);
                 }
                 else
                 {
                     // See if the CompoundObject self has changed
-                    UpdateColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.ColumnName(sprop, prefix));
+                    await UpdateColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.ColumnName(sprop, prefix));
                 }
             }
 
             foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => p.IsList))
             {
-                if (Case.IsNewValueTypePropertyList(prop))
+                if (await Case.IsNewValueTypePropertyList(prop))
                 {
-                    Case.DoNewValueTypePropertyList(objClass, prop);
+                    await Case.DoNewValueTypePropertyList(objClass, prop);
                 }
-                if (Case.IsRenameValueTypePropertyListName(prop))
+                if (await Case.IsRenameValueTypePropertyListName(prop))
                 {
-                    Case.DoRenameValueTypePropertyListName(objClass, prop);
+                    await Case.DoRenameValueTypePropertyListName(objClass, prop);
                 }
-                if (Case.IsMoveValueTypePropertyList(prop))
+                if (await Case.IsMoveValueTypePropertyList(prop))
                 {
-                    Case.DoMoveValueTypePropertyList(objClass, prop);
+                    await Case.DoMoveValueTypePropertyList(objClass, prop);
                 }
             }
 
             foreach (CompoundObjectProperty prop in properties.OfType<CompoundObjectProperty>().Where(p => p.IsList))
             {
-                if (Case.IsNewCompoundObjectPropertyList(prop))
+                if (await Case.IsNewCompoundObjectPropertyList(prop))
                 {
-                    Case.DoNewCompoundObjectPropertyList(objClass, prop);
+                    await Case.DoNewCompoundObjectPropertyList(objClass, prop);
                 }
-                if (Case.IsRenameCompoundObjectPropertyListName(prop))
+                if (await Case.IsRenameCompoundObjectPropertyListName(prop))
                 {
-                    Case.DoRenameCompoundObjectPropertyListName(objClass, prop);
+                    await Case.DoRenameCompoundObjectPropertyListName(objClass, prop);
                 }
-                if (Case.IsMoveCompoundObjectPropertyList(prop))
+                if (await Case.IsMoveCompoundObjectPropertyList(prop))
                 {
-                    Case.DoMoveCompoundObjectPropertyList(objClass, prop);
+                    await Case.DoMoveCompoundObjectPropertyList(objClass, prop);
                 }
             }
         }
 
-        private void UpdateDeletedColumns(ObjectClass objClass, string prefix)
+        private async Task UpdateDeletedColumns(ObjectClass objClass, string prefix)
         {
             foreach (ValueTypeProperty savedProp in Case.savedSchema.GetQuery<ValueTypeProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid))
             {
-                if (Case.IsDeleteValueTypeProperty(savedProp))
+                if (await Case.IsDeleteValueTypeProperty(savedProp))
                 {
-                    Case.DoDeleteValueTypeProperty(objClass, savedProp, prefix);
+                    await Case.DoDeleteValueTypeProperty(objClass, savedProp, prefix);
                 }
-                if (Case.IsDeleteValueTypePropertyList(savedProp))
+                if (await Case.IsDeleteValueTypePropertyList(savedProp))
                 {
-                    Case.DoDeleteValueTypePropertyList(objClass, savedProp, prefix);
+                    await Case.DoDeleteValueTypePropertyList(objClass, savedProp, prefix);
                 }
             }
 
             foreach (CompoundObjectProperty savedCProp in Case.savedSchema.GetQuery<CompoundObjectProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid))
             {
-                if (Case.IsDeleteCompoundObjectProperty(savedCProp))
+                if (await Case.IsDeleteCompoundObjectProperty(savedCProp))
                 {
-                    Case.DoDeleteCompoundObjectProperty(objClass, savedCProp, prefix);
+                    await Case.DoDeleteCompoundObjectProperty(objClass, savedCProp, prefix);
                 }
-                if (Case.IsDeleteCompoundObjectPropertyList(savedCProp))
+                if (await Case.IsDeleteCompoundObjectPropertyList(savedCProp))
                 {
-                    Case.DoDeleteCompoundObjectPropertyList(objClass, savedCProp, prefix);
+                    await Case.DoDeleteCompoundObjectPropertyList(objClass, savedCProp, prefix);
                 }
             }
         }
 
-        private void UpdateDeletedRelations()
+        private async Task UpdateDeletedRelations()
         {
             Log.Info("Updating deleted Relations");
             Log.Debug("--------------------------");
@@ -558,32 +563,32 @@ namespace Zetbox.Server.SchemaManagement
             {
                 Log.DebugFormat("Relation: {0} ({1})", rel.GetAssociationName(), rel.GetRelationType());
 
-                if (rel.GetRelationType() == RelationType.one_n)
+                if (await rel.GetRelationType() == RelationType.one_n)
                 {
-                    if (Case.IsDelete_1_N_Relation(rel))
+                    if (await Case.IsDelete_1_N_Relation(rel))
                     {
-                        Case.DoDelete_1_N_Relation(rel);
+                        await Case.DoDelete_1_N_Relation(rel);
                     }
                 }
-                else if (rel.GetRelationType() == RelationType.n_m)
+                else if (await rel.GetRelationType() == RelationType.n_m)
                 {
-                    if (Case.IsDelete_N_M_Relation(rel))
+                    if (await Case.IsDelete_N_M_Relation(rel))
                     {
-                        Case.DoDelete_N_M_Relation(rel);
+                        await Case.DoDelete_N_M_Relation(rel);
                     }
                 }
-                else if (rel.GetRelationType() == RelationType.one_one)
+                else if (await rel.GetRelationType() == RelationType.one_one)
                 {
-                    if (Case.IsDelete_1_1_Relation(rel))
+                    if (await Case.IsDelete_1_1_Relation(rel))
                     {
-                        Case.DoDelete_1_1_Relation(rel);
+                        await Case.DoDelete_1_1_Relation(rel);
                     }
                 }
             }
             Log.Debug(String.Empty);
         }
 
-        private void UpdateRelations()
+        private async Task UpdateRelations()
         {
             Log.Info("Updating Relations");
             Log.Debug("------------------");
@@ -591,141 +596,141 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (Relation rel in relations)
             {
-                if (Case.IsChangeRelationName(rel))
+                if (await Case.IsChangeRelationName(rel))
                 {
-                    Case.DoChangeRelationName(rel);
+                    await Case.DoChangeRelationName(rel);
                 }
-                if (Case.IsChangeRelationEndTypes(rel))
+                if (await Case.IsChangeRelationEndTypes(rel))
                 {
-                    Case.DoChangeRelationEndTypes(rel);
-                }
-            }
-
-            foreach (Relation rel in relations)
-            {
-                if (Case.IsChangeRelationType(rel))
-                {
-                    if (Case.IsChangeRelationType_from_1_1_to_1_n(rel))
-                    {
-                        Case.DoChangeRelationType_from_1_1_to_1_n(rel);
-                    }
-                    else if (Case.IsChangeRelationType_from_1_1_to_n_m(rel))
-                    {
-                        Case.DoChangeRelationType_from_1_1_to_n_m(rel);
-                    }
-                    else if (Case.IsChangeRelationType_from_1_n_to_1_1(rel))
-                    {
-                        Case.DoChangeRelationType_from_1_n_to_1_1(rel);
-                    }
-                    else if (Case.IsChangeRelationType_from_1_n_to_n_m(rel))
-                    {
-                        Case.DoChangeRelationType_from_1_n_to_n_m(rel);
-                    }
-                    else if (Case.IsChangeRelationType_from_n_m_to_1_1(rel))
-                    {
-                        Case.DoChangeRelationType_from_n_m_to_1_1(rel);
-                    }
-                    else if (Case.IsChangeRelationType_from_n_m_to_1_n(rel))
-                    {
-                        Case.DoChangeRelationType_from_n_m_to_1_n(rel);
-                    }
-                }
-            }
-            foreach (Relation rel in relations)
-            {
-                if (rel.GetRelationType() == RelationType.one_n)
-                {
-                    if (Case.Is_1_N_RelationChange_FromIndexed_To_NotIndexed(rel))
-                    {
-                        Case.Do_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
-                    }
-                    if (Case.Is_1_N_RelationChange_FromNotIndexed_To_Indexed(rel))
-                    {
-                        Case.Do_1_N_RelationChange_FromNotIndexed_To_Indexed(rel);
-                    }
-                    if (Case.Is_1_N_RelationChange_FromNullable_To_NotNullable(rel))
-                    {
-                        Case.Do_1_N_RelationChange_FromNullable_To_NotNullable(rel);
-                    }
-                    if (Case.Is_1_N_RelationChange_FromNotNullable_To_Nullable(rel))
-                    {
-                        Case.Do_1_N_RelationChange_FromNotNullable_To_Nullable(rel);
-                    }
-                }
-                else if (rel.GetRelationType() == RelationType.n_m)
-                {
-                    if (Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A))
-                    {
-                        Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A);
-                    }
-                    if (Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B))
-                    {
-                        Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B);
-                    }
-                    if (Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A))
-                    {
-                        Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A);
-                    }
-                    if (Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B))
-                    {
-                        Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B);
-                    }
-                }
-                else if (rel.GetRelationType() == RelationType.one_one)
-                {
-                    if (Case.IsChange_1_1_Storage(rel))
-                    {
-                        Case.DoChange_1_1_Storage(rel);
-                    }
-
-                    if (Case.Is_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A))
-                    {
-                        Case.Do_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A);
-                    }
-                    if (Case.Is_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B))
-                    {
-                        Case.Do_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B);
-                    }
-
-                    if (Case.Is_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A))
-                    {
-                        Case.Do_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A);
-                    }
-                    if (Case.Is_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B))
-                    {
-                        Case.Do_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B);
-                    }
+                    await Case.DoChangeRelationEndTypes(rel);
                 }
             }
 
             foreach (Relation rel in relations)
             {
-                if (rel.GetRelationType() == RelationType.one_n)
+                if (await Case.IsChangeRelationType(rel))
                 {
-                    if (Case.IsNew_1_N_Relation(rel))
+                    if (await Case.IsChangeRelationType_from_1_1_to_1_n(rel))
                     {
-                        Case.DoNew_1_N_Relation(rel);
+                        await Case.DoChangeRelationType_from_1_1_to_1_n(rel);
+                    }
+                    else if (await Case.IsChangeRelationType_from_1_1_to_n_m(rel))
+                    {
+                        await Case.DoChangeRelationType_from_1_1_to_n_m(rel);
+                    }
+                    else if (await Case.IsChangeRelationType_from_1_n_to_1_1(rel))
+                    {
+                        await Case.DoChangeRelationType_from_1_n_to_1_1(rel);
+                    }
+                    else if (await Case.IsChangeRelationType_from_1_n_to_n_m(rel))
+                    {
+                        await Case.DoChangeRelationType_from_1_n_to_n_m(rel);
+                    }
+                    else if (await Case.IsChangeRelationType_from_n_m_to_1_1(rel))
+                    {
+                        await Case.DoChangeRelationType_from_n_m_to_1_1(rel);
+                    }
+                    else if (await Case.IsChangeRelationType_from_n_m_to_1_n(rel))
+                    {
+                        await Case.DoChangeRelationType_from_n_m_to_1_n(rel);
                     }
                 }
-                else if (rel.GetRelationType() == RelationType.n_m)
+            }
+            foreach (Relation rel in relations)
+            {
+                if (await rel.GetRelationType() == RelationType.one_n)
                 {
-                    if (Case.IsNew_N_M_Relation(rel))
+                    if (await Case.Is_1_N_RelationChange_FromIndexed_To_NotIndexed(rel))
                     {
-                        Case.DoNew_N_M_Relation(rel);
+                        await Case.Do_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
+                    }
+                    if (await Case.Is_1_N_RelationChange_FromNotIndexed_To_Indexed(rel))
+                    {
+                        await Case.Do_1_N_RelationChange_FromNotIndexed_To_Indexed(rel);
+                    }
+                    if (await Case.Is_1_N_RelationChange_FromNullable_To_NotNullable(rel))
+                    {
+                        await Case.Do_1_N_RelationChange_FromNullable_To_NotNullable(rel);
+                    }
+                    if (await Case.Is_1_N_RelationChange_FromNotNullable_To_Nullable(rel))
+                    {
+                        await Case.Do_1_N_RelationChange_FromNotNullable_To_Nullable(rel);
                     }
                 }
-                else if (rel.GetRelationType() == RelationType.one_one)
+                else if (await rel.GetRelationType() == RelationType.n_m)
                 {
-                    if (Case.IsNew_1_1_Relation(rel))
+                    if (await Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A))
                     {
-                        Case.DoNew_1_1_Relation(rel);
+                        await Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A);
+                    }
+                    if (await Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B))
+                    {
+                        await Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B);
+                    }
+                    if (await Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A))
+                    {
+                        await Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A);
+                    }
+                    if (await Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B))
+                    {
+                        await Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B);
+                    }
+                }
+                else if (await rel.GetRelationType() == RelationType.one_one)
+                {
+                    if (await Case.IsChange_1_1_Storage(rel))
+                    {
+                        await Case.DoChange_1_1_Storage(rel);
+                    }
+
+                    if (await Case.Is_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A))
+                    {
+                        await Case.Do_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A);
+                    }
+                    if (await Case.Is_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B))
+                    {
+                        await Case.Do_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B);
+                    }
+
+                    if (await Case.Is_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A))
+                    {
+                        await Case.Do_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A);
+                    }
+                    if (await Case.Is_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B))
+                    {
+                        await Case.Do_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B);
+                    }
+                }
+            }
+
+            foreach (Relation rel in relations)
+            {
+                if (await rel.GetRelationType() == RelationType.one_n)
+                {
+                    if (await Case.IsNew_1_N_Relation(rel))
+                    {
+                        await Case.DoNew_1_N_Relation(rel);
+                    }
+                }
+                else if (await rel.GetRelationType() == RelationType.n_m)
+                {
+                    if (await Case.IsNew_N_M_Relation(rel))
+                    {
+                        await Case.DoNew_N_M_Relation(rel);
+                    }
+                }
+                else if (await rel.GetRelationType() == RelationType.one_one)
+                {
+                    if (await Case.IsNew_1_1_Relation(rel))
+                    {
+                        await Case.DoNew_1_1_Relation(rel);
                     }
                 }
             }
             Log.Debug(String.Empty);
         }
 
-        private void UpdateInheritance()
+        private async Task UpdateInheritance()
         {
             Log.Info("Updating Inheritance");
             Log.Debug("--------------------");
@@ -736,17 +741,17 @@ namespace Zetbox.Server.SchemaManagement
                 Log.DebugFormat("Objectclass: {0}.{1}, {2}", objClass.Module.Namespace, objClass.Name, mapping);
                 if (mapping == TableMapping.TPT)
                 {
-                    if (Case.IsNewObjectClassInheritance(objClass))
+                    if (await Case.IsNewObjectClassInheritance(objClass))
                     {
-                        Case.DoNewObjectClassInheritance(objClass);
+                        await Case.DoNewObjectClassInheritance(objClass);
                     }
-                    if (Case.IsChangeObjectClassInheritance(objClass))
+                    if (await Case.IsChangeObjectClassInheritance(objClass))
                     {
-                        Case.DoChangeObjectClassInheritance(objClass);
+                        await Case.DoChangeObjectClassInheritance(objClass);
                     }
-                    if (Case.IsRemoveObjectClassInheritance(objClass))
+                    if (await Case.IsRemoveObjectClassInheritance(objClass))
                     {
-                        Case.DoRemoveObjectClassInheritance(objClass);
+                        await Case.DoRemoveObjectClassInheritance(objClass);
                     }
                 }
             }

@@ -74,7 +74,7 @@
             }
 <%      } %>
 <% } %>
-<% foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.Name)) {
+<% foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList().Result).OrderBy(p => p.Name)) {
         var propName = prop.Name;                                                     
         if (prop.RelationEnd.HasPersistentOrder) {
             var positionPropertyName = Construct.ListPositionPropertyName(prop.RelationEnd);

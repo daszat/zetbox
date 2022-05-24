@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetObject(AnyReference obj, MethodReturnEventArgs<Zetbox.API.IDataObject> e, Zetbox.API.IZetboxContext ctx)
+        public static async System.Threading.Tasks.Task GetObject(AnyReference obj, MethodReturnEventArgs<Zetbox.API.IDataObject> e, Zetbox.API.IZetboxContext ctx)
         {
             if (obj.ObjClass == null)
             {
@@ -49,7 +49,7 @@ namespace Zetbox.App.Base
             else
             {
                 var cls = _frozenCtx.FindPersistenceObject<ObjectClass>(obj.ObjClass.Value);
-                var ifType = ctx.GetInterfaceType(cls.GetDataType());
+                var ifType = ctx.GetInterfaceType(await cls.GetDataType());
                 if (obj.ObjGuid != null)
                 {
                     e.Result = (IDataObject)ctx.FindPersistenceObject(ifType, obj.ObjGuid.Value);
@@ -63,8 +63,6 @@ namespace Zetbox.App.Base
                     e.Result = null;
                 }
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

@@ -23,6 +23,7 @@ namespace Zetbox.API.Server
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API.Common;
     using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
@@ -131,7 +132,8 @@ namespace Zetbox.API.Server
                         Logging.Linq.Info(expression.ToString());
                     }
 
-                    Expression translated = this.Visit(expression);
+                    // TODO: .Result call
+                    Expression translated = this.Visit(expression).Result;
 
                     if (Logging.LinqQuery.IsDebugEnabled)
                     {
@@ -155,7 +157,7 @@ namespace Zetbox.API.Server
             }
         }
 
-        internal IEnumerable ExecuteEnumerable(Expression expression)
+        internal async Task<IEnumerable> ExecuteEnumerable(Expression expression)
         {
             if (expression == null) throw new ArgumentNullException("expression");
             int objectCount = 0;
@@ -181,7 +183,7 @@ namespace Zetbox.API.Server
                         Logging.Linq.Info(expression.ToString());
                     }
 
-                    Expression translated = this.Visit(expression);
+                    Expression translated = await this.Visit(expression);
 
                     if (Logging.LinqQuery.IsDebugEnabled)
                     {
@@ -219,27 +221,27 @@ namespace Zetbox.API.Server
 
         #region Visits
 
-        protected override Expression VisitMethodCall(MethodCallExpression m)
+        protected override async Task<Expression> VisitMethodCall(MethodCallExpression m)
         {
             if (m.IsMethodCallExpression("Cast"))
             {
                 // Throw away casts, either it is redundant, then we don't need it, or it is wrong, then we'll fail in translation or in the database anyways.
-                return Visit(m.Arguments.Single());
+                return await Visit(m.Arguments.Single());
             }
             else if (m.IsMethodCallExpression("WithEagerLoading", typeof(ZetboxContextQueryableExtensions)))
             {
                 // Eager Loading is done automatically on the server - ignore and continue
-                return Visit(m.Arguments.Single());
+                return await Visit(m.Arguments.Single());
             }
             else if (m.IsMethodCallExpression("WithDeactivated", typeof(ZetboxContextQueryableExtensions)))
             {
                 // save for future use
                 WithDeactivated = true;
-                return Visit(m.Arguments.Single());
+                return await Visit(m.Arguments.Single());
             }
             else if (m.IsMethodCallExpression("OfType"))
             {
-                var source = Visit(m.Arguments.Single());
+                var source = await Visit(m.Arguments.Single());
                 source = Expression.Call(null, GetMethodInfo(m.Method), source);
 
                 var type = source.Type.FindElementTypes().Single(t => t != typeof(object));
@@ -248,7 +250,7 @@ namespace Zetbox.API.Server
             // Methods requiring special translation
             else if ((m.Method.DeclaringType == typeof(Queryable) || m.Method.DeclaringType == typeof(System.Linq.Enumerable)) && m.Method.GetParameters().Length > 1)
             {
-                var source = Visit(m.Arguments[0]);
+                var source = await Visit(m.Arguments[0]);
                 // unpack IQueryable<T>
                 var sourceType = source.Type.GetGenericArguments().Single();
 
@@ -283,7 +285,7 @@ namespace Zetbox.API.Server
                         }
                         else
                         {
-                            var newPredicate = VisitQueryArgument(m.Arguments[1], sourceType);
+                            var newPredicate = await VisitQueryArgument(m.Arguments[1], sourceType);
 
                             // the number of generic arguments to the predicate
                             var predicateArgCount = ExtractArgCount(newPredicate.Type);
@@ -316,7 +318,7 @@ namespace Zetbox.API.Server
                     case "Skip": // Skip<TSource>(this IQueryable<TSource> source, int count);
                     case "Take": // Take<TSource>(this IQueryable<TSource> source, int count);
                         {
-                            var newCount = Visit(m.Arguments[1]);
+                            var newCount = await Visit(m.Arguments[1]);
 
                             MethodInfo newMethod = typeof(Queryable).GetMethods()
                                    .Single(mi => mi.Name == m.Method.Name
@@ -343,11 +345,11 @@ namespace Zetbox.API.Server
                         }
                         else
                         {
-                            var newKeySelector = VisitQueryArgument(m.Arguments[1], sourceType);
+                            var newKeySelector = await VisitQueryArgument(m.Arguments[1], sourceType);
 
                             if (newKeySelector.Body.Type.IsICompoundObject() && new[] { "OrderBy", "OrderByDescending", "ThenBy", "ThenByDescending" }.Contains(m.Method.Name))
                             {
-                                return CreateCompoundOrderByExpression(m, source, sourceType, newKeySelector);
+                                return await CreateCompoundOrderByExpression(m, source, sourceType, newKeySelector);
                             }
                             else
                             {
@@ -391,7 +393,11 @@ namespace Zetbox.API.Server
                         }
                         else
                         {
-                            var selectors = m.Arguments.Skip(1).Select(a => VisitQueryArgument(a, sourceType)).ToList();
+                            var selectors = new List<LambdaExpression>();
+                            foreach (var a in m.Arguments.Skip(1))
+                            {
+                                selectors.Add(await VisitQueryArgument(a, sourceType));
+                            }
 
                             if (selectors[0].Body.Type.IsICompoundObject())
                             {
@@ -416,10 +422,10 @@ namespace Zetbox.API.Server
             }
             else
             {
-                Expression objExp = Visit(m.Object);
+                Expression objExp = await Visit(m.Object);
                 MethodInfo newMethod = GetMethodInfo(m.Method);
 
-                return Expression.Call(objExp, newMethod, VisitExpressionList(m.Arguments));
+                return Expression.Call(objExp, newMethod, await VisitExpressionList(m.Arguments));
             }
         }
 
@@ -434,17 +440,17 @@ namespace Zetbox.API.Server
         /// <param name="argument"></param>
         /// <param name="sourceType"></param>
         /// <returns></returns>
-        private LambdaExpression VisitQueryArgument(Expression argument, Type sourceType)
+        private async Task<LambdaExpression> VisitQueryArgument(Expression argument, Type sourceType)
         {
             var lambda = (LambdaExpression)argument.StripQuotes();
             // force the first parameter to underlying source type
-            var newParams = new[] { VisitParameter(lambda.Parameters.First(), sourceType) }.Concat(VisitParameterList(lambda.Parameters.Skip(1).ToList().AsReadOnly()));
-            var newBody = Visit(lambda.Body);
+            var newParams = new[] { VisitParameter(lambda.Parameters.First(), sourceType) }.Concat(await VisitParameterList(lambda.Parameters.Skip(1).ToList().AsReadOnly()));
+            var newBody = await Visit(lambda.Body);
 
             return Expression.Lambda(newBody, newParams);
         }
 
-        private Expression CreateCompoundOrderByExpression(MethodCallExpression m, Expression source, Type sourceType, LambdaExpression lambda)
+        private async Task<Expression> CreateCompoundOrderByExpression(MethodCallExpression m, Expression source, Type sourceType, LambdaExpression lambda)
         {
             var cpDef = MetaDataResolver.GetCompoundObject(Ctx.GetImplementationType(lambda.Body.Type).ToInterfaceType());
             if (cpDef == null) throw new InvalidOperationException("cannot resolve CompoundObject type: " + lambda.Body.Type.AssemblyQualifiedName);
@@ -455,7 +461,7 @@ namespace Zetbox.API.Server
             var result = source;
             foreach (var prop in cpDef.Properties)
             {
-                var propType = prop.IsNullable() ? typeof(Nullable<>).MakeGenericType(prop.GetPropertyType()) : prop.GetPropertyType();
+                var propType = (await prop.IsNullable()) ? typeof(Nullable<>).MakeGenericType(await prop.GetPropertyType()) : await prop.GetPropertyType();
                 var newOrderByLambda = Expression.Quote(
                     Expression.Lambda(
                         Expression.MakeMemberAccess(lambda.Body, lambda.Body.Type.GetProperty(prop.Name)),
@@ -477,49 +483,49 @@ namespace Zetbox.API.Server
             return result;
         }
 
-        protected override Expression VisitUnary(UnaryExpression u)
+        protected override async Task<Expression> VisitUnary(UnaryExpression u)
         {
             if (u.IsIgnorableCastExpression())
             {
-                return Visit(u.Operand);
+                return await Visit(u.Operand);
             }
             else
             {
-                return Expression.MakeUnary(u.NodeType, Visit(u.Operand), TranslateType(u.Type), u.Method);
+                return Expression.MakeUnary(u.NodeType, await Visit(u.Operand), TranslateType(u.Type), u.Method);
             }
         }
 
-        protected override Expression VisitLambda(LambdaExpression lambda)
+        protected override async Task<Expression> VisitLambda(LambdaExpression lambda)
         {
-            var body = Visit(lambda.Body);
-            var parameters = VisitParameterList(lambda.Parameters);
+            var body = await Visit(lambda.Body);
+            var parameters = await VisitParameterList(lambda.Parameters);
             return Expression.Lambda(TranslateType(lambda.Type), body, parameters);
         }
 
-        protected override Expression VisitTypeIs(TypeBinaryExpression b)
+        protected override async Task<Expression> VisitTypeIs(TypeBinaryExpression b)
         {
             var type = TranslateType(b.TypeOperand);
-            return Expression.TypeIs(Visit(b.Expression), type);
+            return Expression.TypeIs(await Visit(b.Expression), type);
         }
 
-        protected override Expression VisitConstant(ConstantExpression c)
+        protected override Task<Expression> VisitConstant(ConstantExpression c)
         {
             if (c.Type.IsGenericType && c.Type.GetGenericTypeDefinition() == typeof(QueryTranslator<>))
             {
                 var result = Source.Expression;
                 var type = c.Type.GetGenericArguments().First();
-                return AddFilter(result, IftFactory(type));
+                return Task.FromResult(AddFilter(result, IftFactory(type)));
             }
             else
             {
-                return c;
+                return Task.FromResult((Expression)c);
             }
         }
 
         private Dictionary<ParameterExpression, ParameterExpression> _Parameter = new Dictionary<ParameterExpression, ParameterExpression>();
-        protected override ParameterExpression VisitParameter(ParameterExpression p)
+        protected override Task<ParameterExpression> VisitParameter(ParameterExpression p)
         {
-            return VisitParameter(p, null);
+            return Task.FromResult(VisitParameter(p, null));
         }
 
         private ParameterExpression VisitParameter(ParameterExpression p, Type targetType)
@@ -531,9 +537,9 @@ namespace Zetbox.API.Server
             return _Parameter[p];
         }
 
-        protected override Expression VisitMemberAccess(MemberExpression m)
+        protected override async Task<Expression> VisitMemberAccess(MemberExpression m)
         {
-            Expression e = base.Visit(m.Expression);
+            Expression e = await base.Visit(m.Expression);
 
             // e might be null if m.Member is a static reference
             var type = e == null
@@ -581,9 +587,9 @@ namespace Zetbox.API.Server
             return result;
         }
 
-        protected override NewExpression VisitNew(NewExpression newExpression)
+        protected override async Task<NewExpression> VisitNew(NewExpression newExpression)
         {
-            var args = VisitExpressionList(newExpression.Arguments);
+            var args = await VisitExpressionList(newExpression.Arguments);
             Type declaringType = TranslateType(newExpression.Constructor.DeclaringType);
             ConstructorInfo c = declaringType.GetConstructor(
                 newExpression.Constructor.GetParameters().Select(p => TranslateType(p.ParameterType)).ToArray());
@@ -611,17 +617,17 @@ namespace Zetbox.API.Server
             }
         }
 
-        protected override Expression VisitBinary(BinaryExpression b)
+        protected override async Task<Expression> VisitBinary(BinaryExpression b)
         {
             if (b.NodeType == ExpressionType.Equal && b.Left.Type.IsIDataObject() && b.Right.Type.IsIDataObject())
             {
-                var newLeft = Visit(b.Left);
-                var newRight = Visit(b.Right);
+                var newLeft = await Visit(b.Left);
+                var newRight = await Visit(b.Right);
                 return Expression.MakeBinary(b.NodeType,
                     Expression.MakeMemberAccess(newLeft, newLeft.Type.FindFirstOrDefaultMember("ID")),
                     Expression.MakeMemberAccess(newRight, newRight.Type.FindFirstOrDefaultMember("ID")));
             }
-            return base.VisitBinary(b);
+            return await base.VisitBinary(b);
         }
         #endregion
 

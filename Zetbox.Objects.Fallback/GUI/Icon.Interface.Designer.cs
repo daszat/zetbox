@@ -48,11 +48,11 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        void Open();
+        System.Threading.Tasks.Task Open();
 
         /// <summary>
         /// 
         /// </summary>
-        void Upload();
+        System.Threading.Tasks.Task Upload();
     }
 }

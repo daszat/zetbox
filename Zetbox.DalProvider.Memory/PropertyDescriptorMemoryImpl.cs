@@ -19,7 +19,7 @@ namespace Zetbox.DalProvider.Memory
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
 
@@ -43,7 +43,7 @@ namespace Zetbox.DalProvider.Memory
             _propertyGuid = propertyGuid;
         }
 
-        public override string[] GetValidationErrors(object component)
+        public override async Task<string[]> GetValidationErrors(object component)
         {
             IReadOnlyZetboxContext ctx;
             if (_lazyCtx != null && _propertyGuid != null && (ctx = _lazyCtx()) != null)
@@ -51,10 +51,11 @@ namespace Zetbox.DalProvider.Memory
                 var property = ctx.FindPersistenceObject<Zetbox.App.Base.Property>(_propertyGuid.Value);
                 var self = (TComponent)component;
                 var val = getter(self);
-                return property
+                return (await (await property
                     .Constraints
-                    .Where(c => !c.IsValid(self, val))
-                    .Select(c => c.GetErrorText(self, val))
+                    .Where(async c => !(await c.IsValid(self, val))))
+                    .Select(async c => await c.GetErrorText(self, val))                    
+                    .WhenAll())
                     .Concat(TryExecuteIsValidEvent(self))
                     .ToArray();
             }

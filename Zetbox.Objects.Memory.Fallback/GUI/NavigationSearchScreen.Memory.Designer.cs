@@ -738,12 +738,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchRequestedEditorKindTask != null) return _triggerFetchRequestedEditorKindTask;
 
-            if (_fk_RequestedEditorKind.HasValue)
-                _triggerFetchRequestedEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value);
-            else
-                _triggerFetchRequestedEditorKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> task;
 
-            _triggerFetchRequestedEditorKindTask.OnResult(t =>
+            if (_fk_RequestedEditorKind.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
+
+            task.OnResult(t =>
             {
                 if (OnRequestedEditorKind_Getter != null)
                 {
@@ -753,7 +755,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchRequestedEditorKindTask;
+            return _triggerFetchRequestedEditorKindTask = task;
         }
 
         // internal implementation
@@ -764,7 +766,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchRequestedEditorKindAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
@@ -877,12 +878,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchRequestedWorkspaceKindTask != null) return _triggerFetchRequestedWorkspaceKindTask;
 
-            if (_fk_RequestedWorkspaceKind.HasValue)
-                _triggerFetchRequestedWorkspaceKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value);
-            else
-                _triggerFetchRequestedWorkspaceKindTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.ControlKind> task;
 
-            _triggerFetchRequestedWorkspaceKindTask.OnResult(t =>
+            if (_fk_RequestedWorkspaceKind.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ControlKind>(null);
+
+            task.OnResult(t =>
             {
                 if (OnRequestedWorkspaceKind_Getter != null)
                 {
@@ -892,7 +895,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchRequestedWorkspaceKindTask;
+            return _triggerFetchRequestedWorkspaceKindTask = task;
         }
 
         // internal implementation
@@ -903,7 +906,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchRequestedWorkspaceKindAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ControlKindMemoryImpl)task.Result;
             }
             set
@@ -1248,12 +1250,14 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchTypeTask != null) return _triggerFetchTypeTask;
 
-            if (_fk_Type.HasValue)
-                _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
-            else
-                _triggerFetchTypeTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> task;
 
-            _triggerFetchTypeTask.OnResult(t =>
+            if (_fk_Type.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+
+            task.OnResult(t =>
             {
                 if (OnType_Getter != null)
                 {
@@ -1263,7 +1267,7 @@ namespace Zetbox.App.GUI
                 }
             });
 
-            return _triggerFetchTypeTask;
+            return _triggerFetchTypeTask = task;
         }
 
         // internal implementation
@@ -1274,7 +1278,6 @@ namespace Zetbox.App.GUI
             {
                 var task = TriggerFetchTypeAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set
@@ -1387,16 +1390,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDefaultViewModel_NavigationSearchScreen")]
-        public override System.Object GetDefaultViewModel(Zetbox.API.IZetboxContext dataCtx, System.Object parent)
+        public override async System.Threading.Tasks.Task<System.Object> GetDefaultViewModel(Zetbox.API.IZetboxContext dataCtx, System.Object parent)
         {
             var e = new MethodReturnEventArgs<System.Object>();
             if (OnGetDefaultViewModel_NavigationSearchScreen != null)
             {
-                OnGetDefaultViewModel_NavigationSearchScreen(this, e, dataCtx, parent);
+                await OnGetDefaultViewModel_NavigationSearchScreen(this, e, dataCtx, parent);
             }
             else
             {
-                e.Result = base.GetDefaultViewModel(dataCtx, parent);
+                e.Result = await base.GetDefaultViewModel(dataCtx, parent);
             }
             return e.Result;
         }
@@ -1577,26 +1580,26 @@ namespace Zetbox.App.GUI
             // fix direct object references
 
             if (_fk_guid_RequestedEditorKind.HasValue)
-                RequestedEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedEditorKind.Value);
+                RequestedEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedEditorKind.Value));
             else
             if (_fk_RequestedEditorKind.HasValue)
-                RequestedEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value);
+                RequestedEditorKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value));
             else
                 RequestedEditorKindImpl = null;
 
             if (_fk_guid_RequestedWorkspaceKind.HasValue)
-                RequestedWorkspaceKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedWorkspaceKind.Value);
+                RequestedWorkspaceKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedWorkspaceKind.Value));
             else
             if (_fk_RequestedWorkspaceKind.HasValue)
-                RequestedWorkspaceKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value);
+                RequestedWorkspaceKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value));
             else
                 RequestedWorkspaceKindImpl = null;
 
             if (_fk_guid_Type.HasValue)
-                TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_Type.Value);
+                TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_Type.Value));
             else
             if (_fk_Type.HasValue)
-                TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
+                TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value));
             else
                 TypeImpl = null;
             // fix cached lists references
@@ -1903,13 +1906,13 @@ namespace Zetbox.App.GUI
             binStream.Write((int?)this._InitialSortDirection);
             binStream.Write(this._IsEditable);
             binStream.Write(this._IsMultiselect);
-            binStream.Write(RequestedEditorKind != null ? RequestedEditorKind.ID : (int?)null);
-            binStream.Write(RequestedWorkspaceKind != null ? RequestedWorkspaceKind.ID : (int?)null);
+            binStream.Write(_fk_RequestedEditorKind != null ? _fk_RequestedEditorKind : (int?)null);
+            binStream.Write(_fk_RequestedWorkspaceKind != null ? _fk_RequestedWorkspaceKind : (int?)null);
             binStream.Write(this._RespectRequiredFilter);
             binStream.Write(this._ShowCommands);
             binStream.Write(this._ShowFilter);
             binStream.Write(this._ShowMasterDetail);
-            binStream.Write(Type != null ? Type.ID : (int?)null);
+            binStream.Write(_fk_Type != null ? _fk_Type : (int?)null);
             binStream.Write((int?)this._ViewMethod);
         }
 

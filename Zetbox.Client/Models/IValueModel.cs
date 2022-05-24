@@ -28,6 +28,7 @@ namespace Zetbox.Client.Models
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables;
     using Zetbox.API.Async;
+    using System.Threading.Tasks;
 
     public interface IValueModel : INotifyPropertyChanged, IDataErrorInfo
     {
@@ -65,7 +66,7 @@ namespace Zetbox.Client.Models
         /// Returns the untyped value
         /// </summary>
         /// <returns></returns>
-        object GetUntypedValue();
+        Task<object> GetUntypedValue();
 
         /// <summary>
         /// Sets the untyped value
@@ -101,7 +102,7 @@ namespace Zetbox.Client.Models
     public interface IEnumerationValueModel : IValueModel<int?>
     {
         Enumeration Enumeration { get; }
-        IEnumerable<KeyValuePair<int, string>> GetEntries();
+        Task<IEnumerable<KeyValuePair<int, string>>> GetEntries();
     }
 
     public interface IDateTimeValueModel : IValueModel<DateTime?>

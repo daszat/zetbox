@@ -108,11 +108,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public override Task ClearValue()
+        public override async Task ClearValue()
         {
-            ValueModel.Value = DataContext.CreateCompoundObject(DataContext.GetInterfaceType(ReferencedType.GetDataType()));
-
-            return Task.CompletedTask;
+            ValueModel.Value = DataContext.CreateCompoundObject(DataContext.GetInterfaceType(await ReferencedType.GetDataType()));
         }
     }
 }

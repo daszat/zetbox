@@ -1022,12 +1022,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnTestMethodForParameter_Mitarbeiter")]
-        public virtual DateTime TestMethodForParameter(bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Zetbox.App.Projekte.Auftrag TestObjectParameter, string TestString)
+        public virtual async System.Threading.Tasks.Task<DateTime> TestMethodForParameter(bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Zetbox.App.Projekte.Auftrag TestObjectParameter, string TestString)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnTestMethodForParameter_Mitarbeiter != null)
             {
-                OnTestMethodForParameter_Mitarbeiter(this, e, TestBool, TestCLRObjectParameter, TestDateTime, TestDouble, TestInt, TestObjectParameter, TestString);
+                await OnTestMethodForParameter_Mitarbeiter(this, e, TestBool, TestCLRObjectParameter, TestDateTime, TestDouble, TestInt, TestObjectParameter, TestString);
             }
             else
             {

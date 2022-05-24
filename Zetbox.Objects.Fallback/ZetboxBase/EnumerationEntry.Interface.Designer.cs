@@ -88,6 +88,6 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-        string GetLabel();
+        System.Threading.Tasks.Task<string> GetLabel();
     }
 }

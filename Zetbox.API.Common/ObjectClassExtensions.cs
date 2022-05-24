@@ -303,40 +303,40 @@ namespace Zetbox.App.Extensions
             return false;
         }
 
-        public static IList<Property> GetAllProperties(this DataType cls)
+        public static async Task<IList<Property>> GetAllProperties(this DataType cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
 
             if (cls is ObjectClass)
             {
-                return ((ObjectClass)cls).GetInheritedProperties().Concat(cls.Properties).ToList();
+                return (await ((ObjectClass)cls).GetInheritedProperties()).Concat(await cls.GetProp_Properties()).ToList();
             }
             else
             {
-                return cls.Properties;
+                return await cls.GetProp_Properties();
             }
         }
 
-        public static IList<Property> GetInheritedProperties(this ObjectClass cls)
+        public static async Task<IList<Property>> GetInheritedProperties(this ObjectClass cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
 
             var result = new List<Property>().AsEnumerable();
-            while (cls.BaseObjectClass != null)
+            while ((await cls.GetProp_BaseObjectClass()) != null)
             {
-                result = cls.BaseObjectClass.Properties.Concat(result);
+                result = (await cls.BaseObjectClass.GetProp_Properties()).Concat(result);
                 cls = cls.BaseObjectClass;
             }
             return result.ToList();
         }
 
-        public static IList<Method> GetAllMethods(this DataType cls)
+        public static async Task<IList<Method>> GetAllMethods(this DataType cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
 
             if (cls is ObjectClass)
             {
-                return ((ObjectClass)cls).GetInheritedMethods().Concat(cls.Methods).ToList();
+                return (await ((ObjectClass)cls).GetInheritedMethods()).Concat(cls.Methods).ToList();
             }
             else
             {

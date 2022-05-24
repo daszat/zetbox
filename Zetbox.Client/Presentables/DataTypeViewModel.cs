@@ -134,12 +134,21 @@ namespace Zetbox.Client.Presentables
             }
         }
 
+        private string _describedType;
         public string DescribedType
         {
             get
             {
-                return _dataType.GetDataTypeString();
+                Task.Run(async () => await GetDescribedType());
+                return _describedType;
             }
+        }
+
+        public async Task<string> GetDescribedType()
+        {
+            _describedType = await _dataType.GetDataTypeString();
+            OnPropertyChanged(nameof(DescribedType));
+            return _describedType;
         }
 
         protected override void OnObjectPropertyChanged(string propName)

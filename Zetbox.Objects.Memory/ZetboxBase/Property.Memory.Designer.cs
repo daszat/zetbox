@@ -2124,12 +2124,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDescription_Property")]
-        public virtual string GetDescription()
+        public virtual async System.Threading.Tasks.Task<string> GetDescription()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDescription_Property != null)
             {
-                OnGetDescription_Property(this, e);
+                await OnGetDescription_Property(this, e);
             }
             else
             {
@@ -2188,12 +2188,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetElementTypeString_Property")]
-        public virtual string GetElementTypeString()
+        public virtual async System.Threading.Tasks.Task<string> GetElementTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetElementTypeString_Property != null)
             {
-                OnGetElementTypeString_Property(this, e);
+                await OnGetElementTypeString_Property(this, e);
             }
             else
             {
@@ -2252,12 +2252,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_Property")]
-        public virtual string GetLabel()
+        public virtual async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_Property != null)
             {
-                OnGetLabel_Property(this, e);
+                await OnGetLabel_Property(this, e);
             }
             else
             {
@@ -2316,12 +2316,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_Property")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_Property != null)
             {
-                OnGetName_Property(this, e);
+                await OnGetName_Property(this, e);
             }
             else
             {
@@ -2380,12 +2380,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyType_Property")]
-        public virtual System.Type GetPropertyType()
+        public virtual async System.Threading.Tasks.Task<System.Type> GetPropertyType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetPropertyType_Property != null)
             {
-                OnGetPropertyType_Property(this, e);
+                await OnGetPropertyType_Property(this, e);
             }
             else
             {
@@ -2444,12 +2444,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyTypeString_Property")]
-        public virtual string GetPropertyTypeString()
+        public virtual async System.Threading.Tasks.Task<string> GetPropertyTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetPropertyTypeString_Property != null)
             {
-                OnGetPropertyTypeString_Property(this, e);
+                await OnGetPropertyTypeString_Property(this, e);
             }
             else
             {

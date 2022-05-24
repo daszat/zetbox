@@ -85,7 +85,7 @@ namespace Zetbox.Generator.Templates.ObjectClasses
             }
             else
             {
-                return ret.GetParameterTypeString();
+                return ret.GetParameterTypeString().Result;
             }
         }
 

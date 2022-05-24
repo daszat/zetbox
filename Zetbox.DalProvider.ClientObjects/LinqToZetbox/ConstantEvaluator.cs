@@ -21,6 +21,7 @@ namespace Zetbox.DalProvider.Client
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
 
     internal static class ConstantEvaluator
@@ -30,11 +31,11 @@ namespace Zetbox.DalProvider.Client
         /// </summary>
         internal static bool FailOnLambdaCompile = false;
 
-        public static Expression PartialEval(Expression expression)
+        public static async Task<Expression> PartialEval(Expression expression)
         {
             Nominator nominator = new Nominator();
             SubtreeEvaluator evaluator = new SubtreeEvaluator(nominator.Nominate(expression));
-            return evaluator.Eval(expression);
+            return await evaluator.Eval(expression);
         }
 
         class SubtreeEvaluator : ExpressionTreeTranslator
@@ -46,12 +47,12 @@ namespace Zetbox.DalProvider.Client
                 this.candidates = candidates;
             }
 
-            internal Expression Eval(Expression exp)
+            internal async Task<Expression> Eval(Expression exp)
             {
-                return this.Visit(exp);
+                return await this.Visit(exp);
             }
 
-            public override Expression Visit(Expression exp)
+            public override async Task<Expression> Visit(Expression exp)
             {
                 if (exp == null)
                 {
@@ -62,7 +63,7 @@ namespace Zetbox.DalProvider.Client
                 {
                     return this.Evaluate(exp);
                 }
-                return base.Visit(exp);
+                return await base.Visit(exp);
             }
 
             private Expression Evaluate(Expression e)

@@ -17,11 +17,11 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Adapts a list of mergeable properties
         /// </summary>
-        void GetMergeableProperties(IEnumerable<System.Object> properties);
+        System.Threading.Tasks.Task GetMergeableProperties(IEnumerable<System.Object> properties);
 
         /// <summary>
         /// Implemente additional merge tasks here. This method is called on the target object.
         /// </summary>
-        void MergeFrom(Zetbox.API.IDataObject source);
+        System.Threading.Tasks.Task MergeFrom(Zetbox.API.IDataObject source);
     }
 }

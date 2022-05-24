@@ -1006,12 +1006,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_Sequence")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_Sequence != null)
             {
-                OnGetName_Sequence(this, e);
+                await OnGetName_Sequence(this, e);
             }
             else
             {

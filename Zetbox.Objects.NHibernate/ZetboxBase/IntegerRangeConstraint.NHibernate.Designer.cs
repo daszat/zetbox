@@ -169,16 +169,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetErrorText_IntegerRangeConstraint")]
-        public override string GetErrorText(System.Object constrainedObject, System.Object constrainedValue)
+        public override async System.Threading.Tasks.Task<string> GetErrorText(System.Object constrainedObject, System.Object constrainedValue)
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetErrorText_IntegerRangeConstraint != null)
             {
-                OnGetErrorText_IntegerRangeConstraint(this, e, constrainedObject, constrainedValue);
+                await OnGetErrorText_IntegerRangeConstraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
-                e.Result = base.GetErrorText(constrainedObject, constrainedValue);
+                e.Result = await base.GetErrorText(constrainedObject, constrainedValue);
             }
             return e.Result;
         }
@@ -232,16 +232,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnIsValid_IntegerRangeConstraint")]
-        public override bool IsValid(System.Object constrainedObject, System.Object constrainedValue)
+        public override async System.Threading.Tasks.Task<bool> IsValid(System.Object constrainedObject, System.Object constrainedValue)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsValid_IntegerRangeConstraint != null)
             {
-                OnIsValid_IntegerRangeConstraint(this, e, constrainedObject, constrainedValue);
+                await OnIsValid_IntegerRangeConstraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
-                e.Result = base.IsValid(constrainedObject, constrainedValue);
+                e.Result = await base.IsValid(constrainedObject, constrainedValue);
             }
             return e.Result;
         }

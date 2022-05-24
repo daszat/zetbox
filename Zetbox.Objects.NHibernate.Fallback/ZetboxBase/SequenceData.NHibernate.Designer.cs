@@ -316,7 +316,7 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_Sequence.HasValue)
-                this.Sequence = ((Zetbox.App.Base.SequenceNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Sequence>(_fk_Sequence.Value));
+                this.Sequence = ((Zetbox.App.Base.SequenceNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Sequence>(_fk_Sequence.Value)));
             else
                 this.Sequence = null;
         }

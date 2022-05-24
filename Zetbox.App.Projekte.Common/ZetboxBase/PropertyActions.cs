@@ -32,12 +32,12 @@ namespace Zetbox.App.Base
             _assets = assets;
         }
 
-        internal static void DecorateElementType(Property obj, MethodReturnEventArgs<string> e, bool isStruct)
+        internal static async Task DecorateElementType(Property obj, MethodReturnEventArgs<string> e, bool isStruct)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             if (e == null) throw new ArgumentNullException("e");
 
-            if (isStruct && obj.IsNullable())
+            if (isStruct && await obj.IsNullable())
             {
                 e.Result += "?";
             }
@@ -156,12 +156,12 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task get_CodeTemplate(Property obj, PropertyGetterEventArgs<string> e)
+        public static async System.Threading.Tasks.Task get_CodeTemplate(Property obj, PropertyGetterEventArgs<string> e)
         {
             StringBuilder sb = new StringBuilder();
 
             string type = obj.ObjectClass != null ? obj.ObjectClass.Name : "<<TYPE>>";
-            string propType = obj.GetPropertyTypeString();
+            string propType = await obj.GetPropertyTypeString();
 
             sb.AppendFormat("[Invocation]\npublic static System.Threading.Tasks.Task {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "get", obj.Name, type, "PropertyGetterEventArgs", propType);
             if (!obj.IsCalculated())
@@ -172,8 +172,6 @@ namespace Zetbox.App.Base
             }
 
             e.Result = sb.ToString();
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

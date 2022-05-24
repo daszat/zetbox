@@ -275,12 +275,12 @@ namespace Zetbox.App.Test
         /// testmethod
         /// </summary>
         [EventBasedMethod("OnTestMethod_TestObjClass")]
-        public virtual void TestMethod(System.DateTime DateTimeParamForTestMethod)
+        public virtual async Task TestMethod(System.DateTime DateTimeParamForTestMethod)
         {
             // base.TestMethod();
             if (OnTestMethod_TestObjClass != null)
             {
-                OnTestMethod_TestObjClass(this, DateTimeParamForTestMethod);
+                await OnTestMethod_TestObjClass(this, DateTimeParamForTestMethod);
             }
             else
             {

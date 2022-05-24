@@ -1234,12 +1234,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEnd_Relation")]
-        public virtual Zetbox.App.Base.RelationEnd GetEnd(Zetbox.App.Base.ObjectReferenceProperty prop)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetEnd(Zetbox.App.Base.ObjectReferenceProperty prop)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.RelationEnd>();
             if (OnGetEnd_Relation != null)
             {
-                OnGetEnd_Relation(this, e, prop);
+                await OnGetEnd_Relation(this, e, prop);
             }
             else
             {
@@ -1298,12 +1298,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEndFromRole_Relation")]
-        public virtual Zetbox.App.Base.RelationEnd GetEndFromRole(Zetbox.API.RelationEndRole role)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetEndFromRole(Zetbox.API.RelationEndRole role)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.RelationEnd>();
             if (OnGetEndFromRole_Relation != null)
             {
-                OnGetEndFromRole_Relation(this, e, role);
+                await OnGetEndFromRole_Relation(this, e, role);
             }
             else
             {
@@ -1362,12 +1362,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEntryInterfaceType_Relation")]
-        public virtual Zetbox.API.InterfaceType GetEntryInterfaceType()
+        public virtual async System.Threading.Tasks.Task<Zetbox.API.InterfaceType> GetEntryInterfaceType()
         {
             var e = new MethodReturnEventArgs<Zetbox.API.InterfaceType>();
             if (OnGetEntryInterfaceType_Relation != null)
             {
-                OnGetEntryInterfaceType_Relation(this, e);
+                await OnGetEntryInterfaceType_Relation(this, e);
             }
             else
             {
@@ -1426,12 +1426,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetOtherEnd_Relation")]
-        public virtual Zetbox.App.Base.RelationEnd GetOtherEnd(Zetbox.App.Base.RelationEnd relEnd)
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.RelationEnd> GetOtherEnd(Zetbox.App.Base.RelationEnd relEnd)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.RelationEnd>();
             if (OnGetOtherEnd_Relation != null)
             {
-                OnGetOtherEnd_Relation(this, e, relEnd);
+                await OnGetOtherEnd_Relation(this, e, relEnd);
             }
             else
             {
@@ -1490,12 +1490,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetRelationType_Relation")]
-        public virtual Zetbox.API.RelationType GetRelationType()
+        public virtual async System.Threading.Tasks.Task<Zetbox.API.RelationType> GetRelationType()
         {
             var e = new MethodReturnEventArgs<Zetbox.API.RelationType>();
             if (OnGetRelationType_Relation != null)
             {
-                OnGetRelationType_Relation(this, e);
+                await OnGetRelationType_Relation(this, e);
             }
             else
             {
@@ -1554,12 +1554,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnNeedsPositionStorage_Relation")]
-        public virtual bool NeedsPositionStorage(Zetbox.API.RelationEndRole endRole)
+        public virtual async System.Threading.Tasks.Task<bool> NeedsPositionStorage(Zetbox.API.RelationEndRole endRole)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnNeedsPositionStorage_Relation != null)
             {
-                OnNeedsPositionStorage_Relation(this, e, endRole);
+                await OnNeedsPositionStorage_Relation(this, e, endRole);
             }
             else
             {
@@ -1618,12 +1618,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnSwapRelationEnds_Relation")]
-        public virtual void SwapRelationEnds()
+        public virtual async System.Threading.Tasks.Task SwapRelationEnds()
         {
             // base.SwapRelationEnds();
             if (OnSwapRelationEnds_Relation != null)
             {
-                OnSwapRelationEnds_Relation(this);
+                await OnSwapRelationEnds_Relation(this);
             }
             else
             {

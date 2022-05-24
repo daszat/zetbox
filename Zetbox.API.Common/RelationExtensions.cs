@@ -18,7 +18,7 @@ namespace Zetbox.App.Extensions
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
 
@@ -35,10 +35,10 @@ namespace Zetbox.App.Extensions
         /// <summary>
         /// Returns the association name for the association from the given end to the CollectionEntry
         /// </summary>
-        public static string GetRelationAssociationName(this Relation rel, RelationEndRole endRole)
+        public static async Task<string> GetRelationAssociationName(this Relation rel, RelationEndRole endRole)
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
-            RelationEnd relEnd = rel.GetEndFromRole(endRole);
+            RelationEnd relEnd = await rel.GetEndFromRole(endRole);
 
             return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.RoleName, rel.Verb, rel.B.RoleName, relEnd.GetRole());
         }
@@ -70,17 +70,17 @@ namespace Zetbox.App.Extensions
             return relEnd.AParent ?? relEnd.BParent;
         }
 
-        public static ObjectClass GetReferencedObjectClass(this ObjectReferenceProperty prop)
+        public static async Task<ObjectClass> GetReferencedObjectClass(this ObjectReferenceProperty prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-
-            var rel = prop.RelationEnd.GetParent();
-            if (rel == null) { return null; }
 
             var relEnd = prop.RelationEnd;
             if (relEnd == null) { return null; }
 
-            var otherEnd = rel.GetOtherEnd(relEnd);
+            var rel = relEnd.GetParent();
+            if (rel == null) { return null; }
+
+            var otherEnd = await rel.GetOtherEnd(relEnd);
             if (otherEnd == null) { return null; }
 
             return otherEnd.Type;
@@ -108,7 +108,7 @@ namespace Zetbox.App.Extensions
             }
         }
 
-        public static bool HasStorage(this Relation rel, RelationEndRole role)
+        public static async Task<bool> HasStorage(this Relation rel, RelationEndRole role)
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
 
@@ -117,7 +117,7 @@ namespace Zetbox.App.Extensions
             if (storage == StorageType.Replicate)
                 throw new NotImplementedException();
 
-            var type = rel.GetRelationType();
+            var type = await rel.GetRelationType();
             // n:m has no storage on A or B
             return
                    (type == RelationType.one_n && storage == StorageType.MergeIntoA && role == RelationEndRole.A)

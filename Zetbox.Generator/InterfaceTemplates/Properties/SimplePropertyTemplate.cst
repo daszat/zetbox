@@ -29,7 +29,7 @@
 <%@ Parameter Name="isReadonly" Type="bool" %>
 <%
     string name = prop.Name;
-    string type = prop.GetPropertyTypeString();
+    string type = prop.GetPropertyTypeString().Result;
 %>
         [Zetbox.API.DefinitionGuid("<%= prop.ExportGuid %>")]
 <% if(IsObjectReference) { %>

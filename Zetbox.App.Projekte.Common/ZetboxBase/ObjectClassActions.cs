@@ -98,19 +98,17 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetInheritedMethods(ObjectClass obj, MethodReturnEventArgs<IEnumerable<Method>> e)
+        public static async System.Threading.Tasks.Task GetInheritedMethods(ObjectClass obj, MethodReturnEventArgs<IEnumerable<Method>> e)
         {
             ObjectClass baseObjectClass = obj.BaseObjectClass;
             if (baseObjectClass != null)
             {
-                e.Result = baseObjectClass.GetInheritedMethods().Concat(baseObjectClass.Methods);
+                e.Result = (await baseObjectClass.GetInheritedMethods()).Concat(baseObjectClass.Methods);
             }
             else
             {
                 e.Result = new List<Method>();
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

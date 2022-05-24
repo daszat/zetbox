@@ -901,12 +901,12 @@ namespace Zetbox.App.Projekte
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetMergeableProperties_Task")]
-        public virtual void GetMergeableProperties(IEnumerable<System.Object> properties)
+        public virtual async System.Threading.Tasks.Task GetMergeableProperties(IEnumerable<System.Object> properties)
         {
             // base.GetMergeableProperties();
             if (OnGetMergeableProperties_Task != null)
             {
-                OnGetMergeableProperties_Task(this, properties);
+                await OnGetMergeableProperties_Task(this, properties);
             }
             else
             {
@@ -964,12 +964,12 @@ namespace Zetbox.App.Projekte
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnMergeFrom_Task")]
-        public virtual void MergeFrom(Zetbox.API.IDataObject source)
+        public virtual async System.Threading.Tasks.Task MergeFrom(Zetbox.API.IDataObject source)
         {
             // base.MergeFrom();
             if (OnMergeFrom_Task != null)
             {
-                OnMergeFrom_Task(this, source);
+                await OnMergeFrom_Task(this, source);
             }
             else
             {

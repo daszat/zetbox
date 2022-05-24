@@ -22,6 +22,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
     using Zetbox.API.Server;
     using Npgsql;
     using Zetbox.API;
+    using System.Threading.Tasks;
 
     public class PostgresqlErrorTranslator : SqlErrorTranslator
     {
@@ -30,17 +31,17 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         {
         }
 
-        public override Exception Translate(Exception ex)
+        public override Task<Exception> Translate(Exception ex)
         {
             if (ex == null) throw new ArgumentNullException("ex");
 
             if (ex is NpgsqlException)
             {
-                return TranslateNpgsqlErrors((NpgsqlException)ex);
+                return Task.FromResult(TranslateNpgsqlErrors((NpgsqlException)ex));
             }
             else
             {
-                return ex;
+                return Task.FromResult(ex);
             }
         }
 

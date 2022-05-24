@@ -1010,12 +1010,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_EnumerationEntry")]
-        public virtual string GetLabel()
+        public virtual async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_EnumerationEntry != null)
             {
-                OnGetLabel_EnumerationEntry(this, e);
+                await OnGetLabel_EnumerationEntry(this, e);
             }
             else
             {
@@ -1186,20 +1186,20 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_Enumeration.HasValue)
-                this.Enumeration = ((Zetbox.App.Base.EnumerationNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Enumeration>(_fk_guid_Enumeration.Value));
+                this.Enumeration = ((Zetbox.App.Base.EnumerationNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Enumeration>(_fk_guid_Enumeration.Value)));
             else
             if (_fk_Enumeration.HasValue)
-                this.Enumeration = ((Zetbox.App.Base.EnumerationNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value));
+                this.Enumeration = ((Zetbox.App.Base.EnumerationNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value)));
             else
                 this.Enumeration = null;
         }

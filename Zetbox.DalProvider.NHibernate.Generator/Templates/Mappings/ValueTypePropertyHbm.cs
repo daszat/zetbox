@@ -77,11 +77,11 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
                 if (prop is StringProperty)
                 {
-                    length = ((StringProperty)prop).GetMaxLength();
+                    length = ((StringProperty)prop).GetMaxLength().Result;
                 }
             }
 
-            string ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop);
+            string ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop).Result;
             string listPositionColumnName = Construct.ListPositionColumnName(prop);
 
             Call(_host,

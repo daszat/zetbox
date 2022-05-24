@@ -96,12 +96,12 @@ namespace Zetbox.App.Test
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetCurrent_RecurrenceRuleTester")]
-        public virtual DateTime GetCurrent(DateTime? dt)
+        public virtual async System.Threading.Tasks.Task<DateTime> GetCurrent(DateTime? dt)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnGetCurrent_RecurrenceRuleTester != null)
             {
-                OnGetCurrent_RecurrenceRuleTester(this, e, dt);
+                await OnGetCurrent_RecurrenceRuleTester(this, e, dt);
             }
             else
             {
@@ -160,12 +160,12 @@ namespace Zetbox.App.Test
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetNext_RecurrenceRuleTester")]
-        public virtual DateTime GetNext(DateTime? dt)
+        public virtual async System.Threading.Tasks.Task<DateTime> GetNext(DateTime? dt)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnGetNext_RecurrenceRuleTester != null)
             {
-                OnGetNext_RecurrenceRuleTester(this, e, dt);
+                await OnGetNext_RecurrenceRuleTester(this, e, dt);
             }
             else
             {

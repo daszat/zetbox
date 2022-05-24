@@ -68,6 +68,6 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-        bool GetIsList();
+        System.Threading.Tasks.Task<bool> GetIsList();
     }
 }

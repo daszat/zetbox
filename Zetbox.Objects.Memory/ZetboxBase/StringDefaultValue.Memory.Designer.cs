@@ -100,16 +100,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDefaultValue_StringDefaultValue")]
-        public override System.Object GetDefaultValue()
+        public override async System.Threading.Tasks.Task<System.Object> GetDefaultValue()
         {
             var e = new MethodReturnEventArgs<System.Object>();
             if (OnGetDefaultValue_StringDefaultValue != null)
             {
-                OnGetDefaultValue_StringDefaultValue(this, e);
+                await OnGetDefaultValue_StringDefaultValue(this, e);
             }
             else
             {
-                e.Result = base.GetDefaultValue();
+                e.Result = await base.GetDefaultValue();
             }
             return e.Result;
         }

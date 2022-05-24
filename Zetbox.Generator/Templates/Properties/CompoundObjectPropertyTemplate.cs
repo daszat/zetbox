@@ -45,7 +45,7 @@ namespace Zetbox.Generator.Templates.Properties
             string backingPropertyName = overridePropName + Zetbox.API.Helper.ImplementationSuffix;
             string backingStoreName = "_" + overridePropName;
 
-            string coType = prop.GetElementTypeString();
+            string coType = prop.GetElementTypeString().Result;
             string coImplementationType = coType + host.Settings["extrasuffix"] + Zetbox.API.Helper.ImplementationSuffix;
 
             if (isList && hasPersistentOrder)

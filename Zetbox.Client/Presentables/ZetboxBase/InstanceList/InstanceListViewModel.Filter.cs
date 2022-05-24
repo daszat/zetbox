@@ -34,7 +34,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     this._filterList = ViewModelFactory.CreateViewModel<FilterListViewModel.Factory>().Invoke(DataContext, this, _type);
                     this._filterList.ExecuteFilter += (s, e) => Refresh();
-                    this._filterList.ExecutePostFilter += (s, e) => UpdateFilteredInstances();
+                    this._filterList.ExecutePostFilter += async (s, e) => await UpdateFilteredInstances();
                     this._filterList.PropertyChanged += _filterList_PropertyChanged;
                     this._filterList.UserFilterAdded += _filterList_UserFilterAdded;
                 }
@@ -69,14 +69,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        Task _filterList_UserFilterAdded(object sender, UserFilterAddedEventArgs e)
+        async Task _filterList_UserFilterAdded(object sender, UserFilterAddedEventArgs e)
         {
-            if (DisplayedProperties.Any(dp => dp.SequenceEqual(e.Properties)))
-                return Task.CompletedTask;
+            if (DisplayedProperties.Any(dp => dp.SequenceEqual(e.Properties))) return;
 
-            AddDisplayColumn(e.Properties.ToArray());
-
-            return Task.CompletedTask;
+            await AddDisplayColumn(e.Properties.ToArray());
         }
 
         /// <summary>

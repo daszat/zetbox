@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchCompoundObjectDefinitionTask != null) return _triggerFetchCompoundObjectDefinitionTask;
 
-            if (_fk_CompoundObjectDefinition.HasValue)
-                _triggerFetchCompoundObjectDefinitionTask = Context.FindAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value);
-            else
-                _triggerFetchCompoundObjectDefinitionTask = new System.Threading.Tasks.Task<Zetbox.App.Base.CompoundObject>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.CompoundObject> task;
 
-            _triggerFetchCompoundObjectDefinitionTask.OnResult(t =>
+            if (_fk_CompoundObjectDefinition.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.CompoundObject>(null);
+
+            task.OnResult(t =>
             {
                 if (OnCompoundObjectDefinition_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchCompoundObjectDefinitionTask;
+            return _triggerFetchCompoundObjectDefinitionTask = task;
         }
 
         // internal implementation
@@ -126,7 +128,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchCompoundObjectDefinitionAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.CompoundObjectMemoryImpl)task.Result;
             }
             set
@@ -297,16 +298,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDescription_CompoundObjectProperty")]
-        public override string GetDescription()
+        public override async System.Threading.Tasks.Task<string> GetDescription()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDescription_CompoundObjectProperty != null)
             {
-                OnGetDescription_CompoundObjectProperty(this, e);
+                await OnGetDescription_CompoundObjectProperty(this, e);
             }
             else
             {
-                e.Result = base.GetDescription();
+                e.Result = await base.GetDescription();
             }
             return e.Result;
         }
@@ -360,16 +361,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetElementTypeString_CompoundObjectProperty")]
-        public override string GetElementTypeString()
+        public override async System.Threading.Tasks.Task<string> GetElementTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetElementTypeString_CompoundObjectProperty != null)
             {
-                OnGetElementTypeString_CompoundObjectProperty(this, e);
+                await OnGetElementTypeString_CompoundObjectProperty(this, e);
             }
             else
             {
-                e.Result = base.GetElementTypeString();
+                e.Result = await base.GetElementTypeString();
             }
             return e.Result;
         }
@@ -423,16 +424,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_CompoundObjectProperty")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_CompoundObjectProperty != null)
             {
-                OnGetLabel_CompoundObjectProperty(this, e);
+                await OnGetLabel_CompoundObjectProperty(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -486,16 +487,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_CompoundObjectProperty")]
-        public override string GetName()
+        public override async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_CompoundObjectProperty != null)
             {
-                OnGetName_CompoundObjectProperty(this, e);
+                await OnGetName_CompoundObjectProperty(this, e);
             }
             else
             {
-                e.Result = base.GetName();
+                e.Result = await base.GetName();
             }
             return e.Result;
         }
@@ -549,16 +550,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyType_CompoundObjectProperty")]
-        public override System.Type GetPropertyType()
+        public override async System.Threading.Tasks.Task<System.Type> GetPropertyType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetPropertyType_CompoundObjectProperty != null)
             {
-                OnGetPropertyType_CompoundObjectProperty(this, e);
+                await OnGetPropertyType_CompoundObjectProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyType();
+                e.Result = await base.GetPropertyType();
             }
             return e.Result;
         }
@@ -612,16 +613,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyTypeString_CompoundObjectProperty")]
-        public override string GetPropertyTypeString()
+        public override async System.Threading.Tasks.Task<string> GetPropertyTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetPropertyTypeString_CompoundObjectProperty != null)
             {
-                OnGetPropertyTypeString_CompoundObjectProperty(this, e);
+                await OnGetPropertyTypeString_CompoundObjectProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyTypeString();
+                e.Result = await base.GetPropertyTypeString();
             }
             return e.Result;
         }
@@ -748,10 +749,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_CompoundObjectDefinition.HasValue)
-                CompoundObjectDefinitionImpl = (Zetbox.App.Base.CompoundObjectMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.CompoundObject>(_fk_guid_CompoundObjectDefinition.Value);
+                CompoundObjectDefinitionImpl = (Zetbox.App.Base.CompoundObjectMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.CompoundObject>(_fk_guid_CompoundObjectDefinition.Value));
             else
             if (_fk_CompoundObjectDefinition.HasValue)
-                CompoundObjectDefinitionImpl = (Zetbox.App.Base.CompoundObjectMemoryImpl)Context.Find<Zetbox.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value);
+                CompoundObjectDefinitionImpl = (Zetbox.App.Base.CompoundObjectMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value));
             else
                 CompoundObjectDefinitionImpl = null;
             // fix cached lists references
@@ -885,7 +886,7 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(CompoundObjectDefinition != null ? CompoundObjectDefinition.ID : (int?)null);
+            binStream.Write(_fk_CompoundObjectDefinition != null ? _fk_CompoundObjectDefinition : (int?)null);
             binStream.Write(this._HasPersistentOrder);
             binStream.Write(this._IsList);
         }

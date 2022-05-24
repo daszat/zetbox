@@ -282,8 +282,8 @@ namespace Zetbox.Server
                     var endRole = (RelationEndRole)serializableRole;
                     // TODO: Use FrozenContext
                     Relation rel = ctx.FindPersistenceObject<Relation>(relId);
-                    var ifTypeA = _iftFactory(rel.A.Type.GetDataType());
-                    var ifTypeB = _iftFactory(rel.B.Type.GetDataType());
+                    var ifTypeA = _iftFactory(await rel.A.Type.GetDataType());
+                    var ifTypeB = _iftFactory(await rel.B.Type.GetDataType());
                     var ifType = endRole == RelationEndRole.A ? ifTypeA : ifTypeB;
                     int resultCount = 0;
                     var ticks = _perfCounter.IncrementFetchRelation(ifType);
@@ -380,7 +380,7 @@ namespace Zetbox.Server
 
                     if (Logging.Facade.IsDebugEnabled)
                     {
-                        using (var stream = result.GetStream())
+                        using (var stream = await result.GetStream())
                             Logging.Facade.DebugFormat("SetBlobStream created Blob with ID=#{0}, length={1}.", result.ID, stream.Length);
                     }
                     return new BlobResponse()

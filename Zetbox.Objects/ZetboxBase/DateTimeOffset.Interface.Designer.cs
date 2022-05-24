@@ -77,6 +77,6 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Adds the actual offset to a given DateTime
         /// </summary>
-        DateTime AddTo(DateTime dt);
+        System.Threading.Tasks.Task<DateTime> AddTo(DateTime dt);
     }
 }

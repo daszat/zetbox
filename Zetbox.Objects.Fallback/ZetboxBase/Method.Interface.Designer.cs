@@ -158,11 +158,11 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-        string GetLabel();
+        System.Threading.Tasks.Task<string> GetLabel();
 
         /// <summary>
         /// Returns the Return Parameter Meta Object of this Method Meta Object.
         /// </summary>
-        Zetbox.App.Base.BaseParameter GetReturnParameter();
+        System.Threading.Tasks.Task<Zetbox.App.Base.BaseParameter> GetReturnParameter();
     }
 }

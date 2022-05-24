@@ -48,11 +48,11 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-        string GetErrorText(System.Object constrainedObject, System.Object constrainedValue);
+        System.Threading.Tasks.Task<string> GetErrorText(System.Object constrainedObject, System.Object constrainedValue);
 
         /// <summary>
         /// 
         /// </summary>
-        bool IsValid(System.Object constrainedObject, System.Object constrainedValue);
+        System.Threading.Tasks.Task<bool> IsValid(System.Object constrainedObject, System.Object constrainedValue);
     }
 }

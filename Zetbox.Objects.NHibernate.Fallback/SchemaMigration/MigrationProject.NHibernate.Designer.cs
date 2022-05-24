@@ -752,12 +752,12 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Migrat
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateMappingReport_MigrationProject")]
-        public virtual void CreateMappingReport()
+        public virtual async System.Threading.Tasks.Task CreateMappingReport()
         {
             // base.CreateMappingReport();
             if (OnCreateMappingReport_MigrationProject != null)
             {
-                OnCreateMappingReport_MigrationProject(this);
+                await OnCreateMappingReport_MigrationProject(this);
             }
             else
             {
@@ -815,12 +815,12 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Migrat
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpdateFromSourceSchema_MigrationProject")]
-        public virtual void UpdateFromSourceSchema()
+        public virtual async System.Threading.Tasks.Task UpdateFromSourceSchema()
         {
             // base.UpdateFromSourceSchema();
             if (OnUpdateFromSourceSchema_MigrationProject != null)
             {
-                OnUpdateFromSourceSchema_MigrationProject(this);
+                await OnUpdateFromSourceSchema_MigrationProject(this);
             }
             else
             {
@@ -994,20 +994,20 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Migrat
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
 
             if (_fk_guid_DestinationModule.HasValue)
-                this.DestinationModule = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_DestinationModule.Value));
+                this.DestinationModule = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_guid_DestinationModule.Value)));
             else
             if (_fk_DestinationModule.HasValue)
-                this.DestinationModule = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_DestinationModule.Value));
+                this.DestinationModule = ((Zetbox.App.Base.ModuleNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Module>(_fk_DestinationModule.Value)));
             else
                 this.DestinationModule = null;
         }

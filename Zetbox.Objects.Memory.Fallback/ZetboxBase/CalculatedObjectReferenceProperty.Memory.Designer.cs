@@ -50,7 +50,6 @@ namespace Zetbox.App.Base
                 {
                     var task = TriggerFetchInputsAsync();
                     task.TryRunSynchronously();
-                    task.Wait();
                 }
                 return (ICollection<Zetbox.App.Base.Property>)_Inputs;
             }
@@ -66,9 +65,10 @@ namespace Zetbox.App.Base
         public System.Threading.Tasks.Task TriggerFetchInputsAsync()
         {
             if (_triggerFetchInputsTask != null) return _triggerFetchInputsTask;
-            if (!Inputs_was_eagerLoaded) _triggerFetchInputsTask = Context.FetchRelationAsync<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
-            else _triggerFetchInputsTask = System.Threading.Tasks.Task.FromResult<Guid?>(null);
-            _triggerFetchInputsTask = _triggerFetchInputsTask.OnResult(r =>
+            System.Threading.Tasks.Task task;
+            if (!Inputs_was_eagerLoaded) task = Context.FetchRelationAsync<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
+            else task = System.Threading.Tasks.Task.FromResult<Guid?>(null);
+            task = task.OnResult(r =>
             {
                 _Inputs
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl>>(
@@ -76,7 +76,7 @@ namespace Zetbox.App.Base
                         new RelationshipFilterASideCollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl>(this.Context, this));
                         // _Inputs.CollectionChanged is managed by OnInputsCollectionChanged() and called from the RelationEntry
             });
-            return _triggerFetchInputsTask;
+            return _triggerFetchInputsTask = task;
         }
 
         internal void OnInputsCollectionChanged()
@@ -156,12 +156,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         {
             if (_triggerFetchReferencedClassTask != null) return _triggerFetchReferencedClassTask;
 
-            if (_fk_ReferencedClass.HasValue)
-                _triggerFetchReferencedClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);
-            else
-                _triggerFetchReferencedClassTask = new System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.ObjectClass> task;
 
-            _triggerFetchReferencedClassTask.OnResult(t =>
+            if (_fk_ReferencedClass.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.ObjectClass>(null);
+
+            task.OnResult(t =>
             {
                 if (OnReferencedClass_Getter != null)
                 {
@@ -171,7 +173,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
                 }
             });
 
-            return _triggerFetchReferencedClassTask;
+            return _triggerFetchReferencedClassTask = task;
         }
 
         // internal implementation
@@ -182,7 +184,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
             {
                 var task = TriggerFetchReferencedClassAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.ObjectClassMemoryImpl)task.Result;
             }
             set
@@ -237,16 +238,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDescription_CalculatedObjectReferenceProperty")]
-        public override string GetDescription()
+        public override async System.Threading.Tasks.Task<string> GetDescription()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDescription_CalculatedObjectReferenceProperty != null)
             {
-                OnGetDescription_CalculatedObjectReferenceProperty(this, e);
+                await OnGetDescription_CalculatedObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetDescription();
+                e.Result = await base.GetDescription();
             }
             return e.Result;
         }
@@ -300,16 +301,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetElementTypeString_CalculatedObjectReferenceProperty")]
-        public override string GetElementTypeString()
+        public override async System.Threading.Tasks.Task<string> GetElementTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetElementTypeString_CalculatedObjectReferenceProperty != null)
             {
-                OnGetElementTypeString_CalculatedObjectReferenceProperty(this, e);
+                await OnGetElementTypeString_CalculatedObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetElementTypeString();
+                e.Result = await base.GetElementTypeString();
             }
             return e.Result;
         }
@@ -363,16 +364,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_CalculatedObjectReferenceProperty")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_CalculatedObjectReferenceProperty != null)
             {
-                OnGetLabel_CalculatedObjectReferenceProperty(this, e);
+                await OnGetLabel_CalculatedObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -426,16 +427,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_CalculatedObjectReferenceProperty")]
-        public override string GetName()
+        public override async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_CalculatedObjectReferenceProperty != null)
             {
-                OnGetName_CalculatedObjectReferenceProperty(this, e);
+                await OnGetName_CalculatedObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetName();
+                e.Result = await base.GetName();
             }
             return e.Result;
         }
@@ -489,16 +490,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyType_CalculatedObjectReferenceProperty")]
-        public override System.Type GetPropertyType()
+        public override async System.Threading.Tasks.Task<System.Type> GetPropertyType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetPropertyType_CalculatedObjectReferenceProperty != null)
             {
-                OnGetPropertyType_CalculatedObjectReferenceProperty(this, e);
+                await OnGetPropertyType_CalculatedObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyType();
+                e.Result = await base.GetPropertyType();
             }
             return e.Result;
         }
@@ -552,16 +553,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetPropertyTypeString_CalculatedObjectReferenceProperty")]
-        public override string GetPropertyTypeString()
+        public override async System.Threading.Tasks.Task<string> GetPropertyTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetPropertyTypeString_CalculatedObjectReferenceProperty != null)
             {
-                OnGetPropertyTypeString_CalculatedObjectReferenceProperty(this, e);
+                await OnGetPropertyTypeString_CalculatedObjectReferenceProperty(this, e);
             }
             else
             {
-                e.Result = base.GetPropertyTypeString();
+                e.Result = await base.GetPropertyTypeString();
             }
             return e.Result;
         }
@@ -697,10 +698,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
             // fix direct object references
 
             if (_fk_guid_ReferencedClass.HasValue)
-                ReferencedClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.ObjectClass>(_fk_guid_ReferencedClass.Value);
+                ReferencedClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.ObjectClass>(_fk_guid_ReferencedClass.Value));
             else
             if (_fk_ReferencedClass.HasValue)
-                ReferencedClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);
+                ReferencedClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value));
             else
                 ReferencedClassImpl = null;
             // fix cached lists references
@@ -833,7 +834,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
                     auxObjects.Add(obj);
                 }
             }
-            binStream.Write(ReferencedClass != null ? ReferencedClass.ID : (int?)null);
+            binStream.Write(_fk_ReferencedClass != null ? _fk_ReferencedClass : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

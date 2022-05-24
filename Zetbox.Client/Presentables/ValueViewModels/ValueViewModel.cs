@@ -979,7 +979,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         .Enumeration
                         .EnumerationEntries
                         .Where(i => i.NotSelectable != true)
-                        .Select(ee => new KeyValuePair<int?, string>(ee.Value, ee.GetLabel()));
+                        .Select(ee => new KeyValuePair<int?, string>(ee.Value, ee.GetLabel().Result));
 
                     _possibleValues = new ObservableCollection<KeyValuePair<int?, string>>(
                         new[] { new KeyValuePair<int?, string>(null, String.Empty) }
@@ -1056,7 +1056,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 // Add if not found
                 if (!_possibleValues.Any(i => i.Key == value))
                 {
-                    _possibleValues.Add(new KeyValuePair<int?, string>(value, EnumModel.Enumeration.EnumerationEntries.FirstOrDefault(i => i.Value == value.Value)?.GetLabel()));
+                    _possibleValues.Add(new KeyValuePair<int?, string>(value, EnumModel.Enumeration.EnumerationEntries.FirstOrDefault(i => i.Value == value.Value)?.GetLabel().Result));
                 }
             }
         }

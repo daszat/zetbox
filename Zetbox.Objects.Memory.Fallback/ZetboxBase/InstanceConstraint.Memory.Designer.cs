@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchConstrainedTask != null) return _triggerFetchConstrainedTask;
 
-            if (_fk_Constrained.HasValue)
-                _triggerFetchConstrainedTask = Context.FindAsync<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
-            else
-                _triggerFetchConstrainedTask = new System.Threading.Tasks.Task<Zetbox.App.Base.DataType>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.DataType> task;
 
-            _triggerFetchConstrainedTask.OnResult(t =>
+            if (_fk_Constrained.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.DataType>(null);
+
+            task.OnResult(t =>
             {
                 if (OnConstrained_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchConstrainedTask;
+            return _triggerFetchConstrainedTask = task;
         }
 
         // internal implementation
@@ -126,7 +128,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchConstrainedAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.DataTypeMemoryImpl)task.Result;
             }
             set
@@ -326,12 +327,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetErrorText_InstanceConstraint")]
-        public virtual string GetErrorText(Zetbox.API.IDataObject constrainedObject)
+        public virtual async System.Threading.Tasks.Task<string> GetErrorText(Zetbox.API.IDataObject constrainedObject)
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetErrorText_InstanceConstraint != null)
             {
-                OnGetErrorText_InstanceConstraint(this, e, constrainedObject);
+                await OnGetErrorText_InstanceConstraint(this, e, constrainedObject);
             }
             else
             {
@@ -390,12 +391,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnIsValid_InstanceConstraint")]
-        public virtual bool IsValid(Zetbox.API.IDataObject constrainedObject)
+        public virtual async System.Threading.Tasks.Task<bool> IsValid(Zetbox.API.IDataObject constrainedObject)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsValid_InstanceConstraint != null)
             {
-                OnIsValid_InstanceConstraint(this, e, constrainedObject);
+                await OnIsValid_InstanceConstraint(this, e, constrainedObject);
             }
             else
             {
@@ -527,10 +528,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_Constrained.HasValue)
-                ConstrainedImpl = (Zetbox.App.Base.DataTypeMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_guid_Constrained.Value);
+                ConstrainedImpl = (Zetbox.App.Base.DataTypeMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.DataType>(_fk_guid_Constrained.Value));
             else
             if (_fk_Constrained.HasValue)
-                ConstrainedImpl = (Zetbox.App.Base.DataTypeMemoryImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
+                ConstrainedImpl = (Zetbox.App.Base.DataTypeMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.DataType>(_fk_Constrained.Value));
             else
                 ConstrainedImpl = null;
             // fix cached lists references
@@ -663,7 +664,7 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(Constrained != null ? Constrained.ID : (int?)null);
+            binStream.Write(_fk_Constrained != null ? _fk_Constrained : (int?)null);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);

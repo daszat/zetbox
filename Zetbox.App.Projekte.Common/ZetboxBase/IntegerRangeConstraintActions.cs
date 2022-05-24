@@ -53,7 +53,7 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetErrorText(
+        public static async System.Threading.Tasks.Task GetErrorText(
             IntegerRangeConstraint obj,
             MethodReturnEventArgs<string> e,
             object constrainedObjectParam,
@@ -62,11 +62,11 @@ namespace Zetbox.App.Base
             if (constrainedValueParam == null)
             {
                 e.Result = null;
-                return System.Threading.Tasks.Task.CompletedTask;
+                return;
             }
 
             int v = (int)constrainedValueParam;
-            if (obj.IsValid(constrainedObjectParam, constrainedValueParam))
+            if (await obj.IsValid(constrainedObjectParam, constrainedValueParam))
             {
                 e.Result = null;
             }
@@ -86,8 +86,6 @@ namespace Zetbox.App.Base
 
                 e.Result = result.ToString();
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

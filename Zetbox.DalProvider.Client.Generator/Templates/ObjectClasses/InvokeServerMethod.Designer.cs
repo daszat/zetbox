@@ -43,7 +43,7 @@ var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnPar
         argumentDefs = ", " + argumentDefs;
     }
 
-    string argumentTypes = m.GetArgumentTypes();
+    string argumentTypes = m.GetArgumentTypes().Result;
     // add leading comma for later usage
     argumentTypes = "new Type[] {" + argumentTypes + "}";
 

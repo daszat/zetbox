@@ -49,12 +49,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             return !DataContext.IsDisposed;
         }
 
-        protected override void DoExecute(object data)
+        protected override async Task DoExecute(object data)
         {
             ViewModelFactory.CreateDialog(DataContext, "New class")
-                            .AddString("name", NamedObjects.Base.Classes.Zetbox.App.Base.DataType_Properties.Name.Find(FrozenContext).GetLabel())
-                            .AddString("table", NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass_Properties.TableName.Find(FrozenContext).GetLabel())
-                            .AddString("description", NamedObjects.Base.Classes.Zetbox.App.Base.DataType_Properties.Description.Find(FrozenContext).GetLabel())
+                            .AddString("name", await NamedObjects.Base.Classes.Zetbox.App.Base.DataType_Properties.Name.Find(FrozenContext).GetLabel())
+                            .AddString("table", await NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass_Properties.TableName.Find(FrozenContext).GetLabel())
+                            .AddString("description", await NamedObjects.Base.Classes.Zetbox.App.Base.DataType_Properties.Description.Find(FrozenContext).GetLabel())
                             .AddBool("IChangedBy", "IChangedBy", value: false, description: "Implement IChangedBy")
                             .AddBool("IExportable", "IExportable", value: false, description: "Implement IExportable")
                             .AddBool("IAuditable", "IAuditable", value: false, description: "Implement IAuditable")

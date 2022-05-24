@@ -106,6 +106,7 @@ namespace Zetbox.Client.Presentables.SchemaMigration
                         ValueModel.Value.Add(i);
                     }
                 }
+                return Task.CompletedTask;
             });
             dlg.FollowCompoundObjects = true;
 

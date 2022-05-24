@@ -727,12 +727,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetErrorText_Constraint")]
-        public virtual string GetErrorText(System.Object constrainedObject, System.Object constrainedValue)
+        public virtual async System.Threading.Tasks.Task<string> GetErrorText(System.Object constrainedObject, System.Object constrainedValue)
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetErrorText_Constraint != null)
             {
-                OnGetErrorText_Constraint(this, e, constrainedObject, constrainedValue);
+                await OnGetErrorText_Constraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
@@ -791,12 +791,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnIsValid_Constraint")]
-        public virtual bool IsValid(System.Object constrainedObject, System.Object constrainedValue)
+        public virtual async System.Threading.Tasks.Task<bool> IsValid(System.Object constrainedObject, System.Object constrainedValue)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsValid_Constraint != null)
             {
-                OnIsValid_Constraint(this, e, constrainedObject, constrainedValue);
+                await OnIsValid_Constraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
@@ -958,20 +958,20 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_guid_ConstrainedProperty.HasValue)
-                this.ConstrainedProperty = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_ConstrainedProperty.Value));
+                this.ConstrainedProperty = ((Zetbox.App.Base.PropertyNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_guid_ConstrainedProperty.Value)));
             else
             if (_fk_ConstrainedProperty.HasValue)
-                this.ConstrainedProperty = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_ConstrainedProperty.Value));
+                this.ConstrainedProperty = ((Zetbox.App.Base.PropertyNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Property>(_fk_ConstrainedProperty.Value)));
             else
                 this.ConstrainedProperty = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
         }

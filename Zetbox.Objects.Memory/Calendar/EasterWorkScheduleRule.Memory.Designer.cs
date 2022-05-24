@@ -100,16 +100,16 @@ namespace Zetbox.App.Calendar
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnAppliesTo_EasterWorkScheduleRule")]
-        public override bool AppliesTo(DateTime date)
+        public override async System.Threading.Tasks.Task<bool> AppliesTo(DateTime date)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnAppliesTo_EasterWorkScheduleRule != null)
             {
-                OnAppliesTo_EasterWorkScheduleRule(this, e, date);
+                await OnAppliesTo_EasterWorkScheduleRule(this, e, date);
             }
             else
             {
-                e.Result = base.AppliesTo(date);
+                e.Result = await base.AppliesTo(date);
             }
             return e.Result;
         }

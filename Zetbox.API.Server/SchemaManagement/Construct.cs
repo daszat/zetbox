@@ -19,6 +19,7 @@ namespace Zetbox.API.SchemaManagement
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -107,12 +108,13 @@ namespace Zetbox.API.SchemaManagement
             return "CK_" + tblName + "_" + colName;
         }
 
-        public static string[] GetUCColNames(IndexConstraint uc)
+        public static async Task<string[]> GetUCColNames(IndexConstraint uc)
         {
             if (uc == null) throw new ArgumentNullException("uc");
 
             var vt_columns = uc.Properties.OfType<ValueTypeProperty>().Select(p => Construct.ColumnName(p, null)).ToArray();
-            var columns = vt_columns.Union(uc.Properties.OfType<ObjectReferenceProperty>().Select(p => Construct.ForeignKeyColumnName(p.RelationEnd.Parent.GetOtherEnd(p.RelationEnd)))).OrderBy(n => n).ToArray();
+            var objref_columns = await uc.Properties.OfType<ObjectReferenceProperty>().Select(async p => await Construct.ForeignKeyColumnName(await p.RelationEnd.Parent.GetOtherEnd(p.RelationEnd))).ToList().WhenAll();
+            var columns = vt_columns.Union(objref_columns).OrderBy(n => n).ToArray();
             return columns;
         }
         #endregion
@@ -120,50 +122,50 @@ namespace Zetbox.API.SchemaManagement
         #region Column Names
 
         // internal use only. Implement and use a proper overload in/from this region.
-        private static string ForeignKeyColumnName(string colName)
+        private static Task<string> ForeignKeyColumnName(string colName)
         {
-            return "fk_" + colName;
+            return Task.FromResult("fk_" + colName);
         }
 
-        public static string ForeignKeyColumnName(ValueTypeProperty listProp)
+        public static async Task<string> ForeignKeyColumnName(ValueTypeProperty listProp)
         {
             if (listProp == null) { throw new ArgumentNullException("listProp"); }
 
-            return ForeignKeyColumnName(listProp.ObjectClass.Name);
+            return await ForeignKeyColumnName(listProp.ObjectClass.Name);
         }
 
-        public static string ForeignKeyColumnName(CompoundObjectProperty listProp)
+        public static async Task<string> ForeignKeyColumnName(CompoundObjectProperty listProp)
         {
             if (listProp == null) { throw new ArgumentNullException("listProp"); }
 
-            return ForeignKeyColumnName(listProp.ObjectClass.Name);
+            return await ForeignKeyColumnName(listProp.ObjectClass.Name);
         }
 
         /// <summary>Returns the name for a fk column pointing to otherEnd</summary>
         /// <returns>The name for a fk column pointing to otherEnd</returns>
-        public static string ForeignKeyColumnName(RelationEnd otherEnd)
+        public static async Task<string> ForeignKeyColumnName(RelationEnd otherEnd)
         {
-            return ForeignKeyColumnName(otherEnd, string.Empty);
+            return await ForeignKeyColumnName(otherEnd, string.Empty);
         }
 
         /// <summary>Returns the name for a fk column pointing to otherEnd</summary>
         /// <returns>The prefixed name for a fk column pointing to otherEnd</returns>
-        public static string ForeignKeyColumnName(RelationEnd otherEnd, string prefix)
+        public static async Task<string> ForeignKeyColumnName(RelationEnd otherEnd, string prefix)
         {
             if (otherEnd == null) { throw new ArgumentNullException("otherEnd"); }
 
             var rel = otherEnd.GetParent();
-            var relEnd = rel.GetOtherEnd(otherEnd);
+            var relEnd = await rel.GetOtherEnd(otherEnd);
 
             if (relEnd.Type.GetTableMapping() == TableMapping.TPH
                 && relEnd.Type.BaseObjectClass != null
-                && rel.HasStorage(relEnd.GetRole()))
+                && (await rel.HasStorage(relEnd.GetRole())))
             {
-                return NestedColumnName(ForeignKeyColumnName(NestedColumnName(otherEnd.RoleName, prefix)), relEnd.Type.TableName);
+                return NestedColumnName(await ForeignKeyColumnName(NestedColumnName(otherEnd.RoleName, prefix)), relEnd.Type.TableName);
             }
             else
             {
-                return ForeignKeyColumnName(NestedColumnName(otherEnd.RoleName, prefix));
+                return await ForeignKeyColumnName(NestedColumnName(otherEnd.RoleName, prefix));
             }
         }
 

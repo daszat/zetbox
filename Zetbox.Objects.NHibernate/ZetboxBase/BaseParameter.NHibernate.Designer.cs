@@ -1126,12 +1126,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_BaseParameter")]
-        public virtual string GetLabel()
+        public virtual async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_BaseParameter != null)
             {
-                OnGetLabel_BaseParameter(this, e);
+                await OnGetLabel_BaseParameter(this, e);
             }
             else
             {
@@ -1190,12 +1190,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterType_BaseParameter")]
-        public virtual System.Type GetParameterType()
+        public virtual async System.Threading.Tasks.Task<System.Type> GetParameterType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetParameterType_BaseParameter != null)
             {
-                OnGetParameterType_BaseParameter(this, e);
+                await OnGetParameterType_BaseParameter(this, e);
             }
             else
             {
@@ -1254,12 +1254,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterTypeString_BaseParameter")]
-        public virtual string GetParameterTypeString()
+        public virtual async System.Threading.Tasks.Task<string> GetParameterTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetParameterTypeString_BaseParameter != null)
             {
-                OnGetParameterTypeString_BaseParameter(this, e);
+                await OnGetParameterTypeString_BaseParameter(this, e);
             }
             else
             {

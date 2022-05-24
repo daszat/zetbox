@@ -21,6 +21,7 @@ namespace Zetbox.Server.SchemaManagement
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.SchemaManagement;
@@ -115,7 +116,7 @@ namespace Zetbox.Server.SchemaManagement
         /// <param name="objClass">the starting point</param>
         /// <param name="relations">the relations to follow</param>
         /// <returns>a list of joins</returns>
-        public static IList<Join> CreateJoinList(ISchemaProvider db, ObjectClass objClass, IEnumerable<Relation> relations)
+        public static async Task<IList<Join>> CreateJoinList(ISchemaProvider db, ObjectClass objClass, IEnumerable<Relation> relations)
         {
             if (db == null) throw new ArgumentNullException("db");
             if (objClass == null) throw new ArgumentNullException("objClass");
@@ -144,12 +145,12 @@ namespace Zetbox.Server.SchemaManagement
                     throw new JoinListException(string.Format("Unable to create JoinList: Unable to navigate from '{0}' over '{1}' to next type", lastType.Name, rel.ToString()));
                 }
 
-                if (rel.GetRelationType() == RelationType.n_m)
+                if (await rel.GetRelationType() == RelationType.n_m)
                 {
                     var viewRel = new Join();
                     result.Add(viewRel);
                     viewRel.JoinTableName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-                    viewRel.JoinColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(lastRelEnd), ColumnRef.Local) };
+                    viewRel.JoinColumnName = new[] { new ColumnRef(await Construct.ForeignKeyColumnName(lastRelEnd), ColumnRef.Local) };
                     viewRel.FKColumnName = new[] { new ColumnRef("ID", lastJoin) };
                     lastJoin = viewRel;
 
@@ -157,7 +158,7 @@ namespace Zetbox.Server.SchemaManagement
                     result.Add(viewRel);
                     viewRel.JoinTableName = nextRelEnd.Type.GetTableRef(db);
                     viewRel.JoinColumnName = new[] { new ColumnRef("ID", ColumnRef.Local) };
-                    viewRel.FKColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(nextRelEnd), lastJoin) };
+                    viewRel.FKColumnName = new[] { new ColumnRef(await Construct.ForeignKeyColumnName(nextRelEnd), lastJoin) };
 
                     lastJoin = viewRel;
                 }
@@ -170,22 +171,22 @@ namespace Zetbox.Server.SchemaManagement
                     string fkCol = string.Empty;
                     if (nextRelEnd == rel.A && rel.Storage == StorageType.MergeIntoA)
                     {
-                        localCol = Construct.ForeignKeyColumnName(lastRelEnd);
+                        localCol = await Construct.ForeignKeyColumnName(lastRelEnd);
                         fkCol = "ID";
                     }
                     else if (nextRelEnd == rel.A && rel.Storage == StorageType.MergeIntoB)
                     {
                         localCol = "ID";
-                        fkCol = Construct.ForeignKeyColumnName(nextRelEnd);
+                        fkCol = await Construct.ForeignKeyColumnName(nextRelEnd);
                     }
                     else if (nextRelEnd == rel.B && rel.Storage == StorageType.MergeIntoA)
                     {
                         localCol = "ID";
-                        fkCol = Construct.ForeignKeyColumnName(nextRelEnd);
+                        fkCol = await Construct.ForeignKeyColumnName(nextRelEnd);
                     }
                     else if (nextRelEnd == rel.B && rel.Storage == StorageType.MergeIntoB)
                     {
-                        localCol = Construct.ForeignKeyColumnName(lastRelEnd);
+                        localCol = await Construct.ForeignKeyColumnName(lastRelEnd);
                         fkCol = "ID";
                     }
                     else
@@ -249,7 +250,7 @@ namespace Zetbox.Server.SchemaManagement
 
         #region SavedSchema
 
-        public static void LoadSavedSchemaInto(ISchemaProvider provider, IZetboxContext targetCtx)
+        public static async Task LoadSavedSchemaInto(ISchemaProvider provider, IZetboxContext targetCtx)
         {
             if (provider == null) { throw new ArgumentNullException("provider"); }
             if (targetCtx == null) { throw new ArgumentNullException("targetCtx"); }
@@ -262,17 +263,17 @@ namespace Zetbox.Server.SchemaManagement
 
                 using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(schema)))
                 {
-                    Importer.LoadFromXml(targetCtx, ms, "saved schema from " + provider.GetSafeConnectionString());
+                    await Importer.LoadFromXml(targetCtx, ms, "saved schema from " + provider.GetSafeConnectionString());
                 }
             }
         }
 
-        private void SaveSchema(IZetboxContext schema)
+        private async Task SaveSchema(IZetboxContext schema)
         {
             using (Logging.Log.DebugTraceMethodCall("SaveSchema"))
             using (var ms = new MemoryStream())
             {
-                Exporter.PublishFromContext(schema, ms, Exporter.Filter.Schema, new string[] { "*" }, "in-memory buffer for SaveSchema");
+                await Exporter.PublishFromContext(schema, ms, Exporter.Filter.Schema, new string[] { "*" }, "in-memory buffer for SaveSchema");
                 string schemaStr = Encoding.UTF8.GetString(ms.GetBuffer()).TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
                 db.SaveSchema(schemaStr);
             }

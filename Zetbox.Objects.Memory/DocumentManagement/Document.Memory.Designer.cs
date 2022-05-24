@@ -42,16 +42,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnExtractText_Document")]
-        public override void ExtractText()
+        public override async System.Threading.Tasks.Task ExtractText()
         {
             // base.ExtractText();
             if (OnExtractText_Document != null)
             {
-                OnExtractText_Document(this);
+                await OnExtractText_Document(this);
             }
             else
             {
-                base.ExtractText();
+                await base.ExtractText();
             }
         }
         public static event ExtractText_Handler<Document> OnExtractText_Document;
@@ -104,16 +104,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnHandleBlobChange_Document")]
-        public override Zetbox.App.Base.Blob HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
+        public override async System.Threading.Tasks.Task<Zetbox.App.Base.Blob> HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.Blob>();
             if (OnHandleBlobChange_Document != null)
             {
-                OnHandleBlobChange_Document(this, e, oldBlob, newBlob);
+                await OnHandleBlobChange_Document(this, e, oldBlob, newBlob);
             }
             else
             {
-                e.Result = base.HandleBlobChange(oldBlob, newBlob);
+                e.Result = await base.HandleBlobChange(oldBlob, newBlob);
             }
             return e.Result;
         }
@@ -167,16 +167,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_Document")]
-        public override void Open()
+        public override async System.Threading.Tasks.Task Open()
         {
             // base.Open();
             if (OnOpen_Document != null)
             {
-                OnOpen_Document(this);
+                await OnOpen_Document(this);
             }
             else
             {
-                base.Open();
+                await base.Open();
             }
         }
         public static event Open_Handler<Document> OnOpen_Document;
@@ -229,16 +229,16 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_Document")]
-        public override void Upload()
+        public override async System.Threading.Tasks.Task Upload()
         {
             // base.Upload();
             if (OnUpload_Document != null)
             {
-                OnUpload_Document(this);
+                await OnUpload_Document(this);
             }
             else
             {
-                base.Upload();
+                await base.Upload();
             }
         }
         public static event Upload_Handler<Document> OnUpload_Document;

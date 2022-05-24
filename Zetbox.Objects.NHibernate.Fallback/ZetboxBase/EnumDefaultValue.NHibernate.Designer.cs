@@ -173,16 +173,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDefaultValue_EnumDefaultValue")]
-        public override System.Object GetDefaultValue()
+        public override async System.Threading.Tasks.Task<System.Object> GetDefaultValue()
         {
             var e = new MethodReturnEventArgs<System.Object>();
             if (OnGetDefaultValue_EnumDefaultValue != null)
             {
-                OnGetDefaultValue_EnumDefaultValue(this, e);
+                await OnGetDefaultValue_EnumDefaultValue(this, e);
             }
             else
             {
-                e.Result = base.GetDefaultValue();
+                e.Result = await base.GetDefaultValue();
             }
             return e.Result;
         }
@@ -305,10 +305,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_EnumValue.HasValue)
-                this.EnumValue = ((Zetbox.App.Base.EnumerationEntryNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.EnumerationEntry>(_fk_guid_EnumValue.Value));
+                this.EnumValue = ((Zetbox.App.Base.EnumerationEntryNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.EnumerationEntry>(_fk_guid_EnumValue.Value)));
             else
             if (_fk_EnumValue.HasValue)
-                this.EnumValue = ((Zetbox.App.Base.EnumerationEntryNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value));
+                this.EnumValue = ((Zetbox.App.Base.EnumerationEntryNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value)));
             else
                 this.EnumValue = null;
         }

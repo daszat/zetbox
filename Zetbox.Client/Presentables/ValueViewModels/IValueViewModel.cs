@@ -146,7 +146,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     public interface IValueCollectionViewModel<TElement, TList>
         : IBaseValueCollectionViewModel<TElement, TList>
     {
-        void Sort(string propName, ListSortDirection direction);
+        Task Sort(string propName, ListSortDirection direction);
     }
 
     public interface IValueListViewModel<TElement, TList>

@@ -943,12 +943,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnDuplicate_WorkSchedule")]
-        public virtual Zetbox.App.Calendar.WorkSchedule Duplicate()
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Calendar.WorkSchedule> Duplicate()
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Calendar.WorkSchedule>();
             if (OnDuplicate_WorkSchedule != null)
             {
-                OnDuplicate_WorkSchedule(this, e);
+                await OnDuplicate_WorkSchedule(this, e);
             }
             else
             {
@@ -1007,12 +1007,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetHolidays_WorkSchedule")]
-        public virtual int GetHolidays(DateTime from, DateTime until)
+        public virtual async System.Threading.Tasks.Task<int> GetHolidays(DateTime from, DateTime until)
         {
             var e = new MethodReturnEventArgs<int>();
             if (OnGetHolidays_WorkSchedule != null)
             {
-                OnGetHolidays_WorkSchedule(this, e, from, until);
+                await OnGetHolidays_WorkSchedule(this, e, from, until);
             }
             else
             {
@@ -1071,12 +1071,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetOffDays_WorkSchedule")]
-        public virtual int GetOffDays(DateTime from, DateTime until)
+        public virtual async System.Threading.Tasks.Task<int> GetOffDays(DateTime from, DateTime until)
         {
             var e = new MethodReturnEventArgs<int>();
             if (OnGetOffDays_WorkSchedule != null)
             {
-                OnGetOffDays_WorkSchedule(this, e, from, until);
+                await OnGetOffDays_WorkSchedule(this, e, from, until);
             }
             else
             {
@@ -1135,12 +1135,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetWorkingDays_WorkSchedule")]
-        public virtual int GetWorkingDays(DateTime from, DateTime until)
+        public virtual async System.Threading.Tasks.Task<int> GetWorkingDays(DateTime from, DateTime until)
         {
             var e = new MethodReturnEventArgs<int>();
             if (OnGetWorkingDays_WorkSchedule != null)
             {
-                OnGetWorkingDays_WorkSchedule(this, e, from, until);
+                await OnGetWorkingDays_WorkSchedule(this, e, from, until);
             }
             else
             {
@@ -1199,12 +1199,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetWorkingHours_WorkSchedule")]
-        public virtual decimal GetWorkingHours(DateTime from, DateTime until)
+        public virtual async System.Threading.Tasks.Task<decimal> GetWorkingHours(DateTime from, DateTime until)
         {
             var e = new MethodReturnEventArgs<decimal>();
             if (OnGetWorkingHours_WorkSchedule != null)
             {
-                OnGetWorkingHours_WorkSchedule(this, e, from, until);
+                await OnGetWorkingHours_WorkSchedule(this, e, from, until);
             }
             else
             {

@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchDefaultPropertyViewModelDescriptorTask != null) return _triggerFetchDefaultPropertyViewModelDescriptorTask;
 
-            if (_fk_DefaultPropertyViewModelDescriptor.HasValue)
-                _triggerFetchDefaultPropertyViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value);
-            else
-                _triggerFetchDefaultPropertyViewModelDescriptorTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> task;
 
-            _triggerFetchDefaultPropertyViewModelDescriptorTask.OnResult(t =>
+            if (_fk_DefaultPropertyViewModelDescriptor.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(null);
+
+            task.OnResult(t =>
             {
                 if (OnDefaultPropertyViewModelDescriptor_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchDefaultPropertyViewModelDescriptorTask;
+            return _triggerFetchDefaultPropertyViewModelDescriptorTask = task;
         }
 
         // internal implementation
@@ -126,7 +128,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchDefaultPropertyViewModelDescriptorAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
@@ -239,12 +240,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchDefaultViewModelDescriptorTask != null) return _triggerFetchDefaultViewModelDescriptorTask;
 
-            if (_fk_DefaultViewModelDescriptor.HasValue)
-                _triggerFetchDefaultViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
-            else
-                _triggerFetchDefaultViewModelDescriptorTask = new System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.GUI.ViewModelDescriptor> task;
 
-            _triggerFetchDefaultViewModelDescriptorTask.OnResult(t =>
+            if (_fk_DefaultViewModelDescriptor.HasValue)
+                task = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.GUI.ViewModelDescriptor>(null);
+
+            task.OnResult(t =>
             {
                 if (OnDefaultViewModelDescriptor_Getter != null)
                 {
@@ -254,7 +257,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchDefaultViewModelDescriptorTask;
+            return _triggerFetchDefaultViewModelDescriptorTask = task;
         }
 
         // internal implementation
@@ -265,7 +268,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchDefaultViewModelDescriptorAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)task.Result;
             }
             set
@@ -320,16 +322,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnAddProperty_CompoundObject")]
-        public override Zetbox.App.Base.Property AddProperty()
+        public override async System.Threading.Tasks.Task<Zetbox.App.Base.Property> AddProperty()
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.Property>();
             if (OnAddProperty_CompoundObject != null)
             {
-                OnAddProperty_CompoundObject(this, e);
+                await OnAddProperty_CompoundObject(this, e);
             }
             else
             {
-                e.Result = base.AddProperty();
+                e.Result = await base.AddProperty();
             }
             return e.Result;
         }
@@ -383,16 +385,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDataType_CompoundObject")]
-        public override System.Type GetDataType()
+        public override async System.Threading.Tasks.Task<System.Type> GetDataType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetDataType_CompoundObject != null)
             {
-                OnGetDataType_CompoundObject(this, e);
+                await OnGetDataType_CompoundObject(this, e);
             }
             else
             {
-                e.Result = base.GetDataType();
+                e.Result = await base.GetDataType();
             }
             return e.Result;
         }
@@ -446,16 +448,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDataTypeString_CompoundObject")]
-        public override string GetDataTypeString()
+        public override async System.Threading.Tasks.Task<string> GetDataTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetDataTypeString_CompoundObject != null)
             {
-                OnGetDataTypeString_CompoundObject(this, e);
+                await OnGetDataTypeString_CompoundObject(this, e);
             }
             else
             {
-                e.Result = base.GetDataTypeString();
+                e.Result = await base.GetDataTypeString();
             }
             return e.Result;
         }
@@ -509,12 +511,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_CompoundObject")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_CompoundObject != null)
             {
-                OnGetName_CompoundObject(this, e);
+                await OnGetName_CompoundObject(this, e);
             }
             else
             {
@@ -573,16 +575,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnImplementInterfaces_CompoundObject")]
-        public override void ImplementInterfaces()
+        public override async System.Threading.Tasks.Task ImplementInterfaces()
         {
             // base.ImplementInterfaces();
             if (OnImplementInterfaces_CompoundObject != null)
             {
-                OnImplementInterfaces_CompoundObject(this);
+                await OnImplementInterfaces_CompoundObject(this);
             }
             else
             {
-                base.ImplementInterfaces();
+                await base.ImplementInterfaces();
             }
         }
         public static event ImplementInterfaces_Handler<CompoundObject> OnImplementInterfaces_CompoundObject;
@@ -717,18 +719,18 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_DefaultPropertyViewModelDescriptor.HasValue)
-                DefaultPropertyViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultPropertyViewModelDescriptor.Value);
+                DefaultPropertyViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultPropertyViewModelDescriptor.Value));
             else
             if (_fk_DefaultPropertyViewModelDescriptor.HasValue)
-                DefaultPropertyViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value);
+                DefaultPropertyViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value));
             else
                 DefaultPropertyViewModelDescriptorImpl = null;
 
             if (_fk_guid_DefaultViewModelDescriptor.HasValue)
-                DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value);
+                DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value));
             else
             if (_fk_DefaultViewModelDescriptor.HasValue)
-                DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
+                DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)(await Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value));
             else
                 DefaultViewModelDescriptorImpl = null;
             // fix cached lists references
@@ -853,8 +855,8 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(DefaultPropertyViewModelDescriptor != null ? DefaultPropertyViewModelDescriptor.ID : (int?)null);
-            binStream.Write(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null);
+            binStream.Write(_fk_DefaultPropertyViewModelDescriptor != null ? _fk_DefaultPropertyViewModelDescriptor : (int?)null);
+            binStream.Write(_fk_DefaultViewModelDescriptor != null ? _fk_DefaultViewModelDescriptor : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

@@ -20,11 +20,12 @@ namespace Zetbox.API
     using System.Text;
     using System.Collections;
     using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
     public interface IFilterModel
     {
-        IQueryable GetQuery(IQueryable src);
-        LambdaExpression GetExpression(IQueryable src);
+        Task<IQueryable> GetQuery(IQueryable src);
+        Task<LambdaExpression> GetExpression(IQueryable src);
         IEnumerable GetResult(IEnumerable src);
         bool IsServerSideFilter { get; }
 

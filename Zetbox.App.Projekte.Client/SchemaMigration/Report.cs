@@ -20,6 +20,7 @@ namespace Zetbox.App.SchemaMigration
     using System.Linq;
     using System.Text;
     using System.Xml;
+    using stt = System.Threading.Tasks;
 
     using Zetbox.API;
     using Zetbox.API.Client;
@@ -73,15 +74,15 @@ namespace Zetbox.App.SchemaMigration
 
         private Zetbox.App.SchemaMigration.SourceTable _obj = null;
 
-        public void CreateReport(Zetbox.App.SchemaMigration.SourceTable obj)
+        public async stt.Task CreateReport(Zetbox.App.SchemaMigration.SourceTable obj)
         {
             this._obj = obj;
 
             RenderSummary();
-            RenderColumnMappings();
+            await RenderColumnMappings();
         }
 
-        private void RenderColumnMappings()
+        private async stt.Task RenderColumnMappings()
         {
             NewHeading2("Summary");
             var t = NewTable();
@@ -133,7 +134,7 @@ namespace Zetbox.App.SchemaMigration
 
                 r = t.AddRow();
                 r.Cells[0].AddParagraph("Dest Type");
-                r.Cells[1].AddParagraph(c.DestinationProperty.Count > 0 ? c.DestinationProperty.Last().GetPropertyTypeString() : string.Empty);
+                r.Cells[1].AddParagraph(c.DestinationProperty.Count > 0 ? (await c.DestinationProperty.Last().GetPropertyTypeString()) : string.Empty);
 
                 r = t.AddRow();
                 r.Cells[0].AddParagraph("IsNullable");
@@ -261,7 +262,7 @@ namespace Zetbox.App.SchemaMigration
 
         private Zetbox.App.SchemaMigration.MigrationProject _obj = null;
 
-        public void CreateReport(Zetbox.App.SchemaMigration.MigrationProject obj)
+        public async stt.Task CreateReport(Zetbox.App.SchemaMigration.MigrationProject obj)
         {
             this._obj = obj;
 
@@ -276,13 +277,13 @@ namespace Zetbox.App.SchemaMigration
                 foreach (var tbl in s.SourceTables.Where(i => i.DestinationObjectClass != null).OrderBy(i => i.Name))
                 {
                     var r = new SourceTableMappingReport(Section);
-                    r.CreateReport(tbl);
+                    await r.CreateReport(tbl);
                 }
 
                 foreach (var tbl in s.SourceTables.Where(i => i.DestinationObjectClass == null && i.Status != MappingStatus.Ignored).OrderBy(i => i.Name))
                 {
                     var r = new SourceTableMappingReport(Section);
-                    r.CreateReport(tbl);
+                    await r.CreateReport(tbl);
                 }
             }
         }

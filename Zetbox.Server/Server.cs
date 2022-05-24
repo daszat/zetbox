@@ -52,7 +52,7 @@ namespace Zetbox.Server
         /// </summary>
         private ILifetimeScope container;
 
-        public void AnalyzeDatabase(string connectionName, TextWriter output)
+        public Task AnalyzeDatabase(string connectionName, TextWriter output)
         {
             using (Log.InfoTraceMethodCall("AnalyzeDatabase", connectionName))
             using (var subContainer = container.BeginLifetimeScope())
@@ -87,39 +87,41 @@ namespace Zetbox.Server
                     output.WriteLine();
                 }
             }
+
+            return Task.CompletedTask;
         }
 
-        public void Export(string file, string[] schemaModules, string[] ownerModules)
+        public async Task Export(string file, string[] schemaModules, string[] ownerModules)
         {
             using (Log.InfoTraceMethodCallFormat("Export", "file=[{0}],schemaModules=[{1}],ownerModules=[{2}]", file, string.Join(";", schemaModules ?? new string[] { }), string.Join(";", ownerModules ?? new string[] { })))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                Exporter.ExportFromContext(subContainer.Resolve<IZetboxServerContext>(), file, schemaModules, ownerModules);
+                await Exporter.ExportFromContext(subContainer.Resolve<IZetboxServerContext>(), file, schemaModules, ownerModules);
             }
         }
 
-        public void Import(params string[] files)
+        public async Task Import(params string[] files)
         {
             using (Log.InfoTraceMethodCallFormat("Import", "files=[{0}]", string.Join(", ", files)))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IZetboxServerContext ctx = subContainer.Resolve<IZetboxServerContext>();
-                Importer.LoadFromXml(ctx, files);
+                await Importer.LoadFromXml(ctx, files);
                 Log.Info("Submitting changes");
-                ctx.SubmitRestore();
+                await ctx.SubmitRestore();
             }
         }
 
-        public void Publish(string file, string[] namespaces)
+        public async Task Publish(string file, string[] namespaces)
         {
             using (Log.InfoTraceMethodCallFormat("Publish", "file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                Exporter.PublishFromContext(subContainer.Resolve<IZetboxServerContext>(), file, Exporter.Filter.Meta, namespaces);
+                await Exporter.PublishFromContext(subContainer.Resolve<IZetboxServerContext>(), file, Exporter.Filter.Meta, namespaces);
             }
         }
 
-        public void Deploy()
+        public async Task Deploy()
         {
             using (Log.InfoTraceMethodCall("Deploy", "files=*, update schema"))
             {
@@ -127,13 +129,13 @@ namespace Zetbox.Server
                 if (files == null || files.Length == 0) throw new InvalidOperationException("No files found to deploy");
                 Logging.Server.InfoFormat("Found {0} files to deploy", files.Length);
 
-                UpdateSchema(files);
-                Deploy(files);
-                CheckSchema(false);
+                await UpdateSchema(files);
+                await Deploy(files);
+                await CheckSchema(false);
             }
         }
 
-        public void Deploy(params string[] files)
+        public async Task Deploy(params string[] files)
         {
             using (Log.InfoTraceMethodCallFormat("Deploy", "files=[{0}]", string.Join(", ", files)))
             using (var subContainer = container.BeginLifetimeScope())
@@ -141,31 +143,33 @@ namespace Zetbox.Server
                 var ctx = subContainer.Resolve<IZetboxServerContext>();
                 Importer.Deploy(ctx, files);
                 Log.Info("Submitting changes");
-                ctx.SubmitRestore();
+                await ctx.SubmitRestore();
             }
         }
 
-        public void DeleteModule(string module)
+        public Task DeleteModule(string module)
         {
             using (Log.InfoTraceMethodCallFormat("DeleteModule", "Module=[{0}]", module))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 Importer.DeleteModule(() => subContainer.Resolve<IZetboxServerContext>(), module, (ctx) => ((IZetboxServerContext)ctx).SubmitRestore());
             }
+
+            return Task.CompletedTask;
         }
 
-        public void CheckSchemaFromCurrentMetaData(bool withRepair)
+        public async Task CheckSchemaFromCurrentMetaData(bool withRepair)
         {
             using (Log.InfoTraceMethodCallFormat("CheckSchemaFromCurrentMetaData", "withRepair=[{0}]", withRepair))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 var ctx = subContainer.Resolve<IZetboxServerContext>();
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
-                mgr.CheckSchema(withRepair);
+                await mgr.CheckSchema(withRepair);
             }
         }
 
-        public Task CheckSchema(bool withRepair)
+        public async Task CheckSchema(bool withRepair)
         {
             using (Log.InfoTraceMethodCallFormat("CheckSchema", "withRepair=[{0}]", withRepair))
             using (var subContainer = container.BeginLifetimeScope())
@@ -175,28 +179,26 @@ namespace Zetbox.Server
                 var connectionString = cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
                 ISchemaProvider schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
                 schemaProvider.Open(connectionString.ConnectionString);
-                SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
+                await SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
-                mgr.CheckSchema(withRepair);
-
-                return Task.CompletedTask;
+                await mgr.CheckSchema(withRepair);
             }
         }
 
-        public void CheckSchema(string[] files, bool withRepair)
+        public async Task CheckSchema(string[] files, bool withRepair)
         {
             using (Log.InfoTraceMethodCallFormat("CheckSchema", "files=[{0}],withRepair=[{1}]", string.Join(", ", files), withRepair))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IZetboxContext ctx = subContainer.Resolve<BaseMemoryContext>();
-                Importer.LoadFromXml(ctx, files);
+                await Importer.LoadFromXml(ctx, files);
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
-                mgr.CheckSchema(withRepair);
+                await mgr.CheckSchema(withRepair);
             }
         }
 
-        public void UpdateSchema()
+        public async Task UpdateSchema()
         {
             using (Log.InfoTraceMethodCall("UpdateSchema"))
             using (var subContainer = container.BeginLifetimeScope())
@@ -209,30 +211,30 @@ namespace Zetbox.Server
                 // the schema
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    Exporter.PublishFromContext(dbctx, ms, Exporter.Filter.Schema, new string[] { "*" }, "in-memory buffer");
+                    await Exporter.PublishFromContext(dbctx, ms, Exporter.Filter.Schema, new string[] { "*" }, "in-memory buffer");
                     ms.Seek(0, SeekOrigin.Begin);
-                    Importer.LoadFromXml(ctx, ms, "in-memory buffer");
+                    await Importer.LoadFromXml(ctx, ms, "in-memory buffer");
                 }
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
-                mgr.UpdateSchema();
+                await mgr.UpdateSchema();
             }
         }
 
-        public void UpdateSchema(params string[] files)
+        public async Task UpdateSchema(params string[] files)
         {
             using (Log.InfoTraceMethodCallFormat("UpdateSchema", "files=[{0}]", string.Join(", ", files)))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IZetboxContext ctx = subContainer.Resolve<BaseMemoryContext>();
-                Importer.LoadFromXml(ctx, files);
+                await Importer.LoadFromXml(ctx, files);
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
-                mgr.UpdateSchema();
+                await mgr.UpdateSchema();
             }
         }
 
-        public void SyncIdentities(string source)
+        public async Task SyncIdentities(string source)
         {
             using (Log.InfoTraceMethodCall("SyncIdentities", "source=" + source))
             using (var subContainer = container.BeginLifetimeScope())
@@ -260,11 +262,11 @@ namespace Zetbox.Server
                     }
                 }
 
-                ctx.SubmitChanges();
+                await ctx.SubmitChanges();
             }
         }
 
-        public void RunFixes()
+        public Task RunFixes()
         {
             using (Log.InfoTraceMethodCall("RunFixes"))
             //using (var subContainer = container.BeginLifetimeScope())
@@ -371,9 +373,11 @@ namespace Zetbox.Server
 
                 //ctx.SubmitChanges();
             }
+
+            return Task.CompletedTask;
         }
 
-        public void WipeDatabase()
+        public Task WipeDatabase()
         {
             using (var subContainer = container.BeginLifetimeScope())
             {
@@ -382,10 +386,12 @@ namespace Zetbox.Server
                 var schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
                 schemaProvider.Open(connectionString.ConnectionString);
                 schemaProvider.DropAllObjects();
+
+                return Task.CompletedTask;
             }
         }
 
-        public void WaitForDatabase()
+        public Task WaitForDatabase()
         {
             using (var subContainer = container.BeginLifetimeScope())
             {
@@ -399,7 +405,7 @@ namespace Zetbox.Server
                     {
                         schemaProvider.Open(connectionString.ConnectionString);
                         Logging.Server.Info($"... database is online");
-                        return;
+                        return Task.CompletedTask;
                     }
                     catch(Exception ex)
                     {
@@ -407,12 +413,14 @@ namespace Zetbox.Server
                         Logging.Server.Info($"    {schemaProvider.GetSafeConnectionString()}");
                         schemaProvider.Close();
                         System.Threading.Thread.Sleep(1000);
+
+                        return Task.CompletedTask;
                     }
                 }
             }
         }
 
-        public void RefreshRights()
+        public Task RefreshRights()
         {
             using (var subContainer = container.BeginLifetimeScope())
             {
@@ -422,6 +430,7 @@ namespace Zetbox.Server
                 schemaProvider.Open(connectionString.ConnectionString);
                 schemaProvider.ExecRefreshAllRightsProcedure();
             }
+                        return Task.CompletedTask;
         }
 
         private List<IDataObject> GetParcelHack<T>(IZetboxServerContext ctx, int lastID, int count)
@@ -444,7 +453,7 @@ namespace Zetbox.Server
             return (List<IDataObject>)mi.Invoke(this, new object[] { ctx, lastID, count });
         }
 
-        public void RecalculateProperties(Property[] properties)
+        public async Task RecalculateProperties(Property[] properties)
         {
             using (Log.InfoTraceMethodCallFormat("RecalculateProperties", "properties.Length=[{0}]", properties == null ? "ALL" : properties.Length.ToString()))
             using (var propertyContainer = container.BeginLifetimeScope())
@@ -466,7 +475,7 @@ namespace Zetbox.Server
                         {
                             Log.InfoFormat("Processing ObjectClass [{0}]", clsGroup.Key.Name);
                             var lastID = 0;
-                            var dtType = clsGroup.Key.GetDataType();
+                            var dtType = await clsGroup.Key.GetDataType();
                             List<IDataObject> parcel = null;
                             do
                             {
@@ -481,7 +490,7 @@ namespace Zetbox.Server
                                     lastID = obj.ID;
                                 }
                                 Log.InfoFormat("Updated {0} objects", objCounter);
-                                ctx.SubmitChanges();
+                                await ctx.SubmitChanges();
                                 subContainer.Dispose();
                                 subContainer = container.BeginLifetimeScope();
                                 ctx = subContainer.Resolve<IZetboxServerContext>();
@@ -492,7 +501,7 @@ namespace Zetbox.Server
                             Log.WarnFormat("Skipping CompoundObject [{0}]", clsGroup.Key.Name);
                         }
                     }
-                    ctx.SubmitChanges();
+                    await ctx.SubmitChanges();
                 }
                 finally
                 {
@@ -501,12 +510,12 @@ namespace Zetbox.Server
             }
         }
 
-        public void RunBenchmarks()
+        public async Task RunBenchmarks()
         {
             // FetchObjectClasses();        
             Console.WriteLine("Waiting to start benchmark. Press return key to commence.");
             Console.ReadKey();
-            FetchModules();
+            await FetchModules();
         }
 
         //void FetchObjectClasses()
@@ -520,14 +529,14 @@ namespace Zetbox.Server
         //    }
         //}
 
-        void FetchModules()
+        async Task FetchModules()
         {
             using (Log.InfoTraceMethodCall("FetchModules"))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 var ctx = subContainer.Resolve<IZetboxServerContext>();
                 var list = ctx.GetQuery<Zetbox.App.Base.Module>().ToList();
-                ctx.SubmitChanges();
+                await ctx.SubmitChanges();
                 Log.InfoFormat("Fetched [{0}] modules; loaded [{1}] objects", list.Count, ctx.AttachedObjects.Count());
             }
         }

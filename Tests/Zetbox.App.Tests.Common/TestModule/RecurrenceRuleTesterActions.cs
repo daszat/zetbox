@@ -34,33 +34,29 @@ namespace Zetbox.App.Test
             return System.Threading.Tasks.Task.CompletedTask;
         }
         [Invocation]
-        public static System.Threading.Tasks.Task GetCurrent(RecurrenceRuleTester obj, MethodReturnEventArgs<DateTime> e, DateTime? dt)
+        public static async System.Threading.Tasks.Task GetCurrent(RecurrenceRuleTester obj, MethodReturnEventArgs<DateTime> e, DateTime? dt)
         {
             if (dt.HasValue)
             {
-                e.Result = obj.Rule.GetCurrent(DateTime.Today, dt.Value);
+                e.Result = await obj.Rule.GetCurrent(DateTime.Today, dt.Value);
             }
             else
             {
-                e.Result = obj.Rule.GetCurrent(DateTime.Today);
+                e.Result = await obj.Rule.GetCurrent(DateTime.Today);
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetNext(RecurrenceRuleTester obj, MethodReturnEventArgs<DateTime> e, DateTime? dt)
+        public static async System.Threading.Tasks.Task GetNext(RecurrenceRuleTester obj, MethodReturnEventArgs<DateTime> e, DateTime? dt)
         {
             if (dt.HasValue)
             {
-                e.Result = obj.Rule.GetNext(DateTime.Today, dt.Value);
+                e.Result = await obj.Rule.GetNext(DateTime.Today, dt.Value);
             }
             else
             {
-                e.Result = obj.Rule.GetNext(DateTime.Today);
+                e.Result = await obj.Rule.GetNext(DateTime.Today);
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

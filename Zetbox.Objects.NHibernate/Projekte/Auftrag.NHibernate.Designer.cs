@@ -1025,12 +1025,12 @@ namespace Zetbox.App.Projekte
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnRechnungErstellen_Auftrag")]
-        public virtual void RechnungErstellen()
+        public virtual async System.Threading.Tasks.Task RechnungErstellen()
         {
             // base.RechnungErstellen();
             if (OnRechnungErstellen_Auftrag != null)
             {
-                OnRechnungErstellen_Auftrag(this);
+                await OnRechnungErstellen_Auftrag(this);
             }
             else
             {

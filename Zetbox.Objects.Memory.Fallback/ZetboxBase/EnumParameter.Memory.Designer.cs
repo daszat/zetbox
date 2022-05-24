@@ -100,12 +100,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchEnumerationTask != null) return _triggerFetchEnumerationTask;
 
-            if (_fk_Enumeration.HasValue)
-                _triggerFetchEnumerationTask = Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
-            else
-                _triggerFetchEnumerationTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Enumeration>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Enumeration> task;
 
-            _triggerFetchEnumerationTask.OnResult(t =>
+            if (_fk_Enumeration.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Enumeration>(null);
+
+            task.OnResult(t =>
             {
                 if (OnEnumeration_Getter != null)
                 {
@@ -115,7 +117,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchEnumerationTask;
+            return _triggerFetchEnumerationTask = task;
         }
 
         // internal implementation
@@ -126,7 +128,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchEnumerationAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.EnumerationMemoryImpl)task.Result;
             }
             set
@@ -181,16 +182,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_EnumParameter")]
-        public override string GetLabel()
+        public override async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_EnumParameter != null)
             {
-                OnGetLabel_EnumParameter(this, e);
+                await OnGetLabel_EnumParameter(this, e);
             }
             else
             {
-                e.Result = base.GetLabel();
+                e.Result = await base.GetLabel();
             }
             return e.Result;
         }
@@ -244,16 +245,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterType_EnumParameter")]
-        public override System.Type GetParameterType()
+        public override async System.Threading.Tasks.Task<System.Type> GetParameterType()
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnGetParameterType_EnumParameter != null)
             {
-                OnGetParameterType_EnumParameter(this, e);
+                await OnGetParameterType_EnumParameter(this, e);
             }
             else
             {
-                e.Result = base.GetParameterType();
+                e.Result = await base.GetParameterType();
             }
             return e.Result;
         }
@@ -307,16 +308,16 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetParameterTypeString_EnumParameter")]
-        public override string GetParameterTypeString()
+        public override async System.Threading.Tasks.Task<string> GetParameterTypeString()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetParameterTypeString_EnumParameter != null)
             {
-                OnGetParameterTypeString_EnumParameter(this, e);
+                await OnGetParameterTypeString_EnumParameter(this, e);
             }
             else
             {
-                e.Result = base.GetParameterTypeString();
+                e.Result = await base.GetParameterTypeString();
             }
             return e.Result;
         }
@@ -439,10 +440,10 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_guid_Enumeration.HasValue)
-                EnumerationImpl = (Zetbox.App.Base.EnumerationMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Enumeration>(_fk_guid_Enumeration.Value);
+                EnumerationImpl = (Zetbox.App.Base.EnumerationMemoryImpl)(await Context.FindPersistenceObjectAsync<Zetbox.App.Base.Enumeration>(_fk_guid_Enumeration.Value));
             else
             if (_fk_Enumeration.HasValue)
-                EnumerationImpl = (Zetbox.App.Base.EnumerationMemoryImpl)Context.Find<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
+                EnumerationImpl = (Zetbox.App.Base.EnumerationMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value));
             else
                 EnumerationImpl = null;
             // fix cached lists references
@@ -556,7 +557,7 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(Enumeration != null ? Enumeration.ID : (int?)null);
+            binStream.Write(_fk_Enumeration != null ? _fk_Enumeration : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

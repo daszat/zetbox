@@ -288,14 +288,14 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
                 return result;
             }
 
-            protected override void DoExecute(object data)
+            protected override async Task DoExecute(object data)
             {
                 var scope = ViewModelFactory.CreateNewScope();
                 var ctx = scope.ViewModelFactory.CreateNewContext();
 
                 var debugger = scope.ViewModelFactory.CreateViewModel<Zetbox.Client.Presentables.Debugger.DebuggerWindowViewModel.Factory>().Invoke(ctx, null);
                 debugger.Closed += (s, e) => scope.Dispose(); 
-                scope.ViewModelFactory.ShowModel(debugger, true);
+                await scope.ViewModelFactory.ShowModel(debugger, true);
             }
         }        
         #endregion

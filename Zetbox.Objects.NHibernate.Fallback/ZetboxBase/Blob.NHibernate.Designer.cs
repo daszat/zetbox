@@ -700,12 +700,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetStream_Blob")]
-        public virtual System.IO.Stream GetStream()
+        public virtual async System.Threading.Tasks.Task<System.IO.Stream> GetStream()
         {
             var e = new MethodReturnEventArgs<System.IO.Stream>();
             if (OnGetStream_Blob != null)
             {
-                OnGetStream_Blob(this, e);
+                await OnGetStream_Blob(this, e);
             }
             else
             {
@@ -764,12 +764,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_Blob")]
-        public virtual void Open()
+        public virtual async System.Threading.Tasks.Task Open()
         {
             // base.Open();
             if (OnOpen_Blob != null)
             {
-                OnOpen_Blob(this);
+                await OnOpen_Blob(this);
             }
             else
             {
@@ -921,12 +921,12 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value)));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)(await OurContext.FindPersistenceObjectAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value)));
             else
                 this.CreatedBy = null;
         }

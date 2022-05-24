@@ -1553,12 +1553,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabel_Method")]
-        public virtual string GetLabel()
+        public virtual async System.Threading.Tasks.Task<string> GetLabel()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabel_Method != null)
             {
-                OnGetLabel_Method(this, e);
+                await OnGetLabel_Method(this, e);
             }
             else
             {
@@ -1617,12 +1617,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_Method")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_Method != null)
             {
-                OnGetName_Method(this, e);
+                await OnGetName_Method(this, e);
             }
             else
             {
@@ -1681,12 +1681,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetReturnParameter_Method")]
-        public virtual Zetbox.App.Base.BaseParameter GetReturnParameter()
+        public virtual async System.Threading.Tasks.Task<Zetbox.App.Base.BaseParameter> GetReturnParameter()
         {
             var e = new MethodReturnEventArgs<Zetbox.App.Base.BaseParameter>();
             if (OnGetReturnParameter_Method != null)
             {
-                OnGetReturnParameter_Method(this, e);
+                await OnGetReturnParameter_Method(this, e);
             }
             else
             {

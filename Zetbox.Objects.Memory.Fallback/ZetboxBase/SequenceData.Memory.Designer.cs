@@ -157,12 +157,14 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchSequenceTask != null) return _triggerFetchSequenceTask;
 
-            if (_fk_Sequence.HasValue)
-                _triggerFetchSequenceTask = Context.FindAsync<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
-            else
-                _triggerFetchSequenceTask = new System.Threading.Tasks.Task<Zetbox.App.Base.Sequence>(() => null);
+            System.Threading.Tasks.Task<Zetbox.App.Base.Sequence> task;
 
-            _triggerFetchSequenceTask.OnResult(t =>
+            if (_fk_Sequence.HasValue)
+                task = Context.FindAsync<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
+            else
+                task = System.Threading.Tasks.Task.FromResult<Zetbox.App.Base.Sequence>(null);
+
+            task.OnResult(t =>
             {
                 if (OnSequence_Getter != null)
                 {
@@ -172,7 +174,7 @@ namespace Zetbox.App.Base
                 }
             });
 
-            return _triggerFetchSequenceTask;
+            return _triggerFetchSequenceTask = task;
         }
 
         // internal implementation
@@ -183,7 +185,6 @@ namespace Zetbox.App.Base
             {
                 var task = TriggerFetchSequenceAsync();
                 task.TryRunSynchronously();
-                task.Wait();
                 return (Zetbox.App.Base.SequenceMemoryImpl)task.Result;
             }
             set
@@ -325,7 +326,7 @@ namespace Zetbox.App.Base
             // fix direct object references
 
             if (_fk_Sequence.HasValue)
-                SequenceImpl = (Zetbox.App.Base.SequenceMemoryImpl)Context.Find<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
+                SequenceImpl = (Zetbox.App.Base.SequenceMemoryImpl)(await Context.FindAsync<Zetbox.App.Base.Sequence>(_fk_Sequence.Value));
             else
                 SequenceImpl = null;
             // fix cached lists references
@@ -450,7 +451,7 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._CurrentNumber);
-            binStream.Write(Sequence != null ? Sequence.ID : (int?)null);
+            binStream.Write(_fk_Sequence != null ? _fk_Sequence : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)

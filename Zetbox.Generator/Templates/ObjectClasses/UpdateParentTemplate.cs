@@ -53,7 +53,7 @@ namespace Zetbox.Generator.Templates.ObjectClasses
                 .Select(p => new UpdateParentTemplateParams()
                 {
                     PropertyName = p.Name,
-                    IfType = string.Format("{0}.{1}", p.GetReferencedObjectClass().Module.Namespace, p.GetReferencedObjectClass().Name)
+                    IfType = string.Format("{0}.{1}", p.GetReferencedObjectClass().Result.Module.Namespace, p.GetReferencedObjectClass().Result.Name)
                 })
                 .ToList();
 

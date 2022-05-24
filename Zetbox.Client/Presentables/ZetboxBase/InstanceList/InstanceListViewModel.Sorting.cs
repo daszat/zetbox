@@ -17,6 +17,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Linq;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.Client.Models;
 
@@ -28,7 +29,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         private string _initialOrderByExpression = null;
         private System.ComponentModel.ListSortDirection _initialSortDirection = System.ComponentModel.ListSortDirection.Ascending;
 
-        public string SortProperty { get { return orderByExpression; } }
+        public string SortProperty
+        {
+            get
+            {
+                Task.Run(async () => await GetOrderByExpression());
+                return __orderByExpression;
+            }
+        }
         public System.ComponentModel.ListSortDirection SortDirection { get { return sortDirection; } }
 
         private bool _useNaturalSortOrder = false;
@@ -50,21 +58,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     _useNaturalSortOrder = value;
                     OnPropertyChanged("UseNaturalSortOrder");
-                    ResetSort(refresh: false);
+                    // TODO: unawaited task
+                    _ = ResetSort(refresh: false);
                 }
             }
         }
 
-        private bool __orderByExpressionInitialized = false;
-        private string orderByExpression
-        {
-            get
-            {
-                EnsureOrderByExpression();
-                return __orderByExpression;
-            }
-
-        }
         private System.ComponentModel.ListSortDirection sortDirection
         {
             get
@@ -74,7 +73,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
 
-        public void ResetSort(bool refresh = true)
+        private bool __orderByExpressionInitialized = false;
+        public async Task ResetSort(bool refresh = true)
         {
             __orderByExpressionInitialized = false;
 
@@ -82,7 +82,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_instancesFromServer.Count < Helper.MAXLISTCOUNT)
                 {
-                    UpdateFilteredInstances();
+                    await UpdateFilteredInstances();
                 }
                 else
                 {
@@ -91,9 +91,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private void EnsureOrderByExpression()
+        private async Task<string> GetOrderByExpression()
         {
-            if (__orderByExpressionInitialized) return;
+            if (__orderByExpressionInitialized) return __orderByExpression;
             __orderByExpressionInitialized = true;
 
             if (_initialOrderByExpression != null)
@@ -111,7 +111,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 var sortProp = _type.AndParents(c => c.BaseObjectClass).SelectMany(c => c.Properties).Where(p => p.DefaultSortPriority != null).OrderBy(p => p.DefaultSortPriority).FirstOrDefault();
                 if (sortProp != null)
                 {
-                    __orderByExpression = ColumnDisplayModel.FormatDynamicOrderByExpression(sortProp);
+                    __orderByExpression = await ColumnDisplayModel.FormatDynamicOrderByExpression(sortProp);
                     __sortDirection = System.ComponentModel.ListSortDirection.Ascending;
                 }
                 else
@@ -120,9 +120,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     __sortDirection = System.ComponentModel.ListSortDirection.Ascending;
                 }
             }
+            OnPropertyChanged(nameof(SortProperty));
+            return __orderByExpression;
         }
 
-        public void Sort(string orderByExpression, System.ComponentModel.ListSortDirection direction)
+        public async Task Sort(string orderByExpression, System.ComponentModel.ListSortDirection direction)
         {
             if (string.IsNullOrEmpty(orderByExpression)) throw new ArgumentNullException("orderByExpression");
             __orderByExpressionInitialized = true;
@@ -130,7 +132,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             __sortDirection = direction;
             if (_instancesFromServer.Count < Helper.MAXLISTCOUNT)
             {
-                UpdateFilteredInstances();
+                await UpdateFilteredInstances();
             }
             else
             {

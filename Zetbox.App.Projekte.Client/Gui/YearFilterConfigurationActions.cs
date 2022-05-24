@@ -39,14 +39,12 @@ namespace Zetbox.App.GUI
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.YearFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
+        public static async System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.YearFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
-            var mdl = YearValueFilterModel.Create(FrozenContext, obj.GetLabel(), FilterValueSource.FromProperty(obj.Property), obj.IsCurrentYearDefault ?? false);
+            var mdl = YearValueFilterModel.Create(FrozenContext, await obj.GetLabel(), FilterValueSource.FromProperty(obj.Property), obj.IsCurrentYearDefault ?? false);
             mdl.Required = obj.Required;
             mdl.RefreshOnFilterChanged = obj.RefreshOnFilterChanged;
             e.Result = mdl;
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

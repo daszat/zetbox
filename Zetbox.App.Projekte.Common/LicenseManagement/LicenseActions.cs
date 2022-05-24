@@ -59,11 +59,9 @@ namespace Zetbox.App.LicenseManagement
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task Check(License obj, MethodReturnEventArgs<bool> e, System.Object certificate)
+        public static async System.Threading.Tasks.Task Check(License obj, MethodReturnEventArgs<bool> e, System.Object certificate)
         {
-            e.Result = obj.IsValid() && obj.IsSignatureValid(certificate);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            e.Result = (await obj.IsValid()) && (await obj.IsSignatureValid(certificate));
         }
         [Invocation]
         public static System.Threading.Tasks.Task IsValid(License obj, MethodReturnEventArgs<bool> e)

@@ -1341,16 +1341,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetDefaultViewModel_NavigationSearchScreen")]
-        public override System.Object GetDefaultViewModel(Zetbox.API.IZetboxContext dataCtx, System.Object parent)
+        public override async System.Threading.Tasks.Task<System.Object> GetDefaultViewModel(Zetbox.API.IZetboxContext dataCtx, System.Object parent)
         {
             var e = new MethodReturnEventArgs<System.Object>();
             if (OnGetDefaultViewModel_NavigationSearchScreen != null)
             {
-                OnGetDefaultViewModel_NavigationSearchScreen(this, e, dataCtx, parent);
+                await OnGetDefaultViewModel_NavigationSearchScreen(this, e, dataCtx, parent);
             }
             else
             {
-                e.Result = base.GetDefaultViewModel(dataCtx, parent);
+                e.Result = await base.GetDefaultViewModel(dataCtx, parent);
             }
             return e.Result;
         }

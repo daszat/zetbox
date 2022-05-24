@@ -430,12 +430,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_Icon")]
-        public virtual string GetName()
+        public virtual async System.Threading.Tasks.Task<string> GetName()
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetName_Icon != null)
             {
-                OnGetName_Icon(this, e);
+                await OnGetName_Icon(this, e);
             }
             else
             {
@@ -494,12 +494,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_Icon")]
-        public virtual void Open()
+        public virtual async System.Threading.Tasks.Task Open()
         {
             // base.Open();
             if (OnOpen_Icon != null)
             {
-                OnOpen_Icon(this);
+                await OnOpen_Icon(this);
             }
             else
             {
@@ -557,12 +557,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_Icon")]
-        public virtual void Upload()
+        public virtual async System.Threading.Tasks.Task Upload()
         {
             // base.Upload();
             if (OnUpload_Icon != null)
             {
-                OnUpload_Icon(this);
+                await OnUpload_Icon(this);
             }
             else
             {

@@ -66,19 +66,19 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_displayedColumns == null)
                 {
-                    _displayedColumns = CreateDisplayedColumns();
+                    _displayedColumns = CreateDisplayedColumns().Result;
                 }
                 return _displayedColumns;
             }
         }
-        protected virtual GridDisplayConfiguration CreateDisplayedColumns()
+        protected virtual async Task<GridDisplayConfiguration> CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration();
             GridDisplayConfiguration.Mode mode = IsInlineEditable ?
                   GridDisplayConfiguration.Mode.Editable
                 : GridDisplayConfiguration.Mode.ReadOnly;
 
-            result.BuildColumns(ReferencedClass, mode, true);
+            await result.BuildColumns(ReferencedClass, mode, true);
             return result;
         }
 
@@ -571,11 +571,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #endregion
 
         #region Proxy
-        private CompoundObjectViewModel GetObjectFromProxy(CompoundObjectViewModelProxy p)
+        private async Task<CompoundObjectViewModel> GetObjectFromProxy(CompoundObjectViewModelProxy p)
         {
             if (p.Object == null)
             {
-                var obj = DataContext.CreateCompoundObject(DataContext.GetInterfaceType(this.ReferencedClass.GetDataType()));
+                var obj = DataContext.CreateCompoundObject(DataContext.GetInterfaceType(await this.ReferencedClass.GetDataType()));
                 p.Object = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
                 _proxyCache[p.Object.Object] = p;
             }
@@ -615,7 +615,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                                 ObjectCollectionModel,
                                 ObjectCollectionModel.Value,
                                 (vm) => GetProxy(vm),
-                                (p) => GetObjectFromProxy(p).Object);
+                                (p) => GetObjectFromProxy(p).Result.Object);
                             OnPropertyChanged("ValueProxiesAsync");
                         });
                 }
@@ -633,7 +633,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     _selectedProxies = new ObservableProjectedList<CompoundObjectViewModel, CompoundObjectViewModelProxy>(
                         SelectedItems,
                         (vm) => GetProxy(vm.Object),
-                        (p) => GetObjectFromProxy(p));
+                        (p) => GetObjectFromProxy(p).Result);
                 }
                 return _selectedProxies;
             }
@@ -644,7 +644,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         private string _sortProperty = null;
         private System.ComponentModel.ListSortDirection _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
 
-        public void Sort(string propName, System.ComponentModel.ListSortDirection direction)
+        public Task Sort(string propName, System.ComponentModel.ListSortDirection direction)
         {
             _sortProperty = propName;
             _sortDirection = direction;
@@ -654,6 +654,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             EnsureValueCache();
             _wrapper.Sort(propName, direction, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             OnPropertyChanged("ValueProxiesAsync");
+
+            return Task.CompletedTask;
         }
 
         public string SortProperty { get { return _sortProperty; } }

@@ -19,6 +19,7 @@ namespace Zetbox.API.Migration
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
@@ -79,12 +80,12 @@ namespace Zetbox.API.Migration
         /// </summary>
         /// <param name="prop"></param>
         /// <returns></returns>
-        private static string GetColName(Property prop)
+        private static async Task<string> GetColName(Property prop)
         {
             if (prop is ObjectReferenceProperty)
             {
                 var orp = (ObjectReferenceProperty)prop;
-                return "fk_" + orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).RoleName;
+                return "fk_" + (await orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd)).RoleName;
             }
             else
             {
@@ -97,7 +98,7 @@ namespace Zetbox.API.Migration
         /// </summary>
         /// <param name="props"></param>
         /// <returns></returns>
-        private static string GetColName(IEnumerable<Property> props)
+        private static async Task<string> GetColName(IEnumerable<Property> props)
         {
             // TODO: Move Consruct to Server.API so we can use it here
             if (props.First() is CompoundObjectProperty)
@@ -106,7 +107,7 @@ namespace Zetbox.API.Migration
             }
             else if (props.Count() == 1)
             {
-                return GetColName(props.Single());
+                return await GetColName(props.Single());
             }
             else
             {
@@ -114,17 +115,17 @@ namespace Zetbox.API.Migration
             }
         }
 
-        public void TableBaseMigration(SourceTable tbl)
+        public async Task TableBaseMigration(SourceTable tbl)
         {
-            TableBaseMigration(tbl, (Converter[])null, (Join[])null);
+            await TableBaseMigration(tbl, (Converter[])null, (Join[])null);
         }
 
-        public void TableBaseMigration(SourceTable tbl, params Converter[] converter)
+        public async Task TableBaseMigration(SourceTable tbl, params Converter[] converter)
         {
-            TableBaseMigration(tbl, converter, null);
+            await TableBaseMigration(tbl, converter, null);
         }
 
-        public void TableBaseMigration(SourceTable tbl, Converter[] converter, Join[] additional_joins)
+        public async Task TableBaseMigration(SourceTable tbl, Converter[] converter, Join[] additional_joins)
         {
             // ------------------- Argument checks ------------------- 
             if (tbl == null)
@@ -148,122 +149,128 @@ namespace Zetbox.API.Migration
                 // ------------------- Migrate ------------------- 
                 if (referringCols.Count == 0 && (additional_joins == null || additional_joins.Length == 0))
                 {
-                    TableBaseSimpleMigration(tbl, converter, mappedColumns);
+                    await TableBaseSimpleMigration(tbl, converter, mappedColumns);
                 }
                 else
                 {
-                    TableBaseComplexMigration(tbl, converter, mappedColumns, referringCols, additional_joins);
+                    await TableBaseComplexMigration(tbl, converter, mappedColumns, referringCols, additional_joins);
                 }
             }
         }
 
-        private static List<string> GetDestinationColumnNames(SourceTable tbl, List<SourceColumn> srcColumns)
+        private static async Task<List<string>> GetDestinationColumnNames(SourceTable tbl, List<SourceColumn> srcColumns)
         {
-            var dstColumnNames = srcColumns.Select(c => GetColName(c.DestinationProperty)).ToList();
+            var dstColumnNames = (await srcColumns.Select(async c => await GetColName(c.DestinationProperty)).WhenAll()).ToList();
             // Error Col
-            if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
+            if (typeof(IMigrationInfo).IsAssignableFrom(await tbl.DestinationObjectClass.GetDataType()))
             {
                 dstColumnNames.Add("MigrationErrors");
             }
-            dstColumnNames.AddRange(srcColumns
+            dstColumnNames.AddRange(await srcColumns
                 .Where(c => c.DestinationProperty.First() is CompoundObjectProperty)
                 .GroupBy(c => c.DestinationProperty.First())
-                .Select(grp => GetColName(grp.Key)));
+                .Select(async grp => await GetColName(grp.Key))
+                .WhenAll());
 
             return dstColumnNames;
         }
 
-        private void TableBaseComplexMigration(SourceTable tbl, Converter[] converter, List<SourceColumn> mappedColumns, List<SourceColumn> referringCols, Join[] additional_joins)
+        private Task TableBaseComplexMigration(SourceTable tbl, Converter[] converter, List<SourceColumn> mappedColumns, List<SourceColumn> referringCols, Join[] additional_joins)
         {
-            if (additional_joins != null
-                && additional_joins.Length > 0
-                && additional_joins.All(j => referringCols
-                    .Select(c => c.DestinationProperty.Single())
-                    .OfType<ObjectReferenceProperty>()
-                    .Any(orp => j.JoinTableName == _dst.GetTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.Module.SchemaName, orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName))))
-            {
-                throw new InvalidOperationException("Unmapped additional joins found");
-            }
+            throw new NotImplementedException("Handle async/await");
+            //// TODO: re-implement this check
+            ////if (additional_joins != null
+            ////    && additional_joins.Length > 0
+            ////    && additional_joins.All(async j => referringCols
+            ////        .Select(c => c.DestinationProperty.Single())
+            ////        .OfType<ObjectReferenceProperty>()
+            ////        .Where(async orp => j.JoinTableName == _dst.GetTableName((await orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd)).Type.Module.SchemaName, (await orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd)).Type.TableName)))
+            ////        .Any())
+            ////{
+            ////    throw new InvalidOperationException("Unmapped additional joins found");
+            ////}
 
-            // could automatically create needed indices
-            var all_joins = new Dictionary<SourceColumn, Join>();
-            var root_joins = referringCols
-                .GroupBy(k => k.DestinationProperty.Single())
-                .SelectMany(referenceGroup => CreateReferenceJoin(referenceGroup, all_joins))
-                .ToArray();
+            ////// could automatically create needed indices
+            ////var all_joins = new Dictionary<SourceColumn, Join>();
+            ////var root_joins = (await Task.WhenAll(referringCols
+            ////    .GroupBy(k => k.DestinationProperty.Single())
+            ////    .SelectMany(referenceGroup => CreateReferenceJoin(referenceGroup, all_joins))))
+            ////    .ToArray();
 
-            // Add manual joins
-            IEnumerable<Join> joins;
-            if (additional_joins != null)
-            {
-                joins = root_joins.Union(additional_joins);
-            }
-            else
-            {
-                joins = root_joins;
-            }
+            ////// Add manual joins
+            ////IEnumerable<Join> joins;
+            ////if (additional_joins != null)
+            ////{
+            ////    joins = root_joins.Union(additional_joins);
+            ////}
+            ////else
+            ////{
+            ////    joins = root_joins;
+            ////}
 
-            var srcColumns = mappedColumns
-                                .Where(c => c.References == null)
-                                .Union(
-                                    referringCols
-                                        .GroupBy(k => k.DestinationProperty.Single()) // referring columns cannot be mapped remotely
-                                        .Select(g => g.First(p => p.References.References == null))
-                                ).ToList();
-            var srcColumnNames = srcColumns.Select(c =>
-            {
-                var orp = c.DestinationProperty.FirstOrDefault() as ObjectReferenceProperty;
-                if (c.References != null)
-                {
-                    return new ProjectionColumn("ID", all_joins[c], System.Data.DbType.Int32, c.DestinationProperty.Single().Name);
-                }
-                else if (c.References == null
-                    && orp != null)
-                {
-                    if (additional_joins != null
-                        && additional_joins.Count(i => i.JoinTableName == _dst.GetTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.Module.SchemaName, orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)) > 0)
-                    {
-                        return new ProjectionColumn(
-                            "ID",
-                            additional_joins.Single(j => j.JoinTableName == _dst.GetTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.Module.SchemaName, orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)),
-                            System.Data.DbType.Int32,
-                            orp.Name);
-                    }
-                    else if (converter.Any(cnv => cnv.Column.Name == c.Name))
-                    {
-                        return new ProjectionColumn(c.Name, ColumnRef.PrimaryTable, c.DestinationProperty.Single().Name);
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException(string.Format("No join found for {0}", c));
-                    }
-                }
-                else
-                {
-                    return new ProjectionColumn(c.Name, ColumnRef.PrimaryTable, (System.Data.DbType)c.DbType, null);
-                }
-            }).ToList();
+            ////var srcColumns = mappedColumns
+            ////                    .Where(c => c.References == null)
+            ////                    .Union(
+            ////                        referringCols
+            ////                            .GroupBy(k => k.DestinationProperty.Single()) // referring columns cannot be mapped remotely
+            ////                            .Select(g => g.First(p => p.References.References == null))
+            ////                    ).ToList();
+            ////var srcColumnNames = (await Task.WhenAll(srcColumns.Select(async c =>
+            ////{
+            ////    var orp = c.DestinationProperty.FirstOrDefault() as ObjectReferenceProperty;
+            ////    if (c.References != null)
+            ////    {
+            ////        return new ProjectionColumn("ID", all_joins[c], System.Data.DbType.Int32, c.DestinationProperty.Single().Name);
+            ////    }
+            ////    else if (c.References == null
+            ////        && orp != null)
+            ////    {
+            ////        var otherEndType = await (await orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd)).GetProp_Type();
+            ////        var otherEndModule = await otherEndType.GetProp_Module();
+            ////        if (additional_joins != null
+            ////            && additional_joins.Count(i => i.JoinTableName == _dst.GetTableName(otherEndModule.SchemaName, otherEndType.TableName)) > 0)
+            ////        {
+            ////            return new ProjectionColumn(
+            ////                "ID",
+            ////                additional_joins.Single(j => j.JoinTableName == _dst.GetTableName(otherEndModule.SchemaName, otherEndType.TableName)),
+            ////                System.Data.DbType.Int32,
+            ////                orp.Name);
+            ////        }
+            ////        else if (converter.Any(cnv => cnv.Column.Name == c.Name))
+            ////        {
+            ////            return new ProjectionColumn(c.Name, ColumnRef.PrimaryTable, c.DestinationProperty.Single().Name);
+            ////        }
+            ////        else
+            ////        {
+            ////            throw new InvalidOperationException(string.Format("No join found for {0}", c));
+            ////        }
+            ////    }
+            ////    else
+            ////    {
+            ////        return new ProjectionColumn(c.Name, ColumnRef.PrimaryTable, (System.Data.DbType)c.DbType, null);
+            ////    }
+            ////}))).ToList();
 
-            var dstColumnNames = GetDestinationColumnNames(tbl, srcColumns);
-            long processedRows;
+            ////var dstColumnNames = await GetDestinationColumnNames(tbl, srcColumns);
+            ////long processedRows;
 
-            using (var srcReader = _src.ReadJoin(_src.GetTableName(tbl.StagingDatabase.Schema, tbl.Name), srcColumnNames, joins))
-            using (var translator = new Translator(tbl, srcReader, srcColumns, converter))
-            {
-                _dst.WriteTableData(_dst.GetTableName(tbl.DestinationObjectClass.Module.SchemaName, tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
-                processedRows = translator.ProcessedRows;
-            }
+            ////using (var srcReader = _src.ReadJoin(_src.GetTableName(tbl.StagingDatabase.Schema, tbl.Name), srcColumnNames, joins))
+            ////using (var translator = new Translator(tbl, srcReader, srcColumns, converter))
+            ////{
+            ////    _dst.WriteTableData(_dst.GetTableName(tbl.DestinationObjectClass.Module.SchemaName, tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
+            ////    processedRows = translator.ProcessedRows;
+            ////}
 
-            // count rows in original table, joins should not add or remove rows
-            WriteLog(
-                tbl.Name, _src.CountRows(_src.GetTableName(tbl.StagingDatabase.Schema, tbl.Name)),
-                tbl.DestinationObjectClass.TableName, processedRows);
+            ////// count rows in original table, joins should not add or remove rows
+            ////WriteLog(
+            ////    tbl.Name, _src.CountRows(_src.GetTableName(tbl.StagingDatabase.Schema, tbl.Name)),
+            ////    tbl.DestinationObjectClass.TableName, processedRows);
         }
 
-        private IEnumerable<Join> CreateReferenceJoin(IGrouping<Property, SourceColumn> referenceGroup, Dictionary<SourceColumn, Join> all_joins)
+        private async Task<IEnumerable<Join>> CreateReferenceJoin(IGrouping<Property, SourceColumn> referenceGroup, Dictionary<SourceColumn, Join> all_joins)
         {
             // Create a "fake" intermediate IGrouping of the right type
-            return CreateReferenceJoin(referenceGroup
+            return await CreateReferenceJoin(referenceGroup
                 .Select(g => new KeyValuePair<SourceColumn, SourceColumn>(g, g))
                 .GroupBy(g => referenceGroup.Key)
                 .Single(),
@@ -271,7 +278,7 @@ namespace Zetbox.API.Migration
         }
 
         // recursively create necessary joins to resolve references
-        private IEnumerable<Join> CreateReferenceJoin(IGrouping<Property, KeyValuePair<SourceColumn, SourceColumn>> referenceGroup, Dictionary<SourceColumn, Join> all_joins)
+        private async Task<IEnumerable<Join>> CreateReferenceJoin(IGrouping<Property, KeyValuePair<SourceColumn, SourceColumn>> referenceGroup, Dictionary<SourceColumn, Join> all_joins)
         {
             var secondaryReferences = referenceGroup
                 .Select(r => new KeyValuePair<SourceColumn, SourceColumn>(r.Key, r.Value.References)) // go to referenced SourceColumns
@@ -281,16 +288,15 @@ namespace Zetbox.API.Migration
             var join = CreateJoinComponent(referenceGroup, all_joins);
 
             // add secondary joins for referenced tables
-            foreach (var subJoin in secondaryReferences
+            foreach (var subJoin in await secondaryReferences
                 .GroupBy(r => r.Value.DestinationProperty.Single())
-                .Select(g => new { Property = g.Key, Joins = CreateReferenceJoin(g, all_joins) })
-                .ToArray())
+                .Select(async g => new { Property = g.Key, Joins = await CreateReferenceJoin(g, all_joins) }).WhenAll())
             {
                 foreach (var j in subJoin.Joins)
                 {
                     // Append join columns to primary join
                     join.JoinColumnName = join.JoinColumnName.Concat(new[] { new ColumnRef("ID", j, System.Data.DbType.Int32) }).ToArray();
-                    join.FKColumnName = join.FKColumnName.Concat(new[] { new ColumnRef(GetColName(subJoin.Property), ColumnRef.Local, System.Data.DbType.Int32) }).ToArray();
+                    join.FKColumnName = join.FKColumnName.Concat(new[] { new ColumnRef(await GetColName(subJoin.Property), ColumnRef.Local, System.Data.DbType.Int32) }).ToArray();
                     join.CompareNullsAsEqual = join.CompareNullsAsEqual.Concat(new[] { j.CompareNullsAsEqual[0] }).ToArray();
                     join.Joins.Add(j);
                 }
@@ -317,9 +323,9 @@ namespace Zetbox.API.Migration
             return result;
         }
 
-        private void TableBaseSimpleMigration(SourceTable tbl, Converter[] nullConverter, List<SourceColumn> mappedColumns)
+        private async Task TableBaseSimpleMigration(SourceTable tbl, Converter[] nullConverter, List<SourceColumn> mappedColumns)
         {
-            var dstColumnNames = GetDestinationColumnNames(tbl, mappedColumns);
+            var dstColumnNames = await GetDestinationColumnNames(tbl, mappedColumns);
             var srcColumnNames = mappedColumns.Select(c => c.Name).ToArray();
             var tblRef = _src.GetTableName(tbl.StagingDatabase.Schema, tbl.Name);
 

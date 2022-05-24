@@ -32,10 +32,10 @@ namespace Zetbox.App.GUI
     public static class RangeFilterConfigurationActions
     {
         [Invocation]
-        public static System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.RangeFilterConfiguration obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> e, Zetbox.API.IZetboxContext ctx)
+        public static async System.Threading.Tasks.Task CreateFilterModel(Zetbox.App.GUI.RangeFilterConfiguration obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             var mdl = new RangeFilterModel();
-            mdl.Label = obj.GetLabel();
+            mdl.Label = await obj.GetLabel();
             mdl.Required = obj.Required;
             mdl.RefreshOnFilterChanged = obj.RefreshOnFilterChanged;
             mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
@@ -43,11 +43,9 @@ namespace Zetbox.App.GUI
             mdl.ViewModelType = obj.ViewModelDescriptor;
             mdl.RequestedKind = obj.RequestedKind;
 
-            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(ctx, true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
-            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(ctx, true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(await obj.Property.GetDetachedValueModel(ctx, true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(await obj.Property.GetDetachedValueModel(ctx, true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
             e.Result = mdl;
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

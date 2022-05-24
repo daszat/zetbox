@@ -17,6 +17,7 @@ namespace Zetbox.IntegrationTests.Presentables.Properties
 {
     using System;
     using System.Linq;
+    using System.Threading.Tasks;
     using Autofac;
     using NUnit.Framework;
     using Zetbox.API;
@@ -44,7 +45,7 @@ namespace Zetbox.IntegrationTests.Presentables.Properties
         }
 
         [Test]
-        public void string_property()
+        public async Task string_property()
         {
             var frozenCtx = scope.Resolve<IFrozenContext>();
             var stringProperty = Zetbox.NamedObjects.Base.Classes.Zetbox.App.Test.Muhblah_Properties.TestString.Find(frozenCtx);
@@ -53,7 +54,7 @@ namespace Zetbox.IntegrationTests.Presentables.Properties
             {
                 var obj = ctx.GetQuery<Muhblah>().First();
                 obj.TestString = "some test";
-                var valueViewModel = BaseValueViewModel.Fetch(scope.Resolve<IViewModelFactory>(), ctx, null, stringProperty, stringProperty.GetPropertyValueModel(obj));
+                var valueViewModel = BaseValueViewModel.Fetch(scope.Resolve<IViewModelFactory>(), ctx, null, stringProperty, await stringProperty.GetPropertyValueModel(obj));
 
                 Assert.That(valueViewModel, Is.Not.Null);
                 Assert.That(valueViewModel.ValueModel, Is.Not.Null);
@@ -67,7 +68,7 @@ namespace Zetbox.IntegrationTests.Presentables.Properties
 
         [Test]
         [Ignore("not implemented")]
-        public void stringCollection_property()
+        public async Task stringCollection_property()
         {
             var frozenCtx = scope.Resolve<IFrozenContext>();
             var stringCollectionProperty = Zetbox.NamedObjects.Base.Classes.Zetbox.App.Test.Muhblah_Properties.StringCollection.Find(frozenCtx);
@@ -76,7 +77,7 @@ namespace Zetbox.IntegrationTests.Presentables.Properties
             {
                 var obj = ctx.GetQuery<Muhblah>().First();
                 obj.StringCollection.Add("some test");
-                var valueViewModel = BaseValueViewModel.Fetch(scope.Resolve<IViewModelFactory>(), ctx, null, stringCollectionProperty, stringCollectionProperty.GetPropertyValueModel(obj));
+                var valueViewModel = BaseValueViewModel.Fetch(scope.Resolve<IViewModelFactory>(), ctx, null, stringCollectionProperty, await stringCollectionProperty.GetPropertyValueModel(obj));
 
                 Assert.That(valueViewModel, Is.Not.Null);
                 Assert.That(valueViewModel.ValueModel, Is.Not.Null);

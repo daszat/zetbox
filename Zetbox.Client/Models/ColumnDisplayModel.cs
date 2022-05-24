@@ -29,6 +29,7 @@ namespace Zetbox.Client.Models
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
     using System.Globalization;
+    using System.Threading.Tasks;
 
     public class ColumnDisplayModel
     {
@@ -60,9 +61,9 @@ namespace Zetbox.Client.Models
         /// <param name="header">Label for the list header</param>
         /// <param name="p">list of properties to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, string header, params Property[] p)
+        public static async Task<ColumnDisplayModel> Create(GridDisplayConfiguration.Mode mode, string header, params Property[] p)
         {
-            var colMdl = Create(mode, p);
+            var colMdl = await Create(mode, p);
             colMdl.Header = header;
             return colMdl;
         }
@@ -74,9 +75,9 @@ namespace Zetbox.Client.Models
         /// <param name="requestedWidth">Requested list column width</param>
         /// <param name="p">list of properties to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, WidthHint requestedWidth, params Property[] p)
+        public static async Task<ColumnDisplayModel> Create(GridDisplayConfiguration.Mode mode, WidthHint requestedWidth, params Property[] p)
         {
-            var colMdl = Create(mode, p);
+            var colMdl = await Create(mode, p);
             colMdl.RequestedWidth = requestedWidth;
             return colMdl;
         }
@@ -88,9 +89,9 @@ namespace Zetbox.Client.Models
         /// <param name="requestedWidthAbsoulte">Requested list column width in absolute toolkit units</param>
         /// <param name="p">list of properties to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, int requestedWidthAbsoulte, params Property[] p)
+        public static async Task<ColumnDisplayModel> Create(GridDisplayConfiguration.Mode mode, int requestedWidthAbsoulte, params Property[] p)
         {
-            var colMdl = Create(mode, p);
+            var colMdl = await Create(mode, p);
             colMdl.RequestedWidthAbsolute = requestedWidthAbsoulte;
             return colMdl;
         }
@@ -103,9 +104,9 @@ namespace Zetbox.Client.Models
         /// <param name="requestedWidth">Requested list column width</param>
         /// <param name="p">list of properties to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, string header, WidthHint requestedWidth, params Property[] p)
+        public static async Task<ColumnDisplayModel> Create(GridDisplayConfiguration.Mode mode, string header, WidthHint requestedWidth, params Property[] p)
         {
-            var colMdl = Create(mode, p);
+            var colMdl = await Create(mode, p);
             colMdl.Header = header;
             colMdl.RequestedWidth = requestedWidth;
             return colMdl;
@@ -119,9 +120,9 @@ namespace Zetbox.Client.Models
         /// <param name="requestedWidthAbsoulte">Requested list column width in absolute toolkit units</param>
         /// <param name="p">list of properties to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, string header, int requestedWidthAbsoulte, params Property[] p)
+        public static async Task<ColumnDisplayModel> Create(GridDisplayConfiguration.Mode mode, string header, int requestedWidthAbsoulte, params Property[] p)
         {
-            var colMdl = Create(mode, p);
+            var colMdl = await Create(mode, p);
             colMdl.Header = header;
             colMdl.RequestedWidthAbsolute = requestedWidthAbsoulte;
             return colMdl;
@@ -138,9 +139,9 @@ namespace Zetbox.Client.Models
         /// <param name="requestedWidthAbsolute">Requested list column width in absolute toolkit units</param>
         /// <param name="p">list of properties to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, string header, ControlKind kind, ControlKind gridPreviewKind, WidthHint requestedWidth, int? requestedWidthAbsolute, params Property[] p)
+        public static async Task<ColumnDisplayModel> Create(GridDisplayConfiguration.Mode mode, string header, ControlKind kind, ControlKind gridPreviewKind, WidthHint requestedWidth, int? requestedWidthAbsolute, params Property[] p)
         {
-            var colMdl = Create(mode, p);
+            var colMdl = await Create(mode, p);
             colMdl.Header = header;
             colMdl.ControlKind = kind;
             colMdl.GridPreEditKind = gridPreviewKind ?? kind;
@@ -155,7 +156,7 @@ namespace Zetbox.Client.Models
         /// <param name="mode">Requested mode (readonly, editable)</param>
         /// <param name="p">list of properties to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, params Property[] p)
+        public static async Task<ColumnDisplayModel> Create(GridDisplayConfiguration.Mode mode, params Property[] p)
         {
             if (p == null) throw new ArgumentNullException("p");
             if (p.Length == 0) throw new ArgumentOutOfRangeException("p", "At least one property is requiered");
@@ -164,12 +165,12 @@ namespace Zetbox.Client.Models
 
             var colMdl = new ColumnDisplayModel()
             {
-                Header = string.Join(", ", p.Select(i => i.GetLabel()).ToArray()),
+                Header = string.Join(", ", (await p.Select(async i => await i.GetLabel()).WhenAll()).ToArray()),
                 Path = string.Join(".", p.Select(i => i.Name).ToArray()),
-                DynamicOrderByExpression = FormatDynamicOrderByExpression(p),
+                DynamicOrderByExpression = await FormatDynamicOrderByExpression(p),
                 Property = last,
                 Properties = p,
-                RequestedWidth = p.Last().GetDisplayWidth(),
+                RequestedWidth = await p.Last().GetDisplayWidth(),
                 Type = ColumnType.PropertyModel
             };
             switch (mode)
@@ -186,7 +187,7 @@ namespace Zetbox.Client.Models
             return colMdl;
         }
 
-        public static string FormatDynamicOrderByExpression(params Property[] properties)
+        public static async Task<string> FormatDynamicOrderByExpression(params Property[] properties)
         {
             if (properties == null) return string.Empty;
             if (properties.Length == 0) return string.Empty;
@@ -195,7 +196,7 @@ namespace Zetbox.Client.Models
             while (props.Last() is ObjectReferenceProperty)
             {
                 var refProp = (ObjectReferenceProperty)props.Last();
-                var sortProp = refProp.GetReferencedObjectClass()
+                var sortProp = (await refProp.GetReferencedObjectClass())
                                       .AndParents(c => c.BaseObjectClass)
                                       .SelectMany(c => c.Properties)
                                       .Where(p => p.DefaultSortPriority != null)
@@ -313,9 +314,9 @@ namespace Zetbox.Client.Models
         /// <param name="header">Label for the list header</param>
         /// <param name="m">method to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(string header, Method m)
+        public static async Task<ColumnDisplayModel> Create(string header, Method m)
         {
-            var colMdl = Create(m);
+            var colMdl = await Create(m);
             colMdl.Header = header;
             return colMdl;
         }
@@ -327,9 +328,9 @@ namespace Zetbox.Client.Models
         /// <param name="requestedWidth">Requested list column width</param>
         /// <param name="m">method to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(string header, WidthHint requestedWidth, Method m)
+        public static async Task<ColumnDisplayModel> Create(string header, WidthHint requestedWidth, Method m)
         {
-            var colMdl = Create(m);
+            var colMdl = await Create(m);
             colMdl.Header = header;
             colMdl.RequestedWidth = requestedWidth;
             return colMdl;
@@ -342,9 +343,9 @@ namespace Zetbox.Client.Models
         /// <param name="requestedWidthAbsoulte">Requested list column width in absolute toolkit units</param>
         /// <param name="m">method to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(string header, int requestedWidthAbsoulte, Method m)
+        public static async Task<ColumnDisplayModel> Create(string header, int requestedWidthAbsoulte, Method m)
         {
-            var colMdl = Create(m);
+            var colMdl = await Create(m);
             colMdl.Header = header;
             colMdl.RequestedWidthAbsolute = requestedWidthAbsoulte;
             return colMdl;
@@ -356,9 +357,9 @@ namespace Zetbox.Client.Models
         /// <param name="requestedWidth">Requested list column width</param>
         /// <param name="m">method to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(WidthHint requestedWidth, Method m)
+        public static async Task<ColumnDisplayModel> Create(WidthHint requestedWidth, Method m)
         {
-            var colMdl = Create(m);
+            var colMdl = await Create(m);
             colMdl.RequestedWidth = requestedWidth;
             return colMdl;
         }
@@ -369,9 +370,9 @@ namespace Zetbox.Client.Models
         /// <param name="requestedWidthAbsoulte">Requested list column width in absolute toolkit units</param>
         /// <param name="m">method to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(int requestedWidthAbsoulte, Method m)
+        public static async Task<ColumnDisplayModel> Create(int requestedWidthAbsoulte, Method m)
         {
-            var colMdl = Create(m);
+            var colMdl = await Create(m);
             colMdl.RequestedWidthAbsolute = requestedWidthAbsoulte;
             return colMdl;
         }
@@ -381,12 +382,12 @@ namespace Zetbox.Client.Models
         /// </summary>
         /// <param name="m">method to build column for</param>
         /// <returns>a ready configurated ColumnDisplayModel</returns>
-        public static ColumnDisplayModel Create(Method m)
+        public static async Task<ColumnDisplayModel> Create(Method m)
         {
             if (m == null) throw new ArgumentNullException("m");
             return new ColumnDisplayModel()
             {
-                Header = m.GetLabel(),
+                Header = await m.GetLabel(),
                 Path = m.Name,
                 Type = ColumnDisplayModel.ColumnType.MethodModel,
                 RequestedWidth = WidthHint.Medium,
@@ -533,7 +534,7 @@ namespace Zetbox.Client.Models
             return (categoryTags ?? String.Empty).Split(',', ' ').Contains("Summary");
         }
 
-        private void BuildColumns(Zetbox.App.Base.DataType cls, IEnumerable<Property> props, IEnumerable<Method> methods, Mode mode)
+        private async Task BuildColumns(Zetbox.App.Base.DataType cls, IEnumerable<Property> props, IEnumerable<Method> methods, Mode mode)
         {
             if (cls == null) throw new ArgumentNullException("cls");
             if (props == null) throw new ArgumentNullException("props");
@@ -548,21 +549,21 @@ namespace Zetbox.Client.Models
             }
 
             this.Columns = new ObservableCollection<ColumnDisplayModel>(
-                props.Select(p => ColumnDisplayModel.Create(mode, p))
-                     .Concat(methods.Select(m => ColumnDisplayModel.Create(m)))
+                     (await props.Select(async p => await ColumnDisplayModel.Create(mode, p)).WhenAll())
+                     .Concat(await methods.Select(async m => await ColumnDisplayModel.Create(m)).WhenAll())
                      .ToList()
             );
         }
 
-        public void BuildColumns(Zetbox.App.Base.DataType cls, Mode mode, bool showMethods)
+        public async Task BuildColumns(Zetbox.App.Base.DataType cls, Mode mode, bool showMethods)
         {
             if (cls is ObjectClass)
             {
-                BuildColumns((ObjectClass)cls, mode, showMethods);
+                await BuildColumns((ObjectClass)cls, mode, showMethods);
             }
             else if (cls is CompoundObject)
             {
-                BuildColumns((CompoundObject)cls, mode, showMethods);
+                await BuildColumns((CompoundObject)cls, mode, showMethods);
             }
             else
             {
@@ -570,29 +571,29 @@ namespace Zetbox.Client.Models
             }
         }
 
-        public void BuildColumns(Zetbox.App.Base.CompoundObject cls, Mode mode, bool showMethods)
+        public async Task BuildColumns(Zetbox.App.Base.CompoundObject cls, Mode mode, bool showMethods)
         {
             if (cls == null) throw new ArgumentNullException("cls");
 
-            BuildColumns(cls, cls.Properties, showMethods ? cls.Methods.Where(m => m.IsDisplayable) : new Method[] { }, mode);
+            await BuildColumns(cls, cls.Properties, showMethods ? cls.Methods.Where(m => m.IsDisplayable) : new Method[] { }, mode);
         }
 
-        public void BuildColumns(Zetbox.App.Base.ObjectClass cls, Mode mode, bool showMethods)
+        public async Task BuildColumns(Zetbox.App.Base.ObjectClass cls, Mode mode, bool showMethods)
         {
             if (cls == null) throw new ArgumentNullException("cls");
 
-            var props = cls.GetAllProperties()
+            var props = (await cls.GetAllProperties())
                 .Where(p => ContainsSummaryTag(p.CategoryTags))
                 .ToList();
 
             if (props.Count == 0)
             {
-                props = cls.GetAllProperties().Where(p =>
+                props = (await (await cls.GetAllProperties()).Where(async p =>
                 {
                     var orp = p as ObjectReferenceProperty;
                     if (orp == null) { return true; }
 
-                    switch (orp.RelationEnd.Parent.GetRelationType())
+                    switch (await orp.RelationEnd.Parent.GetRelationType())
                     {
                         case RelationType.n_m:
                             return false; // don't display lists in grids
@@ -604,14 +605,14 @@ namespace Zetbox.Client.Models
                             break; // return false; // something went wrong
                     }
                     return false; // workaround for https://bugzilla.novell.com/show_bug.cgi?id=660569
-                })
+                }))
                 .ToList();
             }
 
-            var methods = cls.GetAllMethods()
+            var methods = (await cls.GetAllMethods())
                 .Where(m => m.IsDisplayable && ContainsSummaryTag(m.CategoryTags));
 
-            BuildColumns(cls, props, showMethods ? methods.ToArray() : new Method[0], mode);
+            await BuildColumns(cls, props, showMethods ? methods.ToArray() : new Method[0], mode);
         }
     }
 }

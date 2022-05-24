@@ -89,9 +89,9 @@ namespace Zetbox.Client.Presentables
             if (_parameterModels == null)
             {
                 FetchParameterList();
-                _parameterModels = new LookupDictionary<BaseParameter, BaseParameter, BaseValueViewModel>(_parameterList, k => k, v =>
+                _parameterModels = new LookupDictionary<BaseParameter, BaseParameter, BaseValueViewModel>(_parameterList, k => k, async v =>
                 {
-                    var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v, v.GetValueModel(DataContext, v.IsNullable));
+                    var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v, await v.GetValueModel(DataContext, v.IsNullable));
                     return result;
                 });
             }
@@ -112,9 +112,21 @@ namespace Zetbox.Client.Presentables
         }
         #endregion
 
+        private string _name;
         public override string Name
         {
-            get { return _method.GetLabel(); }
+            get
+            {
+                Task.Run(async () => await GetName());
+                return _name;
+            }
+        }
+
+        public async Task<string> GetName()
+        {
+            _name = await _method.GetLabel();
+            OnPropertyChanged(nameof(Name));
+            return _name;
         }
 
         #region Commands

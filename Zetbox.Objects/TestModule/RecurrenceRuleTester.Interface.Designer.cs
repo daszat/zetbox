@@ -27,11 +27,11 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-        DateTime GetCurrent(DateTime? dt);
+        System.Threading.Tasks.Task<DateTime> GetCurrent(DateTime? dt);
 
         /// <summary>
         /// 
         /// </summary>
-        DateTime GetNext(DateTime? dt);
+        System.Threading.Tasks.Task<DateTime> GetNext(DateTime? dt);
     }
 }

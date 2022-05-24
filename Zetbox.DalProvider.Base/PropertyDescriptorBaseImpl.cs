@@ -19,6 +19,7 @@ namespace Zetbox.DalProvider.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
 
@@ -49,16 +50,15 @@ namespace Zetbox.DalProvider.Base
             }
         }
 
-        public override string[] GetValidationErrors(object component)
+        public override async Task<string[]> GetValidationErrors(object component)
         {
             if (_property != null)
             {
                 var self = (TComponent)component;
                 var val = getter(self);
-                return _property
-                    .Constraints
-                    .Where(c => !c.IsValid(self, val))
-                    .Select(c => c.GetErrorText(self, val))
+                return (await Task.WhenAll(   
+                        (await _property.Constraints.Where(async c => !(await c.IsValid(self, val))))
+                        .Select(async c => await c.GetErrorText(self, val))))
                     .Concat(TryExecuteIsValidEvent(self))
                     .ToArray();
             }

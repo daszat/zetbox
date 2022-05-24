@@ -19,7 +19,7 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -54,22 +54,22 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
             return prop.ExportGuid.ToString();
         }
 
-        protected override string GetCeClassName()
+        protected override Task<string> GetCeClassName()
         {
-            return prop.GetCollectionEntryClassName();
+            return Task.FromResult(prop.GetCollectionEntryClassName());
         }
 
-        protected override string GetCeInterface()
+        protected override async Task<string> GetCeInterface()
         {
             return String.Format("{0}<{1}, {2}>",
-                IsOrdered() ? "IValueListEntry" : "IValueCollectionEntry",
+                (await IsOrdered()) ? "IValueListEntry" : "IValueCollectionEntry",
                 this.prop.ObjectClass.GetDescribedInterfaceTypeName(),
                 this.prop.GetElementTypeString());
         }
 
-        protected override bool IsOrdered()
+        protected override Task<bool> IsOrdered()
         {
-            return prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((CompoundObjectProperty)prop).HasPersistentOrder;
+            return Task.FromResult(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((CompoundObjectProperty)prop).HasPersistentOrder);
         }
 
         protected override string GetDescription()

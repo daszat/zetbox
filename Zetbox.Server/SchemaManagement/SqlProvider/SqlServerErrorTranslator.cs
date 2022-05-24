@@ -22,6 +22,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
     using Zetbox.API.Server;
     using System.Data.SqlClient;
     using Zetbox.API;
+    using System.Threading.Tasks;
 
     public class SqlServerErrorTranslator : SqlErrorTranslator
     {
@@ -30,13 +31,13 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         {
         }
 
-        public override Exception Translate(Exception ex)
+        public override async Task<Exception> Translate(Exception ex)
         {
             if (ex == null) throw new ArgumentNullException("ex");
 
             if (ex is SqlException)
             {
-                return TranslateSqlServerErrors((SqlException)ex);
+                return await TranslateSqlServerErrors((SqlException)ex);
             }
             else
             {
@@ -44,15 +45,15 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             }
         }
 
-        private Exception TranslateSqlServerErrors(SqlException ex)
+        private async Task<Exception> TranslateSqlServerErrors(SqlException ex)
         {
             if (ex.Errors.OfType<SqlError>().Any(e => e.Number == 2601))
             {
-                return new UniqueConstraintViolationException(ex.Errors.OfType<SqlError>().Where(e => e.Number == 2601).Select(e => ConstructUniqueConstraintDetail(e.Message)).ToList());
+                return new UniqueConstraintViolationException((await ex.Errors.OfType<SqlError>().Where(e => e.Number == 2601).Select(async e => await ConstructUniqueConstraintDetail(e.Message)).WhenAll()).ToList());
             }
             else if (ex.Errors.OfType<SqlError>().Any(e => e.Number == 547))
             {
-                return new FKViolationException(ex.Errors.OfType<SqlError>().Where(e => e.Number == 547).Select(e => ConstructFKDetail(e.Message)).ToList());
+                return new FKViolationException((await ex.Errors.OfType<SqlError>().Where(e => e.Number == 547).Select(e => ConstructFKDetail(e.Message)).WhenAll()).ToList());
             }
             return ex;
         }

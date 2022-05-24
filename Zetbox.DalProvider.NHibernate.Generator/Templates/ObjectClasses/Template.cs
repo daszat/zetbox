@@ -101,10 +101,10 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             var orps = this.ObjectClass
                 .Properties
                 .OfType<ObjectReferenceProperty>()
-                .Where(orp => orp.IsList())
+                .Where(orp => orp.IsList().Result)
                 .Select(orp =>
                 {
-                    var type = orp.GetElementTypeString();
+                    var type = orp.GetElementTypeString().Result;
                     Relation rel = RelationExtensions.Lookup(ctx, orp);
                     if (rel.Storage == StorageType.Separate)
                     {
@@ -112,7 +112,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     }
                     else
                     {
-                        type += ImplementationSuffix + "." + orp.GetReferencedObjectClass().Name + "Proxy";
+                        type += ImplementationSuffix + "." + orp.GetReferencedObjectClass().Result.Name + "Proxy";
                     }
                     return new KeyValuePair<string, string>(orp.Name, String.Format("new Collection<{0}>()", type));
                 });
@@ -137,7 +137,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             var relationPosProperties = ctx.GetQuery<RelationEnd>()
                 .Where(relEnd => relEnd.Type == this.ObjectClass)
                 .ToList()
-                .Where(relEnd => relEnd.Parent.NeedsPositionStorage(relEnd.GetRole()))
+                .Where(relEnd => relEnd.Parent.NeedsPositionStorage(relEnd.GetRole()).Result)
                 .Select(relEnd => new KeyValuePair<string, string>("int?", relEnd.RoleName + Zetbox.API.Helper.PositionSuffix));
 
             // Look for relations where we have no navigator where the storage should be
@@ -177,7 +177,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 .Properties
                 .Select(prop =>
                 {
-                    var type = prop.GetElementTypeString();
+                    var type = prop.GetElementTypeString().Result;
                     var orp = prop as ObjectReferenceProperty;
 
                     // object references have to be translated to internal proxy interfaces
@@ -190,9 +190,9 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                         }
                         else
                         {
-                            type += ImplementationSuffix + "." + orp.GetReferencedObjectClass().Name + "Proxy";
+                            type += ImplementationSuffix + "." + orp.GetReferencedObjectClass().Result.Name + "Proxy";
                         }
-                        if (orp.IsList())
+                        if (orp.IsList().Result)
                         {
                             // always hold as collection, the wrapper has to translate/order the elements
                             type = "ICollection<" + type + ">";
@@ -257,14 +257,14 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             Templates.Serialization.SerializationMembersList serList)
         {
             Properties.ProxyProperty.Call(Host, ctx,
-                serList, prop.Module.Namespace, prop.GetElementTypeString(), prop.Name, false, true,
+                serList, prop.Module.Namespace, prop.GetElementTypeString().Result, prop.Name, false, true,
                 prop.DefaultValue != null && !prop.IsCalculated(), // No default value for calculated properties, default values are used then for database migration
-                prop.ObjectClass.GetDataTypeString(),
+                prop.ObjectClass.GetDataTypeString().Result,
                 prop.GetClassName(),
-                prop.IsNullable(),
+                prop.IsNullable().Result,
                 "_is" + prop.Name + "Set",
                 prop.ExportGuid,
-                prop.GetElementTypeString(),
+                prop.GetElementTypeString().Result,
                 "Proxy." + prop.Name,
                 prop.IsCalculated(),
                 prop.DisableExport == true);
@@ -273,7 +273,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         protected override void ApplyCollectionEntryListTemplate(ObjectReferenceProperty prop)
         {
             var rel = RelationExtensions.Lookup(ctx, prop);
-            var relEnd = rel.GetEnd(prop);
+            var relEnd = rel.GetEnd(prop).Result;
             //var otherEnd = rel.GetOtherEnd(relEnd);
 
             Properties.CollectionEntryListProperty.Call(Host, ctx,
@@ -310,7 +310,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     prop.Module.Namespace,
                     prop.Name,
                     "Proxy." + prop.Name,
-                    prop.GetElementTypeString(),
+                    prop.GetElementTypeString().Result,
                     "_is" + prop.Name + "Set");
             }
             else
@@ -320,7 +320,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     prop.Module.Namespace,
                     prop.Name,
                     "Proxy." + prop.Name,
-                    prop.GetElementTypeString());
+                    prop.GetElementTypeString().Result);
             }
         }
 

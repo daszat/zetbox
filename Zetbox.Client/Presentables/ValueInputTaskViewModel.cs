@@ -159,7 +159,7 @@ namespace Zetbox.Client.Presentables
 
         private Dictionary<object, object> ExtractValues()
         {
-            var parameter = _valueModels.ToDictionary(k => k.Item1, i => i.Item2.ValueModel.GetUntypedValue());
+            var parameter = _valueModels.ToDictionary(k => k.Item1, i => i.Item2.ValueModel.GetUntypedValue().Result);
             return parameter;
         }
 

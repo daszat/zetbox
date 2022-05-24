@@ -834,12 +834,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetCurrent_RecurrenceRule")]
-        public virtual DateTime GetCurrent(DateTime start)
+        public virtual async System.Threading.Tasks.Task<DateTime> GetCurrent(DateTime start)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnGetCurrent_RecurrenceRule != null)
             {
-                OnGetCurrent_RecurrenceRule(this, e, start);
+                await OnGetCurrent_RecurrenceRule(this, e, start);
             }
             else
             {
@@ -898,12 +898,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetCurrent1_RecurrenceRule")]
-        public virtual DateTime GetCurrent(DateTime start, DateTime dt)
+        public virtual async System.Threading.Tasks.Task<DateTime> GetCurrent(DateTime start, DateTime dt)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnGetCurrent1_RecurrenceRule != null)
             {
-                OnGetCurrent1_RecurrenceRule(this, e, start, dt);
+                await OnGetCurrent1_RecurrenceRule(this, e, start, dt);
             }
             else
             {
@@ -919,12 +919,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetNext_RecurrenceRule")]
-        public virtual DateTime GetNext(DateTime start)
+        public virtual async System.Threading.Tasks.Task<DateTime> GetNext(DateTime start)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnGetNext_RecurrenceRule != null)
             {
-                OnGetNext_RecurrenceRule(this, e, start);
+                await OnGetNext_RecurrenceRule(this, e, start);
             }
             else
             {
@@ -983,12 +983,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetNext1_RecurrenceRule")]
-        public virtual DateTime GetNext(DateTime start, DateTime dt)
+        public virtual async System.Threading.Tasks.Task<DateTime> GetNext(DateTime start, DateTime dt)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnGetNext1_RecurrenceRule != null)
             {
-                OnGetNext1_RecurrenceRule(this, e, start, dt);
+                await OnGetNext1_RecurrenceRule(this, e, start, dt);
             }
             else
             {
@@ -1004,12 +1004,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetRelative_RecurrenceRule")]
-        public virtual DateTime GetRelative(DateTime dt)
+        public virtual async System.Threading.Tasks.Task<DateTime> GetRelative(DateTime dt)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnGetRelative_RecurrenceRule != null)
             {
-                OnGetRelative_RecurrenceRule(this, e, dt);
+                await OnGetRelative_RecurrenceRule(this, e, dt);
             }
             else
             {
@@ -1068,12 +1068,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetWithinInterval_RecurrenceRule")]
-        public virtual IEnumerable<DateTime> GetWithinInterval(DateTime start, DateTime from, DateTime until)
+        public virtual async System.Threading.Tasks.Task<IEnumerable<DateTime>> GetWithinInterval(DateTime start, DateTime from, DateTime until)
         {
             var e = new MethodReturnEventArgs<IEnumerable<DateTime>>();
             if (OnGetWithinInterval_RecurrenceRule != null)
             {
-                OnGetWithinInterval_RecurrenceRule(this, e, start, from, until);
+                await OnGetWithinInterval_RecurrenceRule(this, e, start, from, until);
             }
             else
             {

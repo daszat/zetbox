@@ -108,24 +108,21 @@ namespace Zetbox.Client.Presentables.Calendar
                     OnPropertyChanged("NextEvents");
                     OnPropertyChanged("NextEventsAsync");
                 },
-                createTask: () =>
+                createTask: async () =>
                 {
-                    return Task.Run(async () =>
-                    {
-                        var now = DateTime.Now;
-                        var tomorrow = now.Date.AddDays(2).AddSeconds(-1); // I know.... :-(
+                    var now = DateTime.Now;
+                    var tomorrow = now.Date.AddDays(2).AddSeconds(-1); // I know.... :-(
 
-                        var fetchCalendar = await FetchCalendar();
-                        _fetchCache.SetCalendars(fetchCalendar);
-                        var fetchTaskFactory = await _fetchCache.FetchEventsAsync(now, tomorrow);
+                    var fetchCalendar = await FetchCalendar();
+                    _fetchCache.SetCalendars(fetchCalendar);
+                    var fetchTaskFactory = await _fetchCache.FetchEventsAsync(now, tomorrow);
 
-                        return (IEnumerable<CalendarItemViewModel>)fetchTaskFactory
-                            .SelectMany(e => e.CreateCalendarItemViewModels(now, tomorrow))
-                            .OrderBy(i => i.From.Date)
-                            .ThenByDescending(i => i.IsAllDay)
-                            .ThenBy(i => i.From.TimeOfDay)
-                            .ToList();
-                    });
+                    var lst = await fetchTaskFactory.SelectMany(e => e.CreateCalendarItemViewModels(now, tomorrow));
+                    return lst
+                        .OrderBy(i => i.From.Date)
+                        .ThenByDescending(i => i.IsAllDay)
+                        .ThenBy(i => i.From.TimeOfDay)
+                        .ToList();
                 },
                 set: (IEnumerable<CalendarItemViewModel> value) =>
                 {
@@ -230,7 +227,7 @@ namespace Zetbox.Client.Presentables.Calendar
             var newScope = ViewModelFactory.CreateNewScope();
             var newCtx = newScope.ViewModelFactory.CreateNewContext();
 
-            var source = SelectedItem.Event.Source.GetObject(newCtx);
+            var source = await SelectedItem.Event.Source.GetObject(newCtx);
             if (source != null && !source.CurrentAccessRights.HasReadRights())
             {
                 ViewModelFactory.ShowMessage(CalendarResources.CannotOpenNoRightsMessage, CalendarResources.CannotOpenNoRightsCaption);

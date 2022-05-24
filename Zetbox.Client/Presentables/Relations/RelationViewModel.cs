@@ -19,6 +19,7 @@ namespace Zetbox.Client.Presentables.Relations
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.App.Base;
@@ -73,7 +74,7 @@ namespace Zetbox.Client.Presentables.Relations
             get
             {
                 if (!IsFullyDefined) return string.Empty;
-                return FormatNavigatorDescription(_relation.A, _relation.B.Type);
+                return FormatNavigatorDescription(_relation.A, _relation.B.Type).Result;
             }
         }
 
@@ -82,22 +83,22 @@ namespace Zetbox.Client.Presentables.Relations
             get
             {
                 if (!IsFullyDefined) return string.Empty;
-                return FormatNavigatorDescription(_relation.B, _relation.A.Type);
+                return FormatNavigatorDescription(_relation.B, _relation.A.Type).Result;
             }
         }
 
-        private static string FormatNavigatorDescription(RelationEnd relEnd, ObjectClass refType)
+        private static async Task<string> FormatNavigatorDescription(RelationEnd relEnd, ObjectClass refType)
         {
             var rel = relEnd.Parent;
-            var otherEnd = rel.GetOtherEnd(relEnd);
+            var otherEnd = await rel.GetOtherEnd(relEnd);
             var prop = relEnd.Navigator;
 
             if (prop == null) return string.Format("No Navigator for {0} defined", string.IsNullOrEmpty(relEnd.RoleName) ? (object)relEnd.GetRole() : relEnd.RoleName);
-            if (prop.GetIsList())
+            if (await prop.GetIsList())
             {
-                return string.Format("Navigator {1}.{2} is a {3}<{0}>", refType.Name, prop.ObjectClass.Name, prop.Name, rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection");
+                return string.Format("Navigator {1}.{2} is a {3}<{0}>", refType.Name, prop.ObjectClass.Name, prop.Name, await rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection");
             }
-            if (prop.IsNullable()) return string.Format("Navigator {1}.{2} is a nullable reference to {0}", refType.Name, prop.ObjectClass.Name, prop.Name);
+            if (await prop.IsNullable()) return string.Format("Navigator {1}.{2} is a nullable reference to {0}", refType.Name, prop.ObjectClass.Name, prop.Name);
             return string.Format("Navigator {1}.{2} is a required reference to {0}", refType.Name, prop.ObjectClass.Name, prop.Name);
         }
 

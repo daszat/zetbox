@@ -37,11 +37,11 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// 
         /// </summary>
-        void PerformSync();
+        System.Threading.Tasks.Task PerformSync();
 
         /// <summary>
         /// Schedules the next sync immediately
         /// </summary>
-        void ScheduleSyncNow();
+        System.Threading.Tasks.Task ScheduleSyncNow();
     }
 }

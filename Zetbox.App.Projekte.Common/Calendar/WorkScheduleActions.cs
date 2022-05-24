@@ -18,7 +18,7 @@ namespace Zetbox.App.Calendar
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using System.Threading.Tasks;
     using Zetbox.API;
     using Zetbox.API.Utils;
 
@@ -34,35 +34,27 @@ namespace Zetbox.App.Calendar
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetWorkingHours(WorkSchedule obj, MethodReturnEventArgs<System.Decimal> e, System.DateTime from, System.DateTime until)
+        public static async System.Threading.Tasks.Task GetWorkingHours(WorkSchedule obj, MethodReturnEventArgs<System.Decimal> e, System.DateTime from, System.DateTime until)
         {
-            e.Result = Calc(obj, from, until, CalcModes.WorkingHours);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            e.Result = await Calc(obj, from, until, CalcModes.WorkingHours);
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetWorkingDays(WorkSchedule obj, MethodReturnEventArgs<System.Int32> e, System.DateTime from, System.DateTime until)
+        public static async System.Threading.Tasks.Task GetWorkingDays(WorkSchedule obj, MethodReturnEventArgs<System.Int32> e, System.DateTime from, System.DateTime until)
         {
-            e.Result = (int)Calc(obj, from, until, CalcModes.WorkingDays);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            e.Result = (int)await Calc(obj, from, until, CalcModes.WorkingDays);
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetOffDays(WorkSchedule obj, MethodReturnEventArgs<System.Int32> e, System.DateTime from, System.DateTime until)
+        public static async System.Threading.Tasks.Task GetOffDays(WorkSchedule obj, MethodReturnEventArgs<System.Int32> e, System.DateTime from, System.DateTime until)
         {
-            e.Result = (int)Calc(obj, from, until, CalcModes.OffDays);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            e.Result = (int)await Calc(obj, from, until, CalcModes.OffDays);
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetHolidays(WorkSchedule obj, MethodReturnEventArgs<int> e, DateTime from, DateTime until)
+        public static async System.Threading.Tasks.Task GetHolidays(WorkSchedule obj, MethodReturnEventArgs<int> e, DateTime from, DateTime until)
         {
-            e.Result = (int)Calc(obj, from, until, CalcModes.Holidays);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            e.Result = (int)await Calc(obj, from, until, CalcModes.Holidays);
         }
 
         private enum CalcModes
@@ -86,7 +78,7 @@ namespace Zetbox.App.Calendar
             return result;
         }
 
-        private static decimal Calc(WorkSchedule obj, DateTime from, DateTime until, CalcModes what)
+        private static async Task<decimal> Calc(WorkSchedule obj, DateTime from, DateTime until, CalcModes what)
         {
             decimal result = 0;
             var rules = obj.RulesAndParents();
@@ -95,9 +87,9 @@ namespace Zetbox.App.Calendar
             {
                 WorkScheduleRule foundRule = null;
                 // Find YearlyRule
-                var yearlyRule = rules.OfType<YearlyWorkScheduleRule>().FirstOrDefault(r => r.AppliesTo(from));
+                var yearlyRule = (await rules.OfType<YearlyWorkScheduleRule>().Where(async r => await r.AppliesTo(from))).FirstOrDefault();
                 // Find DayOfWeekRule
-                var dayOfWeekRule = rules.OfType<DayOfWeekWorkScheduleRule>().FirstOrDefault(r => r.AppliesTo(from));
+                var dayOfWeekRule = (await rules.OfType<DayOfWeekWorkScheduleRule>().Where(async r => await r.AppliesTo(from))).FirstOrDefault();
 
                 if (yearlyRule == null)
                 {
@@ -124,7 +116,7 @@ namespace Zetbox.App.Calendar
                 if (foundRule == null)
                 {
                     // Find CommonRule
-                    foundRule = rules.OfType<CommonWorkScheduleRule>().FirstOrDefault(r => r.AppliesTo(from));
+                    foundRule = (await rules.OfType<CommonWorkScheduleRule>().Where(async r => await r.AppliesTo(from))).FirstOrDefault();
                 }
 
                 if (foundRule != null)
