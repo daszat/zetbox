@@ -599,6 +599,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_displayedColumns == null)
                 {
+                    _displayedColumns = new GridDisplayConfiguration();
                     Task.Run(async () => await CreateDisplayedColumns());
                 }
                 return _displayedColumns;
@@ -645,6 +646,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 await temp(result);
             }
 
+            _displayedColumns = result;
             OnPropertyChanged(nameof(DisplayedColumns));
 
             return result;

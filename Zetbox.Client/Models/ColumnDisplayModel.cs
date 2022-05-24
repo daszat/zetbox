@@ -239,7 +239,7 @@ namespace Zetbox.Client.Models
                     result.Append("!=null?").Append(propsPath).Append(".ID:-1");
                 }
             }
-            else if(result.Length == 0)
+            else if (result.Length == 0)
             {
                 // it's a list
                 propsPath.Append('.').Append(lastProp.Name);
@@ -523,7 +523,7 @@ namespace Zetbox.Client.Models
         public bool ShowIcon { get; set; }
         public bool ShowName { get; set; }
 
-        public ObservableCollection<ColumnDisplayModel> Columns { get; private set; }
+        public ObservableCollection<ColumnDisplayModel> Columns { get; private set; } = new ObservableCollection<ColumnDisplayModel>();
 
         public GridDisplayConfiguration()
         {
@@ -547,12 +547,12 @@ namespace Zetbox.Client.Models
                 ShowId = cls.ShowIdInLists;
                 ShowName = cls.ShowNameInLists;
             }
-
-            this.Columns = new ObservableCollection<ColumnDisplayModel>(
-                     (await props.Select(async p => await ColumnDisplayModel.Create(mode, p)).WhenAll())
-                     .Concat(await methods.Select(async m => await ColumnDisplayModel.Create(m)).WhenAll())
-                     .ToList()
-            );
+            this.Columns.Clear();
+            foreach (var col in (await props.Select(async p => await ColumnDisplayModel.Create(mode, p)).WhenAll())
+                     .Concat(await methods.Select(async m => await ColumnDisplayModel.Create(m)).WhenAll()))
+            {
+                this.Columns.Add(col);
+            }
         }
 
         public async Task BuildColumns(Zetbox.App.Base.DataType cls, Mode mode, bool showMethods)

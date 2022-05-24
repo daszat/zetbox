@@ -53,7 +53,7 @@ namespace Zetbox.API.Server
 
         public IEnumerator<T> GetEnumerator()
         {
-            return ((IEnumerable<T>)_provider.ExecuteEnumerable(this._expression)).GetEnumerator();
+            return ((IEnumerable<T>)_provider.ExecuteEnumerable(this._expression).Result).GetEnumerator();
         }
 
         IEnumerator System.Collections.IEnumerable.GetEnumerator()

@@ -63,7 +63,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
                     if (pce.PropertyName == "ViewMethod") ApplyViewMethod();
                     if (pce.PropertyName == "DisplayedColumns")
                     {
-                        if (ViewModel != null)
+                        if (ViewModel?.DisplayedColumns != null)
                         {
                             ViewModel.DisplayedColumns.Columns.CollectionChanged += (sncc, ncc) => ApplyColumns();
                             ApplyColumns();

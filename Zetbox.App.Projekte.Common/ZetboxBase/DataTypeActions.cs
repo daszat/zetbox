@@ -41,11 +41,9 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetDataType(DataType obj, Zetbox.API.MethodReturnEventArgs<System.Type> e)
+        public static async System.Threading.Tasks.Task GetDataType(DataType obj, Zetbox.API.MethodReturnEventArgs<System.Type> e)
         {
-            e.Result = Type.GetType(obj.GetDataTypeString() + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
-
-            return System.Threading.Tasks.Task.CompletedTask;
+            e.Result = Type.GetType(await obj.GetDataTypeString() + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
         }
 
         [Invocation]
