@@ -55,9 +55,9 @@
 <% IdGeneratorHbm.Call(Host, "id", schemaName, tableName); %>
 
         <many-to-one name="A"
-                     column="`<%= Construct.ForeignKeyColumnName(rel.A) %>`" />
+                     column="`<%= Construct.ForeignKeyColumnName(rel.A).Result %>`" />
         <many-to-one name="B"
-                     column="`<%= Construct.ForeignKeyColumnName(rel.B) %>`" />
+                     column="`<%= Construct.ForeignKeyColumnName(rel.B).Result %>`" />
 <% if (rel.NeedsPositionStorage(RelationEndRole.A).Result) { %>
         <property name="A<%= Zetbox.API.Helper.PositionSuffix %>"
                     column="`<%= Construct.ListPositionColumnName(rel.B) %>`" />
@@ -86,7 +86,7 @@
         var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
         var schemaName = prop.Module.SchemaName;
         var tableName = prop.GetCollectionEntryTable();
-        var ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop);
+        var ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop).Result;
 %>
     <class name="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
            proxy="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
@@ -124,7 +124,7 @@
         var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
         var schemaName = prop.Module.SchemaName;
         var tableName = prop.GetCollectionEntryTable();
-        var ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop);
+        var ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop).Result;
 %>
     <class name="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
            proxy="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"

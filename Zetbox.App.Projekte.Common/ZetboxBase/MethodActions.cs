@@ -116,7 +116,7 @@ namespace Zetbox.App.Base
             foreach (var param in obj.Parameter.Where(p => !p.IsReturnParameter))
             {
                 sb.AppendFormat(", {0} {1}",
-                    param.GetParameterTypeString(),
+                    await param.GetParameterTypeString(),
                     param.Name);
             }
 
@@ -132,15 +132,13 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetName(Method obj, MethodReturnEventArgs<string> e)
+        public static async System.Threading.Tasks.Task GetName(Method obj, MethodReturnEventArgs<string> e)
         {
             var cls = obj.ObjectClass as ObjectClass;
             if (cls != null)
             {
-                e.Result = string.Format("{0}_Methods.{1}", cls.GetName(), obj.Name);
+                e.Result = string.Format("{0}_Methods.{1}", await cls.GetName(), obj.Name);
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

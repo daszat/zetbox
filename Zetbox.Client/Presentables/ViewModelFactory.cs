@@ -309,7 +309,8 @@ namespace Zetbox.Client.Presentables
             }
             else
             {
-                throw new NotImplementedException(String.Format("==>> No model for parameter '{0}' with type '{1}'", param, param.GetParameterTypeString()));
+                // TODO: .Result
+                throw new NotImplementedException(String.Format("==>> No model for parameter '{0}' with type '{1}'", param, param.GetParameterTypeString().Result));
             }
 
             return CreateViewModel<TModelFactory>(ResolveFactory(t));

@@ -66,7 +66,7 @@
 <%          } %>
 <%      } else { %>
             if (me.<%= propName %> == null && other.<%= propName %> != null) {
-                me.<%= propName %> = (<%= prop.GetElementTypeString() %>)other.<%= propName %>.Clone();
+                me.<%= propName %> = (<%= prop.GetElementTypeString().Result %>)other.<%= propName %>.Clone();
             } else if (me.<%= propName %> != null && other.<%= propName %> == null) {
                 me.<%= propName %> = null;
             } else if (me.<%= propName %> != null && other.<%= propName %> != null) {

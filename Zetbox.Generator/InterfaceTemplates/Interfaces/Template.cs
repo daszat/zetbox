@@ -158,11 +158,11 @@ namespace Zetbox.Generator.InterfaceTemplates.Interfaces
         protected virtual void ApplyMethodTemplate(Zetbox.App.Base.Method m, int index)
         {
             var returnParam = m.Parameter.SingleOrDefault(p => p.IsReturnParameter);
-            var returnString = returnParam == null ? "System.Threading.Tasks.Task" : $"System.Threading.Tasks.Task<{returnParam.GetParameterTypeString()}>";
+            var returnString = returnParam == null ? "System.Threading.Tasks.Task" : $"System.Threading.Tasks.Task<{returnParam.GetParameterTypeString().Result}>";
             var name = m.Name;
             var args = String.Join(", ", m.Parameter
                 .Where(p => !p.IsReturnParameter)
-                .Select(p => p.GetParameterTypeString() + " " + p.Name)
+                .Select(p => p.GetParameterTypeString().Result + " " + p.Name)
                 .ToArray());
 
             this.WriteLine("        {0} {1}({2});", returnString, name, args);

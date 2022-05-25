@@ -71,7 +71,7 @@ namespace Zetbox.Generator.Templates.ObjectClasses
             }
             else
             {
-                return $"System.Threading.Tasks.Task<{ret.GetParameterTypeString()}>";
+                return $"System.Threading.Tasks.Task<{ret.GetParameterTypeString().Result}>";
             }
         }
 
@@ -91,12 +91,12 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         protected virtual string GetParameterDefinition(BaseParameter param)
         {
-            return param.GetParameterDefinition();
+            return param.GetParameterDefinition().Result;
         }
 
         protected virtual string GetParameterDefinitions()
         {
-            return m.GetParameterDefinitions();
+            return m.GetParameterDefinitions().Result;
         }
 
         protected virtual void ApplyBodyTemplate()

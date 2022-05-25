@@ -80,7 +80,7 @@ namespace Zetbox.Client.Models
             }
             else
             {
-                Logging.Log.WarnFormat("No model for parameter '{0}' of type '{1}'", parameter, parameter.GetParameterTypeString());
+                Logging.Log.WarnFormat("No model for parameter '{0}' of type '{1}'", parameter, await parameter.GetParameterTypeString());
                 return null;
             }
         }

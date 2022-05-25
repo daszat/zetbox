@@ -45,7 +45,7 @@ namespace <%= module.Namespace %>
     /// <%= UglyXmlEncode(GetDescription()) %>
     /// </summary>
     [Zetbox.API.DefinitionGuid("<%= GetDefinitionGuid() %>")]
-    public interface <%= GetCeClassName() %> : <%= GetCeInterface() %> 
+    public interface <%= GetCeClassName() %> : <%= GetCeInterface().Result %> 
     {
 
     }

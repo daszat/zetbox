@@ -105,7 +105,7 @@ namespace Zetbox.Generator.Templates
             if (!p.IsCalculated())
             {
                 this.WriteLine();
-                this.WriteObjects("        public static event PropertyIsValidHandler<", p.ObjectClass.GetDataTypeString(), "> On", p.Name, "_IsValid;");
+                this.WriteObjects("        public static event PropertyIsValidHandler<", p.ObjectClass.GetDataTypeString().Result, "> On", p.Name, "_IsValid;");
                 this.WriteLine();
             }
         }

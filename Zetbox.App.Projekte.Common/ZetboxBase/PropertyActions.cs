@@ -110,7 +110,7 @@ namespace Zetbox.App.Base
             else
             {
                 e.Result = String.Format("{0} {1}.{2}",
-                    obj.GetPropertyTypeString(),
+                    await obj.GetPropertyTypeString(),
                     cls.Name,
                     obj.Name);
             }
@@ -175,15 +175,13 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task GetName(Property obj, MethodReturnEventArgs<string> e)
+        public static async System.Threading.Tasks.Task GetName(Property obj, MethodReturnEventArgs<string> e)
         {
             var cls = obj.ObjectClass as ObjectClass;
             if (cls != null)
             {
-                e.Result = string.Format("{0}_Properties.{1}", cls.GetName(), obj.Name);
+                e.Result = string.Format("{0}_Properties.{1}", await cls.GetName(), obj.Name);
             }
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
 
         [Invocation]

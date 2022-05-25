@@ -80,7 +80,7 @@ namespace Zetbox.Generator.Templates.Properties
         /// <returns>an expression which can be used to initialise the backing store</returns>
         protected virtual string GetInitialisationExpression()
         {
-            return String.Format("new List<{0}>()", property.GetPropertyTypeString());
+            return String.Format("new List<{0}>()", property.GetPropertyTypeString().Result);
         }
     }
 }

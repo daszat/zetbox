@@ -54,9 +54,9 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
             return rel.ExportGuid.ToString();
         }
 
-        protected override Task<string> GetCeClassName()
+        protected override string GetCeClassName()
         {
-            return Task.FromResult(rel.GetRelationClassName());
+            return rel.GetRelationClassName();
         }
 
         protected virtual bool IsExportable()

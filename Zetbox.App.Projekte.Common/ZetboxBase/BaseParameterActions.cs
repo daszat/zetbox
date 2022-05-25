@@ -64,18 +64,16 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
-        public static System.Threading.Tasks.Task ToString(BaseParameter obj, MethodReturnEventArgs<string> e)
+        public static async System.Threading.Tasks.Task ToString(BaseParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = string.Format("{0}{1} {2}",
                 obj.IsReturnParameter
                     ? "[Return] "
                     : String.Empty,
-                obj.GetParameterTypeString(),
+                await obj.GetParameterTypeString(),
                 obj.Name);
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
-
-            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

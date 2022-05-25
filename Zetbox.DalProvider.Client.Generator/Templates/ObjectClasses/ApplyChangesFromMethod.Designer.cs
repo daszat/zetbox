@@ -103,7 +103,7 @@ this.WriteObjects("            SynchronizeCollections(this._",  propName , "Coll
 } else { 
 #line 68 "D:\Projects\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            if (me.",  propName , " == null && other.",  propName , " != null) {\r\n");
-this.WriteObjects("                me.",  propName , " = (",  prop.GetElementTypeString() , ")other.",  propName , ".Clone();\r\n");
+this.WriteObjects("                me.",  propName , " = (",  prop.GetElementTypeString().Result , ")other.",  propName , ".Clone();\r\n");
 this.WriteObjects("            } else if (me.",  propName , " != null && other.",  propName , " == null) {\r\n");
 this.WriteObjects("                me.",  propName , " = null;\r\n");
 this.WriteObjects("            } else if (me.",  propName , " != null && other.",  propName , " != null) {\r\n");

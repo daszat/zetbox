@@ -25,22 +25,23 @@ namespace Zetbox.Generator.Extensions
 
     public static class MethodExtensions
     {
-        public static string GetParameterDefinitions(this Method method)
+        public static async Task<string> GetParameterDefinitions(this Method method)
         {
             if (method == null) { throw new ArgumentNullException("method"); }
 
             return String.Join(", ",
-                method.Parameter
+                (await method.Parameter
                 .Where(p => !p.IsReturnParameter)
-                .Select(p => GetParameterDefinition(p))
+                .Select(async p => await GetParameterDefinition(p))
+                .WhenAll())
                 .ToArray());
         }
 
-        public static string GetParameterDefinition(this BaseParameter param)
+        public static async Task<string> GetParameterDefinition(this BaseParameter param)
         {
             if (param == null) { throw new ArgumentNullException("param"); }
 
-            return String.Format("{0} {1}", param.GetParameterTypeString(), param.Name);
+            return String.Format("{0} {1}", await param.GetParameterTypeString(), param.Name);
         }
 
         public static string GetArguments(this Method method)

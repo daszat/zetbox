@@ -67,16 +67,16 @@ namespace Zetbox.Generator.Templates.CollectionEntries
                 return String.Format("{0}.CompoundCollectionEntry{1}<{2}, {2}{1}, {3}, {3}{1}>",
                     ImplementationNamespace,
                     ImplementationSuffix,
-                    prop.ObjectClass.GetDataTypeString(),
-                    prop.GetElementTypeString());
+                    prop.ObjectClass.GetDataTypeString().Result,
+                    prop.GetElementTypeString().Result);
             }
             else
             {
                 return String.Format("{0}.ValueCollectionEntry{1}<{2}, {2}{1}, {3}>",
                     ImplementationNamespace,
                     ImplementationSuffix,
-                    prop.ObjectClass.GetDataTypeString(),
-                    prop.GetElementTypeString());
+                    prop.ObjectClass.GetDataTypeString().Result,
+                    prop.GetElementTypeString().Result);
             }
         }
 
@@ -159,7 +159,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
             if (prop is CompoundObjectProperty)
             {
                 this.WriteLine("            if (me.Value == null && other.Value != null) {");
-                this.WriteLine("                me.Value = ({0})other.Value.Clone();", prop.GetElementTypeString());
+                this.WriteLine("                me.Value = ({0})other.Value.Clone();", prop.GetElementTypeString().Result);
                 this.WriteLine("            } else if (me.Value != null && other.Value == null) {");
                 this.WriteLine("                me.Value = null;");
                 this.WriteLine("            } else if (me.Value != null && other.Value != null) {");

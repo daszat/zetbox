@@ -118,7 +118,7 @@ namespace Zetbox.Client.Models
             }
             else
             {
-                throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
+                throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", await prop.GetPropertyTypeString()));
             }
         }
 
@@ -189,7 +189,7 @@ namespace Zetbox.Client.Models
                 return new CompoundObjectValueModel(ctx, lb, description, allowNullInput, false, rk, ((CompoundObjectProperty)prop).CompoundObjectDefinition);
             }
 
-            throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
+            throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", await prop.GetPropertyTypeString()));
         }
     }
 

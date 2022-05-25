@@ -58,7 +58,7 @@ this.WriteObjects("        ",  GetModifiers() , " async ",  GetReturnType() , " 
 string delegateName = m.Name + indexSuffix + "_Handler";
     var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
-    string parameterDefs = m.GetParameterDefinitions();
+    string parameterDefs = m.GetParameterDefinitions().Result;
     if (!String.IsNullOrEmpty(parameterDefs))
     {
         // add leading comma for later usage
@@ -116,7 +116,7 @@ this.WriteObjects("        public delegate System.Threading.Tasks.Task ",  deleg
     else
     {
 
-        string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.GetParameterTypeString());
+        string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.GetParameterTypeString().Result);
 
 #line 104 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        {\r\n");

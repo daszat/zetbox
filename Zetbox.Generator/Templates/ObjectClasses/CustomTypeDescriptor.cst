@@ -64,7 +64,7 @@
             {
 %>
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new <%= propertyDescriptorName %><<%= ifName %>, <%= property.GetPropertyTypeString() %>>(
+                    new <%= propertyDescriptorName %><<%= ifName %>, <%= property.GetPropertyTypeString().Result %>>(
                         lazyCtx,
                         new Guid("<%= property.ExportGuid %>"),
                         "<%= propertyName %>",
@@ -74,7 +74,7 @@
                         obj => On<%= propertyName %>_IsValid), 
 <%          } else if (property is CalculatedObjectReferenceProperty) { %>
                     // property is CalculatedObjectReferenceProperty
-                    new <%= propertyDescriptorName %><<%= ifName %>, <%= property.GetPropertyTypeString() %>>(
+                    new <%= propertyDescriptorName %><<%= ifName %>, <%= property.GetPropertyTypeString().Result %>>(
                         lazyCtx,
                         new Guid("<%= property.ExportGuid %>"),
                         "<%= propertyName %>",
@@ -85,7 +85,7 @@
 <%          } else { %>
 <%              var isReadonly = (property is ValueTypeProperty) && ((ValueTypeProperty)property).IsCalculated; %>
                     // else
-                    new <%= propertyDescriptorName %><<%= ifName %>, <%= property.GetPropertyTypeString() %>>(
+                    new <%= propertyDescriptorName %><<%= ifName %>, <%= property.GetPropertyTypeString().Result %>>(
                         lazyCtx,
                         new Guid("<%= property.ExportGuid %>"),
                         "<%= propertyName %>",

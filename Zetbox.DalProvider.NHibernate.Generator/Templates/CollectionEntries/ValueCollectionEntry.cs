@@ -90,7 +90,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                         "Value",
                         "this.Proxy.Value",
                         prop.GetElementTypeString().Result,
-                        prop.GetElementTypeString() + ImplementationSuffix)
+                        prop.GetElementTypeString().Result + ImplementationSuffix)
                 }
                 : new ObjectClasses.Constructors.CompoundInitialisationDescriptor[0];
             ObjectClasses.Constructors.Call(Host, ctx,

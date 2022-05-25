@@ -29,7 +29,7 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
     {
         protected abstract string GetDefinitionGuid();
 
-        protected abstract Task<string> GetCeClassName();
+        protected abstract string GetCeClassName();
 
         /// <returns>which CollectionEntry interface to implement.</returns>
         protected abstract Task<string> GetCeInterface();

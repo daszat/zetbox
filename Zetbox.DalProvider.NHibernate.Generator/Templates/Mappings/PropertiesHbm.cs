@@ -47,7 +47,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 case RelationType.one_one:
                     if (rel.HasStorage(relEnd.GetRole()).Result)
                     {
-                        string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix));
+                        string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix).Result);
                         this.WriteObjects("        <many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " unique=\"true\" ");
                         // do not cascade if the other end is optional
                         // this let's NHibernate choose a sensible order for persisting entities
@@ -82,7 +82,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                             //this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
                         }
                         this.WriteLine(">");
-                        string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(relEnd, prefix));
+                        string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(relEnd, prefix).Result);
                         this.WriteObjects("            <key ", columnAttr, " />");
                         this.WriteLine();
                         this.WriteObjects("            <one-to-many ", classAttr, " />");
@@ -91,7 +91,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                     }
                     else // we are n-side
                     {
-                        string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix));
+                        string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix).Result);
                         this.WriteObjects("        <many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " ");
                         if (prop.EagerLoading)
                         {
@@ -136,8 +136,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 rel.GetRelationClassName(),
                 ImplementationSuffix);
 
-            string fkThisColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(relEnd));
-            //string fkOtherColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd));
+            string fkThisColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(relEnd).Result);
+            //string fkOtherColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd).Result);
 
             // always map as set, the wrapper has to translate/order the elements
             this.WriteObjects("        <set ", nameAttr, " ", tableAttr, " inverse=\"true\" cascade=\"none\" batch-size=\"100\" ");

@@ -54,9 +54,9 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
             return prop.ExportGuid.ToString();
         }
 
-        protected override Task<string> GetCeClassName()
+        protected override string GetCeClassName()
         {
-            return Task.FromResult(prop.GetCollectionEntryClassName());
+            return prop.GetCollectionEntryClassName();
         }
 
         protected override async Task<string> GetCeInterface()
@@ -64,7 +64,7 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
             return String.Format("{0}<{1}, {2}>",
                 (await IsOrdered()) ? "IValueListEntry" : "IValueCollectionEntry",
                 this.prop.ObjectClass.GetDescribedInterfaceTypeName(),
-                this.prop.GetElementTypeString());
+                this.prop.GetElementTypeString().Result);
         }
 
         protected override Task<bool> IsOrdered()

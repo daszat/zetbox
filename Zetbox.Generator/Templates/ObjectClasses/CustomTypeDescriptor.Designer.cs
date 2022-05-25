@@ -76,7 +76,7 @@ foreach(var property in properties)
 
 #line 66 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()\r\n");
-this.WriteObjects("                    new ",  propertyDescriptorName , "<",  ifName , ", ",  property.GetPropertyTypeString() , ">(\r\n");
+this.WriteObjects("                    new ",  propertyDescriptorName , "<",  ifName , ", ",  property.GetPropertyTypeString().Result , ">(\r\n");
 this.WriteObjects("                        lazyCtx,\r\n");
 this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\r\n");
 this.WriteObjects("                        \"",  propertyName , "\",\r\n");
@@ -88,7 +88,7 @@ this.WriteObjects("                        obj => On",  propertyName , "_IsValid
 } else if (property is CalculatedObjectReferenceProperty) { 
 #line 76 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("                    // property is CalculatedObjectReferenceProperty\r\n");
-this.WriteObjects("                    new ",  propertyDescriptorName , "<",  ifName , ", ",  property.GetPropertyTypeString() , ">(\r\n");
+this.WriteObjects("                    new ",  propertyDescriptorName , "<",  ifName , ", ",  property.GetPropertyTypeString().Result , ">(\r\n");
 this.WriteObjects("                        lazyCtx,\r\n");
 this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\r\n");
 this.WriteObjects("                        \"",  propertyName , "\",\r\n");
@@ -102,7 +102,7 @@ this.WriteObjects("						null), // no constraints on calculated properties \r\n"
 var isReadonly = (property is ValueTypeProperty) && ((ValueTypeProperty)property).IsCalculated; 
 #line 87 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("                    // else\r\n");
-this.WriteObjects("                    new ",  propertyDescriptorName , "<",  ifName , ", ",  property.GetPropertyTypeString() , ">(\r\n");
+this.WriteObjects("                    new ",  propertyDescriptorName , "<",  ifName , ", ",  property.GetPropertyTypeString().Result , ">(\r\n");
 this.WriteObjects("                        lazyCtx,\r\n");
 this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\r\n");
 this.WriteObjects("                        \"",  propertyName , "\",\r\n");
