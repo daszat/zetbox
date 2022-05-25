@@ -314,6 +314,20 @@ namespace Zetbox.API
             }
         }
 
+        public static Type[] GetTypesIgnoringLoadErrors(this Assembly assembly)
+        {
+            IEnumerable<Type> types;
+            try
+            {
+                types = assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException e)
+            {
+                types = e.Types;
+            }
+            return types.Where(t => t != null).ToArray();
+        }
+
         #region HasGenericDefinition
         // From: http://stackoverflow.com/questions/457676/c-sharp-reflection-check-if-a-class-is-derived-from-a-generic-class/897388#897388
 

@@ -160,7 +160,7 @@ namespace Zetbox.App.Extensions
                 try
                 {
                     // Methods
-                    foreach (var t in assembly.GetTypes())
+                    foreach (var t in assembly.GetTypesIgnoringLoadErrors())
                     {
                         if (t.GetCustomAttributes(typeof(Implementor), false).Length != 0)
                         {

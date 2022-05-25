@@ -78,7 +78,7 @@ namespace Zetbox.API
             if (source == null) { throw new ArgumentNullException("source"); }
 
             // Register all non static ActionClasses
-            foreach (var t in source.GetTypes()
+            foreach (var t in source.GetTypesIgnoringLoadErrors()
                                     .Where(t => !t.IsStatic()
                                         && t.GetCustomAttributes(typeof(Implementor), false).Length > 0))
             {

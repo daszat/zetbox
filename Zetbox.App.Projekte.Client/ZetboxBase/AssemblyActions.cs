@@ -96,7 +96,7 @@ namespace Zetbox.App.Base
             {
                 var liveDescriptors = new HashSet<ViewModelDescriptor>();
 
-                foreach (var type in GetTypes(srAssembly))
+                foreach (var type in srAssembly.GetTypesIgnoringLoadErrors())
                 {
                     object attr;
                     // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
@@ -147,7 +147,7 @@ namespace Zetbox.App.Base
             {
                 var liveDescriptors = new HashSet<ViewDescriptor>();
 
-                foreach (var type in GetTypes(srAssembly))
+                foreach (var type in srAssembly.GetTypesIgnoringLoadErrors())
                 {
                     object attr;
                     Toolkit? tk = null;
@@ -240,20 +240,6 @@ namespace Zetbox.App.Base
                 throw new InvalidOperationException("Unable to load assembly: " + assembly.Name);
             }
             return a;
-        }
-
-        private static Type[] GetTypes(SR.Assembly assembly)
-        {
-            IEnumerable<Type> types;
-            try
-            {
-                types = assembly.GetTypes();
-            }
-            catch (ReflectionTypeLoadException e)
-            {
-                types = e.Types;
-            }
-            return types.Where(t => t != null).ToArray();
         }
     }
 }
